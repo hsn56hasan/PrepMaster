@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="tr" class="h-full bg-slate-50">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>PrepMaster - Üniversite Hazırlık & Muafiyet Platformu</title>
+  
+  <!-- Mobile & PWA Metas -->
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#1e3a8a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="PrepMaster">
+  <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2997/2997295.png">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+  </style>
+</head>
+<body class="h-full flex flex-col text-slate-800 antialiased selection:bg-blue-600 selection:text-white">
+
+  <!-- ================= TOP NAVBAR ================= -->
+  <header class="bg-white border-b border-slate-200/80 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Logo & Okul Rozeti -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-gradient-to-tr from-blue-700 to-indigo-600 rounded-xl flex items-center justify-center text-white shadow-md shadow-blue-500/20">
+          <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-blue-700 to-indigo-700 bg-clip-text text-transparent">PrepMaster</span>
+            <span class="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-full">Hazırlık & Muafiyet</span>
+          </div>
+          <div class="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
+            <span id="header-uni-name">İstanbul Teknik Üniversitesi</span>
+            <button onclick="openUniversityModal()" class="text-blue-600 hover:text-blue-700 underline text-[11px] font-semibold">
+              (Değiştir)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kur / Level Seçici (A1 - C2) -->
+      <div class="hidden sm:flex items-center gap-1 bg-slate-100 p-1 rounded-2xl border border-slate-200" id="level-selector-pills">
+        <!-- JS ile dolacak: A1, A2, B1, B2, C1, C2 -->
+      </div>
+
+      <!-- Hızlı Aksiyon & Okul Seçici Butonu -->
+      <div class="flex items-center gap-2">
+        <button onclick="openUniversityModal()" class="flex items-center gap-1.5 px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition">
+          <i data-lucide="building-2" class="w-4 h-4 text-slate-500"></i>
+          <span class="hidden md:inline">Okul Seç</span>
+        </button>
+        <button onclick="startExamSimulation()" class="flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow-md shadow-blue-500/20 transition">
+          <i data-lucide="play" class="w-3.5 h-3.5"></i>
+          <span>Hızlı Deneme</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobil Kur Seçici (Küçük ekranlar için bar) -->
+    <div class="sm:hidden px-4 py-2 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
+      <span class="text-xs font-bold text-slate-500">Çalışma Kuru:</span>
+      <div class="flex items-center gap-1" id="mobile-level-selector">
+        <!-- Rendered in JS if needed or uses the same event -->
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= ANA ALAN (SIDEBAR + İÇERİK) ================= -->
+  <div class="flex-1 flex overflow-hidden max-w-7xl w-full mx-auto px-2 sm:px-6 lg:px-8 py-4 sm:py-6 gap-6" id="main-content-area">
+    
+    <!-- DESKTOP / TABLET SIDEBAR NAV -->
+    <aside class="hidden md:flex flex-col w-60 shrink-0 gap-1.5">
+      <nav class="space-y-1">
+        <button data-nav-tab="dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-xs transition">
+          <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+          <span>Genel Bakış (Dashboard)</span>
+        </button>
+        <button data-nav-tab="exams" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-xs transition">
+          <i data-lucide="file-text" class="w-4 h-4"></i>
+          <span>Okul Denemeleri</span>
+        </button>
+        <button data-nav-tab="listening" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-xs transition">
+          <i data-lucide="headphones" class="w-4 h-4"></i>
+          <span>Dinleme (Listening)</span>
+        </button>
+        <button data-nav-tab="practice" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-xs transition">
+          <i data-lucide="check-square" class="w-4 h-4"></i>
+          <span>Kur Alıştırmaları (A1-C2)</span>
+        </button>
+        <button data-nav-tab="flashcards" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-xs transition">
+          <i data-lucide="layers" class="w-4 h-4"></i>
+          <span>Akademik Kelime Kartları</span>
+        </button>
+        <button data-nav-tab="writing" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-xs transition">
+          <i data-lucide="pen-tool" class="w-4 h-4"></i>
+          <span>Writing & Essay Rehberi</span>
+        </button>
+        <button data-nav-tab="mistakes" class="w-full flex items-center justify-between px-4 py-3 rounded-2xl font-bold text-xs transition">
+          <div class="flex items-center gap-3">
+            <i data-lucide="shield-alert" class="w-4 h-4 text-rose-500"></i>
+            <span>Hata Defterim</span>
+          </div>
+          <span id="nav-mistakes-badge" class="hidden px-2 py-0.5 bg-rose-500 text-white text-[10px] font-extrabold rounded-full">
+            0
+          </span>
+        </button>
+        <button data-nav-tab="analytics" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-xs transition">
+          <i data-lucide="bar-chart-2" class="w-4 h-4"></i>
+          <span>Gelişim & Skor Analizi</span>
+        </button>
+      </nav>
+
+      <!-- Bilgi Kutusu -->
+      <div class="mt-auto p-4 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-3xl">
+        <div class="flex items-center gap-2 text-blue-700 font-bold text-xs mb-1">
+          <i data-lucide="sparkles" class="w-4 h-4"></i>
+          <span>Hazırlık İpucu</span>
+        </div>
+        <p class="text-[11px] text-slate-600 leading-relaxed">
+          Akademik sınavların kalbi <strong>Restatement</strong> ve <strong>Collocation</strong> yapılarıdır. Flashcard'ları her gün 10 dakika tekrar edin.
+        </p>
+      </div>
+    </aside>
+
+    <!-- SAĞ İÇERİK PENCERESİ -->
+    <main class="flex-1 overflow-y-auto pr-1">
+
+      <!-- ================= 1. TAB: DASHBOARD ================= -->
+      <section id="tab-content-dashboard" class="space-y-6">
+        
+        <!-- Üniversite & Sınav Bilgi Kartı (Hero) -->
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white p-6 sm:p-8 shadow-xl">
+          <div class="relative z-10 max-w-2xl">
+            <div class="flex items-center gap-2 mb-3">
+              <span id="header-uni-badge" class="px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-bold uppercase tracking-wider text-blue-100">
+                İTÜ Hazırlık
+              </span>
+              <span id="dashboard-pass-score" class="px-3 py-1 bg-emerald-500/30 text-emerald-200 border border-emerald-400/30 rounded-full text-xs font-bold">
+                %60 Baraj Puanı
+              </span>
+            </div>
+            <h1 id="dashboard-exam-title" class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-3">
+              İTÜ Proficiency Sınavı
+            </h1>
+            <p id="dashboard-uni-desc" class="text-xs sm:text-sm text-slate-200 leading-relaxed mb-6">
+              İstanbul Teknik Üniversitesi Yabancı Diller Yüksekokulu sınav formatına göre özelleştirilmiş denemeler, soru tipleri ve çalışma modülleri.
+            </p>
+
+            <div class="flex flex-wrap gap-3">
+              <button onclick="startExamSimulation()" class="px-5 py-2.5 bg-white text-blue-900 hover:bg-blue-50 font-bold text-xs rounded-xl shadow-lg transition flex items-center gap-2">
+                <i data-lucide="play-circle" class="w-4 h-4"></i> Tam Sınav Simülasyonunu Başlat
+              </button>
+              <button onclick="switchTab('flashcards')" class="px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold text-xs rounded-xl transition flex items-center gap-2">
+                <i data-lucide="layers" class="w-4 h-4"></i> Kelime Kartlarına Git
+              </button>
+            </div>
+          </div>
+          
+          <div class="absolute -right-12 -bottom-12 w-64 h-64 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        </div>
+
+        <!-- İstatistik Özet Kartları -->
+        <div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
+          <div class="p-4 bg-white rounded-2xl border border-slate-200/80 shadow-sm">
+            <div class="flex items-center justify-between text-slate-400 mb-2">
+              <span class="text-xs font-semibold">Çalışma Serisi</span>
+              <i data-lucide="flame" class="w-4 h-4 text-amber-500"></i>
+            </div>
+            <div id="stat-streak" class="text-2xl font-extrabold text-slate-800">1 Gün</div>
+            <p class="text-[11px] text-slate-400 mt-1">Her gün pratik yap</p>
+          </div>
+
+          <div class="p-4 bg-white rounded-2xl border border-slate-200/80 shadow-sm">
+            <div class="flex items-center justify-between text-slate-400 mb-2">
+              <span class="text-xs font-semibold">Çözülen Denemeler</span>
+              <i data-lucide="award" class="w-4 h-4 text-blue-500"></i>
+            </div>
+            <div id="stat-exams-count" class="text-2xl font-extrabold text-slate-800">0</div>
+            <p class="text-[11px] text-slate-400 mt-1">Sınav tecrübesi</p>
+          </div>
+
+          <div class="p-4 bg-white rounded-2xl border border-slate-200/80 shadow-sm">
+            <div class="flex items-center justify-between text-slate-400 mb-2">
+              <span class="text-xs font-semibold">Ortalama Başarı</span>
+              <i data-lucide="trending-up" class="w-4 h-4 text-emerald-500"></i>
+            </div>
+            <div id="stat-avg-score" class="text-2xl font-extrabold text-emerald-600">%0</div>
+            <p class="text-[11px] text-slate-400 mt-1">Hedef: %65+</p>
+          </div>
+
+          <div class="p-4 bg-white rounded-2xl border border-slate-200/80 shadow-sm">
+            <div class="flex items-center justify-between text-slate-400 mb-2">
+              <span class="text-xs font-semibold">Öğrenilen Kelimeler</span>
+              <i data-lucide="bookmark-check" class="w-4 h-4 text-indigo-500"></i>
+            </div>
+            <div id="stat-vocab-count" class="text-2xl font-extrabold text-indigo-600">0 / 0</div>
+            <p class="text-[11px] text-slate-400 mt-1">Akademik kelime havuzu</p>
+          </div>
+
+          <div onclick="switchTab('mistakes')" class="p-4 bg-white rounded-2xl border border-rose-100 hover:border-rose-300 shadow-sm cursor-pointer transition">
+            <div class="flex items-center justify-between text-slate-400 mb-2">
+              <span class="text-xs font-semibold text-rose-700">Hata Defterim</span>
+              <i data-lucide="shield-alert" class="w-4 h-4 text-rose-500"></i>
+            </div>
+            <div id="stat-mistakes-count" class="text-2xl font-extrabold text-rose-600">0</div>
+            <p class="text-[11px] text-rose-500 mt-1 font-semibold flex items-center gap-1">Yanlışları Çöz →</p>
+          </div>
+        </div>
+
+        <!-- Sınav Bölümleri & Son Sınavlar -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-extrabold text-slate-800 text-sm flex items-center gap-2">
+                <i data-lucide="pie-chart" class="w-4 h-4 text-blue-600"></i> Sınav Formatı & Soru Dağılımı
+              </h3>
+              <span class="text-xs text-slate-400">Resmi yönergelere göre</span>
+            </div>
+            <div id="dashboard-exam-sections" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <!-- JS ile dolacak -->
+            </div>
+          </div>
+
+          <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-extrabold text-slate-800 text-sm flex items-center gap-2">
+                <i data-lucide="history" class="w-4 h-4 text-indigo-600"></i> Son Denemeler
+              </h3>
+              <button onclick="switchTab('analytics')" class="text-xs text-blue-600 font-semibold hover:underline">Tümü</button>
+            </div>
+            <div id="dashboard-recent-exams" class="space-y-2">
+              <!-- JS ile dolacak -->
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ================= 2. TAB: EXAMS ================= -->
+      <section id="tab-content-exams" class="hidden space-y-6">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm">
+          <div class="max-w-xl mb-6">
+            <h2 class="text-xl font-extrabold text-slate-800 mb-2">Okul Formatına Uygun Deneme Sınavları</h2>
+            <p class="text-xs text-slate-500 leading-relaxed">
+              Üniversitenizin gerçek sınav süresi, ağırlık oranları ve soru tiplerine göre hazırlanmış testlerle pratik yapın.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Full Simulation -->
+            <div class="p-5 rounded-2xl border-2 border-blue-600 bg-blue-50/20 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="px-2.5 py-0.5 bg-blue-600 text-white text-[11px] font-bold rounded-lg uppercase">Tam Deneme</span>
+                  <span class="text-xs text-slate-500 font-semibold">Tüm Kurlar</span>
+                </div>
+                <h4 class="font-extrabold text-slate-800 text-base mb-1">Resmi Muafiyet / Kur Geçme Denemesi</h4>
+                <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                  Restatement, Cloze Test, Reading ve Grammar bölümlerini içeren kapsamlı deneme sınavı.
+                </p>
+              </div>
+              <button onclick="startExamSimulation()" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow transition">
+                Sınavı Başlat
+              </button>
+            </div>
+
+            <!-- Restatement Challenge -->
+            <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-slate-300 transition flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="px-2.5 py-0.5 bg-indigo-100 text-indigo-700 text-[11px] font-bold rounded-lg uppercase">Özel Modül</span>
+                  <span class="text-xs text-slate-500 font-semibold">B2 - C2</span>
+                </div>
+                <h4 class="font-extrabold text-slate-800 text-base mb-1">Restatement (En Yakın Anlam) Atölyesi</h4>
+                <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                  İTÜ ve Boğaziçi sınavlarının en kritik bölümü olan cümle paraphrase soruları.
+                </p>
+              </div>
+              <button onclick="startExamSimulation(null, null, 'Restatement')" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs rounded-xl transition">
+                Restatement Çöz
+              </button>
+            </div>
+
+            <!-- Reading Challenge -->
+            <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-slate-300 transition flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="px-2.5 py-0.5 bg-amber-100 text-amber-700 text-[11px] font-bold rounded-lg uppercase">Akademik Okuma</span>
+                  <span class="text-xs text-slate-500 font-semibold">B1 - C2</span>
+                </div>
+                <h4 class="font-extrabold text-slate-800 text-base mb-1">Akademik Reading & Çıkarım Testi</h4>
+                <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                  Makaleler üzerinden ana fikir, detay, yazar tutumu ve kelime anlamı soruları.
+                </p>
+              </div>
+              <button onclick="startExamSimulation(null, null, 'Reading')" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs rounded-xl transition">
+                Reading Çöz
+              </button>
+            </div>
+
+            <!-- Grammar & Cloze Challenge -->
+            <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-slate-300 transition flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="px-2.5 py-0.5 bg-emerald-100 text-emerald-700 text-[11px] font-bold rounded-lg uppercase">Use of English</span>
+                  <span class="text-xs text-slate-500 font-semibold">A1 - C1</span>
+                </div>
+                <h4 class="font-extrabold text-slate-800 text-base mb-1">Grammar & Cloze Test Serisi</h4>
+                <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                  Zamanlar, bağlaçlar, devrik yapılar ve metin içi boşluk doldurma.
+                </p>
+              </div>
+              <button onclick="startExamSimulation(null, null, 'Grammar')" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs rounded-xl transition">
+                Grammar Çöz
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 3. TAB: PRACTICE ================= -->
+      <section id="tab-content-practice" class="hidden space-y-6">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100 mb-6">
+            <div>
+              <h2 class="text-xl font-extrabold text-slate-800 mb-1">Kur Bazlı Alıştırmalar & Çözümlü Sorular</h2>
+              <p class="text-xs text-slate-500">Seçtiğiniz kura göre soruları inceleyin ve her sorunun detaylı analizini görün.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-slate-500">Seviye Değiştir:</span>
+              <div class="flex gap-1">
+                <button onclick="changeCurrentLevel('A1')" class="px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-100 hover:bg-slate-200">A1</button>
+                <button onclick="changeCurrentLevel('A2')" class="px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-100 hover:bg-slate-200">A2</button>
+                <button onclick="changeCurrentLevel('B1')" class="px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-100 hover:bg-slate-200">B1</button>
+                <button onclick="changeCurrentLevel('B2')" class="px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-100 hover:bg-slate-200">B2</button>
+                <button onclick="changeCurrentLevel('C1')" class="px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-100 hover:bg-slate-200">C1</button>
+                <button onclick="changeCurrentLevel('C2')" class="px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-100 hover:bg-slate-200">C2</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="practice-questions-list" class="space-y-4">
+            <!-- JS ile dolacak -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 4. TAB: FLASHCARDS ================= -->
+      <section id="tab-content-flashcards" class="hidden space-y-6">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100 mb-6">
+            <div>
+              <h2 class="text-xl font-extrabold text-slate-800 mb-1">Akademik Kelime Kartları (Flashcards)</h2>
+              <p class="text-xs text-slate-500">Kartın üzerine tıklayarak Türkçe anlamını ve eş anlamlılarını görün.</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <span id="flashcard-progress-text" class="text-xs font-extrabold text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
+                1 / 10
+              </span>
+            </div>
+          </div>
+
+          <div id="flashcard-container" class="py-4">
+            <!-- JS ile dinamik render edilecek 3D kart -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 5. TAB: LISTENING ================= -->
+      <section id="tab-content-listening" class="hidden space-y-6">
+        <!-- Hub View -->
+        <div id="listening-hub-view" class="space-y-6">
+          <div class="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
+            <div class="max-w-2xl">
+              <span class="px-3 py-1 bg-blue-500/30 text-blue-200 border border-blue-400/30 rounded-full text-xs font-bold uppercase tracking-wider inline-flex items-center gap-1.5 mb-3">
+                <i data-lucide="headphones" class="w-3.5 h-3.5"></i> Sesli Dinleme Simülatörü
+              </span>
+              <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">
+                Listening & Note-Taking Sınavları
+              </h2>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Boğaziçi BUEPT, İTÜ ve ODTÜ EPE sınav formatlarına özel hazırlanmış sesli akademik dersleri dinleyin; Note-Taking modunda dijital not kağıdınızı kullanıp soruları çözün.
+              </p>
+            </div>
+          </div>
+
+          <div id="listening-tracks-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- JS ile dolacak -->
+          </div>
+        </div>
+
+        <!-- Runner View -->
+        <div id="listening-runner-view" class="hidden space-y-6">
+          <div id="listening-runner-content">
+            <!-- JS renderListeningRunner() -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 6. TAB: WRITING ================= -->
+      <section id="tab-content-writing" class="hidden space-y-6">
+        <div id="ai-writing-evaluator-section" class="space-y-6">
+          <!-- JS initAIWritingEvaluator() -->
+        </div>
+
+        <div id="writing-guides-container" class="space-y-6">
+          <!-- JS ile dolacak -->
+        </div>
+      </section>
+
+      <!-- ================= 6. TAB: ANALYTICS ================= -->
+      <section id="tab-content-analytics" class="hidden space-y-6">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm">
+          <h2 class="text-xl font-extrabold text-slate-800 mb-2">Sınav Geçmişi ve Gelişim Tablosu</h2>
+          <p class="text-xs text-slate-500 mb-6">Tamamladığınız sınavların puanları ve tarihsel kayıtları.</p>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="border-b border-slate-200 text-slate-400 text-[11px] uppercase font-bold tracking-wider">
+                  <th class="py-3 px-4">Üniversite</th>
+                  <th class="py-3 px-4">Kur / Seviye</th>
+                  <th class="py-3 px-4">Skor</th>
+                  <th class="py-3 px-4">Doğru / Toplam</th>
+                  <th class="py-3 px-4">Tarih</th>
+                </tr>
+              </thead>
+              <tbody id="analytics-history-table">
+                <!-- JS ile dolacak -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 7. TAB: MISTAKE VAULT ================= -->
+      <section id="tab-content-mistakes" class="hidden space-y-6">
+        <!-- Hero -->
+        <div class="bg-gradient-to-r from-rose-900 via-slate-900 to-indigo-950 text-white rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
+          <div class="relative z-10 max-w-2xl">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="px-3 py-1 bg-rose-500/30 text-rose-200 border border-rose-400/30 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1.5">
+                <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i> Kişisel Yanlış Havuzu
+              </span>
+              <span id="mistake-vault-count-badge" class="px-3 py-1 bg-white/20 rounded-full text-xs font-bold">
+                0 Yanlış Soru
+              </span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-3">
+              Hata Defterim (Smart Mistake Vault)
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed mb-6">
+              Çözdüğünüz sınavlarda ve alıştırmalarda yanlış yaptığınız sorular otomatik olarak burada toplanır. Sınavı kazanmanın anahtarı eksikleri tekrar etmektir.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <button onclick="startMistakeExam()" class="px-5 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl shadow-lg transition flex items-center gap-2">
+                <i data-lucide="play-circle" class="w-4 h-4"></i> Yanlışlarımı Sınav Olarak Tekrar Çöz
+              </button>
+            </div>
+          </div>
+          <div class="absolute -right-12 -bottom-12 w-64 h-64 bg-rose-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        </div>
+
+        <!-- Soru Listesi -->
+        <div id="mistake-vault-list" class="space-y-4">
+          <!-- JS ile dolacak -->
+        </div>
+
+        <!-- Boş Durum (Empty State) -->
+        <div id="mistake-vault-empty" class="hidden p-12 text-center bg-white rounded-3xl border border-slate-200/80 shadow-sm">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
+            <i data-lucide="check-circle-2" class="w-8 h-8"></i>
+          </div>
+          <h3 class="text-lg font-bold text-slate-800 mb-1">Harika! Hata Defteriniz Boş</h3>
+          <p class="text-xs text-slate-500 max-w-md mx-auto mb-6">
+            Henüz yanlış yaptığınız çözülmemiş bir soru bulunmuyor. Yeni bir deneme sınavı çözerek kendinizi test edebilirsiniz!
+          </p>
+          <button onclick="startExamSimulation()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow transition">
+            Yeni Deneme Sınavı Başlat
+          </button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ================= MOBİL BOTTOM NAVIGATION ================= -->
+  <nav class="md:hidden bg-white border-t border-slate-200 fixed bottom-0 left-0 right-0 z-30 px-2 py-1.5 flex justify-around shadow-lg">
+    <button data-nav-tab="dashboard" class="flex flex-col items-center gap-1 p-2 text-slate-500 text-[10px] font-bold">
+      <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+      <span>Özet</span>
+    </button>
+    <button data-nav-tab="exams" class="flex flex-col items-center gap-1 p-2 text-slate-500 text-[10px] font-bold">
+      <i data-lucide="file-text" class="w-5 h-5"></i>
+      <span>Denemeler</span>
+    </button>
+    <button data-nav-tab="mistakes" class="flex flex-col items-center gap-1 p-2 text-slate-500 text-[10px] font-bold">
+      <i data-lucide="shield-alert" class="w-5 h-5 text-rose-500"></i>
+      <span>Hatalar</span>
+    </button>
+    <button data-nav-tab="practice" class="flex flex-col items-center gap-1 p-2 text-slate-500 text-[10px] font-bold">
+      <i data-lucide="check-square" class="w-5 h-5"></i>
+      <span>Pratik</span>
+    </button>
+    <button data-nav-tab="flashcards" class="flex flex-col items-center gap-1 p-2 text-slate-500 text-[10px] font-bold">
+      <i data-lucide="layers" class="w-5 h-5"></i>
+      <span>Kelime</span>
+    </button>
+    <button data-nav-tab="writing" class="flex flex-col items-center gap-1 p-2 text-slate-500 text-[10px] font-bold">
+      <i data-lucide="pen-tool" class="w-5 h-5"></i>
+      <span>Writing</span>
+    </button>
+  </nav>
+
+  <!-- ================= SINAV SİMÜLASYON EKRANI (FULL FOCUS MODAL) ================= -->
+  <div id="exam-simulation-area" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm overflow-y-auto p-4 sm:p-6 flex flex-col justify-center items-center">
+    <div class="bg-white rounded-3xl max-w-4xl w-full shadow-2xl border border-slate-100 flex flex-col max-h-[92vh] overflow-hidden">
+      
+      <!-- Sınav Başlığı & Geri Sayım Barı -->
+      <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-xs">
+            <i data-lucide="timer" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-slate-100">Hazırlık Muafiyet Simülasyonu</h3>
+            <span class="text-[11px] text-slate-400">Resmi Sınav Modu</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <div class="flex items-center gap-2 bg-slate-800 px-3.5 py-1.5 rounded-xl border border-slate-700">
+            <span class="text-xs text-slate-400">Kalan Süre:</span>
+            <span id="exam-timer-display" class="font-mono font-bold text-base text-amber-400">00:00</span>
+          </div>
+          <button onclick="exitExamInterface()" class="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Sınav Gövdesi (Soru Kartı + Sağ Soru Navigasyon Paleti) -->
+      <div class="flex-1 overflow-y-auto p-6 flex flex-col md:flex-row gap-6">
+        
+        <!-- Sol Alan: Aktif Soru -->
+        <div class="flex-1" id="exam-question-card">
+          <!-- JS renderCurrentQuestion() -->
+        </div>
+
+        <!-- Sağ Alan: Soru Paleti (Numaralar) -->
+        <div class="w-full md:w-56 shrink-0 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+          <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Soru Navigasyonu</div>
+          <div id="exam-question-palette" class="grid grid-cols-5 gap-1.5 mb-4">
+            <!-- JS renderQuestionPalette() -->
+          </div>
+          
+          <div class="space-y-1.5 text-[11px] text-slate-500 border-t border-slate-200 pt-3">
+            <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded bg-blue-600"></span> Yanıtlandı</div>
+            <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded border border-amber-400 bg-amber-50"></span> İşaretlendi</div>
+            <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded border border-slate-300 bg-white"></span> Boş</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sınav Alt Barı (İleri, Geri, Bitir) -->
+      <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between shrink-0">
+        <button onclick="prevExamQuestion()" class="px-4 py-2 bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs rounded-xl border border-slate-200 transition flex items-center gap-1.5">
+          <i data-lucide="chevron-left" class="w-4 h-4"></i> Önceki
+        </button>
+
+        <div class="flex items-center gap-2">
+          <button onclick="nextExamQuestion()" class="px-5 py-2 bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs rounded-xl border border-slate-200 transition flex items-center gap-1.5">
+            Sonraki <i data-lucide="chevron-right" class="w-4 h-4"></i>
+          </button>
+          <button onclick="finishExam()" class="px-6 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center gap-1.5">
+            <i data-lucide="check-circle" class="w-4 h-4"></i> Sınavı Tamamla
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= SINAV SONUÇ & KARNE MODAL ================= -->
+  <div id="exam-results-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm overflow-y-auto p-4 sm:p-6 flex flex-col justify-center items-center">
+    <!-- JS showExamResults() -->
+  </div>
+
+  <!-- ================= OKUL SEÇİM MODAL ================= -->
+  <div id="university-picker-modal" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm p-4 flex items-center justify-center">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 max-h-[85vh] flex flex-col">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+        <div>
+          <h3 class="font-extrabold text-slate-800 text-base">Üniversitenizi Seçin</h3>
+          <p class="text-xs text-slate-400">Sınav formatı ve soru havuzu seçiminize göre optimize edilir.</p>
+        </div>
+        <button onclick="closeUniversityModal()" class="p-1 text-slate-400 hover:text-slate-600 rounded-lg">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div id="university-picker-list" class="py-4 space-y-3 overflow-y-auto flex-1">
+        <!-- JS ile dolacak -->
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Dosyaları -->
+  <script src="/static/js/flashcards.js"></script>
+  <script src="/static/js/exam.js"></script>
+  <script src="/static/js/listening.js"></script>
+  <script src="/static/js/writing_ai.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

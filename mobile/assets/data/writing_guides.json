@@ -1,0 +1,92 @@
+[
+  {
+    "id": "opinion-essay",
+    "title": "Opinion Essay (Fikir Belirtme Kompozisyonu)",
+    "description": "Öğrencinin verilen bir konuda net bir görüş belirleyip (katılıyorum/katılmıyorum) güçlü akademik argümanlarla savunduğu essay türü. İTÜ, YTÜ ve Genel Hazırlık'ta sıklıkla sorulur.",
+    "structure": [
+      {
+        "section": "Introduction (Giriş Paragrafı)",
+        "elements": [
+          "Hook: Konuya dikkat çeken genel bir giriş cümlesi veya istatistik/soru.",
+          "Background: Konunun güncel bağlamı ve neden önemli olduğu (2-3 cümle).",
+          "Thesis Statement: Görüşünüzü ve savunacağınız 2 temel ana argümanı net bir şekilde belirten ana cümle."
+        ]
+      },
+      {
+        "section": "Body Paragraph 1 (1. Gelişme Paragrafı)",
+        "elements": [
+          "Topic Sentence: İlk ana argümanınızı tanıtan cümle.",
+          "Explanation: Bu gerekçenin neden geçerli olduğunu açıklayan derinlemesine mantık.",
+          "Concrete Example: Gerçek hayattan, araştırmalardan veya somut durumlardan bir örnek.",
+          "Concluding Thought: Fikri tezinize bağlayan toparlayıcı cümle."
+        ]
+      },
+      {
+        "section": "Body Paragraph 2 (2. Gelişme Paragrafı)",
+        "elements": [
+          "Topic Sentence: İkinci ana argümanınızı tanıtan cümle (Furthermore, Moreover).",
+          "Explanation & Evidence: Argümanı destekleyen kanıtlar ve sebep-sonuç ilişkisi.",
+          "Counter-argument & Refutation (İsteğe bağlı C1/C2 bonusu): Karşıt görüşe kısaca değinip çürütme."
+        ]
+      },
+      {
+        "section": "Conclusion (Sonuç Paragrafı)",
+        "elements": [
+          "Restatement of Thesis: Tezinizi farklı kelimelerle (paraphrase) yeniden ifade edin.",
+          "Summary of Main Points: İki ana argümanınızı kısaca özetleyin.",
+          "Final Call to Action / Prediction: Geleceğe yönelik bir öngörü veya tavsiye."
+        ]
+      }
+    ],
+    "key_transitions": [
+      "In my perspective, ...",
+      "A primary justification for this assertion is that ...",
+      "Furthermore, empirical evidence indicates that ...",
+      "On the other hand, proponents of ... contend that ...; however, ...",
+      "In light of the evidence delineated above, ..."
+    ],
+    "sample_topic": "Do you agree or disagree that artificial intelligence will replace human educators in universities within the next decade?",
+    "band_score_tip": "Asla 'I think' ifadesini her cümlenin başında tekrarlamayın. Bunun yerine 'It is widely acknowledged that...', 'Compelling evidence demonstrates that...' gibi akademik ifadeleri tercih edin."
+  },
+  {
+    "id": "cause-effect-essay",
+    "title": "Cause & Effect Essay (Neden - Sonuç Kompozisyonu)",
+    "description": "ODTÜ EPE ve Boğaziçi BUEPT sınavlarında sıklıkla sorulan, bir fenomenin nedenlerini (causes) ve doğurduğu sonuçları (effects) analiz eden akademik format.",
+    "structure": [
+      {
+        "section": "Introduction",
+        "elements": [
+          "Tanımlama ve problemin genel çerçevesi.",
+          "Thesis Statement: Bu fenomenin temel nedenlerinin X ve Y olduğunu, bunun sonucunda ise Z etkisinin ortaya çıktığını belirten cümle."
+        ]
+      },
+      {
+        "section": "Body Paragraph 1 (Causes)",
+        "elements": [
+          "Kök nedenlerin incelenmesi (Primary catalysts / underlying factors).",
+          "Zincirleme sebep-sonuç ilişkisi."
+        ]
+      },
+      {
+        "section": "Body Paragraph 2 (Effects)",
+        "elements": [
+          "Bireysel, toplumsal veya ekonomik sonuçlar (Repercussions / ramifications).",
+          "Uzun vadeli etkiler."
+        ]
+      },
+      {
+        "section": "Conclusion",
+        "elements": [
+          "Neden ve sonuçların sentezi ve potansiyel çözüm/önlem önerileri."
+        ]
+      }
+    ],
+    "key_transitions": [
+      "This condition stems largely from ...",
+      "As a direct consequence, ...",
+      "This inevitably precipitates a decline in ...",
+      "Consequently, the long-term ramifications encompass ..."
+    ],
+    "sample_topic": "Analyze the primary causes of mental fatigue among university students and its subsequent effects on academic performance."
+  }
+]

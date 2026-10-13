@@ -1,0 +1,182 @@
+[
+  {
+    "id": "q-itu-1",
+    "university_id": "itu",
+    "level": "B2",
+    "category": "Restatement",
+    "question": "Choose the sentence that is closest in meaning to the sentence given below:\n\n'Had it not been for the prompt intervention of the paramedic team, the injured hiker would certainly have perished.'",
+    "options": [
+      { "key": "A", "text": "Although the paramedics intervened immediately, they were unable to save the hiker's life." },
+      { "key": "B", "text": "The injured hiker survived solely because the paramedic team intervened without delay." },
+      { "key": "C", "text": "If the hiker had not asked for help so promptly, the paramedics could not have reached him." },
+      { "key": "D", "text": "The hiker would have been rescued even if the paramedics had delayed their arrival." }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "'Had it not been for...' yapısı Type 3 Inverted Conditional (Gizli 'If it hadn't been for...') kalıbıdır ve '...olmasaydı' anlamına gelir. 'Prompt intervention' (gecikmesiz/hızlı müdahale) sayesinde dağcının hayatta kaldığı belirtilmektedir. B şıkkında 'survived solely because the paramedic team intervened without delay' ifadesi orijinal cümlenin anlamını eksiksiz ve birebir karşılar.",
+    "explanation_en": "'Had it not been for...' is an inverted third conditional meaning 'if not for'. Therefore, the hiker survived only because of the immediate arrival of the team, matching B perfectly."
+  },
+  {
+    "id": "q-itu-2",
+    "university_id": "itu",
+    "level": "B2",
+    "category": "Cloze Test",
+    "question": "Complete the blank in the academic text:\n\n'Renewable energy investments have soared recently; _______, many countries still rely predominantly on fossil fuels for baseline electricity generation.'",
+    "options": [
+      { "key": "A", "text": "furthermore" },
+      { "key": "B", "text": "nevertheless" },
+      { "key": "C", "text": "consequently" },
+      { "key": "D", "text": "likewise" },
+      { "key": "E", "text": "namely" }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Cümlenin ilk kısmında yenilenebilir enerji yatırımlarının hızla arttığı (olumlu/büyüme), noktalı virgülden sonra ise ülkelerin hala fosil yakıtlara bağımlı olduğu (zıtlık) belirtilmektedir. Bir zıtlık bağlacı (contrast connector) gerektiğinden 'nevertheless' (yine de / buna rağmen) doğru cevaptır. 'Furthermore' ekleme, 'consequently' sonuç bildirir.",
+    "explanation_en": "The two clauses present contrasting situations: investments rising vs. reliance on fossil fuels continuing. 'Nevertheless' introduces this contrast correctly."
+  },
+  {
+    "id": "q-metu-1",
+    "university_id": "metu",
+    "level": "C1",
+    "category": "Reading",
+    "passage": "Cognitive psychologists have long debated the extent to which bilingualism confers executive functioning benefits. While early twentieth-century research posited that juggling two linguistic codes burdened working memory, empirical paradigms developed over the past two decades suggest otherwise. Bilingual individuals frequently exhibit enhanced inhibitory control, allowing them to suppress irrelevant stimuli more effectively during complex problem-solving tasks. Nonetheless, recent replication efforts urge caution, indicating that socio-economic status and cultural background may mediate these purported cognitive advantages.",
+    "question": "According to the passage, recent replication studies on bilingualism:",
+    "options": [
+      { "key": "A", "text": "Corroborate early 20th-century findings that two languages burden memory." },
+      { "key": "B", "text": "Demonstrate that inhibitory control is unaffected by linguistic proficiency." },
+      { "key": "C", "text": "Suggest that apparent cognitive perks might be influenced by external socio-cultural factors." },
+      { "key": "D", "text": "Prove conclusively that bilingual individuals always outperform monolinguals." }
+    ],
+    "correct_answer": "C",
+    "explanation_tr": "Metnin son cümlesinde: 'Nonetheless, recent replication efforts urge caution, indicating that socio-economic status and cultural background may mediate these purported cognitive advantages.' denmektedir. 'Mediate' (aracılık etmek / etkilemek) ve socio-economic / cultural faktörler, C şıkkındaki 'influenced by external socio-cultural factors' ifadesine tam karşılık gelir.",
+    "explanation_en": "The final sentence explicitly notes that replication efforts point to socio-economic status and cultural background mediating the cognitive benefits, which corresponds directly to C."
+  },
+  {
+    "id": "q-metu-2",
+    "university_id": "metu",
+    "level": "B2",
+    "category": "Language Use",
+    "question": "Choose the most appropriate option to complete the sentence:\n\n'Not until the professor had meticulously reviewed the laboratory logs _______ that the data had been systematically altered.'",
+    "options": [
+      { "key": "A", "text": "he realized" },
+      { "key": "B", "text": "did he realize" },
+      { "key": "C", "text": "he had realized" },
+      { "key": "D", "text": "had he realized" }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "'Not until' ile başlayan zaman cümlelerinde ana cümlede devrik yapı (inversion) kullanılır. Zaman sırasına göre inceleme geçmişte daha önce yapılmış ('had meticulously reviewed'), farkına varma eylemi ise Simple Past devrik biçiminde ('did he realize') olmalıdır. 'Did + subject + V1' kuralı geçerlidir.",
+    "explanation_en": "When a sentence begins with 'Not until [time clause]', the main clause must be inverted. Since the main clause describes a past simple event following the past perfect, 'did he realize' is required."
+  },
+  {
+    "id": "q-boun-1",
+    "university_id": "boun",
+    "level": "C1",
+    "category": "Reading",
+    "passage": "The philosophy of science underwent a tectonic paradigm shift with Thomas Kuhn’s 1962 treatise 'The Structure of Scientific Revolutions'. Kuhn argued against the prevailing positivist conception that scientific knowledge accumulates via a linear, steady trajectory of incremental discoveries. Instead, he introduced the concept of 'normal science' punctuated by anomalies, which precipitate crises and culminate in radical paradigm shifts that redefine the very ontological premises of a discipline.",
+    "question": "Which of the following can be inferred from Kuhn's critique of the positivist view?",
+    "options": [
+      { "key": "A", "text": "Scientific progress is an uninterrupted, uniform accumulation of empirical facts." },
+      { "key": "B", "text": "Major scientific breakthroughs involve fundamental changes in foundational assumptions rather than mere incremental additions." },
+      { "key": "C", "text": "Positivist scientists actively disregarded anomalies to prevent intellectual crises." },
+      { "key": "D", "text": "Normal science is inherently incapable of producing reliable experimental observations." }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Kuhn, bilimin doğrusal ve eklemeli bir şekilde (incremental additions) ilerlediği fikrine karşı çıkmış; krizler ve 'ontolojik temelleri yeniden tanımlayan radikal paradigma kaymaları' (fundamental changes in foundational assumptions) ile ilerlediğini savunmuştur. Bu nedenle doğru cevap B'dir.",
+    "explanation_en": "Kuhn argued against linear accumulation and for radical shifts that redefine the ontological premises, supporting inference B directly."
+  },
+  {
+    "id": "q-boun-2",
+    "university_id": "boun",
+    "level": "C2",
+    "category": "Vocabulary",
+    "question": "Select the word that best completes the academic critique:\n\n'Rather than presenting an objective synthesis, the author offered an _______ account that selectively favored his pre-existing dogma.'",
+    "options": [
+      { "key": "A", "text": "equitable" },
+      { "key": "B", "text": "equivocal" },
+      { "key": "C", "text": "injudicious" },
+      { "key": "D", "text": "impartial" }
+    ],
+    "correct_answer": "C",
+    "explanation_tr": "Cümlede 'Rather than presenting an objective synthesis' (nesnel bir sentez sunmak yerine) ifadesi ve 'selectively favored his pre-existing dogma' (kendi dogmasını yanlı şekilde kayırdı) vurgusu vardır. 'Equitable' ve 'impartial' tarafsız demektir (zıttır). 'Injudicious' (sağduyusuz, öngörüsüz, yersiz) eleştirel tona en uygun seçenektir.",
+    "explanation_en": "The context contrasts an objective synthesis with a flawed, prejudiced presentation. 'Injudicious' fits the critical academic tone perfectly."
+  },
+  {
+    "id": "q-bilkent-1",
+    "university_id": "bilkent",
+    "level": "B2",
+    "category": "Reading",
+    "passage": "Urban heat islands (UHIs) represent microclimatic anomalies where metropolitan areas experience significantly elevated ambient temperatures relative to adjacent rural peripheries. This phenomenon stems primarily from the proliferation of impermeable surfaces—such as asphalt and concrete—which possess high thermal inertia and low albedo. Mitigation strategies encompass the integration of green roofs and reflective pavements to counteract localized warming.",
+    "question": "The primary underlying cause of urban heat islands, as outlined in the text, is:",
+    "options": [
+      { "key": "A", "text": "The implementation of reflective pavements across rural perimeters." },
+      { "key": "B", "text": "The widespread presence of materials that trap heat and reflect minimal sunlight." },
+      { "key": "C", "text": "The expansion of green roofs in densely populated districts." },
+      { "key": "D", "text": "The lack of reliable meteorological stations within city centres." }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Metinde 'high thermal inertia and low albedo' (yüksek ısı tutma ve düşük yansıtma kapasitesi) ve 'impermeable surfaces (asphalt and concrete)' temel neden olarak belirtilmiştir. B seçeneğindeki 'materials that trap heat and reflect minimal sunlight' birebir bu tanımı açıklar.",
+    "explanation_en": "'High thermal inertia and low albedo' directly translates to materials that trap heat and reflect minimal sunlight, making B correct."
+  },
+  {
+    "id": "q-ytu-1",
+    "university_id": "ytu",
+    "level": "B1",
+    "category": "Grammar",
+    "question": "Choose the best option to complete the sentence:\n\n'By the time the new campus library opens next autumn, the construction company _______ on the project for over eighteen months.'",
+    "options": [
+      { "key": "A", "text": "works" },
+      { "key": "B", "text": "is working" },
+      { "key": "C", "text": "will have been working" },
+      { "key": "D", "text": "worked" }
+    ],
+    "correct_answer": "C",
+    "explanation_tr": "'By the time + Simple Present (opens next autumn)' kuralı gelecekteki bir zaman sınırını belirtir. Cümlenin devamında 'for over eighteen months' süreç bildiren bir zaman zarfı olduğundan Future Perfect Continuous ('will have been working') yapısı kullanılmalıdır.",
+    "explanation_en": "'By the time' referencing a future time together with a duration ('for eighteen months') requires the Future Perfect Continuous tense."
+  },
+  {
+    "id": "q-gen-a1-1",
+    "university_id": "general",
+    "level": "A1",
+    "category": "Grammar",
+    "question": "Select the correct option to fill in the blank:\n\n'Sarah and her brother _______ to the university prep classes every weekday.'",
+    "options": [
+      { "key": "A", "text": "goes" },
+      { "key": "B", "text": "go" },
+      { "key": "C", "text": "is going" },
+      { "key": "D", "text": "going" }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Özne 'Sarah and her brother' çoğul (They) olduğu için ve 'every weekday' geniş zaman (Simple Present) belirttiği için fiil yalın halde 'go' olarak gelmelidir.",
+    "explanation_en": "The subject 'Sarah and her brother' is plural (they), and the habitual adverb 'every weekday' requires Simple Present 'go'."
+  },
+  {
+    "id": "q-gen-a2-1",
+    "university_id": "general",
+    "level": "A2",
+    "category": "Vocabulary",
+    "question": "Which word best completes the sentence?\n\n'It is _______ to memorize all these words in one day; it is better to study fifteen words every day.'",
+    "options": [
+      { "key": "A", "text": "impossible" },
+      { "key": "B", "text": "essential" },
+      { "key": "C", "text": "accurate" },
+      { "key": "D", "text": "suitable" }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Cümlenin devamında 'günde 15 kelime çalışmak daha iyidir' tavsiyesi verildiğine göre, tüm kelimeleri tek bir günde ezberlemek imkansızdır/mantıklı değildir ('impossible').",
+    "explanation_en": "The second clause suggests spacing out study, indicating that cramming everything in one single day is 'impossible'."
+  },
+  {
+    "id": "q-gen-c2-1",
+    "university_id": "general",
+    "level": "C2",
+    "category": "Restatement",
+    "question": "Select the sentence closest in meaning:\n\n'Seldom has a technological advancement permeated everyday existence with such rapidity and profound societal implications as generative artificial intelligence.'",
+    "options": [
+      { "key": "A", "text": "Generative AI is just one of many typical technologies that have steadily integrated into society over time." },
+      { "key": "B", "text": "Hardly any prior technology has spread into daily life as swiftly or caused as deep a societal transformation as generative artificial intelligence." },
+      { "key": "C", "text": "Despite its swift spread, generative AI has produced negligible effects on social behavior." },
+      { "key": "D", "text": "Society has readily rejected previous technologies in favor of generative artificial intelligence." }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Cümle 'Seldom has...' (Çok nadiren... / Neredeyse hiçbir zaman...) devrik yapısıyla başlar. Generative AI'ın günlük yaşama bu hız ve derin toplumsal etkilerle girmesinin tarihte eşine az rastlandığını belirtir. B seçeneğindeki 'Hardly any prior technology has spread... as swiftly or caused as deep a societal transformation...' ifadesi tam ve eksiksiz bir eşanlamdır.",
+    "explanation_en": "The negative adverbial 'Seldom has...' emphasizes the unprecedented speed and depth of AI's societal adoption, which B paraphrases with precision."
+  }
+]

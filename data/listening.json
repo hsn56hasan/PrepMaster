@@ -1,0 +1,210 @@
+[
+  {
+    "id": "lis_buept_01",
+    "university_id": "boun",
+    "level": "C1",
+    "type": "note_taking",
+    "title": "The Psychology of Cognitive Biases in Decision Making",
+    "subtitle": "Boğaziçi BUEPT Tarzı Note-Taking Sınavı",
+    "target_university": "Boğaziçi Üniversitesi",
+    "duration_minutes": 15,
+    "lecture_duration_seconds": 95,
+    "instructions_tr": "Bu bir Note-Taking (Not Alma) sınavıdır. Dinleme esnasında sorular gizlidir. Aşağıdaki dijital not defterine önemli kavramları, neden-sonuç ilişkilerini ve örnekleri not alınız. Dinleme bittikten sonra 'Soruları Aç' butonuna basarak notlarınıza bakıp soruları yanıtlayınız.",
+    "audio_script": "Good morning class. Today we will examine how unconscious mental shortcuts, known in cognitive psychology as cognitive biases, systematically distort human rationality. Although human beings pride themselves on being logical decision-makers, empirical evidence demonstrates that our cognitive faculties rely heavily on heuristics. Two of the most pervasive biases are confirmation bias and the framing effect. First, let us look at confirmation bias. Confirmation bias is the tendency of individuals to search for, interpret, and recall information in a manner that validates their preexisting beliefs, while simultaneously disregarding contrary evidence. In an academic experiment conducted by Peter Wason in nineteen sixty, subjects consistently tested hypotheses by seeking confirming instances rather than attempting to falsify their assumptions. In contemporary digital society, algorithms on social media platforms amplify confirmation bias, creating ideological echo chambers where divergent opinions are systematically excluded. Now, let us shift our attention to the second phenomenon: the framing effect. Pioneered by psychologists Daniel Kahneman and Amos Tversky in nineteen eighty-one, the framing effect demonstrates that people react differently to a particular choice depending on whether it is presented as a gain or as a loss. For example, when medical patients are informed that a surgical procedure has a ninety percent survival rate, an overwhelming majority consent to the operation. Conversely, when the identical statistical reality is framed as having a ten percent mortality rate, acceptance rates decline precipitously. Thus, the psychological architecture of human perception reveals that risk aversion is context-dependent. To conclude, awareness of these cognitive vulnerabilities is essential for objective critical thinking, scientific inquiry, and sound public policy. In our next lecture, we will examine debiasing techniques.",
+    "suggested_notes_tr": [
+      "Ana Tema: Bilişsel Çarpıtmalar (Cognitive Biases) ve Akılcılık",
+      "1. Confirmation Bias (Doğrulama Yanlılığı): Var olan inançları destekleyen bilgileri arayıp tersini yok sayma. Peter Wason (1960) deneyi. Sosyal medya yankı odaları.",
+      "2. Framing Effect (Çerçeveleme Etkisi): Kahneman & Tversky (1981). Bilginin sunuluş biçimi kararı değiştirir. %90 hayatta kalma vs %10 ölüm oranı örneği.",
+      "Sonuç: Eleştirel düşünme için bu önyargıların farkında olmak şarttır."
+    ],
+    "questions": [
+      {
+        "id": "lis_buept_01_q1",
+        "question": "According to the lecturer, what did Peter Wason's 1960 experiment demonstrate regarding hypothesis testing?",
+        "options": [
+          {"key": "A", "text": "Individuals actively seek to falsify their preconceived assumptions."},
+          {"key": "B", "text": "Subjects prioritize seeking confirming evidence over attempting to disconfirm hypotheses."},
+          {"key": "C", "text": "Decision-makers rely solely on mathematical probabilities in laboratories."},
+          {"key": "D", "text": "Social media algorithms have reduced the impact of confirmation bias."}
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Derste belirtildiği üzere Wason'ın 1960 yılındaki deneyi, insanların hipotezlerini yanlışlamaya (falsify) çalışmak yerine doğrulamaya yönelik kanıt aradıklarını (confirming instances) göstermiştir."
+      },
+      {
+        "id": "lis_buept_01_q2",
+        "question": "What is the primary mechanism of the framing effect as demonstrated by Kahneman and Tversky?",
+        "options": [
+          {"key": "A", "text": "Choices are evaluated based on how outcomes are framed as gains or losses."},
+          {"key": "B", "text": "Patients consistently prefer riskier medical procedures regardless of wording."},
+          {"key": "C", "text": "Rational agents calculate statistical risks identically in all circumstances."},
+          {"key": "D", "text": "Risk tolerance increases when negative outcomes are emphasized."}
+        ],
+        "correct_answer": "A",
+        "explanation_tr": "Kahneman ve Tversky'nin Çerçeveleme Etkisi (Framing Effect) teorisine göre, kararlar seçeneğin bir kazanç (gain) mı yoksa kayıp (loss) olarak mı sunulduğuna bağlı olarak tamamen değişir."
+      },
+      {
+        "id": "lis_buept_01_q3",
+        "question": "Why does the lecturer mention social media platforms during the discussion of confirmation bias?",
+        "options": [
+          {"key": "A", "text": "To suggest that algorithms encourage diverse perspectives."},
+          {"key": "B", "text": "To illustrate how ideological echo chambers amplify belief validation."},
+          {"key": "C", "text": "To prove that digital communication eliminates cognitive shortcuts."},
+          {"key": "D", "text": "To contrast digital media with printed scientific literature."}
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Konuşmacı, sosyal medya algoritmalarının ideolojik 'yankı odaları' (echo chambers) yaratarak doğrulama yanlılığını pekiştirdiğini ve farklı görüşleri dışladığını vurgulamak için sosyal medyadan bahsetmiştir."
+      },
+      {
+        "id": "lis_buept_01_q4",
+        "question": "Which response is provoked when a surgical procedure is presented as having a 'ten percent mortality rate'?",
+        "options": [
+          {"key": "A", "text": "Patients show higher willingness to undergo surgery."},
+          {"key": "B", "text": "Consent rates decrease sharply due to risk aversion framing."},
+          {"key": "C", "text": "Patients demand mathematical proof before deciding."},
+          {"key": "D", "text": "Physicians refuse to execute the operation."}
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Metinde aynı istatistiğin '%10 ölüm oranı' (mortality rate) olarak çerçevelenmesi durumunda kabul oranlarının sert bir şekilde düştüğü ('decline precipitously') ifade edilmiştir."
+      }
+    ]
+  },
+  {
+    "id": "lis_itu_01",
+    "university_id": "itu",
+    "level": "B2",
+    "type": "while_listening",
+    "title": "Smart Electrical Grids and Renewable Energy Integration",
+    "subtitle": "İTÜ Proficiency Tarzı While-Listening Sınavı",
+    "target_university": "İstanbul Teknik Üniversitesi",
+    "duration_minutes": 10,
+    "lecture_duration_seconds": 75,
+    "instructions_tr": "Bu bir While-Listening (Dinlerken Cevaplama) sınavıdır. Sorular ses kaydı boyunca açıktır. Kaydı dinlerken eş zamanlı olarak soruları yanıtlayabilirsiniz.",
+    "audio_script": "Good afternoon prospective engineers. Today, modern electrical engineering is undergoing a fundamental transformation. For over a century, traditional electrical grids operated on a unidirectional flow model: centralized power plants generated electricity from fossil fuels and transmitted it down to passive consumers. However, the rapid proliferation of renewable energy sources, specifically solar photovoltaic systems and offshore wind farms, has rendered this conventional architecture obsolete. Renewable power generation is inherently intermittent and decentralized. Wind patterns fluctuate unpredictably, and solar irradiance ceases during nocturnal hours. To resolve this imbalance between fluctuating supply and volatile demand, engineers have developed the concept of the Smart Grid. A smart grid utilizes bi-directional digital communication networks, advanced metering infrastructure, and automated sensors to dynamically balance load distributions. Furthermore, utility-scale battery energy storage systems, such as lithium-ion and flow batteries, play a pivotal role in frequency regulation. In conclusion, the transition toward carbon neutrality requires not merely green generation, but intelligent transmission systems.",
+    "suggested_notes_tr": [
+      "Klasik Şebeke: Tek yönlü (unidirectional), fosil yakıt, pasif tüketici.",
+      "Yenilenebilir Sorunu: Kesintili (intermittent) üretim ve merkezi olmayan yapı.",
+      "Akıllı Şebeke (Smart Grid): Çift yönlü iletişim, anlık yük dengeleme.",
+      "Depolama: Batarya sistemleri frekans regülasyonu sağlar."
+    ],
+    "questions": [
+      {
+        "id": "lis_itu_01_q1",
+        "question": "How did traditional electrical grids historically distribute power according to the lecturer?",
+        "options": [
+          {"key": "A", "text": "Through bi-directional decentralized networks across regional hubs."},
+          {"key": "B", "text": "Through a unidirectional flow from centralized power plants to passive users."},
+          {"key": "C", "text": "By storing solar energy in decentralized residential batteries."},
+          {"key": "D", "text": "Through automated smart meters installed at consumer homes."}
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Konuşmacı, geleneksel şebekelerin yüz yılı aşkın süredir merkezi santrallerden pasif kullanıcılara tek yönlü (unidirectional flow) çalıştığını belirtmiştir."
+      },
+      {
+        "id": "lis_itu_01_q2",
+        "question": "What is identified as the fundamental engineering challenge of solar and wind generation?",
+        "options": [
+          {"key": "A", "text": "Their reliance on fossil fuel combustion."},
+          {"key": "B", "text": "Excessive high-voltage transmission lines required."},
+          {"key": "C", "text": "Their intermittent and decentralized production characteristics."},
+          {"key": "D", "text": "The inability of consumers to measure their daily consumption."}
+        ],
+        "correct_answer": "C",
+        "explanation_tr": "Rüzgar ve güneş enerjisinin en temel sorunu kesintili (intermittent) ve merkezi olmayan (decentralized) yapısıdır."
+      },
+      {
+        "id": "lis_itu_01_q3",
+        "question": "What technological capability distinguishes a smart grid from conventional power grids?",
+        "options": [
+          {"key": "A", "text": "Bi-directional digital communication and dynamic load balancing."},
+          {"key": "B", "text": "Complete reliance on coal-fired generation stations."},
+          {"key": "C", "text": "Elimination of energy storage requirements."},
+          {"key": "D", "text": "A reduction in electrical sensors across the network."}
+        ],
+        "correct_answer": "A",
+        "explanation_tr": "Akıllı şebekeleri ayıran özellik iki yönlü dijital iletişim (bi-directional digital communication) ve dinamik yük dengelemesidir."
+      },
+      {
+        "id": "lis_itu_01_q4",
+        "question": "What critical role do utility-scale battery storage systems fulfill in smart grids?",
+        "options": [
+          {"key": "A", "text": "Replacing power transmission cables completely."},
+          {"key": "B", "text": "Regulating electrical frequency and mitigating supply fluctuations."},
+          {"key": "C", "text": "Generating wind energy during daylight hours."},
+          {"key": "D", "text": "Eliminating consumer demand entirely."}
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Batarya sistemleri (BESS) şebeke frekansını regüle etmekte ve dalgalanan enerji arzını dengelemektedir."
+      }
+    ]
+  },
+  {
+    "id": "lis_odtu_01",
+    "university_id": "metu",
+    "level": "C1",
+    "type": "note_taking",
+    "title": "Bioclimatic Urban Architecture and Heat Island Mitigation",
+    "subtitle": "ODTÜ EPE Tarzı Note-Taking Sınavı",
+    "target_university": "Orta Doğu Teknik Üniversitesi",
+    "duration_minutes": 15,
+    "lecture_duration_seconds": 85,
+    "instructions_tr": "ODTÜ EPE formatında not alma simülasyonu. Ses kaydını dinlerken notlarınızı alınız. Kayıt bitiminde sorular açılacak ve cevaplayacaksınız.",
+    "audio_script": "Welcome students. In today's architectural seminar, we shall investigate bioclimatic architecture as a mitigation strategy against the Urban Heat Island effect. As metropolitan areas expand, impermeable surfaces such as asphalt roads and concrete high-rises absorb solar radiation, releasing thermal energy overnight. Consequently, urban centers frequently experience ambient temperatures three to seven degrees Celsius higher than neighboring rural districts. Bioclimatic architecture tackles this predicament through three fundamental design interventions: passive natural ventilation corridors, green infrastructure roofs, and albedo optimization. Albedo refers to the fraction of solar radiation reflected by a surface. By substituting dark asphalt with high-albedo reflective coatings and permeable pavers, surface heat absorption is reduced by up to forty percent. Concurrently, green roofs laden with drought-resistant vegetation reduce urban stormwater runoff while facilitating evaporative cooling. Ultimately, sustainable urban design requires synchronizing architectural geometry with microclimatic wind patterns.",
+    "suggested_notes_tr": [
+      "Sorun: Urban Heat Island (UHI) - Beton/asfalt ısınması, 3-7°C daha sıcak şehir merkezleri.",
+      "Çözüm: Biyoklimatik Mimari (3 müdahale):",
+      "1. Doğal havalandırma koridorları (passive ventilation).",
+      "2. Yeşil çatılar (green roofs): Su tutma ve evaporative cooling.",
+      "3. Albedo optimizasyonu: Güneş ışığını yansıtma yüzdesi. Açık renk kaplamalarla %40 ısı azalması."
+    ],
+    "questions": [
+      {
+        "id": "lis_odtu_01_q1",
+        "question": "Why do urban centers experience higher temperatures than surrounding rural areas according to the talk?",
+        "options": [
+          {"key": "A", "text": "Because rural regions consume significantly more electrical energy."},
+          {"key": "B", "text": "Because asphalt and concrete absorb solar radiation and release heat at night."},
+          {"key": "C", "text": "Because green roofs generate artificial thermal emissions."},
+          {"key": "D", "text": "Because wind currents are entirely absent in rural districts."}
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Metinde asfalt ve beton gibi geçirimsiz yüzeylerin güneş enerjisini emip gece yayması sonucu kentsel ısı adası oluştuğu belirtilmiştir."
+      },
+      {
+        "id": "lis_odtu_01_q2",
+        "question": "What does the scientific term 'albedo' denote in the context of bioclimatic architecture?",
+        "options": [
+          {"key": "A", "text": "The speed of subterranean stormwater runoff."},
+          {"key": "B", "text": "The structural load capacity of concrete columns."},
+          {"key": "C", "text": "The percentage of solar radiation reflected by a surface material."},
+          {"key": "D", "text": "The rate at which vegetation produces oxygen during daylight."}
+        ],
+        "correct_answer": "C",
+        "explanation_tr": "Albedo, bir yüzeyin üzerine düşen güneş radyasyonunu yansıtma (reflect) oranıdır."
+      },
+      {
+        "id": "lis_odtu_01_q3",
+        "question": "By how much can high-albedo reflective coatings reduce surface heat absorption?",
+        "options": [
+          {"key": "A", "text": "Up to ten percent."},
+          {"key": "B", "text": "Up to twenty-five percent."},
+          {"key": "C", "text": "Up to forty percent."},
+          {"key": "D", "text": "Nearly eighty percent."}
+        ],
+        "correct_answer": "C",
+        "explanation_tr": "Konuşmacı 'surface heat absorption is reduced by up to forty percent' demiştir."
+      },
+      {
+        "id": "lis_odtu_01_q4",
+        "question": "What twin environmental benefits are provided by green roofs with drought-resistant plants?",
+        "options": [
+          {"key": "A", "text": "Increasing asphalt durability and decreasing rural temperatures."},
+          {"key": "B", "text": "Reducing stormwater runoff and facilitating evaporative cooling."},
+          {"key": "C", "text": "Eliminating architectural wind corridors and absorbing rainwater."},
+          {"key": "D", "text": "Trapping nighttime heat within building interiors."}
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Yeşil çatılar yağmur suyu akışını azaltır (reduce stormwater runoff) ve buharlaşma yoluyla serinletme (evaporative cooling) sağlar."
+      }
+    ]
+  }
+]

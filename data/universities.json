@@ -1,0 +1,239 @@
+[
+  {
+    "id": "itu",
+    "name": "İstanbul Teknik Üniversitesi",
+    "short_name": "İTÜ",
+    "exam_name": "İTÜ Proficiency Sınavı",
+    "passing_score": 60,
+    "duration_minutes": 150,
+    "total_questions": 60,
+    "badge_color": "blue",
+    "description": "İTÜ Yabancı Diller Yüksekokulu tarafından düzenlenen, restatement, cloze test, reading ve writing aşamalarından oluşan muafiyet sınavı.",
+    "sections": [
+      {
+        "name": "Restatement (Yeniden İfade)",
+        "questions_count": 10,
+        "weight_percent": 15,
+        "description": "Verilen cümlenin anlamca en yakın ve eksiksiz karşılığını bulma. Bağlaç ve nüanslara dikkat gerektirir."
+      },
+      {
+        "name": "Reading Comprehension",
+        "questions_count": 25,
+        "weight_percent": 35,
+        "description": "Search reading ve careful reading olmak üzere akademik ve popüler bilim makaleleri üzerinden soru çözümü."
+      },
+      {
+        "name": "Use of English & Cloze Test",
+        "questions_count": 15,
+        "weight_percent": 20,
+        "description": "Akademik bağlamda dilbilgisi kuralları, collocation ve prepositions kullanımı."
+      },
+      {
+        "name": "Essay Writing",
+        "questions_count": 1,
+        "weight_percent": 30,
+        "description": "Opinion veya For & Against formatında 300-350 kelimelik akademik kompozisyon."
+      }
+    ],
+    "tips": [
+      "Restatement sorularında 'cause-effect' ve 'contrast' bağlaçlarının doğru aktarılıp aktarılmadığını mutlaka kontrol edin.",
+      "Reading bölümünde önce soruları tarayın, ardından paragrafın ana fikrini bulun.",
+      "Writing bölümünde 'thesis statement' ve paragraflar arası geçiş bağlaçlarına (transitions) dikkat edin."
+    ]
+  },
+  {
+    "id": "metu",
+    "name": "Orta Doğu Teknik Üniversitesi",
+    "short_name": "ODTÜ",
+    "exam_name": "METU EPE (English Proficiency Exam)",
+    "passing_score": 60,
+    "duration_minutes": 180,
+    "total_questions": 65,
+    "badge_color": "red",
+    "description": "ODTÜ Temel İngilizce Bölümü tarafından hazırlanan; Language Use, Reading, While-Listening & Note-Taking ve Essay içeren kapsamlı sınav.",
+    "sections": [
+      {
+        "name": "Language Use (Cloze & Grammar)",
+        "questions_count": 20,
+        "weight_percent": 20,
+        "description": "Cümle tamamlama, bağlaç seçimi ve ileri düzey gramer yapıları."
+      },
+      {
+        "name": "Reading Comprehension",
+        "questions_count": 30,
+        "weight_percent": 35,
+        "description": "Detaylı okuma, ana fikir çıkarma ve paragrafta eksik cümleyi tamamlama."
+      },
+      {
+        "name": "Listening & Note Taking",
+        "questions_count": 15,
+        "weight_percent": 20,
+        "description": "Akademik bir ders anlatımını dinleyip not alma ve ardından soruları yanıtlama."
+      },
+      {
+        "name": "Academic Writing",
+        "questions_count": 1,
+        "weight_percent": 25,
+        "description": "Verilen iki konu arasından seçilen temada akademik argüman geliştirme (Cause & Effect veya Argumentative)."
+      }
+    ],
+    "tips": [
+      "Note-taking aşamasında anahtar kelimeleri kısaltarak not alın; tam cümle yazmaya çalışıp konuyu kaçırmayın.",
+      "Metin tamamlama sorularında boşluktan önceki ve sonraki zamir (pronoun) referanslarına odaklanın.",
+      "Kelime çalışırken akademik fiil ve isim türevlerine (derive) ağırlık verin."
+    ]
+  },
+  {
+    "id": "boun",
+    "name": "Boğaziçi Üniversitesi",
+    "short_name": "Boğaziçi",
+    "exam_name": "BUEPT (Boğaziçi University English Proficiency Test)",
+    "passing_score": 60,
+    "duration_minutes": 210,
+    "total_questions": 50,
+    "badge_color": "sky",
+    "description": "Türkiye'nin en zorlu hazırlık muafiyet sınavlarından biri kabul edilen; Selective Reading, Careful Reading, Listening ve 2 ayrı Essay içeren test.",
+    "sections": [
+      {
+        "name": "Reading (Selective & Careful)",
+        "questions_count": 20,
+        "weight_percent": 33,
+        "description": "Hızlı tarama (Selective) ve derinlemesine akademik analiz (Careful Reading) soruları."
+      },
+      {
+        "name": "Listening (Selective & Lecture)",
+        "questions_count": 15,
+        "weight_percent": 33,
+        "description": "Önceden soruları görmeden dinleme ve not alarak açık uçlu/çoktan seçmeli yanıtlama."
+      },
+      {
+        "name": "Writing (TWE - Test of Written English)",
+        "questions_count": 2,
+        "weight_percent": 34,
+        "description": "Biri kısa yanıt/özetleme, diğeri tam akademik essay olmak üzere iki yazma görevi."
+      }
+    ],
+    "tips": [
+      "Boğaziçi sınavında ezber şablonlar yerine özgün fikirler ve güçlü dil hakimiyeti aranır.",
+      "Reading metinleri felsefe, psikoloji ve sosyoloji ağırlıklıdır; soyut kavram kelimelerine hakim olun.",
+      "C1-C2 seviyesindeki bağlaç ve yapay cümle çeşitliliğine (varied sentence structures) odaklanın."
+    ]
+  },
+  {
+    "id": "bilkent",
+    "name": "Bilkent Üniversitesi",
+    "short_name": "Bilkent",
+    "exam_name": "COPE (Certificate of Proficiency in English)",
+    "passing_score": 60,
+    "duration_minutes": 180,
+    "total_questions": 55,
+    "badge_color": "amber",
+    "description": "Bilkent İngilizce Hazırlık Okulu tarafından uygulanan; Reading, Listening, Writing ve Use of English bölümlerinden oluşan iki aşamalı sınav.",
+    "sections": [
+      {
+        "name": "Reading & Text Analysis",
+        "questions_count": 25,
+        "weight_percent": 35,
+        "description": "Akademik metinlerden soru yanıtlama, kelime anlamı çıkarma ve özetleme."
+      },
+      {
+        "name": "Listening",
+        "questions_count": 15,
+        "weight_percent": 25,
+        "description": "Konuşmacının tutumunu (attitude) ve ana argümanlarını analiz etme."
+      },
+      {
+        "name": "Academic Writing",
+        "questions_count": 1,
+        "weight_percent": 40,
+        "description": "Okuma metinlerine atıfta bulunarak sentez (Synthesis/Argument) essay yazımı."
+      }
+    ],
+    "tips": [
+      "Sadece fikir beyan etmek yetmez; tezlerinizi örneklerle destekleme yeteneğiniz ölçülür.",
+      "Kelime dağarcığınızda academic word list (AWL) gruplarını mutlaka tamamlayın."
+    ]
+  },
+  {
+    "id": "ytu",
+    "name": "Yıldız Teknik Üniversitesi",
+    "short_name": "YTÜ",
+    "exam_name": "YTÜ İYS (İngilizce Yeterlik Sınavı)",
+    "passing_score": 60,
+    "duration_minutes": 150,
+    "total_questions": 60,
+    "badge_color": "emerald",
+    "description": "YTÜ Yabancı Diller Yüksekokulu İYS sınavı; dilbilgisi, kelime bilgisi, okuma anlama ve kompozisyon bölümlerinden oluşur.",
+    "sections": [
+      {
+        "name": "Use of English & Grammar",
+        "questions_count": 20,
+        "weight_percent": 25,
+        "description": "Zamanlar, kipler, bağlaçlar ve cümle kalıpları."
+      },
+      {
+        "name": "Vocabulary in Context",
+        "questions_count": 15,
+        "weight_percent": 20,
+        "description": "Cümle içinde en uygun akademik veya günlük kelimeyi seçme."
+      },
+      {
+        "name": "Reading Comprehension",
+        "questions_count": 20,
+        "weight_percent": 30,
+        "description": "3 farklı okuma parçasından çoktan seçmeli sorular."
+      },
+      {
+        "name": "Essay Writing",
+        "questions_count": 1,
+        "weight_percent": 25,
+        "description": "Belirli bir konuda giriş, gelişme ve sonuç paragraflarından oluşan kompozisyon."
+      }
+    ],
+    "tips": [
+      "Dilbilgisi sorularında seçenekleri elerken tekil-çoğul ve zaman uyumuna hızlıca bakın.",
+      "Reading metinlerindeki anahtar kelimelerin eş anlamlılarını sorularda aramayı alışkanlık edinin."
+    ]
+  },
+  {
+    "id": "general",
+    "name": "Genel Üniversite Hazırlık & CEFR",
+    "short_name": "Genel",
+    "exam_name": "Genel Hazırlık Muafiyet & Kur Geçme Sınavı",
+    "passing_score": 60,
+    "duration_minutes": 120,
+    "total_questions": 50,
+    "badge_color": "indigo",
+    "description": "A1'den C2'ye kadar tüm CEFR kurları ve Türkiye genelindeki devlet/vakıf üniversitelerinin hazırlık muafiyet formatlarına tam uyumlu sınav havuzu.",
+    "sections": [
+      {
+        "name": "Grammar & Structure",
+        "questions_count": 15,
+        "weight_percent": 25,
+        "description": "Seviyeye göre dilbilgisi ve cümle yapıları."
+      },
+      {
+        "name": "Vocabulary & Phrases",
+        "questions_count": 15,
+        "weight_percent": 25,
+        "description": "Akademik ve kur bazlı kelimeler."
+      },
+      {
+        "name": "Reading Comprehension",
+        "questions_count": 15,
+        "weight_percent": 30,
+        "description": "Okuduğunu anlama, ana fikir ve çıkarım soruları."
+      },
+      {
+        "name": "Writing & Composition",
+        "questions_count": 1,
+        "weight_percent": 20,
+        "description": "Paragraf veya tam essay oluşturma rehberliği."
+      }
+    ],
+    "tips": [
+      "Hangi üniversitede olursanız olun, A1'den C2'ye adımları sağlam atarak muafiyet garantisi sağlayabilirsiniz.",
+      "Kelime kartlarını günde en az 15 dakika tekrar edin."
+    ]
+  }
+]
