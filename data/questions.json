@@ -6,10 +6,22 @@
     "category": "Restatement",
     "question": "Choose the sentence that is closest in meaning to the sentence given below:\n\n'Had it not been for the prompt intervention of the paramedic team, the injured hiker would certainly have perished.'",
     "options": [
-      { "key": "A", "text": "Although the paramedics intervened immediately, they were unable to save the hiker's life." },
-      { "key": "B", "text": "The injured hiker survived solely because the paramedic team intervened without delay." },
-      { "key": "C", "text": "If the hiker had not asked for help so promptly, the paramedics could not have reached him." },
-      { "key": "D", "text": "The hiker would have been rescued even if the paramedics had delayed their arrival." }
+      {
+        "key": "A",
+        "text": "Although the paramedics intervened immediately, they were unable to save the hiker's life."
+      },
+      {
+        "key": "B",
+        "text": "The injured hiker survived solely because the paramedic team intervened without delay."
+      },
+      {
+        "key": "C",
+        "text": "If the hiker had not asked for help so promptly, the paramedics could not have reached him."
+      },
+      {
+        "key": "D",
+        "text": "The hiker would have been rescued even if the paramedics had delayed their arrival."
+      }
     ],
     "correct_answer": "B",
     "explanation_tr": "'Had it not been for...' yapısı Type 3 Inverted Conditional (Gizli 'If it hadn't been for...') kalıbıdır ve '...olmasaydı' anlamına gelir. 'Prompt intervention' (gecikmesiz/hızlı müdahale) sayesinde dağcının hayatta kaldığı belirtilmektedir. B şıkkında 'survived solely because the paramedic team intervened without delay' ifadesi orijinal cümlenin anlamını eksiksiz ve birebir karşılar.",
@@ -22,11 +34,26 @@
     "category": "Cloze Test",
     "question": "Complete the blank in the academic text:\n\n'Renewable energy investments have soared recently; _______, many countries still rely predominantly on fossil fuels for baseline electricity generation.'",
     "options": [
-      { "key": "A", "text": "furthermore" },
-      { "key": "B", "text": "nevertheless" },
-      { "key": "C", "text": "consequently" },
-      { "key": "D", "text": "likewise" },
-      { "key": "E", "text": "namely" }
+      {
+        "key": "A",
+        "text": "furthermore"
+      },
+      {
+        "key": "B",
+        "text": "nevertheless"
+      },
+      {
+        "key": "C",
+        "text": "consequently"
+      },
+      {
+        "key": "D",
+        "text": "likewise"
+      },
+      {
+        "key": "E",
+        "text": "namely"
+      }
     ],
     "correct_answer": "B",
     "explanation_tr": "Cümlenin ilk kısmında yenilenebilir enerji yatırımlarının hızla arttığı (olumlu/büyüme), noktalı virgülden sonra ise ülkelerin hala fosil yakıtlara bağımlı olduğu (zıtlık) belirtilmektedir. Bir zıtlık bağlacı (contrast connector) gerektiğinden 'nevertheless' (yine de / buna rağmen) doğru cevaptır. 'Furthermore' ekleme, 'consequently' sonuç bildirir.",
@@ -40,10 +67,22 @@
     "passage": "Cognitive psychologists have long debated the extent to which bilingualism confers executive functioning benefits. While early twentieth-century research posited that juggling two linguistic codes burdened working memory, empirical paradigms developed over the past two decades suggest otherwise. Bilingual individuals frequently exhibit enhanced inhibitory control, allowing them to suppress irrelevant stimuli more effectively during complex problem-solving tasks. Nonetheless, recent replication efforts urge caution, indicating that socio-economic status and cultural background may mediate these purported cognitive advantages.",
     "question": "According to the passage, recent replication studies on bilingualism:",
     "options": [
-      { "key": "A", "text": "Corroborate early 20th-century findings that two languages burden memory." },
-      { "key": "B", "text": "Demonstrate that inhibitory control is unaffected by linguistic proficiency." },
-      { "key": "C", "text": "Suggest that apparent cognitive perks might be influenced by external socio-cultural factors." },
-      { "key": "D", "text": "Prove conclusively that bilingual individuals always outperform monolinguals." }
+      {
+        "key": "A",
+        "text": "Corroborate early 20th-century findings that two languages burden memory."
+      },
+      {
+        "key": "B",
+        "text": "Demonstrate that inhibitory control is unaffected by linguistic proficiency."
+      },
+      {
+        "key": "C",
+        "text": "Suggest that apparent cognitive perks might be influenced by external socio-cultural factors."
+      },
+      {
+        "key": "D",
+        "text": "Prove conclusively that bilingual individuals always outperform monolinguals."
+      }
     ],
     "correct_answer": "C",
     "explanation_tr": "Metnin son cümlesinde: 'Nonetheless, recent replication efforts urge caution, indicating that socio-economic status and cultural background may mediate these purported cognitive advantages.' denmektedir. 'Mediate' (aracılık etmek / etkilemek) ve socio-economic / cultural faktörler, C şıkkındaki 'influenced by external socio-cultural factors' ifadesine tam karşılık gelir.",
@@ -56,10 +95,22 @@
     "category": "Language Use",
     "question": "Choose the most appropriate option to complete the sentence:\n\n'Not until the professor had meticulously reviewed the laboratory logs _______ that the data had been systematically altered.'",
     "options": [
-      { "key": "A", "text": "he realized" },
-      { "key": "B", "text": "did he realize" },
-      { "key": "C", "text": "he had realized" },
-      { "key": "D", "text": "had he realized" }
+      {
+        "key": "A",
+        "text": "he realized"
+      },
+      {
+        "key": "B",
+        "text": "did he realize"
+      },
+      {
+        "key": "C",
+        "text": "he had realized"
+      },
+      {
+        "key": "D",
+        "text": "had he realized"
+      }
     ],
     "correct_answer": "B",
     "explanation_tr": "'Not until' ile başlayan zaman cümlelerinde ana cümlede devrik yapı (inversion) kullanılır. Zaman sırasına göre inceleme geçmişte daha önce yapılmış ('had meticulously reviewed'), farkına varma eylemi ise Simple Past devrik biçiminde ('did he realize') olmalıdır. 'Did + subject + V1' kuralı geçerlidir.",
@@ -73,10 +124,22 @@
     "passage": "The philosophy of science underwent a tectonic paradigm shift with Thomas Kuhn’s 1962 treatise 'The Structure of Scientific Revolutions'. Kuhn argued against the prevailing positivist conception that scientific knowledge accumulates via a linear, steady trajectory of incremental discoveries. Instead, he introduced the concept of 'normal science' punctuated by anomalies, which precipitate crises and culminate in radical paradigm shifts that redefine the very ontological premises of a discipline.",
     "question": "Which of the following can be inferred from Kuhn's critique of the positivist view?",
     "options": [
-      { "key": "A", "text": "Scientific progress is an uninterrupted, uniform accumulation of empirical facts." },
-      { "key": "B", "text": "Major scientific breakthroughs involve fundamental changes in foundational assumptions rather than mere incremental additions." },
-      { "key": "C", "text": "Positivist scientists actively disregarded anomalies to prevent intellectual crises." },
-      { "key": "D", "text": "Normal science is inherently incapable of producing reliable experimental observations." }
+      {
+        "key": "A",
+        "text": "Scientific progress is an uninterrupted, uniform accumulation of empirical facts."
+      },
+      {
+        "key": "B",
+        "text": "Major scientific breakthroughs involve fundamental changes in foundational assumptions rather than mere incremental additions."
+      },
+      {
+        "key": "C",
+        "text": "Positivist scientists actively disregarded anomalies to prevent intellectual crises."
+      },
+      {
+        "key": "D",
+        "text": "Normal science is inherently incapable of producing reliable experimental observations."
+      }
     ],
     "correct_answer": "B",
     "explanation_tr": "Kuhn, bilimin doğrusal ve eklemeli bir şekilde (incremental additions) ilerlediği fikrine karşı çıkmış; krizler ve 'ontolojik temelleri yeniden tanımlayan radikal paradigma kaymaları' (fundamental changes in foundational assumptions) ile ilerlediğini savunmuştur. Bu nedenle doğru cevap B'dir.",
@@ -89,10 +152,22 @@
     "category": "Vocabulary",
     "question": "Select the word that best completes the academic critique:\n\n'Rather than presenting an objective synthesis, the author offered an _______ account that selectively favored his pre-existing dogma.'",
     "options": [
-      { "key": "A", "text": "equitable" },
-      { "key": "B", "text": "equivocal" },
-      { "key": "C", "text": "injudicious" },
-      { "key": "D", "text": "impartial" }
+      {
+        "key": "A",
+        "text": "equitable"
+      },
+      {
+        "key": "B",
+        "text": "equivocal"
+      },
+      {
+        "key": "C",
+        "text": "injudicious"
+      },
+      {
+        "key": "D",
+        "text": "impartial"
+      }
     ],
     "correct_answer": "C",
     "explanation_tr": "Cümlede 'Rather than presenting an objective synthesis' (nesnel bir sentez sunmak yerine) ifadesi ve 'selectively favored his pre-existing dogma' (kendi dogmasını yanlı şekilde kayırdı) vurgusu vardır. 'Equitable' ve 'impartial' tarafsız demektir (zıttır). 'Injudicious' (sağduyusuz, öngörüsüz, yersiz) eleştirel tona en uygun seçenektir.",
@@ -106,10 +181,22 @@
     "passage": "Urban heat islands (UHIs) represent microclimatic anomalies where metropolitan areas experience significantly elevated ambient temperatures relative to adjacent rural peripheries. This phenomenon stems primarily from the proliferation of impermeable surfaces—such as asphalt and concrete—which possess high thermal inertia and low albedo. Mitigation strategies encompass the integration of green roofs and reflective pavements to counteract localized warming.",
     "question": "The primary underlying cause of urban heat islands, as outlined in the text, is:",
     "options": [
-      { "key": "A", "text": "The implementation of reflective pavements across rural perimeters." },
-      { "key": "B", "text": "The widespread presence of materials that trap heat and reflect minimal sunlight." },
-      { "key": "C", "text": "The expansion of green roofs in densely populated districts." },
-      { "key": "D", "text": "The lack of reliable meteorological stations within city centres." }
+      {
+        "key": "A",
+        "text": "The implementation of reflective pavements across rural perimeters."
+      },
+      {
+        "key": "B",
+        "text": "The widespread presence of materials that trap heat and reflect minimal sunlight."
+      },
+      {
+        "key": "C",
+        "text": "The expansion of green roofs in densely populated districts."
+      },
+      {
+        "key": "D",
+        "text": "The lack of reliable meteorological stations within city centres."
+      }
     ],
     "correct_answer": "B",
     "explanation_tr": "Metinde 'high thermal inertia and low albedo' (yüksek ısı tutma ve düşük yansıtma kapasitesi) ve 'impermeable surfaces (asphalt and concrete)' temel neden olarak belirtilmiştir. B seçeneğindeki 'materials that trap heat and reflect minimal sunlight' birebir bu tanımı açıklar.",
@@ -122,10 +209,22 @@
     "category": "Grammar",
     "question": "Choose the best option to complete the sentence:\n\n'By the time the new campus library opens next autumn, the construction company _______ on the project for over eighteen months.'",
     "options": [
-      { "key": "A", "text": "works" },
-      { "key": "B", "text": "is working" },
-      { "key": "C", "text": "will have been working" },
-      { "key": "D", "text": "worked" }
+      {
+        "key": "A",
+        "text": "works"
+      },
+      {
+        "key": "B",
+        "text": "is working"
+      },
+      {
+        "key": "C",
+        "text": "will have been working"
+      },
+      {
+        "key": "D",
+        "text": "worked"
+      }
     ],
     "correct_answer": "C",
     "explanation_tr": "'By the time + Simple Present (opens next autumn)' kuralı gelecekteki bir zaman sınırını belirtir. Cümlenin devamında 'for over eighteen months' süreç bildiren bir zaman zarfı olduğundan Future Perfect Continuous ('will have been working') yapısı kullanılmalıdır.",
@@ -138,10 +237,22 @@
     "category": "Grammar",
     "question": "Select the correct option to fill in the blank:\n\n'Sarah and her brother _______ to the university prep classes every weekday.'",
     "options": [
-      { "key": "A", "text": "goes" },
-      { "key": "B", "text": "go" },
-      { "key": "C", "text": "is going" },
-      { "key": "D", "text": "going" }
+      {
+        "key": "A",
+        "text": "goes"
+      },
+      {
+        "key": "B",
+        "text": "go"
+      },
+      {
+        "key": "C",
+        "text": "is going"
+      },
+      {
+        "key": "D",
+        "text": "going"
+      }
     ],
     "correct_answer": "B",
     "explanation_tr": "Özne 'Sarah and her brother' çoğul (They) olduğu için ve 'every weekday' geniş zaman (Simple Present) belirttiği için fiil yalın halde 'go' olarak gelmelidir.",
@@ -154,10 +265,22 @@
     "category": "Vocabulary",
     "question": "Which word best completes the sentence?\n\n'It is _______ to memorize all these words in one day; it is better to study fifteen words every day.'",
     "options": [
-      { "key": "A", "text": "impossible" },
-      { "key": "B", "text": "essential" },
-      { "key": "C", "text": "accurate" },
-      { "key": "D", "text": "suitable" }
+      {
+        "key": "A",
+        "text": "impossible"
+      },
+      {
+        "key": "B",
+        "text": "essential"
+      },
+      {
+        "key": "C",
+        "text": "accurate"
+      },
+      {
+        "key": "D",
+        "text": "suitable"
+      }
     ],
     "correct_answer": "A",
     "explanation_tr": "Cümlenin devamında 'günde 15 kelime çalışmak daha iyidir' tavsiyesi verildiğine göre, tüm kelimeleri tek bir günde ezberlemek imkansızdır/mantıklı değildir ('impossible').",
@@ -170,13 +293,1271 @@
     "category": "Restatement",
     "question": "Select the sentence closest in meaning:\n\n'Seldom has a technological advancement permeated everyday existence with such rapidity and profound societal implications as generative artificial intelligence.'",
     "options": [
-      { "key": "A", "text": "Generative AI is just one of many typical technologies that have steadily integrated into society over time." },
-      { "key": "B", "text": "Hardly any prior technology has spread into daily life as swiftly or caused as deep a societal transformation as generative artificial intelligence." },
-      { "key": "C", "text": "Despite its swift spread, generative AI has produced negligible effects on social behavior." },
-      { "key": "D", "text": "Society has readily rejected previous technologies in favor of generative artificial intelligence." }
+      {
+        "key": "A",
+        "text": "Generative AI is just one of many typical technologies that have steadily integrated into society over time."
+      },
+      {
+        "key": "B",
+        "text": "Hardly any prior technology has spread into daily life as swiftly or caused as deep a societal transformation as generative artificial intelligence."
+      },
+      {
+        "key": "C",
+        "text": "Despite its swift spread, generative AI has produced negligible effects on social behavior."
+      },
+      {
+        "key": "D",
+        "text": "Society has readily rejected previous technologies in favor of generative artificial intelligence."
+      }
     ],
     "correct_answer": "B",
     "explanation_tr": "Cümle 'Seldom has...' (Çok nadiren... / Neredeyse hiçbir zaman...) devrik yapısıyla başlar. Generative AI'ın günlük yaşama bu hız ve derin toplumsal etkilerle girmesinin tarihte eşine az rastlandığını belirtir. B seçeneğindeki 'Hardly any prior technology has spread... as swiftly or caused as deep a societal transformation...' ifadesi tam ve eksiksiz bir eşanlamdır.",
     "explanation_en": "The negative adverbial 'Seldom has...' emphasizes the unprecedented speed and depth of AI's societal adoption, which B paraphrases with precision."
+  },
+  {
+    "id": "q-itu-3",
+    "university_id": "itu",
+    "level": "B2",
+    "category": "Restatement",
+    "question": "Choose the sentence that is closest in meaning to the sentence given below:\n\n'Much as the engineers strove to reinforce the bridge against seismic tremors, catastrophic structural failure occurred during the magnitude 7.8 earthquake.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "The bridge collapsed because the engineers refused to apply modern seismic reinforcements."
+      },
+      {
+        "key": "B",
+        "text": "Despite the rigorous efforts of the engineers to fortify the bridge, it could not withstand the 7.8 magnitude tremor."
+      },
+      {
+        "key": "C",
+        "text": "If the engineers had worked harder, the bridge would definitely have resisted the earthquake."
+      },
+      {
+        "key": "D",
+        "text": "Although the magnitude 7.8 earthquake was minor, the bridge collapsed due to poor engineering design."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "'Much as...' yapısı 'Although / Even though' (Her ne kadar... ise de / ...-e rağmen) anlamına gelen gelişmiş bir zıtlık bağlacıdır. Mühendislerin köprüyü güçlendirmek için ne kadar çabaladığına karşın köprünün 7.8 büyüklüğündeki depremde yıkıldığı anlatılmaktadır. B şıkkında 'Despite the rigorous efforts... it could not withstand...' ifadesi birebir aynı zıtlık ilişkisini verir.",
+    "explanation_en": "'Much as' expresses concession ('Although/Despite'). B accurately restates that despite engineering efforts, the bridge succumbed to the tremor."
+  },
+  {
+    "id": "q-itu-4",
+    "university_id": "itu",
+    "level": "B2",
+    "category": "Cloze Test",
+    "question": "Complete the blank in the environmental engineering passage:\n\n'Geothermal power stations emit negligible greenhouse gases compared to coal plants; _______, their deployment is strictly geographically constrained to tectonic fault boundaries.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "on the other hand"
+      },
+      {
+        "key": "B",
+        "text": "in addition"
+      },
+      {
+        "key": "C",
+        "text": "thereby"
+      },
+      {
+        "key": "D",
+        "text": "as a consequence"
+      },
+      {
+        "key": "E",
+        "text": "furthermore"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "İlk cümlede jeotermal santrallerin neredeyse hiç sera gazı salmadığı (büyük bir avantaj), noktalı virgülden sonra ise yalnızca fay hatlarının bulunduğu bölgelerle sınırlı olduğu (kısıtlama/dezavantaj) ifade edilmektedir. İki zıt yönü karşılaştıran 'on the other hand' (öte yandan) doğru bağlaçtır.",
+    "explanation_en": "The first clause presents a clear ecological advantage, while the second notes an operational restriction. 'On the other hand' appropriately introduces the contrasting aspect."
+  },
+  {
+    "id": "q-itu-5",
+    "university_id": "itu",
+    "level": "B2",
+    "category": "Grammar",
+    "question": "Choose the most grammatically correct option to fill the blank:\n\n'Scarcely _______ the flight control algorithm initiated its calibration protocol when the telemetry sensors detected an abnormal voltage surge.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "had"
+      },
+      {
+        "key": "B",
+        "text": "did"
+      },
+      {
+        "key": "C",
+        "text": "was"
+      },
+      {
+        "key": "D",
+        "text": "has"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Scarcely / Hardly / Barely ... when ...' devrik zaman kalıbıdır ve '...yapar yapmaz / henüz ...mıştı ki' anlamına gelir. Cümle başına geldiğinde arkasından Inversion (Devrik yapı: Had + Subject + V3) gerektirir: 'Scarcely had the flight control algorithm initiated...'",
+    "explanation_en": "Negative/limiting adverbs like 'Scarcely' at the beginning of a clause trigger subject-auxiliary inversion with past perfect: 'Scarcely had + subject + past participle'."
+  },
+  {
+    "id": "q-itu-6",
+    "university_id": "itu",
+    "level": "B2",
+    "category": "Reading",
+    "passage": "Modern civil aviation increasingly relies upon fly-by-wire flight control computers rather than direct mechanical linkages. In fly-by-wire aircraft, pilot side-stick inputs are translated into digital signals, which flight control computers interpret to actuate hydraulic control surfaces. Crucially, the computer system is programmed with 'flight envelope protection,' preventing the aviator from executing aerodynamic maneuvers that exceed the airframe's structural g-load thresholds or trigger dangerous aerodynamic stalls. While purists argue this diminishes pilot autonomy, accident analysis demonstrates an 80% reduction in loss-of-control occurrences since the introduction of digital flight envelope governance.",
+    "question": "According to the passage, the primary advantage of 'flight envelope protection' is that it:",
+    "options": [
+      {
+        "key": "A",
+        "text": "Restores full mechanical manual control to aviators during critical emergencies."
+      },
+      {
+        "key": "B",
+        "text": "Inhibits pilots from commanding maneuvers that would compromise aircraft structural integrity."
+      },
+      {
+        "key": "C",
+        "text": "Eliminates the necessity for hydraulic control actuators entirely."
+      },
+      {
+        "key": "D",
+        "text": "Increases loss-of-control incidents by undermining pilot training protocols."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Metinde 'flight envelope protection' sisteminin görevi: 'preventing the aviator from executing aerodynamic maneuvers that exceed the airframe's structural g-load thresholds or trigger dangerous aerodynamic stalls' olarak açıklanmıştır. B şıkkındaki 'Inhibits pilots from commanding maneuvers that would compromise aircraft structural integrity' bu ifadeyi tam anlamıyla karşılar ('Inhibit' = 'prevent').",
+    "explanation_en": "The text states the system prevents maneuvers exceeding structural thresholds or causing stalls, matching B."
+  },
+  {
+    "id": "q-itu-7",
+    "university_id": "itu",
+    "level": "B2",
+    "category": "Restatement",
+    "question": "Choose the closest sentence in meaning:\n\n'Had the municipal water authority not disregarded the warnings issued by hydrologists, the contamination of the urban reservoir could easily have been averted.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "Although hydrologists warned the authority repeatedly, the reservoir contamination was completely unavoidable."
+      },
+      {
+        "key": "B",
+        "text": "The reservoir was contaminated because the water authority ignored the hydrologists' warnings, which could otherwise have prevented the incident."
+      },
+      {
+        "key": "C",
+        "text": "The municipal authority averted the contamination by strictly following the hydrologists' instructions."
+      },
+      {
+        "key": "D",
+        "text": "Hydrologists failed to issue timely warnings, leading to the inevitable pollution of the city reservoir."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "'Had ... not disregarded' Type 3 Inversion'dır ('Eğer uyarıları göz ardı etmeseydi'). Anlam: Belediye su idaresi uyarıları yok saydığı için baraj kirlendi, halbuki bu kirlenme kolayca engellenebilirdi. B seçeneği bu neden-sonuç ve kaçırılmış fırsat anlamını tam olarak vermektedir.",
+    "explanation_en": "The inverted conditional denotes an unreal past condition: ignoring the warnings directly caused the contamination which was preventable."
+  },
+  {
+    "id": "q-boun-3",
+    "university_id": "boun",
+    "level": "C1",
+    "category": "Restatement",
+    "question": "Choose the sentence closest in meaning:\n\n'So deeply ingrained was the institution's commitment to bureaucratic secrecy that even whistleblowers armed with irrefutable evidence failed to provoke internal reform.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "Because whistleblowers lacked solid evidence, the institution easily concealed its secretive bureaucratic procedures."
+      },
+      {
+        "key": "B",
+        "text": "The organization's dedication to secrecy was so profound that conclusive whistleblower disclosures could not trigger institutional change."
+      },
+      {
+        "key": "C",
+        "text": "The institution only agreed to reform after whistleblowers threatened to make bureaucratic secrets public."
+      },
+      {
+        "key": "D",
+        "text": "Whistleblowers successfully eradicated institutional secrecy by presenting undeniable documentation."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "'So + adj + was + subject + that...' yapısı 'O kadar ... idi ki' anlamında bir Inverted Result Clause kalıbıdır. Kurumun gizliliğe bağlılığı o kadar kökleşmişti ('so deeply ingrained') ki, su geçirmez delillere sahip ifşacılar bile iç reform tetikleyemedi. B şıkkındaki 'so profound that conclusive disclosures could not trigger institutional change' orijinal anlamı eksiksiz korur.",
+    "explanation_en": "'So deeply ingrained was...' is an inverted result clause. B preserves the profound secrecy and the failure of indisputable disclosures to prompt reform."
+  },
+  {
+    "id": "q-boun-4",
+    "university_id": "boun",
+    "level": "C1",
+    "category": "Reading",
+    "passage": "In his seminal nineteen-seventy essay, Milton Friedman asserted that the sole social responsibility of business is to increase its profits within the boundaries of open and free competition. This doctrine, known colloquially as shareholder primacy, served as the ideological bedrock for corporate governance across Anglo-American capital markets for four decades. However, the escalating severity of climate degradation, coupled with widening socio-economic disparities, has catalyzed a robust intellectual backlash. Contemporary corporate theorists increasingly champion 'stakeholder capitalism,' a model positing that corporate boards owe fiduciary duties not merely to equity investors, but to labor forces, surrounding communities, and ecological systems. Skeptics retort that stakeholder capitalism dilutes corporate accountability, creating an ambiguous regulatory environment wherein executives can justify suboptimal commercial performance under the vague rubric of social benevolence.",
+    "question": "What is the primary critique leveled by skeptics against the 'stakeholder capitalism' paradigm?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It focuses excessively on maximizing short-term financial returns for equity investors."
+      },
+      {
+        "key": "B",
+        "text": "It diminishes executive accountability by offering ambiguous pretexts for commercial underperformance."
+      },
+      {
+        "key": "C",
+        "text": "It prohibits corporations from investing in local community projects and employee welfare."
+      },
+      {
+        "key": "D",
+        "text": "It completely reinforces Milton Friedman's nineteen-seventy shareholder primacy doctrine."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Metnin son cümlesinde: 'Skeptics retort that stakeholder capitalism dilutes corporate accountability, creating an ambiguous regulatory environment wherein executives can justify suboptimal commercial performance under the vague rubric of social benevolence.' denilmektedir. Şüpheciler yöneticilerin ticari başarısızlıklarını 'toplumsal fayda' adı altında örtbas edebileceklerini ve hesap verebilirliğin zayıflayacağını savunmaktadır. Bu doğrudan B şıkkıdır.",
+    "explanation_en": "The final sentence directly states that skeptics argue it dilutes accountability, allowing executives to justify underperformance under vague social goals."
+  },
+  {
+    "id": "q-boun-5",
+    "university_id": "boun",
+    "level": "C1",
+    "category": "Vocabulary",
+    "question": "Choose the word closest in meaning to the underlined word in context:\n\n'The epidemiologist noted that while initial clinical trials yielded promising observations, the conclusions remained largely speculative pending rigorous empirical verification.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "conjectural"
+      },
+      {
+        "key": "B",
+        "text": "irrefutable"
+      },
+      {
+        "key": "C",
+        "text": "substantive"
+      },
+      {
+        "key": "D",
+        "text": "definitive"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Speculative' kelimesi henüz kanıtlanmamış, varsayımsal veya tahminlere dayalı anlamına gelir. 'Conjectural' kelimesi de tam olarak 'varsayıma/tahmine dayalı' demektir. 'Irrefutable' (inkar edilemez), 'substantive' (somut/özlü) ve 'definitive' (kesin) zıt anlamlı çeldiricilerdir.",
+    "explanation_en": "'Speculative' means based on conjecture rather than knowledge. 'Conjectural' is an exact academic synonym."
+  },
+  {
+    "id": "q-boun-6",
+    "university_id": "boun",
+    "level": "C1",
+    "category": "Reading",
+    "passage": "Urban theorists distinguish between 'procedural gentrification' and 'subcultural gentrification.' The former is driven by institutional capital, municipal rezoning policies, and private equity real estate trusts, which systematically displace long-standing working-class residents. In contrast, subcultural gentrification often originates organically through the influx of bohemian artists, students, and freelancers who seek affordable rents in decaying post-industrial districts. Although subcultural pioneers often view themselves as allies of the incumbent populace, their aesthetic re-valorization of the neighborhood inadvertently paves the way for institutional capital, sparking the very speculative commercial pressures that ultimately displace both groups.",
+    "question": "The author suggests that the relationship between bohemian artists and subsequent institutional gentrification is:",
+    "options": [
+      {
+        "key": "A",
+        "text": "Explicitly coordinated through municipal joint ventures."
+      },
+      {
+        "key": "B",
+        "text": "Unintentionally catalytic, as aesthetic revitalization attracts speculative capital."
+      },
+      {
+        "key": "C",
+        "text": "Permanently protective of long-standing working-class community leases."
+      },
+      {
+        "key": "D",
+        "text": "Completely antagonistic, preventing corporate investors from entering the district."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Metnin son cümlesinde sanatçıların semti estetik olarak yeniden canlandırmasının ('aesthetic re-valorization'), istemeden de olsa ('inadvertently') kurumsal sermayenin önünü açtığı ve her iki grubun da yerinden edilmesine yol açtığı belirtilmektedir. 'Unintentionally catalytic' (istemeden tetikleyici) bu anlamı birebir karşılar.",
+    "explanation_en": "The passage notes that pioneers 'inadvertently pave the way for institutional capital', making their role unintentionally catalytic (B)."
+  },
+  {
+    "id": "q-metu-3",
+    "university_id": "metu",
+    "level": "C1",
+    "category": "Sentence Completion",
+    "question": "Complete the academic sentence with the most logical clause:\n\n'Whereas nineteenth-century neuroanatomists believed that adult brain architecture was irrevocably fixed, _______.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "the human brain loses millions of synapses every calendar year"
+      },
+      {
+        "key": "B",
+        "text": "contemporary neuroscience demonstrates that neuroplasticity persists across the entire lifespan"
+      },
+      {
+        "key": "C",
+        "text": "early psychiatric institutions failed to document clinical behavioral changes"
+      },
+      {
+        "key": "D",
+        "text": "consequently no cognitive rehabilitation could ever be accomplished"
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "'Whereas' (oysaki / -e karşılık) zıtlık bildiren bir yan cümle bağlacıdır. Yan cümlede 19. yüzyıl anatomistlerinin yetişkin beyninin sabit ve değişmez olduğuna inandığı belirtilmiştir. Ana cümlede ise modern bilimin bunun aksini (beynin ömür boyu değişip gelişebildiği 'neuroplasticity' gerçeğini) kanıtladığı söylenmelidir. Bu sebeple B doğru yanıttır.",
+    "explanation_en": "'Whereas' sets up a contrast between past belief (static brain) and modern reality (neuroplasticity throughout life in B)."
+  },
+  {
+    "id": "q-metu-4",
+    "university_id": "metu",
+    "level": "B2",
+    "category": "Restatement",
+    "question": "Choose the closest sentence in meaning:\n\n'Had the geological surveyor not recognized the subtle micro-fissures in the dam's abutment, thousands of downstream residents would have been swept away without prior evacuation.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "Because the surveyor detected tiny cracks in the dam support in time, downstream residents were successfully evacuated before disaster struck."
+      },
+      {
+        "key": "B",
+        "text": "Although the surveyor missed the micro-fissures, the municipal sirens warned downstream residents in advance."
+      },
+      {
+        "key": "C",
+        "text": "The downstream residents refused to evacuate despite the surveyor's alarming discovery of micro-fissures."
+      },
+      {
+        "key": "D",
+        "text": "The dam's collapse was unavoidable even though the surveyor had reported the geological fissures to authorities."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Inverted Conditional Type 3 yapısı: Jeolog baraj ayağındaki mikro çatlakları fark etmemiş olsaydı, binlerce sakin tahliye edilmeden sel sularına kapılacaktı. Yani çatlakları zamanında tespit ettiği için nehir boyundaki sakinler zamanında tahliye edilmiş ve felaketten kurtulmuştur (A seçeneği).",
+    "explanation_en": "The conditional implies that because the surveyor recognized the micro-fissures, residents avoided being swept away through timely evacuation."
+  },
+  {
+    "id": "q-metu-5",
+    "university_id": "metu",
+    "level": "C1",
+    "category": "Reading",
+    "passage": "Antibiotic resistance constitutes one of the most menacing existential crises facing twenty-first-century medicine. Over decades of widespread clinical and agricultural overuse, bacteria have evolved sophisticated defense mechanisms. These include the upregulation of multidrug efflux pumps that actively expel therapeutic compounds from bacterial membranes, enzymatic deactivation of beta-lactam rings, and mutations in target ribosomal subunits. Compounding this biological challenge is an acute economic market failure: because antibiotics are prescribed for short curative courses rather than chronic lifetime maintenance, major pharmaceutical corporations have systematically divested from antimicrobial discovery pipelines, preferring to funnel research expenditures into highly lucrative oncological and autoimmune drugs.",
+    "question": "According to the passage, pharmaceutical companies have curtailed antibiotic research primarily because:",
+    "options": [
+      {
+        "key": "A",
+        "text": "Bacterial mutations have rendered synthetic chemistry scientifically impossible."
+      },
+      {
+        "key": "B",
+        "text": "Chronic maintenance therapies offer substantially greater commercial return than short curative treatments."
+      },
+      {
+        "key": "C",
+        "text": "International health bodies have banned commercial antibiotic production."
+      },
+      {
+        "key": "D",
+        "text": "Efflux pumps can be eradicated without developing new antimicrobial agents."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Metnin son bölümünde ilaç şirketlerinin çekilme nedeni olarak: 'because antibiotics are prescribed for short curative courses rather than chronic lifetime maintenance, major pharmaceutical corporations have systematically divested from antimicrobial discovery pipelines, preferring to funnel research expenditures into highly lucrative oncological and autoimmune drugs.' denilmiştir. Kısa süreli kürler yerine ömür boyu kullanılan kronik ilaçların çok daha karlı olması (B şıkkı) ana sebeptir.",
+    "explanation_en": "The passage explicitly notes that short-course antibiotics are far less lucrative than chronic lifetime maintenance drugs, leading to corporate divestment (B)."
+  },
+  {
+    "id": "q-bilkent-2",
+    "university_id": "bilkent",
+    "level": "B2",
+    "category": "Paragraph Coherence",
+    "question": "Which of the following sentences disrupts the logical coherence of the paragraph?\n\n(I) Desalination technology offers a promising technological remedy for arid nations bordering oceans. (II) Reverse osmosis plants push seawater through semipermeable membranes at immense pressure to extract potable water. (III) Desalination facilities in the Arabian Gulf now provide over ninety percent of domestic drinking supplies. (IV) Solar energy output fluctuates dramatically between nocturnal hours and cloudy periods. (V) However, the disposal of highly concentrated toxic brine into marine ecosystems remains an unresolved environmental hazard.",
+    "options": [
+      {
+        "key": "A",
+        "text": "II"
+      },
+      {
+        "key": "B",
+        "text": "III"
+      },
+      {
+        "key": "C",
+        "text": "IV"
+      },
+      {
+        "key": "D",
+        "text": "V"
+      }
+    ],
+    "correct_answer": "C",
+    "explanation_tr": "Paragrafın ana konusu deniz suyunun tuzdan arındırılmasıdır (desalination). I'de teknoloji tanıtılmış, II'de çalışma mekanizması (reverse osmosis) verilmiş, III'te Körfez ülkelerindeki kullanım oranı söylenmiş, V'te ise atık tuzlu suyun denizlere zararı ('However, disposal of brine...') anlatılmıştır. IV numaralı cümle ise konuyla ilgisiz şekilde güneş enerjisinin gece-gündüz dalgalanmasından bahsederek akışı bozmaktadır.",
+    "explanation_en": "The paragraph is entirely about desalination technology and its ecological brine problem. Sentence IV digresses into solar energy intermittency, disrupting coherence."
+  },
+  {
+    "id": "q-ytu-2",
+    "university_id": "ytu",
+    "level": "B2",
+    "category": "Vocabulary",
+    "question": "Choose the most suitable word to complete the sentence:\n\n'The city council approved a multi-million dollar grant to _______ the flood-prone drainage infrastructure before the onset of the monsoon season.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "subvert"
+      },
+      {
+        "key": "B",
+        "text": "reinforce"
+      },
+      {
+        "key": "C",
+        "text": "obfuscate"
+      },
+      {
+        "key": "D",
+        "text": "diminish"
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Cümlede sel tehlikesi olan drenaj altyapısının muson yağmurları başlamadan önce 'güçlendirilmesi / takviye edilmesi' için bütçe onaylandığı belirtilmektedir. 'Reinforce' (güçlendirmek, takviye etmek) anlamına gelir. 'Subvert' (yıkmak/baltalamak), 'obfuscate' (kafa karıştırmak), 'diminish' (azaltmak) mantıken uyumsuzdur.",
+    "explanation_en": "'Reinforce' means to strengthen or support, which fits the context of upgrading drainage before storms."
+  },
+  {
+    "id": "q-a1-1",
+    "university_id": "general",
+    "level": "A1",
+    "category": "Grammar",
+    "question": "Choose the correct sentence to complete the conversation:\n\n'Where _______ your roommate study in the evenings?'",
+    "options": [
+      {
+        "key": "A",
+        "text": "does"
+      },
+      {
+        "key": "B",
+        "text": "is"
+      },
+      {
+        "key": "C",
+        "text": "do"
+      },
+      {
+        "key": "D",
+        "text": "are"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Tekil üçüncü şahıs ('your roommate' = he/she) ile Present Simple geniş zaman soru cümlesinde yardımcı fiil 'does' kullanılır: 'Where does your roommate study...?'",
+    "explanation_en": "Third-person singular subjects ('your roommate') require the auxiliary verb 'does' in simple present questions."
+  },
+  {
+    "id": "q-a2-1",
+    "university_id": "general",
+    "level": "A2",
+    "category": "Grammar",
+    "question": "Select the correct connector to join the clauses:\n\n'She arrived late to the lecture _______ there was a traffic jam on the highway.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "although"
+      },
+      {
+        "key": "B",
+        "text": "because"
+      },
+      {
+        "key": "C",
+        "text": "so that"
+      },
+      {
+        "key": "D",
+        "text": "unless"
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Derse geç kalmanın nedeni otoyoldaki trafik sıkışıklığıdır. Neden-sonuç bildiren bağlaç 'because' (çünkü / -dığı için) olmalıdır.",
+    "explanation_en": "'Because' introduces the direct cause of her tardiness (the traffic jam)."
+  },
+  {
+    "id": "q-b1-1",
+    "university_id": "general",
+    "level": "B1",
+    "category": "Grammar",
+    "question": "Choose the correct relative clause pronoun:\n\n'The academic advisor with _______ I consulted recommended enrolling in an advanced academic writing seminar.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "who"
+      },
+      {
+        "key": "B",
+        "text": "whom"
+      },
+      {
+        "key": "C",
+        "text": "which"
+      },
+      {
+        "key": "D",
+        "text": "whose"
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Edattan (preposition: 'with') sonra bir insanı niteleyen nesne zamiri olarak yalnızca 'whom' kullanılabilir: 'with whom I consulted'.",
+    "explanation_en": "Prepositions preceding relative pronouns referring to people formally take 'whom' ('with whom')."
+  },
+  {
+    "id": "q-c2-1",
+    "university_id": "general",
+    "level": "C2",
+    "category": "Vocabulary",
+    "question": "Select the word that best completes the scholarly criticism:\n\n'The monograph's core thesis is fundamentally flawed; rather than illuminating historical causality, it serves merely to _______ the socio-political dynamics of the era with verbose jargon.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "elucidate"
+      },
+      {
+        "key": "B",
+        "text": "obfuscate"
+      },
+      {
+        "key": "C",
+        "text": "substantiate"
+      },
+      {
+        "key": "D",
+        "text": "demarcate"
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "'Rather than illuminating...' (aydınlatmaktan ziyade) ifadesi zıtlık gerektirir. 'Verbose jargon' (ağdalı/karmaşık terimler) kullanarak dönemin dinamiklerini 'anlaşılmaz kılmak / kasten perdelemek' ('obfuscate') eylemi eleştirilmektedir. 'Elucidate' (aydınlatmak) ve 'substantiate' (somutlaştırmak) zıt anlamlıdır.",
+    "explanation_en": "'Rather than illuminating' sets up a contrast with making obscure. 'Obfuscate' means to make unclear or unintelligible."
+  },
+  {
+    "id": "q-itu-8",
+    "university_id": "itu",
+    "level": "B2",
+    "category": "Sentence Completion",
+    "question": "Choose the most appropriate clause to complete the sentence:\n\n'Not only did the civil engineering consortium deliver the subsea tunnel ahead of the stipulated deadline, _______.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "and also they reduced the financial expenditure by ten percent"
+      },
+      {
+        "key": "B",
+        "text": "but they also completed the construction under the allocated budget"
+      },
+      {
+        "key": "C",
+        "text": "however the government cancelled the remaining highway extensions"
+      },
+      {
+        "key": "D",
+        "text": "as well as modernizing the railway signaling network"
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "'Not only ... but also ...' kalıbı 'sadece ... değil, aynı zamanda ... da' anlamına gelir. 'Not only' ile başlayan devrik cümlenin devamında paralel olarak 'but (they) also...' yapısı gelmelidir. B şıkkı bu kurala eksiksiz uyar.",
+    "explanation_en": "Correlative conjunctions require parallel structure: 'Not only did they [verb]..., but they also [verb]...' (B)."
+  },
+  {
+    "id": "q-itu-9",
+    "university_id": "itu",
+    "level": "B2",
+    "category": "Reading",
+    "passage": "Microplastic particles, defined as synthetic polymers smaller than five millimeters in diameter, have infiltrated marine ecosystems to an unprecedented degree. Primary microplastics originate from commercial cosmetic microbeads and synthetic textile shedding during domestic laundering, whereas secondary microplastics result from the photodegradation of larger oceanic debris under solar ultraviolet radiation. Marine filter-feeders, such as mussels and zooplankton, ingest these buoyant particles indiscriminately. Consequently, toxic plasticizers and hydrophobic persistent organic pollutants (POPs) bioaccumulate along trophic levels, ultimately reaching top marine predators and human seafood consumers. Marine toxicologists emphasize that conventional wastewater treatment facilities lack fine membrane filtration capable of capturing sub-millimeter fibers, resulting in billions of synthetic microfibers entering estuarine habitats on a daily basis.",
+    "question": "According to the passage, the distinction between primary and secondary microplastics is that:",
+    "options": [
+      {
+        "key": "A",
+        "text": "Primary microplastics are biodegradable, while secondary microplastics are synthetic."
+      },
+      {
+        "key": "B",
+        "text": "Primary microplastics are intentionally manufactured at microscopic scale, whereas secondary ones arise from the environmental fragmentation of larger items."
+      },
+      {
+        "key": "C",
+        "text": "Secondary microplastics are trapped by wastewater plants, whereas primary ones escape."
+      },
+      {
+        "key": "D",
+        "text": "Primary microplastics affect zooplankton, whereas secondary microplastics only accumulate in apex predators."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Metinde: 'Primary microplastics originate from commercial cosmetic microbeads and synthetic textile shedding... whereas secondary microplastics result from the photodegradation of larger oceanic debris under solar ultraviolet radiation.' denmektedir. Yani birinciller doğrudan mikro boyutta üretilenler, ikinciller ise büyük çöplerin parçalanmasıyla oluşanlardır (B seçeneği).",
+    "explanation_en": "Primary particles are manufactured small (microbeads/textiles), whereas secondary particles form through weathering of larger debris (B)."
+  },
+  {
+    "id": "q-itu-10",
+    "university_id": "itu",
+    "level": "B2",
+    "category": "Reading",
+    "passage": "Microplastic particles, defined as synthetic polymers smaller than five millimeters in diameter, have infiltrated marine ecosystems to an unprecedented degree. Primary microplastics originate from commercial cosmetic microbeads and synthetic textile shedding during domestic laundering, whereas secondary microplastics result from the photodegradation of larger oceanic debris under solar ultraviolet radiation. Marine filter-feeders, such as mussels and zooplankton, ingest these buoyant particles indiscriminately. Consequently, toxic plasticizers and hydrophobic persistent organic pollutants (POPs) bioaccumulate along trophic levels, ultimately reaching top marine predators and human seafood consumers. Marine toxicologists emphasize that conventional wastewater treatment facilities lack fine membrane filtration capable of capturing sub-millimeter fibers, resulting in billions of synthetic microfibers entering estuarine habitats on a daily basis.",
+    "question": "Why do conventional wastewater treatment plants fail to prevent microplastic pollution in estuaries?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Because treatment plants rely solely on chemical chlorination rather than biological filters."
+      },
+      {
+        "key": "B",
+        "text": "Because they are not equipped with membrane filtration fine enough to capture sub-millimeter synthetic fibers."
+      },
+      {
+        "key": "C",
+        "text": "Because microplastics dissolve completely in wastewater and reform in saline ocean water."
+      },
+      {
+        "key": "D",
+        "text": "Because legislation prohibits municipal authorities from monitoring microfibers."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Metnin son cümlesinde: 'conventional wastewater treatment facilities lack fine membrane filtration capable of capturing sub-millimeter fibers' ifadesi yer almaktadır. Arıtma tesislerinde bu ince lifleri tutacak hassas membran filtrelerin bulunmayışı (B seçeneği) doğrudan metinden çıkarılır.",
+    "explanation_en": "The final sentence states plants 'lack fine membrane filtration capable of capturing sub-millimeter fibers', matching B exactly."
+  },
+  {
+    "id": "q-itu-11",
+    "university_id": "itu",
+    "level": "B2",
+    "category": "Restatement",
+    "question": "Choose the sentence closest in meaning:\n\n'No matter how meticulously the software engineers tested the autonomous braking system in simulation, real-world highway conditions revealed unforeseen sensor vulnerabilities.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "Because the engineers tested the braking system carelessly in simulation, it failed instantly in actual highway conditions."
+      },
+      {
+        "key": "B",
+        "text": "Regardless of the rigorous simulation testing conducted by the engineers, unexpected sensor flaws emerged during actual highway driving."
+      },
+      {
+        "key": "C",
+        "text": "Highway tests proved that the simulation testing had been completely redundant and ineffective."
+      },
+      {
+        "key": "D",
+        "text": "The autonomous braking system performed flawlessly in both virtual simulations and real-world trials."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "'No matter how + adv / adj' yapısı 'Her ne kadar ... olursa olsun / ne kadar titizce test edilmiş olursa olsun' anlamına gelen bir zıtlık bağlacıdır. B şıkkındaki 'Regardless of the rigorous simulation testing... unexpected sensor flaws emerged' ifadesi birebir eş anlamlıdır.",
+    "explanation_en": "'No matter how meticulously' translates to 'Regardless of the rigorousness'. B captures both the diligence in testing and the unexpected real-world flaws."
+  },
+  {
+    "id": "q-boun-7",
+    "university_id": "boun",
+    "level": "C1",
+    "category": "Reading",
+    "passage": "Neurobiologists investigating synaptic plasticity have elucidated how sleep facilitates memory consolidation. During non-rapid eye movement (NREM) slow-wave sleep, high-amplitude electrical oscillations synchronize between the hippocampus and the neocortex. Neuroscientists hypothesize that this dialogue acts as a neural replay mechanism: episodic memories initially encoded transiently in the hippocampus are transferred and integrated into long-term neocortical distributed storage networks. Concurrently, sleep triggers synaptic downscaling, a homeostatic pruning process wherein redundant synaptic connections forged during waking hours are systematically weakened. Without this nightly metabolic and synaptic recalibration, the brain's neuronal circuits would reach hyper-saturation, drastically impairing subsequent learning capacity.",
+    "question": "According to the passage, the process of 'synaptic downscaling' during sleep is essential because it:",
+    "options": [
+      {
+        "key": "A",
+        "text": "Permanently erases all episodic memories acquired during childhood."
+      },
+      {
+        "key": "B",
+        "text": "Prevents neural circuit saturation by pruning superfluous synaptic connections created while awake."
+      },
+      {
+        "key": "C",
+        "text": "Stimulates the continuous formation of new motor synapses during dreaming."
+      },
+      {
+        "key": "D",
+        "text": "Converts neocortical memory networks back into hippocampal episodic storage."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Metinde 'synaptic downscaling' şu şekilde tanımlanmıştır: 'a homeostatic pruning process wherein redundant synaptic connections forged during waking hours are systematically weakened. Without this... neuronal circuits would reach hyper-saturation, drastically impairing subsequent learning capacity.' Yani uyanıkken oluşan gereksiz bağlantıları budayarak beynin aşırı yüklenmesini önler (B seçeneği).",
+    "explanation_en": "The text explains downscaling prunes redundant connections formed during the day to avoid circuit hyper-saturation (B)."
+  },
+  {
+    "id": "q-boun-8",
+    "university_id": "boun",
+    "level": "C1",
+    "category": "Restatement",
+    "question": "Choose the sentence closest in meaning:\n\n'Seldom do commercial technology developers anticipate the insidious ethical ramifications that arise when algorithmic recommender systems are optimized solely for user retention.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "Tech companies rarely foresee the subtle moral problems caused when recommendation algorithms focus exclusively on keeping users engaged."
+      },
+      {
+        "key": "B",
+        "text": "Developers always deliberately design algorithms to maximize ethical standards rather than user retention."
+      },
+      {
+        "key": "C",
+        "text": "Algorithmic recommendation engines rarely increase user engagement despite intense commercial optimization."
+      },
+      {
+        "key": "D",
+        "text": "Commercial technology firms have successfully eliminated the ethical dilemmas associated with digital engagement."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Seldom do [subject] [verb]...' olumsuz devrik bir yapıdır ('Nadiren öngörürler'). 'Insidious ethical ramifications' (sinsi/zararlı etik sonuçlar) ve 'optimized solely for user retention' (yalnızca kullanıcıyı tutmaya odaklanmış) ifadeleri A şıkkında 'Tech companies rarely foresee the subtle moral problems caused when recommendation algorithms focus exclusively on keeping users engaged' ile mükemmel bir şekilde karşılanmıştır.",
+    "explanation_en": "'Seldom do developers anticipate' means developers rarely foresee. 'Insidious ethical ramifications' matches 'subtle moral problems'. A is accurate."
+  },
+  {
+    "id": "q-metu-6",
+    "university_id": "metu",
+    "level": "C1",
+    "category": "Reading",
+    "passage": "The security of modern digital communications hinges almost entirely on asymmetric public-key cryptography algorithms, most notably RSA and Elliptic Curve Cryptography. These mathematical protocols rely on the computational intractability of prime number factorization for classical von Neumann computers. However, the advent of fault-tolerant quantum computers equipped with thousands of logical qubits threatens to render existing cryptographic infrastructure obsolete. Peter Shor's nineteen-ninety-four quantum algorithm proves that a sufficiently scaled quantum computer could factor large prime products in polynomial time rather than exponential time. In response, cryptographers and national security agencies are urgently developing 'post-quantum cryptography' (PQC) based on mathematical lattices and multivariate polynomials that remain impervious to quantum algorithmic decryption.",
+    "question": "Why does a quantum computer running Shor's algorithm threaten current public-key cryptography?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Because it physically overheats and destroys classical fiber-optic transmission cables."
+      },
+      {
+        "key": "B",
+        "text": "Because it can factor large prime numbers in polynomial rather than exponential time, breaking RSA mathematical security."
+      },
+      {
+        "key": "C",
+        "text": "Because it replaces post-quantum lattice mathematics with Elliptic Curve Cryptography."
+      },
+      {
+        "key": "D",
+        "text": "Because classical computers are incapable of generating asymmetric public keys."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Metinde Shor algoritmasının tehdidi doğrudan şu cümleyle anlatılmıştır: 'Peter Shor's nineteen-ninety-four quantum algorithm proves that a sufficiently scaled quantum computer could factor large prime products in polynomial time rather than exponential time.' Asal sayı çarpanlarına ayırma işlemini üssel zaman yerine polinomiyal (çok daha hızlı) zamanda yapabilmesi mevcut RSA şifrelemesini kırılabilir kılar (B şıkkı).",
+    "explanation_en": "Shor's algorithm solves prime factorization in polynomial time, dismantling the exponential time barrier that guarantees RSA security (B)."
+  },
+  {
+    "id": "q-metu-7",
+    "university_id": "metu",
+    "level": "B2",
+    "category": "Sentence Completion",
+    "question": "Choose the most suitable connector to complete the statement:\n\n'The aviation authority grounded all supersonic test flights _______ subsequent acoustic telemetry data confirm that atmospheric sonic boom intensity complies with residential zoning bylaws.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "until"
+      },
+      {
+        "key": "B",
+        "text": "despite"
+      },
+      {
+        "key": "C",
+        "text": "in case of"
+      },
+      {
+        "key": "D",
+        "text": "nevertheless"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Uçuşları ... olana kadar durdurdu/yere indirdi' anlamında zaman sınırlaması bildiren 'until' (-e kadar) doğru bağlaçtır. 'Until subsequent acoustic data confirm...' = sonraki akustik veriler onaylayana kadar.",
+    "explanation_en": "'Until' sets the time condition before which supersonic flights will remain suspended."
+  },
+  {
+    "id": "q-bilkent-3",
+    "university_id": "bilkent",
+    "level": "B2",
+    "category": "Vocabulary",
+    "question": "Select the option that best replaces the underlined academic phrase:\n\n'The economic consultancy warned that adopting protectionist import tariffs would inevitably trigger retaliatory measures from major trading partners.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "lead to reciprocal punitive actions"
+      },
+      {
+        "key": "B",
+        "text": "foster cooperative bilateral treaties"
+      },
+      {
+        "key": "C",
+        "text": "diminish international currency reserves"
+      },
+      {
+        "key": "D",
+        "text": "eliminate domestic manufacturing subsidies"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Trigger retaliatory measures' (misilleme niteliğinde önlemleri tetiklemek) ifadesinin akademik karşılığı 'lead to reciprocal punitive actions' (karşılıklı cezalandırıcı eylemlere yol açmak) dır. 'Reciprocal' = 'retaliatory / mutual', 'punitive' = 'ceza niteliğinde'.",
+    "explanation_en": "'Retaliatory measures' corresponds to 'reciprocal punitive actions' in scholarly international trade terminology (A)."
+  },
+  {
+    "id": "q-ytu-3",
+    "university_id": "ytu",
+    "level": "B2",
+    "category": "Cloze Test",
+    "question": "Choose the correct phrase to complete the engineering passage:\n\n'The suspension bridge was engineered with tuned mass dampers in the main towers _______ mitigate destructive harmonic resonance during high-velocity typhoons.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "with a view to"
+      },
+      {
+        "key": "B",
+        "text": "so as to"
+      },
+      {
+        "key": "C",
+        "text": "for fear that"
+      },
+      {
+        "key": "D",
+        "text": "as a result of"
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Boşluktan sonra yalın fiil ('mitigate' = V1) gelmiştir. Amaç bildiren 'so as to + V1' (veya 'in order to + V1') kalıbı '...yapmak amacıyla / ...etmek için' anlamına gelir. 'With a view to' arkasından V-ing alır, 'for fear that' tam cümle alır.",
+    "explanation_en": "'So as to + base verb' expresses purpose ('in order to mitigate'). 'With a view to' requires a gerund (-ing)."
+  },
+  {
+    "id": "q-a1-2",
+    "university_id": "general",
+    "level": "A1",
+    "category": "Vocabulary",
+    "question": "Choose the correct word to complete the sentence:\n\n'Can you please _______ the lights before you leave the lecture hall?'",
+    "options": [
+      {
+        "key": "A",
+        "text": "turn off"
+      },
+      {
+        "key": "B",
+        "text": "look for"
+      },
+      {
+        "key": "C",
+        "text": "take off"
+      },
+      {
+        "key": "D",
+        "text": "give up"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Işıkları söndürmek / kapatmak için kullanılan phrasal verb 'turn off' (veya 'switch off') tur.",
+    "explanation_en": "'Turn off' is the standard phrasal verb for extinguishing electric lights."
+  },
+  {
+    "id": "q-a2-2",
+    "university_id": "general",
+    "level": "A2",
+    "category": "Grammar",
+    "question": "Select the correct comparative structure:\n\n'This semester's chemistry exam was _______ than the one we took last term.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "much more difficult"
+      },
+      {
+        "key": "B",
+        "text": "more difficulter"
+      },
+      {
+        "key": "C",
+        "text": "as difficult as"
+      },
+      {
+        "key": "D",
+        "text": "too difficult"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Difficult' çok heceli bir sıfattır, comparative yapılırken başına 'more' alır. Karşılaştırmayı pekiştirmek için önüne 'much' getirilebilir: 'much more difficult than'.",
+    "explanation_en": "Multi-syllable adjectives form comparatives with 'more'; 'much' intensifies the difference ('much more difficult than')."
+  },
+  {
+    "id": "q-b1-2",
+    "university_id": "general",
+    "level": "B1",
+    "category": "Grammar",
+    "question": "Choose the correct modal verb of past deduction:\n\n'Look at the wet pavement and puddles everywhere. It _______ heavily during the night.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "must have rained"
+      },
+      {
+        "key": "B",
+        "text": "should have rained"
+      },
+      {
+        "key": "C",
+        "text": "could rain"
+      },
+      {
+        "key": "D",
+        "text": "need not have rained"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Yerdeki su birikintileri ve ıslaklık kesin bir geçmiş kanıttır. Geçmişe yönelik güçlü olumlu çıkarım (strong past deduction) kalıbı 'must have + V3' (yağmış olmalı) dür.",
+    "explanation_en": "'Must have + past participle' expresses logical certainty about a past event based on present physical evidence."
+  },
+  {
+    "id": "q-c1-3",
+    "university_id": "general",
+    "level": "C1",
+    "category": "Grammar",
+    "question": "Choose the correct inverted conditional structure:\n\n'_______ you encounter any technical anomalies during the simulation, notify the laboratory supervisor immediately.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "Should"
+      },
+      {
+        "key": "B",
+        "text": "Were"
+      },
+      {
+        "key": "C",
+        "text": "Had"
+      },
+      {
+        "key": "D",
+        "text": "Unless"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'If you should encounter...' (Eğer olur da karşılaşırsanız) kalıbının Type 1 Inversion biçimi 'Should you encounter...' dır. Cümle başına 'Should' getirilerek 'If' atılır.",
+    "explanation_en": "'Should you encounter' is an inverted first conditional equivalent to 'If you happen to encounter'."
+  },
+  {
+    "id": "q-c2-2",
+    "university_id": "general",
+    "level": "C2",
+    "category": "Grammar",
+    "question": "Choose the most sophisticated and grammatically precise option:\n\n'Beneath the facade of diplomatic conviviality _______ an intense geopolitical rivalry for oceanic trade routes.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "lay"
+      },
+      {
+        "key": "B",
+        "text": "laid"
+      },
+      {
+        "key": "C",
+        "text": "lied"
+      },
+      {
+        "key": "D",
+        "text": "lain"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Yer bildiren edat tamlaması ('Beneath the facade of...') cümle başına geldiğinde özne ve fiil yer değiştirir (Locative Inversion: Prepositional Phrase + Verb + Subject). 'Lie' (yatmak/bulunmak) fiilinin Past Simple hali 'lay' dir. 'Laid' ise 'lay' (koymak/sermek) fiilinin geçmiş halidir. Burada 'bir rekabet yatıyordu/bulunuyordu' anlamında 'lay' doğru cevaptır.",
+    "explanation_en": "Locative inversion with prepositional phrase requires the past tense of intransitive 'to lie' (lie - lay - lain), which is 'lay' (A)."
+  },
+  {
+    "id": "q-bilkent-4",
+    "university_id": "bilkent",
+    "level": "B2",
+    "category": "Reading",
+    "passage": "Generative design algorithms are transforming computational architecture. Rather than drawing static blueprints, architects now input performance parameters—such as solar exposure, structural load distribution, and wind aerodynamics—into parametric software. The algorithm then iterates through thousands of geometric configurations, generating bio-mimetic forms that maximize thermal efficiency while minimizing concrete consumption. Critics caution that relying excessively on algorithmic generation risks homogenizing urban skylines. Proponents argue, however, that these computational tools liberate architects from routine calculations, enabling deeper exploration of sustainable spatial harmony.",
+    "question": "According to the passage, generative design software differs from traditional drafting primarily because it:",
+    "options": [
+      {
+        "key": "A",
+        "text": "Requires architects to calculate wind aerodynamic formulas manually by hand."
+      },
+      {
+        "key": "B",
+        "text": "Automatically evaluates thousands of configurations based on programmed environmental and structural parameters."
+      },
+      {
+        "key": "C",
+        "text": "Guarantees that all urban buildings will look identical to historical landmarks."
+      },
+      {
+        "key": "D",
+        "text": "Eliminates the necessity for concrete and steel in modern civil construction."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Metinde: 'The algorithm then iterates through thousands of geometric configurations, generating bio-mimetic forms that maximize thermal efficiency while minimizing concrete consumption.' denilmiştir. Programlanan parametrelere göre binlerce geometrik konfigürasyonu otomatik üretip değerlendirmesi (B şıkkı) ana farktır.",
+    "explanation_en": "The passage highlights that the software generates and iterates through thousands of variations based on preset performance parameters (B)."
+  },
+  {
+    "id": "q-bilkent-5",
+    "university_id": "bilkent",
+    "level": "B2",
+    "category": "Sentence Completion",
+    "question": "Choose the most logical connector:\n\n'The autonomous satellite remained in low Earth orbit for eight years _______ catastrophic battery degradation rendered telemetry transmission impossible.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "before"
+      },
+      {
+        "key": "B",
+        "text": "although"
+      },
+      {
+        "key": "C",
+        "text": "as long as"
+      },
+      {
+        "key": "D",
+        "text": "whereas"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Uydunun batarya arızası nedeniyle veri gönderemez hale gelmesinden 'önce' 8 yıl boyunca yörüngede kaldığı anlatılmaktadır. Zaman sırası bildiren 'before' (-den önce) doğru bağlaçtır.",
+    "explanation_en": "'Before' establishes the chronological boundary: 8 years in orbit prior to the battery breakdown."
+  },
+  {
+    "id": "q-bilkent-6",
+    "university_id": "bilkent",
+    "level": "B2",
+    "category": "Restatement",
+    "question": "Choose the closest sentence in meaning:\n\n'Only by systematically auditing every commercial transaction could the forensic accountants uncover the fraudulent shell corporation.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "The forensic accountants discovered the fake shell company solely because they examined every business transaction methodically."
+      },
+      {
+        "key": "B",
+        "text": "Even though every transaction was audited, the fraudulent corporation remained undetected."
+      },
+      {
+        "key": "C",
+        "text": "Auditing transactions was pointless because the shell company had already gone bankrupt."
+      },
+      {
+        "key": "D",
+        "text": "The accountants audited the transactions only after the fraudulent firm confessed."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Only by + V-ing ... could [subject] [verb]...' devrik yapısı ('Yalnızca ... yaparak ortaya çıkarabildiler') tek başarı koşulunu vurgular. A şıkkındaki 'solely because they examined every business transaction methodically' bu anlamı eksiksiz karşılar.",
+    "explanation_en": "'Only by... could they uncover' denotes an exclusive condition for success, accurately rephrased in A."
+  },
+  {
+    "id": "q-ytu-4",
+    "university_id": "ytu",
+    "level": "B2",
+    "category": "Restatement",
+    "question": "Choose the closest sentence in meaning:\n\n'Had the project manager communicated the design alterations to the contractors promptly, costly on-site demolition would have been avoided.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "Contractors demolished the site because the project manager had requested major architectural alterations."
+      },
+      {
+        "key": "B",
+        "text": "Expensive site demolition took place because the project manager failed to notify the contractors about design changes in a timely manner."
+      },
+      {
+        "key": "C",
+        "text": "The demolition costs were minimal despite the delays in project manager communication."
+      },
+      {
+        "key": "D",
+        "text": "The contractors refused to implement the design changes despite prompt communication."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Inverted Type 3 conditional ('Eğer proje yöneticisi tasarım değişikliklerini müteahhitlere vaktinde bildirmiş olsaydı...'). Anlam: Bildirmediği için sahada masraflı yıkım meydana geldi. B seçeneği bu neden-sonuç ilişkisini tam olarak açıklar.",
+    "explanation_en": "The unreal past condition indicates delayed communication was the direct cause of the expensive demolition (B)."
+  },
+  {
+    "id": "q-ytu-5",
+    "university_id": "ytu",
+    "level": "B2",
+    "category": "Reading",
+    "passage": "Thermal energy storage using phase-change materials (PCMs) has emerged as an innovative building engineering technique. PCMs absorb latent thermal energy as they transition from solid to liquid during peak daytime solar radiation, effectively preventing indoor temperatures from escalating. Conversely, during nocturnal temperature drops, the material solidifies, releasing stored thermal energy into the living space. By smoothing out diurnal temperature fluctuations, PCM-enhanced drywall reduces HVAC electrical consumption by up to thirty-five percent.",
+    "question": "According to the passage, phase-change materials regulate room temperature at night by:",
+    "options": [
+      {
+        "key": "A",
+        "text": "Solidifying and discharging latent heat into the indoor space."
+      },
+      {
+        "key": "B",
+        "text": "Consuming thirty-five percent more electrical power from the grid."
+      },
+      {
+        "key": "C",
+        "text": "Melting to absorb nighttime atmospheric moisture."
+      },
+      {
+        "key": "D",
+        "text": "Operating high-velocity air-conditioning compressors continuously."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Metinde gece durumuna ilişkin: 'Conversely, during nocturnal temperature drops, the material solidifies, releasing stored thermal energy into the living space.' denilmiştir. Katılaşarak depolanan ısıyı odaya bırakması (A şıkkı) doğru yanıttır.",
+    "explanation_en": "The text explicitly states PCMs solidify at night, releasing stored latent heat to warm the space (A)."
+  },
+  {
+    "id": "q-metu-8",
+    "university_id": "metu",
+    "level": "C1",
+    "category": "Sentence Completion",
+    "question": "Choose the most appropriate clause to complete the sentence:\n\n'Lest the confidential patient genomics database be compromised by unauthorized cyber intrusions, _______.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "the bioinformatics institute implemented air-gapped server encryption protocols"
+      },
+      {
+        "key": "B",
+        "text": "hackers readily accessed sensitive diagnostic records without difficulty"
+      },
+      {
+        "key": "C",
+        "text": "because hospital administrators neglected standard network firewalls"
+      },
+      {
+        "key": "D",
+        "text": "several clinical trials had already published their findings online"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Lest ... (should) ...' yapısı '...olmasın diye / ...korkusuyla / ...ihtimaline karşı' (for fear that) anlamına gelen resmi bir akademik bağlaçtır. 'Veri tabanı siber saldırganlar tarafından ele geçirilmesin diye enstitü fiziksel olarak yalıtılmış (air-gapped) sunucu şifreleme protokolleri uyguladı' cümlesi (A şıkkı) mantıksal ve dilbilgisel olarak tam oturur.",
+    "explanation_en": "'Lest' means 'for fear that' or 'to prevent the risk of'. A provides the logical precautionary measure taken."
+  },
+  {
+    "id": "q-metu-9",
+    "university_id": "metu",
+    "level": "C1",
+    "category": "Restatement",
+    "question": "Choose the closest sentence in meaning:\n\n'It was not until the statistical anomaly had been independently replicated across four multinational laboratories that the scientific community acknowledged the validity of the discovery.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "The scientific community accepted the discovery only after four separate international laboratories had successfully reproduced the statistical result."
+      },
+      {
+        "key": "B",
+        "text": "Although four laboratories failed to replicate the anomaly, scientists acknowledged the discovery anyway."
+      },
+      {
+        "key": "C",
+        "text": "The discovery was verified before multinational laboratories had an opportunity to review the data."
+      },
+      {
+        "key": "D",
+        "text": "Four laboratories independently rejected the statistical anomaly as an experimental error."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'It was not until ... that ...' yapısı 'Ancak ... olunca / ... olana kadar ... olmadı' anlamına gelir. Keşif ancak dört farklı laboratuvar tarafından bağımsız olarak tekrarlandığında bilim dünyası tarafından kabul edildi (A şıkkı).",
+    "explanation_en": "'It was not until X that Y' equates to 'Y occurred only after X occurred', matching A."
+  },
+  {
+    "id": "q-boun-9",
+    "university_id": "boun",
+    "level": "C1",
+    "category": "Vocabulary",
+    "question": "Choose the best synonym for the underlined word in context:\n\n'The macroeconomic policy proved remarkably resilient, absorbing severe geopolitical supply shocks without triggering domestic stagflation.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "durable"
+      },
+      {
+        "key": "B",
+        "text": "precarious"
+      },
+      {
+        "key": "C",
+        "text": "ephemeral"
+      },
+      {
+        "key": "D",
+        "text": "volatile"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Resilient' (dayanıklı, toparlanma gücü yüksek) kelimesi şokları başarıyla atlatan yapıları tanımlar. En yakın eş anlamlısı 'durable' (sağlam/dayanıklı) veya 'robust'tur. 'Precarious' (tehlikeli/güvensiz), 'ephemeral' (geçici), 'volatile' (oynak/değişken) ise olumsuz çeldiricilerdir.",
+    "explanation_en": "'Resilient' means able to withstand or recover quickly from difficult conditions. 'Durable' is an exact synonym."
+  },
+  {
+    "id": "q-boun-10",
+    "university_id": "boun",
+    "level": "C1",
+    "category": "Restatement",
+    "question": "Choose the closest sentence in meaning:\n\n'Hardly had the central bank governor concluded his briefing on interest rate adjustments when currency exchange markets experienced unprecedented volatility.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "Currency markets stabilized completely long before the central bank governor delivered his speech."
+      },
+      {
+        "key": "B",
+        "text": "No sooner had the governor finished speaking about interest rates than exchange markets reacted with extreme fluctuations."
+      },
+      {
+        "key": "C",
+        "text": "Because interest rate adjustments were anticipated, foreign exchange markets remained unusually calm."
+      },
+      {
+        "key": "D",
+        "text": "The governor postponed his briefing due to severe market volatility across global exchanges."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "'Hardly had ... when ...' = 'No sooner had ... than ...' (Henüz ...mıştı ki / ...yapar yapmaz). B şıkkında 'No sooner had the governor finished speaking... than exchange markets reacted with extreme fluctuations' aynı devrik ve eşzamanlı anlamı verir.",
+    "explanation_en": "'Hardly had... when' is equivalent to 'No sooner had... than'. Both signify that market volatility erupted immediately after the briefing."
+  },
+  {
+    "id": "q-b1-3",
+    "university_id": "general",
+    "level": "B1",
+    "category": "Grammar",
+    "question": "Select the correct passive voice construction:\n\n'The scholarship application forms _______ to the registrar's office by Friday afternoon.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "must be submitted"
+      },
+      {
+        "key": "B",
+        "text": "must submit"
+      },
+      {
+        "key": "C",
+        "text": "have to submit"
+      },
+      {
+        "key": "D",
+        "text": "must been submitted"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Formlar kendi kendini teslim edemez, teslim edilmelidir (Passive Voice: modal + be + V3). Doğru biçim 'must be submitted' dır.",
+    "explanation_en": "Passive modal construction requires 'modal + be + past participle': 'must be submitted'."
+  },
+  {
+    "id": "q-b2-3",
+    "university_id": "general",
+    "level": "B2",
+    "category": "Grammar",
+    "question": "Choose the correct phrase to complete the conditional sentence:\n\n'_______ the fire alarm sound during the examination, all candidates must vacate the auditorium in an orderly line.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "Should"
+      },
+      {
+        "key": "B",
+        "text": "Were"
+      },
+      {
+        "key": "C",
+        "text": "Had"
+      },
+      {
+        "key": "D",
+        "text": "Unless"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Geniş zaman / gelecek zaman olası durumlarında Type 1 Inverted conditional: 'Should + Subject + V1' (Örn: 'Should the fire alarm sound...'). 'Were' olsaydı 'Were the fire alarm to sound' gerekirdi.",
+    "explanation_en": "'Should + subject + base verb' is the inverted form of 'If + subject + should/present verb'."
   }
 ]

@@ -206,5 +206,62 @@
         "explanation_tr": "Yeşil çatılar yağmur suyu akışını azaltır (reduce stormwater runoff) ve buharlaşma yoluyla serinletme (evaporative cooling) sağlar."
       }
     ]
+  },
+  {
+    "id": "lis_bilkent_01",
+    "university_id": "bilkent",
+    "level": "B2",
+    "type": "while_listening",
+    "title": "The Ethical Implications of Autonomous Medical AI",
+    "subtitle": "Bilkent COPE Tarzı While-Listening Sınavı",
+    "target_university": "Bilkent Üniversitesi",
+    "duration_minutes": 12,
+    "lecture_duration_seconds": 80,
+    "instructions_tr": "Bu bir While-Listening (Dinlerken Cevaplama) sınavıdır. Ses kaydı çalarken soruları eş zamanlı okuyup doğru seçenekleri işaretleyiniz.",
+    "audio_script": "Welcome to today's bioethics colloquium. Over the past decade, deep learning convolutional neural networks have surpassed human dermatologists and radiologists in detecting early-stage melanomas and lung nodules. However, transitioning these diagnostic algorithms from controlled clinical benchmarks to emergency triage presents profound ethical and legal quandaries. The principal conundrum is algorithmic opacity, colloquially referred to by computer scientists as the black-box dilemma. Deep neural networks evaluate millions of non-linear parameter weights; consequently, even the computer software engineers who architected the models cannot provide a human-interpretable clinical rationale for why a particular diagnostic recommendation was generated. Under European data privacy regulations and medical malpractice tort laws, patients possess an explicit right to an explanation. If an autonomous algorithm misdiagnoses a malignant tumor or mistakenly triages an urgent cardiac case, who bears legal liability: the attending physician who followed the software, the software vendor who trained the model, or the hospital administration that procured the technology? In our upcoming seminar, we will dissect the emerging legal frameworks of algorithmic accountability.",
+    "suggested_notes_tr": [
+      "Konu: Tıpta Yapay Zeka ve Biyoetik Sorunlar",
+      "Başarı: Erken evre kanser ve melanom tespitinde uzman doktorları geçmesi.",
+      "Temel Sorun 1: Black-Box Dilemma (Algoritmik opaklık - kararın neden verildiğinin açıklanamaması).",
+      "Temel Sorun 2: Yasal Sorumluluk (Hatalı teşhiste hekim mi, yazılımcı mı, hastane mi sorumlu?)."
+    ],
+    "questions": [
+      {
+        "id": "lis_bilkent_01_q1",
+        "question": "What does the term 'black-box dilemma' denote in the context of diagnostic neural networks?",
+        "options": [
+          {"key": "A", "text": "The physical overheating of hospital computer server hardware."},
+          {"key": "B", "text": "The inability of engineers to provide a human-interpretable rationale for algorithm outputs."},
+          {"key": "C", "text": "The complete prohibition of artificial intelligence software in European hospitals."},
+          {"key": "D", "text": "The failure of convolutional networks to detect melanoma cells accurately."}
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Metinde kara kutu (black-box) sorunu; derin sinir ağlarının milyonlarca parametreyi değerlendirmesi sebebiyle mühendislerin bile algoritmanın verdiği teşhis kararının klinik gerekçesini insan anlayışına uygun açıklayamaması olarak ifade edilmiştir."
+      },
+      {
+        "id": "lis_bilkent_01_q2",
+        "question": "Under modern data protection frameworks mentioned in the lecture, what explicit legal entitlement do patients have?",
+        "options": [
+          {"key": "A", "text": "The right to inspect the source code of hospital software."},
+          {"key": "B", "text": "The right to receive an explanation regarding medical decisions affecting them."},
+          {"key": "C", "text": "The right to sue attending software engineers automatically."},
+          {"key": "D", "text": "The right to refuse all diagnostic medical scans."}
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Konuşmacı: 'Under European data privacy regulations and medical malpractice tort laws, patients possess an explicit right to an explanation.' demiştir. Hastaların kendileriyle ilgili kararların açıklamasını alma hakkı (right to an explanation) vardır."
+      },
+      {
+        "id": "lis_bilkent_01_q3",
+        "question": "What unresolved legal question is posed by the speaker regarding medical malpractice?",
+        "options": [
+          {"key": "A", "text": "Whether doctors should be replaced entirely by synthetic algorithms."},
+          {"key": "B", "text": "Who bears legal liability when an autonomous algorithm causes a misdiagnosis."},
+          {"key": "C", "text": "Why software vendors refuse to sell neural networks to developing countries."},
+          {"key": "D", "text": "Whether convolutional neural networks can be legally patented."}
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Konuşmacı, bir algoritma yanlış teşhis koyduğunda yasal sorumluluğun kime ait olduğunu (hekim, yazılımcı veya hastane) sormakta ve bunun çözülmemiş bir hukuk problemi olduğunu belirtmektedir."
+      }
+    ]
   }
 ]

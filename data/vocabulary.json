@@ -7,8 +7,15 @@
     "pronunciation": "/əˈtʃiːv/",
     "meaning_tr": "Başarmak, elde etmek",
     "definition_en": "To succeed in reaching a particular goal or status.",
-    "synonyms": ["accomplish", "reach", "attain"],
-    "antonyms": ["fail", "abandon"],
+    "synonyms": [
+      "accomplish",
+      "reach",
+      "attain"
+    ],
+    "antonyms": [
+      "fail",
+      "abandon"
+    ],
     "example_sentence": "Students work hard to achieve good marks in their exams.",
     "collocation": "achieve a goal / achieve success"
   },
@@ -20,8 +27,15 @@
     "pronunciation": "/ɪˈsenʃl/",
     "meaning_tr": "Gerekli, zorunlu, temel",
     "definition_en": "Extremely important and necessary.",
-    "synonyms": ["vital", "crucial", "fundamental"],
-    "antonyms": ["unnecessary", "optional"],
+    "synonyms": [
+      "vital",
+      "crucial",
+      "fundamental"
+    ],
+    "antonyms": [
+      "unnecessary",
+      "optional"
+    ],
     "example_sentence": "Regular practice is essential for learning a new language.",
     "collocation": "essential element / essential role"
   },
@@ -33,230 +47,1222 @@
     "pronunciation": "/dɪˈveləp/",
     "meaning_tr": "Geliştirmek, gelişmek",
     "definition_en": "To grow or cause to grow and become more mature or advanced.",
-    "synonyms": ["improve", "grow", "expand"],
-    "antonyms": ["deteriorate", "shrink"],
+    "synonyms": [
+      "improve",
+      "grow",
+      "expand"
+    ],
+    "antonyms": [
+      "deteriorate",
+      "shrink"
+    ],
     "example_sentence": "She wants to develop her speaking skills before traveling.",
     "collocation": "develop skills / develop a plan"
   },
   {
+    "id": "v-a1-4",
+    "word": "Provide",
+    "level": "A1",
+    "part_of_speech": "verb",
+    "pronunciation": "/prəˈvaɪd/",
+    "meaning_tr": "Sağlamak, temin etmek",
+    "definition_en": "To make available for use; supply.",
+    "synonyms": [
+      "supply",
+      "furnish",
+      "offer"
+    ],
+    "antonyms": [
+      "withhold",
+      "deprive"
+    ],
+    "example_sentence": "The library provides quiet study areas for students.",
+    "collocation": "provide information / provide support"
+  },
+  {
+    "id": "v-a1-5",
+    "word": "Require",
+    "level": "A1",
+    "part_of_speech": "verb",
+    "pronunciation": "/rɪˈkwaɪər/",
+    "meaning_tr": "Gerektirmek, istemek",
+    "definition_en": "To need something for a particular purpose.",
+    "synonyms": [
+      "demand",
+      "necessitate",
+      "need"
+    ],
+    "antonyms": [
+      "obviate"
+    ],
+    "example_sentence": "Most academic programs require students to pass an English test.",
+    "collocation": "require attention / require permission"
+  },
+  {
     "id": "v-a2-1",
-    "word": "Accurate",
+    "word": "Challenge",
     "level": "A2",
-    "part_of_speech": "adjective",
-    "pronunciation": "/ˈækjərət/",
-    "meaning_tr": "Doğru, kesin, hatasız",
-    "definition_en": "Correct in all details; exact.",
-    "synonyms": ["precise", "exact", "correct"],
-    "antonyms": ["inaccurate", "wrong"],
-    "example_sentence": "Make sure your answers are accurate before handing in the paper.",
-    "collocation": "accurate information / accurate description"
+    "part_of_speech": "noun",
+    "pronunciation": "/ˈtʃælɪndʒ/",
+    "meaning_tr": "Zorluk, meydan okuma",
+    "definition_en": "A task or situation that tests someone's abilities.",
+    "synonyms": [
+      "obstacle",
+      "difficulty",
+      "trial"
+    ],
+    "antonyms": [
+      "ease",
+      "simplicity"
+    ],
+    "example_sentence": "Passing the university proficiency exam is a major challenge.",
+    "collocation": "face a challenge / overcome a challenge"
   },
   {
     "id": "v-a2-2",
     "word": "Benefit",
     "level": "A2",
-    "part_of_speech": "noun / verb",
+    "part_of_speech": "noun",
     "pronunciation": "/ˈbenɪfɪt/",
-    "meaning_tr": "Fayda, yarar; yararlanmak",
+    "meaning_tr": "Fayda, yarar",
     "definition_en": "An advantage or profit gained from something.",
-    "synonyms": ["advantage", "gain", "profit"],
-    "antonyms": ["drawback", "disadvantage"],
-    "example_sentence": "One major benefit of prep school is building self-confidence in speaking.",
-    "collocation": "mutual benefit / benefit from"
+    "synonyms": [
+      "advantage",
+      "gain",
+      "profit"
+    ],
+    "antonyms": [
+      "drawback",
+      "disadvantage"
+    ],
+    "example_sentence": "One major benefit of early revision is reduced exam stress.",
+    "collocation": "reap the benefits / mutual benefit"
   },
   {
     "id": "v-a2-3",
-    "word": "Require",
+    "word": "Describe",
     "level": "A2",
     "part_of_speech": "verb",
-    "pronunciation": "/rɪˈkwaɪə(r)/",
-    "meaning_tr": "Gerektirmek, talep etmek",
-    "definition_en": "To need something for a particular purpose.",
-    "synonyms": ["need", "demand", "necessitate"],
-    "antonyms": ["eliminate", "spare"],
-    "example_sentence": "Passing the prep exam requires continuous vocabulary study.",
-    "collocation": "require attention / require effort"
+    "pronunciation": "/dɪˈskraɪb/",
+    "meaning_tr": "Tanımlamak, betimlemek",
+    "definition_en": "To give a detailed account in words.",
+    "synonyms": [
+      "depict",
+      "portray",
+      "characterize"
+    ],
+    "antonyms": [
+      "confuse",
+      "misrepresent"
+    ],
+    "example_sentence": "The author describes the economic crisis in detail.",
+    "collocation": "describe accurately / describe in detail"
+  },
+  {
+    "id": "v-a2-4",
+    "word": "Reduce",
+    "level": "A2",
+    "part_of_speech": "verb",
+    "pronunciation": "/rɪˈdjuːs/",
+    "meaning_tr": "Azaltmak, düşürmek",
+    "definition_en": "To make smaller or less in amount, degree, or size.",
+    "synonyms": [
+      "decrease",
+      "diminish",
+      "lessen"
+    ],
+    "antonyms": [
+      "increase",
+      "expand"
+    ],
+    "example_sentence": "Recycling helps reduce greenhouse gas emissions.",
+    "collocation": "reduce the risk / reduce costs"
+  },
+  {
+    "id": "v-a2-5",
+    "word": "Prepare",
+    "level": "A2",
+    "part_of_speech": "verb",
+    "pronunciation": "/prɪˈpeər/",
+    "meaning_tr": "Hazırlamak, hazırlanmak",
+    "definition_en": "To make something ready for use or consideration.",
+    "synonyms": [
+      "ready",
+      "equip",
+      "organize"
+    ],
+    "antonyms": [
+      "neglect",
+      "ruin"
+    ],
+    "example_sentence": "She spent several months preparing for the proficiency test.",
+    "collocation": "prepare thoroughly / prepare for an exam"
   },
   {
     "id": "v-b1-1",
-    "word": "Significant",
+    "word": "Analyze",
     "level": "B1",
+    "part_of_speech": "verb",
+    "pronunciation": "/ˈænəlaɪz/",
+    "meaning_tr": "İncelemek, analiz etmek",
+    "definition_en": "To examine methodically and in detail the constitution or structure of something.",
+    "synonyms": [
+      "examine",
+      "investigate",
+      "evaluate"
+    ],
+    "antonyms": [
+      "ignore",
+      "synthesize"
+    ],
+    "example_sentence": "Researchers must analyze data thoroughly before drawing conclusions.",
+    "collocation": "analyze data / analyze critical trends"
+  },
+  {
+    "id": "v-b1-2",
+    "word": "Concept",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "pronunciation": "/ˈkɒnsept/",
+    "meaning_tr": "Kavram, fikir",
+    "definition_en": "An abstract idea; a general notion.",
+    "synonyms": [
+      "notion",
+      "idea",
+      "theory"
+    ],
+    "antonyms": [
+      "concrete",
+      "reality"
+    ],
+    "example_sentence": "Understanding the concept of gravity is fundamental in physics.",
+    "collocation": "key concept / grasp a concept"
+  },
+  {
+    "id": "v-b1-3",
+    "word": "Demonstrate",
+    "level": "B1",
+    "part_of_speech": "verb",
+    "pronunciation": "/ˈdemənstreɪt/",
+    "meaning_tr": "Göstermek, kanıtlamak",
+    "definition_en": "To clearly show the existence or truth of something by giving proof.",
+    "synonyms": [
+      "prove",
+      "show",
+      "illustrate"
+    ],
+    "antonyms": [
+      "disprove",
+      "conceal"
+    ],
+    "example_sentence": "The experiment demonstrated that the hypothesis was valid.",
+    "collocation": "demonstrate clearly / demonstrate competence"
+  },
+  {
+    "id": "v-b1-4",
+    "word": "Indicate",
+    "level": "B1",
+    "part_of_speech": "verb",
+    "pronunciation": "/ˈɪndɪkeɪt/",
+    "meaning_tr": "Göstermek, işaret etmek",
+    "definition_en": "To point out or show something.",
+    "synonyms": [
+      "signify",
+      "denote",
+      "suggest"
+    ],
+    "antonyms": [
+      "mislead",
+      "obscure"
+    ],
+    "example_sentence": "The survey results indicate a high level of customer satisfaction.",
+    "collocation": "indicate clearly / evidence indicates"
+  },
+  {
+    "id": "v-b1-5",
+    "word": "Method",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "pronunciation": "/ˈmeθəd/",
+    "meaning_tr": "Yöntem, metot",
+    "definition_en": "A particular procedure for accomplishing or approaching something.",
+    "synonyms": [
+      "technique",
+      "approach",
+      "strategy"
+    ],
+    "antonyms": [
+      "disorganization"
+    ],
+    "example_sentence": "Scientists employ rigorous methods to ensure repeatable findings.",
+    "collocation": "scientific method / research method"
+  },
+  {
+    "id": "v-b1-6",
+    "word": "Factor",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "pronunciation": "/ˈfæktər/",
+    "meaning_tr": "Etken, faktör",
+    "definition_en": "A circumstance, fact, or influence that contributes to a result.",
+    "synonyms": [
+      "element",
+      "component",
+      "determinant"
+    ],
+    "antonyms": [
+      "whole"
+    ],
+    "example_sentence": "Motivation is a determining factor in academic success.",
+    "collocation": "contributing factor / crucial factor"
+  },
+  {
+    "id": "v-b1-7",
+    "word": "Estimate",
+    "level": "B1",
+    "part_of_speech": "verb",
+    "pronunciation": "/ˈestɪmeɪt/",
+    "meaning_tr": "Tahmin etmek, hesaplamak",
+    "definition_en": "Roughly calculate or judge the value, number, or quantity.",
+    "synonyms": [
+      "gauge",
+      "approximate",
+      "evaluate"
+    ],
+    "antonyms": [
+      "measure accurately"
+    ],
+    "example_sentence": "Economists estimate that inflation will decline next quarter.",
+    "collocation": "estimate roughly / conservative estimate"
+  },
+  {
+    "id": "v-b1-8",
+    "word": "Environment",
+    "level": "B1",
+    "part_of_speech": "noun",
+    "pronunciation": "/ɪnˈvaɪrənmənt/",
+    "meaning_tr": "Çevre, ortam",
+    "definition_en": "The surroundings or conditions in which a person, animal, or plant lives.",
+    "synonyms": [
+      "surroundings",
+      "habitat",
+      "ambience"
+    ],
+    "antonyms": [],
+    "example_sentence": "A peaceful study environment fosters deeper academic concentration.",
+    "collocation": "natural environment / learning environment"
+  },
+  {
+    "id": "v-b2-1",
+    "word": "Significant",
+    "level": "B2",
     "part_of_speech": "adjective",
     "pronunciation": "/sɪɡˈnɪfɪkənt/",
     "meaning_tr": "Önemli, kayda değer",
     "definition_en": "Sufficiently great or important to be worthy of attention.",
-    "synonyms": ["notable", "meaningful", "substantial"],
-    "antonyms": ["insignificant", "minor", "trivial"],
-    "example_sentence": "There has been a significant increase in students studying engineering.",
-    "collocation": "significant impact / significant change"
-  },
-  {
-    "id": "v-b1-2",
-    "word": "Establish",
-    "level": "B1",
-    "part_of_speech": "verb",
-    "pronunciation": "/ɪˈstæblɪʃ/",
-    "meaning_tr": "Kurmak, tesis etmek, kanıtlamak",
-    "definition_en": "Set up an organization, system, or set of rules on a firm basis.",
-    "synonyms": ["found", "institute", "create"],
-    "antonyms": ["abolish", "destroy"],
-    "example_sentence": "The researchers established a clear link between sleep and academic success.",
-    "collocation": "establish a connection / establish rules"
-  },
-  {
-    "id": "v-b1-3",
-    "word": "Consequence",
-    "level": "B1",
-    "part_of_speech": "noun",
-    "pronunciation": "/ˈkɒnsɪkwəns/",
-    "meaning_tr": "Sonuç, netice",
-    "definition_en": "A result or effect, typically one that is unwelcome or unpleasant.",
-    "synonyms": ["outcome", "result", "repercussion"],
-    "antonyms": ["cause", "origin"],
-    "example_sentence": "Global warming has serious consequences for agriculture.",
-    "collocation": "as a consequence of / direct consequence"
-  },
-  {
-    "id": "v-b2-1",
-    "word": "Comprehensive",
-    "level": "B2",
-    "part_of_speech": "adjective",
-    "pronunciation": "/ˌkɒmprɪˈhensɪv/",
-    "meaning_tr": "Kapsamlı, etraflı",
-    "definition_en": "Including or dealing with all or nearly all elements or aspects of something.",
-    "synonyms": ["all-inclusive", "thorough", "exhaustive"],
-    "antonyms": ["partial", "limited", "incomplete"],
-    "example_sentence": "The university provides a comprehensive curriculum for prep students.",
-    "collocation": "comprehensive review / comprehensive study"
+    "synonyms": [
+      "substantial",
+      "considerable",
+      "notable"
+    ],
+    "antonyms": [
+      "trivial",
+      "insignificant"
+    ],
+    "example_sentence": "There has been a significant increase in renewable energy adoption.",
+    "collocation": "significant impact / statistically significant"
   },
   {
     "id": "v-b2-2",
-    "word": "Undermine",
+    "word": "Implement",
     "level": "B2",
     "part_of_speech": "verb",
-    "pronunciation": "/ˌʌndəˈmaɪn/",
-    "meaning_tr": "Baltalamak, zayıflatmak, temelini oymak",
-    "definition_en": "Lessen the effectiveness, power, or ability of, especially gradually.",
-    "synonyms": ["weaken", "sabotage", "subvert"],
-    "antonyms": ["strengthen", "reinforce"],
-    "example_sentence": "Lack of sleep can severely undermine a student's cognitive performance.",
-    "collocation": "undermine confidence / undermine credibility"
+    "pronunciation": "/ˈɪmplɪment/",
+    "meaning_tr": "Yürürlüğe koymak, uygulamak",
+    "definition_en": "To put a decision, plan, or agreement into effect.",
+    "synonyms": [
+      "execute",
+      "apply",
+      "enact"
+    ],
+    "antonyms": [
+      "repeal",
+      "abandon"
+    ],
+    "example_sentence": "The government decided to implement stricter pollution controls.",
+    "collocation": "implement a policy / implement changes"
   },
   {
     "id": "v-b2-3",
+    "word": "Consequence",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "pronunciation": "/ˈkɒnsɪkwəns/",
+    "meaning_tr": "Sonuç, netice",
+    "definition_en": "A result or effect of an action or condition.",
+    "synonyms": [
+      "outcome",
+      "result",
+      "repercussion"
+    ],
+    "antonyms": [
+      "cause",
+      "origin"
+    ],
+    "example_sentence": "Deforestation has severe environmental consequences worldwide.",
+    "collocation": "dire consequences / as a consequence of"
+  },
+  {
+    "id": "v-b2-4",
+    "word": "Facilitate",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "pronunciation": "/fəˈsɪlɪteɪt/",
+    "meaning_tr": "Kolaylaştırmak, olanak tanımak",
+    "definition_en": "To make an action or process easy or easier.",
+    "synonyms": [
+      "ease",
+      "expedite",
+      "assist"
+    ],
+    "antonyms": [
+      "hinder",
+      "impede"
+    ],
+    "example_sentence": "Modern digital tools facilitate rapid communication across teams.",
+    "collocation": "facilitate learning / facilitate dialogue"
+  },
+  {
+    "id": "v-b2-5",
     "word": "Substantial",
     "level": "B2",
     "part_of_speech": "adjective",
     "pronunciation": "/səbˈstænʃl/",
-    "meaning_tr": "Kayda değer, esaslı, somut",
+    "meaning_tr": "Büyük ölçüde, kayda değer, varlıklı",
     "definition_en": "Of considerable importance, size, or worth.",
-    "synonyms": ["considerable", "sizeable", "meaningful"],
-    "antonyms": ["negligible", "slight"],
-    "example_sentence": "The candidate presented substantial evidence to support his thesis statement.",
-    "collocation": "substantial amount / substantial evidence"
+    "synonyms": [
+      "considerable",
+      "significant",
+      "sizeable"
+    ],
+    "antonyms": [
+      "negligible",
+      "slight"
+    ],
+    "example_sentence": "A substantial amount of capital was allocated to infrastructure.",
+    "collocation": "substantial increase / substantial portion"
+  },
+  {
+    "id": "v-b2-6",
+    "word": "Diminish",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "pronunciation": "/dɪˈmɪnɪʃ/",
+    "meaning_tr": "Azalmak, eksilmek",
+    "definition_en": "To make or become less in size, intensity, or value.",
+    "synonyms": [
+      "decrease",
+      "lessen",
+      "wane"
+    ],
+    "antonyms": [
+      "enhance",
+      "increase"
+    ],
+    "example_sentence": "Public confidence in the institution diminished following the scandal.",
+    "collocation": "diminish rapidly / diminish in value"
+  },
+  {
+    "id": "v-b2-7",
+    "word": "Advocate",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "pronunciation": "/ˈædvəkeɪt/",
+    "meaning_tr": "Savunmak, desteklemek",
+    "definition_en": "To publicly recommend or support a particular cause or policy.",
+    "synonyms": [
+      "support",
+      "champion",
+      "endorse"
+    ],
+    "antonyms": [
+      "oppose",
+      "discourage"
+    ],
+    "example_sentence": "Environmentalists advocate stricter caps on carbon emissions.",
+    "collocation": "advocate for change / staunchly advocate"
+  },
+  {
+    "id": "v-b2-8",
+    "word": "Comprehensive",
+    "level": "B2",
+    "part_of_speech": "adjective",
+    "pronunciation": "/ˌkɒmprɪˈhensɪv/",
+    "meaning_tr": "Kapsamlı, geniş çaplı",
+    "definition_en": "Including or dealing with all or nearly all elements or aspects of something.",
+    "synonyms": [
+      "exhaustive",
+      "thorough",
+      "all-inclusive"
+    ],
+    "antonyms": [
+      "partial",
+      "limited"
+    ],
+    "example_sentence": "The ministry published a comprehensive report on public health.",
+    "collocation": "comprehensive study / comprehensive review"
+  },
+  {
+    "id": "v-b2-9",
+    "word": "Inevitable",
+    "level": "B2",
+    "part_of_speech": "adjective",
+    "pronunciation": "/ɪnˈevɪtəbl/",
+    "meaning_tr": "Kaçınılmaz, çaresiz",
+    "definition_en": "Certain to happen; unavoidable.",
+    "synonyms": [
+      "unavoidable",
+      "inescapable",
+      "certain"
+    ],
+    "antonyms": [
+      "preventable",
+      "avoidable"
+    ],
+    "example_sentence": "With the rise of automation, job market restructuring is inevitable.",
+    "collocation": "inevitable outcome / accept the inevitable"
+  },
+  {
+    "id": "v-b2-10",
+    "word": "Rational",
+    "level": "B2",
+    "part_of_speech": "adjective",
+    "pronunciation": "/ˈræʃnəl/",
+    "meaning_tr": "Akılcı, mantıklı",
+    "definition_en": "Based on or in accordance with reason or logic.",
+    "synonyms": [
+      "logical",
+      "reasoned",
+      "sensible"
+    ],
+    "antonyms": [
+      "irrational",
+      "emotional"
+    ],
+    "example_sentence": "Decision makers must make rational choices based on statistical evidence.",
+    "collocation": "rational thought / rational decision"
+  },
+  {
+    "id": "v-b2-11",
+    "word": "Underlying",
+    "level": "B2",
+    "part_of_speech": "adjective",
+    "pronunciation": "/ˌʌndərˈlaɪɪŋ/",
+    "meaning_tr": "Altında yatan, temel",
+    "definition_en": "Significant as a cause or basis even if not readily apparent.",
+    "synonyms": [
+      "fundamental",
+      "basic",
+      "latent"
+    ],
+    "antonyms": [
+      "superficial"
+    ],
+    "example_sentence": "Physicians sought to address the underlying causes of the chronic illness.",
+    "collocation": "underlying cause / underlying assumption"
+  },
+  {
+    "id": "v-b2-12",
+    "word": "Validate",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "pronunciation": "/ˈvælɪdeɪt/",
+    "meaning_tr": "Doğrulamak, geçerli kılmak",
+    "definition_en": "To check or prove the validity or accuracy of something.",
+    "synonyms": [
+      "confirm",
+      "verify",
+      "authenticate"
+    ],
+    "antonyms": [
+      "invalidate",
+      "nullify"
+    ],
+    "example_sentence": "Further peer reviews are needed to validate the experimental results.",
+    "collocation": "validate findings / validate a hypothesis"
   },
   {
     "id": "v-c1-1",
-    "word": "Ubiquitous",
+    "word": "Mitigate",
     "level": "C1",
-    "part_of_speech": "adjective",
-    "pronunciation": "/juːˈbɪkwɪtəs/",
-    "meaning_tr": "Her yerde bulunan, yaygın",
-    "definition_en": "Present, appearing, or found everywhere.",
-    "synonyms": ["omnipresent", "pervasive", "universal"],
-    "antonyms": ["rare", "scarce", "seldom"],
-    "example_sentence": "Smartphones have become ubiquitous in modern academic environments.",
-    "collocation": "ubiquitous presence / ubiquitous influence"
+    "part_of_speech": "verb",
+    "pronunciation": "/ˈmɪtɪɡeɪt/",
+    "meaning_tr": "Hafifletmek, etkisini azaltmak",
+    "definition_en": "To make something bad less severe, serious, or painful.",
+    "synonyms": [
+      "alleviate",
+      "moderate",
+      "lessen"
+    ],
+    "antonyms": [
+      "aggravate",
+      "exacerbate"
+    ],
+    "example_sentence": "Urban planning with green corridors can mitigate the heat island effect.",
+    "collocation": "mitigate risks / mitigate climate impact"
   },
   {
     "id": "v-c1-2",
-    "word": "Exacerbate",
+    "word": "Empirical",
     "level": "C1",
-    "part_of_speech": "verb",
-    "pronunciation": "/ɪɡˈzæsəbeɪt/",
-    "meaning_tr": "Kötüleştirmek, şiddetlendirmek",
-    "definition_en": "Make a problem, bad situation, or negative feeling worse.",
-    "synonyms": ["aggravate", "worsen", "inflame"],
-    "antonyms": ["alleviate", "ameliorate", "soothe"],
-    "example_sentence": "Procrastination will only exacerbate your exam anxiety as the deadline nears.",
-    "collocation": "exacerbate the problem / exacerbate tensions"
+    "part_of_speech": "adjective",
+    "pronunciation": "/ɪmˈpɪrɪkl/",
+    "meaning_tr": "Deneysel, gözleme dayalı",
+    "definition_en": "Based on, concerned with, or verifiable by observation rather than theory.",
+    "synonyms": [
+      "observational",
+      "experimental",
+      "factual"
+    ],
+    "antonyms": [
+      "theoretical",
+      "speculative"
+    ],
+    "example_sentence": "Scientific theories require robust empirical evidence before general acceptance.",
+    "collocation": "empirical study / empirical evidence"
   },
   {
     "id": "v-c1-3",
-    "word": "Discrepancy",
-    "level": "C1",
-    "part_of_speech": "noun",
-    "pronunciation": "/dɪˈskrepənsi/",
-    "meaning_tr": "Uyuşmazlık, çelişki, tutarsızlık",
-    "definition_en": "An illogical or surprising lack of compatibility between two facts.",
-    "synonyms": ["inconsistency", "divergence", "contradiction"],
-    "antonyms": ["consistency", "concordance"],
-    "example_sentence": "The committee identified a noticeable discrepancy between the experimental data and the theoretical model.",
-    "collocation": "glaring discrepancy / resolve discrepancies"
-  },
-  {
-    "id": "v-c1-4",
     "word": "Plausible",
     "level": "C1",
     "part_of_speech": "adjective",
     "pronunciation": "/ˈplɔːzəbl/",
-    "meaning_tr": "Akla yatkın, makul, inandırıcı",
+    "meaning_tr": "Makul, akla yatkın",
     "definition_en": "Seeming reasonable or probable.",
-    "synonyms": ["credible", "tenable", "believable"],
-    "antonyms": ["implausible", "unbelievable"],
-    "example_sentence": "The researcher offered a plausible explanation for the sudden behavioral shift.",
-    "collocation": "plausible explanation / plausible hypothesis"
+    "synonyms": [
+      "credible",
+      "believable",
+      "feasible"
+    ],
+    "antonyms": [
+      "implausible",
+      "unlikely"
+    ],
+    "example_sentence": "The detective presented a plausible explanation for the disappearance.",
+    "collocation": "plausible scenario / plausible explanation"
+  },
+  {
+    "id": "v-c1-4",
+    "word": "Discrepancy",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "pronunciation": "/dɪˈskrepənsi/",
+    "meaning_tr": "Çelişki, uyuşmazlık, fark",
+    "definition_en": "An illogical or surprising lack of compatibility between facts or figures.",
+    "synonyms": [
+      "inconsistency",
+      "divergence",
+      "variance"
+    ],
+    "antonyms": [
+      "congruence",
+      "consistency"
+    ],
+    "example_sentence": "Auditors discovered a marked discrepancy between revenue reports and bank deposits.",
+    "collocation": "glaring discrepancy / resolve a discrepancy"
+  },
+  {
+    "id": "v-c1-5",
+    "word": "Scrutinize",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/ˈskruːtənaɪz/",
+    "meaning_tr": "En ince ayrıntısına kadar incelemek",
+    "definition_en": "To examine or inspect closely and thoroughly.",
+    "synonyms": [
+      "inspect",
+      "examine",
+      "audit"
+    ],
+    "antonyms": [
+      "glance at",
+      "overlook"
+    ],
+    "example_sentence": "The regulatory committee scrutinized every clause of the proposed legislation.",
+    "collocation": "scrutinize closely / scrutinize documents"
+  },
+  {
+    "id": "v-c1-6",
+    "word": "Inherent",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "pronunciation": "/ɪnˈhɪərənt/",
+    "meaning_tr": "Doğasında olan, özünde var olan",
+    "definition_en": "Existing in something as a permanent, essential, or characteristic attribute.",
+    "synonyms": [
+      "intrinsic",
+      "innate",
+      "ingrained"
+    ],
+    "antonyms": [
+      "extrinsic",
+      "alien"
+    ],
+    "example_sentence": "Every innovative investment carries an inherent level of financial risk.",
+    "collocation": "inherent danger / inherent bias"
+  },
+  {
+    "id": "v-c1-7",
+    "word": "Undermine",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/ˌʌndərˈmaɪn/",
+    "meaning_tr": "Baltalamak, sarsmak, zayıflatmak",
+    "definition_en": "To damage or weaken the foundation, integrity, or authority of something.",
+    "synonyms": [
+      "subvert",
+      "weaken",
+      "sabotage"
+    ],
+    "antonyms": [
+      "fortify",
+      "reinforce"
+    ],
+    "example_sentence": "Unsubstantiated rumors threaten to undermine public trust in democratic institutions.",
+    "collocation": "undermine confidence / undermine authority"
+  },
+  {
+    "id": "v-c1-8",
+    "word": "Elucidate",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/ɪˈluːsɪdeɪt/",
+    "meaning_tr": "Aydınlatmak, açıklığa kavuşturmak",
+    "definition_en": "To make something clear; explain.",
+    "synonyms": [
+      "clarify",
+      "illuminate",
+      "explicate"
+    ],
+    "antonyms": [
+      "obfuscate",
+      "confuse"
+    ],
+    "example_sentence": "The professor held an extra workshop to elucidate complex quantum mechanics equations.",
+    "collocation": "elucidate a concept / elucidate the mechanism"
+  },
+  {
+    "id": "v-c1-9",
+    "word": "Prevalent",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "pronunciation": "/ˈprevələnt/",
+    "meaning_tr": "Yaygın, hüküm süren",
+    "definition_en": "Widespread in a particular area or at a particular time.",
+    "synonyms": [
+      "widespread",
+      "pervasive",
+      "ubiquitous"
+    ],
+    "antonyms": [
+      "rare",
+      "uncommon"
+    ],
+    "example_sentence": "Confirmation bias is especially prevalent on social media echo chambers.",
+    "collocation": "prevalent belief / become prevalent"
+  },
+  {
+    "id": "v-c1-10",
+    "word": "Viable",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "pronunciation": "/ˈvaɪəbl/",
+    "meaning_tr": "Uygulanabilir, yaşayabilir",
+    "definition_en": "Capable of working successfully; feasible.",
+    "synonyms": [
+      "feasible",
+      "workable",
+      "practicable"
+    ],
+    "antonyms": [
+      "unviable",
+      "impossible"
+    ],
+    "example_sentence": "Hydrogen fuel cells represent a viable alternative to internal combustion engines.",
+    "collocation": "commercially viable / viable alternative"
   },
   {
     "id": "v-c2-1",
-    "word": "Ephemeral",
+    "word": "Exacerbate",
     "level": "C2",
-    "part_of_speech": "adjective",
-    "pronunciation": "/ɪˈfemərəl/",
-    "meaning_tr": "Geçici, anlık, kısa ömürlü",
-    "definition_en": "Lasting for a very short time; transient.",
-    "synonyms": ["transient", "fleeting", "evanescent", "short-lived"],
-    "antonyms": ["perpetual", "enduring", "permanent"],
-    "example_sentence": "Trends on social media are inherently ephemeral, while foundational principles remain timeless.",
-    "collocation": "ephemeral nature / ephemeral phenomenon"
+    "part_of_speech": "verb",
+    "pronunciation": "/ɪɡˈzæsərbeɪt/",
+    "meaning_tr": "Kötüleştirmek, şiddetlendirmek",
+    "definition_en": "To make a problem, bad situation, or negative feeling worse.",
+    "synonyms": [
+      "aggravate",
+      "worsen",
+      "inflame"
+    ],
+    "antonyms": [
+      "ameliorate",
+      "mitigate"
+    ],
+    "example_sentence": "Rising energy tariffs exacerbated the financial burdens on low-income families.",
+    "collocation": "exacerbate tension / exacerbate the problem"
   },
   {
     "id": "v-c2-2",
+    "word": "Ubiquitous",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "pronunciation": "/juːˈbɪkwɪtəs/",
+    "meaning_tr": "Her yerde birden bulunan",
+    "definition_en": "Present, appearing, or found everywhere.",
+    "synonyms": [
+      "omnipresent",
+      "pervasive",
+      "universal"
+    ],
+    "antonyms": [
+      "rare",
+      "scarce"
+    ],
+    "example_sentence": "Smartphones have become so ubiquitous that life without them is difficult to imagine.",
+    "collocation": "ubiquitous presence / ubiquitous technology"
+  },
+  {
+    "id": "v-c2-3",
     "word": "Juxtapose",
     "level": "C2",
     "part_of_speech": "verb",
     "pronunciation": "/ˌdʒʌkstəˈpəʊz/",
-    "meaning_tr": "Karşılaştırmak için yan yana koymak",
-    "definition_en": "Place or deal with close together for contrasting effect.",
-    "synonyms": ["collocate", "contrast", "compare"],
-    "antonyms": ["isolate", "separate"],
-    "example_sentence": "In her critical essay, she juxtaposes classical philosophical ethics with contemporary artificial intelligence dilemmas.",
-    "collocation": "juxtapose ideas / juxtapose against"
+    "meaning_tr": "Yan yana koymak (karşılaştırmak amacıyla)",
+    "definition_en": "To place or deal with close together for contrasting effect.",
+    "synonyms": [
+      "collocate",
+      "compare",
+      "contrast"
+    ],
+    "antonyms": [
+      "isolate",
+      "separate"
+    ],
+    "example_sentence": "The museum exhibition juxtaposes ancient artifacts with modern sculptures.",
+    "collocation": "juxtapose two concepts / juxtaposed images"
   },
   {
-    "id": "v-c2-3",
+    "id": "v-c2-4",
+    "word": "Ephemeral",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "pronunciation": "/ɪˈfemərəl/",
+    "meaning_tr": "Kısa ömürlü, geçici",
+    "definition_en": "Lasting for a very short time.",
+    "synonyms": [
+      "transient",
+      "fleeting",
+      "evanescent"
+    ],
+    "antonyms": [
+      "permanent",
+      "eternal"
+    ],
+    "example_sentence": "Fame in the digital era is frequently ephemeral and easily eclipsed.",
+    "collocation": "ephemeral pleasure / ephemeral nature"
+  },
+  {
+    "id": "v-c2-5",
     "word": "Equivocal",
     "level": "C2",
     "part_of_speech": "adjective",
     "pronunciation": "/ɪˈkwɪvəkl/",
-    "meaning_tr": "Muğlak, iki anlamlı, şüpheli",
+    "meaning_tr": "Çift anlamlı, kuşkulu, muğlak",
     "definition_en": "Open to more than one interpretation; ambiguous.",
-    "synonyms": ["ambiguous", "non-committal", "enigmatic"],
-    "antonyms": ["unequivocal", "clear-cut", "unambiguous"],
-    "example_sentence": "The survey results were equivocal, necessitating further empirical scrutiny before drawing conclusions.",
-    "collocation": "equivocal stance / equivocal response"
+    "synonyms": [
+      "ambiguous",
+      "noncommittal",
+      "cryptic"
+    ],
+    "antonyms": [
+      "unequivocal",
+      "clear"
+    ],
+    "example_sentence": "The politician gave an equivocal response when pressed on fiscal policy.",
+    "collocation": "equivocal statement / equivocal evidence"
   },
   {
-    "id": "v-c2-4",
-    "word": "Surreptitious",
+    "id": "v-c2-6",
+    "word": "Inexorable",
     "level": "C2",
     "part_of_speech": "adjective",
-    "pronunciation": "/ˌsʌrəpˈtɪʃəs/",
-    "meaning_tr": "Gizli yapılan, gizli kapaklı, kaçamak",
-    "definition_en": "Kept secret, especially because it would not be approved of.",
-    "synonyms": ["clandestine", "covert", "stealthy"],
-    "antonyms": ["overt", "transparent", "candid"],
-    "example_sentence": "The diplomat made surreptitious arrangements to de-escalate the geopolitical friction.",
-    "collocation": "surreptitious action / surreptitious glance"
+    "pronunciation": "/ɪnˈeksərəbl/",
+    "meaning_tr": "Durdurulamaz, amansız",
+    "definition_en": "Impossible to stop or prevent.",
+    "synonyms": [
+      "relentless",
+      "unstoppable",
+      "inevitable"
+    ],
+    "antonyms": [
+      "yielding",
+      "flexible"
+    ],
+    "example_sentence": "The inexorable march of technological progress disrupts legacy industries.",
+    "collocation": "inexorable decline / inexorable advance"
+  },
+  {
+    "id": "v-c2-7",
+    "word": "Meticulous",
+    "level": "C2",
+    "part_of_speech": "adjective",
+    "pronunciation": "/məˈtɪkjələs/",
+    "meaning_tr": "Titiz, kılı kırk yaran",
+    "definition_en": "Showing great attention to detail; very careful and precise.",
+    "synonyms": [
+      "scrupulous",
+      "painstaking",
+      "fastidious"
+    ],
+    "antonyms": [
+      "careless",
+      "sloppy"
+    ],
+    "example_sentence": "The laboratory trial required meticulous documentation of every temperature fluctuation.",
+    "collocation": "meticulous research / meticulous attention to detail"
+  },
+  {
+    "id": "v-c2-8",
+    "word": "Obfuscate",
+    "level": "C2",
+    "part_of_speech": "verb",
+    "pronunciation": "/ˈɒbfʌskeɪt/",
+    "meaning_tr": "Kasten kafa karıştırmak, anlaşılmaz kılmak",
+    "definition_en": "To make obscure, unclear, or unintelligible.",
+    "synonyms": [
+      "cloud",
+      "muddy",
+      "obscure"
+    ],
+    "antonyms": [
+      "clarify",
+      "illuminate"
+    ],
+    "example_sentence": "Legal jargon is often criticized for serving to obfuscate rather than clarify rights.",
+    "collocation": "obfuscate the truth / obfuscate issues"
+  },
+  {
+    "id": "v-b2-13",
+    "word": "Allocate",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "pronunciation": "/ˈæləkeɪt/",
+    "meaning_tr": "Tahsis etmek, paylaştırmak",
+    "definition_en": "To distribute resources or duties for a particular purpose.",
+    "synonyms": [
+      "allot",
+      "assign",
+      "distribute"
+    ],
+    "antonyms": [
+      "withhold",
+      "confiscate"
+    ],
+    "example_sentence": "The faculty decided to allocate more funding to laboratory equipment.",
+    "collocation": "allocate resources / allocate funds"
+  },
+  {
+    "id": "v-b2-14",
+    "word": "Ambiguous",
+    "level": "B2",
+    "part_of_speech": "adjective",
+    "pronunciation": "/æmˈbɪɡjuəs/",
+    "meaning_tr": "Belirsiz, iki anlamlı",
+    "definition_en": "Open to more than one interpretation; having a double meaning.",
+    "synonyms": [
+      "unclear",
+      "equivocal",
+      "vague"
+    ],
+    "antonyms": [
+      "clear",
+      "unambiguous",
+      "lucid"
+    ],
+    "example_sentence": "The wording of the question was so ambiguous that students protested.",
+    "collocation": "ambiguous phrasing / ambiguous result"
+  },
+  {
+    "id": "v-b2-15",
+    "word": "Compensate",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "pronunciation": "/ˈkɒmpenseɪt/",
+    "meaning_tr": "Telafi etmek, tazmin etmek",
+    "definition_en": "To make up for something unwelcome or unpleasant by exerting an opposite force.",
+    "synonyms": [
+      "make up for",
+      "offset",
+      "reimburse"
+    ],
+    "antonyms": [
+      "penalize"
+    ],
+    "example_sentence": "High intelligence does not necessarily compensate for a lack of diligence.",
+    "collocation": "compensate for / compensate adequately"
+  },
+  {
+    "id": "v-b2-16",
+    "word": "Fluctuate",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "pronunciation": "/ˈflʌktʃueɪt/",
+    "meaning_tr": "Dalgalanmak, inip çıkmak",
+    "definition_en": "To rise and fall irregularly in number or amount.",
+    "synonyms": [
+      "oscillate",
+      "vary",
+      "alternate"
+    ],
+    "antonyms": [
+      "stabilize",
+      "remain constant"
+    ],
+    "example_sentence": "Solar and wind energy outputs fluctuate in response to weather patterns.",
+    "collocation": "fluctuate wildly / prices fluctuate"
+  },
+  {
+    "id": "v-b2-17",
+    "word": "Trigger",
+    "level": "B2",
+    "part_of_speech": "verb",
+    "pronunciation": "/ˈtrɪɡər/",
+    "meaning_tr": "Tetiklemek, yol açmak",
+    "definition_en": "To cause an event or situation to happen or exist.",
+    "synonyms": [
+      "provoke",
+      "spark",
+      "precipitate"
+    ],
+    "antonyms": [
+      "halt",
+      "prevent"
+    ],
+    "example_sentence": "Stressful life events can trigger acute physical and mental exhaustion.",
+    "collocation": "trigger a reaction / trigger a crisis"
+  },
+  {
+    "id": "v-b2-18",
+    "word": "Perspective",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "pronunciation": "/pəˈspektɪv/",
+    "meaning_tr": "Bakış açısı, perspektif",
+    "definition_en": "A particular attitude toward or way of regarding something; a point of view.",
+    "synonyms": [
+      "viewpoint",
+      "outlook",
+      "stance"
+    ],
+    "antonyms": [],
+    "example_sentence": "Studying abroad allows undergraduates to gain an international perspective.",
+    "collocation": "broad perspective / from my perspective"
+  },
+  {
+    "id": "v-b2-19",
+    "word": "Infrastructure",
+    "level": "B2",
+    "part_of_speech": "noun",
+    "pronunciation": "/ˈɪnfrəstrʌktʃər/",
+    "meaning_tr": "Altyapı",
+    "definition_en": "The basic physical and organizational structures needed for the operation of a society.",
+    "synonyms": [
+      "framework",
+      "foundation",
+      "base"
+    ],
+    "antonyms": [],
+    "example_sentence": "Aging transportation infrastructure requires substantial state renovation.",
+    "collocation": "critical infrastructure / develop infrastructure"
+  },
+  {
+    "id": "v-b2-20",
+    "word": "Sufficient",
+    "level": "B2",
+    "part_of_speech": "adjective",
+    "pronunciation": "/səˈfɪʃnt/",
+    "meaning_tr": "Yeterli, kafi",
+    "definition_en": "Enough; adequate.",
+    "synonyms": [
+      "adequate",
+      "ample",
+      "enough"
+    ],
+    "antonyms": [
+      "insufficient",
+      "scant"
+    ],
+    "example_sentence": "The researchers collected sufficient experimental samples to prove the claim.",
+    "collocation": "sufficient evidence / sufficient time"
+  },
+  {
+    "id": "v-c1-11",
+    "word": "Concur",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/kənˈkɜːr/",
+    "meaning_tr": "Aynı fikirde olmak, hemfikir olmak",
+    "definition_en": "To be of the same opinion; agree.",
+    "synonyms": [
+      "agree",
+      "accord",
+      "coincide"
+    ],
+    "antonyms": [
+      "dissent",
+      "disagree"
+    ],
+    "example_sentence": "The panel of medical specialists concurred that immediate intervention was mandatory.",
+    "collocation": "concur with / scientists concur"
+  },
+  {
+    "id": "v-c1-12",
+    "word": "Disseminate",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/dɪˈsemɪneɪt/",
+    "meaning_tr": "Yaymak, dağıtmak (bilgi, fikir)",
+    "definition_en": "To spread or disperse something (especially information) widely.",
+    "synonyms": [
+      "circulate",
+      "distribute",
+      "promulgate"
+    ],
+    "antonyms": [
+      "suppress",
+      "withhold"
+    ],
+    "example_sentence": "Scholars utilize academic journals to disseminate peer-reviewed discoveries.",
+    "collocation": "disseminate information / disseminate widely"
+  },
+  {
+    "id": "v-c1-13",
+    "word": "Deteriorate",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/dɪˈtɪəriəreɪt/",
+    "meaning_tr": "Kötüleşmek, bozulmak",
+    "definition_en": "To become progressively worse.",
+    "synonyms": [
+      "degenerate",
+      "worsen",
+      "decline"
+    ],
+    "antonyms": [
+      "ameliorate",
+      "improve"
+    ],
+    "example_sentence": "Air quality in the industrial zone deteriorated substantially over winter.",
+    "collocation": "conditions deteriorate / deteriorate rapidly"
+  },
+  {
+    "id": "v-c1-14",
+    "word": "Proponent",
+    "level": "C1",
+    "part_of_speech": "noun",
+    "pronunciation": "/prəˈpəʊnənt/",
+    "meaning_tr": "Savunucu, taraftar",
+    "definition_en": "A person who advocates a theory, proposal, or course of action.",
+    "synonyms": [
+      "advocate",
+      "supporter",
+      "champion"
+    ],
+    "antonyms": [
+      "opponent",
+      "adversary"
+    ],
+    "example_sentence": "Proponents of nuclear energy emphasize its minimal carbon footprint.",
+    "collocation": "leading proponent / proponent of reform"
+  },
+  {
+    "id": "v-c1-15",
+    "word": "Unprecedented",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "pronunciation": "/ʌnˈpresɪdentɪd/",
+    "meaning_tr": "Eşi benzeri görülmemiş, görülmemiş",
+    "definition_en": "Never done or known before.",
+    "synonyms": [
+      "unparalleled",
+      "novel",
+      "unmatched"
+    ],
+    "antonyms": [
+      "commonplace",
+      "precedented"
+    ],
+    "example_sentence": "The pandemic provoked an unprecedented shutdown of worldwide aviation.",
+    "collocation": "unprecedented scale / unprecedented growth"
+  },
+  {
+    "id": "v-c1-16",
+    "word": "Pragmatic",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "pronunciation": "/præɡˈmætɪk/",
+    "meaning_tr": "Uygulamacı, pratik, faydacı",
+    "definition_en": "Dealing with things sensibly and realistically in a way that is based on practical rather than theoretical considerations.",
+    "synonyms": [
+      "practical",
+      "utilitarian",
+      "hard-headed"
+    ],
+    "antonyms": [
+      "idealistic",
+      "quixotic"
+    ],
+    "example_sentence": "Engineers must adopt a pragmatic approach when balancing safety with strict budgets.",
+    "collocation": "pragmatic approach / pragmatic solution"
+  },
+  {
+    "id": "v-c1-17",
+    "word": "Reconcile",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/ˈrekənsaɪl/",
+    "meaning_tr": "Uzlaştırmak, bağdaştırmak",
+    "definition_en": "To restore friendly relations between; to make consistent.",
+    "synonyms": [
+      "harmonize",
+      "coordinate",
+      "resolve"
+    ],
+    "antonyms": [
+      "alienate",
+      "polarize"
+    ],
+    "example_sentence": "It is arduous to reconcile rapid economic expansion with ecological preservation.",
+    "collocation": "reconcile differences / reconcile two views"
+  },
+  {
+    "id": "v-c1-18",
+    "word": "Susceptible",
+    "level": "C1",
+    "part_of_speech": "adjective",
+    "pronunciation": "/səˈseptəbl/",
+    "meaning_tr": "Duyarlı, kolay etkilenen, savunmasız",
+    "definition_en": "Likely or liable to be influenced or harmed by a particular thing.",
+    "synonyms": [
+      "vulnerable",
+      "prone",
+      "exposed"
+    ],
+    "antonyms": [
+      "immune",
+      "resistant"
+    ],
+    "example_sentence": "Elderly populations are particularly susceptible to seasonal respiratory infections.",
+    "collocation": "susceptible to disease / highly susceptible"
   }
 ]
