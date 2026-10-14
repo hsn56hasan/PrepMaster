@@ -8,7 +8,7 @@ echo ========================================================
 echo.
 echo Sunucu baslatiliyor... Lutfen bekleyin.
 echo Bilgisayarda acmak icin: http://localhost:8050
-echo Telefondan / Tabletten (ayni Wi-Fi) acmak icin: http://172.16.1.211:8050
+echo Telefondan / Tabletten (ayni Wi-Fi) acmak icin: http://10.247.49.48:8050
 echo.
 
 cd /d "%~dp0"

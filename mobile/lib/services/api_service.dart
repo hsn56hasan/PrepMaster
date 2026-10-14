@@ -28,7 +28,7 @@ class ApiService {
     try {
       if (Platform.isAndroid) {
         // Default to Wi-Fi IP for real phones, fallback to 10.0.2.2 for emulator
-        return 'http://172.16.1.211:8050';
+        return 'http://10.247.49.48:8050';
       }
     } catch (_) {}
     return 'http://127.0.0.1:8050';
