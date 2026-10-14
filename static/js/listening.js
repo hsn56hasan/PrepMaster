@@ -409,3 +409,16 @@ async function submitListeningExam() {
 
   alert(`Dinleme Sınavı Tamamlandı!\nDoğru: ${correctCount} / ${total}\nBaşarı Oranı: %${score}`);
 }
+
+window.loadListeningHub = loadListeningHub;
+window.startListeningTrack = startListeningTrack;
+window.exitListeningRunner = exitListeningRunner;
+window.saveUserNotes = saveUserNotes;
+window.revealListeningQuestions = revealListeningQuestions;
+window.selectListeningAnswer = selectListeningAnswer;
+window.toggleAudioSynthesis = toggleAudioSynthesis;
+window.playAudioSynthesis = playAudioSynthesis;
+window.stopAudioSynthesis = stopAudioSynthesis;
+window.setPlaybackRate = setPlaybackRate;
+window.submitListeningExam = submitListeningExam;
+

@@ -422,6 +422,13 @@ async function selectUniversity(uniId) {
     console.error("Profile update error:", err);
   }
 
+  if (window.appState.activeTab === 'practice') {
+    loadPracticeQuestions();
+  } else if (window.appState.activeTab === 'dashboard') {
+    loadDashboardStats();
+  }
+}
+
 // --- Mistake Vault Module ---
 async function loadMistakeVault() {
   const container = document.getElementById("mistake-vault-list");

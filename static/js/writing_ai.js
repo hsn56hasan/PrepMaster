@@ -267,3 +267,10 @@ function renderAIEvaluationResults(data) {
 
   if (window.lucide) window.lucide.createIcons();
 }
+
+window.initAIWritingEvaluator = initAIWritingEvaluator;
+window.onSelectEssayPrompt = onSelectEssayPrompt;
+window.updateEssayWordCount = updateEssayWordCount;
+window.submitEssayForEvaluation = submitEssayForEvaluation;
+window.renderAIEvaluationResults = renderAIEvaluationResults;
+
