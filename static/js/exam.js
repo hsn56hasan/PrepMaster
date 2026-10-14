@@ -79,7 +79,34 @@ async function startMistakeExam() {
   }
 }
 
-function launchExamWithQuestions(questions, uniId, targetLevel, isMistake = false) {
+async function startFullMockExam(universityId = null) {
+  const uniId = universityId || window.appState.currentUniversity.id;
+  try {
+    const res = await fetch(`/api/exam/mock/${uniId}`);
+    const mockData = await res.json();
+
+    const questions = mockData.sections.multiple_choice;
+    if (!questions || questions.length === 0) {
+      alert("Bu üniversite için soru havuzu yüklenemedi.");
+      return;
+    }
+
+    launchExamWithQuestions(
+      questions, 
+      uniId, 
+      "B2-C1", 
+      false, 
+      (mockData.duration_minutes || 120) * 60,
+      mockData.exam_title
+    );
+
+  } catch (err) {
+    console.error("Full mock exam error:", err);
+    alert("Tam deneme sınavı başlatılamadı.");
+  }
+}
+
+function launchExamWithQuestions(questions, uniId, targetLevel, isMistake = false, customSeconds = null, customTitle = null) {
   activeExamState.questions = questions;
   activeExamState.currentIndex = 0;
   activeExamState.userAnswers = {};
@@ -90,9 +117,13 @@ function launchExamWithQuestions(questions, uniId, targetLevel, isMistake = fals
   activeExamState.isMistakeExam = isMistake;
   activeExamState.isFinished = false;
 
-  // Soru başına 90 sn süre
-  activeExamState.totalSeconds = Math.max(questions.length * 90, 180);
+  activeExamState.totalSeconds = customSeconds || Math.max(questions.length * 90, 180);
   activeExamState.secondsRemaining = activeExamState.totalSeconds;
+
+  const titleEl = document.getElementById("exam-active-title");
+  if (titleEl && customTitle) {
+    titleEl.innerText = customTitle;
+  }
 
   showExamInterface();
   startTimer();
@@ -456,6 +487,7 @@ function showExamResults(result) {
 }
 
 window.startExamSimulation = startExamSimulation;
+window.startFullMockExam = startFullMockExam;
 window.startMistakeExam = startMistakeExam;
 window.selectExamOption = selectExamOption;
 window.toggleFlagQuestion = toggleFlagQuestion;

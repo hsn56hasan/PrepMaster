@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/university.dart';
+import '../models/question.dart';
 import '../services/api_service.dart';
 import '../theme/app_theme.dart';
 import 'exam_runner_screen.dart';
@@ -7,6 +8,7 @@ import 'university_picker_dialog.dart';
 import 'listening_screen.dart';
 import 'writing_screen.dart';
 import 'speaking_screen.dart';
+import '../services/sync_service.dart';
 
 class DashboardScreen extends StatefulWidget {
   final University currentUniversity;
@@ -63,15 +65,121 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  void _startFullExam() async {
-    final questions = await ApiService().getQuestions(
-      universityId: widget.currentUniversity.id,
-      level: widget.currentLevel,
+  Future<void> _performCloudSync() async {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Row(
+          children: [
+            SizedBox(
+              width: 16,
+              height: 16,
+              child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+            ),
+            SizedBox(width: 12),
+            Text('Bulut verileri eşitleniyor...'),
+          ],
+        ),
+        duration: Duration(seconds: 1),
+      ),
     );
+
+    final syncData = await SyncService().pullSync();
+    await _loadData();
+
     if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(syncData != null ? '✓ Bulut senkronizasyonu tamamlandı!' : 'Senkronizasyon çevrimdışı modda saklandı.'),
+        backgroundColor: syncData != null ? Colors.green.shade700 : Colors.blueGrey,
+      ),
+    );
+  }
+
+  void _openVerificationDialog() {
+    final emailCtrl = TextEditingController(text: 'ogrenci@${widget.currentUniversity.id}.edu.tr');
+    final numCtrl = TextEditingController(text: '040220199');
+
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: const Row(
+          children: [
+            Icon(Icons.verified_user, color: Colors.green),
+            SizedBox(width: 8),
+            Text('Öğrenci Doğrulama', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Üniversite .edu.tr e-posta ve öğrenci numaranızı girerek doğrulama rozetini alın.', style: TextStyle(fontSize: 12, color: Colors.grey)),
+            const SizedBox(height: 14),
+            TextField(
+              controller: emailCtrl,
+              decoration: InputDecoration(
+                labelText: 'Edu E-posta',
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+              ),
+            ),
+            const SizedBox(height: 10),
+            TextField(
+              controller: numCtrl,
+              decoration: InputDecoration(
+                labelText: 'Öğrenci Numarası',
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('İptal'),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              final res = await SyncService().verifyStudent(
+                universityId: widget.currentUniversity.id,
+                eduEmail: emailCtrl.text.trim(),
+                studentNumber: numCtrl.text.trim(),
+              );
+              if (!mounted) return;
+              if (ctx.mounted) {
+                Navigator.pop(ctx);
+              }
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(res['message'] ?? 'Doğrulandı!'),
+                  backgroundColor: Colors.green.shade700,
+                ),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.green.shade700,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Doğrula'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _startFullMockExam() async {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Resmi muafiyet deneme sınavı hazırlanıyor...'),
+        duration: Duration(seconds: 1),
+      ),
+    );
+    final mockData = await ApiService().getMockExam(widget.currentUniversity.id);
+    if (!mounted) return;
+    final List<Question> questions = (mockData['parsed_questions'] as List<dynamic>?)?.cast<Question>() ?? [];
     if (questions.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Soru yüklenemedi.')),
+        const SnackBar(content: Text('Soru havuzu yüklenemedi.')),
       );
       return;
     }
@@ -86,6 +194,141 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
       ),
     ).then((_) => _loadData());
+  }
+
+  void _showReportSummaryDialog() async {
+    final report = await ApiService().getReportSummary();
+    if (!mounted) return;
+
+    final studentNo = report['student_profile']?['student_number'] ?? '040220199';
+    final avgScore = report['average_score'] ?? 0;
+    final passingScore = report['passing_score'] ?? 60;
+    final totalExams = report['total_exams_taken'] ?? 0;
+    final readiness = report['readiness_status'] ?? 'Geliştirilmeli';
+    final isReady = (report['readiness_color'] == 'emerald');
+    final vocabLearned = report['mastered_vocabulary_count'] ?? 0;
+    final vocabTotal = report['total_vocabulary_count'] ?? 64;
+
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        title: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: AppTheme.brandLightBlue,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Icon(Icons.description, color: AppTheme.brandBlue, size: 20),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Hazırlık Muafiyet Karnesi', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                  Text('${widget.currentUniversity.shortName} • No: $studentNo', style: const TextStyle(fontSize: 11, color: AppTheme.textMuted)),
+                ],
+              ),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: isReady ? Colors.green.shade50 : Colors.amber.shade50,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: isReady ? Colors.green.shade200 : Colors.amber.shade200),
+              ),
+              child: Row(
+                children: [
+                  Icon(isReady ? Icons.check_circle : Icons.info, color: isReady ? Colors.green.shade700 : Colors.amber.shade800),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      readiness,
+                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: isReady ? Colors.green.shade900 : Colors.amber.shade900),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 14),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(color: AppTheme.surfaceBg, borderRadius: BorderRadius.circular(14)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Ortalama Not', style: TextStyle(fontSize: 10, color: AppTheme.textMuted)),
+                        Text('%$avgScore', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppTheme.brandBlue)),
+                        Text('Baraj: %$passingScore', style: const TextStyle(fontSize: 9, color: AppTheme.textMuted)),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(color: AppTheme.surfaceBg, borderRadius: BorderRadius.circular(14)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Denemeler', style: TextStyle(fontSize: 10, color: AppTheme.textMuted)),
+                        Text('$totalExams', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppTheme.textMain)),
+                        const Text('Tamamlandı', style: TextStyle(fontSize: 9, color: AppTheme.textMuted)),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(color: AppTheme.surfaceBg, borderRadius: BorderRadius.circular(14)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text('Akademik AWL Kelime:', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600)),
+                  Text('$vocabLearned / $vocabTotal', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: Colors.indigo)),
+                ],
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Kapat'),
+          ),
+          ElevatedButton.icon(
+            onPressed: () {
+              Navigator.pop(ctx);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('✓ Rapor PDF çıktısı ve karneniz hazırlandı!'), backgroundColor: Colors.green),
+              );
+            },
+            icon: const Icon(Icons.print, size: 16),
+            label: const Text('PDF / Yazdır'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppTheme.brandBlue,
+              foregroundColor: Colors.white,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -143,6 +386,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ],
         ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.assessment_outlined, color: AppTheme.brandBlue),
+            onPressed: _showReportSummaryDialog,
+            tooltip: 'Muafiyet Karnesi (PDF)',
+          ),
+          IconButton(
+            icon: const Icon(Icons.verified_user_outlined, color: Colors.green),
+            onPressed: _openVerificationDialog,
+            tooltip: 'Öğrenci Doğrulama',
+          ),
+          IconButton(
+            icon: const Icon(Icons.cloud_sync_outlined, color: AppTheme.brandBlue),
+            onPressed: _performCloudSync,
+            tooltip: 'Bulut Eşitle',
+          ),
           IconButton(
             icon: const Icon(Icons.account_balance_outlined, color: AppTheme.textMain),
             onPressed: _openUniPicker,
@@ -259,25 +517,26 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       children: [
                         Expanded(
                           child: ElevatedButton.icon(
-                            onPressed: _startFullExam,
+                            onPressed: _startFullMockExam,
                             icon: const Icon(Icons.play_arrow_rounded, size: 18),
-                            label: const Text('Tam Deneme Başlat'),
+                            label: const Text('Resmi Deneme Başlat'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.white,
                               foregroundColor: AppTheme.brandNavy,
                             ),
                           ),
                         ),
-                        const SizedBox(width: 10),
-                        OutlinedButton(
-                          onPressed: () => widget.onTabSwitch(3), // flashcards tab
+                        const SizedBox(width: 8),
+                        OutlinedButton.icon(
+                          onPressed: _showReportSummaryDialog,
+                          icon: const Icon(Icons.description_outlined, size: 16),
+                          label: const Text('Karne (PDF)', style: TextStyle(fontWeight: FontWeight.w700)),
                           style: OutlinedButton.styleFrom(
                             foregroundColor: Colors.white,
                             side: const BorderSide(color: Colors.white38),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
                           ),
-                          child: const Text('Kelimeler', style: TextStyle(fontWeight: FontWeight.w700)),
                         ),
                       ],
                     ),

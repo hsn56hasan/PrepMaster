@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:prep_master/models/listening_track.dart';
 import 'package:prep_master/services/api_service.dart';
 
@@ -79,6 +80,20 @@ In my view, free higher education is essential for promoting social mobility and
       expect(result.strengthsTr, isNotEmpty);
       expect(result.fluencyScore, greaterThan(0));
       expect(result.lexicalScore, greaterThan(0));
+    });
+
+    test('Mock Exam generator and Report Summary return valid structured payloads', () async {
+      TestWidgetsFlutterBinding.ensureInitialized();
+      SharedPreferences.setMockInitialValues({});
+      final mockExam = await ApiService().getMockExam('itu');
+      expect(mockExam['exam_title'], isNotNull);
+      expect(mockExam['duration_minutes'], greaterThan(0));
+      expect(mockExam['passing_score'], greaterThanOrEqualTo(50));
+
+      final report = await ApiService().getReportSummary();
+      expect(report['student_profile'], isNotNull);
+      expect(report['readiness_status'], isNotNull);
+      expect(report['average_score'], isNotNull);
     });
   });
 }

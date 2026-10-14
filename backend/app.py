@@ -21,7 +21,8 @@ from database import (
     set_vocab_status, get_vocab_progress,
     record_mistake, resolve_mistake, delete_mistake,
     get_mistakes, get_mistake_count,
-    bulk_upsert_mistakes, bulk_upsert_vocab_progress
+    bulk_upsert_mistakes, bulk_upsert_vocab_progress,
+    create_user, authenticate_user, verify_student, get_verification_status
 )
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -90,6 +91,73 @@ class SyncPushRequest(BaseModel):
     mistakes: Optional[List[Dict[str, Any]]] = None
     vocab_progress: Optional[Dict[str, str]] = None
     exam_attempts: Optional[List[Dict[str, Any]]] = None
+
+class RegisterRequest(BaseModel):
+    email: str
+    username: str
+    password: str
+    full_name: str
+    university_id: Optional[str] = "itu"
+    student_number: Optional[str] = ""
+
+class LoginRequest(BaseModel):
+    identifier: str
+    password: str
+
+class StudentVerifyRequest(BaseModel):
+    user_id: Optional[int] = 1
+    university_id: str
+    edu_email: str
+    student_number: str
+    notes: Optional[str] = ""
+
+# --- Authentication & Student Verification Endpoints ---
+@app.post("/api/auth/register")
+def register_endpoint(req: RegisterRequest):
+    try:
+        user = create_user(
+            email=req.email,
+            username=req.username,
+            password=req.password,
+            full_name=req.full_name,
+            university_id=req.university_id or "itu",
+            student_number=req.student_number or ""
+        )
+        return {"status": "success", "user": user}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Kayıt oluşturulamadı: {str(e)}")
+
+@app.post("/api/auth/login")
+def login_endpoint(req: LoginRequest):
+    user = authenticate_user(req.identifier, req.password)
+    if not user:
+        raise HTTPException(status_code=401, detail="Geçersiz kullanıcı adı/e-posta veya şifre.")
+    uni = next((u for u in universities_data if u["id"] == user.get("university_id")), universities_data[0])
+    user["university"] = uni
+    return {"status": "success", "user": user}
+
+@app.get("/api/auth/me")
+def current_user_endpoint(user_id: int = 1):
+    user = get_profile(user_id)
+    uni = next((u for u in universities_data if u["id"] == user.get("university_id")), universities_data[0])
+    user["university"] = uni
+    return user
+
+@app.post("/api/student/verify")
+def student_verify_endpoint(req: StudentVerifyRequest):
+    res = verify_student(
+        user_id=req.user_id or 1,
+        university_id=req.university_id,
+        edu_email=req.edu_email,
+        student_number=req.student_number,
+        doc_note=req.notes or ""
+    )
+    return res
+
+@app.get("/api/student/status")
+def student_status_endpoint(user_id: int = 1):
+    return get_verification_status(user_id)
+
 
 
 # --- API Routes ---

@@ -67,3 +67,26 @@
   color: #dc2626 !important;
   border-color: #f87171 !important;
 }
+
+/* Print / PDF Export Styles */
+@media print {
+  header, aside, #level-selector-pills, .no-print, button {
+    display: none !important;
+  }
+  body, html {
+    background: white !important;
+    color: black !important;
+    height: auto !important;
+  }
+  #printable-report-modal {
+    position: static !important;
+    background: white !important;
+    display: block !important;
+    padding: 0 !important;
+  }
+  .print-card {
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: none !important;
+  }
+}
+

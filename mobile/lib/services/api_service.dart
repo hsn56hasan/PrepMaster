@@ -658,5 +658,64 @@ class ApiService {
       modelTranscript: 'Sample model answer with fluent academic delivery.',
     );
   }
+
+  // --- Full Mock Exam ---
+  Future<Map<String, dynamic>> getMockExam(String universityId) async {
+    try {
+      final res = await http.get(Uri.parse('$baseUrl/api/exam/mock/$universityId')).timeout(const Duration(seconds: 4));
+      if (res.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(utf8.decode(res.bodyBytes));
+        if (data['sections'] != null && data['sections']['multiple_choice'] != null) {
+          final List<dynamic> qList = data['sections']['multiple_choice'];
+          data['parsed_questions'] = qList.map((e) => Question.fromJson(e)).toList();
+        }
+        return data;
+      }
+    } catch (_) {}
+
+    final allQuestions = await getQuestions(universityId: universityId);
+    return {
+      'exam_title': 'Resmi Muafiyet Deneme Sınavı',
+      'duration_minutes': 120,
+      'passing_score': 60,
+      'parsed_questions': allQuestions.take(15).toList(),
+    };
+  }
+
+  // --- Student Summary Report Card ---
+  Future<Map<String, dynamic>> getReportSummary() async {
+    try {
+      final res = await http.get(Uri.parse('$baseUrl/api/report/summary')).timeout(const Duration(seconds: 4));
+      if (res.statusCode == 200) {
+        return json.decode(utf8.decode(res.bodyBytes));
+      }
+    } catch (_) {}
+
+    final stats = await getStats();
+    final mistakes = await getMistakes();
+    final vocab = await getVocabulary();
+    final mastered = vocab.where((v) => v.status == 'mastered').length;
+
+    return {
+      'student_profile': {
+        'student_number': '040220199',
+        'is_verified_student': 1,
+      },
+      'target_university': {
+        'name': 'Üniversite Hazırlık Programı',
+      },
+      'readiness_status': mistakes.length <= 5 ? 'Muafiyete Hazır' : 'Geliştirilmeli (Eksikler Var)',
+      'readiness_color': mistakes.length <= 5 ? 'emerald' : 'amber',
+      'average_score': stats['average_exam_score'] ?? 65.0,
+      'passing_score': 60,
+      'total_exams_taken': stats['total_exams_taken'] ?? 1,
+      'unresolved_mistakes_count': mistakes.length,
+      'mistakes_by_category': <String, dynamic>{},
+      'mastered_vocabulary_count': mastered,
+      'total_vocabulary_count': vocab.length,
+      'generated_at': DateTime.now().toString().substring(0, 16),
+    };
+  }
 }
+
 

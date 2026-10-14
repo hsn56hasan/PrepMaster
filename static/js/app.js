@@ -29,8 +29,9 @@ async function initApp() {
     renderLevelSelector();
     setupTabNavigation();
     
-    // 4. Load initial tab
+    // 4. Load initial tab & student status
     switchTab('dashboard');
+    loadStudentStatus();
 
     if (window.lucide) window.lucide.createIcons();
   } catch (err) {
@@ -544,6 +545,204 @@ async function deleteMistakeItem(questionId) {
   }
 }
 
+// --- Cloud Sync & Student Verification Module ---
+async function syncCloudData() {
+  const syncIcon = document.getElementById("sync-icon");
+  if (syncIcon) syncIcon.classList.add("animate-spin");
+
+  try {
+    const res = await fetch('/api/sync/pull');
+    const data = await res.json();
+
+    if (window.appState.activeTab === 'dashboard') loadDashboardStats();
+    else if (window.appState.activeTab === 'mistakes') loadMistakeVault();
+
+    showNotification("✓ Bulut senkronizasyonu tamamlandı. Tüm verileriniz güncel!", "emerald");
+  } catch (err) {
+    console.error("Cloud sync error:", err);
+    showNotification("Senkronizasyon sırasında hata oluştu.", "rose");
+  } finally {
+    if (syncIcon) syncIcon.classList.remove("animate-spin");
+  }
+}
+
+function showNotification(msg, color) {
+  const toast = document.createElement("div");
+  toast.className = `fixed bottom-6 right-6 z-50 px-5 py-3 ${color === 'emerald' ? 'bg-emerald-600' : 'bg-rose-600'} text-white font-bold text-xs rounded-2xl shadow-xl transition`;
+  toast.innerText = msg;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3500);
+}
+
+function openStudentVerifyModal() {
+  const modal = document.getElementById("student-verify-modal");
+  if (modal) modal.classList.remove("hidden");
+}
+
+function closeStudentVerifyModal() {
+  const modal = document.getElementById("student-verify-modal");
+  if (modal) modal.classList.add("hidden");
+}
+
+async function submitStudentVerification() {
+  const emailInput = document.getElementById("verify-edu-email");
+  const numberInput = document.getElementById("verify-student-number");
+  const statusMsg = document.getElementById("verify-status-msg");
+
+  const eduEmail = emailInput ? emailInput.value.trim() : "";
+  const studentNumber = numberInput ? numberInput.value.trim() : "";
+
+  if (!eduEmail || !studentNumber) {
+    if (statusMsg) {
+      statusMsg.className = "p-3 rounded-xl text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200 block";
+      statusMsg.innerText = "Lütfen e-posta ve öğrenci numaranızı eksiksiz girin.";
+    }
+    return;
+  }
+
+  try {
+    const res = await fetch('/api/student/verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        user_id: 1,
+        university_id: window.appState.currentUniversity.id,
+        edu_email: eduEmail,
+        student_number: studentNumber
+      })
+    });
+    const result = await res.json();
+
+    if (statusMsg) {
+      statusMsg.className = "p-3 rounded-xl text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 block";
+      statusMsg.innerText = result.message;
+    }
+
+    setTimeout(() => {
+      closeStudentVerifyModal();
+      loadStudentStatus();
+    }, 1500);
+  } catch (err) {
+    console.error("Verification submit error:", err);
+  }
+}
+
+async function loadStudentStatus() {
+  try {
+    const res = await fetch('/api/student/status');
+    const data = await res.json();
+    const badgeText = document.getElementById("header-verification-text");
+    const badgeEl = document.getElementById("header-verification-badge");
+
+    if (badgeText && badgeEl) {
+      if (data.is_verified_student) {
+        badgeText.innerText = "Doğrulanmış Öğrenci";
+        badgeEl.className = "hidden sm:flex items-center gap-1.5 px-3 py-2 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-xl text-xs font-bold transition";
+      } else {
+        badgeText.innerText = "Öğrenci Doğrula";
+        badgeEl.className = "hidden sm:flex items-center gap-1.5 px-3 py-2 bg-amber-50 text-amber-700 border border-amber-200 rounded-xl text-xs font-bold transition";
+      }
+    }
+  } catch (e) {
+    console.warn("Student status load error:", e);
+  }
+}
+
+async function openPrintableReportModal() {
+  const modal = document.getElementById("printable-report-modal");
+  const content = document.getElementById("printable-report-content");
+  if (!modal || !content) return;
+
+  content.innerHTML = `<div class="p-8 text-center text-slate-400">Akademik gelişim raporu ve karne hazırlanıyor...</div>`;
+  modal.classList.remove("hidden");
+
+  try {
+    const res = await fetch('/api/report/summary');
+    const data = await res.json();
+
+    content.innerHTML = `
+      <div class="print-card bg-white p-8 rounded-3xl border border-slate-200 shadow-xl space-y-6 max-w-2xl mx-auto">
+        <!-- Rapor Başlığı -->
+        <div class="flex items-center justify-between pb-4 border-b-2 border-slate-900">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-extrabold text-xl text-blue-900">PrepMaster</span>
+              <span class="text-xs uppercase font-bold px-2 py-0.5 bg-blue-50 text-blue-800 rounded">Akademik Karne</span>
+            </div>
+            <h2 class="text-base font-bold text-slate-700 mt-1">${data.target_university.name} Hazırlık Muafiyet Karnesi</h2>
+          </div>
+          <div class="text-right text-xs text-slate-400">
+            <div>Tarih: ${data.generated_at}</div>
+            <div class="font-bold text-slate-600">Öğrenci No: ${data.student_profile.student_number || '040220199'}</div>
+          </div>
+        </div>
+
+        <!-- Özet Skorlar -->
+        <div class="grid grid-cols-3 gap-4 text-center">
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+            <span class="text-xs text-slate-400 font-bold block">Ortalama Skor</span>
+            <span class="text-2xl font-black text-blue-900">%${data.average_score}</span>
+            <span class="text-[10px] text-slate-500">Baraj: %${data.passing_score}</span>
+          </div>
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+            <span class="text-xs text-slate-400 font-bold block">Çözülen Sınavlar</span>
+            <span class="text-2xl font-black text-slate-800">${data.total_exams_taken}</span>
+            <span class="text-[10px] text-slate-500">Tamamlanan Deneme</span>
+          </div>
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+            <span class="text-xs text-slate-400 font-bold block">Öğrenilen AWL</span>
+            <span class="text-2xl font-black text-indigo-700">${data.mastered_vocabulary_count} / ${data.total_vocabulary_count}</span>
+            <span class="text-[10px] text-slate-500">Akademik Kelime</span>
+          </div>
+        </div>
+
+        <!-- Muafiyet Hazırlık Durumu -->
+        <div class="p-4 rounded-2xl border ${data.readiness_color === 'emerald' ? 'bg-emerald-50 border-emerald-200 text-emerald-900' : 'bg-amber-50 border-amber-200 text-amber-900'}">
+          <div class="flex items-center gap-2 font-extrabold text-sm mb-1">
+            <span>Muafiyet Durumu:</span>
+            <span>${data.readiness_status}</span>
+          </div>
+          <p class="text-xs opacity-90 leading-relaxed">
+            Hata defterinizde toplam ${data.unresolved_mistakes_count} çözülmemiş soru bulunmaktadır.
+          </p>
+        </div>
+
+        <!-- Kategori Dağılımı -->
+        <div>
+          <h4 class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-2">Hata Dağılımı & Zayıf Konular:</h4>
+          <div class="flex flex-wrap gap-2">
+            ${Object.keys(data.mistakes_by_category).length > 0 ? 
+              Object.entries(data.mistakes_by_category).map(([cat, cnt]) => `
+                <span class="px-3 py-1 bg-rose-50 text-rose-700 border border-rose-200 rounded-xl text-xs font-bold">
+                  ${cat}: ${cnt} Yanlış
+                </span>
+              `).join('') : '<span class="text-xs text-emerald-600 font-bold">Harika! Hata havuzunuz temiz.</span>'}
+          </div>
+        </div>
+
+        <!-- Aksiyon Butonları -->
+        <div class="pt-4 border-t border-slate-100 flex items-center justify-between no-print">
+          <button onclick="closePrintableReportModal()" class="px-4 py-2 text-slate-500 hover:bg-slate-100 rounded-xl text-xs font-bold">
+            Kapat
+          </button>
+          <button onclick="window.print()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow flex items-center gap-1.5">
+            <i data-lucide="printer" class="w-4 h-4"></i> PDF Olarak Kaydet / Yazdır
+          </button>
+        </div>
+      </div>
+    `;
+
+    if (window.lucide) window.lucide.createIcons();
+  } catch (err) {
+    console.error("Report load error:", err);
+  }
+}
+
+function closePrintableReportModal() {
+  const modal = document.getElementById("printable-report-modal");
+  if (modal) modal.classList.add("hidden");
+}
+
 window.changeCurrentLevel = changeCurrentLevel;
 window.switchTab = switchTab;
 window.openUniversityModal = openUniversityModal;
@@ -553,3 +752,12 @@ window.loadDashboardStats = loadDashboardStats;
 window.loadMistakeVault = loadMistakeVault;
 window.resolveMistakeItem = resolveMistakeItem;
 window.deleteMistakeItem = deleteMistakeItem;
+window.syncCloudData = syncCloudData;
+window.openStudentVerifyModal = openStudentVerifyModal;
+window.closeStudentVerifyModal = closeStudentVerifyModal;
+window.submitStudentVerification = submitStudentVerification;
+window.loadStudentStatus = loadStudentStatus;
+window.openPrintableReportModal = openPrintableReportModal;
+window.closePrintableReportModal = closePrintableReportModal;
+
+

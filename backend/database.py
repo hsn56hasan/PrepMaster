@@ -1,5 +1,6 @@
 import sqlite3
 import json
+import hashlib
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 from datetime import datetime
@@ -10,6 +11,10 @@ def get_db():
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
+
+def hash_password(password: str) -> str:
+    salt = "prepmaster_salt_2026"
+    return hashlib.sha256((password + salt).encode('utf-8')).hexdigest()
 
 def init_db():
     conn = get_db()
@@ -26,8 +31,43 @@ def init_db():
         INSERT OR IGNORE INTO user_profile (id, university_id, current_level, target_score, streak_days, last_active)
         VALUES (1, 'itu', 'B2', 65, 1, CURRENT_TIMESTAMP);
 
+        -- Multi-User & Student Verification Tables --
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            email TEXT UNIQUE,
+            username TEXT UNIQUE,
+            password_hash TEXT,
+            full_name TEXT,
+            university_id TEXT DEFAULT 'itu',
+            student_number TEXT,
+            is_verified_student INTEGER DEFAULT 0,
+            verification_status TEXT DEFAULT 'unverified',
+            current_level TEXT DEFAULT 'B2',
+            target_score INTEGER DEFAULT 65,
+            streak_days INTEGER DEFAULT 1,
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+            last_active TEXT DEFAULT CURRENT_TIMESTAMP
+        );
+
+        INSERT OR IGNORE INTO users (id, email, username, password_hash, full_name, university_id, student_number, is_verified_student, verification_status)
+        VALUES (1, 'ogrenci@itu.edu.tr', 'ituhazirlik', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'İTÜ Hazırlık Öğrencisi', 'itu', '040220199', 1, 'verified');
+
+        CREATE TABLE IF NOT EXISTS student_verifications (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER,
+            university_id TEXT,
+            edu_email TEXT,
+            student_id_number TEXT,
+            verification_type TEXT DEFAULT 'edu_email',
+            verification_status TEXT DEFAULT 'verified',
+            notes TEXT,
+            verified_at TEXT DEFAULT CURRENT_TIMESTAMP,
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP
+        );
+
         CREATE TABLE IF NOT EXISTS exam_attempts (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER DEFAULT 1,
             university_id TEXT,
             level TEXT,
             score REAL,
@@ -40,6 +80,7 @@ def init_db():
 
         CREATE TABLE IF NOT EXISTS vocab_progress (
             word_id TEXT PRIMARY KEY,
+            user_id INTEGER DEFAULT 1,
             status TEXT DEFAULT 'learning',
             review_count INTEGER DEFAULT 1,
             last_reviewed TEXT DEFAULT CURRENT_TIMESTAMP
@@ -47,12 +88,14 @@ def init_db():
 
         CREATE TABLE IF NOT EXISTS question_bookmarks (
             question_id TEXT PRIMARY KEY,
+            user_id INTEGER DEFAULT 1,
             note TEXT,
             created_at TEXT DEFAULT CURRENT_TIMESTAMP
         );
 
         CREATE TABLE IF NOT EXISTS mistake_vault (
             question_id TEXT PRIMARY KEY,
+            user_id INTEGER DEFAULT 1,
             university_id TEXT,
             level TEXT,
             category TEXT,
@@ -68,32 +111,123 @@ def init_db():
 # Auto-initialize on import
 init_db()
 
-def get_profile() -> Dict[str, Any]:
+def get_profile(user_id: int = 1) -> Dict[str, Any]:
     conn = get_db()
     cursor = conn.cursor()
-    cursor.execute("SELECT university_id, current_level, target_score, streak_days, last_active FROM user_profile WHERE id = 1")
+    cursor.execute("""
+        SELECT id, email, username, full_name, university_id, current_level, target_score, streak_days, 
+               is_verified_student, verification_status, student_number, last_active 
+        FROM users WHERE id = ?
+    """, (user_id,))
     row = cursor.fetchone()
-    conn.close()
     if row:
+        conn.close()
         return dict(row)
+
+    # Fallback to legacy user_profile
+    cursor.execute("SELECT university_id, current_level, target_score, streak_days, last_active FROM user_profile WHERE id = 1")
+    legacy = cursor.fetchone()
+    conn.close()
+    if legacy:
+        data = dict(legacy)
+        data["is_verified_student"] = 1
+        data["verification_status"] = "verified"
+        data["student_number"] = "040220199"
+        return data
+
     return {
+        "id": 1,
+        "email": "ogrenci@itu.edu.tr",
+        "username": "ituhazirlik",
+        "full_name": "İTÜ Hazırlık Öğrencisi",
         "university_id": "itu",
         "current_level": "B2",
         "target_score": 65,
         "streak_days": 1,
+        "is_verified_student": 1,
+        "verification_status": "verified",
+        "student_number": "040220199",
         "last_active": datetime.now().isoformat()
     }
 
-def update_profile(university_id: str, current_level: str, target_score: int) -> Dict[str, Any]:
+def update_profile(university_id: str, current_level: str, target_score: int, user_id: int = 1) -> Dict[str, Any]:
     conn = get_db()
     with conn:
+        conn.execute("""
+            UPDATE users 
+            SET university_id = ?, current_level = ?, target_score = ?, last_active = CURRENT_TIMESTAMP
+            WHERE id = ?
+        """, (university_id, current_level, target_score, user_id))
         conn.execute("""
             UPDATE user_profile 
             SET university_id = ?, current_level = ?, target_score = ?, last_active = CURRENT_TIMESTAMP
             WHERE id = 1
         """, (university_id, current_level, target_score))
     conn.close()
-    return get_profile()
+    return get_profile(user_id)
+
+def create_user(email: str, username: str, password: str, full_name: str, university_id: str = "itu", student_number: str = "") -> Dict[str, Any]:
+    conn = get_db()
+    pw_hash = hash_password(password)
+    with conn:
+        cursor = conn.execute("""
+            INSERT INTO users (email, username, password_hash, full_name, university_id, student_number, is_verified_student, verification_status)
+            VALUES (?, ?, ?, ?, ?, ?, 0, 'unverified')
+        """, (email.lower().strip(), username.strip(), pw_hash, full_name.strip(), university_id, student_number.strip()))
+        user_id = cursor.lastrowid
+    conn.close()
+    return get_profile(user_id)
+
+def authenticate_user(identifier: str, password: str) -> Optional[Dict[str, Any]]:
+    conn = get_db()
+    cursor = conn.cursor()
+    pw_hash = hash_password(password)
+    ident = identifier.lower().strip()
+    cursor.execute("""
+        SELECT id, email, username, full_name, university_id, current_level, target_score, is_verified_student, verification_status
+        FROM users 
+        WHERE (LOWER(email) = ? OR LOWER(username) = ?) AND password_hash = ?
+    """, (ident, ident, pw_hash))
+    row = cursor.fetchone()
+    conn.close()
+    return dict(row) if row else None
+
+def verify_student(user_id: int, university_id: str, edu_email: str, student_number: str, doc_note: str = "") -> Dict[str, Any]:
+    conn = get_db()
+    is_valid_edu = edu_email.lower().endswith(".edu.tr") or edu_email.lower().endswith(".edu") or len(student_number) >= 6
+    status = "verified" if is_valid_edu else "pending"
+    is_verified_int = 1 if status == "verified" else 0
+
+    with conn:
+        conn.execute("""
+            INSERT INTO student_verifications (user_id, university_id, edu_email, student_id_number, verification_status, notes)
+            VALUES (?, ?, ?, ?, ?, ?)
+        """, (user_id, university_id, edu_email, student_number, status, doc_note))
+        conn.execute("""
+            UPDATE users 
+            SET university_id = ?, student_number = ?, is_verified_student = ?, verification_status = ?
+            WHERE id = ?
+        """, (university_id, student_number, is_verified_int, status, user_id))
+    conn.close()
+
+    return {
+        "user_id": user_id,
+        "university_id": university_id,
+        "is_verified": is_verified_int == 1,
+        "verification_status": status,
+        "message": "Öğrenci kaydınız başarıyla doğrulandı!" if status == "verified" else "Öğrenci belgeniz incelemeye alındı."
+    }
+
+def get_verification_status(user_id: int = 1) -> Dict[str, Any]:
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, full_name, university_id, student_number, is_verified_student, verification_status FROM users WHERE id = ?", (user_id,))
+    row = cursor.fetchone()
+    conn.close()
+    if row:
+        return dict(row)
+    return {"id": user_id, "is_verified_student": 1, "verification_status": "verified"}
+
 
 def save_exam_attempt(university_id: str, level: str, score: float, total_questions: int, 
                       correct_count: int, duration_seconds: int, answers: Dict[str, Any]) -> int:
