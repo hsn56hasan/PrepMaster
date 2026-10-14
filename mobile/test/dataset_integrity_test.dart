@@ -6,15 +6,15 @@ import 'package:prep_master/models/question.dart';
 import 'package:prep_master/models/vocabulary.dart';
 
 void main() {
-  group('Dataset Integrity Tests for 55 Questions, 64 Vocab, 4 Listening', () {
-    test('Questions JSON loads and parses all 55 items with valid fields', () {
+  group('Dataset Integrity Tests for 105 Questions, 110 Vocab, 4 Listening', () {
+    test('Questions JSON loads and parses all 105 items with valid fields', () {
       final file = File('assets/data/questions.json');
       expect(file.existsSync(), isTrue);
 
       final jsonStr = file.readAsStringSync();
       final List<dynamic> jsonList = jsonDecode(jsonStr);
 
-      expect(jsonList.length, 55);
+      expect(jsonList.length, 105);
 
       for (var i = 0; i < jsonList.length; i++) {
         final item = jsonList[i];
@@ -27,14 +27,14 @@ void main() {
       }
     });
 
-    test('Vocabulary JSON loads and parses all 64 items with valid fields', () {
+    test('Vocabulary JSON loads and parses all 110 items with valid fields', () {
       final file = File('assets/data/vocabulary.json');
       expect(file.existsSync(), isTrue);
 
       final jsonStr = file.readAsStringSync();
       final List<dynamic> jsonList = jsonDecode(jsonStr);
 
-      expect(jsonList.length, 64);
+      expect(jsonList.length, 110);
 
       for (var i = 0; i < jsonList.length; i++) {
         final item = jsonList[i];

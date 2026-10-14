@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/university.dart';
+import '../models/question.dart';
 import '../services/api_service.dart';
 import '../theme/app_theme.dart';
 import 'exam_runner_screen.dart';
@@ -14,6 +15,32 @@ class ExamsScreen extends StatelessWidget {
     required this.currentUniversity,
     required this.currentLevel,
   });
+
+  void _launchMockExam(BuildContext context) async {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Resmi muafiyet deneme sınavı hazırlanıyor...'), duration: Duration(seconds: 1)),
+    );
+    final mockData = await ApiService().getMockExam(currentUniversity.id);
+    final List<Question> questions = (mockData['parsed_questions'] as List<dynamic>?)?.cast<Question>() ?? [];
+    if (!context.mounted) return;
+    if (questions.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Soru havuzu yüklenemedi.')),
+      );
+      return;
+    }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => ExamRunnerScreen(
+          questions: questions,
+          university: currentUniversity,
+          level: currentLevel,
+        ),
+      ),
+    );
+  }
 
   void _launchExam(BuildContext context, {String? category, String? level}) async {
     final questions = await ApiService().getQuestions(
@@ -75,7 +102,7 @@ class ExamsScreen extends StatelessWidget {
             title: 'Resmi Muafiyet / Kur Geçme Denemesi',
             desc: 'Restatement, Cloze Test, Reading ve Grammar bölümlerini içeren kapsamlı deneme sınavı.',
             isPrimary: true,
-            onTap: () => _launchExam(context),
+            onTap: () => _launchMockExam(context),
           ),
           const SizedBox(height: 14),
 

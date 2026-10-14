@@ -1559,5 +1559,1405 @@
     "correct_answer": "A",
     "explanation_tr": "Geniş zaman / gelecek zaman olası durumlarında Type 1 Inverted conditional: 'Should + Subject + V1' (Örn: 'Should the fire alarm sound...'). 'Were' olsaydı 'Were the fire alarm to sound' gerekirdi.",
     "explanation_en": "'Should + subject + base verb' is the inverted form of 'If + subject + should/present verb'."
+  },
+  {
+    "id": "q-gen-a1-01",
+    "university_id": "general",
+    "level": "A1",
+    "category": "Use of English",
+    "question": "Choose the correct option to complete the sentence:\n\n'The central library _______ open on Sundays during the exam week.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "is"
+      },
+      {
+        "key": "B",
+        "text": "are"
+      },
+      {
+        "key": "C",
+        "text": "am"
+      },
+      {
+        "key": "D",
+        "text": "be"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'The central library' tekil bir öznedir (it). Present simple 'to be' fiilinin tekil nesneler için çekimi 'is'tir.",
+    "explanation_en": "'The central library' is a third-person singular noun (it), which takes the singular verb 'is'."
+  },
+  {
+    "id": "q-gen-a1-02",
+    "university_id": "general",
+    "level": "A1",
+    "category": "Use of English",
+    "question": "Choose the correct option:\n\n'Our English instructor _______ clear explanations during the morning lectures.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "give"
+      },
+      {
+        "key": "B",
+        "text": "gives"
+      },
+      {
+        "key": "C",
+        "text": "giving"
+      },
+      {
+        "key": "D",
+        "text": "are giving"
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Geniş zamanda (Simple Present Tense) 3. tekil şahıslar (he/she/it veya 'our instructor') için fiilin sonuna '-s' takısı gelir ('gives').",
+    "explanation_en": "In the simple present tense, third-person singular subjects require the verb with an -s suffix ('gives')."
+  },
+  {
+    "id": "q-gen-a1-03",
+    "university_id": "general",
+    "level": "A1",
+    "category": "Use of English",
+    "question": "Choose the correct prepositions:\n\n'The preparatory orientation meeting starts _______ 09:30 AM _______ Monday.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "in / at"
+      },
+      {
+        "key": "B",
+        "text": "at / on"
+      },
+      {
+        "key": "C",
+        "text": "on / in"
+      },
+      {
+        "key": "D",
+        "text": "at / in"
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Saat bildiren kesin zaman ifadeleri için 'at' (at 09:30 AM), haftanın günleri için 'on' (on Monday) edatı kullanılır.",
+    "explanation_en": "Clock times take the preposition 'at', whereas days of the week take 'on'."
+  },
+  {
+    "id": "q-gen-a1-04",
+    "university_id": "general",
+    "level": "A1",
+    "category": "Use of English",
+    "question": "Choose the correct option:\n\n'There aren't _______ empty seats left in lecture hall 101.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "much"
+      },
+      {
+        "key": "B",
+        "text": "any"
+      },
+      {
+        "key": "C",
+        "text": "some"
+      },
+      {
+        "key": "D",
+        "text": "an"
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Olumsuz cümlelerde sayılabilen çoğul isimlerle ('empty seats') miktar belirtirken 'any' (hiç) kullanılır.",
+    "explanation_en": "In negative sentences with plural countable nouns, 'any' is used to express zero quantity."
+  },
+  {
+    "id": "q-gen-a1-05",
+    "university_id": "general",
+    "level": "A1",
+    "category": "Use of English",
+    "question": "Choose the correct question word:\n\n'_______ does the campus shuttle bus arrive at the engineering faculty?' - 'Every fifteen minutes.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "How often"
+      },
+      {
+        "key": "B",
+        "text": "How many"
+      },
+      {
+        "key": "C",
+        "text": "Where"
+      },
+      {
+        "key": "D",
+        "text": "Who"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Cevapta 'Every fifteen minutes' (Her on beş dakikada bir) sıklık belirtildiği için soru 'How often' (Ne sıklıkla) olmalıdır.",
+    "explanation_en": "The answer indicates frequency ('every fifteen minutes'), which is questioned with 'How often'."
+  },
+  {
+    "id": "q-gen-a1-06",
+    "university_id": "general",
+    "level": "A1",
+    "category": "Use of English",
+    "question": "Choose the correct modal auxiliary:\n\n'Students _______ borrow up to five books at a time from the university library.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "can"
+      },
+      {
+        "key": "B",
+        "text": "are"
+      },
+      {
+        "key": "C",
+        "text": "must to"
+      },
+      {
+        "key": "D",
+        "text": "have"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Yetki ve izin (permission/ability) bildirmek için 'can' modalı doğrudan yalın fiil ile kullanılır ('can borrow').",
+    "explanation_en": "'Can' expresses permission and possibility followed directly by the base verb."
+  },
+  {
+    "id": "q-gen-a1-07",
+    "university_id": "general",
+    "level": "A1",
+    "category": "Use of English",
+    "question": "Choose the correct word order:\n\n'Prep students _______ late for morning vocabulary quizzes.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "are never"
+      },
+      {
+        "key": "B",
+        "text": "never are"
+      },
+      {
+        "key": "C",
+        "text": "are always not"
+      },
+      {
+        "key": "D",
+        "text": "never be"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Sıklık zarfları (never, always, usually) 'to be' (am/is/are) yardımcı fiilinden SONRA gelir: 'are never late'.",
+    "explanation_en": "Frequency adverbs appear after the verb 'to be' (e.g., 'are never')."
+  },
+  {
+    "id": "q-gen-a1-08",
+    "university_id": "general",
+    "level": "A1",
+    "category": "Vocabulary",
+    "question": "Choose the correct word:\n\n'Please write your student _______ and name on the top corner of the exam paper.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "number"
+      },
+      {
+        "key": "B",
+        "text": "bill"
+      },
+      {
+        "key": "C",
+        "text": "ticket"
+      },
+      {
+        "key": "D",
+        "text": "price"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Student number', üniversitelerde 'öğrenci numarası' terimidir.",
+    "explanation_en": "'Student number' is the standard compound noun for a university registration identifier."
+  },
+  {
+    "id": "q-gen-a1-09",
+    "university_id": "general",
+    "level": "A1",
+    "category": "Use of English",
+    "question": "Choose the correct pronoun:\n\n'Mark and Sarah lost _______ student ID cards in the campus cafeteria yesterday.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "their"
+      },
+      {
+        "key": "B",
+        "text": "theirs"
+      },
+      {
+        "key": "C",
+        "text": "them"
+      },
+      {
+        "key": "D",
+        "text": "her"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Mark and Sarah' çoğul 3. şahıstır (they). İsimden önce gelen iyelik sıfatı (possessive adjective) 'their' (onların) olmalıdır.",
+    "explanation_en": "'Mark and Sarah' is plural, requiring the possessive adjective 'their' before 'student ID cards'."
+  },
+  {
+    "id": "q-gen-a1-10",
+    "university_id": "general",
+    "level": "A1",
+    "category": "Reading",
+    "question": "Read the short campus notice:\n\n'Notice to All Students: Room B-204 is closed for maintenance this Tuesday. The 10:00 AM General English lecture will take place in Auditorium 3.'\n\nWhere will the Tuesday morning English lecture take place?",
+    "options": [
+      {
+        "key": "A",
+        "text": "In Room B-204"
+      },
+      {
+        "key": "B",
+        "text": "In Auditorium 3"
+      },
+      {
+        "key": "C",
+        "text": "In the cafeteria"
+      },
+      {
+        "key": "D",
+        "text": "In the library"
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Duyuruda açıkça 'The 10:00 AM General English lecture will take place in Auditorium 3' (Salı günkü ders Amfi 3'te yapılacaktır) yazmaktadır.",
+    "explanation_en": "The notice explicitly states that the 10:00 AM lecture will be held in Auditorium 3."
+  },
+  {
+    "id": "q-gen-a2-01",
+    "university_id": "general",
+    "level": "A2",
+    "category": "Use of English",
+    "question": "Choose the correct past tense form:\n\n'Last night, the research assistant _______ all the laboratory data into the university database.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "entered"
+      },
+      {
+        "key": "B",
+        "text": "enters"
+      },
+      {
+        "key": "C",
+        "text": "is entering"
+      },
+      {
+        "key": "D",
+        "text": "has enter"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Last night' geçmiş zaman belirtecidir (Past Simple). Düzenli fiil '-ed' alarak 'entered' olur.",
+    "explanation_en": "'Last night' triggers the past simple tense, requiring the past form 'entered'."
+  },
+  {
+    "id": "q-gen-a2-02",
+    "university_id": "general",
+    "level": "A2",
+    "category": "Use of English",
+    "question": "Choose the correct verb forms:\n\n'While the instructor _______ the grammar topic, the fire alarm suddenly _______.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "was explaining / rang"
+      },
+      {
+        "key": "B",
+        "text": "explained / was ringing"
+      },
+      {
+        "key": "C",
+        "text": "is explaining / rings"
+      },
+      {
+        "key": "D",
+        "text": "explains / rang"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Geçmişte devam eden bir eylem ('was explaining') esnasında anlık gerçekleşen kesici eylem Past Simple ('rang') ile ifade edilir.",
+    "explanation_en": "A continuous background activity (Past Continuous: 'was explaining') interrupted by a completed action (Past Simple: 'rang')."
+  },
+  {
+    "id": "q-gen-a2-03",
+    "university_id": "general",
+    "level": "A2",
+    "category": "Use of English",
+    "question": "Choose the correct comparative form:\n\n'Digital dictionaries are usually _______ and more convenient than heavy printed volumes.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "faster"
+      },
+      {
+        "key": "B",
+        "text": "more fast"
+      },
+      {
+        "key": "C",
+        "text": "fastest"
+      },
+      {
+        "key": "D",
+        "text": "as fast"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Tek heceli sıfatlar karşılaştırma (comparative) yaparken '-er' takısı alır: 'fast' -> 'faster'.",
+    "explanation_en": "Single-syllable adjectives form their comparative with '-er' ('faster')."
+  },
+  {
+    "id": "q-gen-a2-04",
+    "university_id": "general",
+    "level": "A2",
+    "category": "Use of English",
+    "question": "Choose the correct connector:\n\n'The student arrived early for the exam _______ he wanted to review his flashcards one last time.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "because"
+      },
+      {
+        "key": "B",
+        "text": "although"
+      },
+      {
+        "key": "C",
+        "text": "but"
+      },
+      {
+        "key": "D",
+        "text": "so"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Cümlenin ikinci kısmı erken gelmenin gerekçesini (nedenini) açıkladığı için 'because' (çünkü) bağlacı uygundur.",
+    "explanation_en": "The clause provides the reason for arriving early, requiring the causal conjunction 'because'."
+  },
+  {
+    "id": "q-gen-a2-05",
+    "university_id": "general",
+    "level": "A2",
+    "category": "Use of English",
+    "question": "Choose the correct future form:\n\n'Look at the dark clouds gathering over the campus! It _______ rain soon.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "is going to"
+      },
+      {
+        "key": "B",
+        "text": "will to"
+      },
+      {
+        "key": "C",
+        "text": "is raining"
+      },
+      {
+        "key": "D",
+        "text": "rains"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Mevcut görsel bir kanıta ('dark clouds') dayalı gelecek tahminlerinde 'be going to' kalıbı kullanılır ('is going to rain').",
+    "explanation_en": "Predictions based on immediate physical evidence require 'be going to'."
+  },
+  {
+    "id": "q-gen-a2-06",
+    "university_id": "general",
+    "level": "A2",
+    "category": "Use of English",
+    "question": "Choose the correct relative pronoun:\n\n'The professor _______ teaches academic writing is also the head of the department.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "who"
+      },
+      {
+        "key": "B",
+        "text": "which"
+      },
+      {
+        "key": "C",
+        "text": "where"
+      },
+      {
+        "key": "D",
+        "text": "whose"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "İnsanları niteleyen tanımlayıcı ilgi zamiri (defining relative pronoun) 'who'dur ('The professor who teaches...').",
+    "explanation_en": "Persons are defined using the subject relative pronoun 'who'."
+  },
+  {
+    "id": "q-gen-a2-07",
+    "university_id": "general",
+    "level": "A2",
+    "category": "Use of English",
+    "question": "Choose the correct conditional form:\n\n'If you _______ your student card in the scanner, the library gate will open automatically.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "swipe"
+      },
+      {
+        "key": "B",
+        "text": "will swipe"
+      },
+      {
+        "key": "C",
+        "text": "swiped"
+      },
+      {
+        "key": "D",
+        "text": "are swiping"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "First Conditional (Tip 1 Koşul) yapısında 'If' cümlesi Simple Present ('swipe'), ana cümle ise 'will + fiil' alır.",
+    "explanation_en": "First conditional sentences employ present simple in the if-clause to discuss real future outcomes."
+  },
+  {
+    "id": "q-gen-a2-08",
+    "university_id": "general",
+    "level": "A2",
+    "category": "Use of English",
+    "question": "Choose the correct modal of obligation:\n\n'According to university regulations, prep students _______ attend at least 85% of all classes.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "have to"
+      },
+      {
+        "key": "B",
+        "text": "might"
+      },
+      {
+        "key": "C",
+        "text": "could"
+      },
+      {
+        "key": "D",
+        "text": "would"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Resmi kural ve yönetmeliklerden kaynaklanan dışsal zorunluluklar 'have to' kalıbı ile ifade edilir.",
+    "explanation_en": "'Have to' signifies external obligations established by institutional rules and regulations."
+  },
+  {
+    "id": "q-gen-a2-09",
+    "university_id": "general",
+    "level": "A2",
+    "category": "Vocabulary",
+    "question": "Choose the correct option:\n\n'The teacher handed out the course _______ detailing exam dates and weekly reading assignments.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "syllabus"
+      },
+      {
+        "key": "B",
+        "text": "ticket"
+      },
+      {
+        "key": "C",
+        "text": "receipt"
+      },
+      {
+        "key": "D",
+        "text": "passport"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Syllabus', üniversite derslerinde haftalık okuma, ödev ve sınav tarihlerini gösteren 'ders izlencesi / planı'dır.",
+    "explanation_en": "A 'syllabus' is an outline of subjects in a course of study with schedule and assignment details."
+  },
+  {
+    "id": "q-gen-a2-10",
+    "university_id": "general",
+    "level": "A2",
+    "category": "Use of English",
+    "question": "Choose the correct present perfect sentence:\n\n'I have _______ completed the online mock test, so I can check my score now.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "already"
+      },
+      {
+        "key": "B",
+        "text": "yet"
+      },
+      {
+        "key": "C",
+        "text": "ever"
+      },
+      {
+        "key": "D",
+        "text": "ago"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Olumlu Present Perfect cümlelerinde bir işin çoktan / önceden tamamlandığını vurgulamak için 'already' kullanılır.",
+    "explanation_en": "'Already' is placed between the auxiliary and main verb in affirmative present perfect structures to denote completion."
+  },
+  {
+    "id": "q-gen-a2-11",
+    "university_id": "general",
+    "level": "A2",
+    "category": "Use of English",
+    "question": "Choose the correct preposition:\n\n'Students are responsible _______ keeping the computer laboratory clean and quiet.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "for"
+      },
+      {
+        "key": "B",
+        "text": "with"
+      },
+      {
+        "key": "C",
+        "text": "at"
+      },
+      {
+        "key": "D",
+        "text": "about"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Responsible' sıfatı her zaman 'for' edatı ile kullanılır: 'responsible for something' (bir şeyden sorumlu olmak).",
+    "explanation_en": "The adjective 'responsible' is followed by the preposition 'for'."
+  },
+  {
+    "id": "q-gen-a2-12",
+    "university_id": "general",
+    "level": "A2",
+    "category": "Reading",
+    "question": "Read the text:\n\n'Campus shuttle services operate every twenty minutes between 08:00 and 18:00. However, on weekends, buses run once an hour. Students must show a valid university ID to board free of charge.'\n\nWhich statement is TRUE according to the passage?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Shuttles run with the same frequency every day of the week."
+      },
+      {
+        "key": "B",
+        "text": "Students can ride the shuttle for free by presenting their student ID."
+      },
+      {
+        "key": "C",
+        "text": "The shuttle service operates 24 hours a day."
+      },
+      {
+        "key": "D",
+        "text": "Weekend shuttles depart every twenty minutes."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Metinde 'Students must show a valid university ID to board free of charge' (Öğrenciler geçerli kimlik göstererek ücretsiz binebilir) ifadesi B şıkkını doğrular.",
+    "explanation_en": "The passage confirms that students ride free upon presenting valid university identification."
+  },
+  {
+    "id": "q-gen-b1-01",
+    "university_id": "general",
+    "level": "B1",
+    "category": "Use of English",
+    "question": "Choose the correct verb form:\n\n'Over the past five years, researchers at the faculty _______ significant breakthroughs in solar cell efficiency.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "have achieved"
+      },
+      {
+        "key": "B",
+        "text": "achieved"
+      },
+      {
+        "key": "C",
+        "text": "achieve"
+      },
+      {
+        "key": "D",
+        "text": "are achieving"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Over the past five years' (Son beş yılda) gibi geçmişten günümüze uzanan zaman aralıklarında Present Perfect Tense ('have achieved') kullanılır.",
+    "explanation_en": "Time expressions covering a duration up to the present ('over the past...') require the present perfect tense."
+  },
+  {
+    "id": "q-gen-b1-02",
+    "university_id": "general",
+    "level": "B1",
+    "category": "Use of English",
+    "question": "Choose the correct passive voice sentence:\n\n'All proficiency exam papers _______ by a committee of senior language instructors next Monday.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "will be evaluated"
+      },
+      {
+        "key": "B",
+        "text": "are evaluating"
+      },
+      {
+        "key": "C",
+        "text": "will evaluate"
+      },
+      {
+        "key": "D",
+        "text": "were evaluated"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Gelecek zaman belirteci 'next Monday' ve edilgen özne 'exam papers' birleştiğinde Future Simple Passive yapısı 'will be + V3' ('will be evaluated') olmalıdır.",
+    "explanation_en": "Passive future construction is formed by 'will be + past participle'."
+  },
+  {
+    "id": "q-gen-b1-03",
+    "university_id": "general",
+    "level": "B1",
+    "category": "Use of English",
+    "question": "Choose the correct conditional form:\n\n'If university dormitory fees _______ more affordable, fewer students would struggle financially.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "were"
+      },
+      {
+        "key": "B",
+        "text": "are"
+      },
+      {
+        "key": "C",
+        "text": "had been"
+      },
+      {
+        "key": "D",
+        "text": "will be"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Mevcut duruma aykırı varsayımsal durumları anlatan Second Conditional (Tip 2) cümlesidir. If kısmında Past Simple ('were'), sonuç kısmında 'would + V1' kullanılır.",
+    "explanation_en": "Second conditional hypothetical sentences take the past simple ('were') in the condition clause and 'would + verb' in the main clause."
+  },
+  {
+    "id": "q-gen-b1-04",
+    "university_id": "general",
+    "level": "B1",
+    "category": "Use of English",
+    "question": "Choose the correct modal of deduction:\n\n'The departmental office is locked and all lights are switched off. The administrative staff _______ for the day.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "must have left"
+      },
+      {
+        "key": "B",
+        "text": "should leave"
+      },
+      {
+        "key": "C",
+        "text": "can leave"
+      },
+      {
+        "key": "D",
+        "text": "must leave"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Işıkların sönük ve kapının kilitli olması gibi güçlü kanıtlara dayanarak geçmişe dair kesin çıkarım (past deduction) yaparken 'must have + V3' ('must have left' - çıkmış olmalılar) kullanılır.",
+    "explanation_en": "'Must have + past participle' expresses logical certainty regarding a past occurrence based on direct evidence."
+  },
+  {
+    "id": "q-gen-b1-05",
+    "university_id": "general",
+    "level": "B1",
+    "category": "Use of English",
+    "question": "Choose the correct gerund or infinitive:\n\n'The department strictly prohibits students from _______ unverified sources in their academic term papers.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "citing"
+      },
+      {
+        "key": "B",
+        "text": "to cite"
+      },
+      {
+        "key": "C",
+        "text": "cite"
+      },
+      {
+        "key": "D",
+        "text": "having cite"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Prohibit somebody from doing something' kalıbında 'from' edatından sonra fiil '-ing' (gerund) alır: 'citing'.",
+    "explanation_en": "Prepositions (such as 'from') must be followed by a gerund (-ing form)."
+  },
+  {
+    "id": "q-gen-b1-06",
+    "university_id": "general",
+    "level": "B1",
+    "category": "Use of English",
+    "question": "Choose the correct connector:\n\n'_______ intensive preparation over several weeks, many candidates still experienced test anxiety during the listening section.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "Despite"
+      },
+      {
+        "key": "B",
+        "text": "Although"
+      },
+      {
+        "key": "C",
+        "text": "Even though"
+      },
+      {
+        "key": "D",
+        "text": "In spite"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Boşluktan sonra bir isim öbeği ('intensive preparation...') geldiği için zıtlık bildiren ve isimle kullanılan 'Despite' (veya 'In spite of') uygundur. 'Although' ise tam cümle ister.",
+    "explanation_en": "'Despite' functions as a preposition followed directly by a noun phrase, unlike 'although' which requires a clause."
+  },
+  {
+    "id": "q-gen-b1-07",
+    "university_id": "general",
+    "level": "B1",
+    "category": "Use of English",
+    "question": "Choose the correct relative clause:\n\n'The academic advisor _______ recommendations I followed helped me secure a research scholarship.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "whose"
+      },
+      {
+        "key": "B",
+        "text": "whom"
+      },
+      {
+        "key": "C",
+        "text": "which"
+      },
+      {
+        "key": "D",
+        "text": "who"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Danışmanın tavsiyeleri (aitlik/mülkiyet) anlamını vermek için iyelik bildiren ilgi zamiri 'whose' ('whose recommendations') kullanılır.",
+    "explanation_en": "'Whose' is the possessive relative pronoun indicating that the recommendations belonged to the advisor."
+  },
+  {
+    "id": "q-gen-b1-08",
+    "university_id": "general",
+    "level": "B1",
+    "category": "Vocabulary",
+    "question": "Choose the correct academic collocation:\n\n'The university grant enabled the faculty to _______ extensive research into urban water pollution.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "conduct"
+      },
+      {
+        "key": "B",
+        "text": "make"
+      },
+      {
+        "key": "C",
+        "text": "do up"
+      },
+      {
+        "key": "D",
+        "text": "create"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Akademik İngilizcede 'araştırma yürütmek / yapmak' fiil eşdizimi 'conduct research' (veya 'carry out research') şeklindedir.",
+    "explanation_en": "'Conduct research' is the formal academic collocation for carrying out scientific investigations."
+  },
+  {
+    "id": "q-gen-b1-09",
+    "university_id": "general",
+    "level": "B1",
+    "category": "Restatement",
+    "question": "Choose the sentence closest in meaning:\n\n'Unless students submit their medical reports within three days of the exam, make-up requests will be denied.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "Students will only be granted a make-up examination if they deliver their medical documentation within three days."
+      },
+      {
+        "key": "B",
+        "text": "Students who deliver their reports after three days are still eligible for make-up testing."
+      },
+      {
+        "key": "C",
+        "text": "Medical reports are completely rejected if students fail the original examination."
+      },
+      {
+        "key": "D",
+        "text": "Make-up examinations are automatically cancelled for all students regardless of medical reports."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Unless' (olmadıkça / -medikçe) yapısı 'if not' demektir. Yani öğrenciler 3 gün içinde rapor vermezse mazeret sınavı hakkı alamazlar; dolayısıyla yalnızca 3 gün içinde teslim ederlerse mazeret sınavına girebilirler (A şıkkı).",
+    "explanation_en": "'Unless' is equivalent to 'if not', meaning make-up approval is conditional solely upon delivering documentation within three days."
+  },
+  {
+    "id": "q-gen-b1-10",
+    "university_id": "general",
+    "level": "B1",
+    "category": "Use of English",
+    "question": "Choose the correct option:\n\n'Engineering students are accustomed to _______ complex mathematical equations using computational software.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "solving"
+      },
+      {
+        "key": "B",
+        "text": "solve"
+      },
+      {
+        "key": "C",
+        "text": "solved"
+      },
+      {
+        "key": "D",
+        "text": "solution"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Be accustomed to' (bir şeye alışkın olmak) kalıbındaki 'to' bir edattır ve ardından gelen eylem '-ing' (gerund) alır: 'accustomed to solving'.",
+    "explanation_en": "The phrase 'be accustomed to' requires a gerund (-ing) because 'to' functions as a preposition."
+  },
+  {
+    "id": "q-gen-b1-11",
+    "university_id": "general",
+    "level": "B1",
+    "category": "Reading",
+    "question": "Read the passage:\n\n'Urban vertical farming represents an innovative method of food production where crops are cultivated in stacked horizontal layers within controlled indoor environments. By utilizing artificial lighting and hydroponics, these facilities require ninety-five percent less water than conventional agricultural fields. Furthermore, proximity to urban consumers dramatically diminishes transportation emissions.'\n\nWhat is one stated advantage of vertical farming over traditional agriculture?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It consumes significantly less water."
+      },
+      {
+        "key": "B",
+        "text": "It requires vast expanses of rural land."
+      },
+      {
+        "key": "C",
+        "text": "It relies entirely on natural sunlight."
+      },
+      {
+        "key": "D",
+        "text": "It increases long-distance transport emissions."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Metinde vertical farming'in geleneksel tarıma göre '%95 daha az su gerektirdiği' ('require 95% less water') açıkça belirtilmiştir.",
+    "explanation_en": "The text states that vertical facilities require ninety-five percent less water than conventional agricultural fields."
+  },
+  {
+    "id": "q-gen-b1-12",
+    "university_id": "general",
+    "level": "B1",
+    "category": "Reading",
+    "question": "Based on the passage in the previous question, why does vertical farming reduce transportation emissions?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Because produce is grown close to city consumers."
+      },
+      {
+        "key": "B",
+        "text": "Because diesel freight trucks are subsidized."
+      },
+      {
+        "key": "C",
+        "text": "Because consumers travel to rural farms to purchase food."
+      },
+      {
+        "key": "D",
+        "text": "Because vertical farms rely solely on international shipping."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Metindeki 'proximity to urban consumers dramatically diminishes transportation emissions' cümlesi, kentteki tüketicilere yakınlığın taşımacılık kaynaklı karbon emisyonunu azalttığını vurgular.",
+    "explanation_en": "The passage links emission reductions directly to vertical farms' proximity to urban population centers."
+  },
+  {
+    "id": "q-gen-b1-13",
+    "university_id": "general",
+    "level": "B1",
+    "category": "Cloze Test",
+    "question": "Complete the academic sentence:\n\n'The research team discovered that _______ the participants adhered to the strict dietary regimen, the results varied considerably.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "even though"
+      },
+      {
+        "key": "B",
+        "text": "in order to"
+      },
+      {
+        "key": "C",
+        "text": "as a result"
+      },
+      {
+        "key": "D",
+        "text": "because of"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Cümlede zıtlık (concession) ilişkisi vardır: Katılımcılar katı diyete uymuş olmalarına RAĞMEN sonuçlar değişkenlik göstermiştir ('even though').",
+    "explanation_en": "'Even though' introduces a concession clause explaining an unexpected outcome despite strict adherence."
+  },
+  {
+    "id": "q-gen-b1-14",
+    "university_id": "general",
+    "level": "B1",
+    "category": "Use of English",
+    "question": "Choose the correct reported speech form:\n\nDirect speech: 'The exam will take place in Hall A,' the coordinator announced.\nReported speech: The coordinator announced that the exam _______ in Hall A.",
+    "options": [
+      {
+        "key": "A",
+        "text": "would take place"
+      },
+      {
+        "key": "B",
+        "text": "will take place"
+      },
+      {
+        "key": "C",
+        "text": "has taken place"
+      },
+      {
+        "key": "D",
+        "text": "is taking place"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Dolaylı anlatımda (Reported Speech) ana fiil geçmiş zaman ('announced') olduğunda 'will', 'would' haline dönüşür ('would take place').",
+    "explanation_en": "In indirect speech introduced by a past reporting verb, 'will' backshifts to 'would'."
+  },
+  {
+    "id": "q-itu-b2-restat-01",
+    "university_id": "itu",
+    "level": "B2",
+    "category": "Restatement",
+    "question": "Choose the sentence that is closest in meaning to the sentence given below:\n\n'Rarely do novel technologies replace entrenched industrial systems without generating transitional unemployment.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "New technologies almost invariably cause temporary job losses while replacing existing industrial infrastructures."
+      },
+      {
+        "key": "B",
+        "text": "Traditional industries rarely adopt new technologies because workers refuse to accept unemployment."
+      },
+      {
+        "key": "C",
+        "text": "Transitional unemployment is a permanent consequence whenever novel machines are introduced to factories."
+      },
+      {
+        "key": "D",
+        "text": "Established industrial systems easily absorb displaced workers as soon as new technologies appear."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Rarely do... without...' çift olumsuzluk içeren devrik bir kalıptır ve 'hemen hemen her zaman ... ile sonuçlanır' anlamına gelir ('almost invariably cause'). 'Transitional unemployment' ise geçici işsizliği ('temporary job losses') ifade eder. A şıkkı anlamı eksiksiz karşılar.",
+    "explanation_en": "'Rarely without' conveys that technological displacement almost always entails transitional (temporary) unemployment."
+  },
+  {
+    "id": "q-boun-c1-restat-01",
+    "university_id": "boun",
+    "level": "C1",
+    "category": "Restatement",
+    "question": "Choose the sentence closest in meaning:\n\n'The board would certainly have endorsed the geothermal energy venture had the projected returns appeared less conjectural.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "Because the estimated profits were deemed speculative, the board declined to support the geothermal energy project."
+      },
+      {
+        "key": "B",
+        "text": "Although the returns seemed reliable, the board was hesitant to sponsor the geothermal initiative."
+      },
+      {
+        "key": "C",
+        "text": "Had the board supported the project, the geothermal returns would have been far more predictable."
+      },
+      {
+        "key": "D",
+        "text": "The board endorsed the venture despite acknowledging that the returns were largely conjectural."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Cümle devrik bir Type 3 Conditional yapısıdır ('had the projected returns appeared less conjectural' = Eğer tahmini getiriler bu kadar tahmine dayalı / spekülatif görünmeseydi, kurul kesinlikle onaylardı). Kurulun projeyi onaylamamasının tek sebebi getirilerin spekülatif ('conjectural' = 'speculative') görülmesidir. Doğru yanıt A.",
+    "explanation_en": "An inverted third conditional meaning the board rejected the project solely because estimated revenues were speculative."
+  },
+  {
+    "id": "q-odtu-c1-cloze-01",
+    "university_id": "odtu",
+    "level": "C1",
+    "category": "Cloze Test",
+    "question": "Complete the academic sentence:\n\n'The empirical findings were considered groundbreaking _______ they challenged decades of consensus regarding neurological plasticity.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "inasmuch as"
+      },
+      {
+        "key": "B",
+        "text": "notwithstanding"
+      },
+      {
+        "key": "C",
+        "text": "regardless"
+      },
+      {
+        "key": "D",
+        "text": "whereby"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Inasmuch as', resmi akademik dilde 'since / because / -dığı ölçüde' anlamına gelen bir gerekçe bağlacıdır. Bulguların çığır açıcı görülmesinin nedeni, yıllardır süregelen nörolojik uzlaşıyı sorgulamış olmasıdır.",
+    "explanation_en": "'Inasmuch as' is a formal causal conjunction meaning 'considering that' or 'since'."
+  },
+  {
+    "id": "q-bilkent-b2-use-01",
+    "university_id": "bilkent",
+    "level": "B2",
+    "category": "Use of English",
+    "question": "Choose the correct inverted sentence structure:\n\n'_______ had the clinical trial commenced when unexpected adverse side effects were documented among several participants.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "Scarcely"
+      },
+      {
+        "key": "B",
+        "text": "No sooner"
+      },
+      {
+        "key": "C",
+        "text": "Barely that"
+      },
+      {
+        "key": "D",
+        "text": "Seldom"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Scarcely ... when' (veya 'Hardly ... when') devrik zaman kalıbıdır ve '...yapmıştı ki hemen ardından ... oldu' anlamına gelir. 'No sooner' ise 'than' ile kullanılır.",
+    "explanation_en": "'Scarcely + had + subject + V3 ... when' is the correct correlative inversion structure."
+  },
+  {
+    "id": "q-ytu-b2-read-01",
+    "university_id": "ytu",
+    "level": "B2",
+    "category": "Reading",
+    "question": "Read the excerpt from an academic paper on AI ethics:\n\n'Algorithmic decision-making in financial credit assessment promises objective scoring free from human prejudice. However, because predictive models are trained on historical datasets reflecting decades of socioeconomic inequality, artificial intelligence frequently perpetuates the very disparities it was ostensibly designed to eliminate. When historical data contains biases against marginalized demographics, algorithms codify those biases into mathematical absolutes.'\n\nWhat is the primary paradox highlighted by the author?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Algorithms intended to eliminate prejudice end up reinforcing historical inequalities."
+      },
+      {
+        "key": "B",
+        "text": "Financial institutions refuse to utilize automated scoring models."
+      },
+      {
+        "key": "C",
+        "text": "Modern neural networks cannot process socioeconomic data effectively."
+      },
+      {
+        "key": "D",
+        "text": "Human loan officers are demonstrably more objective than statistical algorithms."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Yazarın vurguladığı temel paradoks ('paradox'), insan önyargısını ortadan kaldırmak için tasarlanan yapay zeka modellerinin geçmiş verideki eşitsizlikleri kopyalayarak var olan uçurumu daha da pekiştirmesidir ('frequently perpetuates the very disparities it was designed to eliminate'). Doğru yanıt A.",
+    "explanation_en": "The central paradox is that predictive algorithms intended to be unbiased inevitably replicate and entrench historical inequities."
+  },
+  {
+    "id": "q-ytu-b2-read-02",
+    "university_id": "ytu",
+    "level": "B2",
+    "category": "Reading",
+    "question": "Based on the text above, the word 'ostensibly' in line 4 is closest in meaning to:",
+    "options": [
+      {
+        "key": "A",
+        "text": "apparently / supposedly"
+      },
+      {
+        "key": "B",
+        "text": "permanently"
+      },
+      {
+        "key": "C",
+        "text": "accidentally"
+      },
+      {
+        "key": "D",
+        "text": "secretly"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Ostensibly' kelimesi 'görünüşte, sözde, iddia edildiğine göre' anlamına gelir ve 'apparently / supposedly' ile birebir eşanlamlıdır.",
+    "explanation_en": "'Ostensibly' means stated or appearing to be true, but not necessarily so ('apparently', 'supposedly')."
+  },
+  {
+    "id": "q-itu-b2-cloze-02",
+    "university_id": "itu",
+    "level": "B2",
+    "category": "Use of English",
+    "question": "Choose the correct subjunctive form:\n\n'The research ethics committee demanded that the lead investigator _______ all raw data immediately.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "disclose"
+      },
+      {
+        "key": "B",
+        "text": "discloses"
+      },
+      {
+        "key": "C",
+        "text": "disclosed"
+      },
+      {
+        "key": "D",
+        "text": "is disclosing"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Tavsiye, talep ve zorunluluk bildiren fiillerden (demand, require, suggest, insist) sonra gelen 'that' cümleciğinde Present Subjunctive kuralı gereği özne kim olursa olsun fiilin YALIN hali (base form: 'disclose') kullanılır.",
+    "explanation_en": "Verbs of mandate and demand (e.g. 'demand that') take the subjunctive mood with the base form of the verb."
+  },
+  {
+    "id": "q-boun-c1-use-02",
+    "university_id": "boun",
+    "level": "C1",
+    "category": "Vocabulary",
+    "question": "Choose the vocabulary item that best completes the academic sentence:\n\n'Unchecked deforestation and habitat fragmentation will inevitably _______ the rate of species extinction across tropical biomes.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "exacerbate"
+      },
+      {
+        "key": "B",
+        "text": "mitigate"
+      },
+      {
+        "key": "C",
+        "text": "alleviate"
+      },
+      {
+        "key": "D",
+        "text": "reconcile"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Exacerbate' (daha da kötüleştirmek, şiddetlendirmek) anlamına gelir ve ormansızlaşmanın türlerin yok oluşunu hızlandırıp kötüleştirmesi bağlamına tam oturur. 'Mitigate' ve 'alleviate' ise hafifletmek/azaltmak demektir.",
+    "explanation_en": "'Exacerbate' means to make a bad situation worse; deforestation aggravates extinction rates."
+  },
+  {
+    "id": "q-odtu-c1-restat-02",
+    "university_id": "odtu",
+    "level": "C1",
+    "category": "Restatement",
+    "question": "Choose the sentence closest in meaning:\n\n'So pervasive has constant digital connectivity become that completely unplugging is now regarded as an enviable privilege rather than a minor inconvenience.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "Because digital media is so ubiquitous, disconnecting from technology is seen today as an enviable luxury instead of a hassle."
+      },
+      {
+        "key": "B",
+        "text": "Few individuals consider digital connectivity useful, so they unplug from mobile devices whenever possible."
+      },
+      {
+        "key": "C",
+        "text": "The disadvantages of digital connectivity have forced society to ban electronic communication during weekends."
+      },
+      {
+        "key": "D",
+        "text": "Those who cannot access digital devices perceive modern technology as an unattainable inconvenience."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'So + sıfat + has ... become that...' yapısı 'o kadar yaygın hale geldi ki...' sonucunu anlatır ('ubiquitous'). 'Enviable privilege' (imrenilecek bir ayrıcalık/lüks) ve 'rather than a minor inconvenience' (küçük bir zahmet olmaktan ziyade) ifadeleri A şıkkındaki 'enviable luxury instead of a hassle' ile örtüşür.",
+    "explanation_en": "'So pervasive... that' emphasizes that digital saturation transforms disconnection from a nuisance into a luxury."
+  },
+  {
+    "id": "q-bilkent-b2-restat-02",
+    "university_id": "bilkent",
+    "level": "B2",
+    "category": "Restatement",
+    "question": "Choose the sentence closest in meaning:\n\n'No sooner had the state research grant been disbursed than allegations of procedural misconduct surfaced in the media.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "Reports of procedural irregularities emerged in the press immediately after the government research funding was released."
+      },
+      {
+        "key": "B",
+        "text": "The government cancelled the research grant because media reports proved the scientists committed fraud."
+      },
+      {
+        "key": "C",
+        "text": "The media allegations emerged long before the state decided to fund the research project."
+      },
+      {
+        "key": "D",
+        "text": "Scientists had to refund the grant money after the media cleared them of all misconduct charges."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'No sooner had ... than...' yapısı 'tam ... olmuştu ki hemen ardından ... oldu' (immediately after) anlamı taşır. Fon serbest bırakılır bırakılmaz ('grant disbursed') basında usulsüzlük iddiaları ('allegations of procedural misconduct') ortaya çıkmıştır. A şıkkı tam ve doğru paraphrase'dir.",
+    "explanation_en": "'No sooner... than' expresses immediate succession, corresponding precisely to 'immediately after'."
+  },
+  {
+    "id": "q-itu-c1-read-01",
+    "university_id": "itu",
+    "level": "C1",
+    "category": "Reading",
+    "question": "Read the passage on Quantum Cryptography:\n\n'Classical encryption frameworks, including the ubiquitous RSA protocol, rely fundamentally on the computational intractability of factoring immense prime integers. While conventional supercomputers would require millennia to decipher these keys, fault-tolerant quantum processors leveraging Shor's algorithm could theoretically render classical public-key cryptography obsolete in a matter of hours. Consequently, post-quantum cryptography has transitioned from theoretical speculation to an urgent national security imperative.'\n\nWhy does quantum computing pose an unprecedented threat to classical RSA encryption?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It can factor enormous prime numbers in hours using specialized algorithms."
+      },
+      {
+        "key": "B",
+        "text": "It eliminates the need for prime integers in mathematical equations entirely."
+      },
+      {
+        "key": "C",
+        "text": "It relies on slower computational speeds that jam conventional internet servers."
+      },
+      {
+        "key": "D",
+        "text": "It makes post-quantum cryptography mathematically impossible to develop."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Metinde klasik RSA şifrelemesinin büyük asal sayıları çarpanlarına ayırmanın zorluğuna dayandığı, ancak kuantum işlemcilerin Shor algoritması sayesinde bu sayıları saatler içinde çözebileceği ('render obsolete in hours by factoring') açıklanmıştır.",
+    "explanation_en": "Quantum machines running Shor's algorithm can solve prime factorization problems in hours rather than millennia."
+  },
+  {
+    "id": "q-itu-c1-read-02",
+    "university_id": "itu",
+    "level": "C1",
+    "category": "Reading",
+    "question": "The author implies that the development of post-quantum cryptography:",
+    "options": [
+      {
+        "key": "A",
+        "text": "Is now a critical strategic necessity rather than an academic curiosity."
+      },
+      {
+        "key": "B",
+        "text": "Has been abandoned due to prohibitive hardware manufacturing expenses."
+      },
+      {
+        "key": "C",
+        "text": "Will take decades longer than quantum processor development."
+      },
+      {
+        "key": "D",
+        "text": "Requires quantum computers to function in civilian networks."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Metnin son cümlesindeki 'transitioned from theoretical speculation to an urgent national security imperative' ifadesi, kuantum sonrası şifrelemenin artık akademik bir meraktan öte 'acil ve stratejik bir zorunluluk' haline geldiğini gösterir.",
+    "explanation_en": "The transition to 'an urgent national security imperative' indicates it is now a strategic necessity."
+  },
+  {
+    "id": "q-gen-c1-cloze-03",
+    "university_id": "general",
+    "level": "C1",
+    "category": "Cloze Test",
+    "question": "Complete the academic sentence:\n\n'The anthropologist argued that societal rituals are not arbitrary gestures; _______, they serve as crucial mechanisms for reinforcing social solidarity.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "on the contrary"
+      },
+      {
+        "key": "B",
+        "text": "for instance"
+      },
+      {
+        "key": "C",
+        "text": "otherwise"
+      },
+      {
+        "key": "D",
+        "text": "nonetheless"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Cümlede 'ritüeller keyfi değildir; BİLAKİS / AKSİNE toplumsal dayanışmayı güçlendiren mekanizmalardır' anlamı vardır. Birinci cümlenin olumsuzluğu ardından karşıt gerçeği sunarken 'on the contrary' (bilakis/aksine) kullanılır.",
+    "explanation_en": "'On the contrary' introduces a statement refuting the preceding negative assertion."
+  },
+  {
+    "id": "q-boun-c2-restat-01",
+    "university_id": "boun",
+    "level": "C2",
+    "category": "Restatement",
+    "question": "Choose the sentence closest in meaning:\n\n'Had it not been for the rigorous peer-review mechanism, the flawed methodology in the climate study might easily have passed undetected.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "The defective methodology in the climate research was identified solely because of the thorough peer-review process."
+      },
+      {
+        "key": "B",
+        "text": "Although the peer-reviewers were meticulous, they failed to spot the flawed methodology in the climate study."
+      },
+      {
+        "key": "C",
+        "text": "If the methodology had been more rigorous, the climate paper would have been approved without revisions."
+      },
+      {
+        "key": "D",
+        "text": "The peer-review panel was criticized for not detecting the experimental defects in the climate report."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Had it not been for...' yapısı '...olmasaydı' demektir. Yani titiz hakem değerlendirmesi ('rigorous peer-review') olmasaydı kusurlu metodoloji fark edilmeyebilirdi; dolayısıyla kusur YALNIZCA bu mekanizma sayesinde yakalanabilmiştir ('identified solely because of...'). Doğru yanıt A.",
+    "explanation_en": "Inverted third conditional stating that the defect was caught only thanks to the thorough peer-review evaluation."
   }
 ]

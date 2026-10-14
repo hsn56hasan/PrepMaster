@@ -1264,5 +1264,961 @@
     ],
     "example_sentence": "Elderly populations are particularly susceptible to seasonal respiratory infections.",
     "collocation": "susceptible to disease / highly susceptible"
+  },
+  {
+    "id": "v_a1_06",
+    "word": "assignment",
+    "part_of_speech": "n.",
+    "level": "A1",
+    "meaning_tr": "ödev, verilen görev",
+    "definition_en": "a piece of work or job that you are given to do in a course of study",
+    "collocations": [
+      "submit an assignment",
+      "complete an assignment",
+      "written assignment"
+    ],
+    "example_sentence": "Students must submit their reading assignment before Friday midnight.",
+    "synonyms": [
+      "homework",
+      "task",
+      "project"
+    ],
+    "turkish_hint": "Öğretmenin veya profesörün verdiği ev ödevi ya da proje."
+  },
+  {
+    "id": "v_a1_07",
+    "word": "attend",
+    "part_of_speech": "v.",
+    "level": "A1",
+    "meaning_tr": "katılmak, derse devam etmek",
+    "definition_en": "to be present at an event, meeting, or class",
+    "collocations": [
+      "attend classes",
+      "attend a lecture",
+      "attend university"
+    ],
+    "example_sentence": "You must attend at least eighty percent of the prep classes to sit for the final exam.",
+    "synonyms": [
+      "be present at",
+      "participate in",
+      "go to"
+    ],
+    "turkish_hint": "'Attendance' (devamsızlık) kelimesinin fiil hali; bir etkinliğe veya derse fiziken katılmak."
+  },
+  {
+    "id": "v_a2_06",
+    "word": "deadline",
+    "part_of_speech": "n.",
+    "level": "A2",
+    "meaning_tr": "son teslim tarihi, mühlet",
+    "definition_en": "the latest time or date by which something should be completed",
+    "collocations": [
+      "meet a deadline",
+      "miss a deadline",
+      "strict deadline"
+    ],
+    "example_sentence": "The professor refused to accept the research paper after the strict midnight deadline.",
+    "synonyms": [
+      "time limit",
+      "due date",
+      "cutoff"
+    ],
+    "turkish_hint": "Bir ödevin veya görevin teslim edilmesi gereken en son an."
+  },
+  {
+    "id": "v_a2_07",
+    "word": "semester",
+    "part_of_speech": "n.",
+    "level": "A2",
+    "meaning_tr": "akademik yarıyıl, dönem",
+    "definition_en": "one of the two periods into which a year is divided at a university or college",
+    "collocations": [
+      "fall semester",
+      "spring semester",
+      "semester break"
+    ],
+    "example_sentence": "During the fall semester, prep students focus heavily on grammar and academic vocabulary.",
+    "synonyms": [
+      "term",
+      "academic session"
+    ],
+    "turkish_hint": "Üniversitelerin güz ve bahar dönemlerinden her biri."
+  },
+  {
+    "id": "v_a2_08",
+    "word": "syllabus",
+    "part_of_speech": "n.",
+    "level": "A2",
+    "meaning_tr": "ders izlencesi, müfredat programı",
+    "definition_en": "a document that outlines the subjects, assignments, and exam dates for a course",
+    "collocations": [
+      "course syllabus",
+      "consult the syllabus",
+      "weekly syllabus"
+    ],
+    "example_sentence": "Please consult the course syllabus to check which chapters will be covered on the midterm.",
+    "synonyms": [
+      "curriculum",
+      "course outline",
+      "schedule"
+    ],
+    "turkish_hint": "Dersin ilk haftası verilen, hafta hafta ne işleneceğini gösteren plan."
+  },
+  {
+    "id": "v_a2_09",
+    "word": "faculty",
+    "part_of_speech": "n.",
+    "level": "A2",
+    "meaning_tr": "fakülte, üniversitedeki öğretim üyeleri kadrosu",
+    "definition_en": "a group of departments in a university, or the teaching staff of an institution",
+    "collocations": [
+      "faculty of engineering",
+      "faculty member",
+      "join the faculty"
+    ],
+    "example_sentence": "The Faculty of Architecture is located on the historic Taşkışla campus.",
+    "synonyms": [
+      "department",
+      "academic staff",
+      "division"
+    ],
+    "turkish_hint": "Tıp Fakültesi, Mühendislik Fakültesi gibi akademik ana birimler."
+  },
+  {
+    "id": "v_a2_10",
+    "word": "lecture",
+    "part_of_speech": "n.",
+    "level": "A2",
+    "meaning_tr": "üniversite dersi, amfi dersi, konferans",
+    "definition_en": "a formal talk on a serious subject given to a group of university students",
+    "collocations": [
+      "attend a lecture",
+      "give a lecture",
+      "lecture hall"
+    ],
+    "example_sentence": "The guest professor gave a fascinating lecture on renewable energy in the main amphitheater.",
+    "synonyms": [
+      "talk",
+      "presentation",
+      "address"
+    ],
+    "turkish_hint": "Professörün amfide öğrencilere hitaben anlattığı akademik ders."
+  },
+  {
+    "id": "v_a2_11",
+    "word": "grade",
+    "part_of_speech": "n.",
+    "level": "A2",
+    "meaning_tr": "not, puan, başarı derecesi",
+    "definition_en": "a score or mark indicating a student's level of performance in an examination",
+    "collocations": [
+      "passing grade",
+      "final grade",
+      "receive a grade"
+    ],
+    "example_sentence": "You need a grade of at least sixty-five percent to pass the proficiency examination.",
+    "synonyms": [
+      "mark",
+      "score",
+      "rating"
+    ],
+    "turkish_hint": "Sınavdan alınan harf veya sayısal not."
+  },
+  {
+    "id": "v_b1_09",
+    "word": "evaluate",
+    "part_of_speech": "v.",
+    "level": "B1",
+    "meaning_tr": "değerlendirmek, ölçüp biçmek",
+    "definition_en": "to form an idea of the amount, number, or value of something; assess",
+    "collocations": [
+      "evaluate performance",
+      "evaluate effectiveness",
+      "critical evaluation"
+    ],
+    "example_sentence": "Instructors evaluate student essays based on cohesion, lexical range, and grammatical accuracy.",
+    "synonyms": [
+      "assess",
+      "appraise",
+      "judge",
+      "rate"
+    ],
+    "turkish_hint": "Bir şeyin değerini, başarısını veya kalitesini kıstaslara göre analiz etmek."
+  },
+  {
+    "id": "v_b1_10",
+    "word": "investigate",
+    "part_of_speech": "v.",
+    "level": "B1",
+    "meaning_tr": "araştırmak, soruşturmak, incelemek",
+    "definition_en": "to carry out a systematic or formal inquiry to discover and examine the facts",
+    "collocations": [
+      "investigate the cause",
+      "thoroughly investigate",
+      "investigate an issue"
+    ],
+    "example_sentence": "A team of environmental scientists is investigating the effects of microplastics on marine ecosystems.",
+    "synonyms": [
+      "examine",
+      "explore",
+      "inspect",
+      "probe"
+    ],
+    "turkish_hint": "Dedektif veya bilim insanı gibi derinlemesine inceleme yapmak."
+  },
+  {
+    "id": "v_b1_11",
+    "word": "consequence",
+    "part_of_speech": "n.",
+    "level": "B1",
+    "meaning_tr": "sonuç, netice, doğurduğu tesir",
+    "definition_en": "a result or effect, typically one that is unwelcome or unpleasant",
+    "collocations": [
+      "serious consequences",
+      "as a consequence of",
+      "inevitable consequence"
+    ],
+    "example_sentence": "Global warming is having direct consequences on agricultural yield and water availability.",
+    "synonyms": [
+      "result",
+      "outcome",
+      "repercussion",
+      "effect"
+    ],
+    "turkish_hint": "Bir eylemin veya kararın arkasından gelen doğrudan etki (consequently = sonuç olarak)."
+  },
+  {
+    "id": "v_b1_12",
+    "word": "approach",
+    "part_of_speech": "n.",
+    "level": "B1",
+    "meaning_tr": "yaklaşım, ele alış tarzı",
+    "definition_en": "a way of dealing with a situation or problem",
+    "collocations": [
+      "innovative approach",
+      "scientific approach",
+      "traditional approach"
+    ],
+    "example_sentence": "The engineering faculty adopted an interdisciplinary approach to renewable energy research.",
+    "synonyms": [
+      "method",
+      "strategy",
+      "technique",
+      "perspective"
+    ],
+    "turkish_hint": "Bir meseleye nereden ve nasıl bakıldığı, benimsenecek metot."
+  },
+  {
+    "id": "v_b1_13",
+    "word": "principle",
+    "part_of_speech": "n.",
+    "level": "B1",
+    "meaning_tr": "ilke, temel prensip, kural",
+    "definition_en": "a fundamental truth or proposition that serves as the foundation for a system of belief or behavior",
+    "collocations": [
+      "basic principle",
+      "guiding principle",
+      "in principle"
+    ],
+    "example_sentence": "Conservation of energy is a fundamental principle of modern physics.",
+    "synonyms": [
+      "rule",
+      "tenet",
+      "doctrine",
+      "standard"
+    ],
+    "turkish_hint": "Fizik kanunları veya ahlak kurallarının 'temel dayanağı'."
+  },
+  {
+    "id": "v_b1_14",
+    "word": "identify",
+    "part_of_speech": "v.",
+    "level": "B1",
+    "meaning_tr": "tanımlamak, tespit etmek, belirlemek",
+    "definition_en": "to recognize or establish something as being a particular thing",
+    "collocations": [
+      "identify a problem",
+      "clearly identify",
+      "identify key factors"
+    ],
+    "example_sentence": "The diagnostic test is designed to identify students' specific weaknesses in academic reading.",
+    "synonyms": [
+      "recognize",
+      "detect",
+      "pinpoint",
+      "determine"
+    ],
+    "turkish_hint": "Kimliğini veya problemin kaynağını parmakla gösterecek kadar net tespit etmek."
+  },
+  {
+    "id": "v_b1_15",
+    "word": "maintain",
+    "part_of_speech": "v.",
+    "level": "B1",
+    "meaning_tr": "sürdürmek, devam ettirmek; savunmak/iddia etmek",
+    "definition_en": "to cause or enable a condition or state of affairs to continue; also to state something strongly",
+    "collocations": [
+      "maintain high standards",
+      "maintain focus",
+      "maintain that"
+    ],
+    "example_sentence": "The researcher maintained that the experiment had been conducted under sterile laboratory conditions.",
+    "synonyms": [
+      "sustain",
+      "preserve",
+      "uphold",
+      "assert"
+    ],
+    "turkish_hint": "Hem bir standardı muhafaza etmek hem de tezini savunmak."
+  },
+  {
+    "id": "v_b1_16",
+    "word": "obtain",
+    "part_of_speech": "v.",
+    "level": "B1",
+    "meaning_tr": "elde etmek, edinmek, temin etmek",
+    "definition_en": "to get, acquire, or secure something",
+    "collocations": [
+      "obtain permission",
+      "obtain results",
+      "obtain a degree"
+    ],
+    "example_sentence": "Students must obtain official approval from their advisor before dropping a course.",
+    "synonyms": [
+      "acquire",
+      "gain",
+      "secure",
+      "get"
+    ],
+    "turkish_hint": "'Get' fiilinin resmi ve akademik karşılığı."
+  },
+  {
+    "id": "v_b1_17",
+    "word": "structure",
+    "part_of_speech": "n.",
+    "level": "B1",
+    "meaning_tr": "yapı, kurgu, bünye",
+    "definition_en": "the arrangement of and relations between the parts or elements of something complex",
+    "collocations": [
+      "sentence structure",
+      "organizational structure",
+      "social structure"
+    ],
+    "example_sentence": "Your essay needs a clear five-paragraph structure with an introduction, body, and conclusion.",
+    "synonyms": [
+      "framework",
+      "construction",
+      "architecture",
+      "format"
+    ],
+    "turkish_hint": "Paragraf veya bina yapısı; bir şeyin iskeleti."
+  },
+  {
+    "id": "v_b1_18",
+    "word": "trend",
+    "part_of_speech": "n.",
+    "level": "B1",
+    "meaning_tr": "eğilim, yönelim, cereyan",
+    "definition_en": "a general direction in which something is developing or changing",
+    "collocations": [
+      "current trend",
+      "upward trend",
+      "reversing the trend"
+    ],
+    "example_sentence": "Recent statistical data indicates a strong upward trend in electric vehicle adoption.",
+    "synonyms": [
+      "tendency",
+      "pattern",
+      "movement",
+      "drift"
+    ],
+    "turkish_hint": "Grafiklerde yükseliş veya düşüş yönü."
+  },
+  {
+    "id": "v_b1_19",
+    "word": "factor",
+    "part_of_speech": "n.",
+    "level": "B1",
+    "meaning_tr": "etken, faktör, unsur",
+    "definition_en": "a circumstance, fact, or influence that contributes to a result",
+    "collocations": [
+      "decisive factor",
+      "contributing factor",
+      "key factor"
+    ],
+    "example_sentence": "Sleep deprivation is a major contributing factor to poor academic concentration.",
+    "synonyms": [
+      "element",
+      "component",
+      "determinant",
+      "cause"
+    ],
+    "turkish_hint": "Bir sonucun ortaya çıkmasına katkı sağlayan unsurlar."
+  },
+  {
+    "id": "v_b1_20",
+    "word": "achieve",
+    "part_of_speech": "v.",
+    "level": "B1",
+    "meaning_tr": "başarmak, hedefine ulaşmak",
+    "definition_en": "to successfully bring about or reach a desired objective by effort or skill",
+    "collocations": [
+      "achieve a goal",
+      "achieve success",
+      "achieve proficiency"
+    ],
+    "example_sentence": "With disciplined daily practice, any motivated student can achieve proficiency in English.",
+    "synonyms": [
+      "accomplish",
+      "attain",
+      "realize",
+      "reach"
+    ],
+    "turkish_hint": "'Achievement' (başarı) kelimesinin fiil hali."
+  },
+  {
+    "id": "v_b2_21",
+    "word": "fluctuate",
+    "part_of_speech": "v.",
+    "level": "B2",
+    "meaning_tr": "dalgalanmak, inip çıkmak",
+    "definition_en": "to rise and fall irregularly in number or amount",
+    "collocations": [
+      "fluctuate wildly",
+      "widely fluctuating",
+      "fluctuating prices"
+    ],
+    "example_sentence": "Oil prices have fluctuated dramatically due to geopolitical tensions and supply bottlenecks.",
+    "synonyms": [
+      "oscillate",
+      "vary",
+      "waver",
+      "alternate"
+    ],
+    "turkish_hint": "Borsada veya sıcaklık ölçümlerinde istikrarsız iniş çıkışlar."
+  },
+  {
+    "id": "v_b2_22",
+    "word": "innovate",
+    "part_of_speech": "v.",
+    "level": "B2",
+    "meaning_tr": "yenilik yapmak, yeni yöntemler geliştirmek",
+    "definition_en": "to introduce new methods, ideas, or products",
+    "collocations": [
+      "continuously innovate",
+      "innovate technology",
+      "innovative solution"
+    ],
+    "example_sentence": "Universities must constantly innovate their curriculum to keep pace with artificial intelligence.",
+    "synonyms": [
+      "pioneer",
+      "revolutionize",
+      "modernize"
+    ],
+    "turkish_hint": "'Innovation' (inovasyon/yenilik) kelimesinin fiil kökü."
+  },
+  {
+    "id": "v_b2_23",
+    "word": "perspective",
+    "part_of_speech": "n.",
+    "level": "B2",
+    "meaning_tr": "bakış açısı, perspektif",
+    "definition_en": "a particular attitude toward or way of regarding something; a point of view",
+    "collocations": [
+      "broad perspective",
+      "from my perspective",
+      "historical perspective"
+    ],
+    "example_sentence": "Studying abroad broadens students' cultural perspective and enhances adaptability.",
+    "synonyms": [
+      "viewpoint",
+      "standpoint",
+      "outlook",
+      "stance"
+    ],
+    "turkish_hint": "Olaylara nereden ve hangi gözlükle baktığınız."
+  },
+  {
+    "id": "v_b2_24",
+    "word": "constrain",
+    "part_of_speech": "v.",
+    "level": "B2",
+    "meaning_tr": "kısıtlamak, sınırlamak, zorlamak",
+    "definition_en": "to severely restrict the scope, extent, or activity of something",
+    "collocations": [
+      "financially constrained",
+      "severely constrain",
+      "budgetary constraints"
+    ],
+    "example_sentence": "The research project was severely constrained by budget cuts and limited laboratory space.",
+    "synonyms": [
+      "restrict",
+      "limit",
+      "curb",
+      "hamper"
+    ],
+    "turkish_hint": "Elini kolunu bağlamak, sınır çekmek."
+  },
+  {
+    "id": "v_b2_25",
+    "word": "facilitate",
+    "part_of_speech": "v.",
+    "level": "B2",
+    "meaning_tr": "kolaylaştırmak, önünü açmak",
+    "definition_en": "to make an action or process easy or easier",
+    "collocations": [
+      "facilitate learning",
+      "facilitate communication",
+      "facilitate trade"
+    ],
+    "example_sentence": "Interactive digital tools facilitate collaborative learning among preparatory students.",
+    "synonyms": [
+      "expedite",
+      "assist",
+      "ease",
+      "enable"
+    ],
+    "turkish_hint": "Bir işin daha pürüzsüz ve hızlı yürümesini sağlamak."
+  },
+  {
+    "id": "v_b2_26",
+    "word": "incorporate",
+    "part_of_speech": "v.",
+    "level": "B2",
+    "meaning_tr": "bünyesine katmak, dahil etmek",
+    "definition_en": "to take in or contain something as part of a whole; include",
+    "collocations": [
+      "incorporate feedback",
+      "incorporate into the design",
+      "fully incorporate"
+    ],
+    "example_sentence": "The updated syllabus incorporates modern essay prompts reflecting current environmental challenges.",
+    "synonyms": [
+      "integrate",
+      "assimilate",
+      "include",
+      "absorb"
+    ],
+    "turkish_hint": "Bir parçayı ana yapının içine yedirmek, entegre etmek."
+  },
+  {
+    "id": "v_b2_27",
+    "word": "transition",
+    "part_of_speech": "n./v.",
+    "level": "B2",
+    "meaning_tr": "geçiş, intikal etmek",
+    "definition_en": "the process or a period of changing from one state or condition to another",
+    "collocations": [
+      "smooth transition",
+      "transition period",
+      "transition to clean energy"
+    ],
+    "example_sentence": "The transition from high school memorization to independent university research requires discipline.",
+    "synonyms": [
+      "shift",
+      "progression",
+      "transformation",
+      "evolution"
+    ],
+    "turkish_hint": "Eski halden yeni hale geçiş evresi."
+  },
+  {
+    "id": "v_b2_28",
+    "word": "compensate",
+    "part_of_speech": "v.",
+    "level": "B2",
+    "meaning_tr": "telafi etmek, tazmin etmek",
+    "definition_en": "to give something, typically money, in recognition of loss, suffering, or injury; or to counterbalance",
+    "collocations": [
+      "compensate for",
+      "compensate losses",
+      "adequately compensate"
+    ],
+    "example_sentence": "High motivation and regular practice can compensate for initial shortcomings in English background.",
+    "synonyms": [
+      "make up for",
+      "offset",
+      "counterbalance",
+      "reimburse"
+    ],
+    "turkish_hint": "Bir eksiği başka bir fazlalıkla kapatmak (compensate for)."
+  },
+  {
+    "id": "v_b2_29",
+    "word": "trigger",
+    "part_of_speech": "v.",
+    "level": "B2",
+    "meaning_tr": "tetiklemek, başlatmak, yol açmak",
+    "definition_en": "to cause an event or situation to happen or exist",
+    "collocations": [
+      "trigger a reaction",
+      "trigger inflation",
+      "trigger debate"
+    ],
+    "example_sentence": "The unexpected discovery triggered an intense international debate among climatologists.",
+    "synonyms": [
+      "spark",
+      "provoke",
+      "precipitate",
+      "initiate"
+    ],
+    "turkish_hint": "Tıpkı silahın tetiği gibi bir olayı patlatıp başlatan kıvılcım."
+  },
+  {
+    "id": "v_b2_30",
+    "word": "diminish",
+    "part_of_speech": "v.",
+    "level": "B2",
+    "meaning_tr": "azalmak, eksilmek, değerini düşürmek",
+    "definition_en": "to make or become less",
+    "collocations": [
+      "diminish over time",
+      "diminish returns",
+      "greatly diminished"
+    ],
+    "example_sentence": "Without consistent revision, a student's recall of academic collocations will rapidly diminish.",
+    "synonyms": [
+      "decrease",
+      "decline",
+      "lessen",
+      "dwindle"
+    ],
+    "turkish_hint": "Zamanla kuvvetini veya miktarını yitirmek."
+  },
+  {
+    "id": "v_b2_31",
+    "word": "allocate",
+    "part_of_speech": "v.",
+    "level": "B2",
+    "meaning_tr": "tahsis etmek, paylaştırmak, ödenek ayırmak",
+    "definition_en": "to distribute resources or duties for a particular purpose",
+    "collocations": [
+      "allocate resources",
+      "allocate funds",
+      "allocate time"
+    ],
+    "example_sentence": "The university allocated substantial grant funding to the biomedical engineering department.",
+    "synonyms": [
+      "assign",
+      "allot",
+      "distribute",
+      "apportion"
+    ],
+    "turkish_hint": "Bütçeyi veya zamanı belirli bir hedefe pay etmek."
+  },
+  {
+    "id": "v_b2_32",
+    "word": "arbitrary",
+    "part_of_speech": "adj.",
+    "level": "B2",
+    "meaning_tr": "keyfi, rastgele, gerekçesiz",
+    "definition_en": "based on random choice or personal whim, rather than any reason or system",
+    "collocations": [
+      "arbitrary decision",
+      "arbitrary rule",
+      "purely arbitrary"
+    ],
+    "example_sentence": "Grading rubrics ensure that student essay evaluations are objective rather than arbitrary.",
+    "synonyms": [
+      "random",
+      "capricious",
+      "subjective",
+      "whimsical"
+    ],
+    "turkish_hint": "Belirli bir mantığa dayanmayan, kafaya göre verilen karar."
+  },
+  {
+    "id": "v_b2_33",
+    "word": "explicit",
+    "part_of_speech": "adj.",
+    "level": "B2",
+    "meaning_tr": "açık, net, belirgin, dolaysız",
+    "definition_en": "stated clearly and in detail, leaving no room for confusion or doubt",
+    "collocations": [
+      "explicit instructions",
+      "make it explicit",
+      "explicit agreement"
+    ],
+    "example_sentence": "The exam guidelines provide explicit instructions regarding word count limits for the essay.",
+    "synonyms": [
+      "clear",
+      "direct",
+      "unambiguous",
+      "straightforward"
+    ],
+    "turkish_hint": "'Implicit' (üstü kapalı) kelimesinin zıttı; hiçbir şüpheye yer bırakmayacak kadar açık."
+  },
+  {
+    "id": "v_b2_34",
+    "word": "aggregate",
+    "part_of_speech": "adj./n.",
+    "level": "B2",
+    "meaning_tr": "toplam, kümülatif, bir araya toplanmış",
+    "definition_en": "formed by combining several separate elements into a whole",
+    "collocations": [
+      "aggregate score",
+      "aggregate demand",
+      "in the aggregate"
+    ],
+    "example_sentence": "Your final proficiency result is calculated as an aggregate score of reading, listening, and writing.",
+    "synonyms": [
+      "total",
+      "cumulative",
+      "combined",
+      "collective"
+    ],
+    "turkish_hint": "Farklı bölümlerin toplanıp tek bir bileşik rakam haline gelmesi."
+  },
+  {
+    "id": "v_b2_35",
+    "word": "comprehensive",
+    "part_of_speech": "adj.",
+    "level": "B2",
+    "meaning_tr": "kapsamlı, etraflı, eksiksiz",
+    "definition_en": "including or dealing with all or nearly all elements or aspects of something",
+    "collocations": [
+      "comprehensive exam",
+      "comprehensive review",
+      "comprehensive guide"
+    ],
+    "example_sentence": "PrepMaster offers a comprehensive overview of all grammar topics tested in Turkish university exams.",
+    "synonyms": [
+      "exhaustive",
+      "thorough",
+      "all-inclusive",
+      "extensive"
+    ],
+    "turkish_hint": "Her şeyi içine alan, hiçbir açığı bırakmayan geniş kapsam."
+  },
+  {
+    "id": "v_b2_36",
+    "word": "preliminary",
+    "part_of_speech": "adj.",
+    "level": "B2",
+    "meaning_tr": "ön, başlangıç niteliğinde, hazırlayıcı",
+    "definition_en": "denoting an action or event preceding or done in preparation for something fuller or more important",
+    "collocations": [
+      "preliminary findings",
+      "preliminary stage",
+      "preliminary exam"
+    ],
+    "example_sentence": "Preliminary results from the lab trials demonstrate strong potential for cancer treatment.",
+    "synonyms": [
+      "introductory",
+      "initial",
+      "exploratory",
+      "preparatory"
+    ],
+    "turkish_hint": "Asıl aşamadan önce yapılan ilk yoklama ve ön hazırlık."
+  },
+  {
+    "id": "v_c1_19",
+    "word": "exacerbate",
+    "part_of_speech": "v.",
+    "level": "C1",
+    "meaning_tr": "şiddetlendirmek, daha da kötüleştirmek",
+    "definition_en": "to make a problem, bad situation, or negative feeling worse",
+    "collocations": [
+      "exacerbate the crisis",
+      "exacerbate poverty",
+      "exacerbate symptoms"
+    ],
+    "example_sentence": "Rampant inflation and currency depreciation will exacerbate socioeconomic inequality in developing nations.",
+    "synonyms": [
+      "aggravate",
+      "worsen",
+      "inflame",
+      "compound"
+    ],
+    "turkish_hint": "Yaraya tuz basmak; zaten kötü olan bir durumu çekilmez hale getirmek."
+  },
+  {
+    "id": "v_c1_20",
+    "word": "corroborate",
+    "part_of_speech": "v.",
+    "level": "C1",
+    "meaning_tr": "doğrulamak, teyit etmek, delillerle desteklemek",
+    "definition_en": "to confirm or give support to a statement, theory, or finding with additional evidence",
+    "collocations": [
+      "corroborate evidence",
+      "corroborate findings",
+      "independently corroborate"
+    ],
+    "example_sentence": "Subsequent laboratory experiments independently corroborated the initial astrophysical discovery.",
+    "synonyms": [
+      "substantiate",
+      "confirm",
+      "validate",
+      "verify"
+    ],
+    "turkish_hint": "Bir iddiayı sağlam kanıtlarla arkalamak, sağlama bağlamak."
+  },
+  {
+    "id": "v_c1_21",
+    "word": "dichotomy",
+    "part_of_speech": "n.",
+    "level": "C1",
+    "meaning_tr": "ikilik, iki zıt kutba ayrılma",
+    "definition_en": "a division or contrast between two things that are or are represented as being opposed or entirely different",
+    "collocations": [
+      "false dichotomy",
+      "sharp dichotomy",
+      "dichotomy between"
+    ],
+    "example_sentence": "The essay challenges the rigid dichotomy between quantitative and qualitative research methodologies.",
+    "synonyms": [
+      "division",
+      "dualism",
+      "contrast",
+      "polarity"
+    ],
+    "turkish_hint": "Siyah-beyaz gibi iki zıt kutup arasına çekilen kalın çizgi."
+  },
+  {
+    "id": "v_c1_22",
+    "word": "disparity",
+    "part_of_speech": "n.",
+    "level": "C1",
+    "meaning_tr": "uçurum, belirgin eşitsizlik, uyumsuzluk",
+    "definition_en": "a great difference, especially an unfair inequality",
+    "collocations": [
+      "economic disparity",
+      "gender disparity",
+      "regional disparities"
+    ],
+    "example_sentence": "Policymakers must address the growing economic disparity between metropolitan and rural areas.",
+    "synonyms": [
+      "inequality",
+      "imbalance",
+      "discrepancy",
+      "gap"
+    ],
+    "turkish_hint": "İki taraf arasındaki adil olmayan dev fark ve uçurum."
+  },
+  {
+    "id": "v_c1_23",
+    "word": "ubiquitous",
+    "part_of_speech": "adj.",
+    "level": "C1",
+    "meaning_tr": "her yerde bulunan, çok yaygın",
+    "definition_en": "present, appearing, or found everywhere",
+    "collocations": [
+      "ubiquitous presence",
+      "become ubiquitous",
+      "ubiquitous technology"
+    ],
+    "example_sentence": "Smartphones have become so ubiquitous that life without instant connectivity is virtually unimaginable.",
+    "synonyms": [
+      "omnipresent",
+      "pervasive",
+      "universal",
+      "widespread"
+    ],
+    "turkish_hint": "Nereye baksanız karşınıza çıkan, her köşe başında var olan."
+  },
+  {
+    "id": "v_c1_24",
+    "word": "elucidate",
+    "part_of_speech": "v.",
+    "level": "C1",
+    "meaning_tr": "aydınlatmak, açıklığa kavuşturmak",
+    "definition_en": "to make something clear; explain thoroughly",
+    "collocations": [
+      "elucidate the mechanism",
+      "elucidate a concept",
+      "help elucidate"
+    ],
+    "example_sentence": "The doctoral thesis aims to elucidate the neural mechanisms responsible for short-term memory consolidation.",
+    "synonyms": [
+      "clarify",
+      "illuminate",
+      "explain",
+      "explicate"
+    ],
+    "turkish_hint": "Karanlık veya karmaşık bir konunun üzerine fener tutarak anlaşılır kılmak."
+  },
+  {
+    "id": "v_c1_25",
+    "word": "perpetuate",
+    "part_of_speech": "v.",
+    "level": "C1",
+    "meaning_tr": "sürdürmek, devam ettirmek, ebedileştirmek",
+    "definition_en": "to make something, typically an undesirable situation or an unfounded belief, continue indefinitely",
+    "collocations": [
+      "perpetuate stereotypes",
+      "perpetuate inequality",
+      "perpetuate a myth"
+    ],
+    "example_sentence": "Flawed algorithmic hiring models can inadvertently perpetuate systemic workplace biases.",
+    "synonyms": [
+      "prolong",
+      "sustain",
+      "maintain",
+      "immortalize"
+    ],
+    "turkish_hint": "Genellikle kötü bir durumu veya önyargıyı nesilden nesile devam ettirmek."
+  },
+  {
+    "id": "v_c1_26",
+    "word": "extrapolate",
+    "part_of_speech": "v.",
+    "level": "C1",
+    "meaning_tr": "eldeki veriden hareketle geleceğe/bilinmeyene dair çıkarım yapmak",
+    "definition_en": "to extend the application of a conclusion to an unknown situation by assuming that existing trends will continue",
+    "collocations": [
+      "extrapolate from data",
+      "extrapolate trends",
+      "extrapolate results"
+    ],
+    "example_sentence": "Demographers extrapolate future urban population densities from recent regional census metrics.",
+    "synonyms": [
+      "project",
+      "deduce",
+      "infer",
+      "forecast"
+    ],
+    "turkish_hint": "Eldeki sınırlı grafikten yola çıkarak bilinmeyen geleceğe çizgi çekmek."
+  },
+  {
+    "id": "v_c1_27",
+    "word": "ephemeral",
+    "part_of_speech": "adj.",
+    "level": "C1",
+    "meaning_tr": "geçici, kısa ömürlü, anlık",
+    "definition_en": "lasting for a very short time",
+    "collocations": [
+      "ephemeral nature",
+      "ephemeral trends",
+      "ephemeral fame"
+    ],
+    "example_sentence": "Social media popularity is notoriously ephemeral, fading rapidly as public attention shifts.",
+    "synonyms": [
+      "transient",
+      "fleeting",
+      "short-lived",
+      "momentary"
+    ],
+    "turkish_hint": "Tıpkı bir kelebeğin ömrü veya su damlası gibi çok çabuk kaybolup giden."
+  },
+  {
+    "id": "v_c2_09",
+    "word": "ostensibly",
+    "part_of_speech": "adv.",
+    "level": "C2",
+    "meaning_tr": "görünüşte, sözde, iddia edildiğine göre",
+    "definition_en": "as appears or is stated to be true, though not necessarily so; apparently",
+    "collocations": [
+      "ostensibly designed to",
+      "ostensibly independent",
+      "ostensibly neutral"
+    ],
+    "example_sentence": "The trade tariffs were ostensibly imposed to protect domestic laborers, but geopolitical motives dominated.",
+    "synonyms": [
+      "allegedly",
+      "supposedly",
+      "professedly",
+      "outwardly"
+    ],
+    "turkish_hint": "Vitrine konulan sebep öyle olsa da arkasında başka bir gerçeğin yattığını ima eden zarf."
   }
 ]

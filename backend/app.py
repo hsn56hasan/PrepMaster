@@ -56,6 +56,13 @@ speaking_data = load_json("speaking.json")
 
 @app.on_event("startup")
 def startup_event():
+    global universities_data, questions_data, vocabulary_data, writing_guides_data, listening_data, speaking_data
+    universities_data = load_json("universities.json")
+    questions_data = load_json("questions.json")
+    vocabulary_data = load_json("vocabulary.json")
+    writing_guides_data = load_json("writing_guides.json")
+    listening_data = load_json("listening.json")
+    speaking_data = load_json("speaking.json")
     init_db()
 
 # --- Models ---
