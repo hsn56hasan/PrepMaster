@@ -61,5 +61,25 @@ On the other hand, skeptics argue that complete reliance on automated diagnostic
       expect(result.detectedTransitions, isNotEmpty);
       expect(result.detectedAcademicWords, isNotEmpty);
     });
+
+    test('SpeakingTask parses from JSON and Offline AI Speaking Evaluation scores accurately', () async {
+      const sampleTranscript = '''
+In my view, free higher education is essential for promoting social mobility and dismantling financial barriers. Furthermore, state-funded universities foster widespread societal innovation regardless of socioeconomic background. Consequently, public investment in tertiary education yields profound long-term economic dividends.
+''';
+
+      final result = await ApiService().evaluateSpeaking(
+        transcript: sampleTranscript,
+        taskId: 'spk_boun_01',
+        durationSeconds: 60,
+      );
+
+      expect(result.wordCount, greaterThan(30));
+      expect(result.speakingRateWpm, greaterThan(30));
+      expect(result.overallScore, greaterThanOrEqualTo(60));
+      expect(result.strengthsTr, isNotEmpty);
+      expect(result.fluencyScore, greaterThan(0));
+      expect(result.lexicalScore, greaterThan(0));
+    });
   });
 }
+

@@ -126,7 +126,7 @@ function switchTab(tabName) {
   window.appState.activeTab = tabName;
 
   // Toggle visible sections
-  const tabs = ['dashboard', 'exams', 'listening', 'practice', 'flashcards', 'writing', 'analytics', 'mistakes'];
+  const tabs = ['dashboard', 'exams', 'listening', 'speaking', 'practice', 'flashcards', 'writing', 'analytics', 'mistakes'];
   tabs.forEach(t => {
     const el = document.getElementById(`tab-content-${t}`);
     if (el) {
@@ -152,6 +152,8 @@ function switchTab(tabName) {
     loadDashboardStats();
   } else if (tabName === 'listening') {
     if (window.loadListeningHub) window.loadListeningHub();
+  } else if (tabName === 'speaking') {
+    if (window.loadSpeakingHub) window.loadSpeakingHub();
   } else if (tabName === 'flashcards' && window.loadFlashcards) {
     window.loadFlashcards(window.appState.currentLevel);
   } else if (tabName === 'practice') {

@@ -1,4 +1,6 @@
 import json
+import re
+from datetime import datetime
 from pathlib import Path
 from typing import List, Optional, Dict, Any
 from fastapi import FastAPI, HTTPException, Query
@@ -18,14 +20,15 @@ from database import (
     save_exam_attempt, get_exam_history, 
     set_vocab_status, get_vocab_progress,
     record_mistake, resolve_mistake, delete_mistake,
-    get_mistakes, get_mistake_count
+    get_mistakes, get_mistake_count,
+    bulk_upsert_mistakes, bulk_upsert_vocab_progress
 )
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
 STATIC_DIR = BASE_DIR / "static"
 
-app = FastAPI(title="PrepMaster API", version="1.0.0")
+app = FastAPI(title="PrepMaster API", version="1.1.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -48,6 +51,7 @@ questions_data = load_json("questions.json")
 vocabulary_data = load_json("vocabulary.json")
 writing_guides_data = load_json("writing_guides.json")
 listening_data = load_json("listening.json")
+speaking_data = load_json("speaking.json")
 
 @app.on_event("startup")
 def startup_event():
@@ -75,6 +79,18 @@ class EssayEvaluateRequest(BaseModel):
     prompt: Optional[str] = "General Academic Essay"
     university_id: Optional[str] = "general"
     level: Optional[str] = "B2"
+
+class SpeakingEvaluateRequest(BaseModel):
+    transcript: str
+    task_id: Optional[str] = "spk_boun_01"
+    duration_seconds: Optional[int] = 60
+
+class SyncPushRequest(BaseModel):
+    profile: Optional[Dict[str, Any]] = None
+    mistakes: Optional[List[Dict[str, Any]]] = None
+    vocab_progress: Optional[Dict[str, str]] = None
+    exam_attempts: Optional[List[Dict[str, Any]]] = None
+
 
 # --- API Routes ---
 @app.get("/api/universities")
@@ -488,6 +504,244 @@ def get_overall_stats():
         "average_exam_score": avg_score,
         "recent_exams": history[:5]
     }
+
+# --- Speaking Simulator Endpoints ---
+@app.get("/api/speaking")
+def get_speaking_tasks(university_id: Optional[str] = None):
+    if university_id:
+        return [t for t in speaking_data if t.get("university_id") == university_id or t.get("university_id") == "general"]
+    return speaking_data
+
+@app.get("/api/speaking/{task_id}")
+def get_speaking_task(task_id: str):
+    task = next((t for t in speaking_data if t["id"] == task_id), None)
+    if not task:
+        raise HTTPException(status_code=404, detail="Speaking task not found")
+    return task
+
+@app.post("/api/speaking/evaluate")
+def evaluate_speaking(req: SpeakingEvaluateRequest):
+    text = (req.transcript or "").strip()
+    words = re.findall(r"\b[A-Za-z']+\b", text)
+    word_count = len(words)
+    duration = max(req.duration_seconds or 60, 15)
+    wpm = round((word_count / duration) * 60, 1)
+
+    task = next((t for t in speaking_data if t["id"] == req.task_id), None)
+    text_lower = text.lower()
+
+    # 1. Fluency & Speaking Rate (max 25)
+    # Target rate: 110 - 150 words per minute for academic fluency
+    if 100 <= wpm <= 160:
+        fluency_score = 23
+    elif 80 <= wpm < 100 or 160 < wpm <= 180:
+        fluency_score = 19
+    elif 50 <= wpm < 80:
+        fluency_score = 14
+    else:
+        fluency_score = max(6, min(10, int(wpm / 10)))
+
+    # 2. Lexical Resource / Academic Vocabulary (max 25)
+    academic_keywords = [
+        "fundamental", "significant", "mitigate", "consequently", "furthermore",
+        "paradigm", "infrastructure", "mobility", "autonomy", "subsidize",
+        "intermittency", "biodiversity", "unprecedented", "catalyze", "proliferation",
+        "perspective", "crucial", "sustainable", "inevitably", "comprehensive"
+    ]
+    detected_academic = [w for w in academic_keywords if w in text_lower]
+    if task and "key_vocabulary" in task:
+        for kw in task["key_vocabulary"]:
+            if kw.lower() in text_lower and kw.lower() not in detected_academic:
+                detected_academic.append(kw.lower())
+
+    lexical_score = min(25, max(8, 10 + len(detected_academic) * 3))
+
+    # 3. Grammatical Range & Structure (max 25)
+    sentences = re.split(r"[.!?]+", text)
+    sentences = [s.strip() for s in sentences if len(s.strip()) > 3]
+    connectors = ["although", "because", "while", "furthermore", "however", "therefore", "in addition", "for instance", "as a result"]
+    detected_connectors = [c for c in connectors if c in text_lower]
+    grammar_score = min(25, max(8, 10 + len(detected_connectors) * 3 + (4 if len(sentences) >= 3 else 0)))
+
+    # 4. Task Achievement & Guiding Questions (max 25)
+    guiding_hits = 0
+    if task and "guiding_questions" in task:
+        for gq in task["guiding_questions"]:
+            gq_keywords = [w.lower() for w in re.findall(r"\b[A-Za-z]{4,}\b", gq)]
+            hits = sum(1 for kw in gq_keywords if kw in text_lower)
+            if hits >= 2:
+                guiding_hits += 1
+    task_score = min(25, max(8, 12 + guiding_hits * 4 + (5 if word_count >= 80 else 0)))
+
+    overall = fluency_score + lexical_score + grammar_score + task_score
+
+    if overall >= 85:
+        cefr = "C1 (Advanced Fluency)"
+    elif overall >= 70:
+        cefr = "B2 (Vantage - Muafiyet Yeterli)"
+    elif overall >= 55:
+        cefr = "B1 (Independent)"
+    else:
+        cefr = "A2 (Developing)"
+
+    strengths = []
+    improvements = []
+
+    if fluency_score >= 20:
+        strengths.append(f"Akıcı konuşma temposu ({wpm} kelime/dk) sınav standartlarına çok uygun.")
+    else:
+        improvements.append(f"Konuşma temponuz {wpm} kelime/dk. Hazırlık sınavlarında ideal tempo 110-150 kelime/dk aralığıdır.")
+
+    if len(detected_academic) >= 3:
+        strengths.append(f"Akademik kelime kullanımı zengin ({', '.join(detected_academic[:4])}).")
+    else:
+        improvements.append("Konuşmanızda daha fazla akademik bağlaç ve konu ile ilgili terim (AWL) kullanmaya özen gösterin.")
+
+    if len(detected_connectors) >= 2:
+        strengths.append("Fikir geçişleri bağlaçlarla desteklenmiş.")
+    else:
+        improvements.append("Cümlelerinizi 'Furthermore', 'Consequently', 'On the other hand' gibi bağlaçlarla bağlayın.")
+
+    return {
+        "word_count": word_count,
+        "speaking_rate_wpm": wpm,
+        "overall_score": overall,
+        "cefr_level": cefr,
+        "is_passing": overall >= 65,
+        "scores": {
+            "fluency_and_coherence": fluency_score,
+            "lexical_resource": lexical_score,
+            "grammatical_range": grammar_score,
+            "task_achievement": task_score
+        },
+        "detected_academic_words": detected_academic,
+        "detected_transitions": detected_connectors,
+        "strengths_tr": strengths,
+        "improvements_tr": improvements,
+        "model_transcript": task.get("model_answer_transcript") if task else ""
+    }
+
+# --- Cloud Sync Endpoints (Web-Mobile Two-Way Sync) ---
+@app.get("/api/sync/pull")
+def sync_pull():
+    profile = get_profile()
+    mistakes = get_mistakes()
+    vocab_progress = get_vocab_progress()
+    exam_history = get_exam_history(limit=100)
+    
+    return {
+        "profile": profile,
+        "mistakes": mistakes,
+        "vocab_progress": vocab_progress,
+        "exam_history": exam_history,
+        "server_timestamp": datetime.utcnow().isoformat()
+    }
+
+@app.post("/api/sync/push")
+def sync_push(req: SyncPushRequest):
+    updates = {"profile_updated": False, "mistakes_synced": 0, "vocab_synced": 0, "exams_saved": 0}
+    
+    if req.profile:
+        update_profile(
+            university_id=req.profile.get("university_id", "itu"),
+            current_level=req.profile.get("current_level", "B2"),
+            target_score=req.profile.get("target_score", 65)
+        )
+        updates["profile_updated"] = True
+        
+    if req.mistakes:
+        updates["mistakes_synced"] = bulk_upsert_mistakes(req.mistakes)
+        
+    if req.vocab_progress:
+        updates["vocab_synced"] = bulk_upsert_vocab_progress(req.vocab_progress)
+        
+    if req.exam_attempts:
+        for ea in req.exam_attempts:
+            save_exam_attempt(
+                university_id=ea.get("university_id", "itu"),
+                level=ea.get("level", "B2"),
+                score=ea.get("score", 0),
+                total_questions=ea.get("total_questions", 0),
+                correct_count=ea.get("correct_count", 0),
+                duration_seconds=ea.get("duration_seconds", 0),
+                answers=ea.get("answers", {})
+            )
+            updates["exams_saved"] += 1
+            
+    return {"status": "success", "synced": updates, "timestamp": datetime.utcnow().isoformat()}
+
+# --- Mock Exam Mode (Full University Trial Exam) ---
+@app.get("/api/exam/mock/{university_id}")
+def generate_mock_exam(university_id: str):
+    uni = next((u for u in universities_data if u["id"] == university_id), universities_data[0])
+    
+    # 1. Select matching university questions
+    uni_questions = [q for q in questions_data if q.get("university_id") == university_id]
+    if len(uni_questions) < 10:
+        # supplement with general B2/C1 questions
+        supp = [q for q in questions_data if q.get("university_id") != university_id and q.get("level") in ["B2", "C1"]]
+        uni_questions.extend(supp[:(15 - len(uni_questions))])
+    
+    # 2. Select matching listening track
+    lis_track = next((lt for lt in listening_data if lt.get("university_id") == university_id), listening_data[0] if listening_data else None)
+    
+    # 3. Select matching essay prompt
+    essay_guide = next((wg for wg in writing_guides_data if wg.get("university_id") == university_id), writing_guides_data[0] if writing_guides_data else None)
+    
+    # 4. Select matching speaking prompt
+    spk_task = next((st for st in speaking_data if st.get("university_id") == university_id), speaking_data[0] if speaking_data else None)
+    
+    return {
+        "university": uni,
+        "exam_title": f"{uni.get('name')} Tam Deneme Sınavı",
+        "duration_minutes": uni.get("duration_minutes", 120),
+        "passing_score": uni.get("passing_score", 60),
+        "sections": {
+            "multiple_choice": uni_questions[:15],
+            "listening": lis_track,
+            "writing_prompt": essay_guide,
+            "speaking_prompt": spk_task
+        }
+    }
+
+# --- Student Summary Report Card (PDF/Print View) ---
+@app.get("/api/report/summary")
+def get_student_report_summary():
+    profile = get_profile()
+    history = get_exam_history(limit=50)
+    mistakes = get_mistakes(is_resolved=False)
+    vocab_progress = get_vocab_progress()
+    
+    total_exams = len(history)
+    avg_score = round(sum(h["score"] for h in history) / total_exams, 1) if total_exams > 0 else 0
+    mastered_count = sum(1 for s in vocab_progress.values() if s == "mastered")
+    
+    # Group mistakes by category
+    category_counts = {}
+    for m in mistakes:
+        cat = m.get("category", "General")
+        category_counts[cat] = category_counts.get(cat, 0) + 1
+        
+    uni = next((u for u in universities_data if u["id"] == profile.get("university_id")), universities_data[0])
+    passing_score = uni.get("passing_score", 60)
+    is_ready = avg_score >= passing_score and len(mistakes) <= 5
+    
+    return {
+        "student_profile": profile,
+        "target_university": uni,
+        "readiness_status": "Muafiyete Hazır (Geçer Not)" if is_ready else "Geliştirilmeli (Eksik Konular Var)",
+        "readiness_color": "emerald" if is_ready else "amber",
+        "average_score": avg_score,
+        "passing_score": passing_score,
+        "total_exams_taken": total_exams,
+        "unresolved_mistakes_count": len(mistakes),
+        "mistakes_by_category": category_counts,
+        "mastered_vocabulary_count": mastered_count,
+        "total_vocabulary_count": len(vocabulary_data),
+        "mistake_details": mistakes[:15],
+        "generated_at": datetime.utcnow().strftime("%d.%m.%Y %H:%M")
+    }
+
 
 # --- Static files ---
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")

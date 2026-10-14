@@ -13,6 +13,8 @@ import '../models/mistake_item.dart';
 import '../models/exam_result.dart';
 import '../models/listening_track.dart';
 import '../models/essay_evaluation_result.dart';
+import '../models/speaking_task.dart';
+import '../models/speaking_evaluation_result.dart';
 
 class ApiService {
   static final ApiService _instance = ApiService._internal();
@@ -539,4 +541,122 @@ class ApiService {
       improvementsTr: improvements,
     );
   }
+
+  // --- Speaking Tasks & Offline Evaluator ---
+  Future<List<SpeakingTask>> getSpeakingTasks() async {
+    try {
+      final res = await http.get(Uri.parse('$baseUrl/api/speaking')).timeout(const Duration(seconds: 3));
+      if (res.statusCode == 200) {
+        final List<dynamic> data = json.decode(utf8.decode(res.bodyBytes));
+        return data.map((e) => SpeakingTask.fromJson(e)).toList();
+      }
+    } catch (_) {}
+
+    // Offline asset fallback
+    try {
+      final jsonStr = await rootBundle.loadString('assets/data/speaking.json');
+      final List<dynamic> data = json.decode(jsonStr);
+      return data.map((e) => SpeakingTask.fromJson(e)).toList();
+    } catch (_) {
+      return [];
+    }
+  }
+
+  Future<SpeakingEvaluationResult> evaluateSpeaking({
+    required String transcript,
+    required String taskId,
+    required int durationSeconds,
+  }) async {
+    // Try backend evaluation
+    try {
+      final res = await http.post(
+        Uri.parse('$baseUrl/api/speaking/evaluate'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'transcript': transcript,
+          'task_id': taskId,
+          'duration_seconds': durationSeconds,
+        }),
+      ).timeout(const Duration(seconds: 4));
+
+      if (res.statusCode == 200) {
+        final data = json.decode(utf8.decode(res.bodyBytes));
+        return SpeakingEvaluationResult.fromJson(data);
+      }
+    } catch (_) {}
+
+    // Offline smart speech evaluator fallback
+    final words = RegExp(r"\b[A-Za-z']+\b").allMatches(transcript).map((m) => m.group(0)!).toList();
+    final wordCount = words.length;
+    final duration = durationSeconds > 15 ? durationSeconds : 60;
+    final wpm = double.parse(((wordCount / duration) * 60).toStringAsFixed(1));
+    final textLower = transcript.toLowerCase();
+
+    int fluencyScore = 14;
+    if (wpm >= 100 && wpm <= 160) {
+      fluencyScore = 23;
+    } else if (wpm >= 80) {
+      fluencyScore = 19;
+    }
+
+    final academicKeywords = [
+      'fundamental', 'significant', 'mitigate', 'consequently', 'furthermore',
+      'paradigm', 'infrastructure', 'mobility', 'autonomy', 'subsidize',
+      'intermittency', 'biodiversity', 'unprecedented', 'catalyze', 'sustainable'
+    ];
+    final foundAcademic = academicKeywords.where((w) => textLower.contains(w)).toList();
+    final lexicalScore = (10 + foundAcademic.length * 3).clamp(8, 25);
+
+    final connectors = ['although', 'because', 'while', 'furthermore', 'however', 'therefore', 'for instance'];
+    final foundConnectors = connectors.where((c) => textLower.contains(c)).toList();
+    final grammarScore = (10 + foundConnectors.length * 3).clamp(8, 25);
+
+    final taskScore = (12 + (wordCount >= 70 ? 8 : 4)).clamp(8, 25);
+    final overall = fluencyScore + lexicalScore + grammarScore + taskScore;
+
+    String cefr = 'A2 (Developing)';
+    if (overall >= 85) {
+      cefr = 'C1 (Advanced Fluency)';
+    } else if (overall >= 70) {
+      cefr = 'B2 (Vantage - Muafiyet Yeterli)';
+    } else if (overall >= 55) {
+      cefr = 'B1 (Independent)';
+    }
+
+    final strengths = <String>[];
+    if (fluencyScore >= 20) {
+      strengths.add('Akıcı konuşma temposu ($wpm kelime/dk) sınav standartlarına çok uygun.');
+    } else {
+      strengths.add('Konuşma akışı temel düzeyde tamamlandı.');
+    }
+    if (foundAcademic.isNotEmpty) {
+      strengths.add('Akademik kelime kullanımı (${foundAcademic.take(3).join(", ")}).');
+    }
+
+    final improvements = <String>[];
+    if (wpm < 100) {
+      improvements.add('Konuşma temponuz $wpm WPM. İdeal hazırlık temposu 110-150 WPM aralığıdır.');
+    }
+    if (foundAcademic.length < 2) {
+      improvements.add('Akademik bağlaçlar ve konuya özgü terimler kullanmaya çalışın.');
+    }
+
+    return SpeakingEvaluationResult(
+      wordCount: wordCount,
+      speakingRateWpm: wpm,
+      overallScore: overall,
+      cefrLevel: cefr,
+      isPassing: overall >= 65,
+      fluencyScore: fluencyScore,
+      lexicalScore: lexicalScore,
+      grammaticalScore: grammarScore,
+      taskScore: taskScore,
+      detectedAcademicWords: foundAcademic,
+      detectedTransitions: foundConnectors,
+      strengthsTr: strengths,
+      improvementsTr: improvements,
+      modelTranscript: 'Sample model answer with fluent academic delivery.',
+    );
+  }
 }
+

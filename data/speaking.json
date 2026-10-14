@@ -1,0 +1,106 @@
+[
+  {
+    "id": "spk_boun_01",
+    "university_id": "boun",
+    "target_university": "Boğaziçi Üniversitesi (BUEPT)",
+    "level": "C1",
+    "title": "Academic Opinion Presentation: Free Higher Education",
+    "topic": "Higher Education Economics & Social Mobility",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Soruyu dikkatlice okuyun. 60 saniye boyunca konuşmanızın ana hatlarını planlayın. Ardından mikrofonu açarak 2 dakika boyunca akademik bir dille fikrinizi savunun.",
+    "prompt_en": "Some education economists argue that higher education should be completely tuition-free to maximize social mobility. Others contend that tuition fees ensure academic accountability and institutional autonomy. Which view do you support, and what are the long-term societal ramifications?",
+    "guiding_questions": [
+      "How does free education impact equal opportunity across socioeconomic strata?",
+      "Can universities maintain high-quality research facilities without private tuition revenues?",
+      "What compromise or policy model (e.g., income-contingent loans) seems most viable?"
+    ],
+    "key_vocabulary": [
+      "socioeconomic mobility",
+      "institutional autonomy",
+      "subsidize",
+      "accountability",
+      "ramifications",
+      "egalitarian"
+    ],
+    "model_answer_transcript": "In evaluating whether tertiary education should be entirely state-subsidized, I firmly believe that higher education should be treated as a fundamental public good. Firstly, eliminating tuition fees dismantles financial barriers that disproportionately impede underprivileged students from pursuing academic excellence. Furthermore, state-funded universities foster greater societal innovation by cultivating intellectual talent regardless of socioeconomic status. While detractors argue that tuition ensures institutional autonomy, alternative funding models such as progressive taxation and public-private research partnerships can sufficiently sustain university infrastructure without imposing crippling debt on students."
+  },
+  {
+    "id": "spk_odtu_01",
+    "university_id": "odtu",
+    "target_university": "Orta Doğu Teknik Üniversitesi (ODTÜ EPE)",
+    "level": "C1",
+    "title": "Problem-Solution Speech: Sustainable Urban Expansion",
+    "topic": "Urban Ecology & Smart Infrastructure",
+    "prep_time_seconds": 45,
+    "speak_time_seconds": 90,
+    "instructions_tr": "ODTÜ EPE Speaking mülakatı formatı: Size verilen kentsel çevre problemini analiz edin ve uygulanabilir 2 somut mühendislik/planlama çözümü sunun.",
+    "prompt_en": "Rapid urbanization in developing megacities leads to severe urban heat island effects and depletion of local biodiversity. Propose concrete architectural and urban planning solutions to mitigate these challenges.",
+    "guiding_questions": [
+      "What role can bioclimatic architecture and vertical forests play?",
+      "How can public transit overhauls reduce asphalt-induced thermal heat?",
+      "What regulatory policies should municipalities enforce on private developers?"
+    ],
+    "key_vocabulary": [
+      "urban heat island",
+      "mitigate",
+      "bioclimatic design",
+      "impermeable surfaces",
+      "thermal regulation",
+      "infrastructure"
+    ],
+    "model_answer_transcript": "The escalating phenomenon of urban heat islands in burgeoning megacities demands urgent multifaceted intervention. To mitigate this environmental crisis, municipalities must prioritize bioclimatic architecture and expand vegetative canopies. For instance, mandating green roofs and vertical gardens on commercial buildings significantly diminishes surface temperatures by replacing heat-absorbing concrete with living vegetation. Additionally, urban planners should transition towards permeable pavement materials and develop decentralized public transit networks to diminish automotive thermal emissions."
+  },
+  {
+    "id": "spk_bilkent_01",
+    "university_id": "bilkent",
+    "target_university": "Bilkent Üniversitesi (COPE)",
+    "level": "B2",
+    "title": "Structured Argumentation: Automation and Employment",
+    "topic": "Technological Disruption & Labor Markets",
+    "prep_time_seconds": 45,
+    "speak_time_seconds": 90,
+    "instructions_tr": "Bilkent COPE Speaking formatı: Argümanınızı 'Giriş - Karşı Görüş - Çürütme - Sonuç' mantıksal akışıyla 90 saniye içinde sunun.",
+    "prompt_en": "As autonomous algorithms and robotics advance, will workplace automation create more high-value jobs than it eliminates, or will it trigger unprecedented technological unemployment?",
+    "guiding_questions": [
+      "Which employment sectors are most vulnerable to algorithmic displacement?",
+      "How can educational institutions adapt to retrain the emerging workforce?",
+      "Does historical precedent with the Industrial Revolution apply to cognitive AI?"
+    ],
+    "key_vocabulary": [
+      "algorithmic displacement",
+      "workforce retraining",
+      "unprecedented",
+      "technological unemployment",
+      "paradigm shift",
+      "cognitive skills"
+    ],
+    "model_answer_transcript": "The rapid proliferation of artificial intelligence in the modern labor market has sparked an intense debate regarding the future of employment. In my perspective, while automation will inevitably displace routine cognitive and manual labor, it will ultimately catalyze new categories of high-skill employment. Historically, technological revolutions have initially caused structural displacement, yet they subsequently generated novel industries. To facilitate a smooth transition, educational curricula must be radically restructured to cultivate complex problem-solving and emotional intelligence."
+  },
+  {
+    "id": "spk_itu_01",
+    "university_id": "itu",
+    "target_university": "İstanbul Teknik Üniversitesi (İTÜ)",
+    "level": "B2",
+    "title": "Academic Presentation: Renewable Energy Grid Integration",
+    "topic": "Clean Energy & Grid Modernization",
+    "prep_time_seconds": 45,
+    "speak_time_seconds": 90,
+    "instructions_tr": "İTÜ formatına uygun akademik konuşma: Yenilenebilir enerjinin şebeke entegrasyonundaki teknik zorlukları ve çözüm yollarını açıklayın.",
+    "prompt_en": "Although solar and wind energy are environmentally benign, their intermittency poses severe challenges for national power grids. How can electrical engineers resolve this intermittency dilemma?",
+    "guiding_questions": [
+      "What are the benefits of grid-scale battery energy storage systems (BESS)?",
+      "How do smart metering and predictive AI algorithms optimize load balancing?",
+      "Why is international grid interconnection crucial for energy resilience?"
+    ],
+    "key_vocabulary": [
+      "intermittency",
+      "grid modernization",
+      "battery storage",
+      "load balancing",
+      "predictive algorithms",
+      "resilience"
+    ],
+    "model_answer_transcript": "The integration of renewable energy sources such as solar and wind presents a critical engineering paradox: while ecologically sustainable, their inherent intermittency strains conventional power grids. To overcome this hurdle, electrical engineers must deploy grid-scale battery energy storage systems that capture surplus power during peak generation hours and discharge it during high demand. Furthermore, the incorporation of predictive machine learning models enables utilities to accurately anticipate weather shifts and modulate load distribution in real time."
+  }
+]

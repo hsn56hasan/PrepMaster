@@ -191,3 +191,51 @@ def get_mistake_count() -> int:
     row = cursor.fetchone()
     conn.close()
     return row["cnt"] if row else 0
+
+def bulk_upsert_mistakes(mistakes: List[Dict[str, Any]]) -> int:
+    conn = get_db()
+    inserted = 0
+    with conn:
+        for m in mistakes:
+            qid = m.get("question_id")
+            if not qid:
+                continue
+            conn.execute("""
+                INSERT INTO mistake_vault (question_id, university_id, level, category, wrong_count, last_wrong_answer, last_wrong_at, is_resolved)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(question_id) DO UPDATE SET
+                    wrong_count = MAX(mistake_vault.wrong_count, excluded.wrong_count),
+                    last_wrong_answer = excluded.last_wrong_answer,
+                    last_wrong_at = excluded.last_wrong_at,
+                    is_resolved = excluded.is_resolved
+            """, (
+                qid, 
+                m.get("university_id", "general"),
+                m.get("level", "B2"),
+                m.get("category", "General"),
+                m.get("wrong_count", 1),
+                m.get("last_wrong_answer", ""),
+                m.get("last_wrong_at", datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")),
+                1 if m.get("is_resolved") else 0
+            ))
+            inserted += 1
+    conn.close()
+    return inserted
+
+def bulk_upsert_vocab_progress(vocab_map: Dict[str, str]) -> int:
+    conn = get_db()
+    count = 0
+    with conn:
+        for word_id, status in vocab_map.items():
+            conn.execute("""
+                INSERT INTO vocab_progress (word_id, status, last_reviewed)
+                VALUES (?, ?, CURRENT_TIMESTAMP)
+                ON CONFLICT(word_id) DO UPDATE SET
+                    status = excluded.status,
+                    review_count = vocab_progress.review_count + 1,
+                    last_reviewed = CURRENT_TIMESTAMP
+            """, (word_id, status))
+            count += 1
+    conn.close()
+    return count
+

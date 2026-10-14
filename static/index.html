@@ -122,6 +122,10 @@
           <i data-lucide="headphones" class="w-4 h-4"></i>
           <span>Dinleme (Listening)</span>
         </button>
+        <button data-nav-tab="speaking" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-xs transition">
+          <i data-lucide="mic" class="w-4 h-4 text-indigo-500"></i>
+          <span>Konuşma (Speaking)</span>
+        </button>
         <button data-nav-tab="practice" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-xs transition">
           <i data-lucide="check-square" class="w-4 h-4"></i>
           <span>Kur Alıştırmaları (A1-C2)</span>
@@ -436,6 +440,120 @@
         </div>
       </section>
 
+      <!-- ================= 5.5. TAB: SPEAKING ================= -->
+      <section id="tab-content-speaking" class="hidden space-y-6">
+        <!-- Hub View (Mülakat Listesi) -->
+        <div id="speaking-hub-view" class="space-y-6">
+          <div class="bg-gradient-to-r from-indigo-900 via-purple-900 to-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
+            <div class="max-w-2xl relative z-10">
+              <span class="px-3 py-1 bg-indigo-500/30 text-indigo-200 border border-indigo-400/30 rounded-full text-xs font-bold uppercase tracking-wider inline-flex items-center gap-1.5 mb-3">
+                <i data-lucide="mic" class="w-3.5 h-3.5 text-indigo-300"></i> Sözlü Sınav Simülatörü
+              </span>
+              <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">
+                Hazırlık Speaking & Mülakat Atölyesi
+              </h2>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Boğaziçi BUEPT, ODTÜ EPE, Bilkent COPE ve İTÜ mülakat formatlarına göre hazırlanmış konuşma görevleri. Hazırlık süresinde notlarınızı alın, mikrofonla konuşun ve yapay zekadan anlık telaffuz, akıcılık ve dilbilgisi geri bildirimi alın.
+              </p>
+            </div>
+          </div>
+
+          <div id="speaking-tasks-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- JS loadSpeakingHub() -->
+          </div>
+        </div>
+
+        <!-- Runner View (Canlı Mülakat Ekranı) -->
+        <div id="speaking-runner-view" class="hidden space-y-6">
+          <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
+            
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100 flex-wrap gap-2">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Aktif Mülakat Parkuru</span>
+                <h3 id="speaking-runner-title" class="text-lg font-extrabold text-slate-800">Boğaziçi BUEPT Speaking</h3>
+              </div>
+              <div class="flex items-center gap-3">
+                <span id="speaking-timer-badge" class="px-3 py-1 bg-amber-100 text-amber-800 border border-amber-300 rounded-full text-xs font-bold">
+                  ⏳ Hazırlık: 60s
+                </span>
+                <button onclick="exitSpeakingRunner()" class="p-2 text-slate-400 hover:text-slate-600 rounded-xl transition">
+                  <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Soru Metni & Yönlendirici Sorular -->
+            <div class="p-5 bg-indigo-50/50 rounded-2xl border border-indigo-100 space-y-3">
+              <span class="text-[11px] font-bold text-indigo-700 uppercase tracking-wider block">Mülakat Sorusu (Prompt):</span>
+              <p id="speaking-runner-prompt" class="text-sm font-semibold text-slate-800 leading-relaxed">
+                <!-- JS ile dolacak -->
+              </p>
+
+              <div class="pt-2 border-t border-indigo-100/60">
+                <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Değinilmesi Önerilen Noktalar:</span>
+                <ul id="speaking-guiding-questions" class="text-xs text-slate-600 space-y-1">
+                  <!-- JS ile dolacak -->
+                </ul>
+              </div>
+
+              <div class="pt-2">
+                <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5">Önerilen Akademik Kelimeler (AWL):</span>
+                <div id="speaking-key-vocab" class="flex flex-wrap gap-1.5">
+                  <!-- JS ile dolacak -->
+                </div>
+              </div>
+            </div>
+
+            <!-- 1. Aşama: Hazırlık Kutusu -->
+            <div id="speaking-prep-box" class="p-6 bg-slate-50 rounded-2xl border border-slate-200 text-center space-y-4">
+              <div class="w-12 h-12 bg-amber-100 text-amber-700 rounded-2xl flex items-center justify-center mx-auto">
+                <i data-lucide="timer" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <h4 class="font-extrabold text-slate-800 text-sm">Hazırlık Süresi Devam Ediyor</h4>
+                <p class="text-xs text-slate-500 mt-1 max-w-md mx-auto">
+                  Süreniz dolduğunda kayıt otomatik başlayacaktır. Notlarınızı toparladıysanız beklemeden hemen konuşmaya başlayabilirsiniz.
+                </p>
+              </div>
+              <button onclick="startRecordingPhase()" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl shadow transition inline-flex items-center gap-2">
+                <i data-lucide="mic" class="w-4 h-4"></i> Hazırım, Konuşmaya Başla
+              </button>
+            </div>
+
+            <!-- 2. Aşama: Kayıt Kutusu -->
+            <div id="speaking-record-box" class="hidden p-6 bg-rose-50/50 rounded-2xl border border-rose-200 text-center space-y-4">
+              <div class="w-16 h-16 bg-rose-500 text-white rounded-full flex items-center justify-center mx-auto shadow-lg shadow-rose-500/30 animate-pulse">
+                <i data-lucide="mic" class="w-8 h-8"></i>
+              </div>
+              <div>
+                <h4 class="font-extrabold text-rose-900 text-sm">Canlı Mülakat Kaydı Devam Ediyor</h4>
+                <p class="text-xs text-rose-700 mt-1 max-w-md mx-auto">
+                  Mikrofonunuza net ve akademik bir tonlama ile konuşun. Canlı konuşmanız aşağıda anlık metne dönüştürülmektedir.
+                </p>
+              </div>
+
+              <!-- Canlı Transkript Kutusu -->
+              <div class="text-left">
+                <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                  Canlı Konuşma Transkriptiniz (Gerekirse düzenleyebilirsiniz):
+                </label>
+                <textarea id="speaking-live-transcript" rows="4" class="w-full p-4 bg-white border border-slate-200 rounded-2xl text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 leading-relaxed" placeholder="Konuşmaya başladığınızda söyledikleriniz burada belirecektir..."></textarea>
+              </div>
+
+              <button onclick="finishSpeakingRecording()" class="px-6 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl shadow transition inline-flex items-center gap-2">
+                <i data-lucide="square" class="w-4 h-4"></i> Konuşmayı Bitir ve Yapay Zekaya Gönder
+              </button>
+            </div>
+
+            <!-- 3. Aşama: Sonuç ve Değerlendirme Konteyneri -->
+            <div id="speaking-results-container" class="hidden">
+              <!-- JS renderSpeakingEvaluationResult() -->
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       <!-- ================= 6. TAB: WRITING ================= -->
       <section id="tab-content-writing" class="hidden space-y-6">
         <div id="ai-writing-evaluator-section" class="space-y-6">
@@ -649,6 +767,7 @@
   <script src="/static/js/flashcards.js?v=1.1"></script>
   <script src="/static/js/exam.js?v=1.1"></script>
   <script src="/static/js/listening.js?v=1.1"></script>
+  <script src="/static/js/speaking.js?v=1.1"></script>
   <script src="/static/js/writing_ai.js?v=1.1"></script>
   <script src="/static/js/app.js?v=1.1"></script>
 </body>
