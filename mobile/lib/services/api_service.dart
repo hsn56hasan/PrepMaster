@@ -716,6 +716,106 @@ class ApiService {
       'generated_at': DateTime.now().toString().substring(0, 16),
     };
   }
+
+  // --- User Authentication & Session Management ---
+  Future<Map<String, dynamic>> login({
+    required String identifier,
+    required String password,
+  }) async {
+    try {
+      final res = await http.post(
+        Uri.parse('$baseUrl/api/auth/login'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'identifier': identifier,
+          'password': password,
+        }),
+      ).timeout(const Duration(seconds: 4));
+
+      final data = json.decode(utf8.decode(res.bodyBytes));
+      if (res.statusCode == 200 && data['status'] == 'success') {
+        final user = data['user'];
+        await saveCurrentUser(user);
+        return {'success': true, 'user': user};
+      } else {
+        return {'success': false, 'message': data['detail'] ?? 'Giriş başarısız.'};
+      }
+    } catch (e) {
+      return {'success': false, 'message': 'Bağlantı hatası: ${e.toString()}'};
+    }
+  }
+
+  Future<Map<String, dynamic>> register({
+    required String email,
+    required String username,
+    required String password,
+    required String fullName,
+    String? universityId,
+    String? studentNumber,
+  }) async {
+    try {
+      final res = await http.post(
+        Uri.parse('$baseUrl/api/auth/register'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'email': email,
+          'username': username,
+          'password': password,
+          'full_name': fullName,
+          'university_id': universityId ?? 'itu',
+          'student_number': studentNumber ?? '',
+        }),
+      ).timeout(const Duration(seconds: 4));
+
+      final data = json.decode(utf8.decode(res.bodyBytes));
+      if (res.statusCode == 200 && data['status'] == 'success') {
+        final user = data['user'];
+        await saveCurrentUser(user);
+        return {'success': true, 'user': user};
+      } else {
+        return {'success': false, 'message': data['detail'] ?? 'Kayıt başarısız.'};
+      }
+    } catch (e) {
+      return {'success': false, 'message': 'Bağlantı hatası: ${e.toString()}'};
+    }
+  }
+
+  Future<Map<String, dynamic>?> getCurrentUser({int userId = 1}) async {
+    try {
+      final res = await http.get(Uri.parse('$baseUrl/api/auth/me?user_id=$userId')).timeout(const Duration(seconds: 3));
+      if (res.statusCode == 200) {
+        final user = json.decode(utf8.decode(res.bodyBytes));
+        await saveCurrentUser(user);
+        return user;
+      }
+    } catch (_) {}
+    return await loadSavedUser();
+  }
+
+  Future<void> saveCurrentUser(Map<String, dynamic> user) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('auth_user_data', json.encode(user));
+    } catch (_) {}
+  }
+
+  Future<Map<String, dynamic>?> loadSavedUser() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final str = prefs.getString('auth_user_data');
+      if (str != null) {
+        return json.decode(str) as Map<String, dynamic>;
+      }
+    } catch (_) {}
+    return null;
+  }
+
+  Future<void> clearSavedUser() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove('auth_user_data');
+    } catch (_) {}
+  }
 }
 
 

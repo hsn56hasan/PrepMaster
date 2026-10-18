@@ -13,6 +13,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function initApp() {
   try {
+    // 0. Initialize Theme & Auth
+    initDarkMode();
+    await checkCurrentUser();
+
     // 1. Fetch Universities
     const uniRes = await fetch('/api/universities');
     window.appState.allUniversities = await uniRes.json();
@@ -22,7 +26,9 @@ async function initApp() {
     const profile = await profRes.json();
     
     window.appState.currentLevel = profile.current_level || 'B2';
-    window.appState.currentUniversity = profile.university || window.appState.allUniversities[0];
+    if (!window.appState.currentUniversity) {
+      window.appState.currentUniversity = profile.university || window.appState.allUniversities[0];
+    }
 
     // 3. Render Initial State
     renderUniversityHeader();
@@ -296,9 +302,16 @@ async function loadWritingGuides() {
 
     container.innerHTML = guides.map(g => `
       <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
-        <div>
-          <h3 class="text-xl font-extrabold text-slate-800 mb-2">${g.title}</h3>
-          <p class="text-xs text-slate-500 leading-relaxed">${g.description}</p>
+        <div class="flex items-start justify-between gap-4 flex-wrap">
+          <div>
+            <h3 class="text-xl font-extrabold text-slate-800 mb-1">${g.title}</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">${g.description}</p>
+          </div>
+          ${g.model_band_score ? `
+            <span class="px-3.5 py-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-xl text-xs font-black shrink-0">
+              Model Band: ${g.model_band_score} / 100
+            </span>
+          ` : ''}
         </div>
 
         <!-- Paragraf Yapısı -->
@@ -332,9 +345,46 @@ async function loadWritingGuides() {
         <div class="p-4 bg-amber-50/80 rounded-2xl border border-amber-200 text-xs text-amber-900 leading-relaxed">
           <span class="font-bold block text-amber-800 mb-1">Örnek Sınav Konusu:</span>
           "${g.sample_topic}"
+          ${g.band_score_tip ? `<p class="mt-2 text-amber-800 font-semibold">💡 İpucu: ${g.band_score_tip}</p>` : ''}
         </div>
+
+        <!-- MODEL ESSAY & EXEMPLAR ACCORDION -->
+        ${g.model_essay ? `
+          <div class="pt-2 border-t border-slate-100">
+            <details class="group bg-slate-50 rounded-2xl border border-slate-200 p-4 transition">
+              <summary class="flex items-center justify-between cursor-pointer font-bold text-xs text-slate-800 select-none">
+                <span class="flex items-center gap-2 text-blue-900">
+                  <i data-lucide="book-open" class="w-4 h-4 text-blue-600"></i>
+                  Band ${g.model_band_score || 90}+ Örnek Model Essay & Hata Analizini İncele
+                </span>
+                <span class="text-xs text-blue-600 group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+
+              <div class="mt-4 pt-4 border-t border-slate-200 space-y-4">
+                <div class="p-4 bg-white rounded-xl border border-slate-200 text-xs text-slate-800 font-serif leading-relaxed whitespace-pre-line">
+                  ${g.model_essay}
+                </div>
+
+                ${g.annotated_strengths && g.annotated_strengths.length > 0 ? `
+                  <div class="p-3.5 bg-emerald-50 rounded-xl border border-emerald-200 text-xs text-emerald-900 space-y-1">
+                    <strong class="text-emerald-800 block mb-1">✓ Neden Yüksek Puan Aldı? (Güçlü Yönler):</strong>
+                    ${g.annotated_strengths.map(s => `<div>• ${s}</div>`).join('')}
+                  </div>
+                ` : ''}
+
+                ${g.common_pitfalls && g.common_pitfalls.length > 0 ? `
+                  <div class="p-3.5 bg-rose-50 rounded-xl border border-rose-200 text-xs text-rose-900 space-y-1">
+                    <strong class="text-rose-800 block mb-1">⚠ Sık Yapılan Hatalar (Puan Kırdıran Noktalar):</strong>
+                    ${g.common_pitfalls.map(p => `<div>• ${p}</div>`).join('')}
+                  </div>
+                ` : ''}
+              </div>
+            </details>
+          </div>
+        ` : ''}
       </div>
     `).join('');
+    if (window.lucide) window.lucide.createIcons();
   } catch (err) {
     console.error("Writing guides error:", err);
   }
@@ -743,6 +793,233 @@ function closePrintableReportModal() {
   if (modal) modal.classList.add("hidden");
 }
 
+// --- DARK MODE (THEME) CONTROLLER ---
+function initDarkMode() {
+  const saved = localStorage.getItem("prepmaster_theme");
+  const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const isDark = saved === "dark" || (!saved && prefersDark);
+  if (isDark) {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
+  updateThemeIcon(isDark);
+}
+
+function toggleDarkMode() {
+  const isDark = document.documentElement.classList.toggle("dark");
+  localStorage.setItem("prepmaster_theme", isDark ? "dark" : "light");
+  updateThemeIcon(isDark);
+}
+
+function updateThemeIcon(isDark) {
+  const btn = document.getElementById("header-theme-btn");
+  if (!btn) return;
+  btn.innerHTML = `<i data-lucide="${isDark ? 'sun' : 'moon'}" class="w-4 h-4 ${isDark ? 'text-amber-400' : 'text-slate-700'}" id="theme-icon"></i>`;
+  if (window.lucide) window.lucide.createIcons();
+}
+
+// --- USER AUTHENTICATION & SESSION MANAGEMENT ---
+async function checkCurrentUser() {
+  try {
+    const stored = localStorage.getItem("auth_user");
+    let user = stored ? JSON.parse(stored) : null;
+    if (!user) {
+      const res = await fetch("/api/auth/me?user_id=1");
+      if (res.ok) user = await res.json();
+    }
+    if (user) {
+      window.appState.currentUser = user;
+      const nameEl = document.getElementById("header-user-name");
+      if (nameEl) nameEl.innerText = (user.full_name || user.username || "Öğrenci").split(" ")[0];
+    }
+  } catch (e) {
+    console.warn("checkCurrentUser error:", e);
+  }
+}
+
+function openAuthModal() {
+  const modal = document.getElementById("auth-modal");
+  if (!modal) return;
+  const user = window.appState.currentUser;
+  const loggedInView = document.getElementById("auth-logged-in-view");
+  const formsView = document.getElementById("auth-forms-view");
+
+  if (user && user.id) {
+    if (loggedInView) loggedInView.classList.remove("hidden");
+    if (formsView) formsView.classList.add("hidden");
+    const titleEl = document.getElementById("auth-modal-title");
+    if (titleEl) titleEl.innerText = "Öğrenci Profili";
+
+    const fName = document.getElementById("profile-full-name");
+    const uName = document.getElementById("profile-username");
+    const email = document.getElementById("profile-email");
+    const uniName = document.getElementById("profile-uni-name");
+    const sNum = document.getElementById("profile-student-number");
+    const verifEl = document.getElementById("profile-verification-status");
+
+    if (fName) fName.innerText = user.full_name || "-";
+    if (uName) uName.innerText = user.username || "-";
+    if (email) email.innerText = user.email || "-";
+    if (uniName) uniName.innerText = user.university ? user.university.name : (user.university_id ? user.university_id.toUpperCase() : "-");
+    if (sNum) sNum.innerText = user.student_number || "-";
+
+    const isVerified = user.is_verified_student === 1 || user.verification_status === "verified";
+    if (verifEl) {
+      verifEl.innerText = isVerified ? "✓ Doğrulanmış Öğrenci" : "⚠️ Doğrulanmadı";
+      verifEl.className = isVerified ? "text-xs font-extrabold text-emerald-600" : "text-xs font-bold text-amber-600";
+    }
+  } else {
+    if (loggedInView) loggedInView.classList.add("hidden");
+    if (formsView) formsView.classList.remove("hidden");
+    const titleEl = document.getElementById("auth-modal-title");
+    if (titleEl) titleEl.innerText = "Öğrenci Girişi & Kayıt";
+    switchAuthTab("login");
+  }
+
+  modal.classList.remove("hidden");
+  if (window.lucide) window.lucide.createIcons();
+}
+
+function closeAuthModal() {
+  const modal = document.getElementById("auth-modal");
+  if (modal) modal.classList.add("hidden");
+}
+
+function switchAuthTab(tab) {
+  const btnLogin = document.getElementById("tab-btn-login");
+  const btnReg = document.getElementById("tab-btn-register");
+  const formLogin = document.getElementById("form-login");
+  const formReg = document.getElementById("form-register");
+
+  if (tab === "login") {
+    if (formLogin) formLogin.classList.remove("hidden");
+    if (formReg) formReg.classList.add("hidden");
+    if (btnLogin) {
+      btnLogin.className = "flex-1 py-1.5 rounded-xl bg-white dark:bg-slate-700 text-blue-700 dark:text-blue-400 shadow-sm transition font-bold";
+    }
+    if (btnReg) {
+      btnReg.className = "flex-1 py-1.5 rounded-xl text-slate-500 hover:text-slate-800 transition font-bold";
+    }
+  } else {
+    if (formLogin) formLogin.classList.add("hidden");
+    if (formReg) formReg.classList.remove("hidden");
+    if (btnLogin) {
+      btnLogin.className = "flex-1 py-1.5 rounded-xl text-slate-500 hover:text-slate-800 transition font-bold";
+    }
+    if (btnReg) {
+      btnReg.className = "flex-1 py-1.5 rounded-xl bg-white dark:bg-slate-700 text-blue-700 dark:text-blue-400 shadow-sm transition font-bold";
+    }
+  }
+}
+
+async function submitLogin() {
+  const identInput = document.getElementById("login-identifier");
+  const passInput = document.getElementById("login-password");
+  const errEl = document.getElementById("login-error-msg");
+  const identifier = identInput ? identInput.value.trim() : "";
+  const password = passInput ? passInput.value.trim() : "";
+
+  if (!identifier || !password) {
+    if (errEl) {
+      errEl.innerText = "Lütfen kullanıcı adı/e-posta ve şifrenizi girin.";
+      errEl.classList.remove("hidden");
+    }
+    return;
+  }
+
+  try {
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ identifier, password })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.detail || "Giriş başarısız.");
+    }
+
+    window.appState.currentUser = data.user;
+    localStorage.setItem("auth_user", JSON.stringify(data.user));
+
+    const nameEl = document.getElementById("header-user-name");
+    if (nameEl) nameEl.innerText = (data.user.full_name || data.user.username).split(" ")[0];
+
+    if (data.user.university) {
+      window.appState.currentUniversity = data.user.university;
+      renderUniversityHeader();
+    }
+
+    closeAuthModal();
+    showNotification(`✓ Başarıyla giriş yapıldı. Hoş geldin, ${data.user.full_name}!`, "emerald");
+  } catch (err) {
+    if (errEl) {
+      errEl.innerText = err.message;
+      errEl.classList.remove("hidden");
+    }
+  }
+}
+
+async function submitRegister() {
+  const fullName = (document.getElementById("reg-fullname")?.value || "").trim();
+  const username = (document.getElementById("reg-username")?.value || "").trim();
+  const email = (document.getElementById("reg-email")?.value || "").trim();
+  const universityId = document.getElementById("reg-university")?.value || "itu";
+  const studentNumber = (document.getElementById("reg-student-num")?.value || "").trim();
+  const password = (document.getElementById("reg-password")?.value || "").trim();
+  const errEl = document.getElementById("register-error-msg");
+
+  if (!fullName || !username || !email || !password) {
+    if (errEl) {
+      errEl.innerText = "Lütfen zorunlu alanları (Ad Soyad, Kullanıcı Adı, E-Posta, Şifre) doldurun.";
+      errEl.classList.remove("hidden");
+    }
+    return;
+  }
+
+  try {
+    const res = await fetch("/api/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        full_name: fullName,
+        username: username,
+        email: email,
+        university_id: universityId,
+        student_number: studentNumber,
+        password: password
+      })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.detail || "Kayıt işlemi başarısız.");
+    }
+
+    window.appState.currentUser = data.user;
+    localStorage.setItem("auth_user", JSON.stringify(data.user));
+
+    const nameEl = document.getElementById("header-user-name");
+    if (nameEl) nameEl.innerText = (data.user.full_name || data.user.username).split(" ")[0];
+
+    closeAuthModal();
+    showNotification(`✓ Hesabınız oluşturuldu. Hoş geldin, ${data.user.full_name}!`, "emerald");
+  } catch (err) {
+    if (errEl) {
+      errEl.innerText = err.message;
+      errEl.classList.remove("hidden");
+    }
+  }
+}
+
+function logoutUser() {
+  window.appState.currentUser = null;
+  localStorage.removeItem("auth_user");
+  const nameEl = document.getElementById("header-user-name");
+  if (nameEl) nameEl.innerText = "Giriş Yap";
+  closeAuthModal();
+  showNotification("Oturumunuz kapatıldı.", "rose");
+}
+
 window.changeCurrentLevel = changeCurrentLevel;
 window.switchTab = switchTab;
 window.openUniversityModal = openUniversityModal;
@@ -759,5 +1036,16 @@ window.submitStudentVerification = submitStudentVerification;
 window.loadStudentStatus = loadStudentStatus;
 window.openPrintableReportModal = openPrintableReportModal;
 window.closePrintableReportModal = closePrintableReportModal;
+
+// Dark mode and Auth exports
+window.initDarkMode = initDarkMode;
+window.toggleDarkMode = toggleDarkMode;
+window.openAuthModal = openAuthModal;
+window.closeAuthModal = closeAuthModal;
+window.switchAuthTab = switchAuthTab;
+window.submitLogin = submitLogin;
+window.submitRegister = submitRegister;
+window.logoutUser = logoutUser;
+
 
 

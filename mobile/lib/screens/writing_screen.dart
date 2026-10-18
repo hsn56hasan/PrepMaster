@@ -552,9 +552,34 @@ class _WritingScreenState extends State<WritingScreen> with SingleTickerProvider
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  g.title,
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppTheme.brandNavy),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        g.title,
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppTheme.brandNavy),
+                      ),
+                    ),
+                    if (g.modelBandScore != null)
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: Colors.green.shade50,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: AppTheme.accentEmerald.withValues(alpha: 0.5)),
+                        ),
+                        child: Text(
+                          'Band ${g.modelBandScore} / 100',
+                          style: const TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w900,
+                            color: AppTheme.accentEmerald,
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
                 const SizedBox(height: 6),
                 Text(
@@ -594,6 +619,192 @@ class _WritingScreenState extends State<WritingScreen> with SingleTickerProvider
                     ),
                   );
                 }),
+
+                // Key Transitions
+                if (g.keyTransitions.isNotEmpty) ...[
+                  const SizedBox(height: 10),
+                  const Text(
+                    'ÖNERİLEN GEÇİŞ BAĞLAÇLARI',
+                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.w800, color: AppTheme.brandBlue, letterSpacing: 1),
+                  ),
+                  const SizedBox(height: 8),
+                  Wrap(
+                    spacing: 6,
+                    runSpacing: 6,
+                    children: g.keyTransitions.map((tr) => Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.blue.shade50,
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: Colors.blue.shade200),
+                      ),
+                      child: Text(
+                        tr,
+                        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppTheme.brandBlue),
+                      ),
+                    )).toList(),
+                  ),
+                ],
+
+                // Sample Topic Card
+                if (g.sampleTopic.isNotEmpty) ...[
+                  const SizedBox(height: 14),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.amber.shade50.withValues(alpha: 0.6),
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(color: Colors.amber.shade200),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Row(
+                          children: [
+                            Icon(Icons.assignment_outlined, size: 14, color: Color(0xFFB45309)),
+                            SizedBox(width: 4),
+                            Text(
+                              'Örnek Sınav Konusu:',
+                              style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: Color(0xFFB45309)),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          '"${g.sampleTopic}"',
+                          style: const TextStyle(fontSize: 11, fontStyle: FontStyle.italic, color: AppTheme.brandNavy, height: 1.3),
+                        ),
+                        if (g.bandScoreTip != null && g.bandScoreTip!.isNotEmpty) ...[
+                          const SizedBox(height: 6),
+                          Text(
+                            '💡 İpucu: ${g.bandScoreTip}',
+                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Color(0xFF92400E)),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                ],
+
+                // Model Essay Exemplar Card & Expansion
+                if (g.modelEssay != null && g.modelEssay!.isNotEmpty) ...[
+                  const SizedBox(height: 14),
+                  Theme(
+                    data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: AppTheme.surfaceBg,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: AppTheme.borderSubtle),
+                      ),
+                      child: ExpansionTile(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        tilePadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
+                        leading: const Icon(Icons.menu_book, color: AppTheme.brandBlue, size: 20),
+                        title: Text(
+                          'Band ${g.modelBandScore ?? 90}+ Model Essay & Hata Analizi',
+                          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: AppTheme.brandNavy),
+                        ),
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(14, 0, 14, 14),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Divider(height: 1),
+                                const SizedBox(height: 12),
+                                Container(
+                                  width: double.infinity,
+                                  padding: const EdgeInsets.all(14),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(color: AppTheme.borderSubtle),
+                                  ),
+                                  child: Text(
+                                    g.modelEssay!,
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      height: 1.6,
+                                      fontFamily: 'serif',
+                                      color: Color(0xFF1E293B),
+                                    ),
+                                  ),
+                                ),
+                                if (g.annotatedStrengths.isNotEmpty) ...[
+                                  const SizedBox(height: 12),
+                                  Container(
+                                    width: double.infinity,
+                                    padding: const EdgeInsets.all(12),
+                                    decoration: BoxDecoration(
+                                      color: Colors.green.shade50.withValues(alpha: 0.6),
+                                      borderRadius: BorderRadius.circular(12),
+                                      border: Border.all(color: Colors.green.shade200),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        const Row(
+                                          children: [
+                                            Icon(Icons.check_circle_outline, size: 14, color: AppTheme.accentEmerald),
+                                            SizedBox(width: 4),
+                                            Text(
+                                              'Neden Yüksek Puan Aldı? (Güçlü Yönler):',
+                                              style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: AppTheme.accentEmerald),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 6),
+                                        ...g.annotatedStrengths.map((str) => Padding(
+                                              padding: const EdgeInsets.only(bottom: 2),
+                                              child: Text('• $str', style: const TextStyle(fontSize: 11, color: AppTheme.brandNavy)),
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                                if (g.commonPitfalls.isNotEmpty) ...[
+                                  const SizedBox(height: 10),
+                                  Container(
+                                    width: double.infinity,
+                                    padding: const EdgeInsets.all(12),
+                                    decoration: BoxDecoration(
+                                      color: Colors.red.shade50.withValues(alpha: 0.6),
+                                      borderRadius: BorderRadius.circular(12),
+                                      border: Border.all(color: Colors.red.shade200),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(Icons.warning_amber_rounded, size: 14, color: Colors.red.shade800),
+                                            const SizedBox(width: 4),
+                                            Text(
+                                              'Sık Yapılan Hatalar (Puan Kırdıran Noktalar):',
+                                              style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: Colors.red.shade800),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 6),
+                                        ...g.commonPitfalls.map((pit) => Padding(
+                                              padding: const EdgeInsets.only(bottom: 2),
+                                              child: Text('• $pit', style: const TextStyle(fontSize: 11, color: AppTheme.brandNavy)),
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ],
             ),
           ),

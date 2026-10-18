@@ -46,38 +46,174 @@
       "In light of the evidence delineated above, ..."
     ],
     "sample_topic": "Do you agree or disagree that artificial intelligence will replace human educators in universities within the next decade?",
-    "band_score_tip": "Asla 'I think' ifadesini her cümlenin başında tekrarlamayın. Bunun yerine 'It is widely acknowledged that...', 'Compelling evidence demonstrates that...' gibi akademik ifadeleri tercih edin."
+    "band_score_tip": "Asla 'I think' ifadesini her cümlenin başında tekrarlamayın. Bunun yerine 'It is widely acknowledged that...', 'Compelling evidence demonstrates that...' gibi akademik ifadeleri tercih edin.",
+    "model_band_score": 92,
+    "model_essay": "In recent years, the exponential proliferation of artificial intelligence has sparked intense debate concerning the future of tertiary education. While some commentators envision an entirely automated classroom devoid of human instructors, I firmly disagree with the proposition that artificial intelligence will supplant university educators. In my perspective, while algorithmic systems excel at administrative efficiency, they fundamentally lack the pedagogical empathy and critical mentorship that define authentic academic scholarship.\n\nFirst and foremost, effective university education transcends the mere dissemination of raw information. Professors serve as moral and intellectual role models who guide students through ethical dilemmas, epistemological inquiries, and rigorous scientific discourse. For instance, an automated diagnostic model can readily explain thermodynamic formulas; however, it cannot discern a struggling undergraduate's cognitive frustration or adapt its pedagogy spontaneously in response to nuanced classroom body language. Consequently, the empathetic dialogue cultivated between mentor and apprentice remains entirely outside the scope of computational neural networks.\n\nFurthermore, university education is fundamentally designed to instill critical reasoning and intellectual skepticism rather than passive memorization. Human educators challenge conventional paradigms by encouraging debate and fostering divergent perspectives. Although artificial intelligence can rapidly aggregate vast bibliographic repositories, it essentially operates by predicting statistically probable language patterns, which frequently perpetuates entrenched biases present within historical training data. Thus, reliance solely on automated instruction would risk homogenizing intellectual thought rather than cultivating originality.\n\nIn conclusion, while artificial intelligence undeniably provides valuable augmentative tools for individualized tutoring and automated grading, it cannot duplicate the indispensable socio-emotional and philosophical contributions of human professors. Therefore, universities should integrate machine learning as a pedagogical supplement while preserving human leadership at the core of academic instruction.",
+    "annotated_strengths": [
+      "Kusursuz 4 paragraflı akademik yapı (Giriş, 2 Gelişme, Sonuç).",
+      "Net ve tartışmaya açık Thesis Statement ('I firmly disagree with the proposition that...').",
+      "Zengin Akademik Kelime Havuzu (AWL): proliferation, supplant, pedagogical, epistemological, homogenizing, augmentative.",
+      "Güçlü bağlaçlar ve geçiş ifadeleri: 'First and foremost', 'For instance', 'Consequently', 'Furthermore', 'In conclusion'."
+    ],
+    "common_pitfalls": [
+      "Giriş paragrafında kişisel fikir belirtmeyip tarafsız kalmak (Opinion essay mutlaka taraf seçmeyi gerektirir).",
+      "Örnek vermeden soyut iddialarda bulunmak (Her gelişme paragrafında somut kanıt veya senaryo şarttır).",
+      "'I think', 'In my opinion' gibi ifadeleri peş peşe tekrarlayarak üslubu basitleştirmek."
+    ]
   },
   {
-    "id": "cause-effect-essay",
-    "title": "Cause & Effect Essay (Neden - Sonuç Kompozisyonu)",
-    "description": "ODTÜ EPE ve Boğaziçi BUEPT sınavlarında sıklıkla sorulan, bir fenomenin nedenlerini (causes) ve doğurduğu sonuçları (effects) analiz eden akademik format.",
+    "id": "for-against-essay",
+    "title": "For & Against Essay (Tartışma / İki Yönlü Kompozisyon)",
+    "description": "Boğaziçi BUEPT ve Bilkent COPE sınavlarının vazgeçilmez formatı. Bir konunun hem lehindeki (avantajlar) hem aleyhindeki (dezavantajlar) argümanları dengeli ve tarafsız biçimde ele alır.",
     "structure": [
       {
         "section": "Introduction",
         "elements": [
-          "Tanımlama ve problemin genel çerçevesi.",
-          "Thesis Statement: Bu fenomenin temel nedenlerinin X ve Y olduğunu, bunun sonucunda ise Z etkisinin ortaya çıktığını belirten cümle."
+          "Hook: Konunun küresel veya toplumsal önemini ortaya koyan giriş.",
+          "Background: Tartışmanın iki farklı kutbu olduğunu gösteren genel çerçeve.",
+          "Thesis Statement: Bu kompozisyonda her iki görüşün de mercek altına alınacağını belirten tarafsız tez cümlesi."
         ]
       },
       {
-        "section": "Body Paragraph 1 (Causes)",
+        "section": "Body Paragraph 1 (Arguments For)",
         "elements": [
-          "Kök nedenlerin incelenmesi (Primary catalysts / underlying factors).",
-          "Zincirleme sebep-sonuç ilişkisi."
+          "Topic Sentence: Konunun getirdiği avantajları/olumlu yönleri tanıtan cümle.",
+          "Argüman 1 ve somut örnek.",
+          "Argüman 2 ve toplumsal/ekonomik faydası."
         ]
       },
       {
-        "section": "Body Paragraph 2 (Effects)",
+        "section": "Body Paragraph 2 (Arguments Against)",
         "elements": [
-          "Bireysel, toplumsal veya ekonomik sonuçlar (Repercussions / ramifications).",
-          "Uzun vadeli etkiler."
+          "Topic Sentence: Karşıt görüşü ve beraberinde gelen riskleri/dezavantajları tanıtan cümle (On the other hand, Conversely).",
+          "Eleştiri 1 ve somut zararları.",
+          "Eleştiri 2 veya uzun vadeli potansiyel tehlikeler."
+        ]
+      },
+      {
+        "section": "Conclusion & Personal Stance",
+        "elements": [
+          "Summary of Both Perspectives: Her iki cephenin ana noktalarının dengeli özeti.",
+          "Author's Balanced Verdict: Yazarın hangi tarafı daha ağır bastığını gerekçelendiren nihai görüşü."
+        ]
+      }
+    ],
+    "key_transitions": [
+      "Advocates of ... frequently assert that ...",
+      "On the other side of the spectrum, critics underscore that ...",
+      "Conversely, serious concerns have been raised regarding ...",
+      "Taking both perspectives into consideration, it becomes apparent that ..."
+    ],
+    "sample_topic": "Discuss the advantages and disadvantages of remote digital learning compared to traditional campus-based university education.",
+    "band_score_tip": "Giriş ve gelişme paragraflarında tarafsızlığınızı koruyun; kendi nihai kararınızı ve dengeli görüşünüzü yalnızca sonuç paragrafında (Conclusion) açıklayın.",
+    "model_band_score": 94,
+    "model_essay": "The unprecedented digitalization of global higher education has transformed remote learning from a peripheral alternative into a mainstream academic paradigm. While flexible digital platforms offer geographic inclusivity and cost efficiency, they also present formidable psychological and pedagogical challenges. This essay will examine both dimensions before proposing a balanced evaluation.\n\nOn the one hand, proponents of remote education emphasize its remarkable democratization of knowledge. Digital universities dismantle socioeconomic and geographical barriers by allowing students in isolated rural areas or low-income regions to access world-class lectures without incurring exorbitant relocation expenses. Furthermore, asynchronous learning models empower non-traditional students—such as working professionals and young parents—to tailor their educational schedules around professional commitments. Additionally, digital repositories provide immediate access to interactive simulations and hyperlinked academic literature, thereby cultivating independent research habits.\n\nOn the other hand, critics forcefully argue that the virtual medium compromises essential aspects of the academic experience. Foremost among these concerns is the erosion of collaborative social capital and spontaneous intellectual exchange. Physical campus environments foster serendipitous encounters, interdisciplinary brainstorming, and extracurricular teamwork that cultivate critical interpersonal skills. When instruction is mediated exclusively through screens, students frequently experience psychological isolation, diminished motivation, and digital cognitive fatigue. Moreover, disciplines requiring tactile laboratory experimentation or clinical internships cannot be adequately replicated within virtual environments.\n\nIn conclusion, both modes of instruction exhibit profound merits alongside notable limitations. While remote learning excels at providing equitable access and scheduling flexibility, traditional campuses remain unmatched in cultivating holistic human socialization and hands-on scientific mastery. Therefore, the optimal future of tertiary education lies not in an exclusive dichotomy, but in a hybrid framework that synergistically integrates digital lectures with intensive in-person collaborative seminars.",
+    "annotated_strengths": [
+      "Kelimelerin tam akademik seviyesi (AWL Sublist 1-10: peripheral, democratization, exorbitant, serendipitous, dichotomy).",
+      "Gelişme paragrafları arasında kusursuz simetri ve denge (bir tarafı yüceltip diğerini ezmeden tarafsız analiz).",
+      "Sonuç paragrafında yaratıcı ve ikna edici bir sentez ('hybrid framework').",
+      "Zengin bağlaç geçişleri: 'On the one hand', 'Furthermore', 'On the other hand', 'Foremost among these'."
+    ],
+    "common_pitfalls": [
+      "Bir tarafa 5 cümle yazıp diğer tarafa 1 cümle yazarak tarafsızlığı bozmak.",
+      "Gelişme paragrafında 'I believe' diyerek For/Against formatının nesnelliğini zedelemek.",
+      "Sonuçta hiçbir tarafı seçmeyip kararsız kalmak (Sentez veya hafif eğilim bildirilmelidir)."
+    ]
+  },
+  {
+    "id": "problem-solution-essay",
+    "title": "Problem - Solution Essay (Sorun - Çözüm Kompozisyonu)",
+    "description": "ODTÜ EPE ve İTÜ Proficiency sınavlarında sıklıkla tercih edilen; küresel, kentsel veya bilimsel bir krizi tanımlayıp uygulanabilir somut çözümler öneren kompozisyon türü.",
+    "structure": [
+      {
+        "section": "Introduction",
+        "elements": [
+          "Problem tanımı ve krizin ciddiyetini vurgulayan kanca (Hook).",
+          "Problemin arka planı ve güncel istatistiki/sosyal boyutu.",
+          "Thesis Statement: Bu krizin temel boyutlarını ve çözüme yönelik politika önerilerini özetleyen ana cümle."
+        ]
+      },
+      {
+        "section": "Body Paragraph 1 (The Problem)",
+        "elements": [
+          "Topic Sentence: Problemin temel nedenlerini ve yarattığı hasarı tanımlayın.",
+          "Çevresel, sosyal veya ekonomik yansımalar.",
+          "Mevcut durumun neden sürdürülemez olduğunu gösteren somut analiz."
+        ]
+      },
+      {
+        "section": "Body Paragraph 2 (Viable Solutions)",
+        "elements": [
+          "Topic Sentence: Sorunun çözümüne yönelik stratejik müdahaleleri tanıtın.",
+          "1. Somut Çözüm: Devlet/politika düzeyinde yasal veya mali düzenleme.",
+          "2. Somut Çözüm: Teknolojik inovasyon veya toplumsal bilinçlendirme.",
+          "Çözümlerin uygulanabilirliği ve beklenen olumlu etkisi."
         ]
       },
       {
         "section": "Conclusion",
         "elements": [
-          "Neden ve sonuçların sentezi ve potansiyel çözüm/önlem önerileri."
+          "Problemin ve önerilen çözümlerin kısa sentezi.",
+          "Harekete geçilmezse ortaya çıkacak felaket senaryosu (Call to action).",
+          "İyimser kapanış vizyonu."
+        ]
+      }
+    ],
+    "key_transitions": [
+      "A primary catalyst underpinning this crisis is ...",
+      "To mitigate these detrimental ramifications, ...",
+      "A viable pragmatic intervention entails ...",
+      "Unless proactive measures are instituted immediately, ..."
+    ],
+    "sample_topic": "Urban traffic congestion and carbon emissions have reached unprecedented levels in major metropolises. Discuss the main causes of this crisis and propose viable solutions.",
+    "band_score_tip": "Çözüm önerirken 'insanlar dikkatli olmalı' gibi genel ve zayıf tavsiyeler yerine; 'karbon vergisi uygulanmalı', 'toplu taşıma sübvanse edilmeli' gibi somut kurumsal adımlar sunun.",
+    "model_band_score": 93,
+    "model_essay": "In modern metropolitan centers, rampant vehicular congestion and escalating greenhouse emissions represent one of the most pressing socio-environmental dilemmas of the twenty-first century. Rapid urbanization coupled with obsolete infrastructure has paralyzed urban mobility and deteriorated public health. To alleviate this escalating crisis, municipal authorities must implement a concerted strategy combining stringent fiscal disincentives with massive public transit investments.\n\nThe genesis of urban gridlock lies predominantly in car-centric municipal planning and inadequate commuter alternatives. For decades, city governments prioritized highway expansion over public rail networks, inadvertently incentivizing private vehicle dependency. Consequently, millions of single-occupancy automobiles inundate city arterial roads daily, generating hazardous airborne particulates such as nitrogen dioxide and particulate matter 2.5. Beyond environmental degradation, commuters sacrifice hours in traffic, which precipitates chronic stress and inflicts billions of dollars in lost economic productivity.\n\nTo mitigate these detrimental ramifications, a dual-pronged policy approach is imperative. Firstly, metropolitan administrations should introduce congestion pricing zones, wherein private motorists are taxed heavily for entering central commercial districts during peak hours. Cities like London and Singapore have demonstrated that congestion charges substantially reduce vehicular volume while generating designated revenue streams. Secondly, these fiscal revenues must be directly channeled into subsidizing clean, zero-emission mass transit systems, including electric bus rapid transit and extensive subway extensions. When urban dwellers are provided with rapid, hygienic, and cost-effective alternatives, commuter behavior shifts organically away from private automobiles.\n\nIn conclusion, vehicular paralysis in modern metropolises is an unsustainable consequence of historical policy oversights. Nevertheless, by penalizing inefficient private transit and heavily subsidizing comprehensive public infrastructure, cities can reclaim their air quality and economic dynamism. Decisive governmental intervention today is the sole safeguard against total urban immobility tomorrow.",
+    "annotated_strengths": [
+      "Tam ODTÜ ve İTÜ sınav tarzı akademik retorik ve argümantasyon gücü.",
+      "Sebep-sonuç bağlamı mükemmel: 'prioritized highway expansion... inadvertently incentivizing... Consequently...'.",
+      "Somut ve uluslararası referanslı çözümler (London & Singapore congestion pricing).",
+      "Gelişmiş akademik fiiller: alleviate, inundate, precipitate, mitigate, channel."
+    ],
+    "common_pitfalls": [
+      "Problemi çok uzun anlatıp çözüme sadece 1-2 cümle ayırmak (Paragraflar eşit ağırlıkta olmalıdır).",
+      "Gerçekçi olmayan hayali çözümler önermek (örneğin 'herkes bisiklete binsin' demek yerine altyapı ve maliyet önerilmelidir)."
+    ]
+  },
+  {
+    "id": "cause-effect-essay",
+    "title": "Cause & Effect Essay (Neden - Sonuç Kompozisyonu)",
+    "description": "ODTÜ EPE ve Boğaziçi BUEPT sınavlarında sıklıkla sorulan, bir fenomenin altında yatan kök nedenleri (causes) ve doğurduğu doğrudan/dolaylı sonuçları (effects) analiz eden akademik format.",
+    "structure": [
+      {
+        "section": "Introduction",
+        "elements": [
+          "Kanca ve fenomenin tanımlanması.",
+          "Background: Meselenin tarihsel veya bilimsel çerçevesi.",
+          "Thesis Statement: Bu fenomenin temel nedenlerinin X ve Y olduğunu, bunun sonucunda ise Z etkisinin ortaya çıktığını belirten cümle."
+        ]
+      },
+      {
+        "section": "Body Paragraph 1 (Root Causes)",
+        "elements": [
+          "Topic Sentence: Olayı tetikleyen ana faktörleri/nedenleri belirten cümle.",
+          "Neden 1 ve derinlemesine açıklaması.",
+          "Neden 2 ve mekanizması."
+        ]
+      },
+      {
+        "section": "Body Paragraph 2 (Primary Effects)",
+        "elements": [
+          "Topic Sentence: Ortaya çıkan birincil ve ikincil sonuçları duyuran cümle.",
+          "Bireysel ve psikolojik sonuçlar.",
+          "Toplumsal, kurumsal veya ekonomik uzun vadeli yansımalar."
+        ]
+      },
+      {
+        "section": "Conclusion",
+        "elements": [
+          "Neden ve sonuçların sentezi.",
+          "Geleceğe dair genel bir uyarı veya değerlendirme."
         ]
       }
     ],
@@ -87,6 +223,18 @@
       "This inevitably precipitates a decline in ...",
       "Consequently, the long-term ramifications encompass ..."
     ],
-    "sample_topic": "Analyze the primary causes of mental fatigue among university students and its subsequent effects on academic performance."
+    "sample_topic": "Analyze the primary causes of mental fatigue and burnout among university students and its subsequent effects on academic performance.",
+    "band_score_tip": "Neden ve sonuç arasındaki mantıksal bağı (causality) 'because of', 'leads to', 'stems from', 'precipitates' gibi zengin fiil ve bağlaçlarla kurun.",
+    "model_band_score": 91,
+    "model_essay": "In contemporary higher education, chronic psychological burnout and cognitive exhaustion have emerged as widespread crises affecting undergraduate populations globally. Intensified academic competition combined with perpetual digital connectivity has subjected students to unprecedented pressures. This essay will examine how excessive workload and sleep deprivation serve as primary catalysts for student fatigue, and explore how this exhaustion subsequently impairs cognitive functioning and emotional stability.\n\nAt the root of this psychological malaise lies a confluence of unrealistic academic burdens and disrupted circadian rhythms. Driven by competitive graduate admissions and demanding job markets, students frequently enroll in excessive course credits while simultaneously pursuing internships. This relentless schedule leaves insufficient time for physiological recovery. Compounding this structural stress is the ubiquitous presence of digital smartphones. Late-night exposure to blue light from screens suppresses melatonin secretion, drastically degrading sleep architecture. When young adults consistently sleep fewer than six hours, the neurological brain cannot effectively consolidate memory or flush biochemical toxins, thereby inducing chronic daytime lethargy.\n\nThe ramifications of this sustained fatigue manifest perniciously across both intellectual and psychological domains. Academically, sleep-deprived undergraduates exhibit sharp deficits in executive brain function, resulting in diminished attention spans and impaired analytical synthesis during examinations. Furthermore, chronic fatigue precipitates emotional dysregulation, fostering pervasive anxiety, impostor syndrome, and depressive symptoms. Over time, students frequently disengage from academic life altogether, leading to escalating university dropout rates and squandered intellectual potential.\n\nIn conclusion, university burnout is neither a personal deficiency nor a temporary inconvenience; rather, it is the direct consequence of systemic institutional overwork and pervasive digital intrusion. Unless academic institutions recalibrate workload expectations and promote mental wellness proactively, the cycle of fatigue will continue to undermine the academic vitality of future generations.",
+    "annotated_strengths": [
+      "Kusursuz neden-sonuç zinciri (iş yükü & mavi ışık -> melatonin baskılanması -> beyin toksinleri -> akademik başarısızlık).",
+      "Biyolojik ve psikolojik terminoloji (circadian rhythms, executive function, melatonin secretion).",
+      "Tüm bağlaçlar yerli yerinde: 'At the root of', 'Compounding this', 'The ramifications of', 'In conclusion'."
+    ],
+    "common_pitfalls": [
+      "Neden ile sonucu birbirine karıştırmak (Cause ile Effect arasındaki zaman sırası korunmalıdır).",
+      "Sadece tek bir nedene takılıp kalmak (En az 2 ana neden ve 2 ana etki incelenmelidir)."
+    ]
   }
 ]

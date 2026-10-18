@@ -23,6 +23,10 @@ class WritingGuide {
   final List<String> keyTransitions;
   final String sampleTopic;
   final String? bandScoreTip;
+  final String? modelEssay;
+  final int? modelBandScore;
+  final List<String> annotatedStrengths;
+  final List<String> commonPitfalls;
 
   WritingGuide({
     required this.id,
@@ -32,6 +36,10 @@ class WritingGuide {
     required this.keyTransitions,
     required this.sampleTopic,
     this.bandScoreTip,
+    this.modelEssay,
+    this.modelBandScore,
+    this.annotatedStrengths = const [],
+    this.commonPitfalls = const [],
   });
 
   factory WritingGuide.fromJson(Map<String, dynamic> json) {
@@ -49,6 +57,16 @@ class WritingGuide {
           [],
       sampleTopic: json['sample_topic'] ?? '',
       bandScoreTip: json['band_score_tip'],
+      modelEssay: json['model_essay'],
+      modelBandScore: json['model_band_score'],
+      annotatedStrengths: (json['annotated_strengths'] as List<dynamic>?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          [],
+      commonPitfalls: (json['common_pitfalls'] as List<dynamic>?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          [],
     );
   }
 }

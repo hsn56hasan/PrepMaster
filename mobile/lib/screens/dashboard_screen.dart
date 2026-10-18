@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/university.dart';
 import '../models/question.dart';
 import '../services/api_service.dart';
 import '../theme/app_theme.dart';
+import '../main.dart';
 import 'exam_runner_screen.dart';
 import 'university_picker_dialog.dart';
 import 'listening_screen.dart';
@@ -331,6 +333,339 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
+  void _toggleTheme() async {
+    final isDark = themeModeNotifier.value == ThemeMode.dark;
+    final newMode = isDark ? ThemeMode.light : ThemeMode.dark;
+    themeModeNotifier.value = newMode;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('theme_mode', newMode == ThemeMode.dark ? 'dark' : 'light');
+    setState(() {});
+  }
+
+  void _openAccountDialog() async {
+    final user = await ApiService().loadSavedUser();
+    if (!mounted) return;
+    final messenger = ScaffoldMessenger.of(context);
+
+    if (user != null && user['id'] != null) {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
+          title: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.blue.shade50,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(Icons.person, color: AppTheme.brandBlue, size: 22),
+              ),
+              const SizedBox(width: 10),
+              const Expanded(
+                child: Text('Öğrenci Hesabı', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              ),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _profileRow('Ad Soyad', user['full_name'] ?? '-'),
+              _profileRow('Kullanıcı Adı', user['username'] ?? '-'),
+              _profileRow('E-Posta', user['email'] ?? '-'),
+              _profileRow('Üniversite', (user['university_id'] ?? '').toString().toUpperCase()),
+              _profileRow('Öğrenci No', user['student_number'] ?? '-'),
+              const Divider(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text('Doğrulama:', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: user['is_verified_student'] == 1 ? Colors.green.shade50 : Colors.amber.shade50,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: user['is_verified_student'] == 1 ? Colors.green : Colors.amber),
+                    ),
+                    child: Text(
+                      user['is_verified_student'] == 1 ? '✓ Doğrulanmış' : 'Doğrulanmadı',
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold,
+                        color: user['is_verified_student'] == 1 ? Colors.green.shade800 : Colors.amber.shade900,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('Kapat'),
+            ),
+            ElevatedButton.icon(
+              onPressed: () async {
+                await ApiService().clearSavedUser();
+                if (ctx.mounted) Navigator.pop(ctx);
+                if (mounted) {
+                  setState(() {});
+                  messenger.showSnackBar(
+                    const SnackBar(content: Text('Oturum kapatıldı.')),
+                  );
+                }
+              },
+              icon: const Icon(Icons.logout, size: 16),
+              label: const Text('Çıkış Yap'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppTheme.accentRose,
+                foregroundColor: Colors.white,
+              ),
+            ),
+          ],
+        ),
+      );
+    } else {
+      final loginIdentCtrl = TextEditingController();
+      final loginPassCtrl = TextEditingController();
+      final regNameCtrl = TextEditingController();
+      final regUserCtrl = TextEditingController();
+      final regEmailCtrl = TextEditingController();
+      final regPassCtrl = TextEditingController();
+      final regNumCtrl = TextEditingController();
+      final regUniId = widget.currentUniversity.id;
+
+      showDialog(
+        context: context,
+        builder: (ctx) => StatefulBuilder(
+          builder: (dialogCtx, setDialogState) {
+            return DefaultTabController(
+              length: 2,
+              child: AlertDialog(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                title: Column(
+                  children: [
+                    const Text('PrepMaster Hesabı', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 8),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade100,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: TabBar(
+                        indicator: BoxDecoration(
+                          color: AppTheme.brandBlue,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        labelColor: Colors.white,
+                        unselectedLabelColor: Colors.grey.shade700,
+                        tabs: const [
+                          Tab(text: 'Giriş Yap'),
+                          Tab(text: 'Kayıt Ol'),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                content: SizedBox(
+                  width: double.maxFinite,
+                  child: TabBarView(
+                    children: [
+                      SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const SizedBox(height: 10),
+                            TextField(
+                              controller: loginIdentCtrl,
+                              decoration: InputDecoration(
+                                labelText: 'Kullanıcı Adı veya E-Posta',
+                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            TextField(
+                              controller: loginPassCtrl,
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                labelText: 'Şifre',
+                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  final ident = loginIdentCtrl.text.trim();
+                                  final pass = loginPassCtrl.text.trim();
+                                  if (ident.isEmpty || pass.isEmpty) {
+                                    messenger.showSnackBar(
+                                      const SnackBar(content: Text('Lütfen bilgilerinizi eksiksiz girin.')),
+                                    );
+                                    return;
+                                  }
+                                  final res = await ApiService().login(identifier: ident, password: pass);
+                                  if (res['success'] == true) {
+                                    if (ctx.mounted) Navigator.pop(ctx);
+                                    if (mounted) {
+                                      setState(() {});
+                                      messenger.showSnackBar(
+                                        SnackBar(
+                                          content: Text('✓ Hoş geldin, ${res['user']['full_name']}!'),
+                                          backgroundColor: Colors.green.shade700,
+                                        ),
+                                      );
+                                    }
+                                  } else {
+                                    messenger.showSnackBar(
+                                      SnackBar(
+                                        content: Text(res['message'] ?? 'Giriş yapılamadı.'),
+                                        backgroundColor: Colors.red.shade700,
+                                      ),
+                                    );
+                                  }
+                                },
+                                child: const Text('Giriş Yap'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const SizedBox(height: 10),
+                            TextField(
+                              controller: regNameCtrl,
+                              decoration: InputDecoration(
+                                labelText: 'Ad Soyad',
+                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            TextField(
+                              controller: regUserCtrl,
+                              decoration: InputDecoration(
+                                labelText: 'Kullanıcı Adı',
+                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            TextField(
+                              controller: regEmailCtrl,
+                              decoration: InputDecoration(
+                                labelText: 'E-Posta (.edu.tr)',
+                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            TextField(
+                              controller: regNumCtrl,
+                              decoration: InputDecoration(
+                                labelText: 'Öğrenci No (İsteğe Bağlı)',
+                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            TextField(
+                              controller: regPassCtrl,
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                labelText: 'Şifre',
+                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                              ),
+                            ),
+                            const SizedBox(height: 14),
+                            SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  final name = regNameCtrl.text.trim();
+                                  final user = regUserCtrl.text.trim();
+                                  final email = regEmailCtrl.text.trim();
+                                  final pass = regPassCtrl.text.trim();
+                                  final num = regNumCtrl.text.trim();
+
+                                  if (name.isEmpty || user.isEmpty || email.isEmpty || pass.isEmpty) {
+                                    messenger.showSnackBar(
+                                      const SnackBar(content: Text('Lütfen zorunlu alanları doldurun.')),
+                                    );
+                                    return;
+                                  }
+
+                                  final res = await ApiService().register(
+                                    email: email,
+                                    username: user,
+                                    password: pass,
+                                    fullName: name,
+                                    universityId: regUniId,
+                                    studentNumber: num,
+                                  );
+
+                                  if (res['success'] == true) {
+                                    if (ctx.mounted) Navigator.pop(ctx);
+                                    if (mounted) {
+                                      setState(() {});
+                                      messenger.showSnackBar(
+                                        SnackBar(
+                                          content: Text('✓ Hesabınız oluşturuldu. Hoş geldin, ${res['user']['full_name']}!'),
+                                          backgroundColor: Colors.green.shade700,
+                                        ),
+                                      );
+                                    }
+                                  } else {
+                                    messenger.showSnackBar(
+                                      SnackBar(
+                                        content: Text(res['message'] ?? 'Kayıt yapılamadı.'),
+                                        backgroundColor: Colors.red.shade700,
+                                      ),
+                                    );
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppTheme.accentEmerald,
+                                ),
+                                child: const Text('Hesap Oluştur'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(ctx),
+                    child: const Text('İptal'),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      );
+    }
+  }
+
+  Widget _profileRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 6),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(label, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+          Text(value, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final uni = widget.currentUniversity;
@@ -386,6 +721,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ],
         ),
         actions: [
+          IconButton(
+            icon: Icon(
+              themeModeNotifier.value == ThemeMode.dark ? Icons.light_mode : Icons.dark_mode,
+              color: themeModeNotifier.value == ThemeMode.dark ? Colors.amber : AppTheme.brandNavy,
+            ),
+            onPressed: _toggleTheme,
+            tooltip: 'Karanlık / Aydınlık Mod',
+          ),
+          IconButton(
+            icon: const Icon(Icons.account_circle_outlined, color: AppTheme.brandBlue),
+            onPressed: _openAccountDialog,
+            tooltip: 'Öğrenci Hesabı',
+          ),
           IconButton(
             icon: const Icon(Icons.assessment_outlined, color: AppTheme.brandBlue),
             onPressed: _showReportSummaryDialog,
