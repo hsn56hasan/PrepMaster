@@ -5,7 +5,8 @@ import '../services/api_service.dart';
 import '../theme/app_theme.dart';
 
 class WritingScreen extends StatefulWidget {
-  const WritingScreen({super.key});
+  final String currentLevel;
+  const WritingScreen({super.key, this.currentLevel = 'B2'});
 
   @override
   State<WritingScreen> createState() => _WritingScreenState();
@@ -15,6 +16,7 @@ class _WritingScreenState extends State<WritingScreen> with SingleTickerProvider
   late TabController _tabController;
   List<WritingGuide> _guides = [];
   bool _isLoading = true;
+  late String _selectedLevel;
 
   // AI Evaluation State
   final TextEditingController _essayController = TextEditingController();
@@ -56,6 +58,7 @@ class _WritingScreenState extends State<WritingScreen> with SingleTickerProvider
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
     _selectedPrompt = _prompts.first;
+    _selectedLevel = widget.currentLevel;
     _loadGuides();
   }
 
@@ -66,9 +69,10 @@ class _WritingScreenState extends State<WritingScreen> with SingleTickerProvider
     super.dispose();
   }
 
-  Future<void> _loadGuides() async {
+  Future<void> _loadGuides({String? level}) async {
     setState(() => _isLoading = true);
-    final list = await ApiService().getWritingGuides();
+    final targetLvl = level ?? _selectedLevel;
+    final list = await ApiService().getWritingGuides(level: targetLvl);
     if (mounted) {
       setState(() {
         _guides = list;
@@ -535,20 +539,80 @@ class _WritingScreenState extends State<WritingScreen> with SingleTickerProvider
   Widget _buildGuidesTab() {
     if (_isLoading) return const Center(child: CircularProgressIndicator());
 
-    return ListView.builder(
+    return ListView(
       padding: const EdgeInsets.all(16),
-      itemCount: _guides.length,
-      itemBuilder: (context, i) {
-        final g = _guides[i];
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 16),
-          child: Container(
-            padding: const EdgeInsets.all(18),
+      children: [
+        // Level Filter Chips
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: ['A2', 'B1', 'B2', 'C1', 'C2', 'all'].map((lvl) {
+              final isSel = _selectedLevel == lvl;
+              return Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: ChoiceChip(
+                  label: Text(
+                    lvl == 'all' ? 'Tüm Kurlar' : '$lvl ${lvl == widget.currentLevel ? "★" : ""}',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: isSel ? Colors.white : AppTheme.textMain,
+                    ),
+                  ),
+                  selected: isSel,
+                  selectedColor: AppTheme.brandBlue,
+                  backgroundColor: Colors.white,
+                  onSelected: (val) {
+                    if (val) {
+                      setState(() => _selectedLevel = lvl);
+                      _loadGuides(level: lvl);
+                    }
+                  },
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+        const SizedBox(height: 16),
+
+        if (_guides.isEmpty)
+          Container(
+            padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(22),
+              borderRadius: BorderRadius.circular(20),
               border: Border.all(color: AppTheme.borderSubtle),
             ),
+            child: Center(
+              child: Column(
+                children: [
+                  const Text(
+                    'Bu seviyede yazma rehberi bulunamadı.',
+                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.textMuted),
+                  ),
+                  const SizedBox(height: 8),
+                  TextButton(
+                    onPressed: () {
+                      setState(() => _selectedLevel = 'all');
+                      _loadGuides(level: 'all');
+                    },
+                    child: const Text('Tüm Yazma Rehberlerini Göster'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+        ..._guides.map((g) {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: Container(
+              padding: const EdgeInsets.all(18),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(22),
+                border: Border.all(color: AppTheme.borderSubtle),
+              ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -809,7 +873,8 @@ class _WritingScreenState extends State<WritingScreen> with SingleTickerProvider
             ),
           ),
         );
-      },
-    );
-  }
+      }),
+    ],
+  );
+}
 }

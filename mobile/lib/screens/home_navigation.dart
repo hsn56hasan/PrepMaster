@@ -109,7 +109,9 @@ class _HomeNavigationState extends State<HomeNavigation> {
       PracticeScreen(
         currentLevel: _currentLevel,
       ),
-      const WritingScreen(),
+      WritingScreen(
+        currentLevel: _currentLevel,
+      ),
       const AnalyticsScreen(),
     ];
 

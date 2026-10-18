@@ -308,74 +308,17 @@
             </p>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <!-- Full Simulation -->
-            <div class="p-5 rounded-2xl border-2 border-blue-600 bg-blue-50/20 flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="px-2.5 py-0.5 bg-blue-600 text-white text-[11px] font-bold rounded-lg uppercase">Tam Deneme</span>
-                  <span class="text-xs text-slate-500 font-semibold">Tüm Kurlar</span>
-                </div>
-                <h4 class="font-extrabold text-slate-800 text-base mb-1">Resmi Muafiyet / Kur Geçme Denemesi</h4>
-                <p class="text-xs text-slate-600 leading-relaxed mb-4">
-                  Restatement, Cloze Test, Reading ve Grammar bölümlerini içeren kapsamlı deneme sınavı.
-                </p>
-              </div>
-              <button onclick="startFullMockExam()" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow transition">
-                Resmi Denemeyi Başlat
-              </button>
-            </div>
+          <div id="exams-level-indicator" class="mb-4 flex items-center justify-between flex-wrap gap-2 p-3 bg-blue-50/60 border border-blue-100 rounded-2xl text-xs">
+            <span class="font-bold text-blue-900 flex items-center gap-1.5">
+              <i data-lucide="layers" class="w-4 h-4 text-blue-600"></i> Aktif Seviyenize Uygun Deneme Sınavları
+            </span>
+            <span id="exams-active-level-badge" class="px-3 py-1 bg-blue-600 text-white rounded-xl font-black">
+              B2
+            </span>
+          </div>
 
-            <!-- Restatement Challenge -->
-            <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-slate-300 transition flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="px-2.5 py-0.5 bg-indigo-100 text-indigo-700 text-[11px] font-bold rounded-lg uppercase">Özel Modül</span>
-                  <span class="text-xs text-slate-500 font-semibold">B2 - C2</span>
-                </div>
-                <h4 class="font-extrabold text-slate-800 text-base mb-1">Restatement (En Yakın Anlam) Atölyesi</h4>
-                <p class="text-xs text-slate-600 leading-relaxed mb-4">
-                  İTÜ ve Boğaziçi sınavlarının en kritik bölümü olan cümle paraphrase soruları.
-                </p>
-              </div>
-              <button onclick="startExamSimulation(null, null, 'Restatement')" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs rounded-xl transition">
-                Restatement Çöz
-              </button>
-            </div>
-
-            <!-- Reading Challenge -->
-            <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-slate-300 transition flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="px-2.5 py-0.5 bg-amber-100 text-amber-700 text-[11px] font-bold rounded-lg uppercase">Akademik Okuma</span>
-                  <span class="text-xs text-slate-500 font-semibold">B1 - C2</span>
-                </div>
-                <h4 class="font-extrabold text-slate-800 text-base mb-1">Akademik Reading & Çıkarım Testi</h4>
-                <p class="text-xs text-slate-600 leading-relaxed mb-4">
-                  Makaleler üzerinden ana fikir, detay, yazar tutumu ve kelime anlamı soruları.
-                </p>
-              </div>
-              <button onclick="startExamSimulation(null, null, 'Reading')" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs rounded-xl transition">
-                Reading Çöz
-              </button>
-            </div>
-
-            <!-- Grammar & Cloze Challenge -->
-            <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-slate-300 transition flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="px-2.5 py-0.5 bg-emerald-100 text-emerald-700 text-[11px] font-bold rounded-lg uppercase">Use of English</span>
-                  <span class="text-xs text-slate-500 font-semibold">A1 - C1</span>
-                </div>
-                <h4 class="font-extrabold text-slate-800 text-base mb-1">Grammar & Cloze Test Serisi</h4>
-                <p class="text-xs text-slate-600 leading-relaxed mb-4">
-                  Zamanlar, bağlaçlar, devrik yapılar ve metin içi boşluk doldurma.
-                </p>
-              </div>
-              <button onclick="startExamSimulation(null, null, 'Grammar')" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs rounded-xl transition">
-                Grammar Çöz
-              </button>
-            </div>
+          <div id="exams-cards-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- JS renderExamsTab() ile seviyeye göre doldurulacak -->
           </div>
         </div>
       </section>
@@ -446,6 +389,11 @@
             </div>
           </div>
 
+          <!-- Listening Level Filter Bar -->
+          <div id="listening-filter-bar" class="flex items-center gap-2 flex-wrap p-2 bg-slate-50 border border-slate-200/80 rounded-2xl">
+            <!-- JS loadListeningHub() ile dolacak -->
+          </div>
+
           <div id="listening-tracks-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <!-- JS ile dolacak -->
           </div>
@@ -475,6 +423,11 @@
                 Boğaziçi BUEPT, ODTÜ EPE, Bilkent COPE ve İTÜ mülakat formatlarına göre hazırlanmış konuşma görevleri. Hazırlık süresinde notlarınızı alın, mikrofonla konuşun ve yapay zekadan anlık telaffuz, akıcılık ve dilbilgisi geri bildirimi alın.
               </p>
             </div>
+          </div>
+
+          <!-- Speaking Level Filter Bar -->
+          <div id="speaking-filter-bar" class="flex items-center gap-2 flex-wrap p-2 bg-slate-50 border border-slate-200/80 rounded-2xl">
+            <!-- JS loadSpeakingHub() ile dolacak -->
           </div>
 
           <div id="speaking-tasks-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -577,6 +530,10 @@
       <section id="tab-content-writing" class="hidden space-y-6">
         <div id="ai-writing-evaluator-section" class="space-y-6">
           <!-- JS initAIWritingEvaluator() -->
+        </div>
+
+        <div id="writing-filter-bar" class="flex items-center gap-2 flex-wrap p-2 bg-slate-50 border border-slate-200/80 rounded-2xl">
+          <!-- JS loadWritingGuides() ile dolacak -->
         </div>
 
         <div id="writing-guides-container" class="space-y-6">

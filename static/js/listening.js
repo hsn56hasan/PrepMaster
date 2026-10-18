@@ -15,22 +15,61 @@ window.listeningState = {
 };
 
 
-async function loadListeningHub() {
+async function loadListeningHub(targetLevel = null) {
   const container = document.getElementById("listening-tracks-list");
+  const filterBar = document.getElementById("listening-filter-bar");
   if (!container) return;
 
+  const currentLevel = window.appState?.currentLevel || 'B2';
+  const activeLevel = targetLevel !== null ? targetLevel : currentLevel;
+
+  // Render Level Filter Bar
+  if (filterBar) {
+    const levels = ['A2', 'B1', 'B2', 'C1', 'C2'];
+    filterBar.innerHTML = `
+      <span class="text-xs font-bold text-slate-500 mr-2 flex items-center gap-1">
+        <i data-lucide="filter" class="w-3.5 h-3.5"></i> Kur Filtresi:
+      </span>
+      ${levels.map(lvl => {
+        const isSelected = activeLevel === lvl;
+        return `
+          <button onclick="loadListeningHub('${lvl}')" class="px-3 py-1 rounded-xl text-xs font-bold transition ${isSelected ? 'bg-blue-600 text-white shadow-sm' : 'bg-white text-slate-600 hover:bg-slate-200 border border-slate-200'}">
+            ${lvl} ${lvl === currentLevel ? '★' : ''}
+          </button>
+        `;
+      }).join('')}
+      <button onclick="loadListeningHub('all')" class="px-3 py-1 rounded-xl text-xs font-bold transition ${activeLevel === 'all' ? 'bg-slate-800 text-white shadow-sm' : 'bg-white text-slate-600 hover:bg-slate-200 border border-slate-200'}">
+        Tüm Kurlar
+      </button>
+    `;
+  }
+
   container.innerHTML = `
-    <div class="p-8 text-center text-slate-400">
+    <div class="col-span-full p-8 text-center text-slate-400">
       <i data-lucide="loader-2" class="w-6 h-6 animate-spin mx-auto mb-2 text-blue-600"></i>
-      Dinleme sınavları yükleniyor...
+      ${activeLevel === 'all' ? 'Tüm' : activeLevel} seviyesi dinleme sınavları yükleniyor...
     </div>
   `;
   if (window.lucide) window.lucide.createIcons();
 
   try {
-    const res = await fetch('/api/listening');
+    const url = activeLevel && activeLevel !== 'all' ? `/api/listening?level=${activeLevel}` : '/api/listening';
+    const res = await fetch(url);
     const tracks = await res.json();
     window.listeningState.tracks = tracks;
+
+    if (!tracks || tracks.length === 0) {
+      container.innerHTML = `
+        <div class="col-span-full p-8 text-center bg-white rounded-3xl border border-slate-200">
+          <p class="text-sm font-bold text-slate-700 mb-2">${activeLevel} seviyesinde dinleme parçası bulunamadı.</p>
+          <button onclick="loadListeningHub('all')" class="px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-xl hover:bg-blue-700 transition">
+            Tüm Dinleme Sınavlarını Görüntüle
+          </button>
+        </div>
+      `;
+      if (window.lucide) window.lucide.createIcons();
+      return;
+    }
 
     container.innerHTML = tracks.map(t => {
       const isNoteTaking = t.type === 'note_taking';
@@ -41,7 +80,7 @@ async function loadListeningHub() {
               <span class="px-2.5 py-1 text-[11px] font-extrabold rounded-full ${isNoteTaking ? 'bg-amber-100 text-amber-800 border border-amber-200' : 'bg-blue-100 text-blue-800 border border-blue-200'}">
                 ${isNoteTaking ? '📝 Note-Taking' : '🎧 While-Listening'}
               </span>
-              <span class="px-2.5 py-0.5 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold">
+              <span class="px-2.5 py-0.5 bg-blue-50 text-blue-700 border border-blue-100 rounded-lg text-xs font-black">
                 ${t.level}
               </span>
             </div>
@@ -66,7 +105,7 @@ async function loadListeningHub() {
     if (window.lucide) window.lucide.createIcons();
   } catch (err) {
     console.error("Listening tracks error:", err);
-    container.innerHTML = `<p class="text-xs text-rose-500 text-center">Dinleme parçaları yüklenemedi.</p>`;
+    container.innerHTML = `<p class="col-span-full text-xs text-rose-500 text-center">Dinleme parçaları yüklenemedi.</p>`;
   }
 }
 

@@ -115,7 +115,7 @@ class DeploymentChecker:
         if l_file.exists():
             with open(l_file, "r", encoding="utf-8") as f:
                 tracks = json.load(f)
-            self.assert_check("Listening tracks count == 8", len(tracks) == 8, f"Found {len(tracks)}")
+            self.assert_check("Listening tracks count >= 8", len(tracks) >= 8, f"Found {len(tracks)}")
         else:
             self.assert_check("listening.json exists", False, "File missing")
 

@@ -111,11 +111,28 @@ async function changeCurrentLevel(lvl) {
     console.error("Save profile error:", err);
   }
 
-  // Refresh active tab content
-  if (window.appState.activeTab === 'flashcards' && window.loadFlashcards) {
-    window.loadFlashcards(lvl);
-  } else if (window.appState.activeTab === 'practice') {
+  // Dynamically refresh the currently active tab content for the new level
+  refreshActiveTabContent(lvl);
+}
+
+function refreshActiveTabContent(lvl) {
+  const currentLvl = lvl || window.appState.currentLevel;
+  const activeTab = window.appState.activeTab;
+
+  if (activeTab === 'flashcards' && window.loadFlashcards) {
+    window.loadFlashcards(currentLvl);
+  } else if (activeTab === 'practice') {
     loadPracticeQuestions();
+  } else if (activeTab === 'listening' && window.loadListeningHub) {
+    window.loadListeningHub(currentLvl);
+  } else if (activeTab === 'speaking' && window.loadSpeakingHub) {
+    window.loadSpeakingHub(currentLvl);
+  } else if (activeTab === 'writing') {
+    loadWritingGuides(currentLvl);
+  } else if (activeTab === 'exams') {
+    renderExamsTab(currentLvl);
+  } else if (activeTab === 'dashboard') {
+    loadDashboardStats();
   }
 }
 
@@ -131,6 +148,7 @@ function setupTabNavigation() {
 
 function switchTab(tabName) {
   window.appState.activeTab = tabName;
+  const currentLvl = window.appState.currentLevel;
 
   // Toggle visible sections
   const tabs = ['dashboard', 'exams', 'listening', 'speaking', 'practice', 'flashcards', 'writing', 'analytics', 'mistakes'];
@@ -154,20 +172,22 @@ function switchTab(tabName) {
     }
   });
 
-  // Execute tab-specific loaders
+  // Execute tab-specific loaders with active level parameter
   if (tabName === 'dashboard') {
     loadDashboardStats();
+  } else if (tabName === 'exams') {
+    renderExamsTab(currentLvl);
   } else if (tabName === 'listening') {
-    if (window.loadListeningHub) window.loadListeningHub();
+    if (window.loadListeningHub) window.loadListeningHub(currentLvl);
   } else if (tabName === 'speaking') {
-    if (window.loadSpeakingHub) window.loadSpeakingHub();
+    if (window.loadSpeakingHub) window.loadSpeakingHub(currentLvl);
   } else if (tabName === 'flashcards' && window.loadFlashcards) {
-    window.loadFlashcards(window.appState.currentLevel);
+    window.loadFlashcards(currentLvl);
   } else if (tabName === 'practice') {
     loadPracticeQuestions();
   } else if (tabName === 'writing') {
     if (window.initAIWritingEvaluator) window.initAIWritingEvaluator();
-    loadWritingGuides();
+    loadWritingGuides(currentLvl);
   } else if (tabName === 'analytics') {
     loadAnalytics();
   } else if (tabName === 'mistakes') {
@@ -292,18 +312,65 @@ async function loadPracticeQuestions() {
   }
 }
 
-async function loadWritingGuides() {
+async function loadWritingGuides(targetLevel = null) {
   const container = document.getElementById("writing-guides-container");
+  const filterBar = document.getElementById("writing-filter-bar");
   if (!container) return;
 
+  const currentLevel = window.appState?.currentLevel || 'B2';
+  const activeLevel = targetLevel !== null ? targetLevel : currentLevel;
+
+  // Render Writing Level Filter Bar
+  if (filterBar) {
+    const levels = ['A2', 'B1', 'B2', 'C1', 'C2'];
+    filterBar.innerHTML = `
+      <span class="text-xs font-bold text-slate-500 mr-2 flex items-center gap-1">
+        <i data-lucide="filter" class="w-3.5 h-3.5"></i> Essay & Yazma Kuru:
+      </span>
+      ${levels.map(lvl => {
+        const isSelected = activeLevel === lvl;
+        return `
+          <button onclick="loadWritingGuides('${lvl}')" class="px-3 py-1 rounded-xl text-xs font-bold transition ${isSelected ? 'bg-blue-600 text-white shadow-sm' : 'bg-white text-slate-600 hover:bg-slate-200 border border-slate-200'}">
+            ${lvl} ${lvl === currentLevel ? '★' : ''}
+          </button>
+        `;
+      }).join('')}
+      <button onclick="loadWritingGuides('all')" class="px-3 py-1 rounded-xl text-xs font-bold transition ${activeLevel === 'all' ? 'bg-slate-800 text-white shadow-sm' : 'bg-white text-slate-600 hover:bg-slate-200 border border-slate-200'}">
+        Tüm Kurlar
+      </button>
+    `;
+  }
+
   try {
-    const res = await fetch('/api/writing-guides');
+    const url = activeLevel && activeLevel !== 'all' ? `/api/writing-guides?level=${activeLevel}` : '/api/writing-guides';
+    const res = await fetch(url);
     const guides = await res.json();
+
+    if (!guides || guides.length === 0) {
+      container.innerHTML = `
+        <div class="p-8 text-center bg-white rounded-3xl border border-slate-200">
+          <p class="text-sm font-bold text-slate-700 mb-2">${activeLevel} seviyesinde yazma rehberi bulunamadı.</p>
+          <button onclick="loadWritingGuides('all')" class="px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-xl hover:bg-blue-700 transition">
+            Tüm Rehberleri Görüntüle
+          </button>
+        </div>
+      `;
+      if (window.lucide) window.lucide.createIcons();
+      return;
+    }
 
     container.innerHTML = guides.map(g => `
       <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
         <div class="flex items-start justify-between gap-4 flex-wrap">
           <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2.5 py-0.5 bg-blue-100 text-blue-800 rounded-md text-xs font-black">
+                ${g.level || 'B2'}
+              </span>
+              <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider">
+                Akademik Kompozisyon Formatı
+              </span>
+            </div>
             <h3 class="text-xl font-extrabold text-slate-800 mb-1">${g.title}</h3>
             <p class="text-xs text-slate-500 leading-relaxed">${g.description}</p>
           </div>
@@ -388,6 +455,157 @@ async function loadWritingGuides() {
   } catch (err) {
     console.error("Writing guides error:", err);
   }
+}
+
+function renderExamsTab(targetLevel = null) {
+  const container = document.getElementById("exams-cards-container");
+  const badgeEl = document.getElementById("exams-active-level-badge");
+  if (!container) return;
+
+  const lvl = (targetLevel || window.appState.currentLevel || "B2").toUpperCase();
+  if (badgeEl) badgeEl.innerText = `${lvl} (Hedef Kur)`;
+
+  let module1 = {
+    badge: `Use of English • ${lvl}`,
+    badgeColor: "bg-indigo-100 text-indigo-700",
+    title: "Temel Dilbilgisi & Cümle Kurma",
+    desc: `${lvl} seviyesine uygun zamanlar, bağlaçlar, cümle kurma kuralları ve günlük soru kalıpları.`,
+    category: "Use of English"
+  };
+
+  let module2 = {
+    badge: `Okuma & Kelime • ${lvl}`,
+    badgeColor: "bg-amber-100 text-amber-700",
+    title: "Akademik Kelime & Okuma Testi",
+    desc: `${lvl} seviyesinde kısa akademik ve günlük metinler üzerinden ana fikir ve kelime soruları.`,
+    category: "Reading"
+  };
+
+  let module3 = {
+    badge: `Dilbilgisi • ${lvl}`,
+    badgeColor: "bg-emerald-100 text-emerald-700",
+    title: "Grammar & Boşluk Doldurma",
+    desc: `${lvl} seviyesine özel hazırlanmış çoktan seçmeli dilbilgisi ve boşluk tamamlama soruları.`,
+    category: "Grammar"
+  };
+
+  if (['B1', 'B2'].includes(lvl)) {
+    module1 = {
+      badge: `Restatement • ${lvl}`,
+      badgeColor: "bg-indigo-100 text-indigo-700",
+      title: "Restatement (En Yakın Anlam) Atölyesi",
+      desc: `${lvl} seviyesinde cümle paraphrase etme, eşanlamlı yapılar ve anlam bütünlüğü analizi.`,
+      category: "Restatement"
+    };
+    module2 = {
+      badge: `Akademik Okuma • ${lvl}`,
+      badgeColor: "bg-amber-100 text-amber-700",
+      title: "Akademik Reading & Çıkarım Testi",
+      desc: `${lvl} sınav formatında makaleler üzerinden ana fikir, detay, yazar tutumu ve kelime soruları.`,
+      category: "Reading"
+    };
+    module3 = {
+      badge: `Cloze Test • ${lvl}`,
+      badgeColor: "bg-emerald-100 text-emerald-700",
+      title: "Grammar & Cloze Test Serisi",
+      desc: `${lvl} hazırlık müfredatına uygun zamanlar, bağlaçlar ve paragraf içi boşluk doldurma.`,
+      category: "Cloze Test"
+    };
+  } else if (['C1', 'C2'].includes(lvl)) {
+    module1 = {
+      badge: `İleri Düzey • ${lvl}`,
+      badgeColor: "bg-purple-100 text-purple-700",
+      title: "İleri Düzey Restatement & Text Analysis",
+      desc: `Boğaziçi BUEPT ve ODTÜ EPE standardında karmaşık felsefi ve bilimsel cümle paraphrase testleri.`,
+      category: "Restatement"
+    };
+    module2 = {
+      badge: `Akademik Analiz • ${lvl}`,
+      badgeColor: "bg-rose-100 text-rose-700",
+      title: "Akademik Makale & Eleştirel Okuma",
+      desc: `${lvl} seviyesinde yüksek lisans ve lisans muafiyetine yönelik akademik makale çıkarım soruları.`,
+      category: "Reading"
+    };
+    module3 = {
+      badge: `Sentence Completion • ${lvl}`,
+      badgeColor: "bg-teal-100 text-teal-700",
+      title: "Cümle & Paragraf Tamamlama Serisi",
+      desc: `İleri düzey akademik geçiş bağlaçları, retorik akış ve paragraf tamamlama soruları.`,
+      category: "Sentence Completion"
+    };
+  }
+
+  container.innerHTML = `
+    <!-- Full Mock Exam Card -->
+    <div class="p-5 rounded-2xl border-2 border-blue-600 bg-blue-50/20 flex flex-col justify-between shadow-sm">
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <span class="px-2.5 py-0.5 bg-blue-600 text-white text-[11px] font-bold rounded-lg uppercase">Tam Deneme</span>
+          <span class="px-2.5 py-0.5 bg-blue-100 text-blue-800 text-xs font-black rounded-lg">Seviye: ${lvl}</span>
+        </div>
+        <h4 class="font-extrabold text-slate-800 text-base mb-1">Resmi Muafiyet / ${lvl} Kur Bitirme Denemesi</h4>
+        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+          ${lvl} müfredatına özel seçilmiş 15 soru, dinleme parçası ve yazma/konuşma sınav simülasyonu.
+        </p>
+      </div>
+      <button onclick="startFullMockExam(null, '${lvl}')" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center justify-center gap-1.5">
+        <i data-lucide="play" class="w-3.5 h-3.5"></i> ${lvl} Deneme Sınavını Başlat
+      </button>
+    </div>
+
+    <!-- Modül 1 -->
+    <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-slate-300 transition flex flex-col justify-between">
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <span class="px-2.5 py-0.5 ${module1.badgeColor} text-[11px] font-bold rounded-lg uppercase">${module1.badge}</span>
+          <span class="text-xs text-slate-500 font-semibold">${lvl} Modülü</span>
+        </div>
+        <h4 class="font-extrabold text-slate-800 text-base mb-1">${module1.title}</h4>
+        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+          ${module1.desc}
+        </p>
+      </div>
+      <button onclick="startExamSimulation(null, '${lvl}', '${module1.category}')" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs rounded-xl transition">
+        ${module1.category} Sorularını Çöz
+      </button>
+    </div>
+
+    <!-- Modül 2 -->
+    <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-slate-300 transition flex flex-col justify-between">
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <span class="px-2.5 py-0.5 ${module2.badgeColor} text-[11px] font-bold rounded-lg uppercase">${module2.badge}</span>
+          <span class="text-xs text-slate-500 font-semibold">${lvl} Modülü</span>
+        </div>
+        <h4 class="font-extrabold text-slate-800 text-base mb-1">${module2.title}</h4>
+        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+          ${module2.desc}
+        </p>
+      </div>
+      <button onclick="startExamSimulation(null, '${lvl}', '${module2.category}')" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs rounded-xl transition">
+        ${module2.category} Sorularını Çöz
+      </button>
+    </div>
+
+    <!-- Modül 3 -->
+    <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-slate-300 transition flex flex-col justify-between">
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <span class="px-2.5 py-0.5 ${module3.badgeColor} text-[11px] font-bold rounded-lg uppercase">${module3.badge}</span>
+          <span class="text-xs text-slate-500 font-semibold">${lvl} Modülü</span>
+        </div>
+        <h4 class="font-extrabold text-slate-800 text-base mb-1">${module3.title}</h4>
+        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+          ${module3.desc}
+        </p>
+      </div>
+      <button onclick="startExamSimulation(null, '${lvl}', '${module3.category}')" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs rounded-xl transition">
+        ${module3.category} Sorularını Çöz
+      </button>
+    </div>
+  `;
+
+  if (window.lucide) window.lucide.createIcons();
 }
 
 async function loadAnalytics() {

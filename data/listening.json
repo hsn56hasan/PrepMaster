@@ -915,5 +915,566 @@
         "explanation_tr": "Gömülü Yapısal Sağlık İzleme (SHM) sistemleri, kompozit katmanlara yerleştirilen piezoelektrik sensörler ve fiber-optik Bragg ızgaraları aracılığıyla akustik emisyonları ve ultrasonik dalgaları sürekli izleyerek arızaları önceden tespit eder."
       }
     ]
+  },
+  {
+    "id": "lis_itu_a2",
+    "university_id": "itu",
+    "level": "A2",
+    "type": "while_listening",
+    "title": "Campus Life & Library Orientation",
+    "subtitle": "İTÜ Hazırlık Başlangıç Seviyesi Dinleme",
+    "target_university": "İstanbul Teknik Üniversitesi",
+    "duration_minutes": 8,
+    "lecture_duration_seconds": 55,
+    "instructions_tr": "Bu temel dinleme testinde kampüs kütüphanesinin kuralları ve çalışma alanları anlatılmaktadır. Soruları dinlerken dikkatle cevaplayınız.",
+    "audio_script": "Welcome to Istanbul Technical University library orientation. My name is Sarah and I am the head librarian. Our main library is open every day from eight in the morning until nine in the evening during the semester. To enter the library, you must show your student identity card at the turnstiles. We have four main floors. On the first floor, you can find group study rooms and computer stations. If you need to borrow books, undergraduate students can borrow up to five books for three weeks. If you return books late, you will have to pay a small daily fine. On the third and fourth floors, silence is mandatory for individual study. Please keep your mobile phones on silent mode. Thank you, and we wish you a successful academic year.",
+    "suggested_notes_tr": [
+      "Çalışma Saatleri: Sabah 08:00 - Akşam 21:00",
+      "Giriş Şartı: Öğrenci kimlik kartı",
+      "1. Kat: Grup çalışma odaları ve bilgisayarlar",
+      "Kitap Ödünç Alma: En fazla 5 kitap, 3 hafta süreyle",
+      "3. ve 4. Kat: Bireysel sessiz çalışma alanı"
+    ],
+    "questions": [
+      {
+        "id": "lis_itu_a2_q1",
+        "question": "What time does the library close during the semester?",
+        "options": [
+          {
+            "key": "A",
+            "text": "At eight o'clock in the evening."
+          },
+          {
+            "key": "B",
+            "text": "At nine o'clock in the evening."
+          },
+          {
+            "key": "C",
+            "text": "At ten o'clock at night."
+          },
+          {
+            "key": "D",
+            "text": "It is open twenty-four hours."
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Metinde kütüphanenin sabah sekizden akşam dokuza kadar (until nine in the evening) açık olduğu açıkça belirtilmiştir."
+      },
+      {
+        "id": "lis_itu_a2_q2",
+        "question": "How many books can undergraduate students borrow at one time?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Up to three books."
+          },
+          {
+            "key": "B",
+            "text": "Up to four books."
+          },
+          {
+            "key": "C",
+            "text": "Up to five books."
+          },
+          {
+            "key": "D",
+            "text": "An unlimited number of books."
+          }
+        ],
+        "correct_answer": "C",
+        "explanation_tr": "Konuşmacı lisans öğrencilerinin en fazla beş kitap (up to five books) alabileceğini söylemektedir."
+      },
+      {
+        "id": "lis_itu_a2_q3",
+        "question": "Which floors are designated for silent individual study?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Only the first floor."
+          },
+          {
+            "key": "B",
+            "text": "The second and third floors."
+          },
+          {
+            "key": "C",
+            "text": "The third and fourth floors."
+          },
+          {
+            "key": "D",
+            "text": "All floors are silent zones."
+          }
+        ],
+        "correct_answer": "C",
+        "explanation_tr": "Konuşmacı üçüncü ve dördüncü katlarda sessizliğin zorunlu olduğunu (silence is mandatory on the third and fourth floors) vurgulamıştır."
+      }
+    ]
+  },
+  {
+    "id": "lis_odtu_a2",
+    "university_id": "odtu",
+    "level": "A2",
+    "type": "note_taking",
+    "title": "Student Club Registration & Sports Center",
+    "subtitle": "ODTÜ Kampüs Yaşamı & Kulüp Tanıtımı",
+    "target_university": "Orta Doğu Teknik Üniversitesi",
+    "duration_minutes": 10,
+    "lecture_duration_seconds": 60,
+    "instructions_tr": "Konuşmayı dinlerken kulüp günleri ve spor salonu kayıt şartları gibi önemli bilgileri not alınız. Dinleme bitince notlarınıza bakarak soruları cevaplayınız.",
+    "audio_script": "Good morning new students. Welcome to Middle East Technical University. Today I want to give you quick information about campus activities and our sports facilities. First, student club orientation will take place next Tuesday and Wednesday in the main campus alley. We have more than eighty active student clubs, ranging from robotics and astronomy to photography and drama. Joining a club is completely free and it is the best way to make lifelong friends. Second, regarding the sports center: our indoor swimming pool and gym are available to all students. You must bring a medical report and two photos to register at the student sports office before Friday. Regular operating hours are between seven in the morning and ten at night on weekdays. Remember, a healthy physical routine improves your exam performance.",
+    "suggested_notes_tr": [
+      "Kulüp Günleri: Gelecek Salı ve Çarşamba günleri ana yerleşke yolunda.",
+      "Kulüp Sayısı: 80'den fazla aktif kulüp (robotik, astronomi, fotoğrafçılık, drama).",
+      "Kulübe Katılım: Tamamen ücretsiz.",
+      "Spor Merkezi: Kapalı havuz ve fitness salonu.",
+      "Kayıt Belgeleri: Sağlık raporu ve 2 vesikalık fotoğraf (Cuma gününden önce)."
+    ],
+    "questions": [
+      {
+        "id": "lis_odtu_a2_q1",
+        "question": "When will the student club orientation take place?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Next Monday and Tuesday."
+          },
+          {
+            "key": "B",
+            "text": "Next Tuesday and Wednesday."
+          },
+          {
+            "key": "C",
+            "text": "Every weekend during the semester."
+          },
+          {
+            "key": "D",
+            "text": "Only on Friday morning."
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Konuşmacı kulüp oryantasyonunun önümüzdeki Salı ve Çarşamba günleri yapılacağını (next Tuesday and Wednesday) ifade etmiştir."
+      },
+      {
+        "id": "lis_odtu_a2_q2",
+        "question": "What documents must students submit to register for the sports center?",
+        "options": [
+          {
+            "key": "A",
+            "text": "A high school diploma and passport."
+          },
+          {
+            "key": "B",
+            "text": "A medical report and two photos."
+          },
+          {
+            "key": "C",
+            "text": "A student transcript and bank receipt."
+          },
+          {
+            "key": "D",
+            "text": "No documents are required."
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Kayıt için bir sağlık raporu ve iki adet fotoğraf (a medical report and two photos) getirilmesi gerektiği belirtilmiştir."
+      },
+      {
+        "id": "lis_odtu_a2_q3",
+        "question": "According to the speaker, what is the primary benefit of joining a club?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Earning academic credits for graduation."
+          },
+          {
+            "key": "B",
+            "text": "Getting free lunch at the cafeteria."
+          },
+          {
+            "key": "C",
+            "text": "Making lifelong friends."
+          },
+          {
+            "key": "D",
+            "text": "Avoiding attendance requirements."
+          }
+        ],
+        "correct_answer": "C",
+        "explanation_tr": "Konuşmacı bir kulübe katılmanın ömür boyu sürecek dostluklar kurmanın en iyi yolu olduğunu (best way to make lifelong friends) söylemiştir."
+      }
+    ]
+  },
+  {
+    "id": "lis_itu_b1",
+    "university_id": "itu",
+    "level": "B1",
+    "type": "while_listening",
+    "title": "Introduction to Campus Sustainability & Waste Management",
+    "subtitle": "İTÜ Yeşil Kampüs ve Sıfır Atık Politikası",
+    "target_university": "İstanbul Teknik Üniversitesi",
+    "duration_minutes": 10,
+    "lecture_duration_seconds": 65,
+    "instructions_tr": "İTÜ Yeşil Kampüs tanıtım dersini dinlerken kampüsün geri dönüşüm ve karbon hedefleri ile ilgili soruları yanıtlayınız.",
+    "audio_script": "Good afternoon everyone. In today's introductory environmental seminar, we will examine campus sustainability initiatives here at ITU. As an engineering university, our institutional objective is to achieve complete carbon neutrality by twenty-thirty. One of the central pillars of this initiative is integrated waste management. Across all faculties, color-coded recycling bins are categorized into plastic, paper, electronic waste, and organic materials. Organic waste from dining halls is collected daily and transported to our composting facility near the north gate. This organic compost is then utilized to fertilize campus green spaces without synthetic chemical additives. Furthermore, we have reduced single-use plastic bottles by eighty percent since twenty twenty-one through the installation of filtered water refilling stations. Every student is encouraged to carry a reusable thermos to support our zero-waste mission.",
+    "suggested_notes_tr": [
+      "Hedef: 2030 yılına kadar tam karbon nötrlüğü (carbon neutrality by 2030).",
+      "Geri Dönüşüm: Plastik, kağıt, e-atık ve organik atık kutuları.",
+      "Yemekhane Organik Atıkları: Kuzey kapısındaki kompost tesisine taşınıyor.",
+      "Tek Kullanımlık Plastikler: Su dolum istasyonları sayesinde %80 azaltıldı."
+    ],
+    "questions": [
+      {
+        "id": "lis_itu_b1_q1",
+        "question": "What is the university's long-term environmental target mentioned in the talk?",
+        "options": [
+          {
+            "key": "A",
+            "text": "To eliminate all motor vehicles from campus by 2025."
+          },
+          {
+            "key": "B",
+            "text": "To achieve complete carbon neutrality by 2030."
+          },
+          {
+            "key": "C",
+            "text": "To double cafeteria capacity by 2035."
+          },
+          {
+            "key": "D",
+            "text": "To construct new solar buildings only."
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Derste İTÜ'nün hedefinin 2030 yılına kadar tam karbon nötrlüğü sağlamak olduğu (carbon neutrality by 2030) açıkça belirtilmiştir."
+      },
+      {
+        "id": "lis_itu_b1_q2",
+        "question": "How is organic dining hall waste repurposed on the campus?",
+        "options": [
+          {
+            "key": "A",
+            "text": "It is incinerated to generate campus electricity."
+          },
+          {
+            "key": "B",
+            "text": "It is sold to municipal waste contractors."
+          },
+          {
+            "key": "C",
+            "text": "It is composted and used as fertilizer for green spaces."
+          },
+          {
+            "key": "D",
+            "text": "It is processed into animal feed for local farms."
+          }
+        ],
+        "correct_answer": "C",
+        "explanation_tr": "Yemekhane organik atıklarının kompost tesisinde işlenerek kimyasal madde olmadan kampüs yeşil alanlarını gübrelemede kullanıldığı ifade edilmiştir."
+      },
+      {
+        "id": "lis_itu_b1_q3",
+        "question": "What initiative led to an 80 percent reduction in single-use plastic bottles?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Banning bottled beverages in university cafeterias."
+          },
+          {
+            "key": "B",
+            "text": "Installing filtered water refilling stations across faculties."
+          },
+          {
+            "key": "C",
+            "text": "Increasing plastic recycling taxes on campus."
+          },
+          {
+            "key": "D",
+            "text": "Providing free bottled water to all first-year students."
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Fakültelere kurulan arıtmalı su doldurma istasyonları sayesinde tek kullanımlık pet şişelerin %80 azaldığı belirtilmiştir."
+      }
+    ]
+  },
+  {
+    "id": "lis_boun_b1",
+    "university_id": "boun",
+    "level": "B1",
+    "type": "note_taking",
+    "title": "Academic Study Habits and Time Allocation",
+    "subtitle": "Boğaziçi Akademik Başarı ve Zaman Yönetimi Semineri",
+    "target_university": "Boğaziçi Üniversitesi",
+    "duration_minutes": 12,
+    "lecture_duration_seconds": 70,
+    "instructions_tr": "Akademik başarı ve zaman yönetimi seminerini dinlerken not alınız. Dinleme bitince notlarınıza dayanarak soruları çözünüz.",
+    "audio_script": "Welcome to the Academic Advising Centre workshop on effective study methodologies. Many first-year university students struggle not because of intellectual ability, but because of poor time allocation. Cognitive science has consistently proven that distributed practice, commonly known as the spacing effect, is vastly superior to massed cramming before exams. When you study material in shorter, spaced intervals over several days, your brain consolidates neural connections during sleep. In contrast, cramming the night before creates superficial familiarity rather than deep retrieval memory. Another critical technique is active recall. Instead of passively re-reading highlighting markers in textbooks, students should test themselves by attempting practice questions or summarizing concepts in their own words without looking at their notes. Incorporating twenty minutes of active recall every evening doubles long-term retention compared to passive reading.",
+    "suggested_notes_tr": [
+      "Öğrencilerin Zorlanma Nedeni: Zeka eksikliği değil, verimsiz zaman yönetimi.",
+      "Aralıklı Tekrar (Spacing Effect): Sınav gecesi sabahlamaktan (cramming) çok daha etkilidir; uyku sırasında sinirsel bağlantıları pekiştirir.",
+      "Aktif Hatırlama (Active Recall): Pasif okuma yerine notlara bakmadan sorular çözmek ve kavramları kendi cümleleriyle özetlemek.",
+      "Sonuç: Günde 20 dakika aktif hatırlama uzun vadeli kalıcılığı ikiye katlar."
+    ],
+    "questions": [
+      {
+        "id": "lis_boun_b1_q1",
+        "question": "Why is distributed practice (the spacing effect) superior to cramming?",
+        "options": [
+          {
+            "key": "A",
+            "text": "It requires fewer total hours of overall semester commitment."
+          },
+          {
+            "key": "B",
+            "text": "It consolidates neural memory connections over time during sleep."
+          },
+          {
+            "key": "C",
+            "text": "It allows students to skip complex theoretical textbook chapters."
+          },
+          {
+            "key": "D",
+            "text": "It guarantees automatic top scores without self-testing."
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Aralıklı çalışma beynin uyku esnasında nöronal bağlantıları pekiştirmesini (consolidates neural connections during sleep) sağlayarak bilgiyi kalıcı hale getirir."
+      },
+      {
+        "id": "lis_boun_b1_q2",
+        "question": "What does active recall involve according to the lecturer?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Highlighting text with colorful pens repeatedly."
+          },
+          {
+            "key": "B",
+            "text": "Testing oneself or summarizing concepts without looking at notes."
+          },
+          {
+            "key": "C",
+            "text": "Reading lecture slides silently for multiple hours."
+          },
+          {
+            "key": "D",
+            "text": "Listening to classical music while reviewing vocabulary."
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Aktif hatırlama, notlara bakmadan soru çözmek veya kavramları kendi cümleleriyle özetlemektir (summarizing concepts in their own words without looking at notes)."
+      },
+      {
+        "id": "lis_boun_b1_q3",
+        "question": "According to the speaker, what is the primary reason first-year students struggle?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Lack of cognitive intelligence."
+          },
+          {
+            "key": "B",
+            "text": "Ineffective study habits and poor time allocation."
+          },
+          {
+            "key": "C",
+            "text": "Excessive campus extracurricular activities."
+          },
+          {
+            "key": "D",
+            "text": "High cost of academic course books."
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Konuşmacı öğrencilerin zeka eksikliğinden değil, zamanlarını yanlış tahsis etmekten ve verimsiz çalışma yöntemlerinden (poor time allocation) zorlandığını söylemiştir."
+      }
+    ]
+  },
+  {
+    "id": "lis_boun_c2",
+    "university_id": "boun",
+    "level": "C2",
+    "type": "note_taking",
+    "title": "Bioethics, Consciousness, and Autonomous Neurotechnology",
+    "subtitle": "Boğaziçi İleri Düzey Nöroetik ve Felsefe Kolokyumu",
+    "target_university": "Boğaziçi Üniversitesi",
+    "duration_minutes": 15,
+    "lecture_duration_seconds": 95,
+    "instructions_tr": "C2 seviyesi felsefi ve nörobilimsel sunumu dinlerken kavramsal ayrımları ve etik argümanları not alınız. Dinleme bitince soruları yanıtlayınız.",
+    "audio_script": "Distinguished colleagues, today we address the profound paradigm shift emerging at the intersection of non-invasive brain-computer interfaces and neural privacy. Recent empirical breakthroughs in high-density magnetoencephalography combined with generative neural decoders have achieved unprecedented fidelity in reconstructing internal semantic speech directly from cortical micro-oscillations. While the clinical dividends for locked-in syndrome patients are undeniable, the philosophical ramifications regarding cognitive liberty are deeply unsettling. If neural decoders can extrapolate propositional thought before voluntary vocalization, the classical Cartesian boundary between subjective interiority and public expression is irrevocably dismantled. Deontological frameworks posit that cognitive autonomy is the foundational prerequisite for moral agency; once external algorithmic entities possess real-time diagnostic surveillance over unconscious neural states, the very concept of voluntary consent becomes compromised. Consequently, legal jurisprudence must formulate sui generis neuro-rights—specifically, the right to mental privacy and psychological continuity—to preclude corporate and state actors from commodifying cognitive processes under the guise of therapeutic optimization.",
+    "suggested_notes_tr": [
+      "Ana Tema: Beyin-Bilgisayar Arayüzleri ve Bilişsel Özgürlük (Cognitive Liberty).",
+      "Teknolojik Gelişme: Manyetoensefalografi ve üretken sinirsel kod çözücüler içsel düşünceyi çözebilmektedir.",
+      "Felsefi Kriz: Öznel iç dünya ile kamusal ifade arasındaki Kartezyen sınırın kalkması.",
+      "Deontolojik Yaklaşım: Zihinsel özerklik olmadan ahlaki eylemlilik (moral agency) ve rıza var olamaz.",
+      "Hukuki Çözüm Önerisi: Zihinsel mahremiyet ve psikolojik süreklilik için sui generis nöro-haklar (neuro-rights) yasalaştırılmalıdır."
+    ],
+    "questions": [
+      {
+        "id": "lis_boun_c2_q1",
+        "question": "What fundamental boundary does generative neural decoding challenge according to the lecturer?",
+        "options": [
+          {
+            "key": "A",
+            "text": "The distinction between motor reflexes and autonomic respiration."
+          },
+          {
+            "key": "B",
+            "text": "The classical boundary between subjective interiority and public expression."
+          },
+          {
+            "key": "C",
+            "text": "The division between artificial intelligence and biological evolution."
+          },
+          {
+            "key": "D",
+            "text": "The economic disparity between industrialized and emerging nations."
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Konuşmacı içsel düşüncelerin çözülmesinin öznel iç dünya ile kamusal ifade arasındaki klasik Kartezyen sınırı (classical Cartesian boundary between subjective interiority and public expression) yıktığını belirtmiştir."
+      },
+      {
+        "id": "lis_boun_c2_q2",
+        "question": "In the speaker's analysis, why does neural surveillance undermine deontological moral agency?",
+        "options": [
+          {
+            "key": "A",
+            "text": "It increases computational latency in medical diagnostic software."
+          },
+          {
+            "key": "B",
+            "text": "It infringes upon the cognitive autonomy required for authentic voluntary consent."
+          },
+          {
+            "key": "C",
+            "text": "It diminishes financial returns for neurotechnology developers."
+          },
+          {
+            "key": "D",
+            "text": "It invalidates mathematical models of cortical synchronization."
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Deontolojik etiğe göre zihinsel özerklik ahlaki eylemliliğin önkoşuludur; zihinsel durumlara harici müdahale gönüllü rıza kavramını zedeler."
+      },
+      {
+        "id": "lis_boun_c2_q3",
+        "question": "What institutional remedy does the speaker advocate to protect human cognition?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Complete prohibition of all biomedical interface research."
+          },
+          {
+            "key": "B",
+            "text": "Establishing sui generis legal neuro-rights safeguarding mental privacy."
+          },
+          {
+            "key": "C",
+            "text": "Privatizing cognitive algorithms under proprietary patents."
+          },
+          {
+            "key": "D",
+            "text": "Mandating cognitive enhancement implants for all citizens."
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Konuşmacı zihinsel mahremiyeti ve psikolojik sürekliliği güvence altına almak için 'sui generis neuro-rights' (özgün nöro-haklar) oluşturulması gerektiğini savunmuştur."
+      }
+    ]
+  },
+  {
+    "id": "lis_odtu_c2",
+    "university_id": "odtu",
+    "level": "C2",
+    "type": "while_listening",
+    "title": "Quantum Computational Paradigms & Cryptographic Resilience",
+    "subtitle": "ODTÜ İleri Düzey Kuantum Fiziği ve Kriptoloji Semineri",
+    "target_university": "Orta Doğu Teknik Üniversitesi",
+    "duration_minutes": 15,
+    "lecture_duration_seconds": 90,
+    "instructions_tr": "Kuantum algoritmaları ve kuantum sonrası şifreleme sunumunu dinlerken soruları eşzamanlı olarak yanıtlayınız.",
+    "audio_script": "In this advanced physics colloquium, we will analyze the disruptive vector posed by Shor's quantum algorithm against contemporary asymmetric cryptographic architectures. Current global banking, secure communications, and national defense protocols depend almost ubiquitously on the computational intractability of integer factorization, exemplified by RSA cryptosystems. A fault-tolerant quantum computer leveraging superposition and quantum phase estimation renders this polynomial-time reduction feasible, effectively obliterating the security assurances that underpin classical public-key cryptography. To counteract this existential cryptographic vulnerability, post-quantum cryptography has converged on lattice-based algebraic structures, such as learning-with-errors problems, which remain computationally intractable even for quantum adversaries utilizing Grover or Shor routines. Furthermore, quantum key distribution guarantees information-theoretic security rooted in the Heisenberg uncertainty principle and the no-cloning theorem, meaning any interception attempts introduce detectable quantum state collapses. Thus, the transition to post-quantum resilience is not merely a theoretical prerogative, but an immediate infrastructural imperative.",
+    "suggested_notes_tr": [
+      "Shor Algoritması: Asimetrik RSA şifrelemesinin dayandığı tamsayı çarpanlarına ayırma problemini polinom zamanda çözer.",
+      "Kriz: Klasik açık anahtarlı şifreleme ve küresel bankacılık güvenliğinin çökme riski.",
+      "Kuantum Sonrası Kriptografi (PQC): Kafes tabanlı (lattice-based) yapılar ve 'learning-with-errors' algoritmaları kuantum saldırılarına dirençlidir.",
+      "Kuantum Anahtar Dağıtımı (QKD): Heisenberg belirsizlik ilkesi ve klonlanamazlık teoremi sayesinde dinleme girişimlerini fiziksel olarak tespit eder."
+    ],
+    "questions": [
+      {
+        "id": "lis_odtu_c2_q1",
+        "question": "Why does Shor's algorithm pose an existential threat to RSA cryptosystems?",
+        "options": [
+          {
+            "key": "A",
+            "text": "It increases electricity consumption in classical server farms."
+          },
+          {
+            "key": "B",
+            "text": "It reduces the intractability of integer factorization to polynomial time."
+          },
+          {
+            "key": "C",
+            "text": "It disables fiber-optic transmission lines physically."
+          },
+          {
+            "key": "D",
+            "text": "It introduces thermal noise into semiconductor chips."
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Shor algoritması, RSA'nın dayandığı tamsayı çarpanlarına ayırma zorluğunu kuantum üst üste binme ile polinomik zamanda çözülebilir hale getirir."
+      },
+      {
+        "id": "lis_odtu_c2_q2",
+        "question": "Which mathematical foundation is central to post-quantum cryptographic defenses?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Lattice-based algebraic structures and learning-with-errors problems."
+          },
+          {
+            "key": "B",
+            "text": "Simple linear algebra with single-bit parity checks."
+          },
+          {
+            "key": "C",
+            "text": "Classical Newtonian mechanics and optical mirrors."
+          },
+          {
+            "key": "D",
+            "text": "Pure brute-force enumeration of DES keys."
+          }
+        ],
+        "correct_answer": "A",
+        "explanation_tr": "Kuantum sonrası kriptografi, kuantum bilgisayarların dahi polinom zamanda çözemediği kafes tabanlı (lattice-based) cebirsel yapılara ve 'learning-with-errors' problemlerine dayanır."
+      },
+      {
+        "id": "lis_odtu_c2_q3",
+        "question": "On what fundamental physical principle does quantum key distribution base its security?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Thermodynamic equilibrium and heat dissipation."
+          },
+          {
+            "key": "B",
+            "text": "The Heisenberg uncertainty principle and the no-cloning theorem."
+          },
+          {
+            "key": "C",
+            "text": "Electromagnetic radiation shielding in underground tunnels."
+          },
+          {
+            "key": "D",
+            "text": "Radioactive decay rates of isotopic elements."
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Kuantum anahtar dağıtımı (QKD), Heisenberg belirsizlik ilkesi ve kuantum klonlanamazlık teoremi sayesinde dinleme girişiminde dalga fonksiyonunun çökmesini sağlayarak izinsiz erişimi anında tespit eder."
+      }
+    ]
   }
 ]

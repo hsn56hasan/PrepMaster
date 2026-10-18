@@ -1159,7 +1159,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (_) => const ListeningScreen()),
+                          MaterialPageRoute(builder: (_) => ListeningScreen(currentLevel: widget.currentLevel)),
                         );
                       },
                       borderRadius: BorderRadius.circular(18),
@@ -1260,7 +1260,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (_) => const SpeakingScreen()),
+                    MaterialPageRoute(builder: (_) => SpeakingScreen(currentLevel: widget.currentLevel)),
                   );
                 },
                 borderRadius: BorderRadius.circular(18),

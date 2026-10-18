@@ -13,37 +13,76 @@ window.speakingState = {
   durationElapsed: 0
 };
 
-async function loadSpeakingHub() {
+async function loadSpeakingHub(targetLevel = null) {
   const container = document.getElementById("speaking-tasks-list");
+  const filterBar = document.getElementById("speaking-filter-bar");
   if (!container) return;
 
+  const currentLevel = window.appState?.currentLevel || 'B2';
+  const activeLevel = targetLevel !== null ? targetLevel : currentLevel;
+
+  // Render Level Filter Bar
+  if (filterBar) {
+    const levels = ['A2', 'B1', 'B2', 'C1', 'C2'];
+    filterBar.innerHTML = `
+      <span class="text-xs font-bold text-slate-500 mr-2 flex items-center gap-1">
+        <i data-lucide="filter" class="w-3.5 h-3.5"></i> Mülakat Kuru:
+      </span>
+      ${levels.map(lvl => {
+        const isSelected = activeLevel === lvl;
+        return `
+          <button onclick="loadSpeakingHub('${lvl}')" class="px-3 py-1 rounded-xl text-xs font-bold transition ${isSelected ? 'bg-indigo-600 text-white shadow-sm' : 'bg-white text-slate-600 hover:bg-slate-200 border border-slate-200'}">
+            ${lvl} ${lvl === currentLevel ? '★' : ''}
+          </button>
+        `;
+      }).join('')}
+      <button onclick="loadSpeakingHub('all')" class="px-3 py-1 rounded-xl text-xs font-bold transition ${activeLevel === 'all' ? 'bg-slate-800 text-white shadow-sm' : 'bg-white text-slate-600 hover:bg-slate-200 border border-slate-200'}">
+        Tüm Kurlar
+      </button>
+    `;
+  }
+
   container.innerHTML = `
-    <div class="p-8 text-center text-slate-400">
-      <i data-lucide="loader-2" class="w-6 h-6 animate-spin mx-auto mb-2 text-blue-600"></i>
-      Mülakat ve konuşma görevleri yükleniyor...
+    <div class="col-span-full p-8 text-center text-slate-400">
+      <i data-lucide="loader-2" class="w-6 h-6 animate-spin mx-auto mb-2 text-indigo-600"></i>
+      ${activeLevel === 'all' ? 'Tüm' : activeLevel} seviyesi konuşma görevleri yükleniyor...
     </div>
   `;
   if (window.lucide) window.lucide.createIcons();
 
   try {
-    const res = await fetch('/api/speaking');
+    const url = activeLevel && activeLevel !== 'all' ? `/api/speaking?level=${activeLevel}` : '/api/speaking';
+    const res = await fetch(url);
     const tasks = await res.json();
     window.speakingState.tasks = tasks;
 
+    if (!tasks || tasks.length === 0) {
+      container.innerHTML = `
+        <div class="col-span-full p-8 text-center bg-white rounded-3xl border border-slate-200">
+          <p class="text-sm font-bold text-slate-700 mb-2">${activeLevel} seviyesinde mülakat görevi bulunamadı.</p>
+          <button onclick="loadSpeakingHub('all')" class="px-4 py-2 bg-indigo-600 text-white text-xs font-bold rounded-xl hover:bg-indigo-700 transition">
+            Tüm Mülakatları Görüntüle
+          </button>
+        </div>
+      `;
+      if (window.lucide) window.lucide.createIcons();
+      return;
+    }
+
     container.innerHTML = tasks.map(t => `
-      <div class="bg-white rounded-3xl p-6 border border-slate-200/80 hover:border-blue-400 hover:shadow-md transition flex flex-col justify-between">
+      <div class="bg-white rounded-3xl p-6 border border-slate-200/80 hover:border-indigo-400 hover:shadow-md transition flex flex-col justify-between">
         <div>
           <div class="flex items-center justify-between mb-3">
             <span class="px-2.5 py-1 text-[11px] font-extrabold rounded-full bg-indigo-100 text-indigo-800 border border-indigo-200">
               🎙️ Sözlü Mülakat
             </span>
-            <span class="px-2.5 py-0.5 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold">
+            <span class="px-2.5 py-0.5 bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-lg text-xs font-black">
               ${t.level}
             </span>
           </div>
 
           <h3 class="text-base font-extrabold text-slate-800 mb-1 leading-snug">${t.title}</h3>
-          <p class="text-xs font-bold text-blue-600 mb-2">${t.target_university}</p>
+          <p class="text-xs font-bold text-indigo-600 mb-2">${t.target_university}</p>
           <p class="text-xs text-slate-500 leading-relaxed mb-4">${t.instructions_tr}</p>
 
           <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 mb-4 text-xs text-slate-600 italic">
@@ -65,6 +104,7 @@ async function loadSpeakingHub() {
     if (window.lucide) window.lucide.createIcons();
   } catch (err) {
     console.error("Load speaking hub error:", err);
+    container.innerHTML = `<p class="col-span-full text-xs text-rose-500 text-center">Konuşma görevleri yüklenemedi.</p>`;
   }
 }
 

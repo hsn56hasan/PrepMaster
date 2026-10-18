@@ -20,7 +20,7 @@ class ExamsScreen extends StatelessWidget {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Resmi muafiyet deneme sınavı hazırlanıyor...'), duration: Duration(seconds: 1)),
     );
-    final mockData = await ApiService().getMockExam(currentUniversity.id);
+    final mockData = await ApiService().getMockExam(currentUniversity.id, level: currentLevel);
     final List<Question> questions = (mockData['parsed_questions'] as List<dynamic>?)?.cast<Question>() ?? [];
     if (!context.mounted) return;
     if (questions.isEmpty) {
@@ -98,9 +98,9 @@ class ExamsScreen extends StatelessWidget {
             context: context,
             badge: 'TAM DENEME',
             badgeBg: AppTheme.brandBlue,
-            levelText: 'Tüm Kurlar',
-            title: 'Resmi Muafiyet / Kur Geçme Denemesi',
-            desc: 'Restatement, Cloze Test, Reading ve Grammar bölümlerini içeren kapsamlı deneme sınavı.',
+            levelText: 'Seviye: $currentLevel',
+            title: '$currentLevel Muafiyet / Kur Geçme Denemesi',
+            desc: '$currentLevel seviyesine özel hazırlanmış kapsamlı deneme sınavı.',
             isPrimary: true,
             onTap: () => _launchMockExam(context),
           ),
@@ -111,9 +111,9 @@ class ExamsScreen extends StatelessWidget {
             context: context,
             badge: 'ÖZEL MODÜL',
             badgeBg: Colors.indigo,
-            levelText: 'B2 - C2',
+            levelText: 'Seviye: $currentLevel',
             title: 'Restatement (En Yakın Anlam) Atölyesi',
-            desc: 'İTÜ ve Boğaziçi sınavlarının en kritik bölümü olan cümle paraphrase soruları.',
+            desc: '$currentLevel seviyesine uygun cümle paraphrase ve anlam bütünlüğü soruları.',
             onTap: () => _launchExam(context, category: 'Restatement'),
           ),
           const SizedBox(height: 14),
@@ -123,9 +123,9 @@ class ExamsScreen extends StatelessWidget {
             context: context,
             badge: 'AKADEMİK OKUMA',
             badgeBg: AppTheme.accentAmber,
-            levelText: 'B1 - C2',
+            levelText: 'Seviye: $currentLevel',
             title: 'Akademik Reading & Çıkarım Testi',
-            desc: 'Makaleler üzerinden ana fikir, detay, yazar tutumu ve kelime anlamı soruları.',
+            desc: '$currentLevel metinleri üzerinden ana fikir, detay ve kelime anlamı soruları.',
             onTap: () => _launchExam(context, category: 'Reading'),
           ),
           const SizedBox(height: 14),
@@ -135,9 +135,9 @@ class ExamsScreen extends StatelessWidget {
             context: context,
             badge: 'USE OF ENGLISH',
             badgeBg: AppTheme.accentEmerald,
-            levelText: 'A1 - C1',
+            levelText: 'Seviye: $currentLevel',
             title: 'Grammar & Cloze Test Serisi',
-            desc: 'Zamanlar, bağlaçlar, devrik yapılar ve metin içi boşluk doldurma.',
+            desc: '$currentLevel seviyesine uygun zamanlar, bağlaçlar ve metin içi boşluk doldurma.',
             onTap: () => _launchExam(context, category: 'Grammar'),
           ),
           const SizedBox(height: 14),
@@ -147,13 +147,13 @@ class ExamsScreen extends StatelessWidget {
             context: context,
             badge: '🎧 SESLİ DİNLEME',
             badgeBg: Colors.purple,
-            levelText: 'B2 - C1',
+            levelText: 'Seviye: $currentLevel',
             title: 'Listening & Note-Taking Sınavları',
-            desc: 'Boğaziçi BUEPT, İTÜ ve ODTÜ EPE sesli akademik ders dinleme ve not alma simülatörü.',
+            desc: 'Üniversite formatında sesli akademik ders dinleme ve not alma simülatörü.',
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => const ListeningScreen()),
+                MaterialPageRoute(builder: (_) => ListeningScreen(currentLevel: currentLevel)),
               );
             },
           ),

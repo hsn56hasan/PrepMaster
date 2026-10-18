@@ -5,7 +5,8 @@ import '../services/api_service.dart';
 import '../theme/app_theme.dart';
 
 class ListeningScreen extends StatefulWidget {
-  const ListeningScreen({super.key});
+  final String currentLevel;
+  const ListeningScreen({super.key, this.currentLevel = 'B2'});
 
   @override
   State<ListeningScreen> createState() => _ListeningScreenState();
@@ -14,16 +15,19 @@ class ListeningScreen extends StatefulWidget {
 class _ListeningScreenState extends State<ListeningScreen> {
   List<ListeningTrack> _tracks = [];
   bool _isLoading = true;
+  late String _selectedLevel;
 
   @override
   void initState() {
     super.initState();
+    _selectedLevel = widget.currentLevel;
     _loadTracks();
   }
 
-  Future<void> _loadTracks() async {
+  Future<void> _loadTracks({String? level}) async {
     setState(() => _isLoading = true);
-    final tracks = await ApiService().getListeningTracks();
+    final targetLvl = level ?? _selectedLevel;
+    final tracks = await ApiService().getListeningTracks(level: targetLvl);
     if (mounted) {
       setState(() {
         _tracks = tracks;
@@ -42,7 +46,7 @@ class _ListeningScreenState extends State<ListeningScreen> {
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : RefreshIndicator(
-              onRefresh: _loadTracks,
+              onRefresh: () => _loadTracks(),
               child: ListView(
                 padding: const EdgeInsets.all(16),
                 children: [
@@ -103,12 +107,90 @@ class _ListeningScreenState extends State<ListeningScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 20),
-                  const Text(
-                    'Mevcut Dinleme Sınavları',
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: AppTheme.brandNavy),
+                  const SizedBox(height: 16),
+
+                  // CEFR Level Filter Chips
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: ['A2', 'B1', 'B2', 'C1', 'C2', 'all'].map((lvl) {
+                        final isSel = _selectedLevel == lvl;
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: ChoiceChip(
+                            label: Text(
+                              lvl == 'all' ? 'Tüm Kurlar' : '$lvl ${lvl == widget.currentLevel ? "★" : ""}',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: isSel ? Colors.white : AppTheme.textMain,
+                              ),
+                            ),
+                            selected: isSel,
+                            selectedColor: AppTheme.brandBlue,
+                            backgroundColor: Colors.white,
+                            onSelected: (val) {
+                              if (val) {
+                                setState(() => _selectedLevel = lvl);
+                                _loadTracks(level: lvl);
+                              }
+                            },
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Mevcut Dinleme Sınavları',
+                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: AppTheme.brandNavy),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: AppTheme.brandLightBlue,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          '${_tracks.length} Parça',
+                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: AppTheme.brandBlue),
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 12),
+
+                  if (_tracks.isEmpty)
+                    Container(
+                      padding: const EdgeInsets.all(24),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: AppTheme.borderSubtle),
+                      ),
+                      child: Center(
+                        child: Column(
+                          children: [
+                            const Text(
+                              'Bu seviyede dinleme parçası bulunamadı.',
+                              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.textMuted),
+                            ),
+                            const SizedBox(height: 8),
+                            TextButton(
+                              onPressed: () {
+                                setState(() => _selectedLevel = 'all');
+                                _loadTracks(level: 'all');
+                              },
+                              child: const Text('Tüm Dinleme Sınavlarını Göster'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
 
                   ..._tracks.map((track) {
                     final isNoteTaking = track.type == 'note_taking';

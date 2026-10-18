@@ -142,9 +142,10 @@ class ApiService {
   }
 
   // --- Writing Guides ---
-  Future<List<WritingGuide>> getWritingGuides() async {
+  Future<List<WritingGuide>> getWritingGuides({String? level}) async {
+    final query = level != null && level.isNotEmpty && level != 'all' ? '?level=$level' : '';
     try {
-      final res = await http.get(Uri.parse('$baseUrl/api/writing-guides')).timeout(const Duration(seconds: 3));
+      final res = await http.get(Uri.parse('$baseUrl/api/writing-guides$query')).timeout(const Duration(seconds: 3));
       if (res.statusCode == 200) {
         final List<dynamic> list = json.decode(utf8.decode(res.bodyBytes));
         return list.map((e) => WritingGuide.fromJson(e)).toList();
@@ -153,7 +154,15 @@ class ApiService {
 
     final jsonStr = await rootBundle.loadString('assets/data/writing_guides.json');
     final List<dynamic> list = json.decode(jsonStr);
-    return list.map((e) => WritingGuide.fromJson(e)).toList();
+    var filtered = list;
+    if (level != null && level.isNotEmpty && level != 'all') {
+      final target = level.toUpperCase();
+      final matched = list.where((e) => (e['level'] as String? ?? '').toUpperCase() == target).toList();
+      if (matched.isNotEmpty) {
+        filtered = matched;
+      }
+    }
+    return filtered.map((e) => WritingGuide.fromJson(e)).toList();
   }
 
   // --- Exam Submit & Mistake Vault ---
@@ -543,9 +552,18 @@ class ApiService {
   }
 
   // --- Speaking Tasks & Offline Evaluator ---
-  Future<List<SpeakingTask>> getSpeakingTasks() async {
+  Future<List<SpeakingTask>> getSpeakingTasks({String? universityId, String? level}) async {
+    final queryParams = <String>[];
+    if (universityId != null && universityId.isNotEmpty && universityId != 'all') {
+      queryParams.add('university_id=$universityId');
+    }
+    if (level != null && level.isNotEmpty && level != 'all') {
+      queryParams.add('level=$level');
+    }
+    final queryString = queryParams.isNotEmpty ? '?${queryParams.join('&')}' : '';
+
     try {
-      final res = await http.get(Uri.parse('$baseUrl/api/speaking')).timeout(const Duration(seconds: 3));
+      final res = await http.get(Uri.parse('$baseUrl/api/speaking$queryString')).timeout(const Duration(seconds: 3));
       if (res.statusCode == 200) {
         final List<dynamic> data = json.decode(utf8.decode(res.bodyBytes));
         return data.map((e) => SpeakingTask.fromJson(e)).toList();
@@ -556,7 +574,15 @@ class ApiService {
     try {
       final jsonStr = await rootBundle.loadString('assets/data/speaking.json');
       final List<dynamic> data = json.decode(jsonStr);
-      return data.map((e) => SpeakingTask.fromJson(e)).toList();
+      var filtered = data;
+      if (level != null && level.isNotEmpty && level != 'all') {
+        final target = level.toUpperCase();
+        final matched = data.where((e) => (e['level'] as String? ?? '').toUpperCase() == target).toList();
+        if (matched.isNotEmpty) {
+          filtered = matched;
+        }
+      }
+      return filtered.map((e) => SpeakingTask.fromJson(e)).toList();
     } catch (_) {
       return [];
     }
@@ -660,9 +686,10 @@ class ApiService {
   }
 
   // --- Full Mock Exam ---
-  Future<Map<String, dynamic>> getMockExam(String universityId) async {
+  Future<Map<String, dynamic>> getMockExam(String universityId, {String? level}) async {
+    final query = level != null && level.isNotEmpty && level != 'all' ? '?level=$level' : '';
     try {
-      final res = await http.get(Uri.parse('$baseUrl/api/exam/mock/$universityId')).timeout(const Duration(seconds: 4));
+      final res = await http.get(Uri.parse('$baseUrl/api/exam/mock/$universityId$query')).timeout(const Duration(seconds: 4));
       if (res.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(utf8.decode(res.bodyBytes));
         if (data['sections'] != null && data['sections']['multiple_choice'] != null) {
@@ -673,7 +700,7 @@ class ApiService {
       }
     } catch (_) {}
 
-    final allQuestions = await getQuestions(universityId: universityId);
+    final allQuestions = await getQuestions(universityId: universityId, level: level);
     return {
       'exam_title': 'Resmi Muafiyet Deneme Sınavı',
       'duration_minutes': 120,

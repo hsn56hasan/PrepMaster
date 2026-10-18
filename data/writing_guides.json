@@ -1,5 +1,55 @@
 [
   {
+    "id": "paragraph-writing",
+    "title": "Academic Paragraph & Personal Reflection",
+    "description": "A1 ve A2 seviyesindeki öğrenciler için temel akademik paragraf yapısı (Topic Sentence, Supporting Details, Concluding Sentence) ve kişisel düşünce yazma rehberi.",
+    "level": "A2",
+    "structure": [
+      {
+        "section": "Topic Sentence (Ana Fikir Cümlesi)",
+        "elements": [
+          "Paragrafın ne hakkında olduğunu tek bir açık cümle ile belirtin.",
+          "Örnek: Living on a university campus provides several important benefits for new students."
+        ]
+      },
+      {
+        "section": "Supporting Sentences (Destekleyici Detaylar)",
+        "elements": [
+          "First, ...: İlk gerekçenizi ve kısa açıklamasını yazın.",
+          "Second, ...: İkinci gerekçenizi ve günlük hayattan somut bir örneği belirtin.",
+          "Also / In addition, ...: Fikrinizi güçlendiren ek bir gözlem ekleyin."
+        ]
+      },
+      {
+        "section": "Concluding Sentence (Sonuç Cümlesi)",
+        "elements": [
+          "To sum up, ...: Ana fikri farklı kelimelerle tekrarlayın ve toparlayın."
+        ]
+      }
+    ],
+    "key_transitions": [
+      "First of all, ...",
+      "For example, ...",
+      "In addition, ...",
+      "Because of this, ...",
+      "To sum up, ..."
+    ],
+    "sample_topic": "Why is learning English important for your future career?",
+    "band_score_tip": "Cümlelerinizi çok karmaşık yapmaya çalışmak yerine özne-yüklem uyumuna ve doğru zaman (Simple Present / Past) kullanımına odaklanın.",
+    "model_band_score": 86,
+    "model_essay": "Learning English is extremely important for modern university students for two main reasons. First of all, English is the global language of science, technology, and international business. Most academic textbooks, online research articles, and programming documentation are written in English. Therefore, knowing English helps students understand their university courses much better. In addition, fluency in English creates exciting job opportunities after graduation. Many international companies require their employees to communicate with global clients. To sum up, mastering English is an essential skill that helps students succeed both academically and professionally.",
+    "annotated_strengths": [
+      "Açık ve net Topic Sentence ile başlamış.",
+      "Mantıklı ve anlaşılır iki destekleyici gerekçe sunulmuş.",
+      "Geçiş bağlaçları (First of all, Therefore, In addition, To sum up) doğru ve dengeli kullanılmış."
+    ],
+    "common_pitfalls": [
+      "Birden fazla alakasız fikri tek bir paragrafa sığdırmaya çalışmak.",
+      "Özne veya fiili eksik bırakarak yarım cümleler (fragment) kurmak.",
+      "Türkçe düşünüp kelimeleri birebir çevirmeye çalışmak."
+    ]
+  },
+  {
     "id": "opinion-essay",
     "title": "Opinion Essay (Fikir Belirtme Kompozisyonu)",
     "description": "Öğrencinin verilen bir konuda net bir görüş belirleyip (katılıyorum/katılmıyorum) güçlü akademik argümanlarla savunduğu essay türü. İTÜ, YTÜ ve Genel Hazırlık'ta sıklıkla sorulur.",
@@ -59,7 +109,8 @@
       "Giriş paragrafında kişisel fikir belirtmeyip tarafsız kalmak (Opinion essay mutlaka taraf seçmeyi gerektirir).",
       "Örnek vermeden soyut iddialarda bulunmak (Her gelişme paragrafında somut kanıt veya senaryo şarttır).",
       "'I think', 'In my opinion' gibi ifadeleri peş peşe tekrarlayarak üslubu basitleştirmek."
-    ]
+    ],
+    "level": "B1"
   },
   {
     "id": "for-against-essay",
@@ -118,7 +169,8 @@
       "Bir tarafa 5 cümle yazıp diğer tarafa 1 cümle yazarak tarafsızlığı bozmak.",
       "Gelişme paragrafında 'I believe' diyerek For/Against formatının nesnelliğini zedelemek.",
       "Sonuçta hiçbir tarafı seçmeyip kararsız kalmak (Sentez veya hafif eğilim bildirilmelidir)."
-    ]
+    ],
+    "level": "B2"
   },
   {
     "id": "problem-solution-essay",
@@ -178,7 +230,8 @@
     "common_pitfalls": [
       "Problemi çok uzun anlatıp çözüme sadece 1-2 cümle ayırmak (Paragraflar eşit ağırlıkta olmalıdır).",
       "Gerçekçi olmayan hayali çözümler önermek (örneğin 'herkes bisiklete binsin' demek yerine altyapı ve maliyet önerilmelidir)."
-    ]
+    ],
+    "level": "C1"
   },
   {
     "id": "cause-effect-essay",
@@ -235,6 +288,53 @@
     "common_pitfalls": [
       "Neden ile sonucu birbirine karıştırmak (Cause ile Effect arasındaki zaman sırası korunmalıdır).",
       "Sadece tek bir nedene takılıp kalmak (En az 2 ana neden ve 2 ana etki incelenmelidir)."
+    ],
+    "level": "C2"
+  },
+  {
+    "id": "critical-synthesis",
+    "title": "Scholarly Synthesis & Critical Evaluation Paper",
+    "description": "C2 Seviyesi: Birden fazla akademik kaynağın, karşıt teorinin ve ampirik araştırmanın eleştirel biçimde sentezlenip özgün bir akademik teze bağlandığı ileri düzey kompozisyon.",
+    "level": "C2",
+    "structure": [
+      {
+        "section": "Epistemological Context & Problem Statement",
+        "elements": [
+          "Alan yazındaki temel kuramsal çatışmayı ve ontolojik varsayımları tanıtın.",
+          "Nuanced Thesis Statement: İki zıt teoriyi aşan üçüncü bir sentez veya eleştirel çerçeve ortaya koyun."
+        ]
+      },
+      {
+        "section": "Comparative Critique & Synthesis",
+        "elements": [
+          "Deconstructive Analysis: Metodolojik varsayımların ve ampirik sınırların eleştirisi.",
+          "Synthesis of Counter-Theses: Zıt bakış açılarının hangi koşullarda geçerli olduğunu gösteren derinlikli değerlendirme."
+        ]
+      },
+      {
+        "section": "Theoretical Ramifications & Future Horizons",
+        "elements": [
+          "Sonuç: Elde edilen sentezin alan yazına ve kurumsal politikalara sunduğu özgün katkı."
+        ]
+      }
+    ],
+    "key_transitions": [
+      "While neoclassical paradigms posit that ..., empirical contingencies indicate ...",
+      "This dichotomy fails to account for the dialectical relationship between ...",
+      "Consequently, a critical epistemological realignment is warranted ..."
+    ],
+    "sample_topic": "Critically evaluate whether technocratic governance can reconcile environmental sustainability with democratic legitimacy.",
+    "band_score_tip": "Yalnızca bilgi aktarmayın; argümanların altındaki felsefi ve metodolojik açmazları teşhis ederek eleştirel olgunluk sergileyin.",
+    "model_band_score": 96,
+    "model_essay": "The contemporary discourse surrounding technocratic ecological governance hinges upon a fundamental democratic paradox: the urgency of anthropogenic climate stabilization versus the participatory imperatives of liberal democracy. While technocratic advocates contend that existential ecological tipping points necessitate insulated expert governance, this analysis argues that depoliticizing ecological decisions ultimately undermines long-term institutional legitimacy.\n\nFirst and foremost, technocratic policy formulation operates upon an epistemology of algorithmic optimization that frequently overlooks localized socio-ecological vulnerabilities. By treating ecological crises primarily as technical engineering puzzles rather than distributional political conflicts, technocratic interventions risk imposing disproportionate burdens upon marginalized populations. Consequently, public resistance escalates, eroding the civic compliance necessary to sustain complex ecological transitions.\n\nFurthermore, durable ecological resilience cannot be manufactured through authoritarian fiat; it demands deliberative legitimacy. When citizens participate meaningfully in carbon-reduction frameworks, civic ownership reinforces behavioral norms far more effectively than top-down edicts. In conclusion, sustainable ecological governance must reject the false dichotomy between expert efficacy and democratic sovereignty, forging instead participatory deliberative institutions that synthesize empirical expertise with civic accountability.",
+    "annotated_strengths": [
+      "Olağanüstü zengin akademik kelime dağarcığı ve felsefi olgunluk.",
+      "Kavramsal derinlik ve zıtlıkların diyalektik sentezi.",
+      "Kusursuz cümle içi bağlaçlar ve retorik akıcılık."
+    ],
+    "common_pitfalls": [
+      "Basit lehte/aleyhte argümanlara indirgeyip teorik çerçeveyi unutmak.",
+      "Akademik terminolojiyi yerli yersiz ve yapay şekilde sıralamak."
     ]
   }
 ]

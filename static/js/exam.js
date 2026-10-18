@@ -38,15 +38,20 @@ async function startExamSimulation(universityId = null, level = null, category =
       url += `&level=${targetLevel}`;
     }
     if (category && category !== 'all') {
-      url += `&category=${category}`;
+      url += `&category=${encodeURIComponent(category)}`;
     }
 
-    const res = await fetch(url);
-    const questions = await res.json();
+    let res = await fetch(url);
+    let questions = await res.json();
 
     if (!questions || questions.length === 0) {
-      alert("Bu filtreye uygun soru bulunamadı. Lütfen seviye veya filtre seçimini değiştirin.");
-      return;
+      // Graceful fallback to general questions of the user's level
+      const fallbackRes = await fetch(`/api/questions?level=${targetLevel}`);
+      questions = await fallbackRes.json();
+      if (!questions || questions.length === 0) {
+        alert(`${targetLevel} seviyesine uygun soru bulunamadı.`);
+        return;
+      }
     }
 
     launchExamWithQuestions(questions, uniId, targetLevel, false);
@@ -79,22 +84,23 @@ async function startMistakeExam() {
   }
 }
 
-async function startFullMockExam(universityId = null) {
+async function startFullMockExam(universityId = null, level = null) {
   const uniId = universityId || window.appState.currentUniversity.id;
+  const targetLevel = level || window.appState.currentLevel || "B2";
   try {
-    const res = await fetch(`/api/exam/mock/${uniId}`);
+    const res = await fetch(`/api/exam/mock/${uniId}?level=${targetLevel}`);
     const mockData = await res.json();
 
-    const questions = mockData.sections.multiple_choice;
+    const questions = mockData.sections?.multiple_choice;
     if (!questions || questions.length === 0) {
-      alert("Bu üniversite için soru havuzu yüklenemedi.");
+      alert(`${targetLevel} seviyesi için deneme sınavı havuzu yüklenemedi.`);
       return;
     }
 
     launchExamWithQuestions(
       questions, 
       uniId, 
-      "B2-C1", 
+      targetLevel, 
       false, 
       (mockData.duration_minutes || 120) * 60,
       mockData.exam_title

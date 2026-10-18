@@ -6,7 +6,8 @@ import '../services/api_service.dart';
 import '../theme/app_theme.dart';
 
 class SpeakingScreen extends StatefulWidget {
-  const SpeakingScreen({super.key});
+  final String currentLevel;
+  const SpeakingScreen({super.key, this.currentLevel = 'B2'});
 
   @override
   State<SpeakingScreen> createState() => _SpeakingScreenState();
@@ -15,16 +16,19 @@ class SpeakingScreen extends StatefulWidget {
 class _SpeakingScreenState extends State<SpeakingScreen> {
   List<SpeakingTask> _tasks = [];
   bool _isLoading = true;
+  late String _selectedLevel;
 
   @override
   void initState() {
     super.initState();
+    _selectedLevel = widget.currentLevel;
     _loadTasks();
   }
 
-  Future<void> _loadTasks() async {
+  Future<void> _loadTasks({String? level}) async {
     setState(() => _isLoading = true);
-    final tasks = await ApiService().getSpeakingTasks();
+    final targetLvl = level ?? _selectedLevel;
+    final tasks = await ApiService().getSpeakingTasks(level: targetLvl);
     if (mounted) {
       setState(() {
         _tasks = tasks;
@@ -43,7 +47,7 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : RefreshIndicator(
-              onRefresh: _loadTasks,
+              onRefresh: () => _loadTasks(),
               child: ListView(
                 padding: const EdgeInsets.all(16),
                 children: [
@@ -100,7 +104,90 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 16),
+
+                  // CEFR Level Filter Chips
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: ['A2', 'B1', 'B2', 'C1', 'C2', 'all'].map((lvl) {
+                        final isSel = _selectedLevel == lvl;
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: ChoiceChip(
+                            label: Text(
+                              lvl == 'all' ? 'Tüm Kurlar' : '$lvl ${lvl == widget.currentLevel ? "★" : ""}',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: isSel ? Colors.white : AppTheme.textMain,
+                              ),
+                            ),
+                            selected: isSel,
+                            selectedColor: const Color(0xFF4F46E5),
+                            backgroundColor: Colors.white,
+                            onSelected: (val) {
+                              if (val) {
+                                setState(() => _selectedLevel = lvl);
+                                _loadTasks(level: lvl);
+                              }
+                            },
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Mevcut Mülakat Görevleri',
+                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: AppTheme.brandNavy),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFEEF2FF),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          '${_tasks.length} Görev',
+                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Color(0xFF4F46E5)),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+
+                  if (_tasks.isEmpty)
+                    Container(
+                      padding: const EdgeInsets.all(24),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: AppTheme.borderSubtle),
+                      ),
+                      child: Center(
+                        child: Column(
+                          children: [
+                            const Text(
+                              'Bu seviyede mülakat görevi bulunamadı.',
+                              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.textMuted),
+                            ),
+                            const SizedBox(height: 8),
+                            TextButton(
+                              onPressed: () {
+                                setState(() => _selectedLevel = 'all');
+                                _loadTasks(level: 'all');
+                              },
+                              child: const Text('Tüm Mülakatları Göster'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
 
                   // Task Cards
                   ..._tasks.map((task) => _buildTaskCard(task)),

@@ -154,6 +154,132 @@
       "sustainability"
     ],
     "model_answer_transcript": "Accelerating freshwater depletion demands innovative technological interventions to safeguard global hydrological security. First, advancing solar-powered reverse osmosis desalination offers an economically viable solution for arid coastal territories, drastically diminishing carbon emissions associated with conventional thermal plants. Concurrently, municipal authorities should implement closed-loop wastewater reclamation facilities to purify industrial effluent for agricultural irrigation, conserving pristine groundwater reserves."
+  },
+  {
+    "id": "spk_gen_a2",
+    "university_id": "general",
+    "target_university": "Genel Hazırlık & İTÜ (A2 Temel Mülakat)",
+    "level": "A2",
+    "title": "Personal Introduction & Academic Ambitions",
+    "topic": "Daily Life, Academic Interests & Campus Motivation",
+    "prep_time_seconds": 30,
+    "speak_time_seconds": 45,
+    "instructions_tr": "Hazırlık başlangıç seviyesi mülakatı: Kendinizi tanıtın, bölümünüzü neden seçtiğinizi ve üniversitedeki hedeflerinizi 45 saniye boyunca açık ve akıcı bir dille anlatın.",
+    "prompt_en": "Please introduce yourself, describe your intended major, and explain why you chose to study at university.",
+    "guiding_questions": [
+      "What is your name and where are you from?",
+      "Which department are you studying in, and why did you choose it?",
+      "What is your primary goal during your university preparation year?"
+    ],
+    "key_vocabulary": [
+      "major",
+      "ambition",
+      "campus",
+      "routine",
+      "motivated"
+    ],
+    "model_answer_transcript": "Hello, my name is Alex. I am a first-year student aiming to study computer engineering. I chose this field because I have always been fascinated by software development and problem solving. During my preparation year, my primary goal is to become completely fluent in English so that I can follow international textbooks and communicate effectively with global peers."
+  },
+  {
+    "id": "spk_boun_b1",
+    "university_id": "boun",
+    "target_university": "Boğaziçi Üniversitesi (B1 Seviye Mülakat)",
+    "level": "B1",
+    "title": "Extracurricular Activities and Academic Balance",
+    "topic": "Student Life & Holistic Development",
+    "prep_time_seconds": 45,
+    "speak_time_seconds": 60,
+    "instructions_tr": "Üniversite kulüplerinin ve ders dışı aktivitelerin öğrenci gelişimindeki rolünü açıklayınız. 45 saniye düşünüp 1 dakika konuşunuz.",
+    "prompt_en": "Do you believe extracurricular activities improve or harm academic performance in university? Provide reasons and examples to support your view.",
+    "guiding_questions": [
+      "How do student clubs help relieve exam-related stress?",
+      "Can participating in sports or arts clubs teach valuable time management skills?",
+      "What balance should students maintain between course deadlines and social clubs?"
+    ],
+    "key_vocabulary": [
+      "extracurricular",
+      "balance",
+      "time management",
+      "socialize",
+      "stress relief"
+    ],
+    "model_answer_transcript": "In my opinion, extracurricular activities are essential for a healthy academic life. Although some people worry that joining clubs wastes study time, active club participation actually teaches students crucial time management skills. For example, collaborating in a debate club or sports team helps students relieve exam stress and build leadership skills. As long as students prioritize their course deadlines, extracurricular involvement enhances both academic focus and emotional well-being."
+  },
+  {
+    "id": "spk_itu_b1",
+    "university_id": "itu",
+    "target_university": "İstanbul Teknik Üniversitesi (B1 Seviye Mülakat)",
+    "level": "B1",
+    "title": "Advantages and Challenges of Campus Dormitory Living",
+    "topic": "Dormitory Life vs Commuting from Home",
+    "prep_time_seconds": 45,
+    "speak_time_seconds": 60,
+    "instructions_tr": "Kampüs yurdunda yaşamanın avantaj ve zorluklarını karşılaştırarak değerlendiriniz. 45 saniye planlama yapıp 60 saniye boyunca fikrinizi açıklayınız.",
+    "prompt_en": "Discuss the pros and cons of living in a campus dormitory compared to living with family during university years.",
+    "guiding_questions": [
+      "How does campus residence save commuting time in major metropolitan cities?",
+      "What social skills and independence do students develop by sharing rooms?",
+      "What compromises regarding privacy and noise must students make?"
+    ],
+    "key_vocabulary": [
+      "dormitory",
+      "independence",
+      "roommate",
+      "commute",
+      "responsibility"
+    ],
+    "model_answer_transcript": "Living in a university dormitory offers tremendous benefits for personal maturity, though it comes with certain adjustments. On the positive side, residing on campus eliminates long hours spent in daily city traffic and grants immediate access to the library and laboratories. Furthermore, sharing a room fosters genuine independence and interpersonal communication skills. However, students must learn to compromise regarding noise and privacy. Overall, the independence gained makes dormitory living a worthwhile experience."
+  },
+  {
+    "id": "spk_boun_c2",
+    "university_id": "boun",
+    "target_university": "Boğaziçi Üniversitesi (C2 İleri Akademik Mülakat)",
+    "level": "C2",
+    "title": "Defending Ethical Accountability in Autonomous Algorithmic Governance",
+    "topic": "Artificial Intelligence, Epistemology & Jurisprudence",
+    "prep_time_seconds": 90,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Yapay zekanın karar verici olduğu otonom sistemlerde hukuki ve ahlaki sorumluluğu savunan üst düzey bir argümantasyon sununuz.",
+    "prompt_en": "When autonomous machine learning models cause catastrophic failures in public healthcare or algorithmic governance, where should moral and criminal liability reside? Defend your position using ethical and legal paradigms.",
+    "guiding_questions": [
+      "Why is attributing moral culpability to algorithmic artifacts philosophically incoherent?",
+      "How can strict corporate and institutional liability deter reckless automated deployment?",
+      "What role should deontological human veto power play in mission-critical automated decisions?"
+    ],
+    "key_vocabulary": [
+      "accountability",
+      "deontological",
+      "systemic",
+      "utilitarian",
+      "oversight",
+      "culpability"
+    ],
+    "model_answer_transcript": "The deployment of autonomous algorithmic agents in mission-critical societal infrastructure exposes a fundamental lacuna in contemporary jurisprudence. When autonomous systems produce catastrophic outcomes, attempting to attribute moral culpability to the algorithmic artifact is conceptually incoherent, as synthetic models lack phenomenological consciousness and moral intentionality. Instead, liability must be conceptualized through a strict corporate negligence framework. System architects, institutional deployers, and regulatory bodies must bear shared strict liability. Deontological ethics demands that human beings maintain meaningful supervisory veto power over autonomous decisions. Consequently, organizations that profit from algorithmic optimization cannot evade culpability by treating deep neural networks as impenetrable black boxes."
+  },
+  {
+    "id": "spk_odtu_c2",
+    "university_id": "odtu",
+    "target_university": "Orta Doğu Teknik Üniversitesi (C2 İleri Mülakat)",
+    "level": "C2",
+    "title": "Critique of Macroeconomic Paradigms in Global Energy Transition",
+    "topic": "Geopolitics, Macroeconomics & Renewable Infrastructure",
+    "prep_time_seconds": 90,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Küresel yeşil dönüşümün ekonomik ve jeopolitik açmazlarını analiz eden akademik bir konuşma yapınız.",
+    "prompt_en": "Critique the mainstream economic paradigm of the global green energy transition. How do rare earth mineral supply chains and geopolitical rivalries complicate the feasibility of complete decarbonization?",
+    "guiding_questions": [
+      "How does geographical concentration of critical minerals create new geopolitical vulnerabilities?",
+      "What capital investment barriers impede developing nations from modernizing power grids?",
+      "Why are circular metallurgical supply chains indispensable for sustainable decarbonization?"
+    ],
+    "key_vocabulary": [
+      "paradigm",
+      "geopolitical",
+      "decentralization",
+      "macroeconomic",
+      "resilience",
+      "hegemony"
+    ],
+    "model_answer_transcript": "The prevailing macroeconomic consensus surrounding the clean energy transition frequently suffers from technological determinism, ignoring critical geopolitical dependencies. While the decarbonization of energy grids is undeniably imperative, the physical infrastructure of renewable technologies relies heavily on geographically concentrated supply chains for rare earth elements like lithium, cobalt, and neodymium. When global powers monopolize mineral refining capacities, the transition risks replacing fossil fuel cartels with new geopolitical chokepoints. Furthermore, developing nations face crippling capital costs when modernizing transmission grids. A resilient global transition requires multilateral technology transfer agreements and circular metallurgical supply chains to prevent deepening macroeconomic inequality."
   }
 ]
-
