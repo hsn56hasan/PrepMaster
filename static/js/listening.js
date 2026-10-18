@@ -1,15 +1,19 @@
-// PrepMaster Listening Simulator (Web Speech API & Audio Simulation)
+// PrepMaster Listening Simulator (HTML5 Audio Engine & Web Speech API Fallback)
 
 window.listeningState = {
   tracks: [],
   currentTrack: null,
+  audio: null,
   speechUtterance: null,
   isPlaying: false,
   playbackRate: 1.0,
+  duration: 0,
+  currentTime: 0,
   userNotes: "",
   answers: {},
   questionsRevealed: false
 };
+
 
 async function loadListeningHub() {
   const container = document.getElementById("listening-tracks-list");
@@ -70,10 +74,17 @@ function startListeningTrack(trackId) {
   const track = window.listeningState.tracks.find(t => t.id === trackId);
   if (!track) return;
 
+  stopAudioPlayback();
+
   window.listeningState.currentTrack = track;
   window.listeningState.answers = {};
   window.listeningState.userNotes = "";
   window.listeningState.questionsRevealed = track.type !== 'note_taking';
+  window.listeningState.currentTime = 0;
+  window.listeningState.duration = track.lecture_duration_seconds || 90;
+
+  // Initialize Audio
+  initTrackAudio(track);
 
   // Switch to Runner UI
   document.getElementById("listening-hub-view")?.classList.add("hidden");
@@ -83,7 +94,7 @@ function startListeningTrack(trackId) {
 }
 
 function exitListeningRunner() {
-  stopAudioSynthesis();
+  stopAudioPlayback();
   document.getElementById("listening-runner-view")?.classList.add("hidden");
   document.getElementById("listening-hub-view")?.classList.remove("hidden");
 }
@@ -117,38 +128,48 @@ function renderListeningRunner() {
         </button>
       </div>
 
-      <!-- AKILLI SES OYNATICI (AUDIO SIMULATOR) -->
-      <div class="bg-gradient-to-r from-slate-900 to-indigo-950 text-white rounded-2xl p-6 shadow-lg">
+      <!-- GERÇEK MP3 AUDIO ENGINE & PLAYER -->
+      <div class="bg-gradient-to-r from-slate-900 to-indigo-950 text-white rounded-2xl p-6 shadow-lg space-y-4">
         <div class="flex flex-col md:flex-row items-center justify-between gap-4">
           <div class="flex items-center gap-4 w-full md:w-auto">
-            <button id="audio-play-btn" onclick="toggleAudioSynthesis()" class="w-14 h-14 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center shrink-0 shadow-lg shadow-blue-500/30 transition">
+            <button id="audio-play-btn" onclick="toggleAudioPlayback()" class="w-14 h-14 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center shrink-0 shadow-lg shadow-blue-500/30 transition">
               <i data-lucide="play" class="w-7 h-7"></i>
             </button>
             <div>
-              <span class="text-xs font-bold uppercase tracking-wider text-blue-400 block mb-0.5">Akademik Konuşmacı</span>
-              <h4 class="text-sm font-extrabold text-white">Academic English Lecture (US/UK)</h4>
+              <span class="text-xs font-bold uppercase tracking-wider text-blue-400 block mb-0.5">Akademik Dinleme Kaydı (MP3 Audio)</span>
+              <h4 class="text-sm font-extrabold text-white">${t.title}</h4>
               <span id="audio-status-text" class="text-xs text-slate-400">Başlatmak için oynat butonuna basın</span>
             </div>
           </div>
 
           <!-- Hız ve Ses Kontrolleri -->
-          <div class="flex items-center gap-3">
-            <span class="text-xs text-slate-400 font-semibold">Oynatma Hızı:</span>
-            <div class="flex bg-slate-800/80 p-1 rounded-xl border border-slate-700">
-              <button onclick="setPlaybackRate(0.85)" class="px-2.5 py-1 text-xs font-bold rounded-lg rate-btn hover:text-white text-slate-400 transition" id="rate-085">0.85x</button>
-              <button onclick="setPlaybackRate(1.0)" class="px-2.5 py-1 text-xs font-bold rounded-lg rate-btn bg-blue-600 text-white transition" id="rate-10">1.0x</button>
-              <button onclick="setPlaybackRate(1.15)" class="px-2.5 py-1 text-xs font-bold rounded-lg rate-btn hover:text-white text-slate-400 transition" id="rate-115">1.15x</button>
+          <div class="flex items-center gap-4 flex-wrap">
+            <div class="flex items-center gap-2">
+              <span class="text-xs text-slate-400 font-semibold">Hız:</span>
+              <div class="flex bg-slate-800/80 p-1 rounded-xl border border-slate-700">
+                <button onclick="setPlaybackRate(0.75)" class="px-2.5 py-1 text-xs font-bold rounded-lg rate-btn hover:text-white text-slate-400 transition" id="rate-075">0.75x</button>
+                <button onclick="setPlaybackRate(1.0)" class="px-2.5 py-1 text-xs font-bold rounded-lg rate-btn bg-blue-600 text-white transition" id="rate-10">1.0x</button>
+                <button onclick="setPlaybackRate(1.25)" class="px-2.5 py-1 text-xs font-bold rounded-lg rate-btn hover:text-white text-slate-400 transition" id="rate-125">1.25x</button>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <i data-lucide="volume-2" class="w-4 h-4 text-slate-400"></i>
+              <input type="range" id="audio-volume" min="0" max="1" step="0.05" value="1" oninput="setAudioVolume(this.value)" class="w-16 sm:w-20 accent-blue-500 h-1.5 rounded-lg cursor-pointer bg-slate-700" title="Ses Seviyesi">
             </div>
           </div>
         </div>
 
-        <!-- Animasyonlu Dalga Çubuğu -->
-        <div class="mt-5 pt-4 border-t border-slate-800 flex items-center gap-2" id="audio-waveform-bar">
-          <div class="h-1.5 flex-1 bg-slate-800 rounded-full overflow-hidden">
-            <div id="audio-progress-fill" class="h-full bg-blue-500 w-0 transition-all duration-300"></div>
+        <!-- İlerleme / Seek Bar & Süre Göstergesi -->
+        <div class="pt-2">
+          <div class="flex items-center gap-3">
+            <span id="audio-time-current" class="text-xs font-mono text-slate-300 w-10 text-right">00:00</span>
+            <input type="range" id="audio-seek-slider" min="0" max="100" value="0" step="0.1" oninput="onSeekSliderChange(this.value)" class="flex-1 h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500">
+            <span id="audio-time-duration" class="text-xs font-mono text-slate-400 w-10">01:30</span>
           </div>
         </div>
       </div>
+
 
       <!-- NOTE-TAKING DIJITAL NOT DEFTERİ -->
       ${isNoteTaking ? `
@@ -228,7 +249,7 @@ function saveUserNotes(val) {
 }
 
 function revealListeningQuestions() {
-  stopAudioSynthesis();
+  pauseAudioPlayback();
   window.listeningState.questionsRevealed = true;
   renderListeningRunner();
 }
@@ -249,11 +270,145 @@ function selectListeningAnswer(qId, key) {
   }
 }
 
-// --- AUDIO TEXT-TO-SPEECH CONTROLS ---
-function toggleAudioSynthesis() {
+// --- REAL HTML5 AUDIO & MP3 STREAMING ENGINE ---
+function formatAudioTime(seconds) {
+  if (isNaN(seconds) || seconds < 0) return "00:00";
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
+}
+
+function initTrackAudio(track) {
+  if (window.listeningState.audio) {
+    try {
+      window.listeningState.audio.pause();
+      window.listeningState.audio.src = '';
+    } catch (_) {}
+    window.listeningState.audio = null;
+  }
+
+  // Primary: MP3 file from static audio directory
+  const audioUrl = `/static/audio/${track.id}.mp3`;
+  const audio = new Audio(audioUrl);
+  audio.preload = 'metadata';
+  audio.playbackRate = window.listeningState.playbackRate;
+
+  audio.addEventListener('loadedmetadata', () => {
+    window.listeningState.duration = audio.duration;
+    const durEl = document.getElementById("audio-time-duration");
+    if (durEl) durEl.innerText = formatAudioTime(audio.duration);
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    if (!audio.duration) return;
+    window.listeningState.currentTime = audio.currentTime;
+    const curEl = document.getElementById("audio-time-current");
+    const slider = document.getElementById("audio-seek-slider");
+    if (curEl) curEl.innerText = formatAudioTime(audio.currentTime);
+    if (slider) slider.value = (audio.currentTime / audio.duration) * 100;
+  });
+
+  audio.addEventListener('ended', () => {
+    window.listeningState.isPlaying = false;
+    updateAudioControlsUI(false);
+  });
+
+  audio.addEventListener('error', (e) => {
+    console.warn("HTML5 audio playback error, falling back to Web Speech Synthesis:", e);
+  });
+
+  window.listeningState.audio = audio;
+}
+
+function toggleAudioPlayback() {
   if (window.listeningState.isPlaying) {
-    stopAudioSynthesis();
+    pauseAudioPlayback();
   } else {
+    startAudioPlayback();
+  }
+}
+
+function startAudioPlayback() {
+  const track = window.listeningState.currentTrack;
+  if (!track) return;
+
+  const audio = window.listeningState.audio;
+  if (audio && audio.src && !audio.error) {
+    audio.playbackRate = window.listeningState.playbackRate;
+    audio.play().then(() => {
+      window.listeningState.isPlaying = true;
+      updateAudioControlsUI(true);
+    }).catch(err => {
+      console.warn("Audio play failed, falling back to speech synthesis:", err);
+      playAudioSynthesis();
+    });
+  } else {
+    playAudioSynthesis();
+  }
+}
+
+function pauseAudioPlayback() {
+  if (window.listeningState.audio) {
+    try { window.listeningState.audio.pause(); } catch (_) {}
+  }
+  if ('speechSynthesis' in window) {
+    try { window.speechSynthesis.cancel(); } catch (_) {}
+  }
+  window.listeningState.isPlaying = false;
+  updateAudioControlsUI(false);
+}
+
+function stopAudioPlayback() {
+  pauseAudioPlayback();
+  if (window.listeningState.audio) {
+    try {
+      window.listeningState.audio.currentTime = 0;
+    } catch (_) {}
+  }
+  window.listeningState.currentTime = 0;
+  const curEl = document.getElementById("audio-time-current");
+  const slider = document.getElementById("audio-seek-slider");
+  if (curEl) curEl.innerText = "00:00";
+  if (slider) slider.value = 0;
+}
+
+function onSeekSliderChange(percentVal) {
+  const percent = parseFloat(percentVal);
+  const audio = window.listeningState.audio;
+  if (audio && audio.duration) {
+    audio.currentTime = (percent / 100) * audio.duration;
+    window.listeningState.currentTime = audio.currentTime;
+    const curEl = document.getElementById("audio-time-current");
+    if (curEl) curEl.innerText = formatAudioTime(audio.currentTime);
+  }
+}
+
+function setAudioVolume(volVal) {
+  const vol = parseFloat(volVal);
+  if (window.listeningState.audio) {
+    window.listeningState.audio.volume = vol;
+  }
+}
+
+function setPlaybackRate(rate) {
+  window.listeningState.playbackRate = rate;
+
+  document.querySelectorAll(".rate-btn").forEach(b => {
+    b.classList.remove("bg-blue-600", "text-white");
+    b.classList.add("text-slate-400");
+  });
+
+  const rateKey = rate === 0.75 ? '075' : (rate === 1.0 ? '10' : '125');
+  const targetBtn = document.getElementById(`rate-${rateKey}`);
+  if (targetBtn) {
+    targetBtn.classList.add("bg-blue-600", "text-white");
+    targetBtn.classList.remove("text-slate-400");
+  }
+
+  if (window.listeningState.audio) {
+    window.listeningState.audio.playbackRate = rate;
+  }
+  if (window.listeningState.speechUtterance && window.listeningState.isPlaying) {
     playAudioSynthesis();
   }
 }
@@ -265,13 +420,12 @@ function playAudioSynthesis() {
     return;
   }
 
-  window.speechSynthesis.cancel(); // Reset any previous
+  window.speechSynthesis.cancel();
 
   const utterance = new SpeechSynthesisUtterance(track.audio_script);
   utterance.lang = 'en-US';
   utterance.rate = window.listeningState.playbackRate;
 
-  // Try to pick an English voice
   const voices = window.speechSynthesis.getVoices();
   const enVoice = voices.find(v => v.lang.startsWith('en')) || voices[0];
   if (enVoice) utterance.voice = enVoice;
@@ -296,38 +450,9 @@ function playAudioSynthesis() {
   window.speechSynthesis.speak(utterance);
 }
 
-function stopAudioSynthesis() {
-  if ('speechSynthesis' in window) {
-    window.speechSynthesis.cancel();
-  }
-  window.listeningState.isPlaying = false;
-  updateAudioControlsUI(false);
-}
-
-function setPlaybackRate(rate) {
-  window.listeningState.playbackRate = rate;
-
-  document.querySelectorAll(".rate-btn").forEach(b => {
-    b.classList.remove("bg-blue-600", "text-white");
-    b.classList.add("text-slate-400");
-  });
-
-  const rateKey = rate === 0.85 ? '085' : (rate === 1.0 ? '10' : '115');
-  const targetBtn = document.getElementById(`rate-${rateKey}`);
-  if (targetBtn) {
-    targetBtn.classList.add("bg-blue-600", "text-white");
-    targetBtn.classList.remove("text-slate-400");
-  }
-
-  if (window.listeningState.isPlaying) {
-    playAudioSynthesis(); // Restart with new rate
-  }
-}
-
 function updateAudioControlsUI(isPlaying) {
   const btn = document.getElementById("audio-play-btn");
   const statusEl = document.getElementById("audio-status-text");
-  const fillEl = document.getElementById("audio-progress-fill");
 
   if (!btn) return;
 
@@ -336,23 +461,22 @@ function updateAudioControlsUI(isPlaying) {
     btn.classList.add("bg-amber-600", "hover:bg-amber-500");
     btn.classList.remove("bg-blue-600", "hover:bg-blue-500");
     if (statusEl) statusEl.innerText = "▶ Oynatılıyor... Notlarınızı alın";
-    if (fillEl) fillEl.style.width = "75%";
   } else {
     btn.innerHTML = `<i data-lucide="play" class="w-7 h-7"></i>`;
     btn.classList.remove("bg-amber-600", "hover:bg-amber-500");
     btn.classList.add("bg-blue-600", "hover:bg-blue-500");
     if (statusEl) statusEl.innerText = "Durduruldu / Tamamlandı";
-    if (fillEl) fillEl.style.width = "100%";
   }
 
   if (window.lucide) window.lucide.createIcons();
 }
 
+
 async function submitListeningExam() {
   const track = window.listeningState.currentTrack;
   if (!track) return;
 
-  stopAudioSynthesis();
+  stopAudioPlayback();
 
   let correctCount = 0;
   const total = track.questions.length;
@@ -416,9 +540,16 @@ window.exitListeningRunner = exitListeningRunner;
 window.saveUserNotes = saveUserNotes;
 window.revealListeningQuestions = revealListeningQuestions;
 window.selectListeningAnswer = selectListeningAnswer;
-window.toggleAudioSynthesis = toggleAudioSynthesis;
+window.toggleAudioPlayback = toggleAudioPlayback;
+window.startAudioPlayback = startAudioPlayback;
+window.pauseAudioPlayback = pauseAudioPlayback;
+window.stopAudioPlayback = stopAudioPlayback;
+window.onSeekSliderChange = onSeekSliderChange;
+window.setAudioVolume = setAudioVolume;
+window.toggleAudioSynthesis = toggleAudioPlayback;
 window.playAudioSynthesis = playAudioSynthesis;
-window.stopAudioSynthesis = stopAudioSynthesis;
+window.stopAudioSynthesis = stopAudioPlayback;
 window.setPlaybackRate = setPlaybackRate;
 window.submitListeningExam = submitListeningExam;
+
 

@@ -98,73 +98,225 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   void _openVerificationDialog() {
+    final messenger = ScaffoldMessenger.of(context);
     final emailCtrl = TextEditingController(text: 'ogrenci@${widget.currentUniversity.id}.edu.tr');
     final numCtrl = TextEditingController(text: '040220199');
+    final otpCtrl = TextEditingController();
+
+    bool isOtpStep = false;
+    bool isLoading = false;
+    String statusMessage = '';
+    bool isError = false;
 
     showDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: const Row(
-          children: [
-            Icon(Icons.verified_user, color: Colors.green),
-            SizedBox(width: 8),
-            Text('Öğrenci Doğrulama', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          ],
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text('Üniversite .edu.tr e-posta ve öğrenci numaranızı girerek doğrulama rozetini alın.', style: TextStyle(fontSize: 12, color: Colors.grey)),
-            const SizedBox(height: 14),
-            TextField(
-              controller: emailCtrl,
-              decoration: InputDecoration(
-                labelText: 'Edu E-posta',
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+      builder: (ctx) => StatefulBuilder(
+        builder: (dlgCtx, setDialogState) => AlertDialog(
+
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: Row(
+            children: [
+              Icon(isOtpStep ? Icons.mark_email_read_outlined : Icons.verified_user, color: Colors.green.shade700),
+              const SizedBox(width: 8),
+              Text(
+                isOtpStep ? 'E-Posta OTP Doğrulama' : 'Öğrenci Doğrulama',
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
-            ),
-            const SizedBox(height: 10),
-            TextField(
-              controller: numCtrl,
-              decoration: InputDecoration(
-                labelText: 'Öğrenci Numarası',
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text('İptal'),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () async {
-              final res = await SyncService().verifyStudent(
-                universityId: widget.currentUniversity.id,
-                eduEmail: emailCtrl.text.trim(),
-                studentNumber: numCtrl.text.trim(),
-              );
-              if (!mounted) return;
-              if (ctx.mounted) {
-                Navigator.pop(ctx);
-              }
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(res['message'] ?? 'Doğrulandı!'),
-                  backgroundColor: Colors.green.shade700,
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (!isOtpStep) ...[
+                const Text(
+                  'Üniversite .edu.tr e-posta ve öğrenci numaranızı girerek 6 haneli doğrulama kodunu talep edin.',
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green.shade700,
-              foregroundColor: Colors.white,
-            ),
-            child: const Text('Doğrula'),
+                const SizedBox(height: 14),
+                TextField(
+                  controller: emailCtrl,
+                  decoration: InputDecoration(
+                    labelText: 'Edu E-posta',
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                TextField(
+                  controller: numCtrl,
+                  decoration: InputDecoration(
+                    labelText: 'Öğrenci Numarası',
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                  ),
+                ),
+              ] else ...[
+                Text(
+                  '${emailCtrl.text.trim()} adresine gönderilen 6 haneli doğrulama kodunu girin (Geçerlilik: 5 dk):',
+                  style: const TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+                const SizedBox(height: 14),
+                TextField(
+                  controller: otpCtrl,
+                  maxLength: 6,
+                  keyboardType: TextInputType.number,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, letterSpacing: 8),
+                  decoration: InputDecoration(
+                    counterText: '',
+                    hintText: '000000',
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Kod gelmedi mi?', style: TextStyle(fontSize: 11, color: Colors.grey)),
+                    TextButton(
+                      onPressed: isLoading ? null : () async {
+                        setDialogState(() {
+                          isLoading = true;
+                          statusMessage = 'Yeni kod talep ediliyor...';
+                          isError = false;
+                        });
+                        final res = await SyncService().requestStudentOtp(
+                          email: emailCtrl.text.trim(),
+                          studentNumber: numCtrl.text.trim(),
+                        );
+                        setDialogState(() {
+                          isLoading = false;
+                          statusMessage = res['message'] ?? 'Kod tekrar gönderildi!';
+                          isError = res['status'] == 'error';
+                        });
+                      },
+                      child: const Text('Tekrar Gönder', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+                    ),
+                  ],
+                ),
+              ],
+              if (statusMessage.isNotEmpty) ...[
+                const SizedBox(height: 10),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: isError ? Colors.red.shade50 : Colors.green.shade50,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: isError ? Colors.red.shade200 : Colors.green.shade200),
+                  ),
+                  child: Text(
+                    statusMessage,
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: isError ? Colors.red.shade800 : Colors.green.shade800,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ],
           ),
-        ],
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('İptal'),
+            ),
+            if (!isOtpStep)
+              ElevatedButton(
+                onPressed: isLoading ? null : () async {
+                  final email = emailCtrl.text.trim();
+                  final num = numCtrl.text.trim();
+                  if (email.isEmpty || num.isEmpty) {
+                    setDialogState(() {
+                      statusMessage = 'Lütfen tüm alanları doldurun.';
+                      isError = true;
+                    });
+                    return;
+                  }
+
+                  setDialogState(() {
+                    isLoading = true;
+                    statusMessage = '';
+                  });
+
+                  final res = await SyncService().requestStudentOtp(
+                    email: email,
+                    studentNumber: num,
+                  );
+
+                  setDialogState(() {
+                    isLoading = false;
+                    if (res['status'] == 'error') {
+                      statusMessage = res['message'] ?? 'Kod gönderilemedi.';
+                      isError = true;
+                    } else {
+                      isOtpStep = true;
+                      statusMessage = res['message'] ?? 'Doğrulama kodu gönderildi!';
+                      isError = false;
+                    }
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppTheme.brandBlue,
+                  foregroundColor: Colors.white,
+                ),
+                child: isLoading
+                    ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
+                    : const Text('Kod Gönder'),
+              )
+            else
+              ElevatedButton(
+                onPressed: isLoading ? null : () async {
+                  final code = otpCtrl.text.trim();
+                  if (code.length != 6) {
+                    setDialogState(() {
+                      statusMessage = 'Lütfen 6 haneli kodu giriniz.';
+                      isError = true;
+                    });
+                    return;
+                  }
+
+                  setDialogState(() {
+                    isLoading = true;
+                    statusMessage = '';
+                  });
+
+                  final res = await SyncService().verifyStudentOtp(
+                    email: emailCtrl.text.trim(),
+                    otpCode: code,
+                  );
+
+                  if (!mounted) return;
+
+                  if (res['is_verified'] == true) {
+                    if (ctx.mounted) {
+                      Navigator.pop(ctx);
+                    }
+                    messenger.showSnackBar(
+                      SnackBar(
+                        content: Text(res['message'] ?? 'Öğrenci hesabınız başarıyla doğrulandı!'),
+                        backgroundColor: Colors.green.shade700,
+                      ),
+                    );
+                    _loadData();
+
+                  } else {
+                    setDialogState(() {
+                      isLoading = false;
+                      statusMessage = res['message'] ?? 'Doğrulama başarısız.';
+                      isError = true;
+                    });
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green.shade700,
+                  foregroundColor: Colors.white,
+                ),
+                child: isLoading
+                    ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
+                    : const Text('Doğrula'),
+              ),
+          ],
+        ),
       ),
     );
   }

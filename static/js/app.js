@@ -634,46 +634,126 @@ function closeStudentVerifyModal() {
   if (modal) modal.classList.add("hidden");
 }
 
-async function submitStudentVerification() {
+let otpTimerInterval = null;
+let currentOtpEmail = "";
+
+async function requestStudentOtp() {
   const emailInput = document.getElementById("verify-edu-email");
   const numberInput = document.getElementById("verify-student-number");
   const statusMsg = document.getElementById("verify-status-msg");
-
-  const eduEmail = emailInput ? emailInput.value.trim() : "";
+  const email = emailInput ? emailInput.value.trim() : "";
   const studentNumber = numberInput ? numberInput.value.trim() : "";
 
-  if (!eduEmail || !studentNumber) {
+  if (!email || !email.includes("@")) {
     if (statusMsg) {
       statusMsg.className = "p-3 rounded-xl text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200 block";
-      statusMsg.innerText = "Lütfen e-posta ve öğrenci numaranızı eksiksiz girin.";
+      statusMsg.innerText = "Lütfen geçerli bir üniversite e-posta adresi (.edu.tr) girin.";
+    }
+    return;
+  }
+
+  currentOtpEmail = email;
+
+  try {
+    const res = await fetch('/api/student/request-otp', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, student_number: studentNumber })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.detail || "Kod gönderilemedi.");
+    }
+
+    document.getElementById("verify-step-input")?.classList.add("hidden");
+    document.getElementById("verify-step-otp")?.classList.remove("hidden");
+    const sentLabel = document.getElementById("otp-sent-email-label");
+    if (sentLabel) sentLabel.innerText = `${email} adresine gönderilen 6 haneli kodu girin.`;
+
+    const otpInput = document.getElementById("verify-otp-code");
+    if (otpInput) {
+      otpInput.value = "";
+      otpInput.focus();
+    }
+
+    startOtpCountdown(60);
+    showNotification("✓ 6 haneli doğrulama kodu gönderildi!", "emerald");
+  } catch (err) {
+    if (statusMsg) {
+      statusMsg.className = "p-3 rounded-xl text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200 block";
+      statusMsg.innerText = err.message;
+    }
+  }
+}
+
+function startOtpCountdown(seconds) {
+  if (otpTimerInterval) clearInterval(otpTimerInterval);
+  let remaining = seconds;
+  const display = document.getElementById("otp-timer-display");
+  const resendBtn = document.getElementById("btn-resend-otp");
+  if (resendBtn) resendBtn.disabled = true;
+
+  if (display) display.innerText = `Kalan Süre: ${remaining}s`;
+
+  otpTimerInterval = setInterval(() => {
+    remaining--;
+    if (display) display.innerText = `Kalan Süre: ${remaining}s`;
+    if (remaining <= 0) {
+      clearInterval(otpTimerInterval);
+      if (display) display.innerText = "Süre doldu";
+      if (resendBtn) resendBtn.disabled = false;
+    }
+  }, 1000);
+}
+
+function resendStudentOtp() {
+  requestStudentOtp();
+}
+
+async function submitStudentOtp() {
+  const otpInput = document.getElementById("verify-otp-code");
+  const statusMsg = document.getElementById("verify-status-msg");
+  const code = otpInput ? otpInput.value.trim() : "";
+
+  if (!code || code.length !== 6) {
+    if (statusMsg) {
+      statusMsg.className = "p-3 rounded-xl text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200 block";
+      statusMsg.innerText = "Lütfen 6 haneli doğrulama kodunu eksiksiz girin.";
     }
     return;
   }
 
   try {
-    const res = await fetch('/api/student/verify', {
+    const res = await fetch('/api/student/verify-otp', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        user_id: 1,
-        university_id: window.appState.currentUniversity.id,
-        edu_email: eduEmail,
-        student_number: studentNumber
-      })
+      body: JSON.stringify({ email: currentOtpEmail, otp_code: code })
     });
-    const result = await res.json();
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.detail || "Kod doğrulanamadı.");
+    }
+
+    if (otpTimerInterval) clearInterval(otpTimerInterval);
 
     if (statusMsg) {
       statusMsg.className = "p-3 rounded-xl text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 block";
-      statusMsg.innerText = result.message;
+      statusMsg.innerText = data.message || "Öğrenci hesabınız başarıyla doğrulandı!";
     }
+
+    showNotification("✓ Öğrenci hesabı doğrulandı!", "emerald");
 
     setTimeout(() => {
       closeStudentVerifyModal();
       loadStudentStatus();
+      document.getElementById("verify-step-input")?.classList.remove("hidden");
+      document.getElementById("verify-step-otp")?.classList.add("hidden");
     }, 1500);
   } catch (err) {
-    console.error("Verification submit error:", err);
+    if (statusMsg) {
+      statusMsg.className = "p-3 rounded-xl text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200 block";
+      statusMsg.innerText = err.message;
+    }
   }
 }
 
@@ -1046,6 +1126,10 @@ window.switchAuthTab = switchAuthTab;
 window.submitLogin = submitLogin;
 window.submitRegister = submitRegister;
 window.logoutUser = logoutUser;
+window.requestStudentOtp = requestStudentOtp;
+window.resendStudentOtp = resendStudentOtp;
+window.submitStudentOtp = submitStudentOtp;
+
 
 
 

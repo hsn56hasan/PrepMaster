@@ -398,31 +398,40 @@ class _ListeningRunnerScreenState extends State<ListeningRunnerScreen> {
                 ),
                 const SizedBox(height: 14),
 
-                // Progress Bar
-                LinearProgressIndicator(
-                  value: _playbackProgress,
-                  backgroundColor: Colors.white12,
-                  valueColor: AlwaysStoppedAnimation<Color>(_isPlaying ? AppTheme.accentAmber : AppTheme.brandBlue),
-                  minHeight: 6,
-                  borderRadius: BorderRadius.circular(3),
+                // Progress Seek Bar Slider
+                SliderTheme(
+                  data: SliderTheme.of(context).copyWith(
+                    thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6),
+                    trackHeight: 4,
+                    activeTrackColor: _isPlaying ? AppTheme.accentAmber : AppTheme.brandBlue,
+                    inactiveTrackColor: Colors.white12,
+                    thumbColor: Colors.white,
+                  ),
+                  child: Slider(
+                    value: _playbackProgress.clamp(0.0, 1.0),
+                    onChanged: (val) {
+                      setState(() {
+                        _playbackProgress = val;
+                      });
+                    },
+                  ),
                 ),
-                const SizedBox(height: 10),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Süre: ~${(t.lectureDurationSeconds * (1 - _playbackProgress)).round()} sn kaldı',
+                      '${(t.lectureDurationSeconds * _playbackProgress).round()}s / ${t.lectureDurationSeconds}s',
                       style: const TextStyle(fontSize: 11, color: Colors.white60),
                     ),
                     Row(
                       children: [
                         const Text('Hız: ', style: TextStyle(fontSize: 11, color: Colors.white60)),
-                        _speedChip(0.85),
+                        _speedChip(0.75),
                         const SizedBox(width: 4),
                         _speedChip(1.0),
                         const SizedBox(width: 4),
-                        _speedChip(1.15),
+                        _speedChip(1.25),
                       ],
                     ),
                   ],
@@ -430,6 +439,7 @@ class _ListeningRunnerScreenState extends State<ListeningRunnerScreen> {
               ],
             ),
           ),
+
 
           const SizedBox(height: 16),
 

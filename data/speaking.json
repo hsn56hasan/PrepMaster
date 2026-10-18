@@ -102,5 +102,58 @@
       "resilience"
     ],
     "model_answer_transcript": "The integration of renewable energy sources such as solar and wind presents a critical engineering paradox: while ecologically sustainable, their inherent intermittency strains conventional power grids. To overcome this hurdle, electrical engineers must deploy grid-scale battery energy storage systems that capture surplus power during peak generation hours and discharge it during high demand. Furthermore, the incorporation of predictive machine learning models enables utilities to accurately anticipate weather shifts and modulate load distribution in real time."
+  },
+  {
+    "id": "spk_boun_02",
+    "university_id": "boun",
+    "target_university": "Boğaziçi Üniversitesi (BUEPT)",
+    "level": "C1",
+    "title": "Academic Debate: Ethical Implications of AI in Healthcare",
+    "topic": "Bioethics & Medical Artificial Intelligence",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Boğaziçi BUEPT mülakatı: Sağlık sektöründe yapay zekanın tanı koymadaki etik sorumluluklarını ve hasta haklarını değerlendirin.",
+    "prompt_en": "As diagnostic AI systems surpass human clinicians in early disease detection, what are the primary ethical and legal dilemmas regarding accountability when algorithmic misdiagnoses occur?",
+    "guiding_questions": [
+      "Who bears ultimate liability: the algorithm developer, the hospital, or the attending physician?",
+      "How can algorithmic transparency and explainability be enforced in clinical settings?",
+      "Does automated medicine undermine the empathetic doctor-patient relationship?"
+    ],
+    "key_vocabulary": [
+      "clinical liability",
+      "algorithmic bias",
+      "diagnostic accuracy",
+      "transparency",
+      "bioethics",
+      "empathy"
+    ],
+    "model_answer_transcript": "The deployment of autonomous artificial intelligence systems in medical diagnostics represents an epochal leap in clinical efficacy, yet it introduces profound ethical and juridical dilemmas. The paramount question concerns legal accountability in the event of an erroneous diagnosis. In my analysis, liability cannot be delegated to an algorithmic model; rather, healthcare institutions must institute human-in-the-loop protocols where certified physicians review and corroborate AI recommendations. Moreover, establishing transparent explainable AI frameworks is essential to preserve patient trust and uphold fundamental bioethical standards."
+  },
+  {
+    "id": "spk_odtu_02",
+    "university_id": "odtu",
+    "target_university": "Orta Doğu Teknik Üniversitesi (ODTÜ EPE)",
+    "level": "C1",
+    "title": "Engineering Solution: Mitigating Global Freshwater Scarcity",
+    "topic": "Hydrological Engineering & Desalination",
+    "prep_time_seconds": 45,
+    "speak_time_seconds": 90,
+    "instructions_tr": "ODTÜ EPE formatı: Küresel tatlı su krizine karşı uygulanabilir 2 ileri mühendislik çözümünü ve sürdürülebilirlik boyutunu sunun.",
+    "prompt_en": "Climate change and population growth are accelerating acute freshwater shortages globally. Evaluate two cutting-edge engineering solutions to ensure long-term hydrological security.",
+    "guiding_questions": [
+      "How can solar-powered reverse osmosis reduce desalination costs?",
+      "What role does industrial wastewater recycling play in circular water economies?",
+      "What ecological precautions are needed for brine disposal?"
+    ],
+    "key_vocabulary": [
+      "hydrological security",
+      "reverse osmosis",
+      "desalination",
+      "wastewater reclamation",
+      "brine discharge",
+      "sustainability"
+    ],
+    "model_answer_transcript": "Accelerating freshwater depletion demands innovative technological interventions to safeguard global hydrological security. First, advancing solar-powered reverse osmosis desalination offers an economically viable solution for arid coastal territories, drastically diminishing carbon emissions associated with conventional thermal plants. Concurrently, municipal authorities should implement closed-loop wastewater reclamation facilities to purify industrial effluent for agricultural irrigation, conserving pristine groundwater reserves."
   }
 ]
+

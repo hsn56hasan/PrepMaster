@@ -1,0 +1,27 @@
+services:
+  prepmaster-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: prepmaster_platform
+    restart: unless-stopped
+    ports:
+      - "8050:8050"
+    environment:
+      - PORT=8050
+      - HOST=0.0.0.0
+      - ENVIRONMENT=production
+      - PREPMASTER_DB_PATH=/app/data/prepmaster.db
+    volumes:
+      - prepmaster_data:/app/data
+      - ./static/audio:/app/static/audio:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8050/api/student/status')"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  prepmaster_data:
+    driver: local

@@ -22,7 +22,8 @@ from database import (
     record_mistake, resolve_mistake, delete_mistake,
     get_mistakes, get_mistake_count,
     bulk_upsert_mistakes, bulk_upsert_vocab_progress,
-    create_user, authenticate_user, verify_student, get_verification_status
+    create_user, authenticate_user, verify_student, get_verification_status,
+    create_student_otp, verify_student_otp
 )
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -118,6 +119,15 @@ class StudentVerifyRequest(BaseModel):
     student_number: str
     notes: Optional[str] = ""
 
+class StudentOtpRequest(BaseModel):
+    email: str
+    student_number: Optional[str] = ""
+
+class StudentOtpVerifyRequest(BaseModel):
+    email: str
+    otp_code: str
+    user_id: Optional[int] = 1
+
 # --- Authentication & Student Verification Endpoints ---
 @app.post("/api/auth/register")
 def register_endpoint(req: RegisterRequest):
@@ -160,6 +170,25 @@ def student_verify_endpoint(req: StudentVerifyRequest):
         doc_note=req.notes or ""
     )
     return res
+
+@app.post("/api/student/request-otp")
+def student_request_otp_endpoint(req: StudentOtpRequest):
+    if not req.email or "@" not in req.email:
+        raise HTTPException(status_code=400, detail="Geçerli bir e-posta adresi giriniz.")
+    res = create_student_otp(email=req.email, student_number=req.student_number or "")
+    if not res.get("success"):
+        raise HTTPException(status_code=400, detail=res.get("detail", "OTP kodu oluşturulamadı."))
+    return res
+
+@app.post("/api/student/verify-otp")
+def student_verify_otp_endpoint(req: StudentOtpVerifyRequest):
+    if not req.email or not req.otp_code:
+        raise HTTPException(status_code=400, detail="E-posta ve 6 haneli doğrulama kodunu eksiksiz giriniz.")
+    res = verify_student_otp(email=req.email, otp_code=req.otp_code, user_id=req.user_id or 1)
+    if not res.get("success"):
+        raise HTTPException(status_code=400, detail=res.get("detail", "Doğrulama başarısız."))
+    return res
+
 
 @app.get("/api/student/status")
 def student_status_endpoint(user_id: int = 1):

@@ -808,14 +808,43 @@
       </div>
 
       <div class="space-y-3">
-        <div>
-          <label class="block text-xs font-bold text-slate-600 mb-1">Üniversite E-postası (.edu.tr):</label>
-          <input type="email" id="verify-edu-email" placeholder="ornek@itu.edu.tr" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+        <!-- Adım 1: E-Posta & Öğrenci No -->
+        <div id="verify-step-input" class="space-y-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">Üniversite E-postası (.edu.tr):</label>
+            <input type="email" id="verify-edu-email" placeholder="ornek@itu.edu.tr" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">Öğrenci Numarası:</label>
+            <input type="text" id="verify-student-number" placeholder="Örn: 040220199" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+          </div>
+
+          <button onclick="requestStudentOtp()" id="btn-request-otp" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow transition flex items-center justify-center gap-1.5">
+            <i data-lucide="send" class="w-4 h-4"></i> 6 Haneli Doğrulama Kodu Gönder
+          </button>
         </div>
 
-        <div>
-          <label class="block text-xs font-bold text-slate-600 mb-1">Öğrenci Numarası:</label>
-          <input type="text" id="verify-student-number" placeholder="Örn: 040220199" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+        <!-- Adım 2: 6 Haneli OTP Kod Girişi -->
+        <div id="verify-step-otp" class="hidden space-y-3">
+          <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-800">
+            <span class="font-bold block">✓ Kod Gönderildi!</span>
+            <span id="otp-sent-email-label">E-posta adresinize gelen 6 haneli doğrulama kodunu girin.</span>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">6 Haneli Doğrulama Kodu (OTP):</label>
+            <input type="text" id="verify-otp-code" maxlength="6" placeholder="• • • • • •" class="w-full p-3 text-center tracking-widest text-lg font-black bg-slate-50 border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+          </div>
+
+          <div class="flex items-center justify-between text-xs">
+            <span id="otp-timer-display" class="font-bold text-slate-500">Kalan Süre: 60s</span>
+            <button onclick="resendStudentOtp()" id="btn-resend-otp" disabled class="text-emerald-700 hover:underline font-bold disabled:opacity-40">Tekrar Gönder</button>
+          </div>
+
+          <button onclick="submitStudentOtp()" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow transition flex items-center justify-center gap-1.5">
+            <i data-lucide="check-circle" class="w-4 h-4"></i> Kodu Doğrula ve Onayla
+          </button>
         </div>
 
         <div id="verify-status-msg" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
@@ -824,9 +853,6 @@
       <div class="pt-3 border-t border-slate-100 flex items-center justify-end gap-2">
         <button onclick="closeStudentVerifyModal()" class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-xl text-xs font-bold transition">
           Kapat
-        </button>
-        <button onclick="submitStudentVerification()" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow transition flex items-center gap-1.5">
-          <i data-lucide="check-circle" class="w-4 h-4"></i> Doğrula
         </button>
       </div>
     </div>

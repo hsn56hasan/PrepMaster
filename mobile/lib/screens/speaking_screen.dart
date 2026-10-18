@@ -456,19 +456,45 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
             child: const Icon(Icons.mic, size: 36, color: Colors.white),
           ),
           const SizedBox(height: 12),
-          const Text('Konuşma Kaydediliyor...', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.red)),
-          const SizedBox(height: 12),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 8,
+                height: 8,
+                decoration: const BoxDecoration(color: Colors.red, shape: BoxShape.circle),
+              ),
+              const SizedBox(width: 6),
+              const Text('Mikrofon Canlı Kayıtta • Konuşun veya Metin Girin', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.red)),
+            ],
+          ),
+          const SizedBox(height: 10),
           TextField(
             controller: _transcriptController,
             maxLines: 4,
             decoration: InputDecoration(
-              hintText: 'Konuşmanızı yazarak veya mikrofonla dikte ederek metni burada görebilirsiniz...',
+              hintText: 'Konuşmanızı mikrofonla söyleyin veya metin olarak buraya girin...',
               filled: true,
               fillColor: Colors.white,
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide(color: Colors.grey.shade300)),
             ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton.icon(
+                onPressed: () {
+                  _transcriptController.text =
+                      'In my perspective, this academic question requires a comprehensive approach. Sustainable infrastructure and educational investments stimulate socioeconomic mobility and foster scientific advancement.';
+                  setState(() {});
+                },
+                icon: const Icon(Icons.auto_fix_high, size: 14),
+                label: const Text('Akademik Örnek Dikte Et', style: TextStyle(fontSize: 11)),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
           ElevatedButton.icon(
             onPressed: _finishAndEvaluate,
             icon: const Icon(Icons.check, size: 18),
@@ -480,6 +506,7 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             ),
           ),
+
         ],
       ),
     );

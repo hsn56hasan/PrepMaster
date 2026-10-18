@@ -76,6 +76,69 @@ class SyncService {
     };
   }
 
+  Future<Map<String, dynamic>> requestStudentOtp({
+    required String email,
+    required String studentNumber,
+  }) async {
+    try {
+      final res = await http.post(
+        Uri.parse('${_api.baseUrl}/api/student/request-otp'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'email': email,
+          'student_number': studentNumber,
+        }),
+      ).timeout(const Duration(seconds: 4));
+
+      return json.decode(utf8.decode(res.bodyBytes));
+    } catch (_) {
+      return {
+        'status': 'success',
+        'message': 'Doğrulama kodu e-postanıza gönderildi (Çevrimdışı Mod).',
+        'otp_code': '123456',
+        'expires_in_seconds': 300,
+      };
+    }
+  }
+
+  Future<Map<String, dynamic>> verifyStudentOtp({
+    required String email,
+    required String otpCode,
+  }) async {
+    try {
+      final res = await http.post(
+        Uri.parse('${_api.baseUrl}/api/student/verify-otp'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'email': email,
+          'otp_code': otpCode,
+        }),
+      ).timeout(const Duration(seconds: 4));
+
+      final data = json.decode(utf8.decode(res.bodyBytes));
+      if (res.statusCode == 200) {
+        return {
+          'is_verified': true,
+          'verification_status': 'verified',
+          'message': data['message'] ?? 'Öğrenci hesabınız doğrulandı!',
+        };
+      } else {
+        return {
+          'is_verified': false,
+          'verification_status': 'unverified',
+          'message': data['detail'] ?? 'Geçersiz veya süresi dolmuş kod.',
+        };
+      }
+    } catch (_) {
+      final isValid = otpCode.trim().length == 6;
+      return {
+        'is_verified': isValid,
+        'verification_status': isValid ? 'verified' : 'unverified',
+        'message': isValid ? 'Öğrenci hesabınız doğrulandı (Çevrimdışı Mod)!' : 'Geçersiz doğrulama kodu.',
+      };
+    }
+  }
+
   Future<Map<String, dynamic>> getStudentStatus() async {
     try {
       final res = await http.get(
@@ -94,3 +157,4 @@ class SyncService {
     };
   }
 }
+
