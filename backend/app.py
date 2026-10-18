@@ -3,7 +3,7 @@ import re
 from datetime import datetime
 from pathlib import Path
 from typing import List, Optional, Dict, Any
-from fastapi import FastAPI, HTTPException, Query, Request, Depends, status
+from fastapi import FastAPI, HTTPException, Query, Request, Depends, status, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse
@@ -23,7 +23,11 @@ from database import (
     get_mistakes, get_mistake_count,
     bulk_upsert_mistakes, bulk_upsert_vocab_progress,
     create_user, authenticate_user, verify_student, get_verification_status,
-    create_student_otp, verify_student_otp
+    create_student_otp, verify_student_otp,
+    verify_student_by_document, unlock_university_membership, check_university_access
+)
+from document_scanner import (
+    scan_student_document, extract_text_from_bytes, SAMPLE_DOCUMENTS
 )
 
 from security import (
@@ -203,6 +207,22 @@ class StudentOtpVerifyRequest(BaseModel):
     def sanitize_inputs(cls, v):
         return sanitize_text(v, strip_tags=True)
 
+class DocumentScanRequest(BaseModel):
+    user_id: Optional[int] = Field(1, ge=1)
+    document_text: Optional[str] = Field(None, max_length=50000)
+    sample_key: Optional[str] = Field(None, max_length=50)
+
+class UnlockMembershipRequest(BaseModel):
+    user_id: Optional[int] = Field(1, ge=1)
+    university_id: str = Field(..., max_length=50, pattern=r"^[a-zA-Z0-9_-]+$")
+    card_holder: Optional[str] = Field("Öğrenci", max_length=100)
+    card_number: Optional[str] = Field("**** **** **** 4242", max_length=30)
+
+    @field_validator("card_holder", "card_number", mode="before")
+    @classmethod
+    def sanitize_membership_inputs(cls, v):
+        return sanitize_text(v, strip_tags=True)
+
 # --- Authentication & Student Verification Endpoints ---
 @app.post("/api/auth/register")
 def register_endpoint(req: RegisterRequest, request: Request, _=Depends(rate_limit_register)):
@@ -290,6 +310,113 @@ def student_verify_otp_endpoint(req: StudentOtpVerifyRequest, request: Request, 
 def student_status_endpoint(user_id: int = 1):
     return get_verification_status(user_id)
 
+@app.get("/api/student/sample-documents")
+def get_sample_documents():
+    return {
+        k: {
+            "key": k,
+            "title": f"{k.upper()} E-Devlet Öğrenci Belgesi Örneği",
+            "content": v.strip()
+        } for k, v in SAMPLE_DOCUMENTS.items()
+    }
+
+async def _process_scanned_document(doc_text: str, filename: str, target_user_id: int):
+    if not doc_text or len(doc_text.strip()) < 10:
+        raise HTTPException(
+            status_code=400, 
+            detail="Öğrenci belgesi metni okunamadı. Lütfen geçerli bir PDF yükleyin veya E-Devlet barkodlu metni yapıştırın."
+        )
+
+    scan_res = scan_student_document(doc_text, filename)
+    if not scan_res.get("success"):
+        raise HTTPException(
+            status_code=400,
+            detail=scan_res.get("error", "Öğrenci belgesinde tanınan bir üniversite tespit edilemedi.")
+        )
+
+    matched_uni = scan_res["matched_university_id"]
+    db_res = verify_student_by_document(
+        user_id=target_user_id,
+        matched_uni_id=matched_uni,
+        student_number=scan_res.get("student_number", ""),
+        barcode=scan_res.get("document_barcode", ""),
+        doc_snippet=scan_res.get("matched_snippet", "")
+    )
+
+    uni_obj = next((u for u in universities_data if u["id"] == matched_uni), None)
+
+    return {
+        "success": True,
+        "matched_university_id": matched_uni,
+        "matched_university_name": scan_res.get("matched_university_name", matched_uni),
+        "university": uni_obj,
+        "student_number": scan_res.get("student_number", ""),
+        "document_barcode": scan_res.get("document_barcode", ""),
+        "is_active_student": scan_res.get("is_active_student", True),
+        "unlocked_universities": db_res.get("unlocked_universities", [matched_uni, "general"]),
+        "message": scan_res.get("message", "Belgeniz başarıyla tarandı ve onaylandı.")
+    }
+
+@app.post("/api/student/scan-document")
+async def scan_student_document_endpoint(req: DocumentScanRequest, request: Request):
+    token_user = get_current_user_from_request(request)
+    target_user_id = token_user["user_id"] if token_user else (req.user_id or 1)
+
+    doc_text = ""
+    filename = ""
+
+    if req.sample_key and req.sample_key in SAMPLE_DOCUMENTS:
+        doc_text = SAMPLE_DOCUMENTS[req.sample_key]
+        filename = f"{req.sample_key}_edevlet.txt"
+    elif req.document_text:
+        doc_text = req.document_text
+        filename = "uploaded_text.txt"
+
+    return await _process_scanned_document(doc_text, filename, target_user_id)
+
+@app.post("/api/student/upload-document")
+async def upload_student_document_endpoint(
+    request: Request,
+    file: UploadFile = File(...),
+    user_id: Optional[int] = Form(1)
+):
+    target_user_id = user_id or 1
+    if request:
+        token_user = get_current_user_from_request(request)
+        if token_user:
+            target_user_id = token_user["user_id"]
+
+    filename = file.filename or "belge.pdf"
+    content = await file.read()
+    doc_text = extract_text_from_bytes(content, filename)
+    return await _process_scanned_document(doc_text, filename, target_user_id)
+
+@app.post("/api/membership/unlock")
+def unlock_membership_endpoint(req: UnlockMembershipRequest, request: Request):
+    token_user = get_current_user_from_request(request)
+    target_id = token_user["user_id"] if token_user else req.user_id
+
+    res = unlock_university_membership(
+        user_id=target_id,
+        university_id=req.university_id,
+        card_holder=req.card_holder or "Öğrenci",
+        card_last_four=(req.card_number or "4242")[-4:],
+        price_try=50.0
+    )
+    return res
+
+@app.get("/api/membership/check")
+def check_membership_endpoint(university_id: str, request: Request, user_id: int = 1):
+    token_user = get_current_user_from_request(request)
+    target_id = token_user["user_id"] if token_user else user_id
+    has_access = check_university_access(target_id, university_id)
+    return {
+        "university_id": university_id,
+        "has_access": has_access,
+        "price_try": 50.0,
+        "requires_membership": not has_access
+    }
+
 
 
 # --- API Routes ---
@@ -321,10 +448,36 @@ def update_user_profile(req: ProfileUpdateRequest):
 
 @app.get("/api/questions")
 def get_questions(
+    request: Request,
     university_id: Optional[str] = None,
     level: Optional[str] = None,
-    category: Optional[str] = None
+    category: Optional[str] = None,
+    user_id: int = 1
 ):
+    if university_id and university_id not in ["all", "general"]:
+        target_id = user_id
+        if request:
+            token_user = get_current_user_from_request(request)
+            if token_user:
+                target_id = token_user["user_id"]
+            else:
+                uid_param = request.query_params.get("user_id")
+                if uid_param:
+                    try:
+                        target_id = int(uid_param)
+                    except ValueError:
+                        pass
+        if not check_university_access(target_id, university_id):
+            raise HTTPException(
+                status_code=403,
+                detail={
+                    "error": "membership_required",
+                    "message": f"{university_id.upper()} hazırlık sorularını çözmek için 50 TL üyelik gereklidir.",
+                    "university_id": university_id,
+                    "price_try": 50.0
+                }
+            )
+
     filtered = questions_data
     if university_id and university_id != "all":
         # match specific university or general questions
@@ -897,7 +1050,31 @@ def sync_push(req: SyncPushRequest):
 
 # --- Mock Exam Mode (Full University Trial Exam) ---
 @app.get("/api/exam/mock/{university_id}")
-def generate_mock_exam(university_id: str, level: Optional[str] = None):
+def generate_mock_exam(university_id: str, request: Request, level: Optional[str] = None, user_id: int = 1):
+    target_id = user_id
+    if request:
+        token_user = get_current_user_from_request(request)
+        if token_user:
+            target_id = token_user["user_id"]
+        else:
+            uid_param = request.query_params.get("user_id")
+            if uid_param:
+                try:
+                    target_id = int(uid_param)
+                except ValueError:
+                    pass
+
+    if not check_university_access(target_id, university_id):
+        raise HTTPException(
+            status_code=403,
+            detail={
+                "error": "membership_required",
+                "message": f"{university_id.upper()} hazırlık sınavları kilitlidir. Bu üniversitenin denemelerini çözmek için 50 TL üyelik gereklidir.",
+                "university_id": university_id,
+                "price_try": 50.0
+            }
+        )
+
     uni = next((u for u in universities_data if u["id"] == university_id), universities_data[0])
     target_level = (level or "B2").upper()
 

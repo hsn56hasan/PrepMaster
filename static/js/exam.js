@@ -31,9 +31,10 @@ function trackQuestionTimeEnter() {
 async function startExamSimulation(universityId = null, level = null, category = null) {
   const uniId = universityId || window.appState.currentUniversity.id;
   const targetLevel = level || window.appState.currentLevel;
+  const userId = window.appState.currentUser?.id || 1;
 
   try {
-    let url = `/api/questions?university_id=${uniId}`;
+    let url = `/api/questions?university_id=${uniId}&user_id=${userId}`;
     if (targetLevel && targetLevel !== 'all') {
       url += `&level=${targetLevel}`;
     }
@@ -42,6 +43,14 @@ async function startExamSimulation(universityId = null, level = null, category =
     }
 
     let res = await fetch(url);
+    if (res.status === 403) {
+      if (window.openUniversityPaywallModal) {
+        window.openUniversityPaywallModal(uniId, () => {
+          startExamSimulation(uniId, targetLevel, category);
+        });
+        return;
+      }
+    }
     let questions = await res.json();
 
     if (!questions || questions.length === 0) {
@@ -87,8 +96,18 @@ async function startMistakeExam() {
 async function startFullMockExam(universityId = null, level = null) {
   const uniId = universityId || window.appState.currentUniversity.id;
   const targetLevel = level || window.appState.currentLevel || "B2";
+  const userId = window.appState.currentUser?.id || 1;
+
   try {
-    const res = await fetch(`/api/exam/mock/${uniId}?level=${targetLevel}`);
+    const res = await fetch(`/api/exam/mock/${uniId}?level=${targetLevel}&user_id=${userId}`);
+    if (res.status === 403) {
+      if (window.openUniversityPaywallModal) {
+        window.openUniversityPaywallModal(uniId, () => {
+          startFullMockExam(uniId, targetLevel);
+        });
+        return;
+      }
+    }
     const mockData = await res.json();
 
     const questions = mockData.sections?.multiple_choice;

@@ -843,6 +843,96 @@ class ApiService {
       await prefs.remove('auth_user_data');
     } catch (_) {}
   }
+
+  // --- Student Document Scanning & Verification ---
+  Future<Map<String, dynamic>> scanStudentDocument({
+    String? documentText,
+    String? sampleKey,
+    int userId = 1,
+  }) async {
+    try {
+      final Map<String, dynamic> body = {'user_id': userId};
+      if (documentText != null) body['document_text'] = documentText;
+      if (sampleKey != null) body['sample_key'] = sampleKey;
+
+      final res = await http.post(
+        Uri.parse('$baseUrl/api/student/scan-document'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode(body),
+      ).timeout(const Duration(seconds: 10));
+
+      final data = json.decode(utf8.decode(res.bodyBytes));
+      if (res.statusCode == 200) {
+        // Refresh local user profile if available
+        final user = await loadSavedUser();
+        if (user != null) {
+          user['verified_university'] = data['matched_university_id'];
+          user['university_id'] = data['matched_university_id'];
+          user['is_verified_student'] = 1;
+          user['verification_status'] = 'verified';
+          user['unlocked_universities'] = data['unlocked_universities'] ?? [data['matched_university_id'], 'general'];
+          await saveCurrentUser(user);
+        }
+        return {'success': true, ...data};
+      } else {
+        return {'success': false, 'message': data['detail'] ?? 'Belge doğrulanamadı.'};
+      }
+    } catch (e) {
+      return {'success': false, 'message': 'Bağlantı hatası: ${e.toString()}'};
+    }
+  }
+
+  // --- 50 TL University Membership Paywall ---
+  Future<Map<String, dynamic>> unlockUniversityMembership({
+    required String universityId,
+    String cardHolder = 'Öğrenci',
+    String cardNumber = '4242 4242 4242 4242',
+    int userId = 1,
+  }) async {
+    try {
+      final res = await http.post(
+        Uri.parse('$baseUrl/api/membership/unlock'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'user_id': userId,
+          'university_id': universityId,
+          'card_holder': cardHolder,
+          'card_number': cardNumber,
+        }),
+      ).timeout(const Duration(seconds: 10));
+
+      final data = json.decode(utf8.decode(res.bodyBytes));
+      if (res.statusCode == 200) {
+        final user = await loadSavedUser();
+        if (user != null) {
+          user['unlocked_universities'] = data['unlocked_universities'] ?? [];
+          await saveCurrentUser(user);
+        }
+        return {'success': true, ...data};
+      } else {
+        return {'success': false, 'message': data['detail'] ?? 'Ödeme alınamadı.'};
+      }
+    } catch (e) {
+      return {'success': false, 'message': 'Ödeme bağlantı hatası: ${e.toString()}'};
+    }
+  }
+
+  Future<bool> checkUniversityAccess({
+    required String universityId,
+    int userId = 1,
+  }) async {
+    if (universityId == 'general' || universityId == 'all') return true;
+    try {
+      final res = await http.get(
+        Uri.parse('$baseUrl/api/membership/check?university_id=$universityId&user_id=$userId'),
+      ).timeout(const Duration(seconds: 3));
+      if (res.statusCode == 200) {
+        final data = json.decode(utf8.decode(res.bodyBytes));
+        return data['has_access'] == true;
+      }
+    } catch (_) {}
+    return true; // Graceful offline access
+  }
 }
 
 

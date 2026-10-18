@@ -99,6 +99,10 @@
           <i data-lucide="building-2" class="w-4 h-4 text-slate-500"></i>
           <span class="hidden md:inline">Okul Seç</span>
         </button>
+        <button onclick="openDocScanModal()" id="header-doc-scan-btn" class="flex items-center gap-1.5 px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-xl text-xs font-bold transition" title="Öğrenci Belgesi Tara (Okulunu Eşle)">
+          <i data-lucide="scan-text" class="w-4 h-4 text-indigo-600"></i>
+          <span class="hidden sm:inline">Belge Tara</span>
+        </button>
         <button onclick="openAuthModal()" id="header-auth-btn" class="flex items-center gap-1.5 px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition" title="Kullanıcı Girişi / Kayıt">
           <i data-lucide="user" class="w-4 h-4 text-blue-600"></i>
           <span id="header-user-name" class="hidden sm:inline">Giriş Yap</span>
@@ -952,6 +956,222 @@
   <div id="printable-report-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm p-4 overflow-y-auto flex items-center justify-center">
     <div id="printable-report-content" class="w-full max-w-2xl my-auto">
       <!-- JS openPrintableReportModal() ile dolacak -->
+    </div>
+  </div>
+
+  <!-- ================= ÖĞRENCİ BELGESİ TARAMA & OTOMATİK OKUL ATAMA MODAL ================= -->
+  <div id="student-doc-scan-modal" class="hidden fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm p-4 overflow-y-auto flex items-center justify-center">
+    <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 dark:border-slate-700 space-y-4 my-auto">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-700">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-2xl bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-400 flex items-center justify-center shadow-inner">
+            <i data-lucide="scan-text" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-black text-slate-800 dark:text-white text-sm">Öğrenci Belgesi Tarama & Okul Eşleme</h3>
+            <p class="text-[11px] text-slate-400">YÖK & E-Devlet algoritmamız belgenizdeki okulu otomatik tanımlar.</p>
+          </div>
+        </div>
+        <button onclick="closeDocScanModal()" id="btn-close-doc-scan" class="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Bilgi Kutusu -->
+      <div class="p-3.5 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-slate-700 dark:to-slate-700/80 rounded-2xl border border-blue-100 dark:border-slate-600 text-xs text-blue-900 dark:text-blue-200 space-y-1">
+        <div class="flex items-center gap-1.5 font-bold text-blue-800 dark:text-blue-300">
+          <i data-lucide="sparkles" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
+          <span>Otomatik Üniversite Tanımlama & 100% Ücretsiz Erişim</span>
+        </div>
+        <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+          Belgenizde tespit edilen üniversite (Hacettepe, Ankara, Boğaziçi, ODTÜ, İTÜ vb.) hesabınıza <strong>otomatik atanacak</strong> ve tüm hazırlık sınavları size <strong>ücretsiz</strong> açılacaktır.
+        </p>
+      </div>
+
+      <!-- Tarama Yöntemi Sekmeleri -->
+      <div class="flex bg-slate-100 dark:bg-slate-700 p-1 rounded-2xl border border-slate-200 dark:border-slate-600 text-xs font-bold">
+        <button onclick="switchDocScanTab('upload')" id="tab-btn-doc-upload" class="flex-1 py-1.5 rounded-xl bg-white dark:bg-slate-800 text-blue-700 dark:text-blue-400 shadow-sm transition">
+          PDF / Dosya Yükle
+        </button>
+        <button onclick="switchDocScanTab('text')" id="tab-btn-doc-text" class="flex-1 py-1.5 rounded-xl text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition">
+          Metin / Barkod Yapıştır
+        </button>
+        <button onclick="switchDocScanTab('samples')" id="tab-btn-doc-samples" class="flex-1 py-1.5 rounded-xl text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition">
+          1-Tık Hazır Şablonlar
+        </button>
+      </div>
+
+      <!-- 1. Sekme: Dosya Yükleme (Drag & Drop) -->
+      <div id="doc-scan-view-upload" class="space-y-3">
+        <div id="doc-drop-zone" onclick="document.getElementById('doc-file-input').click()" class="border-2 border-dashed border-slate-300 dark:border-slate-600 hover:border-blue-500 dark:hover:border-blue-400 rounded-2xl p-6 text-center cursor-pointer transition bg-slate-50/50 dark:bg-slate-700/30">
+          <input type="file" id="doc-file-input" accept=".pdf,.txt,.doc,.docx" class="hidden" onchange="handleDocFileSelect(event)">
+          <div class="w-12 h-12 mx-auto mb-2 rounded-2xl bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 flex items-center justify-center">
+            <i data-lucide="upload-cloud" class="w-6 h-6"></i>
+          </div>
+          <p class="text-xs font-bold text-slate-700 dark:text-slate-200" id="doc-upload-label">
+            E-Devlet PDF veya Öğrenci Belgenizi Sürükleyin veya Seçin
+          </p>
+          <p class="text-[11px] text-slate-400 mt-1">PDF, TXT formatları desteklenir (Maksimum 10MB)</p>
+        </div>
+
+        <button onclick="submitDocFileUpload()" id="btn-submit-doc-upload" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md transition flex items-center justify-center gap-2">
+          <i data-lucide="scan" class="w-4 h-4"></i> Belgeyi Tara ve Okulumu Ata
+        </button>
+      </div>
+
+      <!-- 2. Sekme: E-Devlet Metin Yapıştırma -->
+      <div id="doc-scan-view-text" class="hidden space-y-3">
+        <div>
+          <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">E-Devlet Belge Metni / Barkod Bilgisi:</label>
+          <textarea id="doc-scan-text-input" rows="5" placeholder="E-Devlet'ten aldığınız barkodlu öğrenci belgesi metnini buraya yapıştırın..." class="w-full p-3 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono"></textarea>
+        </div>
+        <button onclick="submitDocTextScan()" id="btn-submit-doc-text" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md transition flex items-center justify-center gap-2">
+          <i data-lucide="file-check-2" class="w-4 h-4"></i> Metni Çözümle ve Üniversiteyi Doğrula
+        </button>
+      </div>
+
+      <!-- 3. Sekme: 1-Tık Hazır Şablonlar -->
+      <div id="doc-scan-view-samples" class="hidden space-y-3">
+        <p class="text-[11px] text-slate-500 dark:text-slate-400">
+          Elinde hemen belge olmayan öğrenciler için sisteme tanımlı resmi E-Devlet test şablonları:
+        </p>
+        <div class="grid grid-cols-2 gap-2">
+          <button onclick="scanSampleDoc('hacettepe')" class="p-2.5 bg-slate-50 hover:bg-indigo-50 dark:bg-slate-700 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-600 hover:border-indigo-400 rounded-xl text-left transition flex items-center gap-2">
+            <span class="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-700 font-black text-xs flex items-center justify-center">HU</span>
+            <div>
+              <div class="text-xs font-bold text-slate-800 dark:text-slate-100">Hacettepe Üni</div>
+              <div class="text-[10px] text-slate-400">E-Devlet Belgesi</div>
+            </div>
+          </button>
+          <button onclick="scanSampleDoc('ankara')" class="p-2.5 bg-slate-50 hover:bg-blue-50 dark:bg-slate-700 dark:hover:bg-blue-950/40 border border-slate-200 dark:border-slate-600 hover:border-blue-400 rounded-xl text-left transition flex items-center gap-2">
+            <span class="w-7 h-7 rounded-lg bg-blue-100 text-blue-700 font-black text-xs flex items-center justify-center">AÜ</span>
+            <div>
+              <div class="text-xs font-bold text-slate-800 dark:text-slate-100">Ankara Üni</div>
+              <div class="text-[10px] text-slate-400">E-Devlet Belgesi</div>
+            </div>
+          </button>
+          <button onclick="scanSampleDoc('boun')" class="p-2.5 bg-slate-50 hover:bg-sky-50 dark:bg-slate-700 dark:hover:bg-sky-950/40 border border-slate-200 dark:border-slate-600 hover:border-sky-400 rounded-xl text-left transition flex items-center gap-2">
+            <span class="w-7 h-7 rounded-lg bg-sky-100 text-sky-700 font-black text-xs flex items-center justify-center">BO</span>
+            <div>
+              <div class="text-xs font-bold text-slate-800 dark:text-slate-100">Boğaziçi Üni</div>
+              <div class="text-[10px] text-slate-400">BUEPT Belgesi</div>
+            </div>
+          </button>
+          <button onclick="scanSampleDoc('itu')" class="p-2.5 bg-slate-50 hover:bg-amber-50 dark:bg-slate-700 dark:hover:bg-amber-950/40 border border-slate-200 dark:border-slate-600 hover:border-amber-400 rounded-xl text-left transition flex items-center gap-2">
+            <span class="w-7 h-7 rounded-lg bg-amber-100 text-amber-700 font-black text-xs flex items-center justify-center">İTÜ</span>
+            <div>
+              <div class="text-xs font-bold text-slate-800 dark:text-slate-100">İTÜ Hazırlık</div>
+              <div class="text-[10px] text-slate-400">Barkodlu Belge</div>
+            </div>
+          </button>
+          <button onclick="scanSampleDoc('metu')" class="p-2.5 col-span-2 bg-slate-50 hover:bg-rose-50 dark:bg-slate-700 dark:hover:bg-rose-950/40 border border-slate-200 dark:border-slate-600 hover:border-rose-400 rounded-xl text-left transition flex items-center gap-2">
+            <span class="w-7 h-7 rounded-lg bg-rose-100 text-rose-700 font-black text-xs flex items-center justify-center">ODTÜ</span>
+            <div>
+              <div class="text-xs font-bold text-slate-800 dark:text-slate-100">Orta Doğu Teknik Üniversitesi (ODTÜ)</div>
+              <div class="text-[10px] text-slate-400">EPE Resmi Hazırlık Öğrenci Kaydı</div>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tarama Animasyonu & Durum Mesajı -->
+      <div id="doc-scan-loading" class="hidden p-4 bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-2xl flex items-center gap-3">
+        <div class="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+        <div class="text-xs text-blue-800 dark:text-blue-200 font-bold">
+          Öğrenci belgesi taranıyor ve üniversite kurum bilgisi doğrulanıyor...
+        </div>
+      </div>
+
+      <div id="doc-scan-result-msg" class="hidden p-3.5 rounded-2xl text-xs font-semibold"></div>
+
+    </div>
+  </div>
+
+  <!-- ================= 50 TL ÜNİVERSİTE ÜYELİK & PAYWALL MODAL ================= -->
+  <div id="university-paywall-modal" class="hidden fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm p-4 overflow-y-auto flex items-center justify-center">
+    <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-100 dark:border-slate-700 space-y-4 my-auto">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-700">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-2xl bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-400 flex items-center justify-center shadow-inner">
+            <i data-lucide="lock" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-black text-slate-800 dark:text-white text-sm">Üniversite Sınav Paketi</h3>
+            <p class="text-[11px] text-slate-400">Farklı okul sınavları için tek seferlik üyelik</p>
+          </div>
+        </div>
+        <button onclick="closeUniversityPaywallModal()" class="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Bilgi & Okul Karşılaştırması -->
+      <div class="p-4 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-slate-700 dark:to-slate-700/80 rounded-2xl border border-amber-200 dark:border-slate-600 space-y-2.5">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-slate-500 dark:text-slate-400">Kayıtlı Okulunuz:</span>
+          <span class="text-xs font-extrabold text-emerald-600 bg-emerald-100 dark:bg-emerald-900/50 px-2 py-0.5 rounded-lg" id="paywall-user-uni-badge">Ücretsiz</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-slate-500 dark:text-slate-400">Açılacak Okul:</span>
+          <span class="text-xs font-black text-blue-700 dark:text-blue-300" id="paywall-target-uni-name">-</span>
+        </div>
+        <div class="flex items-center justify-between pt-2 border-t border-amber-200 dark:border-slate-600">
+          <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Üyelik Ücreti:</span>
+          <div class="text-right">
+            <span class="text-xl font-black text-amber-700 dark:text-amber-400">50 TL</span>
+            <span class="text-[10px] text-slate-400 block font-semibold">Ömür boyu sınırsız erişim</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dahil Olan Özellikler -->
+      <div class="space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
+        <div class="flex items-center gap-2">
+          <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+          <span>Bu üniversiteye ait tüm resmi muafiyet ve kur denemeleri</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+          <span>Özel akademik listening parçaları ve soru setleri</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+          <span>Örnek essay konuları ve speaking alıştırmaları</span>
+        </div>
+      </div>
+
+      <!-- Hızlı Ödeme Kart Formu -->
+      <div class="space-y-3 pt-2 border-t border-slate-100 dark:border-slate-700">
+        <div>
+          <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Kart Sahibi:</label>
+          <input type="text" id="paywall-card-holder" placeholder="Ad Soyad" value="Öğrenci" class="w-full p-2.5 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500 font-semibold">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Kart Numarası:</label>
+          <input type="text" id="paywall-card-number" placeholder="4242 •••• •••• 4242" value="4242 4242 4242 4242" class="w-full p-2.5 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500 font-mono">
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Son Kullanma:</label>
+            <input type="text" id="paywall-card-expiry" placeholder="12/28" value="12/28" class="w-full p-2.5 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500 font-mono text-center">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">CVV:</label>
+            <input type="text" id="paywall-card-cvv" placeholder="•••" value="424" class="w-full p-2.5 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500 font-mono text-center">
+          </div>
+        </div>
+
+        <div id="paywall-status-msg" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+
+        <button onclick="submitUniversityUnlockPayment()" id="btn-submit-paywall-unlock" class="w-full py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-black text-xs rounded-xl shadow-lg shadow-amber-500/25 transition flex items-center justify-center gap-2">
+          <i data-lucide="credit-card" class="w-4 h-4"></i> 50 TL ile Kilidi Aç ve Başla
+        </button>
+      </div>
+
     </div>
   </div>
 

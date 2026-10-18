@@ -141,11 +141,27 @@ def init_db():
         conn.execute("ALTER TABLE users ADD COLUMN verification_status TEXT DEFAULT 'pending'")
     if "is_verified_student" not in cols:
         conn.execute("ALTER TABLE users ADD COLUMN is_verified_student INTEGER DEFAULT 0")
+    if "unlocked_universities" not in cols:
+        conn.execute("ALTER TABLE users ADD COLUMN unlocked_universities TEXT DEFAULT '[\"itu\", \"general\"]'")
+    if "verified_university" not in cols:
+        conn.execute("ALTER TABLE users ADD COLUMN verified_university TEXT DEFAULT 'itu'")
 
     cursor.execute("PRAGMA table_info(student_verifications)")
     s_cols = [r[1] for r in cursor.fetchall()]
     if "verification_status" not in s_cols:
         conn.execute("ALTER TABLE student_verifications ADD COLUMN verification_status TEXT DEFAULT 'pending'")
+
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS university_purchases (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER,
+            university_id TEXT,
+            price_try REAL DEFAULT 50.0,
+            payment_reference TEXT,
+            card_last_four TEXT,
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP
+        );
+    """)
 
     conn.commit()
     conn.close()
@@ -158,13 +174,34 @@ def get_profile(user_id: int = 1) -> Dict[str, Any]:
     cursor = conn.cursor()
     cursor.execute("""
         SELECT id, email, username, full_name, university_id, current_level, target_score, streak_days, 
-               is_verified_student, verification_status, student_number, last_active 
+               is_verified_student, verification_status, student_number, last_active,
+               unlocked_universities, verified_university
         FROM users WHERE id = ?
     """, (user_id,))
     row = cursor.fetchone()
     if row:
         conn.close()
-        return dict(row)
+        data = dict(row)
+        import json
+        raw_unlocked = data.get("unlocked_universities")
+        unlocked = []
+        if isinstance(raw_unlocked, str):
+            try:
+                unlocked = json.loads(raw_unlocked)
+            except Exception:
+                unlocked = []
+        elif isinstance(raw_unlocked, list):
+            unlocked = raw_unlocked
+
+        primary_uni = data.get("verified_university") or data.get("university_id") or "itu"
+        if primary_uni not in unlocked:
+            unlocked.append(primary_uni)
+        if "general" not in unlocked:
+            unlocked.append("general")
+
+        data["unlocked_universities"] = unlocked
+        data["verified_university"] = primary_uni
+        return data
 
     # Fallback to legacy user_profile
     cursor.execute("SELECT university_id, current_level, target_score, streak_days, last_active FROM user_profile WHERE id = 1")
@@ -175,6 +212,8 @@ def get_profile(user_id: int = 1) -> Dict[str, Any]:
         data["is_verified_student"] = 1
         data["verification_status"] = "verified"
         data["student_number"] = "040220199"
+        data["unlocked_universities"] = ["itu", "general"]
+        data["verified_university"] = "itu"
         return data
 
     return {
@@ -189,6 +228,8 @@ def get_profile(user_id: int = 1) -> Dict[str, Any]:
         "is_verified_student": 1,
         "verification_status": "verified",
         "student_number": "040220199",
+        "unlocked_universities": ["itu", "general"],
+        "verified_university": "itu",
         "last_active": datetime.now().isoformat()
     }
 
@@ -209,13 +250,15 @@ def update_profile(university_id: str, current_level: str, target_score: int, us
     return get_profile(user_id)
 
 def create_user(email: str, username: str, password: str, full_name: str, university_id: str = "itu", student_number: str = "") -> Dict[str, Any]:
+    import json
     conn = get_db()
     pw_hash = hash_password(password)
+    initial_unlocked = json.dumps([university_id, "general"])
     with conn:
         cursor = conn.execute("""
-            INSERT INTO users (email, username, password_hash, full_name, university_id, student_number, is_verified_student, verification_status)
-            VALUES (?, ?, ?, ?, ?, ?, 0, 'pending')
-        """, (email.lower().strip(), username.strip(), pw_hash, full_name.strip(), university_id, student_number.strip()))
+            INSERT INTO users (email, username, password_hash, full_name, university_id, student_number, is_verified_student, verification_status, unlocked_universities, verified_university)
+            VALUES (?, ?, ?, ?, ?, ?, 0, 'pending', ?, ?)
+        """, (email.lower().strip(), username.strip(), pw_hash, full_name.strip(), university_id, student_number.strip(), initial_unlocked, university_id))
         user_id = cursor.lastrowid
     conn.close()
     return get_profile(user_id)
@@ -225,7 +268,8 @@ def authenticate_user(identifier: str, password: str) -> Optional[Dict[str, Any]
     cursor = conn.cursor()
     ident = identifier.lower().strip()
     cursor.execute("""
-        SELECT id, email, username, password_hash, full_name, university_id, current_level, target_score, is_verified_student, verification_status
+        SELECT id, email, username, password_hash, full_name, university_id, current_level, target_score, 
+               is_verified_student, verification_status, unlocked_universities, verified_university
         FROM users 
         WHERE LOWER(email) = ? OR LOWER(username) = ?
     """, (ident, ident))
@@ -248,6 +292,26 @@ def authenticate_user(identifier: str, password: str) -> Optional[Dict[str, Any]
     user_dict = dict(row)
     user_dict.pop("password_hash", None)
     conn.close()
+
+    import json
+    raw_unlocked = user_dict.get("unlocked_universities")
+    unlocked = []
+    if isinstance(raw_unlocked, str):
+        try:
+            unlocked = json.loads(raw_unlocked)
+        except Exception:
+            unlocked = []
+    elif isinstance(raw_unlocked, list):
+        unlocked = raw_unlocked
+
+    primary = user_dict.get("verified_university") or user_dict.get("university_id") or "itu"
+    if primary not in unlocked:
+        unlocked.append(primary)
+    if "general" not in unlocked:
+        unlocked.append("general")
+
+    user_dict["unlocked_universities"] = unlocked
+    user_dict["verified_university"] = primary
     return user_dict
 
 def verify_student(user_id: int, university_id: str, edu_email: str, student_number: str, doc_note: str = "") -> Dict[str, Any]:
@@ -285,6 +349,120 @@ def get_verification_status(user_id: int = 1) -> Dict[str, Any]:
     if row:
         return dict(row)
     return {"id": user_id, "is_verified_student": 1, "verification_status": "verified"}
+
+def verify_student_by_document(user_id: int, matched_uni_id: str, student_number: str = "", barcode: str = "", doc_snippet: str = "") -> Dict[str, Any]:
+    import json
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT unlocked_universities, email, full_name FROM users WHERE id = ?", (user_id,))
+    row = cursor.fetchone()
+    email = row["email"] if row else ""
+    raw_unlocked = row["unlocked_universities"] if row else None
+
+    unlocked = ["general"]
+    if raw_unlocked:
+        try:
+            unlocked = json.loads(raw_unlocked)
+        except Exception:
+            unlocked = ["general"]
+
+    if matched_uni_id not in unlocked:
+        unlocked.append(matched_uni_id)
+
+    with conn:
+        conn.execute("""
+            UPDATE users 
+            SET university_id = ?,
+                verified_university = ?,
+                is_verified_student = 1,
+                verification_status = 'verified',
+                student_number = CASE WHEN ? != '' THEN ? ELSE student_number END,
+                unlocked_universities = ?
+            WHERE id = ?
+        """, (matched_uni_id, matched_uni_id, student_number, student_number, json.dumps(unlocked), user_id))
+
+        conn.execute("""
+            INSERT INTO student_verifications (user_id, university_id, edu_email, student_id_number, verification_type, verification_status, notes)
+            VALUES (?, ?, ?, ?, 'document_scan', 'verified', ?)
+        """, (user_id, matched_uni_id, email, student_number, f"Barcode: {barcode} | Snippet: {doc_snippet[:100]}"))
+
+    conn.close()
+    return {
+        "success": True,
+        "university_id": matched_uni_id,
+        "is_verified": True,
+        "verification_status": "verified",
+        "unlocked_universities": unlocked,
+        "message": f"Tebrikler! Belgeniz başarıyla tarandı ve {matched_uni_id.upper()} hazırlık programı hesabınıza otomatik olarak tanımlandı."
+    }
+
+def unlock_university_membership(user_id: int, university_id: str, card_holder: str = "", card_last_four: str = "4242", price_try: float = 50.0) -> Dict[str, Any]:
+    import json
+    import uuid
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT unlocked_universities FROM users WHERE id = ?", (user_id,))
+    row = cursor.fetchone()
+
+    raw_unlocked = row["unlocked_universities"] if row else None
+    unlocked = ["general"]
+    if raw_unlocked:
+        try:
+            unlocked = json.loads(raw_unlocked)
+        except Exception:
+            unlocked = ["general"]
+
+    if university_id not in unlocked:
+        unlocked.append(university_id)
+
+    ref = f"PAY-50TL-{uuid.uuid4().hex[:8].upper()}"
+    with conn:
+        conn.execute("""
+            UPDATE users 
+            SET unlocked_universities = ?
+            WHERE id = ?
+        """, (json.dumps(unlocked), user_id))
+
+        conn.execute("""
+            INSERT INTO university_purchases (user_id, university_id, price_try, payment_reference, card_last_four)
+            VALUES (?, ?, ?, ?, ?)
+        """, (user_id, university_id, price_try, ref, card_last_four[-4:] if card_last_four else "4242"))
+
+    conn.close()
+    return {
+        "success": True,
+        "unlocked_university": university_id,
+        "unlocked_universities": unlocked,
+        "price_try": price_try,
+        "reference": ref,
+        "message": f"{university_id.upper()} hazırlık sınavları ve deneme testleri 50 TL karşılığında başarıyla açıldı!"
+    }
+
+def check_university_access(user_id: int, university_id: str) -> bool:
+    if not university_id or university_id in ["general", "all"]:
+        return True
+    import json
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT university_id, verified_university, unlocked_universities FROM users WHERE id = ?", (user_id,))
+    row = cursor.fetchone()
+    conn.close()
+    if not row:
+        return True
+
+    # If it's their own registered / verified university, it's 100% free!
+    if row["university_id"] == university_id or row["verified_university"] == university_id:
+        return True
+
+    raw_unlocked = row["unlocked_universities"]
+    if raw_unlocked:
+        try:
+            unlocked = json.loads(raw_unlocked)
+            if university_id in unlocked:
+                return True
+        except Exception:
+            pass
+    return False
 
 
 def save_exam_attempt(university_id: str, level: str, score: float, total_questions: int, 
