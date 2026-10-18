@@ -2959,5 +2959,573 @@
     "correct_answer": "A",
     "explanation_tr": "'Had it not been for...' yapısı '...olmasaydı' demektir. Yani titiz hakem değerlendirmesi ('rigorous peer-review') olmasaydı kusurlu metodoloji fark edilmeyebilirdi; dolayısıyla kusur YALNIZCA bu mekanizma sayesinde yakalanabilmiştir ('identified solely because of...'). Doğru yanıt A.",
     "explanation_en": "Inverted third conditional stating that the defect was caught only thanks to the thorough peer-review evaluation."
+  },
+  {
+    "id": "q-boun-c1-restat-04",
+    "university_id": "boun",
+    "level": "C1",
+    "category": "Restatement",
+    "question": "Choose the sentence closest in meaning:\n\n'No sooner had the experimental immunotherapy demonstrated measurable tumor regression in preliminary cohorts than regulatory oversight bodies halted the trial following unexpected hepatotoxicity reports.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "The regulatory agencies suspended the immunotherapy trial due to unanticipated liver damage almost immediately after it showed tumor shrinkage in early patient groups."
+      },
+      {
+        "key": "B",
+        "text": "Because preliminary cohorts experienced severe liver complications, the experimental immunotherapy was permanently abandoned before any antitumor efficacy could be observed."
+      },
+      {
+        "key": "C",
+        "text": "Although the immunotherapy proved completely ineffective against malignant tumors, regulatory agencies allowed the clinical trials to proceed until hepatotoxicity emerged."
+      },
+      {
+        "key": "D",
+        "text": "Had the regulatory bodies scrutinized the early hepatotoxicity findings more rigorously, the experimental immunotherapy would not have been administered to the preliminary cohorts."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'No sooner ... than ...' yapısı, bir eylemin hemen ardından diğerinin gerçekleştiğini ('yapar yapmaz / henüz olmuştu ki') bildiren devrik bir zaman kalıbıdır. Cümlede, deneysel immünoterapinin erken hasta gruplarında ('preliminary cohorts') tümör küçülmesi ('tumor regression') göstermesiyle birlikte, beklenmedik karaciğer toksisitesi ('unexpected hepatotoxicity') raporları üzerine denetim kurullarınca durdurulduğu ('halted the trial') ifade edilmektedir. A seçeneği ('almost immediately after...') bu zaman ve sebep ilişkisini, 'unanticipated liver damage' (beklenmeyen karaciğer hasarı) ve 'tumor shrinkage' (tümör küçülmesi) eşanlamlılarıyla birebir ve eksiksiz aktarmaktadır.\n\nAkademik İpucu (BUEPT): BUEPT Restatement bölümünde 'No sooner... than', 'Hardly... when', 'Barely... when' devrik zaman yapıları ve tıbbi/akademik eşanlamlı dönüşümleri (hepatotoxicity -> liver damage, regression -> shrinkage) sıkça test edilir.",
+    "explanation_en": "'No sooner ... than ...' denotes immediate temporal succession. Option A faithfully renders both the timing ('almost immediately after') and the semantic content (regression = shrinkage, hepatotoxicity = liver damage, halted = suspended)."
+  },
+  {
+    "id": "q-boun-c1-text-01",
+    "university_id": "boun",
+    "level": "C1",
+    "category": "Text Analysis",
+    "passage": "The integration of predictive algorithmic architectures within criminal justice sentencing has prompted acute normative anxieties regarding epistemic justice. Proponents maintain that actuarial risk-assessment instruments eradicate human idiosyncrasies and racial bias by evaluating recidivism probability through dispassionate statistical aggregates. However, this assertion fundamentally conflates descriptive historical data with prescriptive normative validity. Because these algorithmic models are trained on datasets reflecting historically discriminatory arrest practices, they do not merely mirror existing structural inequities; they actively codify, legitimize, and amplify them under a deceptive veneer of mathematical neutrality.",
+    "question": "It can be inferred from the passage that the author views algorithmic risk assessment instruments in sentencing as:",
+    "options": [
+      {
+        "key": "A",
+        "text": "Inherently objective mechanisms that successfully insulate legal adjudications from racial disparities."
+      },
+      {
+        "key": "B",
+        "text": "Technologically sophisticated tools that inadvertently perpetuate institutional discrimination by formalizing historical biases."
+      },
+      {
+        "key": "C",
+        "text": "Methodologically flawless models whose only deficiency lies in the reluctance of judges to adopt their recommendations."
+      },
+      {
+        "key": "D",
+        "text": "Superior alternatives to judicial discretion that should be implemented without external human oversight."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Metnin ana fikri ve yazarın tutumu (author's stance), algoritmik risk değerlendirme araçlarının tarafsızlık iddiasını çürütmektedir. Yazar, bu modellerin geçmişteki ayrımcı tutuklama verileriyle eğitildiğini ve bu nedenle yapısal adaletsizlikleri meşrulaştırıp güçlendirdiğini ('actively codify, legitimize, and amplify them under a deceptive veneer of mathematical neutrality') belirtmektedir. B şıkkında yer alan 'inadvertently perpetuate institutional discrimination by formalizing historical biases' (tarihsel önyargıları resmileştirerek kurumsal ayrımcılığı sürdürmek) ifadesi yazarın çıkarımını ve eleştirel tutumunu kusursuz yansıtır. A ve D şıkları yazarın açıkça karşı çıktığı savunucu argümanlardır.\n\nAkademik İpucu (BUEPT): BUEPT Reading & Text Analysis sorularında 'inferred/implies' köklerinde yazarın retorik tavrına ve metnin sonundaki vurgu cümlelerine (özellikle 'under a deceptive veneer of...') dikkat edilmelidir.",
+    "explanation_en": "The author argues that algorithmic sentencing tools rely on historically biased data, thereby codifying and magnifying discrimination behind an illusion of mathematical neutrality, perfectly matching B."
+  },
+  {
+    "id": "q-boun-c1-para-01",
+    "university_id": "boun",
+    "level": "C1",
+    "category": "Paragraph Completion",
+    "passage": "Urban microclimates are profoundly influenced by the thermal properties of anthropogenic surfaces. Conventional asphalt and dark roofing materials absorb the preponderance of incident shortwave solar radiation, re-emitting it as thermal infrared energy during nocturnal hours. Consequently, metropolitan centers frequently experience temperatures up to 8°C higher than peripheral rural environs—a phenomenon designated as the urban heat island (UHI) effect. [_____] By substituting traditional roofing membranes with high-albedo cool roofs and expanding vegetated green canopies, municipal planners can significantly elevate surface reflectance, curtail ambient air temperatures, and attenuate building cooling energy loads.",
+    "question": "Which of the following sentences best completes the blank in the passage?",
+    "options": [
+      {
+        "key": "A",
+        "text": "To mitigate this severe thermal accumulation, contemporary urban environmental engineering prioritizes surface albedo enhancement and urban greening strategies."
+      },
+      {
+        "key": "B",
+        "text": "Nevertheless, rural ecosystems remain largely insusceptible to global climatic fluctuations due to extensive agricultural biomass."
+      },
+      {
+        "key": "C",
+        "text": "Consequently, the burning of fossil fuels in industrial production continues to be the exclusive driver of municipal carbon emissions."
+      },
+      {
+        "key": "D",
+        "text": "In spite of these thermal discrepancies, most urban residents express a distinct preference for warmer nighttime ambient conditions."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Boşluktan önceki cümlede kentsel ısı adası (UHI) etkisinin nasıl oluştuğu ve sıcaklıkların 8°C kadar yükselebildiği ('metropolitan centers frequently experience temperatures up to 8°C higher...') bir problem olarak ortaya konmuştur. Boşluktan hemen sonraki cümlede ise çözüm yöntemleri ('By substituting traditional roofing membranes with high-albedo cool roofs and expanding vegetated green canopies...') sıralanmaktadır. Dolayısıyla boşluğa bu termal birikimi azaltmaya yönelik mühendislik ve yeşillendirme stratejilerini başlatan A seçeneği ('To mitigate this severe thermal accumulation, contemporary urban environmental engineering prioritizes surface albedo enhancement...') gelmelidir.\n\nAkademik İpucu (BUEPT): Boşluk tamamlama sorularında problem-çözüm (problem-solution) örgüsünü takip etmek ve takip eden cümlenin araçsal yapısına ('By substituting...') zemin hazırlayan cümleyi bulmak esastır.",
+    "explanation_en": "The blank precedes the specific solutions of high-albedo roofs and vegetated canopies. Option A introduces the mitigation strategies of surface albedo enhancement and greening, bridging the problem and solution seamlessly."
+  },
+  {
+    "id": "q-boun-c2-restat-02",
+    "university_id": "boun",
+    "level": "C2",
+    "category": "Restatement",
+    "question": "Choose the sentence closest in meaning:\n\n'Much as macroeconomic indicators appeared buoyant on the surface, fundamental structural deficits rendered the national fiscal system exceptionally vulnerable to sudden capital flight.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "Even though topline macroeconomic data seemed promising, the country's economic framework remained acutely susceptible to rapid capital outflows because of deep-seated structural flaws."
+      },
+      {
+        "key": "B",
+        "text": "The national fiscal system collapsed under abrupt capital flight primarily because macroeconomic indicators had falsely reported strong financial health."
+      },
+      {
+        "key": "C",
+        "text": "Since the structural deficits were thoroughly addressed, the economy became resilient against external macroeconomic shocks and unexpected monetary flight."
+      },
+      {
+        "key": "D",
+        "text": "Regardless of the underlying structural weaknesses, the sustained buoyancy of macroeconomic metrics successfully shielded the nation from foreign capital flight."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Much as...' yapısı 'Although / Even though / -e rağmen' anlamına gelen ileri düzey bir zıtlık (concession) bağlacıdır. 'Buoyant on the surface' (yüzeysel olarak canlı/umut verici görünen), 'fundamental structural deficits' (temel yapısal açıklar/kusurlar), 'exceptionally vulnerable' (son derece savunmasız/kırılgan) ve 'sudden capital flight' (ani sermaye çıkışı/kaçışı) ifadeleri mevcuttur. A şıkkında 'Even though topline macroeconomic data seemed promising...' (Much as... buoyant on the surface), 'acutely susceptible' (exceptionally vulnerable), 'rapid capital outflows' (sudden capital flight) ve 'deep-seated structural flaws' (fundamental structural deficits) eşleştirmeleriyle orijinal cümlenin her nüansı eksiksiz karşılanmıştır.\n\nAkademik İpucu (BUEPT): C2 seviyesi BUEPT Restatement sorularında 'Much as + S + V' (Concession) yapıları ve 'vulnerable = susceptible', 'capital flight = capital outflow' dönüşümleri belirleyicidir.",
+    "explanation_en": "'Much as' introduces concession equivalent to 'even though'. Option A matches every component: buoyant on the surface = seemed promising, vulnerable = acutely susceptible, capital flight = capital outflows."
+  },
+  {
+    "id": "q-boun-c1-cloze-01",
+    "university_id": "boun",
+    "level": "C1",
+    "category": "Cloze Test",
+    "question": "Complete the blank in the academic text:\n\n'Early developmental neurobiology postulated that synaptic density steadily escalates throughout human lifespan; _______, contemporary magnetic resonance tractography demonstrates that adolescence is marked by extensive synaptic pruning, eliminating underutilized axonal projections to optimize computational neural efficiency.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "on the contrary"
+      },
+      {
+        "key": "B",
+        "text": "for instance"
+      },
+      {
+        "key": "C",
+        "text": "in that"
+      },
+      {
+        "key": "D",
+        "text": "furthermore"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Cümlenin ilk kısmında erken dönem nörobiyolojinin sinaptik yoğunluğun yaşam boyu sürekli arttığını öne sürdüğü ('steadily escalates throughout human lifespan') belirtilmiş; noktalı virgülden sonra ise güncel MR traktografisinin ergenlikte tam tersine yoğun bir sinaptik budama ('extensive synaptic pruning') ve gereksiz aksonların elenmesi olduğunu gösterdiği vurgulanmıştır. Önceki tezi çürüten ve taban tabana zıt bir gerçeği ('bilakis / tam aksine') ortaya koyan bir bağlaca ihtiyaç vardır. Bu işlevi 'on the contrary' eksiksiz karşılar.\n\nAkademik İpucu (BUEPT): BUEPT Cloze Test ve Use of English bölümlerinde 'On the contrary' yapısı, önceki yanlış/eski savı çürüten zıtlık bildiren cümle geçişlerinde vazgeçilmez bir akademik bağlaçtır.",
+    "explanation_en": "The second clause directly refutes the historical hypothesis presented in the first clause. 'On the contrary' introduces the refuting counter-evidence (escalation vs. pruning)."
+  },
+  {
+    "id": "q-metu-c1-restat-03",
+    "university_id": "metu",
+    "level": "C1",
+    "category": "Restatement",
+    "question": "Choose the sentence closest in meaning:\n\n'The anthropologists tentatively hypothesized that the megalithic stone alignment served astronomical orientation functions, though empirical archaeoastronomical evidence remains decidedly inconclusive.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "Anthropologists have definitively verified that the megalithic monuments were engineered precisely to track solstice movements and celestial alignments."
+      },
+      {
+        "key": "B",
+        "text": "While anthropologists have cautiously suggested the megalithic structures may have been aligned with celestial bodies, conclusive factual proof is still lacking."
+      },
+      {
+        "key": "C",
+        "text": "Despite the absence of archaeological interest, astronomical researchers have proved beyond doubt that ancient stone circles functioned as solar observatories."
+      },
+      {
+        "key": "D",
+        "text": "Because the megalithic alignments provided indisputable empirical evidence, anthropologists abandoned their initial tentative hypotheses."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Cümlede antropolojik iddia temkinli ve kesin olmayan bir dille ('tentatively hypothesized' - ihtiyatla varsaydılar) aktarılmış, ikinci kısımda ise ampirik kanıtların kesinlikten uzak olduğu ('decidedly inconclusive' - kesin olmaktan büsbütün uzak) zıtlık bağlacı ('though') ile belirtilmiştir. B seçeneğinde: 'tentatively hypothesized' -> 'cautiously suggested', 'megalithic stone alignment served astronomical orientation' -> 'aligned with celestial bodies', 'empirical evidence remains decidedly inconclusive' -> 'conclusive factual proof is still lacking' dönüşümleri nüansları tam korumuştur.\n\nAkademik İpucu (ODTÜ EPE): METU EPE sınavında akademik metinlerdeki 'hedging' (ihtiyatlı/kesinlik bildirmeyen dil: tentatively, suggested, remains inconclusive) ifadeleri restatement sorularının kilit noktasıdır.",
+    "explanation_en": "'Tentatively hypothesized' denotes cautious suggestion, and 'remains decidedly inconclusive' means conclusive proof is lacking. Option B captures the exact epistemic stance and modality."
+  },
+  {
+    "id": "q-metu-c1-cloze-02",
+    "university_id": "metu",
+    "level": "C1",
+    "category": "Cloze Test",
+    "question": "Complete the blank in the academic text:\n\n'While CRISPR-Cas9 genome editing possesses immense therapeutic potential for hereditary monogenic disorders, off-target endonuclease cleavage poses substantial mutagenic hazards; _______, international bioethics consortia advocate stringent preclinical verification protocols.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "consequently"
+      },
+      {
+        "key": "B",
+        "text": "conversely"
+      },
+      {
+        "key": "C",
+        "text": "notwithstanding"
+      },
+      {
+        "key": "D",
+        "text": "otherwise"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Cümlenin 'While' yan tümcesinde CRISPR'ın tedavi edici potansiyelinin yüksek olduğu ancak hedef dışı kesimlerin önemli mutasyonel riskler ('substantial mutagenic hazards') barındırdığı belirtilmiştir. Noktalı virgülden sonraki bağımsız cümlede ise bu tehlike nedeniyle uluslararası biyoetik kurullarının sıkı klinik öncesi doğrulama protokollerini savunduğu aktarılmaktadır. Bir neden-sonuç (cause and effect / result) ilişkisi söz konusu olduğundan 'consequently' (bu nedenle, sonuç olarak) doğru cevaptır.\n\nAkademik İpucu (ODTÜ EPE): ODTÜ EPE Language Use ve Cloze bölümlerinde noktalı virgül (;) ve virgül (,) arasına gelen 'sentence connectors' (consequently, therefore, furthermore, nevertheless) sınavın en yüksek puan getiren soru kalıbıdır.",
+    "explanation_en": "The second clause expresses the direct logical result of the mutagenic hazards mentioned in the first clause. 'Consequently' correctly establishes this cause-and-effect relationship."
+  },
+  {
+    "id": "q-metu-c1-para-01",
+    "university_id": "metu",
+    "level": "C1",
+    "category": "Paragraph Completion",
+    "passage": "Paleoclimatologists reconstruct historical atmospheric compositions by drilling deep ice core cylinders from polar ice sheets. Atmospheric gases trapped within hermetically sealed interstitial air bubbles provide an unbroken chronological repository of prehistoric gas ratios. [_____] By quantifying the ratio of oxygen-18 to oxygen-16 isotopes preserved in the surrounding ice matrix, researchers can decipher historical temperature fluctuations that directly correspond to these atmospheric greenhouse concentrations.",
+    "question": "Which of the following sentences best completes the blank in the passage?",
+    "options": [
+      {
+        "key": "A",
+        "text": "However, polar expeditions are frequently canceled due to unexpected logistical impediments and prohibitive fiscal costs."
+      },
+      {
+        "key": "B",
+        "text": "Yet, measuring greenhouse gases alone provides an incomplete climatic picture without contemporaneous paleotemperature proxies."
+      },
+      {
+        "key": "C",
+        "text": "Consequently, modern satellite meteorological monitoring has completely rendered cryogenic ice drilling obsolete."
+      },
+      {
+        "key": "D",
+        "text": "In addition, oxygen isotopes have no documented correlation with ancient terrestrial climatic epochs."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Boşluktan önceki cümlede gaz kabarcıklarının sera gazı oranlarının kesintisiz kronolojik kaydını sunduğu ('unbroken chronological repository of prehistoric gas ratios') söylenmiştir. Boşluktan sonraki cümlede ise buz matrisinde korunan Oksijen-18 ile Oksijen-16 izotop oranlarının ölçülmesiyle bu gazlara karşılık gelen geçmiş sıcaklık dalgalanmalarının ('historical temperature fluctuations') çözümlenebildiği anlatılmaktadır. Boşluğa, sadece gazları ölçmenin tek başına sıcaklık vekilleri olmadan eksik kalacağını belirten ve bir sonraki cümledeki izotop proxy yöntemine geçiş sağlayan B seçeneği ('Yet, measuring greenhouse gases alone provides an incomplete climatic picture without contemporaneous paleotemperature proxies') gelmelidir.\n\nAkademik İpucu (ODTÜ EPE): METU EPE paragraf tamamlama sorularında boşluğun hem öncesindeki veriyle (greenhouse gases) hem de sonrasındaki metodolojiyle (paleotemperature proxies -> O-18/O-16 ratio) iki taraflı kavramsal bağ kurması şarttır.",
+    "explanation_en": "The sentence following the blank introduces isotopic paleotemperature proxies. Option B provides the necessary conceptual bridge by explaining why greenhouse gas data alone is insufficient without temperature proxies."
+  },
+  {
+    "id": "q-metu-c1-text-01",
+    "university_id": "metu",
+    "level": "C1",
+    "category": "Text Analysis",
+    "passage": "Standard neoclassical economic paradigms long presumed that human economic agents act as utility-maximizing rational actors endowed with stable intertemporal preferences. However, behavioral economics has dismantled this premise through empirical demonstrations of hyperbolic discounting. When choosing between immediate gratification and superior delayed rewards, individuals consistently exhibit present-bias, disproportionately devaluing future payoffs. This cognitive asymmetry explains why voluntary retirement savings schemes routinely suffer from chronic under-enrollment unless structured with automated default opt-in architecture.",
+    "question": "According to the passage, the primary impediment to adequate voluntary retirement savings is:",
+    "options": [
+      {
+        "key": "A",
+        "text": "The complete absence of financial literacy and computational mathematical skills among young employees."
+      },
+      {
+        "key": "B",
+        "text": "An innate cognitive bias that leads individuals to prioritize instantaneous utility over deferred long-term security."
+      },
+      {
+        "key": "C",
+        "text": "Neoclassical economists deliberately manipulating interest rates to discourage institutional pensions."
+      },
+      {
+        "key": "D",
+        "text": "The high administrative overhead charges associated with automated default enrollment systems."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Metinde bireylerin gönüllü emeklilik tasarruflarına yeterince katılmamasının nedeni, davranışsal iktisatın ortaya koyduğu 'hyperbolic discounting' ve 'present-bias' (şimdiki zaman yanlılığı) ile açıklanmaktadır: 'individuals consistently exhibit present-bias, disproportionately devaluing future payoffs' (bireyler anlık tatmini gecikmiş ödüllere tercih eder ve gelecekteki getirileri orantısız biçimde değersizleştirir). B seçeneğindeki 'An innate cognitive bias that leads individuals to prioritize instantaneous utility over deferred long-term security' ifadesi metindeki 'present-bias' ve 'immediate gratification over superior delayed rewards' ile birebir örtüşmektedir.\n\nAkademik İpucu (ODTÜ EPE): METU EPE Reading / Text Analysis sorularında 'According to the passage' soruları doğrudan metindeki tanımları ve neden-sonuç bağlarını arar. Paraphrase eşleştirmesi (immediate gratification -> instantaneous utility, deferred payoffs -> deferred long-term security) çözüme götürür.",
+    "explanation_en": "The text attributes low retirement savings directly to present-bias and hyperbolic discounting (valuing immediate gratification over delayed rewards), which corresponds precisely to Option B."
+  },
+  {
+    "id": "q-metu-c1-restat-04",
+    "university_id": "metu",
+    "level": "C1",
+    "category": "Restatement",
+    "question": "Choose the sentence closest in meaning:\n\n'Were national governments to allocate more substantial fiscal subsidies to vocational retraining, the widespread displacement of industrial workers by robotic automation could be significantly mitigated.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "The displacement of manufacturing personnel by industrial robotics has already been halted because governments subsidized retraining programs."
+      },
+      {
+        "key": "B",
+        "text": "If governments provided greater financial support for retraining workers, the loss of manufacturing jobs caused by automated robotics would be considerably lessened."
+      },
+      {
+        "key": "C",
+        "text": "Unless robotics automation in manufacturing is banned outright by governments, subsidizing worker education will have negligible impact on employment."
+      },
+      {
+        "key": "D",
+        "text": "National governments have refused to fund vocational programs because robotic automation creates more industrial positions than it eliminates."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "'Were national governments to allocate...' yapısı, devrik bir Type 2 Conditional ('If national governments allocated...') yapısıdır ve geleceğe/şimdiki zamana yönelik varsayımsal bir koşul bildirir. Cümlede, eğer ulusal hükümetler mesleki yeniden eğitime ('vocational retraining') daha kayda değer mali sübvansiyonlar ('more substantial fiscal subsidies') sağlasaydı, endüstriyel işçilerin robotik otomasyonla yerlerinden edilmesinin ('displacement of industrial workers') önemli ölçüde hafifletilebileceği ('significantly mitigated') ifade edilmektedir. B seçeneğinde: 'If governments provided greater financial support...' (Were governments to allocate...), 'loss of manufacturing jobs caused by automated robotics' (displacement of industrial workers by robotic automation), 'considerably lessened' (significantly mitigated) karşılıklarıyla cümle aslına tamamen sadık kalmıştır.\n\nAkademik İpucu (ODTÜ EPE): METU EPE sınavında devrik şart yapıları ('Were + S + to-V' = Type 2 If-clause) restatement bölümünün klasik ve vazgeçilmez sorularındandır.",
+    "explanation_en": "'Were governments to allocate...' is an inverted second conditional. Option B accurately transforms the inverted conditional into a standard 'if' clause while preserving semantic equivalence across all elements."
+  },
+  {
+    "id": "q-itu-c1-restat-02",
+    "university_id": "itu",
+    "level": "C1",
+    "category": "Restatement",
+    "question": "Choose the sentence closest in meaning:\n\n'Far from depleting regional aquifers as environmental skeptics warned, the newly commissioned municipal desalination facility has actually stabilized the subterranean water table.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "Contrary to the warnings of environmental critics about groundwater exhaustion, the new desalination plant has helped maintain underground water levels."
+      },
+      {
+        "key": "B",
+        "text": "Although the municipal desalination plant exhausted local aquifers, environmental activists praised its contribution to the city's drinking water supply."
+      },
+      {
+        "key": "C",
+        "text": "Because the subterranean water table had already been stabilized by municipal engineers, the desalination facility was deemed unnecessary."
+      },
+      {
+        "key": "D",
+        "text": "Environmental skeptics warned that stabilizing the water table through desalination would deplete regional coastal ecosystems."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Far from doing X, Y actually did Z' kalıbı, 'X yapmak şöyle dursun / X yapmanın aksine, Y aslında Z yaptı' anlamına gelen güçlü bir karşıtlık yapısıdır. Metinde şüphecilerin uyardığı gibi akiferleri tüketmek bir yana ('Far from depleting regional aquifers...'), yeni devreye alınan tuzdan arındırma tesisinin yeraltı su seviyesini stabilize ettiği ('stabilized the subterranean water table') belirtilmiştir. A seçeneğinde: 'Contrary to the warnings of environmental critics about groundwater exhaustion...' (Far from depleting regional aquifers as environmental skeptics warned), 'the new desalination plant has helped maintain underground water levels' (the facility has actually stabilized the subterranean water table) ile anlam tastamam aktarılmıştır.\n\nAkademik İpucu (İTÜ Proficiency): İTÜ Restatement bölümünde 'Far from -ing' ve 'Contrary to...' karşıtlık kalıpları ile teknik/çevre terminolojisi (aquifer = groundwater table, deplete = exhaust) çok sık test edilir.",
+    "explanation_en": "'Far from depleting...' means it did not deplete at all, but did the opposite. Option A accurately conveys this contrast using 'contrary to the warnings' and 'helped maintain underground water levels'."
+  },
+  {
+    "id": "q-itu-c1-cloze-03",
+    "university_id": "itu",
+    "level": "C1",
+    "category": "Cloze Test",
+    "question": "Complete the blank in the academic text:\n\n'Graphene-reinforced polymer composites exhibit exceptional strength-to-weight ratios; the atomic lattice disperses localized mechanical stress evenly across the matrix, _______ catastrophic fracture under high-velocity ballistic impacts.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "thereby averting"
+      },
+      {
+        "key": "B",
+        "text": "whereas inducing"
+      },
+      {
+        "key": "C",
+        "text": "in spite of provoking"
+      },
+      {
+        "key": "D",
+        "text": "nevertheless resulting in"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Cümlede grafen takviyeli polimer kompozitlerin olağanüstü dayanıklılık-ağırlık oranına sahip olduğu ve atomik kafesin mekanik stresi matris boyunca eşit olarak dağıttığı anlatılmaktadır. Virgülden sonraki yapı, bu stres dağıtımının doğal sonucunu ('böylece / bu sayede önleyerek') ifade eden bir participle clause gerektirmektedir. 'Thereby' zarfı kendisinden sonra '-ing' (present participle) alarak 'böylelikle ... yaparak / önleyerek' anlamı katar: 'thereby averting catastrophic fracture' (böylece feci kırılmaları önleyerek).\n\nAkademik İpucu (İTÜ Proficiency): İTÜ Use of English & Cloze bölümünde mühendislik/fen metinlerinde ', thereby + V-ing' yapısı neden-sonuç belirten indirgenmiş cümle yapısı olarak sıklıkla sorulur.",
+    "explanation_en": "', thereby + V-ing' functions as a result participle clause indicating the direct logical consequence of the even stress distribution, making Option A the grammatically and logically correct choice."
+  },
+  {
+    "id": "q-itu-c1-para-01",
+    "university_id": "itu",
+    "level": "C1",
+    "category": "Paragraph Completion",
+    "passage": "Grid-scale electricity transmission networks face unprecedented operational challenges due to the intermittent nature of solar photovoltaics and wind turbines. Unlike conventional hydroelectric and thermal power stations that provide dispatchable baseload power on demand, renewable generation fluctuates unpredictably with meteorological variations. [_____] To circumvent this curtailment dilemma, electrical engineers are deploying utility-scale lithium-iron-phosphate battery energy storage systems (BESS) and pumped-storage hydro facilities to absorb surplus megawatts during generation peaks.",
+    "question": "Which of the following sentences best completes the blank in the passage?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Consequently, when renewable power output surges beyond momentary grid transmission capacity, grid operators are frequently compelled to curtail clean electricity generation."
+      },
+      {
+        "key": "B",
+        "text": "As a result, renewable energy sources have now been completely discarded by national transmission system operators."
+      },
+      {
+        "key": "C",
+        "text": "However, solar irradiance remains entirely constant regardless of seasonal atmospheric disturbances or cloud cover."
+      },
+      {
+        "key": "D",
+        "text": "In addition, traditional coal power plants emit virtually no greenhouse gases when operating at maximum generation output."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Boşluktan önce yenilenebilir enerjinin kesintili doğası (intermittent nature) ve hava koşullarına bağlı olarak dalgalanması anlatılmıştır. Boşluktan hemen sonraki cümlede ise: 'To circumvent this curtailment dilemma...' (Bu üretim kısıtlama / devreden çıkarma ikilemini aşmak için...) denilerek 'curtailment' kavramı bir 'dilemma' olarak ilk kez refere edilmektedir. Demek ki boşluktaki cümlede üretimin şebeke kapasitesini aştığı anlarda temiz enerjinin zorunlu olarak kesintiye uğratıldığı (curtailment) problemi dile getirilmelidir! Bu mantığı A şıkkı kusursuz kurar.\n\nAkademik İpucu (İTÜ Proficiency): Paragraf tamamlama sorularında boşluğu takip eden cümledeki işaret sıfatlarına ve referanslara ('this curtailment dilemma') odaklanmak, boşlukta 'curtail' eyleminin geçmesi gerektiğini anında ele verir.",
+    "explanation_en": "The subsequent sentence refers back to 'this curtailment dilemma'. Option A introduces the phenomenon of curtailment caused by surplus generation surpassing transmission capacity."
+  },
+  {
+    "id": "q-itu-c1-text-01",
+    "university_id": "itu",
+    "level": "C1",
+    "category": "Text Analysis",
+    "passage": "In autonomous vehicular navigation, relying exclusively on either LiDAR or optical camera systems presents distinct operational vulnerabilities. Optical computer vision algorithms excel at semantic object classification, lane identification, and traffic typography recognition; however, their perceptual accuracy degrades severely under adverse atmospheric conditions such as dense precipitation, particulate smog, or sudden luminescent glare. Conversely, solid-state LiDAR sensors emit pulsed laser waveforms capable of generating ultra-high-resolution spatial point-cloud geometry regardless of ambient illumination, yet they struggle to decipher color-coded signage and encounter severe signal backscatter from heavy snow. Consequently, modern automotive robotics relies on multi-modal sensor fusion architectures, wherein raw inputs from heterogeneous modalities are integrated at the feature-extraction layer to construct an invariant representation of the dynamic operational envelope.",
+    "question": "The author implies that multi-modal sensor fusion is indispensable in autonomous driving primarily because:",
+    "options": [
+      {
+        "key": "A",
+        "text": "Optical cameras are incapable of performing semantic classification without LiDAR guidance."
+      },
+      {
+        "key": "B",
+        "text": "The complementary sensor strengths compensate for individual perceptual weaknesses under divergent environmental conditions."
+      },
+      {
+        "key": "C",
+        "text": "Manufacturing single-sensor systems is significantly more expensive than integrating multiple sensor arrays."
+      },
+      {
+        "key": "D",
+        "text": "Automotive regulatory standards strictly prohibit vehicles from operating exclusively during daylight hours."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Metinde kameraların ve LiDAR'ın zayıf ve güçlü yönleri karşılaştırılmıştır: Kameralar sınıflandırmada iyi ancak yağış ve siste körleşiyor; LiDAR ise geometride kusursuz ve ışıktan etkilenmiyor ancak renk ve levhaları okuyamıyor, karda geri saçılma yaşıyor. Son cümlede ise bu iki farklı sensörün birleştirilmesinin (sensor fusion) nedeni, ortam koşullarına bağlı zafiyetleri kapatarak 'invariant representation' (değişmez/güvenilir çevre modeli) oluşturmak olarak belirtilmiştir. B seçeneğindeki 'complementary sensor strengths compensate for individual perceptual weaknesses under divergent environmental conditions' ifadesi yazarın asıl çıkarımını doğrudan vermektedir.\n\nAkademik İpucu (İTÜ Proficiency): İTÜ Reading bölümünde mühendislik ve teknoloji metinlerinde 'complementary / compensate / trade-offs' kavramları sıkça doğru cevap kökünde yer alır.",
+    "explanation_en": "The passage outlines how optical cameras and LiDAR each possess distinct limitations that the other overcomes. Therefore, sensor fusion is required to combine their complementary advantages, matching Option B."
+  },
+  {
+    "id": "q-itu-c1-restat-03",
+    "university_id": "itu",
+    "level": "C1",
+    "category": "Restatement",
+    "question": "Choose the sentence closest in meaning:\n\n'Had the peer-reviewers scrutinized the statistical anomalies in the raw telemetry dataset, the retraction of the flagship aerospace paper could have been prevented.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "The prominent aerospace paper had to be withdrawn solely because the peer-reviewers failed to carefully examine the numerical irregularities in the original telemetry data."
+      },
+      {
+        "key": "B",
+        "text": "Although the peer-review panel detected statistical discrepancies in the telemetry data, they nevertheless authorized the publication of the aerospace paper."
+      },
+      {
+        "key": "C",
+        "text": "If the aerospace paper had not been retracted by the journal editors, the anomalies in the raw telemetry dataset would never have come to light."
+      },
+      {
+        "key": "D",
+        "text": "Even if the telemetry dataset had undergone rigorous statistical scrutiny, the retraction of the publication would still have been inevitable."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Had the peer-reviewers scrutinized...' yapısı Inverted Third Conditional (Gizli 'If the peer-reviewers had scrutinized...') kalıbıdır ve geçmişte gerçekleşmemiş bir koşul ile sonucunu ifade eder: 'Eğer hakemler ham telemetri veri setindeki istatistiksel anomalileri dikkatle inceleseydi, amiral gemisi havacılık makalesinin geri çekilmesi (retraction) önlenebilirdi.' Buradan çıkan kesin anlam: Hakemler bu anomalileri dikkatle incelemedikleri için makale geri çekilmek zorunda kalmıştır. A seçeneğinde: 'had to be withdrawn' (retraction occurred), 'solely because the peer-reviewers failed to carefully examine' (Had they scrutinized... could have been prevented), 'numerical irregularities' (statistical anomalies), 'original telemetry data' (raw telemetry dataset) eşleştirmeleriyle anlam kusursuz aktarılmıştır.\n\nAkademik İpucu (İTÜ Proficiency): İTÜ Proficiency Restatement bölümünde Inverted Conditional (Had + S + V3, could/would have V3) kalıbı 'failed to do X, resulting in Y' veya 'solely because X didn't happen' şeklinde yeniden ifade edilir.",
+    "explanation_en": "Inverted third conditional stating that careful inspection of anomalies would have prevented the retraction. Option A correctly expresses the causal reality: the paper was withdrawn because the reviewers failed to scrutinize the irregularities."
+  },
+  {
+    "id": "q-bilkent-c1-restat-01",
+    "university_id": "bilkent",
+    "level": "C1",
+    "category": "Restatement",
+    "question": "Choose the sentence closest in meaning:\n\n'It is only by fostering civic engagement and safeguarding judicial autonomy that constitutional democracies can withstand authoritarian encroachment.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "Constitutional democracies will inevitably succumb to authoritarian regimes unless they encourage citizen participation and protect the independence of the courts."
+      },
+      {
+        "key": "B",
+        "text": "Authoritarian regimes can easily subvert constitutional democracies even when civic participation is high and judicial independence is legally guaranteed."
+      },
+      {
+        "key": "C",
+        "text": "Because constitutional democracies prioritize judicial autonomy over civic engagement, they are uniquely resistant to authoritarian pressures."
+      },
+      {
+        "key": "D",
+        "text": "While civic engagement is essential for constitutional democracies, maintaining judicial independence has little bearing on resisting authoritarian rule."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'It is only by X that Y can happen' kalıbı zorunlu bir koşul bildiren vurgu (cleft) yapısıdır: 'Anayasal demokrasiler ancak ve ancak yurttaş katılımını teşvik ederek ve yargı bağımsızlığını koruyarak otoriter müdahalelere/baskılara direnebilir.' Bu durum mantıksal olarak 'Eğer X yapılmazsa Y kaçınılmaz olarak gerçekleşir / çöker' (Unless X, Y will inevitably succumb) anlamına gelir. A seçeneğinde: 'withstand authoritarian encroachment' -> 'succumb to authoritarian regimes unless...', 'fostering civic engagement' -> 'encourage citizen participation', 'safeguarding judicial autonomy' -> 'protect the independence of the courts' eşleştirmeleri yapılmış ve zorunlu şart-sonuç bağı eksiksiz verilmiştir.\n\nAkademik İpucu (Bilkent PAE): Bilkent PAE sınavında 'It is only by ... that ...' vurgu yapılarının 'Unless ... will inevitably ...' ile paraphrase edilmesi sıkça sorulan mantıksal denklik kurgusudur.",
+    "explanation_en": "'It is only by X that Y' implies X is a necessary condition for Y to occur. Option A correctly formulates this condition using 'unless', preserving the exact logical necessity."
+  },
+  {
+    "id": "q-bilkent-c1-text-01",
+    "university_id": "bilkent",
+    "level": "C1",
+    "category": "Text Analysis",
+    "passage": "The deployment of computational stylometry in literary historiography has fundamentally unsettled long-standing philological orthodoxies. Traditional humanist scholars long relied on subjective aesthetic intuition and thematic impressionism to adjudicate authorial attribution in anonymous Renaissance treatises. In contrast, stylometric algorithms analyze non-contextual function word frequencies—such as prepositions, conjunctions, and auxiliary modals—which are deployed subconsciously by writers and remain remarkably stable across disparate subject matters. Far from degrading literature into mechanistic reductionism, this quantitative empirical methodology provides a transparent, replicable evidentiary threshold, rescuing literary provenance debates from endless rhetorical circularity.",
+    "question": "In the passage, the author's attitude toward computational stylometry can best be characterized as:",
+    "options": [
+      {
+        "key": "A",
+        "text": "Strongly skeptical, warning that algorithmic metrics desecrate the artistic complexity of Renaissance masterpieces."
+      },
+      {
+        "key": "B",
+        "text": "Vigorously supportive, championing it as an objective and transparent advancement over subjective traditional attribution."
+      },
+      {
+        "key": "C",
+        "text": "Ambivalent, recognizing its computational precision while decrying its lack of empirical replicability."
+      },
+      {
+        "key": "D",
+        "text": "Indifferent, considering quantitative metrics largely irrelevant to broader humanist debates."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Metinde yazarın hesaplamalı üslupbilim (computational stylometry) hakkındaki tavrı son derece olumludur. Yazar, geleneksel insani yaklaşımların 'öznel estetik sezgi ve tematik izlenimciliğe' dayandığını söylerken, algoritmik yöntemin 'mekanik bir indirgemecilik olmak şöyle dursun, şeffaf ve tekrarlanabilir bir kanıt eşiği sunduğunu ve edebiyat tartışmalarını kısırdöngüden kurtardığını' ('rescuing literary provenance debates from endless rhetorical circularity') belirtmiştir. B seçeneğindeki 'Vigorously supportive, championing it as an objective and transparent advancement over subjective traditional attribution' ifadesi yazarın bu coşkulu ve destekleyici duruşunu eksiksiz özetler.\n\nAkademik İpucu (Bilkent PAE): Bilkent PAE Text Analysis bölümünde yazarın tonu (tone: supportive, critical, skeptical, ambivalent, neutral) sorularında son paragraftaki savunma ve sıfat yüklemelerine ('rescuing... from endless rhetorical circularity') dikkat edilmelidir.",
+    "explanation_en": "The author explicitly defends stylometry ('Far from degrading...', 'rescuing literary provenance debates...'), displaying strong support for its empirical objectivity over subjective humanistic impressions, perfectly matching Option B."
+  },
+  {
+    "id": "q-bilkent-c1-para-01",
+    "university_id": "bilkent",
+    "level": "C1",
+    "category": "Paragraph Completion",
+    "passage": "In cognitive linguistics, conceptual metaphor theory posits that abstract reasoning is intrinsically scaffolded upon sensorimotor bodily experiences. Rather than functioning merely as ornamental rhetorical flourishes in poetic verse, metaphors serve as constitutive cognitive mechanisms through which humans conceptualize intangible domains. [_____] Consequently, when individuals conceptualize temporal progression through spatial idioms—such as looking 'forward' to the future or casting glances 'back' at the past—they are mapping physical spatial locomotion onto the abstract continuum of time.",
+    "question": "Which of the following sentences best completes the blank in the passage?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Specifically, concrete physical domains of source experience are systematically mapped onto elusive abstract target concepts."
+      },
+      {
+        "key": "B",
+        "text": "However, human language is processed in isolated cognitive modules completely detached from physical sensory perception."
+      },
+      {
+        "key": "C",
+        "text": "Therefore, poetic literature remains the only domain in which metaphorical expressions can be accurately interpreted."
+      },
+      {
+        "key": "D",
+        "text": "In contrast, spatial locomotion bears no demonstrable relationship to neurological motor cortex activity."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Boşluktan önceki cümlede metaforların sadece süsleme (ornamental) değil, somut olmayan alanları kavramamızı sağlayan kurucu zihinsel mekanizmalar olduğu belirtilmiştir. Boşluktan sonraki cümlede ise 'Consequently, when individuals conceptualize temporal progression through spatial idioms...' denilerek zaman gibi soyut bir kavramın uzamsal hareket gibi fiziksel bir kaynakla haritalandırılması ('mapping physical spatial locomotion onto the abstract continuum of time') örneklendirilmektedir. Boşluğa bu kaynak-hedef eşlemesini (source domain -> target domain) genel kural olarak ifade eden A seçeneği ('Specifically, concrete physical domains of source experience are systematically mapped onto elusive abstract target concepts') gelmelidir.\n\nAkademik İpucu (Bilkent PAE): Paragraf tamamlama sorularında bir önceki cümlenin teorik savı ile bir sonraki cümlenin somut örneği (mapping spatial idioms onto time) arasında geçiş kuran 'Specifically, ...' veya 'In other words, ...' formundaki açıklayıcı cümleleri tespit etmek kritik önem taşır.",
+    "explanation_en": "The blank precedes a concrete example of temporal progression being mapped to spatial movement. Option A provides the general theoretical formulation (source domains mapped onto target concepts) that justifies the subsequent 'Consequently' example."
+  },
+  {
+    "id": "q-bilkent-c1-cloze-01",
+    "university_id": "bilkent",
+    "level": "C1",
+    "category": "Cloze Test",
+    "question": "Complete the blank in the academic text:\n\n'Neoclassical welfare economists advocate Pigouvian carbon taxation on fossil fuel combustion; _______ internalizing negative environmental externalities into market prices, such levies incentivize industrial polluters to transition toward renewable energy alternatives without dictating specific technological pathways.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "by means of"
+      },
+      {
+        "key": "B",
+        "text": "in defiance of"
+      },
+      {
+        "key": "C",
+        "text": "as opposed to"
+      },
+      {
+        "key": "D",
+        "text": "on behalf of"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Cümlede Pigou tarzı karbon vergilendirmesinin amacı açıklanmaktadır. Noktalı virgülden sonra gelen boşluk bir edat öbeği istemektedir: '... internalizing negative environmental externalities into market prices, such levies incentivize industrial polluters...' Negatif çevresel dışsallıkları piyasa fiyatlarına yansıtarak / dahil ederek ('vasıtasıyla / aracılığıyla'), bu tür vergiler sanayi kirleticilerini yenilenebilir enerjiye yönlendirir. Bu 'aracıyla / yoluyla' anlamını 'by means of' (-erek, -mek vasıtasıyla) edatı eksiksiz sağlar.\n\nAkademik İpucu (Bilkent PAE): Bilkent PAE Use of English ve Cloze Test bölümlerinde 'by means of + V-ing', 'by virtue of', 'in terms of' gibi akademik edat öbekleri (prepositional phrases) sıkça test edilen hedef yapılardır.",
+    "explanation_en": "'By means of' introduces the instrument or mechanism (internalizing externalities into prices) through which the taxes incentivize polluters to shift to renewables."
+  },
+  {
+    "id": "q-bilkent-c1-restat-02",
+    "university_id": "bilkent",
+    "level": "C1",
+    "category": "Restatement",
+    "question": "Choose the sentence closest in meaning:\n\n'Unless statutory regulatory frameworks mandate rigorous auditability for deep neural networks, deploying them within criminal sentencing poses intolerable constitutional perils.'",
+    "options": [
+      {
+        "key": "A",
+        "text": "Incorporating opaque deep learning algorithms into criminal judicial sentencing creates unacceptable constitutional dangers if legal regulations do not enforce strict audit mechanisms."
+      },
+      {
+        "key": "B",
+        "text": "Constitutional protections will remain fully intact even if courts implement unverified deep neural networks in judicial decisions."
+      },
+      {
+        "key": "C",
+        "text": "Because regulatory frameworks have already prohibited machine learning in courtrooms, constitutional perils in criminal sentencing have been eliminated."
+      },
+      {
+        "key": "D",
+        "text": "Although deep neural networks are thoroughly auditable under existing statutes, judges remain reluctant to deploy them in sentencing guidelines."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Unless X mandates Y, doing Z poses intolerable perils' kalıbı 'Eğer X, Y'yi zorunlu kılmazsa, Z'yi uygulamak kabul edilemez anayasal tehlikeler doğurur' demektir. 'Unless' koşul bağlacı 'if ... not' yapısına denktir. A seçeneğinde: 'poses intolerable constitutional perils' -> 'creates unacceptable constitutional dangers', 'deploying deep neural networks within criminal sentencing' -> 'incorporating opaque deep learning algorithms into criminal judicial sentencing', 'unless statutory frameworks mandate rigorous auditability' -> 'if legal regulations do not enforce strict audit mechanisms' eşleştirmeleriyle cümle hem dilbilgisel hem anlamsal açıdan kusursuz yeniden ifade edilmiştir.\n\nAkademik İpucu (Bilkent PAE): 'Unless' (medikçe/madıkça) yapısının 'if ... not' ve 'intolerable = unacceptable', 'statutory = legal', 'mandate = enforce' eşanlamlılarıyla dönüştürülmesi Bilkent PAE Restatement sorularında sıklıkla karşımıza çıkan temel bir ölçme standardıdır.",
+    "explanation_en": "'Unless' is logically equivalent to 'if not'. Option A precisely parallels the conditional danger: deploying neural networks creates unacceptable constitutional hazards if legal frameworks fail to mandate strict audits."
   }
 ]

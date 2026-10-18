@@ -3,11 +3,11 @@ import re
 from datetime import datetime
 from pathlib import Path
 from typing import List, Optional, Dict, Any
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, Request, Depends, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, field_validator
 
 import sys
 from pathlib import Path
@@ -26,18 +26,41 @@ from database import (
     create_student_otp, verify_student_otp
 )
 
+from security import (
+    SecurityHeadersMiddleware,
+    ALLOWED_ORIGINS,
+    rate_limiter,
+    enforce_rate_limit,
+    rate_limit_otp_request,
+    rate_limit_otp_verify,
+    rate_limit_login,
+    rate_limit_register,
+    rate_limit_ai_writing,
+    rate_limit_ai_speaking,
+    rate_limit_general,
+    sanitize_text,
+    create_session_token,
+    verify_session_token,
+    get_current_user_from_request
+)
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
 STATIC_DIR = BASE_DIR / "static"
 
-app = FastAPI(title="PrepMaster API", version="1.1.0")
+app = FastAPI(title="PrepMaster API", version="1.2.0")
 
+# Security Headers (CSP, HSTS, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, etc.)
+app.add_middleware(SecurityHeadersMiddleware)
+
+# Controlled CORS configuration (Restricted origins, credentials protection, explicit methods & headers)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allow_headers=["Content-Type", "Authorization", "X-Requested-With", "Accept", "Origin"],
+    expose_headers=["Retry-After"]
 )
 
 # Load JSON datasets
@@ -68,31 +91,58 @@ def startup_event():
 
 # --- Models ---
 class ProfileUpdateRequest(BaseModel):
-    university_id: str
-    current_level: str
-    target_score: Optional[int] = 65
+    university_id: str = Field(..., max_length=50, pattern=r"^[a-zA-Z0-9_-]+$")
+    current_level: str = Field(..., pattern=r"^(?i)(A1|A2|B1|B2|C1|C2)$")
+    target_score: Optional[int] = Field(65, ge=0, le=100)
+
+    @field_validator("university_id", "current_level", mode="before")
+    @classmethod
+    def sanitize_strings(cls, v):
+        return sanitize_text(v, strip_tags=True)
 
 class ExamSubmitRequest(BaseModel):
-    university_id: str
-    level: str
-    duration_seconds: int
-    answers: Dict[str, str] # question_id -> chosen option key (e.g. "B")
-    question_times: Optional[Dict[str, int]] = {} # question_id -> seconds spent
+    university_id: str = Field(..., max_length=50, pattern=r"^[a-zA-Z0-9_-]+$")
+    level: str = Field(..., max_length=10, pattern=r"^[a-zA-Z0-9]+$")
+    duration_seconds: int = Field(..., ge=0, le=86400)
+    answers: Dict[str, str] = Field(...) # question_id -> chosen option key (e.g. "B")
+    question_times: Optional[Dict[str, int]] = Field(default_factory=dict)
     is_mistake_practice: Optional[bool] = False
 
+    @field_validator("answers", mode="before")
+    @classmethod
+    def sanitize_answers(cls, v):
+        if not isinstance(v, dict):
+            return v
+        cleaned = {}
+        for q_id, ans in v.items():
+            s_qid = sanitize_text(str(q_id), strip_tags=True, max_length=100)
+            s_ans = sanitize_text(str(ans), strip_tags=True, max_length=50)
+            cleaned[s_qid] = s_ans
+        return cleaned
+
 class VocabStatusRequest(BaseModel):
-    status: str # "mastered" or "learning"
+    status: str = Field(..., pattern=r"^(mastered|learning|unreviewed)$")
 
 class EssayEvaluateRequest(BaseModel):
-    essay: str
-    prompt: Optional[str] = "General Academic Essay"
-    university_id: Optional[str] = "general"
-    level: Optional[str] = "B2"
+    essay: str = Field(..., min_length=1, max_length=20000)
+    prompt: Optional[str] = Field("General Academic Essay", max_length=1000)
+    university_id: Optional[str] = Field("general", max_length=50)
+    level: Optional[str] = Field("B2", max_length=10)
+
+    @field_validator("essay", "prompt", "university_id", "level", mode="before")
+    @classmethod
+    def sanitize_inputs(cls, v):
+        return sanitize_text(v, strip_tags=False)
 
 class SpeakingEvaluateRequest(BaseModel):
-    transcript: str
-    task_id: Optional[str] = "spk_boun_01"
-    duration_seconds: Optional[int] = 60
+    transcript: str = Field(..., min_length=1, max_length=10000)
+    task_id: Optional[str] = Field("spk_boun_01", max_length=50)
+    duration_seconds: Optional[int] = Field(60, ge=1, le=3600)
+
+    @field_validator("transcript", "task_id", mode="before")
+    @classmethod
+    def sanitize_inputs(cls, v):
+        return sanitize_text(v, strip_tags=False)
 
 class SyncPushRequest(BaseModel):
     profile: Optional[Dict[str, Any]] = None
@@ -101,36 +151,61 @@ class SyncPushRequest(BaseModel):
     exam_attempts: Optional[List[Dict[str, Any]]] = None
 
 class RegisterRequest(BaseModel):
-    email: str
-    username: str
-    password: str
-    full_name: str
-    university_id: Optional[str] = "itu"
-    student_number: Optional[str] = ""
+    email: str = Field(..., min_length=5, max_length=255, pattern=r"^[\w\.-]+@[\w\.-]+\.\w+$")
+    username: str = Field(..., min_length=3, max_length=50, pattern=r"^[a-zA-Z0-9_.-]+$")
+    password: str = Field(..., min_length=6, max_length=128)
+    full_name: str = Field(..., min_length=2, max_length=100)
+    university_id: Optional[str] = Field("itu", max_length=50, pattern=r"^[a-zA-Z0-9_-]+$")
+    student_number: Optional[str] = Field("", max_length=30, pattern=r"^[a-zA-Z0-9_-]*$")
+
+    @field_validator("full_name", "username", "student_number", mode="before")
+    @classmethod
+    def sanitize_fields(cls, v):
+        return sanitize_text(v, strip_tags=True)
 
 class LoginRequest(BaseModel):
-    identifier: str
-    password: str
+    identifier: str = Field(..., min_length=3, max_length=255)
+    password: str = Field(..., min_length=1, max_length=128)
+
+    @field_validator("identifier", mode="before")
+    @classmethod
+    def sanitize_identifier(cls, v):
+        return sanitize_text(v, strip_tags=True)
 
 class StudentVerifyRequest(BaseModel):
-    user_id: Optional[int] = 1
-    university_id: str
-    edu_email: str
-    student_number: str
-    notes: Optional[str] = ""
+    user_id: Optional[int] = Field(1, ge=1)
+    university_id: str = Field(..., max_length=50, pattern=r"^[a-zA-Z0-9_-]+$")
+    edu_email: str = Field(..., min_length=5, max_length=255, pattern=r"^[\w\.-]+@[\w\.-]+\.\w+$")
+    student_number: str = Field(..., min_length=4, max_length=30, pattern=r"^[a-zA-Z0-9_-]+$")
+    notes: Optional[str] = Field("", max_length=500)
+
+    @field_validator("notes", "student_number", mode="before")
+    @classmethod
+    def sanitize_inputs(cls, v):
+        return sanitize_text(v, strip_tags=True)
 
 class StudentOtpRequest(BaseModel):
-    email: str
-    student_number: Optional[str] = ""
+    email: str = Field(..., min_length=5, max_length=255, pattern=r"^[\w\.-]+@[\w\.-]+\.\w+$")
+    student_number: Optional[str] = Field("", max_length=30, pattern=r"^[a-zA-Z0-9_-]*$")
+
+    @field_validator("email", "student_number", mode="before")
+    @classmethod
+    def sanitize_inputs(cls, v):
+        return sanitize_text(v, strip_tags=True)
 
 class StudentOtpVerifyRequest(BaseModel):
-    email: str
-    otp_code: str
-    user_id: Optional[int] = 1
+    email: str = Field(..., min_length=5, max_length=255, pattern=r"^[\w\.-]+@[\w\.-]+\.\w+$")
+    otp_code: str = Field(..., min_length=6, max_length=6, pattern=r"^\d{6}$")
+    user_id: Optional[int] = Field(1, ge=1)
+
+    @field_validator("email", "otp_code", mode="before")
+    @classmethod
+    def sanitize_inputs(cls, v):
+        return sanitize_text(v, strip_tags=True)
 
 # --- Authentication & Student Verification Endpoints ---
 @app.post("/api/auth/register")
-def register_endpoint(req: RegisterRequest):
+def register_endpoint(req: RegisterRequest, request: Request, _=Depends(rate_limit_register)):
     try:
         user = create_user(
             email=req.email,
@@ -140,24 +215,43 @@ def register_endpoint(req: RegisterRequest):
             university_id=req.university_id or "itu",
             student_number=req.student_number or ""
         )
-        return {"status": "success", "user": user}
+        token, expires_in = create_session_token(user["id"], user["username"], user["email"])
+        return {
+            "status": "success",
+            "user": user,
+            "token": token,
+            "token_type": "Bearer",
+            "expires_in": expires_in
+        }
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Kayıt oluşturulamadı: {str(e)}")
 
 @app.post("/api/auth/login")
-def login_endpoint(req: LoginRequest):
+def login_endpoint(req: LoginRequest, request: Request, _=Depends(rate_limit_login)):
+    enforce_rate_limit(request, scope="login_account", max_requests=5, window_seconds=60, identifier=req.identifier)
     user = authenticate_user(req.identifier, req.password)
     if not user:
         raise HTTPException(status_code=401, detail="Geçersiz kullanıcı adı/e-posta veya şifre.")
     uni = next((u for u in universities_data if u["id"] == user.get("university_id")), universities_data[0])
     user["university"] = uni
-    return {"status": "success", "user": user}
+    token, expires_in = create_session_token(user["id"], user["username"], user["email"])
+    return {
+        "status": "success",
+        "user": user,
+        "token": token,
+        "token_type": "Bearer",
+        "expires_in": expires_in
+    }
 
 @app.get("/api/auth/me")
-def current_user_endpoint(user_id: int = 1):
-    user = get_profile(user_id)
+def current_user_endpoint(request: Request, user_id: int = 1):
+    token_user = get_current_user_from_request(request)
+    target_id = token_user["user_id"] if token_user else user_id
+    user = get_profile(target_id)
     uni = next((u for u in universities_data if u["id"] == user.get("university_id")), universities_data[0])
     user["university"] = uni
+    if token_user:
+        user["authenticated_via"] = "bearer_token"
     return user
 
 @app.post("/api/student/verify")
@@ -172,18 +266,20 @@ def student_verify_endpoint(req: StudentVerifyRequest):
     return res
 
 @app.post("/api/student/request-otp")
-def student_request_otp_endpoint(req: StudentOtpRequest):
+def student_request_otp_endpoint(req: StudentOtpRequest, request: Request, _=Depends(rate_limit_otp_request)):
     if not req.email or "@" not in req.email:
         raise HTTPException(status_code=400, detail="Geçerli bir e-posta adresi giriniz.")
+    enforce_rate_limit(request, scope="otp_request_email", max_requests=3, window_seconds=60, identifier=req.email)
     res = create_student_otp(email=req.email, student_number=req.student_number or "")
     if not res.get("success"):
         raise HTTPException(status_code=400, detail=res.get("detail", "OTP kodu oluşturulamadı."))
     return res
 
 @app.post("/api/student/verify-otp")
-def student_verify_otp_endpoint(req: StudentOtpVerifyRequest):
+def student_verify_otp_endpoint(req: StudentOtpVerifyRequest, request: Request, _=Depends(rate_limit_otp_verify)):
     if not req.email or not req.otp_code:
         raise HTTPException(status_code=400, detail="E-posta ve 6 haneli doğrulama kodunu eksiksiz giriniz.")
+    enforce_rate_limit(request, scope="otp_verify_email", max_requests=5, window_seconds=60, identifier=req.email)
     res = verify_student_otp(email=req.email, otp_code=req.otp_code, user_id=req.user_id or 1)
     if not res.get("success"):
         raise HTTPException(status_code=400, detail=res.get("detail", "Doğrulama başarısız."))
@@ -246,13 +342,14 @@ def get_vocabulary(
 ):
     progress = get_vocab_progress()
     result = []
+    clean_search = sanitize_text(search, strip_tags=True, max_length=100) if search else None
     for item in vocabulary_data:
         entry = dict(item)
         entry["status"] = progress.get(item["id"], "unreviewed")
         if level and level != "all" and item["level"].upper() != level.upper():
             continue
-        if search:
-            query = search.lower()
+        if clean_search:
+            query = clean_search.lower()
             if (query not in item["word"].lower() and 
                 query not in item["meaning_tr"].lower() and 
                 query not in item["definition_en"].lower()):
@@ -296,7 +393,7 @@ def get_listening_detail(item_id: str):
     raise HTTPException(status_code=404, detail="Listening item not found")
 
 @app.post("/api/writing/evaluate")
-def evaluate_essay_endpoint(req: EssayEvaluateRequest):
+def evaluate_essay_endpoint(req: EssayEvaluateRequest, _=Depends(rate_limit_ai_writing)):
     import re
     text = req.essay.strip()
     words = re.findall(r"\b[A-Za-z0-9'-]+\b", text)
@@ -624,7 +721,7 @@ def get_speaking_task(task_id: str):
     return task
 
 @app.post("/api/speaking/evaluate")
-def evaluate_speaking(req: SpeakingEvaluateRequest):
+def evaluate_speaking(req: SpeakingEvaluateRequest, _=Depends(rate_limit_ai_speaking)):
     text = (req.transcript or "").strip()
     words = re.findall(r"\b[A-Za-z']+\b", text)
     word_count = len(words)

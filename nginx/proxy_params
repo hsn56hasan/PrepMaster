@@ -1,0 +1,40 @@
+# ==============================================================================
+# PrepMaster Standardized Nginx Reverse Proxy Headers & Buffers
+# Ensures header sanitization, WebSockets, timeouts and DoS mitigation
+# ==============================================================================
+
+proxy_http_version 1.1;
+
+# Host & Client IP sanitization
+proxy_set_header Host $host;
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+proxy_set_header X-Forwarded-Proto $scheme;
+proxy_set_header X-Forwarded-Host $host;
+proxy_set_header X-Forwarded-Port $server_port;
+
+# Preserve Cloudflare Visitor Information if present
+proxy_set_header CF-Ray $http_cf_ray;
+proxy_set_header CF-IPCountry $http_cf_ipcountry;
+proxy_set_header CF-Visitor $http_cf_visitor;
+
+# WebSockets and Keep-Alive support
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection $connection_upgrade;
+
+# Proxy Connection & Read Timeouts
+proxy_connect_timeout 15s;
+proxy_send_timeout 60s;
+proxy_read_timeout 60s;
+
+# Response Buffering for Stability & High Throughput
+proxy_buffering on;
+proxy_buffer_size 16k;
+proxy_buffers 16 16k;
+proxy_busy_buffers_size 32k;
+proxy_temp_file_write_size 64k;
+
+# Automatic Failover across backend instances
+proxy_next_upstream error timeout invalid_header http_502 http_503 http_504;
+proxy_next_upstream_tries 3;
+proxy_next_upstream_timeout 10s;

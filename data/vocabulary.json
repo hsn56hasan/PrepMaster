@@ -2220,5 +2220,565 @@
       "outwardly"
     ],
     "turkish_hint": "Vitrine konulan sebep öyle olsa da arkasında başka bir gerçeğin yattığını ima eden zarf."
+  },
+  {
+    "id": "v_c1_28",
+    "word": "substantiate",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/səbˈstænʃieɪt/",
+    "meaning_tr": "kanıtlamak, somut delillerle desteklemek",
+    "definition_en": "to provide evidence to support or prove the truth of a claim or hypothesis",
+    "synonyms": [
+      "corroborate",
+      "authenticate",
+      "validate",
+      "verify"
+    ],
+    "antonyms": [
+      "disprove",
+      "refute",
+      "undermine"
+    ],
+    "example_sentence": "The research team must substantiate their controversial hypothesis with statistically reproducible laboratory trials.",
+    "collocation": "substantiate a claim / substantiate an allegation / substantiate findings",
+    "collocations": [
+      "substantiate a claim",
+      "substantiate an allegation",
+      "substantiate findings"
+    ],
+    "turkish_hint": "Soyut bir iddiayı elle tutulur somut (substance) kanıtlarla besleyip ispatlamak."
+  },
+  {
+    "id": "v_c1_29",
+    "word": "proliferate",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/prəˈlɪfəreɪt/",
+    "meaning_tr": "hızla çoğalmak, türemek, yayılmak",
+    "definition_en": "to increase rapidly in numbers or multiply at a fast pace",
+    "synonyms": [
+      "multiply",
+      "mushroom",
+      "burgeon",
+      "escalate"
+    ],
+    "antonyms": [
+      "dwindle",
+      "diminish",
+      "decline"
+    ],
+    "example_sentence": "Online misinformation platforms proliferate rapidly in the absence of robust algorithmic content moderation.",
+    "collocation": "proliferate rapidly / weapons proliferate / cells proliferate",
+    "collocations": [
+      "proliferate rapidly",
+      "weapons proliferate",
+      "cells proliferate"
+    ],
+    "turkish_hint": "Mantar gibi bir anda her yerde türemek ve sayıca hızla katlanmak."
+  },
+  {
+    "id": "v_c1_30",
+    "word": "delineate",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/dɪˈlɪnieɪt/",
+    "meaning_tr": "ana hatlarıyla betimlemek, sınırlarını açıkça çizmek",
+    "definition_en": "to describe, portray, or set forth the boundaries of something with precision",
+    "synonyms": [
+      "outline",
+      "demarcate",
+      "depict",
+      "define"
+    ],
+    "antonyms": [
+      "confuse",
+      "blur",
+      "distort"
+    ],
+    "example_sentence": "The doctoral dissertation clearly delineates the ethical boundaries between observational fieldwork and clinical intervention.",
+    "collocation": "delineate boundaries / delineate a strategy / delineate responsibilities",
+    "collocations": [
+      "delineate boundaries",
+      "delineate a strategy",
+      "delineate responsibilities"
+    ],
+    "turkish_hint": "İçindeki 'line' (çizgi) kökünden hatırla; sınırları cetvelle çizer gibi netleştirmek."
+  },
+  {
+    "id": "v_c1_31",
+    "word": "culminate",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/ˈkʌlmɪneɪt/",
+    "meaning_tr": "ile sonuçlanmak, zirveye ulaşmak",
+    "definition_en": "to reach a climax, highest point, or decisive final outcome after a long process",
+    "synonyms": [
+      "climax",
+      "conclude",
+      "terminate in",
+      "crest"
+    ],
+    "antonyms": [
+      "commence",
+      "originate",
+      "initiate"
+    ],
+    "example_sentence": "Years of meticulous diplomatic negotiations culminated in the signing of the historic multilateral treaty.",
+    "collocation": "culminate in success / culminate in a crisis / culminate in an agreement",
+    "collocations": [
+      "culminate in success",
+      "culminate in a crisis",
+      "culminate in an agreement"
+    ],
+    "turkish_hint": "Uzun bir sürecin sonunda en tepe noktaya (culmination) varıp bir sonuçla taçlanması."
+  },
+  {
+    "id": "v_c1_32",
+    "word": "engender",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/ɪnˈdʒendər/",
+    "meaning_tr": "doğurmak, neden olmak, yol açmak",
+    "definition_en": "to cause, give rise to, or bring into existence a particular feeling, situation, or condition",
+    "synonyms": [
+      "instigate",
+      "provoke",
+      "foster",
+      "generate"
+    ],
+    "antonyms": [
+      "stifle",
+      "extinguish",
+      "quash"
+    ],
+    "example_sentence": "Opaque decision-making in public institutions tends to engender widespread citizen cynicism and distrust.",
+    "collocation": "engender distrust / engender controversy / engender debate",
+    "collocations": [
+      "engender distrust",
+      "engender controversy",
+      "engender debate"
+    ],
+    "turkish_hint": "Genetik/üreme kökünden gelir; bir durumu veya duyguyu tohum gibi ekip filizlendirmek."
+  },
+  {
+    "id": "v_c1_33",
+    "word": "ameliorate",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/əˈmiːliəreɪt/",
+    "meaning_tr": "iyileştirmek, daha iyi duruma getirmek, ıslah etmek",
+    "definition_en": "to make something that is bad, unpleasant, or deficient significantly better",
+    "synonyms": [
+      "improve",
+      "alleviate",
+      "enhance",
+      "remedy"
+    ],
+    "antonyms": [
+      "exacerbate",
+      "worsen",
+      "aggravate"
+    ],
+    "example_sentence": "Targeted social welfare stipends are designed to ameliorate extreme rural poverty and food insecurity.",
+    "collocation": "ameliorate conditions / ameliorate suffering / ameliorate poverty",
+    "collocations": [
+      "ameliorate conditions",
+      "ameliorate suffering",
+      "ameliorate poverty"
+    ],
+    "turkish_hint": "'Exacerbate' (kötüleştirmek) zıttıdır; yarayı sarıp durumu iyileştirmek."
+  },
+  {
+    "id": "v_c1_34",
+    "word": "repudiate",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/rɪˈpjuːdieɪt/",
+    "meaning_tr": "reddetmek, tanımamak, yadsımak",
+    "definition_en": "to refuse to accept, acknowledge, or be associated with; to reject the validity of",
+    "synonyms": [
+      "reject",
+      "renounce",
+      "disown",
+      "dismiss"
+    ],
+    "antonyms": [
+      "embrace",
+      "endorse",
+      "affirm"
+    ],
+    "example_sentence": "The scientific committee formally repudiated the discredited study due to widespread data fabrication.",
+    "collocation": "repudiate a claim / repudiate an agreement / repudiate findings",
+    "collocations": [
+      "repudiate a claim",
+      "repudiate an agreement",
+      "repudiate findings"
+    ],
+    "turkish_hint": "Bir iddiayı veya anlaşmayı kesin bir dille masadan itip elinin tersiyle reddetmek."
+  },
+  {
+    "id": "v_c1_35",
+    "word": "correlate",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/ˈkɒrəleɪt/",
+    "meaning_tr": "birbiriyle ilişkili olmak, karşılıklı bağıntı göstermek",
+    "definition_en": "to have a mutual relationship or connection, in which one thing affects or depends on another",
+    "synonyms": [
+      "associate",
+      "connect",
+      "align",
+      "correspond"
+    ],
+    "antonyms": [
+      "differ",
+      "diverge",
+      "disconnect"
+    ],
+    "example_sentence": "Socioeconomic status strongly correlates with educational attainment across standardized longitudinal studies.",
+    "collocation": "correlate with performance / correlate strongly / positively correlate",
+    "collocations": [
+      "correlate with performance",
+      "correlate strongly",
+      "positively correlate"
+    ],
+    "turkish_hint": "İki değişkenin grafik üzerinde el ele tutuşarak birlikte artması veya azalması."
+  },
+  {
+    "id": "v_c1_36",
+    "word": "synthesize",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/ˈsɪnθəsaɪz/",
+    "meaning_tr": "sentezlemek, farklı unsurları bir araya getirip bütünleştirmek",
+    "definition_en": "to combine diverse ideas, substances, or components into a coherent, unified whole",
+    "synonyms": [
+      "integrate",
+      "amalgamate",
+      "fuse",
+      "blend"
+    ],
+    "antonyms": [
+      "separate",
+      "disintegrate",
+      "disassemble"
+    ],
+    "example_sentence": "In the literature review, graduate students must synthesize conflicting scholarly arguments into a coherent conceptual framework.",
+    "collocation": "synthesize data / synthesize information / synthesize findings",
+    "collocations": [
+      "synthesize data",
+      "synthesize information",
+      "synthesize findings"
+    ],
+    "turkish_hint": "Farklı kaynaklardaki ham bilgileri eritip tek bir potada yeni bir ürün ortaya çıkarmak."
+  },
+  {
+    "id": "v_c1_37",
+    "word": "promulgate",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/ˈprɒmlɡeɪt/",
+    "meaning_tr": "resmen ilan etmek, yaymak, yürürlüğe koymak",
+    "definition_en": "to promote, broadcast, or officially put a law, decree, or doctrine into public effect",
+    "synonyms": [
+      "proclaim",
+      "disseminate",
+      "enact",
+      "broadcast"
+    ],
+    "antonyms": [
+      "suppress",
+      "withhold",
+      "repeal"
+    ],
+    "example_sentence": "The ministry promulgated comprehensive regulatory directives to govern artificial intelligence deployment in healthcare.",
+    "collocation": "promulgate a law / promulgate a policy / promulgate standards",
+    "collocations": [
+      "promulgate a law",
+      "promulgate a policy",
+      "promulgate standards"
+    ],
+    "turkish_hint": "Devletin veya kurumun resmi gazetede basarak kanunu tüm topluma duyurması."
+  },
+  {
+    "id": "v_c1_38",
+    "word": "circumscribe",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/ˈsɜːrkəmskraɪb/",
+    "meaning_tr": "sınırlandırmak, kısıtlamak, çevrelemek",
+    "definition_en": "to restrict something within definite limits or draw a boundary around it",
+    "synonyms": [
+      "restrict",
+      "constrain",
+      "confine",
+      "limit"
+    ],
+    "antonyms": [
+      "expand",
+      "liberate",
+      "broaden"
+    ],
+    "example_sentence": "The supreme court ruling effectively circumscribed executive authority during peacetime national emergencies.",
+    "collocation": "circumscribe authority / circumscribe freedom / circumscribe power",
+    "collocations": [
+      "circumscribe authority",
+      "circumscribe freedom",
+      "circumscribe power"
+    ],
+    "turkish_hint": "'Circle' (daire) ve 'scribe' (yazmak/çizmek); etrafına çember çizip hareket alanını daraltmak."
+  },
+  {
+    "id": "v_c1_39",
+    "word": "discern",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/dɪˈsɜːrn/",
+    "meaning_tr": "ayırt etmek, fark etmek, sezmek",
+    "definition_en": "to perceive, recognize, or distinguish something with difficulty or keen intellect",
+    "synonyms": [
+      "distinguish",
+      "differentiate",
+      "perceive",
+      "detect"
+    ],
+    "antonyms": [
+      "overlook",
+      "confuse",
+      "misinterpret"
+    ],
+    "example_sentence": "Trained art historians can readily discern authentic Renaissance canvases from modern deceptive forgeries.",
+    "collocation": "discern differences / discern a pattern / discern the truth",
+    "collocations": [
+      "discern differences",
+      "discern a pattern",
+      "discern the truth"
+    ],
+    "turkish_hint": "Bulanık veya karmaşık bir ortamda ince ayrıntıyı göz ucuyla veya akılla yakalamak."
+  },
+  {
+    "id": "v_c1_40",
+    "word": "preclude",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/prɪˈkluːd/",
+    "meaning_tr": "engel olmak, imkânsız kılmak, önüne geçmek",
+    "definition_en": "to prevent something from happening or make it entirely impossible in advance",
+    "synonyms": [
+      "prevent",
+      "obviate",
+      "prohibit",
+      "foreclose"
+    ],
+    "antonyms": [
+      "allow",
+      "facilitate",
+      "permit"
+    ],
+    "example_sentence": "A prior history of cardiovascular complications does not necessarily preclude participation in moderate exercise.",
+    "collocation": "preclude the possibility / preclude from participating / preclude an investigation",
+    "collocations": [
+      "preclude the possibility",
+      "preclude from participating",
+      "preclude an investigation"
+    ],
+    "turkish_hint": "'Exclude' gibi kapıyı peşinen kilitleyip baştan imkansız hale getirmek."
+  },
+  {
+    "id": "v_c1_41",
+    "word": "reverberate",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/rɪˈvɜːrbəreɪt/",
+    "meaning_tr": "yankılanmak, derin ve sarsıcı etkiler bırakmak",
+    "definition_en": "to echo repeatedly; to have continuing and widespread shock or influence over an extended period",
+    "synonyms": [
+      "resonate",
+      "echo",
+      "recoil",
+      "impact"
+    ],
+    "antonyms": [
+      "quiet",
+      "subside",
+      "settle"
+    ],
+    "example_sentence": "The collapse of the major investment bank reverberated throughout international capital markets for years.",
+    "collocation": "reverberate through society / reverberate globally / reverberate across industries",
+    "collocations": [
+      "reverberate through society",
+      "reverberate globally",
+      "reverberate across industries"
+    ],
+    "turkish_hint": "Vadide atılan bir çığlığın veya düşen bir bombanın tüm dağlarda dalga dalga yankı yapması."
+  },
+  {
+    "id": "v_c1_42",
+    "word": "coalesce",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/ˌkoʊəˈles/",
+    "meaning_tr": "birleşmek, kaynaşmak, tek vücut haline gelmek",
+    "definition_en": "to come together to form one larger mass, group, or whole",
+    "synonyms": [
+      "merge",
+      "unite",
+      "fuse",
+      "consolidate"
+    ],
+    "antonyms": [
+      "disperse",
+      "fragment",
+      "dissolve"
+    ],
+    "example_sentence": "Disparate grassroots environmental groups coalesced into a powerful national coalition advocating climate justice.",
+    "collocation": "coalesce into a movement / coalesce around an idea / interests coalesce",
+    "collocations": [
+      "coalesce into a movement",
+      "coalesce around an idea",
+      "interests coalesce"
+    ],
+    "turkish_hint": "Ayrı su damlalarının akıp tek bir büyük gölcükte kaynaşması."
+  },
+  {
+    "id": "v_c1_43",
+    "word": "exemplify",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/ɪɡˈzemplɪfaɪ/",
+    "meaning_tr": "örneklemek, somut örneği olmak, timsali olmak",
+    "definition_en": "to be a quintessential or typical example of something; to illustrate by giving an example",
+    "synonyms": [
+      "illustrate",
+      "epitomize",
+      "typify",
+      "embody"
+    ],
+    "antonyms": [
+      "misrepresent",
+      "contradict",
+      "obscure"
+    ],
+    "example_sentence": "The newly inaugurated sustainable campus exemplifies state-of-the-art zero-emission architectural engineering.",
+    "collocation": "exemplify the trend / exemplify success / exemplify the principles",
+    "collocations": [
+      "exemplify the trend",
+      "exemplify success",
+      "exemplify the principles"
+    ],
+    "turkish_hint": "'Example' kelimesinin akademik fiil hali; 'örnek teşkil etmek / tipik göstergesi olmak'."
+  },
+  {
+    "id": "v_c1_44",
+    "word": "attenuate",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/əˈtenjueɪt/",
+    "meaning_tr": "hafifletmek, etkisini azaltmak, zayıflatmak",
+    "definition_en": "to reduce the force, intensity, effect, or thickness of something",
+    "synonyms": [
+      "diminish",
+      "weaken",
+      "mitigate",
+      "dampen"
+    ],
+    "antonyms": [
+      "intensify",
+      "amplify",
+      "strengthen"
+    ],
+    "example_sentence": "Dense coastal mangrove forests attenuate the destructive velocity of hurricane storm surges.",
+    "collocation": "attenuate the impact / attenuate risk / attenuate the signal",
+    "collocations": [
+      "attenuate the impact",
+      "attenuate risk",
+      "attenuate the signal"
+    ],
+    "turkish_hint": "Mühendislikte sinyal sönümleme; şiddetli bir darbenin veya dalganın gücünü kırıp inceltmek."
+  },
+  {
+    "id": "v_c1_45",
+    "word": "stipulate",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/ˈstɪpjuleɪt/",
+    "meaning_tr": "şart koşmak, sözleşmede açıkça belirtmek",
+    "definition_en": "to demand or specify a requirement as an essential part of an agreement or law",
+    "synonyms": [
+      "specify",
+      "prescribe",
+      "require",
+      "condition"
+    ],
+    "antonyms": [
+      "concede",
+      "waive",
+      "relinquish"
+    ],
+    "example_sentence": "The university grant stipulates that all research findings must be made immediately accessible via open-access repositories.",
+    "collocation": "stipulate conditions / contract stipulates / law stipulates that",
+    "collocations": [
+      "stipulate conditions",
+      "contract stipulates",
+      "law stipulates that"
+    ],
+    "turkish_hint": "Sözleşmeye kırmızı çizgi çekip 'bu olmadan olmaz' diye kesin madde koymak."
+  },
+  {
+    "id": "v_c1_46",
+    "word": "galvanize",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/ˈɡælvənaɪz/",
+    "meaning_tr": "harekete geçirmek, şevke getirmek, silkelemek",
+    "definition_en": "to shock or excite someone into taking rapid, purposeful action",
+    "synonyms": [
+      "energize",
+      "mobilize",
+      "catalyze",
+      "spur"
+    ],
+    "antonyms": [
+      "discourage",
+      "dissuade",
+      "demobilize"
+    ],
+    "example_sentence": "The alarming climate report galvanized international civil society into demanding immediate legislative emissions caps.",
+    "collocation": "galvanize support / galvanize the public / galvanize action",
+    "collocations": [
+      "galvanize support",
+      "galvanize the public",
+      "galvanize action"
+    ],
+    "turkish_hint": "Elektrik akımı verilmiş gibi uyuşukluğu dağıtıp kitleleri anında aksiyona geçirmek."
+  },
+  {
+    "id": "v_c1_47",
+    "word": "postulate",
+    "level": "C1",
+    "part_of_speech": "verb",
+    "pronunciation": "/ˈpɒstjuleɪt/",
+    "meaning_tr": "varsaymak, öncül olarak ileri sürmek",
+    "definition_en": "to suggest or accept the truth of something as a basis for reasoning, discussion, or belief",
+    "synonyms": [
+      "hypothesize",
+      "posit",
+      "presuppose",
+      "premise"
+    ],
+    "antonyms": [
+      "disprove",
+      "reject",
+      "invalidate"
+    ],
+    "example_sentence": "Theoretical physicists postulate the existence of dark matter to account for galactic rotational velocities.",
+    "collocation": "postulate a theory / postulate the existence of / postulate that",
+    "collocations": [
+      "postulate a theory",
+      "postulate the existence of",
+      "postulate that"
+    ],
+    "turkish_hint": "Henüz ispatlanmasa bile teorik çıkarım yapabilmek için kabul edilen temel aksiyom/varsayım."
   }
 ]

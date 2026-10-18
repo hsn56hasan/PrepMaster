@@ -7,16 +7,23 @@ from pathlib import Path
 from typing import Dict, Any, List, Optional
 from datetime import datetime, timedelta, timezone
 
+import sys
+from pathlib import Path
+
+# Add backend directory to path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+try:
+    from security import hash_password, verify_password
+except ImportError:
+    from backend.security import hash_password, verify_password
+
 DB_PATH = Path(os.getenv("PREPMASTER_DB_PATH", str(Path(__file__).resolve().parent.parent / "prepmaster.db")))
 
 def get_db():
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
-
-def hash_password(password: str) -> str:
-    salt = "prepmaster_salt_2026"
-    return hashlib.sha256((password + salt).encode('utf-8')).hexdigest()
 
 def init_db():
     conn = get_db()
@@ -65,17 +72,6 @@ def init_db():
             notes TEXT,
             verified_at TEXT DEFAULT CURRENT_TIMESTAMP,
             created_at TEXT DEFAULT CURRENT_TIMESTAMP
-        );
-
-        CREATE TABLE IF NOT EXISTS student_otps (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            email TEXT,
-            student_number TEXT,
-            otp_code TEXT,
-            attempts INTEGER DEFAULT 0,
-            created_at TEXT DEFAULT CURRENT_TIMESTAMP,
-            expires_at TEXT,
-            is_used INTEGER DEFAULT 0
         );
 
         CREATE TABLE IF NOT EXISTS exam_attempts (
@@ -227,16 +223,32 @@ def create_user(email: str, username: str, password: str, full_name: str, univer
 def authenticate_user(identifier: str, password: str) -> Optional[Dict[str, Any]]:
     conn = get_db()
     cursor = conn.cursor()
-    pw_hash = hash_password(password)
     ident = identifier.lower().strip()
     cursor.execute("""
-        SELECT id, email, username, full_name, university_id, current_level, target_score, is_verified_student, verification_status
+        SELECT id, email, username, password_hash, full_name, university_id, current_level, target_score, is_verified_student, verification_status
         FROM users 
-        WHERE (LOWER(email) = ? OR LOWER(username) = ?) AND password_hash = ?
-    """, (ident, ident, pw_hash))
+        WHERE LOWER(email) = ? OR LOWER(username) = ?
+    """, (ident, ident))
     row = cursor.fetchone()
+    if not row:
+        conn.close()
+        return None
+
+    stored_hash = row["password_hash"]
+    if not verify_password(password, stored_hash):
+        conn.close()
+        return None
+
+    # Transparently upgrade legacy SHA-256 hash to PBKDF2
+    if not stored_hash.startswith("pbkdf2:"):
+        upgraded_hash = hash_password(password)
+        with conn:
+            conn.execute("UPDATE users SET password_hash = ? WHERE id = ?", (upgraded_hash, row["id"]))
+
+    user_dict = dict(row)
+    user_dict.pop("password_hash", None)
     conn.close()
-    return dict(row) if row else None
+    return user_dict
 
 def verify_student(user_id: int, university_id: str, edu_email: str, student_number: str, doc_note: str = "") -> Dict[str, Any]:
     conn = get_db()
