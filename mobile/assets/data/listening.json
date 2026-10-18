@@ -22,10 +22,22 @@
         "id": "lis_buept_01_q1",
         "question": "According to the lecturer, what did Peter Wason's 1960 experiment demonstrate regarding hypothesis testing?",
         "options": [
-          {"key": "A", "text": "Individuals actively seek to falsify their preconceived assumptions."},
-          {"key": "B", "text": "Subjects prioritize seeking confirming evidence over attempting to disconfirm hypotheses."},
-          {"key": "C", "text": "Decision-makers rely solely on mathematical probabilities in laboratories."},
-          {"key": "D", "text": "Social media algorithms have reduced the impact of confirmation bias."}
+          {
+            "key": "A",
+            "text": "Individuals actively seek to falsify their preconceived assumptions."
+          },
+          {
+            "key": "B",
+            "text": "Subjects prioritize seeking confirming evidence over attempting to disconfirm hypotheses."
+          },
+          {
+            "key": "C",
+            "text": "Decision-makers rely solely on mathematical probabilities in laboratories."
+          },
+          {
+            "key": "D",
+            "text": "Social media algorithms have reduced the impact of confirmation bias."
+          }
         ],
         "correct_answer": "B",
         "explanation_tr": "Derste belirtildiği üzere Wason'ın 1960 yılındaki deneyi, insanların hipotezlerini yanlışlamaya (falsify) çalışmak yerine doğrulamaya yönelik kanıt aradıklarını (confirming instances) göstermiştir."
@@ -34,10 +46,22 @@
         "id": "lis_buept_01_q2",
         "question": "What is the primary mechanism of the framing effect as demonstrated by Kahneman and Tversky?",
         "options": [
-          {"key": "A", "text": "Choices are evaluated based on how outcomes are framed as gains or losses."},
-          {"key": "B", "text": "Patients consistently prefer riskier medical procedures regardless of wording."},
-          {"key": "C", "text": "Rational agents calculate statistical risks identically in all circumstances."},
-          {"key": "D", "text": "Risk tolerance increases when negative outcomes are emphasized."}
+          {
+            "key": "A",
+            "text": "Choices are evaluated based on how outcomes are framed as gains or losses."
+          },
+          {
+            "key": "B",
+            "text": "Patients consistently prefer riskier medical procedures regardless of wording."
+          },
+          {
+            "key": "C",
+            "text": "Rational agents calculate statistical risks identically in all circumstances."
+          },
+          {
+            "key": "D",
+            "text": "Risk tolerance increases when negative outcomes are emphasized."
+          }
         ],
         "correct_answer": "A",
         "explanation_tr": "Kahneman ve Tversky'nin Çerçeveleme Etkisi (Framing Effect) teorisine göre, kararlar seçeneğin bir kazanç (gain) mı yoksa kayıp (loss) olarak mı sunulduğuna bağlı olarak tamamen değişir."
@@ -46,10 +70,22 @@
         "id": "lis_buept_01_q3",
         "question": "Why does the lecturer mention social media platforms during the discussion of confirmation bias?",
         "options": [
-          {"key": "A", "text": "To suggest that algorithms encourage diverse perspectives."},
-          {"key": "B", "text": "To illustrate how ideological echo chambers amplify belief validation."},
-          {"key": "C", "text": "To prove that digital communication eliminates cognitive shortcuts."},
-          {"key": "D", "text": "To contrast digital media with printed scientific literature."}
+          {
+            "key": "A",
+            "text": "To suggest that algorithms encourage diverse perspectives."
+          },
+          {
+            "key": "B",
+            "text": "To illustrate how ideological echo chambers amplify belief validation."
+          },
+          {
+            "key": "C",
+            "text": "To prove that digital communication eliminates cognitive shortcuts."
+          },
+          {
+            "key": "D",
+            "text": "To contrast digital media with printed scientific literature."
+          }
         ],
         "correct_answer": "B",
         "explanation_tr": "Konuşmacı, sosyal medya algoritmalarının ideolojik 'yankı odaları' (echo chambers) yaratarak doğrulama yanlılığını pekiştirdiğini ve farklı görüşleri dışladığını vurgulamak için sosyal medyadan bahsetmiştir."
@@ -58,10 +94,22 @@
         "id": "lis_buept_01_q4",
         "question": "Which response is provoked when a surgical procedure is presented as having a 'ten percent mortality rate'?",
         "options": [
-          {"key": "A", "text": "Patients show higher willingness to undergo surgery."},
-          {"key": "B", "text": "Consent rates decrease sharply due to risk aversion framing."},
-          {"key": "C", "text": "Patients demand mathematical proof before deciding."},
-          {"key": "D", "text": "Physicians refuse to execute the operation."}
+          {
+            "key": "A",
+            "text": "Patients show higher willingness to undergo surgery."
+          },
+          {
+            "key": "B",
+            "text": "Consent rates decrease sharply due to risk aversion framing."
+          },
+          {
+            "key": "C",
+            "text": "Patients demand mathematical proof before deciding."
+          },
+          {
+            "key": "D",
+            "text": "Physicians refuse to execute the operation."
+          }
         ],
         "correct_answer": "B",
         "explanation_tr": "Metinde aynı istatistiğin '%10 ölüm oranı' (mortality rate) olarak çerçevelenmesi durumunda kabul oranlarının sert bir şekilde düştüğü ('decline precipitously') ifade edilmiştir."
@@ -91,10 +139,22 @@
         "id": "lis_itu_01_q1",
         "question": "How did traditional electrical grids historically distribute power according to the lecturer?",
         "options": [
-          {"key": "A", "text": "Through bi-directional decentralized networks across regional hubs."},
-          {"key": "B", "text": "Through a unidirectional flow from centralized power plants to passive users."},
-          {"key": "C", "text": "By storing solar energy in decentralized residential batteries."},
-          {"key": "D", "text": "Through automated smart meters installed at consumer homes."}
+          {
+            "key": "A",
+            "text": "Through bi-directional decentralized networks across regional hubs."
+          },
+          {
+            "key": "B",
+            "text": "Through a unidirectional flow from centralized power plants to passive users."
+          },
+          {
+            "key": "C",
+            "text": "By storing solar energy in decentralized residential batteries."
+          },
+          {
+            "key": "D",
+            "text": "Through automated smart meters installed at consumer homes."
+          }
         ],
         "correct_answer": "B",
         "explanation_tr": "Konuşmacı, geleneksel şebekelerin yüz yılı aşkın süredir merkezi santrallerden pasif kullanıcılara tek yönlü (unidirectional flow) çalıştığını belirtmiştir."
@@ -103,10 +163,22 @@
         "id": "lis_itu_01_q2",
         "question": "What is identified as the fundamental engineering challenge of solar and wind generation?",
         "options": [
-          {"key": "A", "text": "Their reliance on fossil fuel combustion."},
-          {"key": "B", "text": "Excessive high-voltage transmission lines required."},
-          {"key": "C", "text": "Their intermittent and decentralized production characteristics."},
-          {"key": "D", "text": "The inability of consumers to measure their daily consumption."}
+          {
+            "key": "A",
+            "text": "Their reliance on fossil fuel combustion."
+          },
+          {
+            "key": "B",
+            "text": "Excessive high-voltage transmission lines required."
+          },
+          {
+            "key": "C",
+            "text": "Their intermittent and decentralized production characteristics."
+          },
+          {
+            "key": "D",
+            "text": "The inability of consumers to measure their daily consumption."
+          }
         ],
         "correct_answer": "C",
         "explanation_tr": "Rüzgar ve güneş enerjisinin en temel sorunu kesintili (intermittent) ve merkezi olmayan (decentralized) yapısıdır."
@@ -115,10 +187,22 @@
         "id": "lis_itu_01_q3",
         "question": "What technological capability distinguishes a smart grid from conventional power grids?",
         "options": [
-          {"key": "A", "text": "Bi-directional digital communication and dynamic load balancing."},
-          {"key": "B", "text": "Complete reliance on coal-fired generation stations."},
-          {"key": "C", "text": "Elimination of energy storage requirements."},
-          {"key": "D", "text": "A reduction in electrical sensors across the network."}
+          {
+            "key": "A",
+            "text": "Bi-directional digital communication and dynamic load balancing."
+          },
+          {
+            "key": "B",
+            "text": "Complete reliance on coal-fired generation stations."
+          },
+          {
+            "key": "C",
+            "text": "Elimination of energy storage requirements."
+          },
+          {
+            "key": "D",
+            "text": "A reduction in electrical sensors across the network."
+          }
         ],
         "correct_answer": "A",
         "explanation_tr": "Akıllı şebekeleri ayıran özellik iki yönlü dijital iletişim (bi-directional digital communication) ve dinamik yük dengelemesidir."
@@ -127,10 +211,22 @@
         "id": "lis_itu_01_q4",
         "question": "What critical role do utility-scale battery storage systems fulfill in smart grids?",
         "options": [
-          {"key": "A", "text": "Replacing power transmission cables completely."},
-          {"key": "B", "text": "Regulating electrical frequency and mitigating supply fluctuations."},
-          {"key": "C", "text": "Generating wind energy during daylight hours."},
-          {"key": "D", "text": "Eliminating consumer demand entirely."}
+          {
+            "key": "A",
+            "text": "Replacing power transmission cables completely."
+          },
+          {
+            "key": "B",
+            "text": "Regulating electrical frequency and mitigating supply fluctuations."
+          },
+          {
+            "key": "C",
+            "text": "Generating wind energy during daylight hours."
+          },
+          {
+            "key": "D",
+            "text": "Eliminating consumer demand entirely."
+          }
         ],
         "correct_answer": "B",
         "explanation_tr": "Batarya sistemleri (BESS) şebeke frekansını regüle etmekte ve dalgalanan enerji arzını dengelemektedir."
@@ -161,10 +257,22 @@
         "id": "lis_odtu_01_q1",
         "question": "Why do urban centers experience higher temperatures than surrounding rural areas according to the talk?",
         "options": [
-          {"key": "A", "text": "Because rural regions consume significantly more electrical energy."},
-          {"key": "B", "text": "Because asphalt and concrete absorb solar radiation and release heat at night."},
-          {"key": "C", "text": "Because green roofs generate artificial thermal emissions."},
-          {"key": "D", "text": "Because wind currents are entirely absent in rural districts."}
+          {
+            "key": "A",
+            "text": "Because rural regions consume significantly more electrical energy."
+          },
+          {
+            "key": "B",
+            "text": "Because asphalt and concrete absorb solar radiation and release heat at night."
+          },
+          {
+            "key": "C",
+            "text": "Because green roofs generate artificial thermal emissions."
+          },
+          {
+            "key": "D",
+            "text": "Because wind currents are entirely absent in rural districts."
+          }
         ],
         "correct_answer": "B",
         "explanation_tr": "Metinde asfalt ve beton gibi geçirimsiz yüzeylerin güneş enerjisini emip gece yayması sonucu kentsel ısı adası oluştuğu belirtilmiştir."
@@ -173,10 +281,22 @@
         "id": "lis_odtu_01_q2",
         "question": "What does the scientific term 'albedo' denote in the context of bioclimatic architecture?",
         "options": [
-          {"key": "A", "text": "The speed of subterranean stormwater runoff."},
-          {"key": "B", "text": "The structural load capacity of concrete columns."},
-          {"key": "C", "text": "The percentage of solar radiation reflected by a surface material."},
-          {"key": "D", "text": "The rate at which vegetation produces oxygen during daylight."}
+          {
+            "key": "A",
+            "text": "The speed of subterranean stormwater runoff."
+          },
+          {
+            "key": "B",
+            "text": "The structural load capacity of concrete columns."
+          },
+          {
+            "key": "C",
+            "text": "The percentage of solar radiation reflected by a surface material."
+          },
+          {
+            "key": "D",
+            "text": "The rate at which vegetation produces oxygen during daylight."
+          }
         ],
         "correct_answer": "C",
         "explanation_tr": "Albedo, bir yüzeyin üzerine düşen güneş radyasyonunu yansıtma (reflect) oranıdır."
@@ -185,10 +305,22 @@
         "id": "lis_odtu_01_q3",
         "question": "By how much can high-albedo reflective coatings reduce surface heat absorption?",
         "options": [
-          {"key": "A", "text": "Up to ten percent."},
-          {"key": "B", "text": "Up to twenty-five percent."},
-          {"key": "C", "text": "Up to forty percent."},
-          {"key": "D", "text": "Nearly eighty percent."}
+          {
+            "key": "A",
+            "text": "Up to ten percent."
+          },
+          {
+            "key": "B",
+            "text": "Up to twenty-five percent."
+          },
+          {
+            "key": "C",
+            "text": "Up to forty percent."
+          },
+          {
+            "key": "D",
+            "text": "Nearly eighty percent."
+          }
         ],
         "correct_answer": "C",
         "explanation_tr": "Konuşmacı 'surface heat absorption is reduced by up to forty percent' demiştir."
@@ -197,10 +329,22 @@
         "id": "lis_odtu_01_q4",
         "question": "What twin environmental benefits are provided by green roofs with drought-resistant plants?",
         "options": [
-          {"key": "A", "text": "Increasing asphalt durability and decreasing rural temperatures."},
-          {"key": "B", "text": "Reducing stormwater runoff and facilitating evaporative cooling."},
-          {"key": "C", "text": "Eliminating architectural wind corridors and absorbing rainwater."},
-          {"key": "D", "text": "Trapping nighttime heat within building interiors."}
+          {
+            "key": "A",
+            "text": "Increasing asphalt durability and decreasing rural temperatures."
+          },
+          {
+            "key": "B",
+            "text": "Reducing stormwater runoff and facilitating evaporative cooling."
+          },
+          {
+            "key": "C",
+            "text": "Eliminating architectural wind corridors and absorbing rainwater."
+          },
+          {
+            "key": "D",
+            "text": "Trapping nighttime heat within building interiors."
+          }
         ],
         "correct_answer": "B",
         "explanation_tr": "Yeşil çatılar yağmur suyu akışını azaltır (reduce stormwater runoff) ve buharlaşma yoluyla serinletme (evaporative cooling) sağlar."
@@ -230,10 +374,22 @@
         "id": "lis_bilkent_01_q1",
         "question": "What does the term 'black-box dilemma' denote in the context of diagnostic neural networks?",
         "options": [
-          {"key": "A", "text": "The physical overheating of hospital computer server hardware."},
-          {"key": "B", "text": "The inability of engineers to provide a human-interpretable rationale for algorithm outputs."},
-          {"key": "C", "text": "The complete prohibition of artificial intelligence software in European hospitals."},
-          {"key": "D", "text": "The failure of convolutional networks to detect melanoma cells accurately."}
+          {
+            "key": "A",
+            "text": "The physical overheating of hospital computer server hardware."
+          },
+          {
+            "key": "B",
+            "text": "The inability of engineers to provide a human-interpretable rationale for algorithm outputs."
+          },
+          {
+            "key": "C",
+            "text": "The complete prohibition of artificial intelligence software in European hospitals."
+          },
+          {
+            "key": "D",
+            "text": "The failure of convolutional networks to detect melanoma cells accurately."
+          }
         ],
         "correct_answer": "B",
         "explanation_tr": "Metinde kara kutu (black-box) sorunu; derin sinir ağlarının milyonlarca parametreyi değerlendirmesi sebebiyle mühendislerin bile algoritmanın verdiği teşhis kararının klinik gerekçesini insan anlayışına uygun açıklayamaması olarak ifade edilmiştir."
@@ -242,10 +398,22 @@
         "id": "lis_bilkent_01_q2",
         "question": "Under modern data protection frameworks mentioned in the lecture, what explicit legal entitlement do patients have?",
         "options": [
-          {"key": "A", "text": "The right to inspect the source code of hospital software."},
-          {"key": "B", "text": "The right to receive an explanation regarding medical decisions affecting them."},
-          {"key": "C", "text": "The right to sue attending software engineers automatically."},
-          {"key": "D", "text": "The right to refuse all diagnostic medical scans."}
+          {
+            "key": "A",
+            "text": "The right to inspect the source code of hospital software."
+          },
+          {
+            "key": "B",
+            "text": "The right to receive an explanation regarding medical decisions affecting them."
+          },
+          {
+            "key": "C",
+            "text": "The right to sue attending software engineers automatically."
+          },
+          {
+            "key": "D",
+            "text": "The right to refuse all diagnostic medical scans."
+          }
         ],
         "correct_answer": "B",
         "explanation_tr": "Konuşmacı: 'Under European data privacy regulations and medical malpractice tort laws, patients possess an explicit right to an explanation.' demiştir. Hastaların kendileriyle ilgili kararların açıklamasını alma hakkı (right to an explanation) vardır."
@@ -254,13 +422,497 @@
         "id": "lis_bilkent_01_q3",
         "question": "What unresolved legal question is posed by the speaker regarding medical malpractice?",
         "options": [
-          {"key": "A", "text": "Whether doctors should be replaced entirely by synthetic algorithms."},
-          {"key": "B", "text": "Who bears legal liability when an autonomous algorithm causes a misdiagnosis."},
-          {"key": "C", "text": "Why software vendors refuse to sell neural networks to developing countries."},
-          {"key": "D", "text": "Whether convolutional neural networks can be legally patented."}
+          {
+            "key": "A",
+            "text": "Whether doctors should be replaced entirely by synthetic algorithms."
+          },
+          {
+            "key": "B",
+            "text": "Who bears legal liability when an autonomous algorithm causes a misdiagnosis."
+          },
+          {
+            "key": "C",
+            "text": "Why software vendors refuse to sell neural networks to developing countries."
+          },
+          {
+            "key": "D",
+            "text": "Whether convolutional neural networks can be legally patented."
+          }
         ],
         "correct_answer": "B",
         "explanation_tr": "Konuşmacı, bir algoritma yanlış teşhis koyduğunda yasal sorumluluğun kime ait olduğunu (hekim, yazılımcı veya hastane) sormakta ve bunun çözülmemiş bir hukuk problemi olduğunu belirtmektedir."
+      }
+    ]
+  },
+  {
+    "id": "lis_buept_02",
+    "university_id": "boun",
+    "level": "C1",
+    "type": "note_taking",
+    "title": "Epigenetics, Neuroplasticity, and Cognitive Aging",
+    "subtitle": "Boğaziçi BUEPT Tarzı Note-Taking Sınavı",
+    "target_university": "Boğaziçi Üniversitesi",
+    "duration_minutes": 15,
+    "lecture_duration_seconds": 110,
+    "instructions_tr": "Bu bir Note-Taking (Not Alma) sınavıdır. Dinleme esnasında sorular gizlidir. Aşağıdaki dijital not defterine dersin ana fikrini, bilimsel terimleri, epigenetik mekanizmaları ve örnekleri not alınız. Dinleme bittikten sonra 'Soruları Aç' butonuna basarak notlarınıza bakıp soruları yanıtlayınız.",
+    "audio_script": "Good morning, colleagues. Today, we will examine one of the most transformative paradigm shifts in modern neuroscience: the convergence of epigenetics and neuroplasticity in the context of cognitive aging. Historically, neurobiology operated under a deterministic dogma: that our genetic code represented an unalterable blueprint, and that the adult human brain was structurally immutable, condemned to gradual neuronal depletion. Contemporary empirical research has dismantled both assumptions. First, epigenetics reveals that while our underlying nucleotide sequence remains static, gene expression is dynamically modulated by environmental interactions. Molecular mechanisms—predominantly DNA methylation and histone acetylation—act as biochemical switches, silencing or activating specific genes in response to chronic stress, nutritional patterns, and cognitive stimulation. Concurrently, neuroplasticity demonstrates that adult neural circuits retain lifelong structural flexibility. Even in senescence, the hippocampus can generate new neurons—a process known as adult neurogenesis—and forge novel synaptic arborizations. This dynamic capacity underpins the concept of 'cognitive reserve.' Individuals who routinely engage in rigorous intellectual inquiry, multilingualism, and aerobic exercise accumulate dense synaptic redundancies. Consequently, when pathological markers such as beta-amyloid plaques emerge, resilient brains reorganize compensatory networks, delaying clinical manifestations of dementia for years. Ultimately, human cognitive longevity is neither genetically predetermined nor fatalistically destined to decay. Through intentional lifestyle modifications, we exert substantial regulatory agency over the molecular architecture of our own minds. In our next session, we will examine pharmacological epigenetic modulators.",
+    "suggested_notes_tr": [
+      "Ana Tema: Nörobiyolojide Paradigma Değişimi - Genetik kadercilik ve sabit beyin anlayışının yıkılması.",
+      "Epigenetik Mekanizmalar: DNA nükleotid dizilimi değişmez, ancak DNA metilasyonu ve histon asetilasyonu ile gen ifadesi açılıp kapanır.",
+      "Nöroplastisite ve Nörogenez: Yaşlılıkta (senescence) dahi hipokampusta yeni nöron oluşumu ve sinaptik dallanmalar mümkündür.",
+      "Bilişsel Rezerv (Cognitive Reserve): Zihinsel uğraş ve egzersiz sinaptik yedeklilik sağlar; beta-amiloid plaklara karşı telafi edici ağlar kurarak demansı geciktirir.",
+      "Sonuç / Çıkarım: Bilişsel yaşlanma kaçınılmaz bir çöküş değildir; yaşam tarzı tercihleriyle beyin mimarisi üzerinde düzenleyici kontrol (regulatory agency) kurulabilir."
+    ],
+    "questions": [
+      {
+        "id": "lis_buept_02_q1",
+        "question": "What is the central paradigm shift in modern neuroscience highlighted by the lecturer?",
+        "options": [
+          {
+            "key": "A",
+            "text": "The definitive proof that cognitive aging is strictly dictated by inherited nucleotide sequences."
+          },
+          {
+            "key": "B",
+            "text": "The transition from genetic and structural determinism to dynamic gene-environment and neural plasticity models."
+          },
+          {
+            "key": "C",
+            "text": "The discovery that pharmacological modulators can completely replace lifestyle modifications in dementia care."
+          },
+          {
+            "key": "D",
+            "text": "The realization that synaptic arborization ceases entirely once the brain reaches biological maturity."
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Dersin ana teması, geleneksel nörobiyolojinin 'genetik kodun değiştirilemez bir yazgı olduğu ve yetişkin beyninin sabit kaldığı' yönündeki determinist dogmasının yıkılmasıdır. Konuşmacı, epigenetik (dinamik gen-çevre etkileşimi) ve nöroplastisite (ömür boyu süren beyin esnekliği) sayesinde insan beyninin dinamik olarak yeniden yapılandığını vurgulamaktadır."
+      },
+      {
+        "id": "lis_buept_02_q2",
+        "question": "According to the lecture, how do molecular mechanisms like DNA methylation and histone acetylation affect genes?",
+        "options": [
+          {
+            "key": "A",
+            "text": "They permanently alter the fundamental nucleotide sequence of the organism's DNA."
+          },
+          {
+            "key": "B",
+            "text": "They eradicate beta-amyloid plaques before any synaptic damage can occur in the hippocampus."
+          },
+          {
+            "key": "C",
+            "text": "They act as biochemical switches that modulate gene expression without changing the genetic code itself."
+          },
+          {
+            "key": "D",
+            "text": "They prevent the hippocampus from undergoing adult neurogenesis under chronic stress."
+          }
+        ],
+        "correct_answer": "C",
+        "explanation_tr": "Konuşmacı açıkça epigenetik mekanizmaların (DNA metilasyonu ve histon asetilasyonu) altta yatan nükleotid dizilimini değiştirmeden ('underlying nucleotide sequence remains static'), gen ifadesini biyokimyasal anahtarlar gibi açıp kapattığını ('biochemical switches, silencing or activating specific genes') ifade etmiştir."
+      },
+      {
+        "id": "lis_buept_02_q3",
+        "question": "What enables individuals with high cognitive reserve to delay the clinical symptoms of dementia?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Their brains establish redundant synaptic connections and recruit compensatory neural networks."
+          },
+          {
+            "key": "B",
+            "text": "Their genetic profiles eliminate the physical formation of toxic beta-amyloid plaques."
+          },
+          {
+            "key": "C",
+            "text": "They avoid all metabolic and physical stressors throughout their adult lifespan."
+          },
+          {
+            "key": "D",
+            "text": "They rely exclusively on synthetic epigenetic drugs to halt natural cellular senescence."
+          }
+        ],
+        "correct_answer": "A",
+        "explanation_tr": "Metne göre zihinsel olarak aktif bireyler sinaptik yedeklilik (dense synaptic redundancies) biriktirir. Beyinde beta-amiloid plakları oluşsa bile, dirençli beyinler telafi edici ağları (compensatory networks) devreye sokarak klinik demans semptomlarının ortaya çıkmasını yıllarca geciktirir."
+      },
+      {
+        "id": "lis_buept_02_q4",
+        "question": "Which statement best captures the speaker's stance regarding the trajectory of human cognitive aging?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Intellectual decline is an unavoidable biological fate that renders lifestyle choices inconsequential."
+          },
+          {
+            "key": "B",
+            "text": "Proactive lifestyle modifications grant individuals meaningful regulatory influence over brain health."
+          },
+          {
+            "key": "C",
+            "text": "Genetic inheritance accounts for nearly all cognitive disparities observed in elderly populations."
+          },
+          {
+            "key": "D",
+            "text": "Adult neurogenesis is a laboratory artifact with negligible relevance to real-world neural preservation."
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Konuşmacı sonuç bölümünde bilişsel uzun ömürlülüğün genetik olarak önceden belirlenmediğini ('neither genetically predetermined nor fatalistically destined to decay'), bilinçli yaşam tarzı seçimleriyle zihnimizin moleküler mimarisi üzerinde önemli bir düzenleme gücüne ('substantial regulatory agency') sahip olduğumuzu savunmaktadır."
+      }
+    ]
+  },
+  {
+    "id": "lis_bilkent_02",
+    "university_id": "bilkent",
+    "level": "B2",
+    "type": "while_listening",
+    "title": "Behavioral Economics and Choice Architecture in Public Policy",
+    "subtitle": "Bilkent COPE Tarzı While-Listening Sınavı",
+    "target_university": "Bilkent Üniversitesi",
+    "duration_minutes": 12,
+    "lecture_duration_seconds": 100,
+    "instructions_tr": "Bu bir While-Listening (Dinlerken Cevaplama) sınavıdır. Ses kaydı çalarken soruları eş zamanlı okuyup doğru seçenekleri işaretleyiniz.",
+    "audio_script": "Good afternoon, class. Today, we will explore how behavioral economics has reshaped modern public policy through the concept of choice architecture. For decades, neoclassical economic theory operated on the premise of 'Homo economicus'—the assumption that human agents are perfectly rational actors who consistently calculate costs and benefits to maximize personal utility. However, empirical behavioral research led by scholars like Richard Thaler and Cass Sunstein proved that actual decision-makers exhibit bounded rationality. Real people rely on cognitive shortcuts, suffer from inertia, and are disproportionately influenced by how options are organized. To address this reality without imposing restrictive mandates or financial penalties, governments increasingly utilize 'nudges.' A nudge subtly alters the decision-making environment without forbidding any choices or altering economic incentives. The most potent tool in choice architecture is the default option. In classical opt-in systems—such as organ donation or supplemental pension schemes—citizens must actively complete paperwork to participate, resulting in participation rates often hovering below thirty percent. Conversely, when policymakers switch to an opt-out default—where enrollment is automatic but opting out remains entirely cost-free—participation frequently surges past ninety percent. This framework, termed 'libertarian paternalism,' preserves individual liberty while steering citizens toward beneficial welfare outcomes. Nonetheless, ethical critics raise legitimate concerns regarding transparency, questioning whether subtle psychological nudges border on covert paternalistic manipulation when citizens remain unaware of institutional influence.",
+    "suggested_notes_tr": [
+      "Ana Tema: Davranışsal İktisat ve Kamu Politikasında Karar Mimarisi (Choice Architecture).",
+      "Klasik İktisat vs Davranışsal Gerçeklik: 'Homo economicus' (tam rasyonel insan) yanılgısına karşı sınırlı rasyonalite (bounded rationality) ve eylemsizlik (inertia).",
+      "Dürtme Teorisi (Nudge): Thaler & Sunstein - Seçenekleri yasaklamadan ve ekonomik teşvikleri değiştirmeden karar ortamını yeniden düzenleme.",
+      "En Etkili Araç - Varsayılan Seçenek (Default Option): Opt-in (%30 altı katılım) yerine otomatik katılımlı Opt-out sistemiyle katılımın %90'ın üzerine fırlaması.",
+      "Özgürlükçü Babacıllık (Libertarian Paternalism) ve Etik Tartışma: Bireysel özgürlüğü koruma iddiası ile şeffaflık eksikliği ve örtük manipülasyon (covert manipulation) eleştirisi."
+    ],
+    "questions": [
+      {
+        "id": "lis_bilkent_02_q1",
+        "question": "How does behavioral economics challenge the classical concept of 'Homo economicus'?",
+        "options": [
+          {
+            "key": "A",
+            "text": "By showing that human agents operate with bounded rationality rather than flawless mathematical logic."
+          },
+          {
+            "key": "B",
+            "text": "By demonstrating that economic incentives are completely irrelevant to human decision-making."
+          },
+          {
+            "key": "C",
+            "text": "By proving that financial penalties are the only effective mechanism to modify consumer behavior."
+          },
+          {
+            "key": "D",
+            "text": "By establishing that market consumers consistently calculate optimal long-term utility."
+          }
+        ],
+        "correct_answer": "A",
+        "explanation_tr": "Konuşmacı klasik iktisadın 'insanların her zaman kusursuz rasyonel fayda maksimizasyonu yaptığı (Homo economicus)' varsayımına karşı, gerçek insanların sınırlı rasyonellik (bounded rationality), kestirme yollar ve eylemsizlik ile hareket ettiğini ortaya koymuştur."
+      },
+      {
+        "id": "lis_bilkent_02_q2",
+        "question": "According to the lecturer, what distinguishes a 'nudge' from traditional regulatory interventions?",
+        "options": [
+          {
+            "key": "A",
+            "text": "It enforces compulsory participation by imposing severe legal fines on non-compliant citizens."
+          },
+          {
+            "key": "B",
+            "text": "It subtly alters the choice context without banning alternative options or changing financial costs."
+          },
+          {
+            "key": "C",
+            "text": "It completely removes negative alternatives from the consumer's decision environment."
+          },
+          {
+            "key": "D",
+            "text": "It requires citizens to pass economic literacy examinations before choosing."
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Metinde dürtmenin (nudge) hiçbir seçeneği yasaklamadan ('without forbidding any choices') ve ekonomik teşvikleri/maliyetleri değiştirmeden ('altering economic incentives') karar alma ortamını incelikle değiştirdiği belirtilmiştir."
+      },
+      {
+        "id": "lis_bilkent_02_q3",
+        "question": "What occurs when policymakers transition from an opt-in to an opt-out default system in pension or donation programs?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Citizen participation rates drop significantly due to heightened administrative paperwork."
+          },
+          {
+            "key": "B",
+            "text": "The financial cost of administering public welfare programs triples immediately."
+          },
+          {
+            "key": "C",
+            "text": "Participation rates frequently surge from under thirty percent to over ninety percent."
+          },
+          {
+            "key": "D",
+            "text": "Citizens lose their fundamental legal right to withdraw from the government program."
+          }
+        ],
+        "correct_answer": "C",
+        "explanation_tr": "Konuşmacı, klasik opt-in (onay vererek katılma) sisteminde katılımın %30'un altında kaldığını, ancak varsayılanın opt-out (otomatik dahil olup dilediğinde çıkabilme) yapılmasıyla katılım oranlarının sıklıkla %90'ın üzerine çıktığını ('surges past ninety percent') belirtmektedir."
+      },
+      {
+        "id": "lis_bilkent_02_q4",
+        "question": "What primary ethical concern is raised by critics regarding the philosophy of 'libertarian paternalism'?",
+        "options": [
+          {
+            "key": "A",
+            "text": "It fails to achieve any statistically measurable impact on public welfare outcomes."
+          },
+          {
+            "key": "B",
+            "text": "It may cross the boundary into covert psychological manipulation when citizens lack transparency."
+          },
+          {
+            "key": "C",
+            "text": "It forces private commercial enterprises to bear the full expense of policy reforms."
+          },
+          {
+            "key": "D",
+            "text": "It restricts personal freedom of choice by outlawing unhealthy consumer products."
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Metnin sonunda etik eleştirmenlerin şeffaflık konusuna dikkat çektiği ve vatandaşların kurumsal yönlendirmeden habersiz olduğu durumlarda bu ince psikolojik dürtmelerin örtük bir babacıl manipülasyona dönüşüp dönüşmediğini sorguladığı ('border on covert paternalistic manipulation') aktarılmıştır."
+      }
+    ]
+  },
+  {
+    "id": "lis_odtu_02",
+    "university_id": "metu",
+    "level": "C1",
+    "type": "note_taking",
+    "title": "Circular Economy and Industrial Symbiosis in Resource-Constrained Economies",
+    "subtitle": "ODTÜ EPE Tarzı Note-Taking Sınavı",
+    "target_university": "Orta Doğu Teknik Üniversitesi",
+    "duration_minutes": 15,
+    "lecture_duration_seconds": 105,
+    "instructions_tr": "ODTÜ EPE formatında not alma simülasyonu. Ses kaydını dinlerken notlarınızı alınız. Kayıt bitiminde sorular açılacak ve notlarınıza dayanarak soruları cevaplayacaksınız.",
+    "audio_script": "Good morning, engineering scholars. Today we examine industrial symbiosis as an operational foundation for the circular economy. Conventional manufacturing operates on a throughput-intensive linear model: virgin materials are extracted, processed, and ultimately discarded as non-recyclable refuse. Industrial symbiosis fundamentally disrupts this degenerative paradigm by organizing geographically clustered industries into closed-loop metabolic ecosystems. In such networks, the residual effluent, discarded by-product, or surplus thermal energy of one manufacturing facility is systematically repurposed as the direct secondary feedstock or energy supply for an adjacent enterprise. The quintessential empirical paradigm of this architecture is the Kalundborg eco-industrial park in Denmark. In Kalundborg, a large-scale combined heat and power plant pipelines high-temperature surplus steam directly to an adjacent pharmaceutical facility and an enzyme fermentation plant, eliminating independent industrial boiler combustion. Simultaneously, calcium sulfate dihydrate, commonly known as synthetic gypsum, is recovered directly from the sulfur dioxide flue-gas desulfurization scrubbers of the power station. This synthetic gypsum completely supplants virgin mined gypsum at an adjacent gypsum wallboard manufacturing plant. Cumulatively, these symbiotic exchanges conserve more than three million cubic meters of groundwater annually, achieve over six hundred thousand tons of net carbon dioxide abatement, and transform toxic disposal liabilities into lucrative commercial assets. Nonetheless, ecological engineers must confront a critical systemic vulnerability: co-dependency risk. Because participant facilities become structurally reliant on continuous byproduct streams, the unscheduled shutdown, economic contraction, or decommissioning of a primary anchor tenant can instantly destabilize the material supply chains of dependent downstream plants. Consequently, robust symbiotic architectures require auxiliary redundant buffers.",
+    "suggested_notes_tr": [
+      "Doğrusal vs Kapalı Devre Model: Klasik 'al-üret-at' (linear) model yerine, tesislerin atık ve enerjilerini birbirine aktardığı kapalı döngülü (closed-loop) endüstriyel simbiyoz.",
+      "Temel Çalışma Mantığı: Bir fabrikanın atık ısısı, atık suyu veya yan ürününün komşu fabrikanın birincil girdisi (feedstock) haline gelmesi.",
+      "Kalundborg Vakası (Danimarka): Termik santralin atık buharı ilaç/enzim tesisine gidiyor; baca gazı kükürt arıtımından çıkan sentetik alçı (gypsum) alçıpan fabrikasında işleniyor.",
+      "Kazanımlar: Yılda 3 milyon m³ üzerinde yeraltı suyu tasarrufu, 600.000 ton CO2 azaltımı ve atık bertaraf maliyetlerinin gelire dönüşmesi.",
+      "Sistemik Risk (Co-dependency): Tesislerin birbirine aşırı bağımlılığı; ana bir üreticinin (anchor tenant) durması halinde tüm ekosistemin tedarik zincirinin çökme tehlikesi ve tamponlama ihtiyacı."
+    ],
+    "questions": [
+      {
+        "id": "lis_odtu_02_q1",
+        "question": "What constitutes the core operational principle of industrial symbiosis according to the lecture?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Utilizing the residual by-products, effluent, or surplus energy of one facility as feedstock for another."
+          },
+          {
+            "key": "B",
+            "text": "Centralizing all regional manufacturing processes under a single state-owned conglomerate."
+          },
+          {
+            "key": "C",
+            "text": "Eliminating reliance on heavy industry by converting manufacturing plants into agricultural reserves."
+          },
+          {
+            "key": "D",
+            "text": "Subsidizing virgin material extraction through international carbon credit markets."
+          }
+        ],
+        "correct_answer": "A",
+        "explanation_tr": "Konuşmacıya göre endüstriyel simbiyozun temel çalışma prensibi, bir üretim tesisinin atık yan ürünlerinin, atık suyunun veya fazla termal enerjisinin başka bir komşu tesis için hammadde (feedstock) ya da enerji kaynağı olarak yeniden kullanılmasıdır."
+      },
+      {
+        "id": "lis_odtu_02_q2",
+        "question": "How is synthetic gypsum obtained and utilized within the Kalundborg eco-industrial cluster?",
+        "options": [
+          {
+            "key": "A",
+            "text": "It is chemically synthesized from virgin mineral deposits shipped from neighboring rural mines."
+          },
+          {
+            "key": "B",
+            "text": "It is extracted from municipal wastewater filtration beds to fertilize agricultural land."
+          },
+          {
+            "key": "C",
+            "text": "It is recovered from power plant flue-gas desulfurization scrubbers to manufacture wallboards."
+          },
+          {
+            "key": "D",
+            "text": "It is generated as an organic precipitate during pharmaceutical enzyme fermentation."
+          }
+        ],
+        "correct_answer": "C",
+        "explanation_tr": "Ders anlatımında belirtildiği üzere sentetik alçıtaşı (synthetic gypsum), elektrik santralinin baca gazı kükürt giderme (flue-gas desulfurization) filtrelerinden geri kazanılarak komşu alçıpan (wallboard) üretim tesisinde doğal alçıtaşının yerini almaktadır."
+      },
+      {
+        "id": "lis_odtu_02_q3",
+        "question": "Which pair of environmental benefits is explicitly attributed to the symbiotic material exchanges in Kalundborg?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Complete elimination of industrial electricity tariffs and zero solid waste generation."
+          },
+          {
+            "key": "B",
+            "text": "A fifty percent reduction in global maritime shipping and total reforestation of regional wetlands."
+          },
+          {
+            "key": "C",
+            "text": "Immediate doubling of factory profit margins without any capital equipment modification."
+          },
+          {
+            "key": "D",
+            "text": "Over three million cubic meters of groundwater saved and over six hundred thousand tons of CO2 abated."
+          }
+        ],
+        "correct_answer": "D",
+        "explanation_tr": "Konuşmacı somut çevresel kazanımlar olarak yıllık 3 milyon metreküpten fazla yeraltı suyu tasarrufu sağlandığını ve 600.000 tonun üzerinde net karbondioksit azaltımı (CO2 abatement) gerçekleştirildiğini vurgulamıştır."
+      },
+      {
+        "id": "lis_odtu_02_q4",
+        "question": "What fundamental vulnerability does the lecturer identify regarding highly integrated symbiotic networks?",
+        "options": [
+          {
+            "key": "A",
+            "text": "High government excise taxation applied uniquely to closed-loop manufacturing facilities."
+          },
+          {
+            "key": "B",
+            "text": "Co-dependency risk, where the disruption of an anchor tenant imperils downstream material supply."
+          },
+          {
+            "key": "C",
+            "text": "The inability of chemical engineers to measure thermodynamic heat transfer across steam pipes."
+          },
+          {
+            "key": "D",
+            "text": "The legal prohibition against transferring secondary steam across industrial property lines."
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Konuşmacı, tesislerin birbirine yapısal olarak bağımlı hale gelmesiyle oluşan co-dependency (ortak bağımlılık) riskine dikkat çekmiştir. Ana bir çıpa tesisin (anchor tenant) üretimi durdurması veya kapanması, yan ürüne muhtaç alt tesislerin tedarik zincirini derhal istikrarsızlaştırabilir."
+      }
+    ]
+  },
+  {
+    "id": "lis_itu_02",
+    "university_id": "itu",
+    "level": "B2",
+    "type": "while_listening",
+    "title": "Composite Materials and Structural Health Monitoring in Aerospace Engineering",
+    "subtitle": "İTÜ Proficiency Tarzı While-Listening Sınavı",
+    "target_university": "İstanbul Teknik Üniversitesi",
+    "duration_minutes": 10,
+    "lecture_duration_seconds": 85,
+    "instructions_tr": "Bu bir While-Listening (Dinlerken Cevaplama) sınavıdır. Sorular ses kaydı boyunca açıktır. Kaydı dinlerken eş zamanlı olarak soruları yanıtlayabilirsiniz.",
+    "audio_script": "Good afternoon, class. In modern aerospace engineering, structural efficiency is fundamentally governed by material selection. For decades, commercial and military aircraft structures relied primarily on aluminum alloys due to their predictable isotropic properties and well-established fabrication methods. However, the pressing necessity to maximize fuel efficiency and payload capacity has propelled a comprehensive transition toward advanced composite materials, predominantly Carbon-Fiber-Reinforced Polymers, or CFRP. Unlike traditional metals, composite materials possess an anisotropic nature, meaning their mechanical strength and stiffness can be customized along specific load trajectories by orienting the carbon fibers during the manufacturing layup. This yields an exceptionally high strength-to-weight ratio. In state-of-the-art commercial jetliners, such as the Boeing 787 and Airbus A350, composites account for more than fifty percent of the total structural airframe weight. This substantial weight reduction decreases operating fuel consumption by approximately twenty percent compared to legacy aluminum airliners, while delivering superior resistance against environmental corrosion and fatigue cracking. Nevertheless, composite structures introduce distinct maintenance and reliability challenges. Specifically, low-velocity impacts—such as ground service collisions or runway debris strikes—can induce internal delamination, which is the internal separation of resin plies. Because this damage often leaves no visible indentation on the external surface, it is known as Barely Visible Impact Damage. To diagnose subsurface flaws without destructive disassembly, aerospace engineers integrate continuous Structural Health Monitoring systems. By embedding networks of piezoelectric sensors and fiber-optic Bragg gratings into the composite laminates, acoustic emissions and ultrasonic wave reflections are continuously monitored, alerting technicians to structural degradation before catastrophic failure occurs.",
+    "suggested_notes_tr": [
+      "Havacılıkta Malzeme Evrimi: Klasik izotropik alüminyum alaşımlarından anizotropik Karbon Elyaf Takviyeli Polimerlere (CFRP) geçiş.",
+      "CFRP Avantajları: Liflerin yük yönüne göre dizilebilmesi, yüksek mukavemet/ağırlık oranı, korozyon ve yorulma (fatigue) direnci.",
+      "Uçak Performansı: Modern yolcu uçaklarında gövde ağırlığının %50'sinden fazlası kompozit; %20 yakıt tasarrufu.",
+      "Mühendislik Sorunu (Delamination): Düşük hızlı çarpmalarda iç katmanların ayrılması; dıştan görünmeyen hasar (Barely Visible Impact Damage - BVID).",
+      "Çözüm (SHM): Kompozit içine gömülen piezoelektrik ve fiber-optik Bragg sensörleriyle Gerçek Zamanlı Yapısal Sağlık İzleme."
+    ],
+    "questions": [
+      {
+        "id": "lis_itu_02_q1",
+        "question": "Why do aerospace engineers orient carbon fibers along specific directions in composite manufacturing?",
+        "options": [
+          {
+            "key": "A",
+            "text": "To make the material completely transparent to air traffic radar signals."
+          },
+          {
+            "key": "B",
+            "text": "To align strength and stiffness with anticipated aerodynamic load trajectories."
+          },
+          {
+            "key": "C",
+            "text": "To guarantee that the fuselage expands uniformly at high altitudes."
+          },
+          {
+            "key": "D",
+            "text": "To allow the aircraft skin to melt harmlessly during atmospheric re-entry."
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Karbon Elyaf Takviyeli Polimerler (CFRP) anizotropik bir yapıya sahiptir; bu sayede mühendisler lifleri belirli yönlere dizerek mukavemet ve rijitliği beklenen aerodinamik yük rotalarına göre özelleştirebilirler."
+      },
+      {
+        "id": "lis_itu_02_q2",
+        "question": "According to the lecture, what structural proportion and fuel savings do composites achieve in modern commercial jetliners?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Composites make up over fifty percent of structural weight, saving approximately twenty percent of fuel."
+          },
+          {
+            "key": "B",
+            "text": "Composites make up twenty percent of structural weight, saving five percent of fuel."
+          },
+          {
+            "key": "C",
+            "text": "Composites make up thirty-five percent of structural weight, saving twelve percent of fuel."
+          },
+          {
+            "key": "D",
+            "text": "Composites make up ninety percent of structural weight, saving over fifty percent of fuel."
+          }
+        ],
+        "correct_answer": "A",
+        "explanation_tr": "Ders anlatımında modern uçaklarda (Boeing 787 ve Airbus A350) kompozitlerin toplam gövde ağırlığının %50'sinden fazlasını oluşturduğu ve klasik alüminyum uçaklara kıyasla yaklaşık %20 yakıt tasarrufu sağladığı açıkça ifade edilmiştir."
+      },
+      {
+        "id": "lis_itu_02_q3",
+        "question": "What makes 'Barely Visible Impact Damage' particularly hazardous in composite airframes?",
+        "options": [
+          {
+            "key": "A",
+            "text": "It causes immediate hydraulic system fires in the cockpit."
+          },
+          {
+            "key": "B",
+            "text": "It permanently degrades the aircraft's autopilot navigation software."
+          },
+          {
+            "key": "C",
+            "text": "It causes external metal plating to corrode instantly when exposed to rain."
+          },
+          {
+            "key": "D",
+            "text": "It involves internal layer separation that leaves virtually no external surface mark."
+          }
+        ],
+        "correct_answer": "D",
+        "explanation_tr": "Düşük hızlı çarpmalar sonucu reçine tabakaları arasında iç katman ayrılması (delamination) meydana gelir. Bu hasar dış yüzeyde neredeyse hiç iz bırakmadığı (Barely Visible Impact Damage) için görsel muayeneyle fark edilemez ve büyük tehlike yaratır."
+      },
+      {
+        "id": "lis_itu_02_q4",
+        "question": "How do embedded Structural Health Monitoring systems detect internal flaws before failure occurs?",
+        "options": [
+          {
+            "key": "A",
+            "text": "By requiring ground technicians to dismantle the entire fuselage after every flight."
+          },
+          {
+            "key": "B",
+            "text": "By spraying chemical fluorescent dye along exterior wing surfaces during takeoff."
+          },
+          {
+            "key": "C",
+            "text": "By using piezoelectric and fiber-optic sensors to monitor acoustic and ultrasonic signals."
+          },
+          {
+            "key": "D",
+            "text": "By transmitting high-voltage electrical shocks through the wings to test conductivity."
+          }
+        ],
+        "correct_answer": "C",
+        "explanation_tr": "Gömülü Yapısal Sağlık İzleme (SHM) sistemleri, kompozit katmanlara yerleştirilen piezoelektrik sensörler ve fiber-optik Bragg ızgaraları aracılığıyla akustik emisyonları ve ultrasonik dalgaları sürekli izleyerek arızaları önceden tespit eder."
       }
     ]
   }
