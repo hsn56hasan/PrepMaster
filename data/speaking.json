@@ -281,5 +281,1230 @@
       "hegemony"
     ],
     "model_answer_transcript": "The prevailing macroeconomic consensus surrounding the clean energy transition frequently suffers from technological determinism, ignoring critical geopolitical dependencies. While the decarbonization of energy grids is undeniably imperative, the physical infrastructure of renewable technologies relies heavily on geographically concentrated supply chains for rare earth elements like lithium, cobalt, and neodymium. When global powers monopolize mineral refining capacities, the transition risks replacing fossil fuel cartels with new geopolitical chokepoints. Furthermore, developing nations face crippling capital costs when modernizing transmission grids. A resilient global transition requires multilateral technology transfer agreements and circular metallurgical supply chains to prevent deepening macroeconomic inequality."
+  },
+  {
+    "id": "spk_a1_01",
+    "university_id": "ankara",
+    "target_university": "Ankara Üniversitesi Hazırlık",
+    "level": "A1",
+    "title": "Self Introduction & Academic Background",
+    "topic": "Personal Background & Study Goals",
+    "prep_time_seconds": 30,
+    "speak_time_seconds": 60,
+    "instructions_tr": "30 saniye boyunca konuşmanızı planlayın. Ardından 1 dakika boyunca kendinizi, bölümünüzü ve hedeflerinizi tanıtın.",
+    "prompt_en": "Please introduce yourself. State your name, where you are from, your department at university, and why you are learning English.",
+    "guiding_questions": [
+      "What is your name and where do you come from?",
+      "Which department are you studying in?",
+      "Why is learning English useful for your studies?"
+    ],
+    "key_vocabulary": [
+      "introduce",
+      "department",
+      "undergraduate",
+      "future goal",
+      "practice"
+    ],
+    "model_answer_transcript": "Hello, my name is Deniz and I come from Izmir. I am an eighteen-year-old first-year student in the Department of Computer Engineering at Ankara University. I am currently learning English in the preparatory school because most of my textbooks and programming tools are written in English. Learning English will also help me make international friends and attend exchange programs in Europe."
+  },
+  {
+    "id": "spk_a1_02",
+    "university_id": "hacettepe",
+    "target_university": "Hacettepe Üniversitesi YDYO",
+    "level": "A1",
+    "title": "Daily Routine on University Campus",
+    "topic": "Daily Schedule & Student Life",
+    "prep_time_seconds": 30,
+    "speak_time_seconds": 60,
+    "instructions_tr": "30 saniye düşünün. Bir üniversite öğrencisi olarak sıradan bir gününüzü saat ve aktivitelerle 1 dakika anlatın.",
+    "prompt_en": "Describe your typical daily routine as a university student from morning until night.",
+    "guiding_questions": [
+      "What time do you usually wake up and eat breakfast?",
+      "What do you do between morning lectures and lunch?",
+      "How do you spend your evenings in the dormitory or at home?"
+    ],
+    "key_vocabulary": [
+      "wake up",
+      "attend classes",
+      "cafeteria",
+      "study session",
+      "dormitory"
+    ],
+    "model_answer_transcript": "On a typical weekday, I wake up at seven o'clock and eat a quick breakfast at the student cafeteria. My morning English classes start at nine o'clock and finish around one in the afternoon. After lunch with my classmates, I usually go to the central library to do homework and review vocabulary cards. In the evening, I return to my dormitory, call my family, and read a book before sleeping."
+  },
+  {
+    "id": "spk_a1_03",
+    "university_id": "gazi",
+    "target_university": "Gazi Üniversitesi YDYO",
+    "level": "A1",
+    "title": "Favorite Hobby and Free Time Activities",
+    "topic": "Hobbies & Recreation",
+    "prep_time_seconds": 30,
+    "speak_time_seconds": 60,
+    "instructions_tr": "Boş zamanlarınızda yapmaktan en çok hoşlandığınız aktiviteyi ve nedenini açıklayın.",
+    "prompt_en": "Talk about your favorite hobby. What is it, how often do you do it, and why do you enjoy it?",
+    "guiding_questions": [
+      "What is your favorite hobby?",
+      "How often and with whom do you practice it?",
+      "Why does this hobby make you feel relaxed or happy?"
+    ],
+    "key_vocabulary": [
+      "favorite hobby",
+      "free time",
+      "relax",
+      "regularly",
+      "enjoyable"
+    ],
+    "model_answer_transcript": "My favorite hobby is playing basketball with my friends. I play twice a week at the university sports center. I enjoy this hobby because it helps me stay physically healthy after sitting in class for long hours. Playing team sports also teaches me teamwork, and it is a wonderful way to relieve stress after weekly English vocabulary quizzes."
+  },
+  {
+    "id": "spk_a1_04",
+    "university_id": "ege",
+    "target_university": "Ege Üniversitesi YDYO",
+    "level": "A1",
+    "title": "Describing Your Hometown or City",
+    "topic": "Hometown & Geography",
+    "prep_time_seconds": 30,
+    "speak_time_seconds": 60,
+    "instructions_tr": "Memleketinizi veya yaşadığınız şehri tanıtan 1 dakikalık konuşma yapın.",
+    "prompt_en": "Describe your hometown or current city. Mention its location, weather, and the most famous sights.",
+    "guiding_questions": [
+      "Where is your hometown located in Turkey?",
+      "What is the weather like throughout the year?",
+      "What do visitors usually see or eat there?"
+    ],
+    "key_vocabulary": [
+      "hometown",
+      "located",
+      "climate",
+      "historic places",
+      "traditional food"
+    ],
+    "model_answer_transcript": "I am from Izmir, which is a beautiful coastal city located in western Turkey. The weather is generally sunny and warm for most of the year. Visitors love walking along the famous Kordon seaside promenade and visiting the historical Clock Tower in Konak square. The city is also famous for delicious traditional food like boyoz and fresh Aegean seafood."
+  },
+  {
+    "id": "spk_a1_05",
+    "university_id": "ytu",
+    "target_university": "Yıldız Teknik Üniversitesi İYS",
+    "level": "A1",
+    "title": "My Favorite Room or Study Place",
+    "topic": "Study Spaces & Environment",
+    "prep_time_seconds": 30,
+    "speak_time_seconds": 60,
+    "instructions_tr": "Ders çalışırken en verimli hissettiğiniz mekanı tarif edin.",
+    "prompt_en": "Describe your favorite room or study place on campus or at home. Why do you like studying there?",
+    "guiding_questions": [
+      "Where is this study place located?",
+      "What objects or furniture are inside?",
+      "Why is it quiet or comfortable for your studies?"
+    ],
+    "key_vocabulary": [
+      "study place",
+      "quiet environment",
+      "comfortable desk",
+      "concentrate",
+      "natural light"
+    ],
+    "model_answer_transcript": "My favorite study place is the quiet reading room on the second floor of the campus library. It has large wooden desks, comfortable chairs, and big windows that let in plenty of natural daylight. I like studying there because it is completely silent, so I can concentrate easily on reading English texts without phone distractions."
+  },
+  {
+    "id": "spk_a1_06",
+    "university_id": "general",
+    "target_university": "Genel Hazırlık & CEFR A1",
+    "level": "A1",
+    "title": "Talking About a Family Member or Friend",
+    "topic": "People & Relationships",
+    "prep_time_seconds": 30,
+    "speak_time_seconds": 60,
+    "instructions_tr": "Hayatınızda önemli bir aile üyesini veya yakın bir arkadaşınızı fiziksel ve kişisel özellikleriyle tanıtın.",
+    "prompt_en": "Talk about a close friend or family member who inspires you. Describe their appearance and personality.",
+    "guiding_questions": [
+      "Who is this person and what is their relationship to you?",
+      "What do they look like and what is their job?",
+      "Why do you admire their personality?"
+    ],
+    "key_vocabulary": [
+      "close friend",
+      "kind-hearted",
+      "hardworking",
+      "admire",
+      "inspiration"
+    ],
+    "model_answer_transcript": "I would like to talk about my older sister, Merve. She is twenty-four years old and works as a pharmacist. She is tall, has brown hair, and always wears a warm smile. I admire her because she is exceptionally hardworking and patient. Whenever I encounter difficult topics in my courses, she encourages me and helps me stay motivated."
+  },
+  {
+    "id": "spk_a1_07",
+    "university_id": "general",
+    "target_university": "Genel Hazırlık & CEFR A1",
+    "level": "A1",
+    "title": "A Memorable Weekend Trip",
+    "topic": "Travel & Free Time",
+    "prep_time_seconds": 30,
+    "speak_time_seconds": 60,
+    "instructions_tr": "Geçmişte yaptığınız keyifli bir hafta sonu gezisini anlatın.",
+    "prompt_en": "Describe a memorable weekend trip you took with family or friends. Where did you go and what did you do?",
+    "guiding_questions": [
+      "Where did you travel and who went with you?",
+      "What was the most interesting activity you did?",
+      "How did you feel about the trip?"
+    ],
+    "key_vocabulary": [
+      "weekend trip",
+      "travel by train",
+      "historic museum",
+      "scenic view",
+      "memorable"
+    ],
+    "model_answer_transcript": "Last spring, my cousins and I took a weekend trip to Eskişehir by high-speed train. We visited the colorful Odunpazarı houses, walked along the Porsuk river, and took a boat ride in the afternoon. We also tasted the famous çiğbörek. It was an unforgettable weekend because the city was vibrant, clean, and full of university students."
+  },
+  {
+    "id": "spk_a1_08",
+    "university_id": "general",
+    "target_university": "Genel Hazırlık & CEFR A1",
+    "level": "A1",
+    "title": "Healthy Eating Habits",
+    "topic": "Food & Nutrition",
+    "prep_time_seconds": 30,
+    "speak_time_seconds": 60,
+    "instructions_tr": "Sağlıklı beslenme ve günlük yeme alışkanlıklarınız hakkında konuşun.",
+    "prompt_en": "What do you usually eat in a day? Explain why eating healthy food is important for students.",
+    "guiding_questions": [
+      "What do you typically eat for breakfast and dinner?",
+      "Do you prefer eating at home or eating fast food outside?",
+      "Why does good nutrition help students learn better?"
+    ],
+    "key_vocabulary": [
+      "healthy food",
+      "vegetables",
+      "balanced diet",
+      "energy",
+      "homemade meal"
+    ],
+    "model_answer_transcript": "For breakfast, I usually eat eggs, cheese, olives, and fresh bread. During lunchtime at university, I try to choose vegetable soups and grilled chicken rather than fast food. I believe healthy nutrition is very important for students because balanced meals provide steady mental energy, helping us concentrate during long afternoon study sessions."
+  },
+  {
+    "id": "spk_a1_09",
+    "university_id": "general",
+    "target_university": "Genel Hazırlık & CEFR A1",
+    "level": "A1",
+    "title": "Using Mobile Phones for Learning",
+    "topic": "Technology in Education",
+    "prep_time_seconds": 30,
+    "speak_time_seconds": 60,
+    "instructions_tr": "Akıllı telefonunuzu ders çalışırken ve İngilizce öğrenirken nasıl kullandığınızı anlatın.",
+    "prompt_en": "How do you use your smartphone for learning English? Mention specific apps or activities.",
+    "guiding_questions": [
+      "Which language apps or websites do you use regularly?",
+      "How often do you listen to English podcasts or videos on your phone?",
+      "What is one disadvantage of using phones while studying?"
+    ],
+    "key_vocabulary": [
+      "smartphone",
+      "vocabulary app",
+      "dictionary",
+      "podcast",
+      "distraction"
+    ],
+    "model_answer_transcript": "I use my smartphone daily to practice English vocabulary using digital flashcard applications. I also look up unfamiliar words in online Cambridge and Oxford dictionaries. While taking the bus to campus, I listen to beginner English podcasts. However, the main disadvantage is notifications, so I always silence social media alerts while studying."
+  },
+  {
+    "id": "spk_a1_10",
+    "university_id": "general",
+    "target_university": "Genel Hazırlık & CEFR A1",
+    "level": "A1",
+    "title": "Plans for Next Summer Vacation",
+    "topic": "Future Plans & Ambitions",
+    "prep_time_seconds": 30,
+    "speak_time_seconds": 60,
+    "instructions_tr": "Gelecek yaz tatilinde yapmayı planladığınız şeyleri anlatın.",
+    "prompt_en": "What are your plans for next summer vacation after finishing your preparatory classes?",
+    "guiding_questions": [
+      "Where do you plan to travel or visit?",
+      "Will you take any summer courses, internships, or language programs?",
+      "What new skill do you want to learn?"
+    ],
+    "key_vocabulary": [
+      "summer vacation",
+      "travel plans",
+      "internship",
+      "learn a skill",
+      "relax"
+    ],
+    "model_answer_transcript": "Next summer, after passing my English proficiency exam, I plan to spend two weeks with my family by the seaside in Antalya. In July, I want to attend an introductory programming workshop to prepare for my departmental courses. I also hope to work part-time to improve my communication skills and save money for a future European journey."
+  },
+  {
+    "id": "spk_a2_02",
+    "university_id": "itu",
+    "target_university": "İstanbul Teknik Üniversitesi İTÜ",
+    "level": "A2",
+    "title": "Living On-Campus vs. Off-Campus Housing",
+    "topic": "Student Accommodations",
+    "prep_time_seconds": 45,
+    "speak_time_seconds": 90,
+    "instructions_tr": "Üniversite yurdunda kalmak ile şehirde ev tutmanın avantaj ve dezavantajlarını karşılaştırın.",
+    "prompt_en": "Compare the advantages and disadvantages of living in a campus dormitory versus renting a private apartment with friends.",
+    "guiding_questions": [
+      "How does dormitory life save commuting time and expenses?",
+      "What privacy or freedom advantages does a shared private flat offer?",
+      "Which option do you recommend for a first-year student?"
+    ],
+    "key_vocabulary": [
+      "dormitory",
+      "commute",
+      "shared apartment",
+      "independence",
+      "cost-effective"
+    ],
+    "model_answer_transcript": "Both campus dormitories and private flats have clear advantages for university students. Living in a campus dormitory is highly convenient because students can walk to lectures in five minutes without paying public transportation fees. Moreover, dormitories include utilities and security, which reduces financial worry for freshmen. On the other hand, renting a private apartment offers greater personal privacy, quiet study space, and the freedom to cook homemade meals. For first-year students, I strongly recommend living in a dormitory initially because it makes forming friendships and adjusting to campus life much easier."
+  },
+  {
+    "id": "spk_a2_03",
+    "university_id": "metu",
+    "target_university": "Orta Doğu Teknik Üniversitesi ODTÜ",
+    "level": "A2",
+    "title": "The Impact of Social Media on Study Habits",
+    "topic": "Technology & Concentration",
+    "prep_time_seconds": 45,
+    "speak_time_seconds": 90,
+    "instructions_tr": "Sosyal medyanın öğrencilerin çalışma alışkanlıkları ve odaklanma süresi üzerindeki etkilerini tartışın.",
+    "prompt_en": "How does social media affect students' academic focus and productivity? Discuss both positive and negative aspects.",
+    "guiding_questions": [
+      "In what ways can social media groups aid collaborative homework?",
+      "How does frequent notification checking disrupt sustained reading?",
+      "What strategies can students use to maintain a healthy digital balance?"
+    ],
+    "key_vocabulary": [
+      "social media",
+      "productivity",
+      "digital distraction",
+      "collaborative study",
+      "screen time"
+    ],
+    "model_answer_transcript": "Social media has a double-edged effect on contemporary student productivity. On the positive side, platforms like WhatsApp and Telegram allow classmates to exchange lecture summaries, ask homework questions, and form study groups instantly. However, the negative effects often outweigh these benefits if unchecked. Frequent notifications constantly interrupt concentration, reducing the depth of reading comprehension. To combat this digital distraction, disciplined students should use website blockers and turn off notifications during exam revision periods."
+  },
+  {
+    "id": "spk_a2_04",
+    "university_id": "ankara",
+    "target_university": "Ankara Üniversitesi",
+    "level": "A2",
+    "title": "Why Learning Foreign Languages Opens Careers",
+    "topic": "Global Careers & Multilingualism",
+    "prep_time_seconds": 45,
+    "speak_time_seconds": 90,
+    "instructions_tr": "Yabancı dil bilmenin modern iş dünyasında neden zorunlu hale geldiğini açıklayın.",
+    "prompt_en": "Explain why proficiency in English and other foreign languages provides critical career advantages in the global marketplace.",
+    "guiding_questions": [
+      "How do multinational companies evaluate multilingual job applicants?",
+      "Why is English essential for reading international scientific research?",
+      "Can speaking a second language boost personal confidence?"
+    ],
+    "key_vocabulary": [
+      "global marketplace",
+      "career advantage",
+      "multinational firm",
+      "communication skill",
+      "job market"
+    ],
+    "model_answer_transcript": "In today's interconnected global economy, language proficiency is no longer an optional resume bonus; it is an absolute necessity. Multinational companies operate across continents, requiring team members to negotiate contracts, write technical reports, and converse with international clients in English. Furthermore, cutting-edge scientific research and industry standards are published almost exclusively in English. Speaking a foreign language fluently also boosts cognitive flexibility and gives candidates an edge during competitive hiring processes."
+  },
+  {
+    "id": "spk_a2_05",
+    "university_id": "hacettepe",
+    "target_university": "Hacettepe Üniversitesi",
+    "level": "A2",
+    "title": "The Importance of Physical Exercise for Academic Mental Health",
+    "topic": "Sports, Health & Wellbeing",
+    "prep_time_seconds": 45,
+    "speak_time_seconds": 90,
+    "instructions_tr": "Düzenli spor ve egzersizin sınav stresi ve zihinsel sağlık üzerindeki olumlu etkilerini değerlendirin.",
+    "prompt_en": "How does regular physical exercise contribute to better mental health and higher academic performance among university students?",
+    "guiding_questions": [
+      "How does exercise relieve exam stress and anxiety?",
+      "What biological benefits does regular movement have on sleep quality?",
+      "Which sports are easiest for busy university students to fit into their schedules?"
+    ],
+    "key_vocabulary": [
+      "physical exercise",
+      "mental health",
+      "stress relief",
+      "endorphins",
+      "sleep quality"
+    ],
+    "model_answer_transcript": "Regular physical exercise is fundamentally tied to academic stamina and cognitive performance. When students exercise, their bodies release endorphins that naturally alleviate stress and test anxiety. Furthermore, engaging in jogging, swimming, or brisk walking improves cardiovascular circulation, delivering more oxygen to the brain and enhancing memory retention. Regular workouts also lead to deeper nighttime sleep, ensuring students wake up refreshed. Even thirty minutes of daily physical activity makes a noticeable difference in academic performance."
+  },
+  {
+    "id": "spk_a2_06",
+    "university_id": "gazi",
+    "target_university": "Gazi Üniversitesi",
+    "level": "A2",
+    "title": "Environmental Protection on Campus",
+    "topic": "Campus Sustainability",
+    "prep_time_seconds": 45,
+    "speak_time_seconds": 90,
+    "instructions_tr": "Üniversite kampüslerinde çevre kirliliğini önlemek ve geri dönüşümü yaygınlaştırmak için neler yapılabileceğini anlatın.",
+    "prompt_en": "What actionable steps should universities and students take to reduce waste and promote sustainability on campus?",
+    "guiding_questions": [
+      "Why should single-use plastics be banned or restricted in campus cafeterias?",
+      "How can recycling bins for paper and electronics be made more effective?",
+      "What role do student clubs play in organizing tree planting drives?"
+    ],
+    "key_vocabulary": [
+      "sustainability",
+      "single-use plastic",
+      "recycling bin",
+      "waste reduction",
+      "environmental awareness"
+    ],
+    "model_answer_transcript": "Universities should take bold leadership roles in ecological sustainability. First, campus administrations should replace single-use plastic cups and cutlery in dining halls with biodegradable or reusable alternatives. Second, clearly labeled recycling bins for paper, plastic, and electronic waste must be positioned near every lecture hall. Finally, student environmental societies can organize campus cleanup days and tree-planting campaigns to foster collective responsibility for our shared planet."
+  },
+  {
+    "id": "spk_a2_07",
+    "university_id": "ege",
+    "target_university": "Ege Üniversitesi",
+    "level": "A2",
+    "title": "Benefits of Reading English Fiction for Vocabulary",
+    "topic": "Reading & Language Acquisition",
+    "prep_time_seconds": 45,
+    "speak_time_seconds": 90,
+    "instructions_tr": "İngilizce hikaye ve roman okumanın kelime öğrenimini nasıl hızlandırdığını anlatın.",
+    "prompt_en": "Explain how reading graded English fiction and novels accelerates vocabulary growth compared to memorizing word lists.",
+    "guiding_questions": [
+      "How does reading words in context aid long-term memory?",
+      "Why is reading stories more engaging than rote memorization?",
+      "What level of books should students choose to avoid feeling discouraged?"
+    ],
+    "key_vocabulary": [
+      "graded reader",
+      "vocabulary acquisition",
+      "in context",
+      "rote memorization",
+      "reading habit"
+    ],
+    "model_answer_transcript": "Reading English fiction is one of the most effective methods for expanding academic vocabulary. When learners read stories, new words appear naturally within meaningful storylines and character dialogues, allowing the brain to understand subtle emotional and grammatical nuances. In contrast, memorizing isolated word lists often results in quick forgetting. Students who choose books matching their CEFR level enjoy reading without constantly checking dictionaries, naturally acquiring idioms and sentence flow."
+  },
+  {
+    "id": "spk_a2_08",
+    "university_id": "koc",
+    "target_university": "Koç Üniversitesi KUEPE",
+    "level": "A2",
+    "title": "Collaborative Teamwork vs. Independent Studying",
+    "topic": "Study Methods & Team Dynamics",
+    "prep_time_seconds": 45,
+    "speak_time_seconds": 90,
+    "instructions_tr": "Grup halinde çalışmak ile tek başına çalışmanın farklarını değerlendirin.",
+    "prompt_en": "Do you study more productively in group study circles or by studying alone? Give reasons and examples.",
+    "guiding_questions": [
+      "What are the benefits of discussing difficult concepts with classmates?",
+      "When can study groups become noisy or counterproductive?",
+      "Which tasks (e.g. writing vs. problem solving) require solo focus?"
+    ],
+    "key_vocabulary": [
+      "collaborative learning",
+      "independent study",
+      "peer discussion",
+      "focus",
+      "productive"
+    ],
+    "model_answer_transcript": "Whether group work or independent study is superior depends entirely on the academic task. When preparing for problem-solving exams like calculus or chemistry, studying with peers is immensely helpful because members can explain tricky formulas to each other. However, when writing an essay or practicing reading comprehension, independent study in a silent library is far more productive, as solo concentration prevents conversational distractions. A balanced mix of both methods yields the best academic outcomes."
+  },
+  {
+    "id": "spk_a2_09",
+    "university_id": "sabanci",
+    "target_university": "Sabancı Üniversitesi ELAE",
+    "level": "A2",
+    "title": "The Value of Attending University Orientation Week",
+    "topic": "Orientation & Campus Adaptation",
+    "prep_time_seconds": 45,
+    "speak_time_seconds": 90,
+    "instructions_tr": "Yeni başlayanlar için oryantasyon haftasının önemini açıklayın.",
+    "prompt_en": "Why is participating in university orientation week important for incoming first-year students?",
+    "guiding_questions": [
+      "How does orientation introduce students to campus laboratories and libraries?",
+      "What social opportunities does orientation provide for meeting peers?",
+      "How does learning university regulations prevent future academic mistakes?"
+    ],
+    "key_vocabulary": [
+      "orientation week",
+      "incoming students",
+      "campus tour",
+      "academic regulations",
+      "networking"
+    ],
+    "model_answer_transcript": "Attending university orientation week is an invaluable milestone for every incoming student. Firstly, guided campus tours familiarize freshmen with essential facilities such as the registrar's office, health center, and digital laboratories. Secondly, orientation events host social mixers that enable newcomers to form friendships before academic lectures begin. Finally, orientation workshops explain credit requirements and grading policies, preventing costly mistakes during semester course registrations."
+  },
+  {
+    "id": "spk_a2_10",
+    "university_id": "general",
+    "target_university": "Genel Hazırlık & CEFR A2",
+    "level": "A2",
+    "title": "Public Transportation vs. Personal Cars in Megacities",
+    "topic": "Urban Transit & Commuting",
+    "prep_time_seconds": 45,
+    "speak_time_seconds": 90,
+    "instructions_tr": "Büyükşehirlerde toplu taşıma araçlarının kullanımının özel araçlara göre neden teşvik edilmesi gerektiğini savunun.",
+    "prompt_en": "Why should metropolitan municipalities prioritize subway and bus transit networks over expanding automobile highways?",
+    "guiding_questions": [
+      "How does subway usage reduce municipal traffic gridlock?",
+      "What are the environmental advantages in terms of carbon emissions?",
+      "How do affordable transit tickets benefit low-income university students?"
+    ],
+    "key_vocabulary": [
+      "public transportation",
+      "traffic congestion",
+      "carbon emissions",
+      "subway network",
+      "accessible transit"
+    ],
+    "model_answer_transcript": "In rapidly growing megacities like Istanbul and Ankara, prioritizing extensive subway and bus transit networks is essential. Personal automobiles consume massive road space and emit harmful greenhouse gases, resulting in chronic gridlock and poor air quality. In contrast, modern underground rail systems transport hundreds of thousands of commuters rapidly and safely without adding street-level traffic. Furthermore, affordable student transit passes ensure equal access to education and employment across the metropolitan region."
+  },
+  {
+    "id": "spk_b1_03",
+    "university_id": "ankara",
+    "target_university": "Ankara Üniversitesi",
+    "level": "B1",
+    "title": "Online vs. Traditional Classroom Education",
+    "topic": "Distance Learning & Pedagogy",
+    "prep_time_seconds": 45,
+    "speak_time_seconds": 90,
+    "instructions_tr": "Uzaktan eğitim ile yüz yüze geleneksel eğitimin artı ve eksilerini akademik bir dille değerlendirin.",
+    "prompt_en": "Compare the efficacy of online distance learning with traditional in-person classroom instruction. Which paradigm is more sustainable for higher education?",
+    "guiding_questions": [
+      "How does digital learning offer schedule flexibility and geographical access?",
+      "Why is spontaneous classroom interaction critical for deep socialization and debate?",
+      "What hybrid model seems most viable for future universities?"
+    ],
+    "key_vocabulary": [
+      "distance learning",
+      "in-person instruction",
+      "pedagogy",
+      "flexibility",
+      "socialization"
+    ],
+    "model_answer_transcript": "The debate between distance learning and traditional face-to-face education centers on accessibility versus interpersonal engagement. Online instruction undeniably democratizes higher education by allowing students from remote locations to access elite lectures without bearing steep housing costs. However, virtual environments often lack the spontaneous intellectual debates and laboratory collaborations that define traditional campuses. Therefore, the most sustainable future model is a hybrid framework where foundational lectures are streamed digitally, while interactive seminars and laboratory trials remain physical."
+  },
+  {
+    "id": "spk_b1_04",
+    "university_id": "hacettepe",
+    "target_university": "Hacettepe Üniversitesi",
+    "level": "B1",
+    "title": "The Role of Artificial Intelligence in Higher Education",
+    "topic": "AI Tools & Academic Ethics",
+    "prep_time_seconds": 45,
+    "speak_time_seconds": 90,
+    "instructions_tr": "Yapay zekanın üniversite eğitimi ve akademik dürüstlük üzerindeki etkilerini analiz edin.",
+    "prompt_en": "To what extent should university students be permitted to utilize generative AI tools in preparing coursework and assignments?",
+    "guiding_questions": [
+      "How can AI serve as an individualized tutor for coding and vocabulary?",
+      "What ethical risks arise when students submit AI-generated texts as original work?",
+      "How should university examination boards adapt assessment formats?"
+    ],
+    "key_vocabulary": [
+      "generative AI",
+      "academic integrity",
+      "individualized learning",
+      "ethical risk",
+      "critical thinking"
+    ],
+    "model_answer_transcript": "Generative artificial intelligence tools present both profound educational opportunities and ethical dilemmas for universities. When employed responsibly as personalized study tutors, AI systems can explain intricate scientific equations and provide instant coding feedback. However, blindly copying AI outputs into term assignments corrodes critical thinking and breaches academic integrity. Rather than instituting ineffective bans, universities should teach ethical AI literacy while pivoting toward in-person oral defenses and proctored handwriting assessments."
+  },
+  {
+    "id": "spk_b1_05",
+    "university_id": "gazi",
+    "target_university": "Gazi Üniversitesi",
+    "level": "B1",
+    "title": "Should University Attendance Be Mandatory?",
+    "topic": "Academic Freedom & Student Autonomy",
+    "prep_time_seconds": 45,
+    "speak_time_seconds": 90,
+    "instructions_tr": "Üniversitelerde derslere devam zorunluluğunun gerekli olup olmadığını argümanlarla savunun.",
+    "prompt_en": "Argue whether university lecture attendance should be strictly compulsory or entirely optional for adult undergraduate students.",
+    "guiding_questions": [
+      "Does mandatory attendance guarantee genuine intellectual engagement?",
+      "How can adult learners take responsibility for their own academic outcomes?",
+      "In which courses (e.g. medical labs) is physical presence indispensable?"
+    ],
+    "key_vocabulary": [
+      "mandatory attendance",
+      "student autonomy",
+      "intellectual engagement",
+      "accountability",
+      "laboratory course"
+    ],
+    "model_answer_transcript": "While university professors naturally desire packed lecture halls, enforcing rigid mandatory attendance policies often fails to produce genuine engagement. Treating undergraduate scholars as mature adults means trusting them to manage their own study schedules. If a student can master theoretical concepts through textbooks and recorded lectures, they should not be penalized simply for missing a roll call. Nonetheless, practical laboratory courses, medical rotations, and interactive seminars must remain compulsory due to essential safety and collaborative requirements."
+  },
+  {
+    "id": "spk_b1_06",
+    "university_id": "ege",
+    "target_university": "Ege Üniversitesi",
+    "level": "B1",
+    "title": "The Impact of Fast Fashion on the Environment",
+    "topic": "Consumerism & Environmental Sustainability",
+    "prep_time_seconds": 45,
+    "speak_time_seconds": 90,
+    "instructions_tr": "Hızlı modanın (fast fashion) çevre ve su kaynakları üzerindeki zararlarını ele alıp çözümler sunun.",
+    "prompt_en": "Analyze the environmental repercussions of the fast fashion industry and propose consumer habits to mitigate textile waste.",
+    "guiding_questions": [
+      "How does mass textile manufacturing deplete freshwater and generate toxic dyes?",
+      "Why do consumers rapidly discard inexpensive trendy garments?",
+      "How can thrift stores and sustainable fashion curb ecological damage?"
+    ],
+    "key_vocabulary": [
+      "fast fashion",
+      "textile waste",
+      "water depletion",
+      "sustainable consumption",
+      "circular economy"
+    ],
+    "model_answer_transcript": "The rise of fast fashion has created an ecological catastrophe characterized by microplastic pollution and excessive freshwater depletion. Producing inexpensive, trendy garments requires thousands of liters of clean water per shirt and utilizes toxic synthetic dyes that poison downstream river basins. Because these garments are poorly fabricated, consumers discard them after minimal usage, clogging municipal landfills. To curb this environmental degradation, society must transition toward a circular economy by buying second-hand clothing, choosing durable natural fibers, and supporting ethical fashion brands."
+  },
+  {
+    "id": "spk_b1_07",
+    "university_id": "ytu",
+    "target_university": "Yıldız Teknik Üniversitesi",
+    "level": "B1",
+    "title": "Encouraging Youth Entrepreneurship and Startups",
+    "topic": "Innovation & Startup Incubators",
+    "prep_time_seconds": 45,
+    "speak_time_seconds": 90,
+    "instructions_tr": "Üniversitelerin genç girişimcileri ve teknoparkları nasıl desteklemesi gerektiğini açıklayın.",
+    "prompt_en": "How can universities best support undergraduate students who aspire to launch technology startups and entrepreneurial ventures?",
+    "guiding_questions": [
+      "What role do campus technoparks and seed funding incubators play?",
+      "How can universities bridge the gap between engineering theory and business management?",
+      "Why is learning from business failure an essential entrepreneurial lesson?"
+    ],
+    "key_vocabulary": [
+      "entrepreneurship",
+      "technopark",
+      "seed funding",
+      "startup incubator",
+      "innovation"
+    ],
+    "model_answer_transcript": "Universities should serve as vibrant incubators for youthful entrepreneurial innovation. Rather than confining education to textbook examinations, institutions should establish campus technoparks where students receive seed funding, patent guidance, and mentorship from veteran venture capitalists. Furthermore, interdisciplinary coursework combining engineering prototypes with business marketing equips young founders to pitch viable solutions to global investors. Cultivating a supportive ecosystem that normalizes learning from startup setbacks empowers undergraduates to build transformative enterprises."
+  },
+  {
+    "id": "spk_b1_08",
+    "university_id": "koc",
+    "target_university": "Koç Üniversitesi",
+    "level": "B1",
+    "title": "The Value of Humanities in STEM Curricula",
+    "topic": "Liberal Arts & Interdisciplinary Studies",
+    "prep_time_seconds": 45,
+    "speak_time_seconds": 90,
+    "instructions_tr": "Mühendislik ve fen bölümlerinde felsefe, sanat ve edebiyat gibi sosyal derslerin neden zorunlu olması gerektiğini savunun.",
+    "prompt_en": "Why should undergraduate engineering and science curricula mandate coursework in philosophy, literature, and the social sciences?",
+    "guiding_questions": [
+      "How do humanities foster ethical reflection in technological innovation?",
+      "Why is clear written and rhetorical communication vital for engineers?",
+      "How does exposure to liberal arts cultivate empathetic design?"
+    ],
+    "key_vocabulary": [
+      "humanities",
+      "STEM curriculum",
+      "interdisciplinary",
+      "ethical reflection",
+      "critical analysis"
+    ],
+    "model_answer_transcript": "Integrating the humanities into STEM education is crucial for cultivating socially responsible innovators. While rigorous mathematics and coding enable engineers to build complex algorithms, philosophical inquiry teaches them whether those technologies should be built in the first place. Understanding ethics prevents algorithmic bias in artificial intelligence and ensures biomedical innovations respect human dignity. Moreover, literary analysis refines verbal articulation, empowering scientists to communicate complex technical discoveries persuasively to policymakers and the broader public."
+  },
+  {
+    "id": "spk_b1_09",
+    "university_id": "sabanci",
+    "target_university": "Sabancı Üniversitesi",
+    "level": "B1",
+    "title": "Preserving Cultural Heritage in the Era of Modern Urbanization",
+    "topic": "Urban Planning & Historical Preservation",
+    "prep_time_seconds": 45,
+    "speak_time_seconds": 90,
+    "instructions_tr": "Tarihi ve kültürel mirasın modern kentsel dönüşüm karşısında nasıl korunabileceğini tartışın.",
+    "prompt_en": "How can historical metropolises balance urgent modern housing demands with the preservation of ancient architectural heritage?",
+    "guiding_questions": [
+      "Why is preserving ancient monuments essential for cultural identity and tourism?",
+      "How can urban planners repurpose historical buildings rather than demolishing them?",
+      "What zoning laws should protect archaeological excavation zones?"
+    ],
+    "key_vocabulary": [
+      "cultural heritage",
+      "urbanization",
+      "historic preservation",
+      "adaptive reuse",
+      "zoning regulations"
+    ],
+    "model_answer_transcript": "Cities like Istanbul and Rome face the continuous tension between expanding modern urban infrastructure and conserving irreplaceable historical heritage. Preserving ancient architectural monuments is vital because they embody collective cultural identity and draw international academic tourism. Rather than demolishing aging structures to erect high-rise concrete apartments, municipal planners should embrace adaptive reuse—transforming historic warehouses and palaces into libraries, museums, and innovation hubs. Strict archaeological zoning regulations must safeguard subsurface historical strata from unregulated real-estate developers."
+  },
+  {
+    "id": "spk_b1_10",
+    "university_id": "general",
+    "target_university": "Genel Hazırlık & CEFR B1",
+    "level": "B1",
+    "title": "Combating Fake News and Misinformation Online",
+    "topic": "Media Literacy & Digital Information",
+    "prep_time_seconds": 45,
+    "speak_time_seconds": 90,
+    "instructions_tr": "İnternetteki dezenformasyon ve sahte haberlerle mücadelede bireylerin ve eğitim kurumlarının rolünü değerlendirin.",
+    "prompt_en": "What measures should individuals and educational institutions adopt to combat the proliferation of digital misinformation and fake news?",
+    "guiding_questions": [
+      "Why do sensationalist headlines spread faster on social algorithms than verified facts?",
+      "How can students learn to cross-check sources before sharing viral posts?",
+      "Why is media literacy training essential in primary and secondary schools?"
+    ],
+    "key_vocabulary": [
+      "misinformation",
+      "media literacy",
+      "fact-checking",
+      "sensationalism",
+      "critical evaluation"
+    ],
+    "model_answer_transcript": "The rapid dissemination of digital misinformation represents an existential threat to informed civic debate. Social media algorithms are engineered to amplify sensationalist outrage, often propelling unverified claims ahead of factual scientific consensus. To counter this digital toxicity, educational institutions must embed media literacy into foundational curricula, training students to cross-reference primary sources, verify author credentials, and detect manipulated media. As individual citizens, cultivating the habit of rigorous fact-checking before sharing viral claims is our primary defense against collective deception."
+  },
+  {
+    "id": "spk_b2_03",
+    "university_id": "boun",
+    "target_university": "Boğaziçi Üniversitesi BUEPT",
+    "level": "B2",
+    "title": "Corporate Social Responsibility vs. Profit Maximization",
+    "topic": "Business Ethics & Corporate Governance",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Şirketlerin tek amacının kar maksimizasyonu mu yoksa toplumsal ve çevresel sorumluluk mu olması gerektiğini savunun.",
+    "prompt_en": "Milton Friedman famously asserted that the sole social responsibility of business is to increase its profits within the rules of the game. Evaluate whether contemporary corporations have a moral duty to prioritize ecological sustainability and stakeholder welfare over shareholder returns.",
+    "guiding_questions": [
+      "How does ignoring environmental externalities lead to catastrophic climate crises?",
+      "Can corporate social responsibility genuinely coexist with sustained profitability?",
+      "What role should regulatory state fines play in enforcing corporate accountability?"
+    ],
+    "key_vocabulary": [
+      "corporate social responsibility",
+      "externalities",
+      "shareholder value",
+      "stakeholder welfare",
+      "accountability"
+    ],
+    "model_answer_transcript": "The classical dogma that corporations exist solely to maximize short-term shareholder profits is fundamentally obsolete in an era defined by acute climate disruption and social inequality. While commercial profitability ensures solvency and drives innovation, treating ethical stewardship as secondary allows corporations to externalize ecological damages onto public healthcare systems and vulnerable communities. Contemporary corporate governance must embrace a stakeholder paradigm where sustainability benchmarks carry equal weight with financial dividends. Moreover, businesses that champion carbon neutrality and fair labor practices cultivate deeper brand loyalty among conscious consumers, demonstrating that ethical responsibility and enduring profitability are mutually reinforcing."
+  },
+  {
+    "id": "spk_b2_04",
+    "university_id": "metu",
+    "target_university": "Orta Doğu Teknik Üniversitesi ODTÜ",
+    "level": "B2",
+    "title": "Nuclear Energy: Indispensable Clean Power or Unacceptable Hazard?",
+    "topic": "Energy Geopolitics & Nuclear Engineering",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Nükleer enerjinin sıfır karbon emisyonu sağlama potansiyeli ile nükleer atık ve kaza risklerini karşılaştıran bir konuşma yapın.",
+    "prompt_en": "As the world races to achieve net-zero carbon targets, nuclear energy remains deeply polarizing. Is nuclear fission an indispensable clean baseload power source, or do radioactive waste and catastrophe risks render it unviable?",
+    "guiding_questions": [
+      "Why are wind and solar intermittent, and how does nuclear provide continuous baseload power?",
+      "What long-term solutions exist for storing spent radioactive uranium fuel?",
+      "How have modern small modular reactors (SMRs) improved operational safety?"
+    ],
+    "key_vocabulary": [
+      "nuclear fission",
+      "baseload power",
+      "intermittent renewables",
+      "radioactive waste",
+      "small modular reactors"
+    ],
+    "model_answer_transcript": "Navigating the clean energy transition without nuclear power is mathematically and logistically improbable. While solar and wind infrastructure is expanding rapidly, their operational intermittency requires either colossal battery storage or dependable zero-carbon baseload generation. Nuclear power stations operate continuously regardless of meteorological conditions, delivering massive gigawatt outputs on tiny land footprints. While critics rightfully cite historical catastrophes like Chernobyl and the unresolved dilemma of permanent geological waste storage, fourth-generation small modular reactors incorporate passive shutdown physics that render catastrophic meltdowns virtually impossible. Rejecting nuclear power forces nations to prolong coal consumption, inflicting far greater atmospheric mortality."
+  },
+  {
+    "id": "spk_b2_05",
+    "university_id": "itu",
+    "target_university": "İstanbul Teknik Üniversitesi İTÜ",
+    "level": "B2",
+    "title": "Earthquake Resilience and Urban Renewal in Seismic Zones",
+    "topic": "Civil Engineering & Disaster Mitigation",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Deprem kuşaklarındaki şehirlerde kentsel dönüşümün rant yerine mühendislik bilimiyle nasıl yapılması gerektiğini analiz edin.",
+    "prompt_en": "Major metropolitan centers located along tectonic fault lines face imminent seismic hazards. How should municipal authorities restructure urban renewal policies to prioritize structural engineering safety over speculative real-estate profit?",
+    "guiding_questions": [
+      "Why do non-compliant building materials and illegal zoning amnesties amplify casualties?",
+      "How can base isolation and tuned mass dampers safeguard high-density urban populations?",
+      "What financial mechanisms can assist low-income residents in retrofitting vulnerable homes?"
+    ],
+    "key_vocabulary": [
+      "seismic hazard",
+      "urban renewal",
+      "base isolation",
+      "building compliance",
+      "retrofitting"
+    ],
+    "model_answer_transcript": "In seismically vulnerable metropolises like Istanbul, urban renewal cannot be treated as an opportunity for speculative real-estate enrichment; it is an urgent matter of public safety. Historical earthquakes have demonstrated that buildings, not seismic waves alone, cause human casualties. Fatalities are systematically amplified by substandard concrete, uninspected pillar modifications, and political zoning amnesties. Municipalities must enforce rigorous building codes mandating geotechnical soil assessments and seismic base isolation technology in multi-story residential designs. Furthermore, the state must establish subsidized micro-lending programs that enable working-class families to structurally retrofit older apartments without being displaced by gentrification."
+  },
+  {
+    "id": "spk_b2_06",
+    "university_id": "bilkent",
+    "target_university": "Bilkent Üniversitesi COPE",
+    "level": "B2",
+    "title": "The Commercialization of Higher Education",
+    "topic": "Academic Capitalism & University Philosophy",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Üniversitelerin ticari şirket gibi yönetilmesinin ve öğrencilerin 'müşteri' olarak görülmesinin sakıncalarını değerlendirin.",
+    "prompt_en": "Many contemporary universities increasingly adopt corporate management models, treating education as a commodity and students as consumers. Critically assess the ramifications of this neoliberal shift on academic freedom and pure theoretical research.",
+    "guiding_questions": [
+      "How does market-driven funding marginalize humanities and pure mathematics?",
+      "Does viewing students as paying customers lead to grade inflation and weakened rigor?",
+      "What is the true democratic and cultural mission of tertiary institutions?"
+    ],
+    "key_vocabulary": [
+      "commercialization",
+      "academic capitalism",
+      "neoliberal paradigm",
+      "grade inflation",
+      "intellectual inquiry"
+    ],
+    "model_answer_transcript": "The encroaching commercialization of higher education threatens to dismantle the foundational mission of the university. When tertiary institutions are restructured around corporate KPIs and revenue streams, students are recast as consumers rather than intellectual apprentices. This commodification precipitates pervasive grade inflation, as administrations hesitate to challenge tuition-paying customers with rigorous demands. More alarmingly, corporate sponsorship skews university research priorities toward immediately monetizable applied technologies, while starving pure theoretical mathematics, philosophy, and classical history. Higher education must be fiercely defended as an autonomous public good dedicated to disinterested pursuit of truth and critical civic consciousness."
+  },
+  {
+    "id": "spk_b2_07",
+    "university_id": "ankara",
+    "target_university": "Ankara Üniversitesi",
+    "level": "B2",
+    "title": "Universal Basic Income: Economic Panacea or Work Disincentive?",
+    "topic": "Welfare Economics & Automation Disruption",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Evrensel Temel Gelir (UBI) modelinin otomatikleşen dünyada yaratacağı ekonomik ve sosyal etkileri tartışın.",
+    "prompt_en": "As artificial intelligence and robotics threaten widespread displacement of white-collar and blue-collar labor, Universal Basic Income (UBI) has gained prominent political traction. Analyze whether UBI represents a viable safety net or an unsustainable fiscal hazard.",
+    "guiding_questions": [
+      "How does UBI eradicate absolute poverty and restore worker bargaining power?",
+      "Can national tax revenues realistically sustain unconditional monthly stipends?",
+      "Does guaranteed income discourage productivity and entrepreneurship?"
+    ],
+    "key_vocabulary": [
+      "Universal Basic Income",
+      "automation displacement",
+      "fiscal sustainability",
+      "safety net",
+      "bargaining power"
+    ],
+    "model_answer_transcript": "Universal Basic Income represents a bold policy response to the structural labor displacements wrought by artificial intelligence. By providing an unconditional financial floor, UBI eliminates extreme poverty and affords displaced workers the breathing room to re-skill without being coerced into predatory, low-wage employment. Empirical trials in Scandinavia and North America contradict fears of widespread laziness; recipients predominantly invested stipends in child education, healthcare, and localized micro-enterprises. The principal barrier to UBI is not human motivation, but fiscal financing. Implementing UBI requires progressive taxation on corporate automation gains, carbon extraction, and digital wealth concentration, ensuring technological prosperity is equitably shared."
+  },
+  {
+    "id": "spk_b2_08",
+    "university_id": "hacettepe",
+    "target_university": "Hacettepe Üniversitesi",
+    "level": "B2",
+    "title": "Ethical Limits of Genetic Editing and CRISPR Technology",
+    "topic": "Bioethics & Human Genome Modification",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "CRISPR ve gen düzenleme teknolojilerinin kalıtsal hastalıkları tedavi etmedeki rolü ile 'tasarım bebek' tehlikelerini değerlendirin.",
+    "prompt_en": "CRISPR gene editing possesses revolutionary potential to eradicate hereditary genetic disorders, yet simultaneously opens the door to germline modification and genetic enhancement. Where should international bioethics councils draw the regulatory line?",
+    "guiding_questions": [
+      "How does therapeutic somatic editing differ ethically from heritable germline modification?",
+      "Could genetic enhancements exacerbate existing socioeconomic inequalities into biological caste systems?",
+      "What international treaties are needed to prevent rogue genetic experimentation?"
+    ],
+    "key_vocabulary": [
+      "CRISPR gene editing",
+      "germline modification",
+      "bioethics",
+      "hereditary disease",
+      "genetic inequality"
+    ],
+    "model_answer_transcript": "The advent of CRISPR-Cas9 genome editing places humanity at a monumental bioethical crossroads. Utilizing somatic gene therapy to cure debilitating monogenic disorders such as sickle cell anemia or Huntington's disease represents an unambiguous moral imperative. However, extending this technology to human germline editing—altering the DNA of embryos in ways that will be inherited across generations—crosses a perilous ethical threshold. If genetic enhancement becomes a commodified market service, affluent elites will purchase biological advantages for their progeny, crystallizing economic inequality into permanent genetic divides. International bioethics bodies must enforce binding moratoria prohibiting non-therapeutic human enhancement while sanctioning ethical curative medicine."
+  },
+  {
+    "id": "spk_b2_09",
+    "university_id": "koc",
+    "target_university": "Koç Üniversitesi KUEPE",
+    "level": "B2",
+    "title": "The Paradox of Choice in Modern Consumerist Society",
+    "topic": "Behavioral Psychology & Decision Making",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Modern dünyada aşırı seçenek bolluğunun insanlarda mutluluk yerine kaygı ve pişmanlık yaratmasını psikolojik olarak analiz edin.",
+    "prompt_en": "Psychologist Barry Schwartz posits that an abundance of choices does not liberate the individual, but rather induces decision paralysis and heightened dissatisfaction. To what extent does this 'paradox of choice' undermine psychological well-being in consumer societies?",
+    "guiding_questions": [
+      "How do endless choices in career, entertainment, and consumer goods cause chronic FOMO?",
+      "Why do people feel more personal regret when an outcome is sub-optimal among many alternatives?",
+      "How can individuals practice satisficing rather than maximizing to achieve peace of mind?"
+    ],
+    "key_vocabulary": [
+      "paradox of choice",
+      "decision paralysis",
+      "consumerism",
+      "satisficing",
+      "psychological well-being"
+    ],
+    "model_answer_transcript": "While classical economics posits that expanding choices maximizes consumer utility, psychological reality demonstrates the opposite: excessive choice induces acute decision paralysis and persistent regret. When confronted with hundreds of career options, streaming channels, or consumer brands, individuals expend disproportionate mental energy evaluating trivial differences. Once a decision is finalized, any slight imperfection triggers agonizing counterfactual thoughts that an alternative choice would have yielded superior satisfaction. To escape this debilitating psychological trap, individuals must consciously transition from maximizing—seeking the absolute best—to satisficing, which entails embracing options that are sufficiently good and aligning decisions with internal core values."
+  },
+  {
+    "id": "spk_b2_10",
+    "university_id": "sabanci",
+    "target_university": "Sabancı Üniversitesi ELAE",
+    "level": "B2",
+    "title": "Digital Privacy vs. National Security in Counter-Terrorism",
+    "topic": "Civil Liberties & Mass Telecommunications Surveillance",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Devletlerin güvenlik gerekçesiyle vatandaşların dijital verilerini ve mesajlaşmalarını gözetlemesinin sınırlarını tartışın.",
+    "prompt_en": "State intelligence agencies argue that backdoor access to encrypted messaging platforms is vital to neutralize terrorist threats. Civil libertarians counter that mass digital surveillance shatters foundational democratic privacy. How should a modern constitutional democracy arbitrate this conflict?",
+    "guiding_questions": [
+      "Why does weakening end-to-end encryption jeopardize digital banking and dissidents alike?",
+      "Can targeted, warrant-based judicial surveillance suffice without bulk data harvesting?",
+      "What historical precedents demonstrate the abuse of unchecked state surveillance power?"
+    ],
+    "key_vocabulary": [
+      "digital privacy",
+      "mass surveillance",
+      "end-to-end encryption",
+      "civil liberties",
+      "judicial oversight"
+    ],
+    "model_answer_transcript": "The conflict between national security imperatives and individual digital privacy represents one of the most defining constitutional struggles of the information age. While intelligence services rightfully seek to neutralize violent extremism, compromising end-to-end encryption to facilitate mass state eavesdropping creates catastrophic vulnerabilities. A backdoor engineered for law enforcement will inevitably be discovered and weaponized by hostile nation-states and cybercriminal syndicates, jeopardizing global financial infrastructure and personal data integrity. A free democracy cannot preserve security by destroying the civil liberties that define its identity. Targeted surveillance, strictly authorized by independent judicial warrants upon demonstrable probable cause, must remain the sole permissible investigative method."
+  },
+  {
+    "id": "spk_c1_05",
+    "university_id": "boun",
+    "target_university": "Boğaziçi Üniversitesi BUEPT",
+    "level": "C1",
+    "title": "Epistemological Implications of Algorithmic Filter Bubbles",
+    "topic": "Cognitive Science & Public Discourse",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Algoritmik filtre balonlarının toplumların ortak gerçeklik algısını nasıl parçaladığını felsefi ve sosyolojik olarak irdeleyin.",
+    "prompt_en": "Algorithmic recommendation engines monetize engagement by personalizing informational feeds, creating ideological echo chambers. Examine how these algorithmic filter bubbles erode shared empirical realities and polarize democratic deliberation.",
+    "guiding_questions": [
+      "How do confirmation bias heuristics interact with algorithmic feedback loops?",
+      "Can a pluralistic democracy function when citizens no longer agree upon verifiable facts?",
+      "What public utility regulations could reintroduce epistemic diversity into social media platforms?"
+    ],
+    "key_vocabulary": [
+      "epistemological",
+      "filter bubble",
+      "confirmation bias",
+      "democratic deliberation",
+      "algorithmic accountability"
+    ],
+    "model_answer_transcript": "Algorithmic curation of information has precipitated a profound epistemological crisis by dismantling the shared informational commons upon which democratic deliberation depends. Commercial social media architectures maximize attention retention by serving users content that confirms preexisting ideological prejudices while systematically suppressing discordant perspectives. This algorithmic positive feedback loop traps citizens within solipsistic epistemic echo chambers, transforming subjective partisan dogma into perceived objective reality. When rival factions in a democracy no longer share a baseline consensus regarding verifiable scientific or electoral facts, reasoned debate collapses into sectarian tribalism. Reversing this fragmentation requires treating foundational social networks as digital public utilities subject to transparency audits and algorithmic diversity mandates."
+  },
+  {
+    "id": "spk_c1_06",
+    "university_id": "metu",
+    "target_university": "Orta Doğu Teknik Üniversitesi ODTÜ",
+    "level": "C1",
+    "title": "Technological Determinism vs. Social Construction of Technology",
+    "topic": "Philosophy of Technology & Societal Agency",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Teknolojinin mi tarihi ve insan davranışını belirlediğini, yoksa toplumsal güçlerin mi teknolojiyi şekillendirdiğini tartışın.",
+    "prompt_en": "Evaluate the theoretical tension between technological determinism—the premise that autonomous technological progress dictates human history—and the social construction of technology (SCOT), which posits that societal power structures mold technological trajectories.",
+    "guiding_questions": [
+      "To what extent do breakthrough innovations like the printing press or Internet impose unavoidable societal paradigms?",
+      "How do corporate monopolies and political regulatory regimes deliberately steer technological design?",
+      "How can democratic societies reclaim moral agency over emerging biotechnological advances?"
+    ],
+    "key_vocabulary": [
+      "technological determinism",
+      "social construction of technology",
+      "human agency",
+      "sociotechnical systems",
+      "paradigm"
+    ],
+    "model_answer_transcript": "The intellectual duel between technological determinism and the social construction of technology illuminates our contemporary anxieties regarding artificial intelligence and genetic engineering. Determinists like Jacques Ellul argue that technology possesses an autonomous internal logic; once invented, systems like steam engines or pervasive algorithms enforce specific bureaucratic and cultural behavioral patterns that humans cannot resist. Conversely, the social constructivist critique reveals that technological trajectories are never neutral or preordained. They are meticulously sculpted by capital investments, patent regimes, and military priorities reflecting entrenched power dynamics. Yielding to fatalistic determinism blinds societies to their democratic capacity to regulate and redirect innovation toward collective human flourishing."
+  },
+  {
+    "id": "spk_c1_07",
+    "university_id": "bilkent",
+    "target_university": "Bilkent Üniversitesi COPE",
+    "level": "C1",
+    "title": "Degrowth Economics vs. Green Growth Paradigms",
+    "topic": "Ecological Economics & Planetary Boundaries",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Sürekli GSYİH büyümesi hedefinin ekolojik yıkıma yol açtığını savunan 'Küçülme' (Degrowth) tezi ile 'Yeşil Büyüme' modelini sentezleyin.",
+    "prompt_en": "Ecological economists argue that decoupling continuous GDP growth from environmental destruction is a biophysical impossibility, advocating instead for planned economic 'degrowth'. Mainstream institutions champion 'green growth'. Critically synthesize both paradigms.",
+    "guiding_questions": [
+      "Why do empirical planetary boundaries challenge the dogma of infinite economic expansion?",
+      "How does degrowth propose reorganizing social labor, resource extraction, and public welfare?",
+      "Is degrowth politically viable in developing nations requiring poverty alleviation?"
+    ],
+    "key_vocabulary": [
+      "degrowth",
+      "green growth",
+      "biophysical limits",
+      "decoupling",
+      "circular economy"
+    ],
+    "model_answer_transcript": "The debate over degrowth strikes at the core contradiction of modern civilization: pursuing infinite exponential GDP growth upon a materially finite planet. Proponents of 'green growth' assert that technological innovation, clean energy, and circular resource efficiency can decouple economic output from ecological damage. However, empirical metrics indicate that decoupling remains relative and localized, failing to halt aggregate biodiversity loss and carbon accumulation. Degrowth articulates a radical corrective, demanding deliberate downscaling of throughput in energy-intensive consumer sectors while expanding social investments in healthcare, education, and ecological regeneration. A nuanced synthesis demands that while developed economies embrace degrowth, emerging nations must be afforded equitable developmental space fueled by green technological transfers."
+  },
+  {
+    "id": "spk_c1_08",
+    "university_id": "koc",
+    "target_university": "Koç Üniversitesi KUEPE",
+    "level": "C1",
+    "title": "The Neuroethics of Cognitive Enhancement and Neural Interfaces",
+    "topic": "Neuroscience & Bodily Integrity",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Beyin-bilgisayar arayüzleri ve bilişsel güçlendirici ilaçların zihinsel mahremiyet ve insan kimliği üzerindeki etik sonuçlarını tartışın.",
+    "prompt_en": "Brain-computer interfaces and neurotechnological cognitive enhancers are transitioning from restorative clinical applications to elective augmentations. Examine the neuroethical quandaries surrounding cognitive liberty, mental privacy, and human authenticity.",
+    "guiding_questions": [
+      "What constitutes the boundary between neurological medical therapy and competitive transhumanist enhancement?",
+      "How could neural monitoring by employers or states obliterate the ultimate sanctum of mental privacy?",
+      "What international charter of 'neurorights' must be established immediately?"
+    ],
+    "key_vocabulary": [
+      "neuroethics",
+      "brain-computer interface",
+      "cognitive liberty",
+      "mental privacy",
+      "transhumanism"
+    ],
+    "model_answer_transcript": "The frontier of neural interface technology poses profound ontological challenges to our understanding of human agency and interiority. While implantable neuroprosthetics offer miraculous therapeutic remediation for paralyzed patients, their prospective commercial deployment as elective cognitive enhancers threatens foundational principles of justice. If high-bandwidth brain-computer interfaces become prerequisite for elite competitive productivity, biological humans without neural implants will face systemic economic marginalization. More terrifying is the erosion of mental privacy; neural telemetry can decode subconscious intentions and emotional states, exposing the innermost sanctum of the human mind to corporate surveillance and state control. Jurisprudence must rapidly codify absolute 'neurorights' safeguarding cognitive sovereignty."
+  },
+  {
+    "id": "spk_c1_09",
+    "university_id": "sabanci",
+    "target_university": "Sabancı Üniversitesi ELAE",
+    "level": "C1",
+    "title": "Meritocracy and the Tyranny of Academic Credentialism",
+    "topic": "Sociological Theory & Social Stratification",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Liyakat sisteminin nasıl bir kibir ve yeni bir sınıf ayrımı yarattığını (Michael Sandel'in Liyakat Tiranlığı tezi) analiz edin.",
+    "prompt_en": "Philosopher Michael Sandel contends that meritocracy fosters hubris among the credentialed elite while inflicting systemic humiliation upon non-credentialed working citizens. Critically evaluate whether the meritocratic ideal can be reformed or must be replaced.",
+    "guiding_questions": [
+      "How do standardized admissions tests reflect inherited wealth rather than innate merit?",
+      "Why does meritocratic rhetoric convince losers that their economic plight is entirely their own fault?",
+      "How can societies restore the dignity of manual labor and non-academic contributions?"
+    ],
+    "key_vocabulary": [
+      "meritocracy",
+      "credentialism",
+      "social stratification",
+      "hubris",
+      "dignity of labor"
+    ],
+    "model_answer_transcript": "The rhetoric of meritocracy, celebrated as the pinnacle of egalitarian opportunity, has paradoxically ossified into a corrosive engine of social division. As philosopher Michael Sandel cogently argues, the meritocratic mantra—that those who work hard and achieve high test scores deserve their outsized material rewards—cultivates unbearable arrogance among the credentialed managerial class. Concurrently, it inflicts acute demoralization upon manual laborers, subtly communicating that their lower socioeconomic standing is a deserved personal failure. In truth, meritocratic achievement is heavily determined by inherited social capital, private preparatory tutoring, and geographical accident. To heal societal polarization, we must dismantle the tyranny of credentialism, recognize that moral desert is distinct from market outcomes, and restore cultural and economic dignity to all forms of labor."
+  },
+  {
+    "id": "spk_c1_10",
+    "university_id": "ankara",
+    "target_university": "Ankara Üniversitesi",
+    "level": "C1",
+    "title": "Sovereignty and International Law in the Era of Autonomous Weapons",
+    "topic": "International Humanitarian Law & Military AI",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Yapay zeka kontrollü otonom silah sistemlerinin (ölümcül İHA'lar vb.) uluslararası savaş hukuku ve ahlaki sorumluluk açısından yarattığı krizleri irdeleyin.",
+    "prompt_en": "Lethal Autonomous Weapons Systems (LAWS) capable of selecting and engaging targets without human intervention challenge the tenets of international humanitarian law. Analyze the moral and legal voids created when the decision to take human life is delegated to algorithms.",
+    "guiding_questions": [
+      "How do autonomous weapons violate the Geneva Convention principles of distinction and proportionality?",
+      "Who bears legal criminal responsibility when an autonomous drone commits a war crime?",
+      "Why is an international ban on algorithmic lethal systems urgent for global security?"
+    ],
+    "key_vocabulary": [
+      "autonomous weapons",
+      "international humanitarian law",
+      "proportionality",
+      "moral accountability",
+      "Geneva Convention"
+    ],
+    "model_answer_transcript": "The proliferation of Lethal Autonomous Weapon Systems represents an unprecedented abdication of human moral responsibility in the conduct of warfare. Core tenets of international humanitarian law, particularly the Geneva Conventions, mandate that combatants exercise nuanced qualitative judgment regarding the principles of distinction between civilians and soldiers, and the proportionality of collateral damage. Algorithms, operating via probabilistic pattern recognition, are structurally incapable of comprehending the tragic gravity of taking human life or evaluating complex ethical battlefield contexts. Furthermore, autonomous lethal systems introduce an insoluble legal vacuum: when an algorithm mistakenly massacres civilians, does criminal culpability rest upon the software engineer, the commanding officer, or the hardware manufacturer? Delegating the sovereign power of life and death to automated code strips human existence of intrinsic dignity, demanding a comprehensive multilateral ban akin to international prohibitions on chemical and biological weaponry."
+  },
+  {
+    "id": "spk_c2_03",
+    "university_id": "boun",
+    "target_university": "Boğaziçi Üniversitesi BUEPT",
+    "level": "C2",
+    "title": "Hermeneutic Circle and the Problem of Intersubjectivity",
+    "topic": "Epistemology, Language & Literary Hermeneutics",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Hermeneutik döngü (parça-bütün ilişkisi) ve dilde anlamın öznelerarası kuruluşu üzerine üst düzey felsefi değerlendirme yapın.",
+    "prompt_en": "Hans-Georg Gadamer articulated that all interpretation is historically situated within a 'fusion of horizons' and mediated by the hermeneutic circle. Critically analyze whether objective semantic textual truth is achievable, or whether meaning is perpetually re-inscribed by the interpreter's historical prejudices.",
+    "guiding_questions": [
+      "How does the circular relationship between the textual part and the thematic whole problematize linear positivism?",
+      "Can historical prejudice (Vorurteil) be acknowledged as an enabling condition of understanding rather than an obstacle?",
+      "What are the consequences of Gadamer's hermeneutics for constitutional and legal jurisprudence?"
+    ],
+    "key_vocabulary": [
+      "hermeneutic circle",
+      "fusion of horizons",
+      "intersubjectivity",
+      "historical situatedness",
+      "Vorurteil"
+    ],
+    "model_answer_transcript": "Gadamer's philosophical hermeneutics shatters the Enlightenment illusion that an interpreter can achieve detached, Cartesian objectivity toward a textual artifact. In Truth and Method, Gadamer demonstrates that understanding is not a reproductive act of reconstructing an author's original psychological intent, but rather a productive 'fusion of horizons' wherein the historical horizon of the text encounters the living horizon of the interpreter. The hermeneutic circle—the reciprocal movement whereby the individual parts of a text can only be comprehended through the whole, and the whole only through its constituent parts—proves that understanding is fundamentally ontological and temporally situated. Prejudices, far from being epistemic defects, serve as the indispensable linguistic fore-structures through which meaning is initially accessed. Consequently, meaning is not an immutable museum piece awaiting passive retrieval, but a dynamic, dialogical event that is continuously renegotiated within the evolving stream of history."
+  },
+  {
+    "id": "spk_c2_04",
+    "university_id": "metu",
+    "target_university": "Orta Doğu Teknik Üniversitesi ODTÜ",
+    "level": "C2",
+    "title": "The Posthuman Condition and the Ontological Dissolution of the Subject",
+    "topic": "Posthumanism & Critical Theory",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Hümanizmin merkezindeki 'insan öznesi' kavramının yapay zeka, sibernetik ve antroposen çağında yapısöküme uğramasını tartışın.",
+    "prompt_en": "Critical posthumanist thinkers like Rosi Braidotti and Donna Haraway argue that the classical humanist ideal of 'Man' as the universal measure of all things was an exclusionary, anthropocentric construct. Evaluate the philosophical implications of decentering the human subject in contemporary sociotechnical systems.",
+    "guiding_questions": [
+      "How does the Anthropocene demonstrate the catastrophic limitations of anthropocentric mastery over non-human nature?",
+      "In what ways does the cyborg boundary-blurring dissolve Cartesian dualisms between mind and matter, organism and machine?",
+      "What relational ethics emerges when non-human and algorithmic actors are granted ecological agency?"
+    ],
+    "key_vocabulary": [
+      "posthumanism",
+      "anthropocentrism",
+      "ontological dissolution",
+      "cyborg feminism",
+      "relational ethics"
+    ],
+    "model_answer_transcript": "The accelerating convergence of ecological collapse, synthetic biology, and autonomous cognitive architectures has made the traditional humanist paradigm untenable. Classical humanism, inaugurated during the European Renaissance, constructed an idealized, eurocentric subject that derived its ontological sovereignty through the domination of women, indigenous populations, and the natural world. Donna Haraway's cyborg manifesto and contemporary posthumanist philosophies radically disrupt these entrenched Cartesian dualisms—dissolving the rigid bifurcations separating nature from culture, organism from mechanism, and human from non-human. In the Anthropocene, human survival demands abandoning the hubristic posture of autonomous planetary stewards. We must cultivate a non-hierarchical, relational materialism that recognizes our radical entanglement within complex bio-digital ecosystems where agency is shared across human, animal, and algorithmic assemblages."
+  },
+  {
+    "id": "spk_c2_05",
+    "university_id": "bilkent",
+    "target_university": "Bilkent Üniversitesi COPE",
+    "level": "C2",
+    "title": "Aesthetic Autonomy and the Critique of Instrumental Reason",
+    "topic": "Frankfurt School Critical Theory & Aesthetics",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Theodor Adorno'nun 'Kültür Endüstrisi' ve sanatın özerkliği tezini, modern algoritmik tüketim kültürü bağlamında değerlendirin.",
+    "prompt_en": "Theodor W. Adorno contended in 'Aesthetic Theory' that authentic art derives its critical power from its radical non-identity and refusal to be instrumentalized by capitalist commodity exchange. Assess whether autonomous art can survive within today's hyper-algorithmic culture industry.",
+    "guiding_questions": [
+      "How does algorithmic content generation reduce aesthetic expression to industrialized mass amusement?",
+      "Why did Adorno see autonomous aesthetic dissonance as a vital sanctuary against totalitarian commodification?",
+      "Can subversive counter-cultural art exist when subversion itself is instantly monetized as a brand aesthetic?"
+    ],
+    "key_vocabulary": [
+      "aesthetic autonomy",
+      "instrumental reason",
+      "culture industry",
+      "non-identity",
+      "Adorno"
+    ],
+    "model_answer_transcript": "Theodor Adorno’s searing critique of the culture industry acquires prophetic diagnostic power in the era of streaming platforms and generative artificial intelligence. Adorno observed that late capitalism eradicates the transcendent, negative capability of genuine art by subordinating all creative labor to the imperatives of instrumental reason and market exchangeability. In our hyper-curated digital reality, algorithms optimize artistic production for immediate dopamine gratification and frictionless consumable familiarity, neutralizing the destabilizing aesthetic shock that authentic modernism once inflicted on bourgeois complacency. When autonomous art is transformed into algorithmic 'content', its dissonant resistance is commodified into anodyne lifestyle signifiers. Yet, as Adorno insisted, the dialectical survival of art resides precisely in its refusal of utilitarian functionality. True artistic autonomy endures only by sustaining an intractable, enigmatic refusal to harmonize with the demands of totalizing commodification."
+  },
+  {
+    "id": "spk_c2_06",
+    "university_id": "koc",
+    "target_university": "Koç Üniversitesi KUEPE",
+    "level": "C2",
+    "title": "Biopolitics, Necropolitics, and Sovereign Power in Modern Border Regimes",
+    "topic": "Political Philosophy & Sovereignty",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Michel Foucault'nun Biyopolitika ve Achille Mbembe'nin Nekropolitika kavramlarını çağdaş küresel mülteci krizleri üzerinden analiz edin.",
+    "prompt_en": "Michel Foucault conceptualized modern governance as 'biopolitics'—the management, optimization, and control of life. Achille Mbembe extended this through 'necropolitics,' arguing that ultimate sovereign power resides in dictating who is allowed to live and who is exposed to death. Evaluate this dialectic through the lens of contemporary Mediterranean border regimes.",
+    "guiding_questions": [
+      "How do militarized maritime borders create zones of legal exception where basic human rights are suspended?",
+      "In what manner does the sovereign state differentiate between productive populations and expendable bodies?",
+      "How does necropolitical bordering challenge the universalist rhetoric of international human rights conventions?"
+    ],
+    "key_vocabulary": [
+      "biopolitics",
+      "necropolitics",
+      "sovereign power",
+      "state of exception",
+      "Agamben"
+    ],
+    "model_answer_transcript": "The architectural reality of contemporary global border enforcement exposes the stark limitations of Foucault’s biopolitical model, requiring Mbembe’s framework of necropolitics to fully illuminate state sovereignty. Foucault accurately recognized that modern administrative states exercise power through the regulatory optimization of biological populations—maximizing health, fertility, and economic productivity. However, as Achille Mbembe contends, the darker corollary of this biopolitical management of internal life is the necropolitical exposure of externalized, racialized populations to structural death. The militarized maritime boundaries of the Mediterranean and Aegean seas operate precisely as contemporary 'spaces of exception,' where international maritime conventions regarding rescue at sea are systematically suspended. By externalizing borders through maritime interceptors and detention camps in North Africa, sovereign powers determine not merely who may cross, but who is left to drown in liminal jurisdictional voids. This necropolitical reality reveals that state sovereignty continues to derive its most lethal authority from the prerogative to designate expendable human life."
+  },
+  {
+    "id": "spk_c2_07",
+    "university_id": "sabanci",
+    "target_university": "Sabancı Üniversitesi ELAE",
+    "level": "C2",
+    "title": "Epistemic Injustice and the Colonization of Scientific Knowledge",
+    "topic": "Philosophy of Science & Epistemic Justice",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Miranda Fricker'ın 'Epistemik Adaletsizlik' kavramını (Tanıklık ve Yorumbilimsel Adaletsizlik) bilimsel bilgi hiyerarşileri bağlamında tartışın.",
+    "prompt_en": "Miranda Fricker conceptualized 'epistemic injustice' as wrong done to someone specifically in their capacity as a knower, identifying testimonial injustice and hermeneutical injustice. Critically evaluate how Western Eurocentric scientific paradigms historically marginalized indigenous knowledge systems, and assess paths toward epistemic decolonization.",
+    "guiding_questions": [
+      "How does testimonial injustice devalue non-Western scientific observations due to systemic racial and cultural prejudice?",
+      "What is hermeneutical injustice when marginalized groups lack the conceptual tools to render their social realities intelligible to dominant institutions?",
+      "Can scientific universalism be reconciled with epistemic pluralism without degenerating into uncritical relativism?"
+    ],
+    "key_vocabulary": [
+      "epistemic injustice",
+      "testimonial injustice",
+      "hermeneutical injustice",
+      "epistemic decolonization",
+      "Miranda Fricker"
+    ],
+    "model_answer_transcript": "Miranda Fricker’s paradigm of epistemic injustice provides a profound critical apparatus for deconstructing how systemic societal prejudice corrupts the very production and validation of knowledge. Fricker illuminates two pervasive mechanisms: testimonial injustice, wherein prejudice causes a hearer to assign a deflated level of credibility to a speaker's word, and hermeneutical injustice, where a structural gap in collective interpretive resources disadvantages marginalized groups from understanding or articulating their lived experiences. In the history of science, Western colonial paradigms systematically enacted epistemic violence by classifying non-Western, indigenous ecological and medicinal knowledge as primitive superstition rather than empirical observation. Reconciling scientific universalism with epistemic decolonization does not necessitate succumbing to anti-rationalist relativism; rather, it demands cultivating epistemic humility and dismantling institutional cartels so that diverse empirical methodologies can contribute to a genuinely pluralistic, globally accountable scientific inquiry."
+  },
+  {
+    "id": "spk_c2_08",
+    "university_id": "ankara",
+    "target_university": "Ankara Üniversitesi",
+    "level": "C2",
+    "title": "The Teleological Illusion and the Contingency of Evolutionary Biology",
+    "topic": "Evolutionary Theory & Philosophy of Biology",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Stephen Jay Gould'un evrimsel olumsallık (contingency) tezi ile evrimin kaçınılmaz bir ilerleme olduğu yönündeki ereksel (teleolojik) yanılsamayı çürütün.",
+    "prompt_en": "Stephen Jay Gould famously posited the metaphor of 'replaying life's tape,' arguing that if the tape of evolutionary history were rewound to the Burgess Shale and replayed, the emergence of human-like intelligence would be overwhelmingly improbable. Deconstruct the persistent teleological illusion that evolution is a directional ladder of inevitable progress toward conscious complexity.",
+    "guiding_questions": [
+      "Why is natural selection an opportunistic, non-teleological mechanism rather than a premeditated cosmic design?",
+      "How do catastrophic mass extinction events demonstrate the radical contingency of phylogenetic survival?",
+      "What existential humility arises when humanity is recognized not as evolution's pinnacle, but as an incidental evolutionary twig?"
+    ],
+    "key_vocabulary": [
+      "teleological illusion",
+      "evolutionary contingency",
+      "Stephen Jay Gould",
+      "Burgess Shale",
+      "phylogenetic"
+    ],
+    "model_answer_transcript": "The human mind exhibits an intractable psychological proclivity toward teleology—the persistent illusion that natural processes unfold toward a predetermined cosmic apex. In the popular imagination, evolutionary biology is persistently caricatured as an ascending escalator of progress, climbing inexorably from primitive bacteria toward the crowning culmination of human consciousness. Stephen Jay Gould’s seminal analysis of the Cambrian Burgess Shale fossils decisively refutes this anthropocentric myth through the concept of radical historical contingency. Natural selection is an opportunistic, myopic filter adapted solely to localized ecological pressures, entirely devoid of foresight or grand architecture. Mass extinction events, such as the Cretaceous asteroid impact, wiped out dominant dinosaurian lineages not because of morphological inferiority, but through random geophysical catastrophe, clearing ecological space for previously marginal mammalian forms. Replaying life's evolutionary tape would diverge along millions of alternative trajectories in which Homo sapiens would never materialize, restoring profound existential humility to our ecological self-understanding."
+  },
+  {
+    "id": "spk_c2_09",
+    "university_id": "hacettepe",
+    "target_university": "Hacettepe Üniversitesi",
+    "level": "C2",
+    "title": "Linguistic Relativity, Structuralism, and the Limits of Expressibility",
+    "topic": "Linguistics, Semiotics & Philosophy of Language",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Sapir-Whorf hipotezi (Linguistic Relativity) ve Saussure'ün göstergebilim kuramını, dilin düşünceyi sınırlama gücü üzerinden değerlendirin.",
+    "prompt_en": "Ludwig Wittgenstein famously proclaimed, 'The limits of my language mean the limits of my world.' Synthesize the Sapir-Whorf hypothesis of linguistic relativity with Saussurean structural semiotics to evaluate whether human thought is fundamentally constrained by linguistic syntax and lexicon.",
+    "guiding_questions": [
+      "To what extent does grammatical structure shape spatial and temporal cognitive perceptions across cultures?",
+      "How does Ferdinand de Saussure’s concept of the arbitrary signifier and differential meaning demonstrate that reality is mediated by language?",
+      "Can non-linguistic mental states (e.g. musical perception or spatial mathematics) transcend lexical boundaries?"
+    ],
+    "key_vocabulary": [
+      "linguistic relativity",
+      "Sapir-Whorf hypothesis",
+      "Saussurean semiotics",
+      "Wittgenstein",
+      "differential meaning"
+    ],
+    "model_answer_transcript": "The axiom that language is merely an external packaging for preexisting, universal mental thoughts has been repeatedly dismantled by structural semiotics and cognitive linguistics. Ferdinand de Saussure demonstrated that language is a self-referential system of differential signs; an arbitrary signifier derives meaning not from an intrinsic correspondence to physical reality, but from its negative contrast with other signs within the linguistic web. Extending this insight, the Sapir-Whorf hypothesis of linguistic relativity posits that the specific syntactical structures and lexical taxonomies of a speaker’s native tongue subtly organize their sensory perception of time, space, and causality. When Wittgenstein asserted that the limits of language delineate the limits of one's world, he illuminated that philosophical problems frequently dissolve into grammatical boundary confusions. While non-verbal sensory cognition demonstrates that consciousness is not wholly reducible to syntax, the conceptual architecture through which humans deliberate, philosophize, and institutionalize reality remains inextricably structured by the horizons of language."
+  },
+  {
+    "id": "spk_c2_10",
+    "university_id": "general",
+    "target_university": "Genel Hazırlık & CEFR C2",
+    "level": "C2",
+    "title": "The Epistemology of Scientific Paradigms and Incommensurability",
+    "topic": "Philosophy of Science & Thomas Kuhn",
+    "prep_time_seconds": 60,
+    "speak_time_seconds": 120,
+    "instructions_tr": "Thomas Kuhn'un 'Bilimsel Devrimlerin Yapısı' ve paradigmaların eş-ölçülemezliği (incommensurability) tezini değerlendirin.",
+    "prompt_en": "In 'The Structure of Scientific Revolutions,' Thomas Kuhn challenged the cumulative, linear view of scientific progress, arguing that major breakthroughs represent discontinuous paradigm shifts characterized by incommensurability. Critically assess whether scientific theories progressively approximate objective truth, or merely replace one worldview with another.",
+    "guiding_questions": [
+      "How does 'normal science' operate as puzzle-solving within rigid dogmatic disciplinary matrices?",
+      "What precipitates a crisis phase when empirical anomalies can no longer be accommodated within an existing paradigm?",
+      "Does incommensurability mean that Einsteinian mechanics is not 'closer to truth' than Newtonian physics, but conceptually incompatible?"
+    ],
+    "key_vocabulary": [
+      "paradigm shift",
+      "incommensurability",
+      "Thomas Kuhn",
+      "normal science",
+      "scientific revolutions"
+    ],
+    "model_answer_transcript": "Thomas Kuhn's 'The Structure of Scientific Revolutions' permanently disrupted the triumphalist narrative that scientific progress represents a continuous, incremental accretion of objective facts. Kuhn demonstrated that scientific activity predominantly proceeds as 'normal science'—a highly dogmatic puzzle-solving exercise conducted within an unexamined disciplinary matrix or paradigm. Only when irreconcilable anomalies accumulate beyond the explanatory capacity of the prevailing paradigm does the discipline enter a crisis phase, culminating in a revolutionary paradigm shift. Crucially, Kuhn asserted that rival paradigms—such as Aristotelian, Newtonian, and relativistic physics—are incommensurable: they utilize identical terms with divergent semantic contents and evaluate evidence through distinct observational instruments. Consequently, scientists on opposite sides of a revolutionary shift operate in conceptually different worlds. While this insight cautions against naive scientific realism, it does not imply radical irrationalism; rather, it underscores that scientific truth is an evolving, historically mediated enterprise whose heuristic power deepens across revolutionary transformations."
   }
 ]

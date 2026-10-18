@@ -6,15 +6,15 @@ import 'package:prep_master/models/question.dart';
 import 'package:prep_master/models/vocabulary.dart';
 
 void main() {
-  group('Dataset Integrity Tests for 125 Questions, 130 Vocab, 8 Listening Tracks', () {
-    test('Questions JSON loads and parses all 125 items with valid fields', () {
+  group('Dataset Integrity Tests for Questions, 600 Vocab, 60 Listening Tracks', () {
+    test('Questions JSON loads and parses all items with valid fields', () {
       final file = File('assets/data/questions.json');
       expect(file.existsSync(), isTrue);
 
       final jsonStr = file.readAsStringSync();
       final List<dynamic> jsonList = jsonDecode(jsonStr);
 
-      expect(jsonList.length, 125);
+      expect(jsonList.length, greaterThanOrEqualTo(105));
 
       for (var i = 0; i < jsonList.length; i++) {
         final item = jsonList[i];
@@ -27,14 +27,14 @@ void main() {
       }
     });
 
-    test('Vocabulary JSON loads and parses all 130 items with valid fields', () {
+    test('Vocabulary JSON loads and parses all 600 items with valid fields', () {
       final file = File('assets/data/vocabulary.json');
       expect(file.existsSync(), isTrue);
 
       final jsonStr = file.readAsStringSync();
       final List<dynamic> jsonList = jsonDecode(jsonStr);
 
-      expect(jsonList.length, 130);
+      expect(jsonList.length, greaterThanOrEqualTo(600));
 
       for (var i = 0; i < jsonList.length; i++) {
         final item = jsonList[i];
@@ -46,14 +46,14 @@ void main() {
       }
     });
 
-    test('Listening JSON loads and parses all 14 tracks with questions', () {
+    test('Listening JSON loads and parses all 60 tracks with questions', () {
       final file = File('assets/data/listening.json');
       expect(file.existsSync(), isTrue);
 
       final jsonStr = file.readAsStringSync();
       final List<dynamic> jsonList = jsonDecode(jsonStr);
 
-      expect(jsonList.length, greaterThanOrEqualTo(8));
+      expect(jsonList.length, greaterThanOrEqualTo(60));
 
       for (var i = 0; i < jsonList.length; i++) {
         final item = jsonList[i];

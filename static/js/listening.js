@@ -25,7 +25,7 @@ async function loadListeningHub(targetLevel = null) {
 
   // Render Level Filter Bar
   if (filterBar) {
-    const levels = ['A2', 'B1', 'B2', 'C1', 'C2'];
+    const levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
     filterBar.innerHTML = `
       <span class="text-xs font-bold text-slate-500 mr-2 flex items-center gap-1">
         <i data-lucide="filter" class="w-3.5 h-3.5"></i> Kur Filtresi:

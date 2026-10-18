@@ -110,7 +110,7 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
-                      children: ['A2', 'B1', 'B2', 'C1', 'C2', 'all'].map((lvl) {
+                      children: ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'all'].map((lvl) {
                         final isSel = _selectedLevel == lvl;
                         return Padding(
                           padding: const EdgeInsets.only(right: 8),

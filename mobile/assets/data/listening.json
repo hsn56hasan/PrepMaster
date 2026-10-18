@@ -1476,5 +1476,3223 @@
         "explanation_tr": "Kuantum anahtar dağıtımı (QKD), Heisenberg belirsizlik ilkesi ve kuantum klonlanamazlık teoremi sayesinde dinleme girişiminde dalga fonksiyonunun çökmesini sağlayarak izinsiz erişimi anında tespit eder."
       }
     ]
+  },
+  {
+    "id": "lis_a1_01",
+    "university_id": "ankara",
+    "level": "A1",
+    "type": "while_listening",
+    "title": "Welcome to the University Library",
+    "subtitle": "Ankara Üniversitesi Kütüphane Oryantasyonu",
+    "target_university": "Ankara Üniversitesi",
+    "duration_minutes": 5,
+    "lecture_duration_seconds": 65,
+    "instructions_tr": "Kütüphanecinin konuşmasını dinlerken soruları yanıtlayınız (While-Listening).",
+    "audio_script": "Good morning and welcome to the central library. Our library is open from eight o'clock in the morning until nine o'clock at night on weekdays. On weekends, we open at ten o'clock. First-year students can borrow up to five books for two weeks. Please remember that food and open drinks are strictly forbidden inside the study rooms. However, you can bring a closed water bottle. If you need a computer for your research, they are located on the second floor next to the reference desk. Enjoy your study time.",
+    "suggested_notes_tr": [
+      "Hafta içi saatler: 08:00 - 21:00",
+      "Hafta sonu açılış: 10:00",
+      "Ödünç kitap kotası: 5 kitap / 2 hafta",
+      "Yiyecek/içecek kuralı: Sadece kapalı su serbest",
+      "Bilgisayarlar: 2. kat, danışma yanı"
+    ],
+    "questions": [
+      {
+        "id": "lis_a1_01_q1",
+        "question": "What time does the library open on Saturday and Sunday?",
+        "options": [
+          {
+            "key": "A",
+            "text": "At 8:00 AM"
+          },
+          {
+            "key": "B",
+            "text": "At 9:00 AM"
+          },
+          {
+            "key": "C",
+            "text": "At 10:00 AM"
+          },
+          {
+            "key": "D",
+            "text": "At 12:00 PM"
+          }
+        ],
+        "correct_answer": "C",
+        "explanation_tr": "Metinde 'On weekends, we open at ten o'clock' denilerek hafta sonu saat 10:00'da açıldığı belirtilmiştir."
+      },
+      {
+        "id": "lis_a1_01_q2",
+        "question": "How many books can a first-year student borrow at one time?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Three books"
+          },
+          {
+            "key": "B",
+            "text": "Five books"
+          },
+          {
+            "key": "C",
+            "text": "Seven books"
+          },
+          {
+            "key": "D",
+            "text": "Ten books"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'First-year students can borrow up to five books for two weeks' ifadesi geçmektedir."
+      },
+      {
+        "id": "lis_a1_01_q3",
+        "question": "Where are the research computers located?",
+        "options": [
+          {
+            "key": "A",
+            "text": "In the cafeteria"
+          },
+          {
+            "key": "B",
+            "text": "On the ground floor entrance"
+          },
+          {
+            "key": "C",
+            "text": "On the second floor near the reference desk"
+          },
+          {
+            "key": "D",
+            "text": "In the outdoor garden"
+          }
+        ],
+        "correct_answer": "C",
+        "explanation_tr": "Bilgisayarların 2. katta danışmanın (reference desk) yanında olduğu söylenmiştir."
+      }
+    ]
+  },
+  {
+    "id": "lis_a1_02",
+    "university_id": "hacettepe",
+    "level": "A1",
+    "type": "while_listening",
+    "title": "First Day at Preparatory English School",
+    "subtitle": "Hacettepe YDYO Bilgilendirme Konuşması",
+    "target_university": "Hacettepe Üniversitesi",
+    "duration_minutes": 5,
+    "lecture_duration_seconds": 60,
+    "instructions_tr": "Ders saatleri ve kurallara ilişkin bilgilendirmeyi dinleyip soruları cevaplayınız.",
+    "audio_script": "Hello students, my name is Sarah Jenkins, and I am your English preparatory instructor. Our classes meet every Monday, Tuesday, and Thursday from nine to twelve. On Wednesdays, we have vocabulary workshops in the language lab. Regular attendance is very important. If you miss more than twenty percent of classes, you cannot take the final level exam. Please purchase your coursebook from the university bookstore before next Monday. Have a wonderful semester.",
+    "suggested_notes_tr": [
+      "Ders günleri: Pazartesi, Salı, Perşembe (09:00-12:00)",
+      "Çarşamba: Dil laboratuvarında kelime atölyesi",
+      "Devamsızlık sınırı: %20'yi aşarsa sınava girilemez",
+      "Ders kitabı: Kampüs kitabevinden alınmalı"
+    ],
+    "questions": [
+      {
+        "id": "lis_a1_02_q1",
+        "question": "What activity takes place on Wednesdays?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Grammar tests in the cafeteria"
+          },
+          {
+            "key": "B",
+            "text": "Vocabulary workshops in the language lab"
+          },
+          {
+            "key": "C",
+            "text": "Sports competitions"
+          },
+          {
+            "key": "D",
+            "text": "Independent reading at home"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Metinde 'On Wednesdays, we have vocabulary workshops in the language lab' denmektedir."
+      },
+      {
+        "id": "lis_a1_02_q2",
+        "question": "What happens if a student misses more than 20 percent of classes?",
+        "options": [
+          {
+            "key": "A",
+            "text": "They receive extra homework"
+          },
+          {
+            "key": "B",
+            "text": "They must change their department"
+          },
+          {
+            "key": "C",
+            "text": "They cannot take the final level exam"
+          },
+          {
+            "key": "D",
+            "text": "They pay an administrative fine"
+          }
+        ],
+        "correct_answer": "C",
+        "explanation_tr": "'If you miss more than twenty percent of classes, you cannot take the final level exam' denilmiştir."
+      }
+    ]
+  },
+  {
+    "id": "lis_a1_03",
+    "university_id": "gazi",
+    "level": "A1",
+    "type": "while_listening",
+    "title": "Ordering Lunch at the Student Dining Hall",
+    "subtitle": "Kampüs Yemekhanesi Diyaloğu",
+    "target_university": "Gazi Üniversitesi",
+    "duration_minutes": 5,
+    "lecture_duration_seconds": 55,
+    "instructions_tr": "Öğrenci ile yemekhane görevlisi arasındaki diyaloğu dinleyin.",
+    "audio_script": "Worker: Hello, what would you like for lunch today? Student: Hi! Could I have the lentil soup and the grilled chicken, please? Worker: Certainly. Would you prefer rice or pasta as a side dish? Student: Rice, please. Worker: And would you like a bottle of mineral water or orange juice? Student: Just water, thank you. How much is the meal? Worker: With your student ID card, the lunch menu is thirty liras. Student: Here is my card. Thank you very much.",
+    "suggested_notes_tr": [
+      "Seçilen yemekler: Mercimek çorbası, ızgara tavuk, pilav",
+      "İçecek: Su",
+      "Öğrenci kartı ile menü fiyatı: 30 TL"
+    ],
+    "questions": [
+      {
+        "id": "lis_a1_03_q1",
+        "question": "Which side dish did the student choose?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Mashed potatoes"
+          },
+          {
+            "key": "B",
+            "text": "Rice"
+          },
+          {
+            "key": "C",
+            "text": "Pasta"
+          },
+          {
+            "key": "D",
+            "text": "Mixed salad"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Öğrenci açıkça 'Rice, please' cevabını vermiştir."
+      },
+      {
+        "id": "lis_a1_03_q2",
+        "question": "How much does the lunch menu cost with a student ID?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Twenty liras"
+          },
+          {
+            "key": "B",
+            "text": "Thirty liras"
+          },
+          {
+            "key": "C",
+            "text": "Fifty liras"
+          },
+          {
+            "key": "D",
+            "text": "Free of charge"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Görevli 'With your student ID card, the lunch menu is thirty liras' demiştir."
+      }
+    ]
+  },
+  {
+    "id": "lis_a1_04",
+    "university_id": "ege",
+    "level": "A1",
+    "type": "while_listening",
+    "title": "Campus Transportation and Bus Services",
+    "subtitle": "Ege Üniversitesi Kampüs Ulaşımı",
+    "target_university": "Ege Üniversitesi",
+    "duration_minutes": 5,
+    "lecture_duration_seconds": 60,
+    "instructions_tr": "Kampüs içi ring seferleri duyurusunu dinleyip soruları işaretleyiniz.",
+    "audio_script": "Attention all students. The free campus shuttle bus departs from the metro station every ten minutes between eight in the morning and six in the evening. The bus stops at the Faculty of Medicine, the sports arena, and the preparatory language school. After six o'clock, buses run every twenty minutes until ten at night. Please show your student transport card to the driver when boarding. Bicycles are also welcome on campus bike lanes.",
+    "suggested_notes_tr": [
+      "Ring servisleri: 08:00 - 18:00 arası her 10 dakikada bir",
+      "18:00 sonrası: Her 20 dakikada bir (22:00'ye kadar)",
+      "Duraklar: Tıp Fakültesi, Spor Salonu, Yabancı Diller Hazırlık",
+      "Ücretsiz ve bisiklet yolları mevcut"
+    ],
+    "questions": [
+      {
+        "id": "lis_a1_04_q1",
+        "question": "How frequently do shuttle buses depart during the morning peak hours?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Every five minutes"
+          },
+          {
+            "key": "B",
+            "text": "Every ten minutes"
+          },
+          {
+            "key": "C",
+            "text": "Every half hour"
+          },
+          {
+            "key": "D",
+            "text": "Once an hour"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Metinde 'every ten minutes between eight in the morning and six in the evening' denilmektedir."
+      },
+      {
+        "id": "lis_a1_04_q2",
+        "question": "What is required when boarding the free campus bus?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Cash ticket"
+          },
+          {
+            "key": "B",
+            "text": "Student transport card"
+          },
+          {
+            "key": "C",
+            "text": "Passport"
+          },
+          {
+            "key": "D",
+            "text": "Library membership form"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'Please show your student transport card to the driver' ifadesi yer almaktadır."
+      }
+    ]
+  },
+  {
+    "id": "lis_a1_05",
+    "university_id": "ytu",
+    "level": "A1",
+    "type": "while_listening",
+    "title": "Joining Student Clubs and Societies",
+    "subtitle": "YTÜ Kulüpler Birliği Tanıtımı",
+    "target_university": "Yıldız Teknik Üniversitesi",
+    "duration_minutes": 5,
+    "lecture_duration_seconds": 60,
+    "instructions_tr": "Öğrenci kulüpleri festivali duyurusunu dinleyip soruları cevaplayın.",
+    "audio_script": "Welcome new freshmen! Today is Club Day at the student center. There are over forty active student clubs on campus, including the robotics club, the photography society, and the outdoor mountaineering club. Joining a club is free for all enrolled students. Visit the registration booths in the central courtyard before four o'clock today to sign up. Members meet every Tuesday evening for workshops and events.",
+    "suggested_notes_tr": [
+      "Kulüp sayısı: 40'tan fazla aktif kulüp",
+      "Örnek kulüpler: Robotik, Fotoğrafçılık, Dağcılık",
+      "Ücret: Tüm kayıtlı öğrencilere ücretsiz",
+      "Kayıt son saat: Bugün 16:00'ya kadar orta avluda"
+    ],
+    "questions": [
+      {
+        "id": "lis_a1_05_q1",
+        "question": "How much does it cost for enrolled students to join a club?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Fifty liras per month"
+          },
+          {
+            "key": "B",
+            "text": "One hundred liras annually"
+          },
+          {
+            "key": "C",
+            "text": "It is completely free"
+          },
+          {
+            "key": "D",
+            "text": "Only senior students can join"
+          }
+        ],
+        "correct_answer": "C",
+        "explanation_tr": "'Joining a club is free for all enrolled students' cümlesi kulüplerin tamamen ücretsiz olduğunu belirtir."
+      },
+      {
+        "id": "lis_a1_05_q2",
+        "question": "What time do registration booths close today?",
+        "options": [
+          {
+            "key": "A",
+            "text": "At 2:00 PM"
+          },
+          {
+            "key": "B",
+            "text": "At 4:00 PM"
+          },
+          {
+            "key": "C",
+            "text": "At 6:00 PM"
+          },
+          {
+            "key": "D",
+            "text": "At midnight"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'before four o'clock today' denilerek saat 16:00'da kapanacağı söylenmiştir."
+      }
+    ]
+  },
+  {
+    "id": "lis_a1_06",
+    "university_id": "general",
+    "level": "A1",
+    "type": "while_listening",
+    "title": "Finding Books in the Campus Bookstore",
+    "subtitle": "Kitabevi Alışveriş Diyaloğu",
+    "target_university": "Genel Hazırlık & CEFR A1",
+    "duration_minutes": 5,
+    "lecture_duration_seconds": 55,
+    "instructions_tr": "Kitabevindeki konuşmayı dinleyerek soruları yanıtlayın.",
+    "audio_script": "Clerk: Good afternoon, can I help you find something? Student: Yes, please. I am looking for the English Grammar in Use textbook for level A1. Clerk: Certainly. That textbook is on shelf number four, under the language learning section. We also have workbook editions with audio CDs. Student: Does the book include online practice tests? Clerk: Yes, there is an access code inside the front cover. Student: Wonderful, I will take it.",
+    "suggested_notes_tr": [
+      "Aranan kitap: English Grammar in Use (A1)",
+      "Konum: 4 numaralı raf, dil öğrenimi bölümü",
+      "Özellik: Ön kapakta online deneme testleri erişim kodu var"
+    ],
+    "questions": [
+      {
+        "id": "lis_a1_06_q1",
+        "question": "On which shelf is the grammar textbook located?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Shelf number two"
+          },
+          {
+            "key": "B",
+            "text": "Shelf number four"
+          },
+          {
+            "key": "C",
+            "text": "Shelf number seven"
+          },
+          {
+            "key": "D",
+            "text": "Behind the cash register"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Görevli 'That textbook is on shelf number four' demiştir."
+      },
+      {
+        "id": "lis_a1_06_q2",
+        "question": "Where is the online practice test code found?",
+        "options": [
+          {
+            "key": "A",
+            "text": "On the sales receipt"
+          },
+          {
+            "key": "B",
+            "text": "On the bookstore website"
+          },
+          {
+            "key": "C",
+            "text": "Inside the front cover of the book"
+          },
+          {
+            "key": "D",
+            "text": "Sent by email"
+          }
+        ],
+        "correct_answer": "C",
+        "explanation_tr": "'there is an access code inside the front cover' bilgisi verilmiştir."
+      }
+    ]
+  },
+  {
+    "id": "lis_a1_07",
+    "university_id": "general",
+    "level": "A1",
+    "type": "while_listening",
+    "title": "Campus Health Center and Doctor Appointments",
+    "subtitle": "Sağlık Merkezi Bilgilendirmesi",
+    "target_university": "Genel Hazırlık & CEFR A1",
+    "duration_minutes": 5,
+    "lecture_duration_seconds": 60,
+    "instructions_tr": "Üniversite sağlık merkezi duyurusunu dinleyip soruları cevaplayın.",
+    "audio_script": "The student health center is located next to the main dormitory building. General medical doctors are available from nine in the morning until five in the afternoon without an appointment. If you need a dental checkup or eye examination, please book an appointment online through the student medical portal. In case of emergency after five o'clock, the campus ambulance service can be reached twenty-four hours a day by dialing extension 112.",
+    "suggested_notes_tr": [
+      "Konum: Ana yurt binasının yanı",
+      "Genel hekim saatleri: 09:00 - 17:00 (randevusuz muayene)",
+      "Diş / Göz: Portal üzerinden online randevu gerekir",
+      "Acil durum: 24 saat ambulans (Dahili 112)"
+    ],
+    "questions": [
+      {
+        "id": "lis_a1_07_q1",
+        "question": "When can students see a general doctor without an appointment?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Only on Monday mornings"
+          },
+          {
+            "key": "B",
+            "text": "Between 9:00 AM and 5:00 PM"
+          },
+          {
+            "key": "C",
+            "text": "After 8:00 PM"
+          },
+          {
+            "key": "D",
+            "text": "On Sunday afternoons"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'General medical doctors are available from nine in the morning until five in the afternoon without an appointment' denilmiştir."
+      },
+      {
+        "id": "lis_a1_07_q2",
+        "question": "How should students arrange a dental appointment?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Call the city hospital"
+          },
+          {
+            "key": "B",
+            "text": "Book online via the student portal"
+          },
+          {
+            "key": "C",
+            "text": "Ask their English instructor"
+          },
+          {
+            "key": "D",
+            "text": "Visit in person on weekends"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'please book an appointment online through the student medical portal' ifadesi geçer."
+      }
+    ]
+  },
+  {
+    "id": "lis_a1_08",
+    "university_id": "general",
+    "level": "A1",
+    "type": "while_listening",
+    "title": "Weather Forecast for Campus Sports Tournament",
+    "subtitle": "Hava Durumu ve Spor Etkinliği",
+    "target_university": "Genel Hazırlık & CEFR A1",
+    "duration_minutes": 5,
+    "lecture_duration_seconds": 55,
+    "instructions_tr": "Haftalık hava tahminini dinleyerek spor turnuvası programı sorularını yanıtlayın.",
+    "audio_script": "Here is the campus weather forecast for this week. Monday and Tuesday will be partly cloudy with pleasant temperatures around eighteen degrees Celsius. On Wednesday, expect heavy rain and cooler winds, so the outdoor football matches will be moved inside the gymnasium. Thursday and Friday will be warm and sunny, with temperatures climbing to twenty-four degrees. Perfect weather for the track and field championship on Friday afternoon.",
+    "suggested_notes_tr": [
+      "Pazartesi-Salı: Parçalı bulutlu, 18 derece",
+      "Çarşamba: Şiddetli yağmur, futbol kapalı spor salonuna alındı",
+      "Perşembe-Cuma: Güneşli ve 24 derece, Cuma atletizm şampiyonası"
+    ],
+    "questions": [
+      {
+        "id": "lis_a1_08_q1",
+        "question": "Why will the outdoor football matches be moved inside on Wednesday?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Due to extreme summer heat"
+          },
+          {
+            "key": "B",
+            "text": "Because of heavy rain and wind"
+          },
+          {
+            "key": "C",
+            "text": "The football field is under construction"
+          },
+          {
+            "key": "D",
+            "text": "Lack of referee availability"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'expect heavy rain and cooler winds, so the outdoor football matches will be moved inside' denilmiştir."
+      },
+      {
+        "id": "lis_a1_08_q2",
+        "question": "What is the expected temperature for Friday afternoon?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Ten degrees"
+          },
+          {
+            "key": "B",
+            "text": "Eighteen degrees"
+          },
+          {
+            "key": "C",
+            "text": "Twenty-four degrees"
+          },
+          {
+            "key": "D",
+            "text": "Thirty-five degrees"
+          }
+        ],
+        "correct_answer": "C",
+        "explanation_tr": "'temperatures climbing to twenty-four degrees' cümlesi yer almaktadır."
+      }
+    ]
+  },
+  {
+    "id": "lis_a1_09",
+    "university_id": "general",
+    "level": "A1",
+    "type": "while_listening",
+    "title": "Computer Lab Guidelines and Printing Rules",
+    "subtitle": "Bilgisayar Laboratuvarı ve Yazıcı Kuralları",
+    "target_university": "Genel Hazırlık & CEFR A1",
+    "duration_minutes": 5,
+    "lecture_duration_seconds": 60,
+    "instructions_tr": "Bilgisayar laboratuvarı kurallarını dinleyip soruları cevaplayın.",
+    "audio_script": "Welcome to the engineering computer lab. Before using any workstation, log in using your student email and password. Each student receives fifty free printed pages per month. If you exceed this quota, additional pages cost fifty kuruş each. Please do not save personal files on desktop computers; store your homework on USB flash drives or cloud storage, as all desktop computers reset automatically every night at midnight.",
+    "suggested_notes_tr": [
+      "Giriş: Öğrenci e-postası ve şifresi ile",
+      "Baskı kotası: Ayda 50 ücretsiz sayfa (sonrası 50 kuruş)",
+      "Dosya saklama: Masaüstüne kaydetmeyin (gece yarısı sıfırlanır), bulut veya USB kullanın"
+    ],
+    "questions": [
+      {
+        "id": "lis_a1_09_q1",
+        "question": "How many free printed pages does each student receive per month?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Ten pages"
+          },
+          {
+            "key": "B",
+            "text": "Twenty-five pages"
+          },
+          {
+            "key": "C",
+            "text": "Fifty pages"
+          },
+          {
+            "key": "D",
+            "text": "One hundred pages"
+          }
+        ],
+        "correct_answer": "C",
+        "explanation_tr": "'Each student receives fifty free printed pages per month' ifadesi geçmektedir."
+      },
+      {
+        "id": "lis_a1_09_q2",
+        "question": "Why should students avoid saving files directly on lab desktop computers?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Printers will reject the file format"
+          },
+          {
+            "key": "B",
+            "text": "Computers reset automatically at midnight"
+          },
+          {
+            "key": "C",
+            "text": "Internet access is restricted"
+          },
+          {
+            "key": "D",
+            "text": "The screens turn off during class"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'all desktop computers reset automatically every night at midnight' denilmiştir."
+      }
+    ]
+  },
+  {
+    "id": "lis_a1_10",
+    "university_id": "general",
+    "level": "A1",
+    "type": "while_listening",
+    "title": "Lost and Found Office Announcement",
+    "subtitle": "Kayıp Eşya Bürosu Anonsu",
+    "target_university": "Genel Hazırlık & CEFR A1",
+    "duration_minutes": 5,
+    "lecture_duration_seconds": 55,
+    "instructions_tr": "Kayıp eşya bürosu duyurusunu dinleyerek soruları yanıtlayın.",
+    "audio_script": "This is an announcement from the campus security office. A black leather backpack containing a student notebook and silver laptop was found in lecture hall B yesterday afternoon. If you are the owner of this bag, please come to the lost and found office in building three. Bring your official student ID card to claim your belongings. The office is open from eight in the morning until four in the afternoon.",
+    "suggested_notes_tr": [
+      "Bulunan eşya: Siyah deri sırt çantası (içinde defter ve gümüş renkli dizüstü bilgisayar)",
+      "Bulunduğu yer: B amfisi (dün öğleden sonra)",
+      "Teslim yeri: 3 numaralı bina Kayıp Eşya Bürosu (08:00 - 16:00)",
+      "Gerekli belge: Resmi öğrenci kimlik kartı"
+    ],
+    "questions": [
+      {
+        "id": "lis_a1_10_q1",
+        "question": "Where was the black leather backpack found yesterday?",
+        "options": [
+          {
+            "key": "A",
+            "text": "In the sports cafeteria"
+          },
+          {
+            "key": "B",
+            "text": "In lecture hall B"
+          },
+          {
+            "key": "C",
+            "text": "Inside the metro station"
+          },
+          {
+            "key": "D",
+            "text": "At the campus gate"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'found in lecture hall B yesterday afternoon' denilmiştir."
+      },
+      {
+        "id": "lis_a1_10_q2",
+        "question": "What must the owner bring to claim the lost backpack?",
+        "options": [
+          {
+            "key": "A",
+            "text": "A monetary reward"
+          },
+          {
+            "key": "B",
+            "text": "A letter from the department dean"
+          },
+          {
+            "key": "C",
+            "text": "Their official student ID card"
+          },
+          {
+            "key": "D",
+            "text": "A purchase receipt for the laptop"
+          }
+        ],
+        "correct_answer": "C",
+        "explanation_tr": "'Bring your official student ID card to claim your belongings' ifadesi yer alır."
+      }
+    ]
+  },
+  {
+    "id": "lis_a2_03",
+    "university_id": "ankara",
+    "level": "A2",
+    "type": "while_listening",
+    "title": "Introduction to Marine Biology Field Trip",
+    "subtitle": "Ankara Üniversitesi Biyoloji Bölümü Duyurusu",
+    "target_university": "Ankara Üniversitesi",
+    "duration_minutes": 8,
+    "lecture_duration_seconds": 75,
+    "instructions_tr": "Saha gezisi hakkındaki bilgilendirmeyi dinlerken soruları yanıtlayın.",
+    "audio_script": "Good afternoon, biology undergraduates. Today I want to outline the schedule for our weekend coastal ecology field trip to Sinop. We will depart by chartered bus from the main campus gate at six in the morning on Saturday. Please bring waterproof field boots, a digital notebook, and weather-resistant clothing. The university covers hotel accommodations and breakfast, but students are responsible for their own dinner expenses. We will collect seawater samples on Saturday afternoon and analyze microbial specimens in the mobile lab on Sunday morning. Attendance is mandatory for passing the laboratory component.",
+    "suggested_notes_tr": [
+      "Hedef: Sinop kıyı ekolojisi saha gezisi",
+      "Hareket: Cumartesi sabah 06:00, ana kampüs kapısı",
+      "Getirilecekler: Su geçirmez çizme, dijital defter, mevsime uygun giysi",
+      "Maliyet: Otel ve kahvaltı üniversiteden, akşam yemeği öğrenciye ait",
+      "Program: Cumartesi numune toplama, Pazar mobil laboratuvar analizi"
+    ],
+    "questions": [
+      {
+        "id": "lis_a2_03_q1",
+        "question": "What time will the chartered bus depart on Saturday morning?",
+        "options": [
+          {
+            "key": "A",
+            "text": "At 5:00 AM"
+          },
+          {
+            "key": "B",
+            "text": "At 6:00 AM"
+          },
+          {
+            "key": "C",
+            "text": "At 8:30 AM"
+          },
+          {
+            "key": "D",
+            "text": "At noon"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'depart by chartered bus from the main campus gate at six in the morning' denilmiştir."
+      },
+      {
+        "id": "lis_a2_03_q2",
+        "question": "Which expense is NOT covered by the university during the trip?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Hotel accommodations"
+          },
+          {
+            "key": "B",
+            "text": "Breakfast meals"
+          },
+          {
+            "key": "C",
+            "text": "Dinner expenses"
+          },
+          {
+            "key": "D",
+            "text": "Chartered bus transportation"
+          }
+        ],
+        "correct_answer": "C",
+        "explanation_tr": "'students are responsible for their own dinner expenses' denilmiştir."
+      }
+    ]
+  },
+  {
+    "id": "lis_a2_04",
+    "university_id": "hacettepe",
+    "level": "A2",
+    "type": "while_listening",
+    "title": "How Spaced Repetition Improves Language Memory",
+    "subtitle": "Hacettepe YDYO Öğrenme Stratejileri Dersi",
+    "target_university": "Hacettepe Üniversitesi",
+    "duration_minutes": 8,
+    "lecture_duration_seconds": 80,
+    "instructions_tr": "Aralıklı tekrar yönteminin anlatıldığı dersi dinleyip soruları cevaplayınız.",
+    "audio_script": "Welcome everyone. In today's mini-lecture, we explore the science of spaced repetition. In the late nineteenth century, German psychologist Hermann Ebbinghaus discovered the forgetting curve. He proved that humans forget nearly fifty percent of newly learned information within twenty-four hours unless it is reviewed. Spaced repetition counteracts this by scheduling reviews at systematically increasing intervals—such as after one day, three days, one week, and one month. Using digital flashcards that employ spaced algorithms allows language students to transfer words from short-term memory into permanent long-term storage.",
+    "suggested_notes_tr": [
+      "Hermann Ebbinghaus: Unutma eğrisi (Forgetting curve)",
+      "Bulgu: Yeni bilginin %50'si 24 saatte unutulur",
+      "Aralıklı tekrar: Artan zaman aralıklarıyla gözden geçirme (1 gün, 3 gün, 1 hafta, 1 ay)",
+      "Amaç: Kısa süreli bellekten kalıcı uzun süreli belleğe aktarım"
+    ],
+    "questions": [
+      {
+        "id": "lis_a2_04_q1",
+        "question": "According to Hermann Ebbinghaus, how much information is lost within 24 hours without review?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Nearly ten percent"
+          },
+          {
+            "key": "B",
+            "text": "Nearly twenty-five percent"
+          },
+          {
+            "key": "C",
+            "text": "Nearly fifty percent"
+          },
+          {
+            "key": "D",
+            "text": "One hundred percent"
+          }
+        ],
+        "correct_answer": "C",
+        "explanation_tr": "'humans forget nearly fifty percent of newly learned information within twenty-four hours' bilgisi verilir."
+      },
+      {
+        "id": "lis_a2_04_q2",
+        "question": "What is the primary benefit of spaced repetition algorithms?",
+        "options": [
+          {
+            "key": "A",
+            "text": "They replace the need for reading textbooks"
+          },
+          {
+            "key": "B",
+            "text": "They transfer knowledge into permanent long-term storage"
+          },
+          {
+            "key": "C",
+            "text": "They automatically grade essay exams"
+          },
+          {
+            "key": "D",
+            "text": "They eliminate all grammar errors"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'allows language students to transfer words from short-term memory into permanent long-term storage' denilmiştir."
+      }
+    ]
+  },
+  {
+    "id": "lis_a2_05",
+    "university_id": "gazi",
+    "level": "A2",
+    "type": "while_listening",
+    "title": "Basic Principles of Renewable Wind Energy",
+    "subtitle": "Gazi Üniversitesi Mühendisliğe Giriş",
+    "target_university": "Gazi Üniversitesi",
+    "duration_minutes": 8,
+    "lecture_duration_seconds": 75,
+    "instructions_tr": "Rüzgar türbinlerinin çalışma prensibini dinleyip soruları cevaplayın.",
+    "audio_script": "Good morning class. Today we examine the mechanics of wind turbines. A modern wind turbine converts kinetic energy from moving air into mechanical energy, and then into electricity via an internal generator. The giant aerodynamic blades are designed like airplane wings; as wind passes over them, lift force causes the rotor to spin. Most utility-scale turbines begin generating electricity at wind speeds of approximately three meters per second and automatically shut down during extreme gales exceeding twenty-five meters per second to prevent mechanical failure. Turkey currently produces over eleven thousand megawatts of wind power.",
+    "suggested_notes_tr": [
+      "Enerji dönüşümü: Kinetik enerji -> Mekanik enerji -> Elektrik (jeneratör ile)",
+      "Kanat aerodinamiği: Uçak kanadı gibi kaldırma kuvveti (lift force)",
+      "Çalışma hızı: 3 m/s hızda başlar, 25 m/s fırtınada güvenlik için otomatik durur",
+      "Türkiye kurulu güç: 11.000 megavat üzeri"
+    ],
+    "questions": [
+      {
+        "id": "lis_a2_05_q1",
+        "question": "What happens to a wind turbine when wind speeds exceed twenty-five meters per second?",
+        "options": [
+          {
+            "key": "A",
+            "text": "It generates double the electrical output"
+          },
+          {
+            "key": "B",
+            "text": "It automatically shuts down for safety"
+          },
+          {
+            "key": "C",
+            "text": "Its blades reverse rotational direction"
+          },
+          {
+            "key": "D",
+            "text": "It switches to solar mode"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'automatically shut down during extreme gales exceeding twenty-five meters per second to prevent mechanical failure' denilmiştir."
+      },
+      {
+        "id": "lis_a2_05_q2",
+        "question": "What aerodynamic force causes wind turbine blades to spin?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Gravitational pull"
+          },
+          {
+            "key": "B",
+            "text": "Lift force"
+          },
+          {
+            "key": "C",
+            "text": "Frictional resistance"
+          },
+          {
+            "key": "D",
+            "text": "Magnetic repulsion"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'as wind passes over them, lift force causes the rotor to spin' bilgisi açıkça yer alır."
+      }
+    ]
+  },
+  {
+    "id": "lis_a2_06",
+    "university_id": "ege",
+    "level": "A2",
+    "type": "while_listening",
+    "title": "The History of Olive Cultivation in the Mediterranean",
+    "subtitle": "Ege Üniversitesi Ziraat ve Tarih Semineri",
+    "target_university": "Ege Üniversitesi",
+    "duration_minutes": 8,
+    "lecture_duration_seconds": 75,
+    "instructions_tr": "Akdeniz'de zeytin tarımının tarihini dinleyip soruları cevaplayın.",
+    "audio_script": "Olive trees have been cultivated across the Mediterranean basin for over six thousand years. Originating in ancient Anatolia and the Levant, olive farming spread to Greece, Rome, and North Africa through Phoenician maritime merchants. Ancient Mediterranean civilizations valued olive oil not only as dietary sustenance, but also as fuel for ceramic lamps, medicinal ointment, and sacred ceremonial anointment. Olive trees are remarkably drought-resistant, capable of thriving in rocky, arid soils where conventional cereal crops perish. Some ancient olive trees in the Aegean region are estimated to be over a thousand years old.",
+    "suggested_notes_tr": [
+      "Tarih: 6.000 yıldan fazla geçmiş",
+      "Köken: Antik Anadolu ve Levant; Fenikeli tüccarlarla Akdeniz'e yayıldı",
+      "Kullanım alanları: Besin, kandil yakıtı, tıbbi merhem, dini törenler",
+      "Özellik: Kuraklığa dayanıklı, kayalık topraklarda 1000 yıldan fazla yaşayabilir"
+    ],
+    "questions": [
+      {
+        "id": "lis_a2_06_q1",
+        "question": "How did olive cultivation spread across the Mediterranean in antiquity?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Through Phoenician maritime merchants"
+          },
+          {
+            "key": "B",
+            "text": "By migrating nomadic hunters"
+          },
+          {
+            "key": "C",
+            "text": "Via medieval railway routes"
+          },
+          {
+            "key": "D",
+            "text": "Through airborne pollination alone"
+          }
+        ],
+        "correct_answer": "A",
+        "explanation_tr": "'spread to Greece, Rome, and North Africa through Phoenician maritime merchants' denilmiştir."
+      },
+      {
+        "id": "lis_a2_06_q2",
+        "question": "Why are olive trees particularly well-suited to the Mediterranean climate?",
+        "options": [
+          {
+            "key": "A",
+            "text": "They require continuous daily rain"
+          },
+          {
+            "key": "B",
+            "text": "They are remarkably drought-resistant and thrive in rocky soils"
+          },
+          {
+            "key": "C",
+            "text": "They only grow in dense rainforests"
+          },
+          {
+            "key": "D",
+            "text": "They cannot survive sunlight"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'remarkably drought-resistant, capable of thriving in rocky, arid soils' ifadesi geçer."
+      }
+    ]
+  },
+  {
+    "id": "lis_a2_07",
+    "university_id": "koc",
+    "level": "A2",
+    "type": "while_listening",
+    "title": "Understanding the Human Circadian Rhythm",
+    "subtitle": "Koç Üniversitesi Sağlık Bilimleri Dersi",
+    "target_university": "Koç Üniversitesi",
+    "duration_minutes": 8,
+    "lecture_duration_seconds": 80,
+    "instructions_tr": "Biyolojik saat ve uyku döngüsünü anlatan dersi dinleyin.",
+    "audio_script": "Every human body possesses an internal biological clock known as the circadian rhythm. Regulated by a tiny cluster of cells in the brain called the suprachiasmatic nucleus, this 24-hour cycle governs sleepiness, core body temperature, and hormone production. When specialized photoreceptors in our retinas detect morning sunlight, the brain suppresses the sleep hormone melatonin, making us alert. Conversely, in the evening, darkness triggers melatonin synthesis, preparing the body for rest. Exposing eyes to bright blue light from smartphone screens before bed disrupts melatonin secretion, leading to chronic insomnia among students.",
+    "suggested_notes_tr": [
+      "Sirkadiyen ritim: 24 saatlik iç biyolojik saat",
+      "Merkez: Beyindeki 'suprachiasmatic nucleus'",
+      "Sabah ışığı: Melatonin hormonunu baskılar, uyanıklık sağlar",
+      "Karanlık: Melatonin salgısını artırır, uykuya hazırlar",
+      "Mavi ışık tehlikesi: Akıllı telefon ekranları melatonin üretimini bozar"
+    ],
+    "questions": [
+      {
+        "id": "lis_a2_07_q1",
+        "question": "Which hormone is suppressed by the brain when morning sunlight enters the eyes?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Insulin"
+          },
+          {
+            "key": "B",
+            "text": "Melatonin"
+          },
+          {
+            "key": "C",
+            "text": "Adrenaline"
+          },
+          {
+            "key": "D",
+            "text": "Dopamine"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'the brain suppresses the sleep hormone melatonin, making us alert' denilmiştir."
+      },
+      {
+        "id": "lis_a2_07_q2",
+        "question": "Why does using smartphones before bed cause sleep difficulties?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Blue light disrupts evening melatonin secretion"
+          },
+          {
+            "key": "B",
+            "text": "It lowers body temperature too rapidly"
+          },
+          {
+            "key": "C",
+            "text": "It drains brain glucose reserves"
+          },
+          {
+            "key": "D",
+            "text": "It stimulates ear canal infections"
+          }
+        ],
+        "correct_answer": "A",
+        "explanation_tr": "'Exposing eyes to bright blue light from smartphone screens before bed disrupts melatonin secretion' ifadesi yer alır."
+      }
+    ]
+  },
+  {
+    "id": "lis_a2_08",
+    "university_id": "sabanci",
+    "level": "A2",
+    "type": "while_listening",
+    "title": "The Fundamentals of 3D Printing Technology",
+    "subtitle": "Sabancı Üniversitesi Üretim Teknolojileri",
+    "target_university": "Sabancı Üniversitesi",
+    "duration_minutes": 8,
+    "lecture_duration_seconds": 75,
+    "instructions_tr": "3D yazıcı teknolojisi ve eklemeli imalatı dinleyin.",
+    "audio_script": "Three-dimensional printing, technically referred to as additive manufacturing, creates physical objects directly from digital computer-aided design models. Unlike traditional subtractive manufacturing—which cuts or carves material away from a solid block—a 3D printer deposits successive layers of plastic, resin, or metal powder on top of each other until the object is complete. This layer-by-layer technique drastically minimizes raw material waste and allows engineers to fabricate complex internal geometries that are impossible with conventional molds. Today, 3D printing is utilized in aerospace engineering, custom medical prosthetics, and architectural modeling.",
+    "suggested_notes_tr": [
+      "3D Yazıcı = Eklemeli İmalat (Additive manufacturing)",
+      "Gelenekselden farkı: Bloktan yontarak değil, katman katman ekleyerek üretir",
+      "Avantajlar: Hammadde israfını azaltır, karmaşık iç geometrileri basabilir",
+      "Kullanım: Havacılık, kişiye özel tıbbi protezler, mimari modeller"
+    ],
+    "questions": [
+      {
+        "id": "lis_a2_08_q1",
+        "question": "How does additive manufacturing differ fundamentally from subtractive manufacturing?",
+        "options": [
+          {
+            "key": "A",
+            "text": "It carves material from large solid metal blocks"
+          },
+          {
+            "key": "B",
+            "text": "It deposits successive layers of material on top of each other"
+          },
+          {
+            "key": "C",
+            "text": "It requires manual hand carving"
+          },
+          {
+            "key": "D",
+            "text": "It only produces two-dimensional paper printouts"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'a 3D printer deposits successive layers of plastic, resin, or metal powder on top of each other' denilmiştir."
+      },
+      {
+        "id": "lis_a2_08_q2",
+        "question": "Which industry is mentioned as utilizing 3D printing for customized patient care?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Automotive tire retreading"
+          },
+          {
+            "key": "B",
+            "text": "Medical prosthetics"
+          },
+          {
+            "key": "C",
+            "text": "Oil refining"
+          },
+          {
+            "key": "D",
+            "text": "Textile spinning"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'custom medical prosthetics, and architectural modeling' cümlesi mevcuttur."
+      }
+    ]
+  },
+  {
+    "id": "lis_a2_09",
+    "university_id": "general",
+    "level": "A2",
+    "type": "while_listening",
+    "title": "Urban Bees and Rooftop Beekeeping",
+    "subtitle": "Kentsel Ekoloji ve Çatı Arıcılığı",
+    "target_university": "Genel Hazırlık & CEFR A2",
+    "duration_minutes": 8,
+    "lecture_duration_seconds": 70,
+    "instructions_tr": "Şehirlerde arıcılık ve biyoçeşitlilik dersini dinleyin.",
+    "audio_script": "In major global metropolises from London to Istanbul, rooftop beekeeping has evolved into a popular ecological movement. Honeybees play a vital pollination role for urban community gardens, parks, and fruit trees. Surprisingly, research demonstrates that urban bees often produce more diverse and pesticide-free honey than rural agricultural bees. This is because modern cities feature diverse decorative flowers blooming continuously across private balconies and public parks, whereas intensive rural farmland frequently relies on monoculture crops sprayed with agricultural insecticides. Urban beehives help maintain city biodiversity while raising ecological awareness.",
+    "suggested_notes_tr": [
+      "Kentsel arıcılık: Çatılarda ve parklarda yaygınlaşan hareket",
+      "Şaşırtıcı bulgu: Şehir arıları kırsal arılara göre daha çeşitli ve pestisitsiz bal üretebiliyor",
+      "Neden: Şehir parklarında sürekli açan çiçek çeşitliliği var; kırsalda tek tip ürün ve kimyasal ilaçlama yaygın"
+    ],
+    "questions": [
+      {
+        "id": "lis_a2_09_q1",
+        "question": "Why do urban bees often produce cleaner honey than rural bees?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Cities have no rain"
+          },
+          {
+            "key": "B",
+            "text": "Urban flowers are free from intensive agricultural pesticides"
+          },
+          {
+            "key": "C",
+            "text": "Urban bees are fed artificial sugar water"
+          },
+          {
+            "key": "D",
+            "text": "Hives are kept indoors at warm temperatures"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "Metinde kırsaldaki monokültür ve kimyasal ilaçlamaya (insecticides) kıyasla şehirde çeşitlilik ve pestisitsiz çiçekler vurgulanmıştır."
+      },
+      {
+        "id": "lis_a2_09_q2",
+        "question": "What primary ecological benefit do bees provide to urban parks and gardens?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Pollination of flowers and fruit trees"
+          },
+          {
+            "key": "B",
+            "text": "Reduction of carbon dioxide levels directly"
+          },
+          {
+            "key": "C",
+            "text": "Eradication of mosquito larvae"
+          },
+          {
+            "key": "D",
+            "text": "Cleaning soil pollutants"
+          }
+        ],
+        "correct_answer": "A",
+        "explanation_tr": "'Honeybees play a vital pollination role for urban community gardens, parks, and fruit trees' denilmiştir."
+      }
+    ]
+  },
+  {
+    "id": "lis_a2_10",
+    "university_id": "general",
+    "level": "A2",
+    "type": "while_listening",
+    "title": "The Engineering of Suspension Bridges",
+    "subtitle": "Asma Köprülerin Mühendislik Prensipleri",
+    "target_university": "Genel Hazırlık & CEFR A2",
+    "duration_minutes": 8,
+    "lecture_duration_seconds": 75,
+    "instructions_tr": "Asma köprülerin yük taşıma sistemini dinleyip soruları cevaplayınız.",
+    "audio_script": "Suspension bridges are magnificent feats of civil engineering capable of spanning vast waterways. The architectural principle relies on balancing tension and compression. The roadway deck is hung suspended from vertical suspender cables, which are in turn connected to two massive main cables draped over soaring concrete towers. The immense weight of vehicles transfers upward into tension along the cables, and then downward into compression through the towers into bedrock foundations. The 1915 Çanakkale Bridge in Turkey currently holds the world record for the longest main suspension span, measuring 2,023 meters.",
+    "suggested_notes_tr": [
+      "Temel ilke: Çekme (tension) ve Basınç (compression) dengesi",
+      "Yapı: Tabliye dikey kablolarla ana kablolara, ana kablolar kulelere bağlı",
+      "Yük aktarımı: Araç ağırlığı kablolarda çekmeye, kulelerde ise zemine basınç kuvvetine dönüşür",
+      "Rekor: 1915 Çanakkale Köprüsü (2.023 metre ana açıklık ile dünya rekoru)"
+    ],
+    "questions": [
+      {
+        "id": "lis_a2_10_q1",
+        "question": "How is the weight of traffic on a suspension bridge transmitted into the earth?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Through tension in cables and compression down the towers"
+          },
+          {
+            "key": "B",
+            "text": "Through floating pontoons beneath the deck"
+          },
+          {
+            "key": "C",
+            "text": "Via magnetic repulsion rails"
+          },
+          {
+            "key": "D",
+            "text": "Only through horizontal steel beams"
+          }
+        ],
+        "correct_answer": "A",
+        "explanation_tr": "'transfers upward into tension along the cables, and then downward into compression through the towers' ifadesi yer alır."
+      },
+      {
+        "id": "lis_a2_10_q2",
+        "question": "What record is held by the 1915 Çanakkale Bridge?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Oldest operational bridge"
+          },
+          {
+            "key": "B",
+            "text": "Longest main suspension span in the world"
+          },
+          {
+            "key": "C",
+            "text": "Highest railway bridge"
+          },
+          {
+            "key": "D",
+            "text": "First bridge made entirely of carbon fiber"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'holds the world record for the longest main suspension span, measuring 2,023 meters' denilmiştir."
+      }
+    ]
+  },
+  {
+    "id": "lis_b1_03",
+    "university_id": "ankara",
+    "level": "B1",
+    "type": "note_taking",
+    "title": "Smart Irrigation in Mediterranean Agriculture",
+    "subtitle": "Ankara Üniversitesi Ziraat Fakültesi Dersi",
+    "target_university": "Ankara Üniversitesi",
+    "duration_minutes": 10,
+    "lecture_duration_seconds": 90,
+    "instructions_tr": "Akıllı sulama teknolojileri dersini dinleyiniz. Dinlerken notlarınızı dijital deftere kaydediniz; ardından soruları yanıtlayınız.",
+    "audio_script": "Good morning class. Today we explore smart precision irrigation in modern Mediterranean farming. Conventional flood irrigation is notoriously wasteful, losing up to fifty percent of water to surface evaporation and runoff. In contrast, automated smart irrigation integrates subterranean soil moisture sensors with localized meteorological satellite data. These internet-of-things sensors continuously transmit real-time telemetry regarding soil osmotic potential to a centralized cloud controller. The automated system then activates subterranean drip lines only when plant roots truly require hydration, typically during pre-dawn hours when evaporative heat is lowest. Agronomical field trials in the Konya basin demonstrate that smart drip systems diminish total agricultural water consumption by thirty-five percent while increasing crop yield by twelve percent. As freshwater reserves face severe climate volatility, precision irrigation becomes an essential ecological adaptation.",
+    "suggested_notes_tr": [
+      "Geleneksel sulama: %50 su kaybı (buharlaşma ve yüzey akışı)",
+      "Akıllı hassas sulama: Toprak nem sensörleri + Hava durumu uyduları + IoT bulut kontrolü",
+      "Sulama zamanı: Şafak öncesi (buharlaşmanın en düşük olduğu saatler)",
+      "Konya havzası saha deneyi: %35 su tasarrufu, %12 verim artışı",
+      "Önemi: İklim krizinde tatlı su kaynaklarını korumak için şart"
+    ],
+    "questions": [
+      {
+        "id": "lis_b1_03_q1",
+        "question": "Why does conventional flood irrigation result in severe water waste?",
+        "options": [
+          {
+            "key": "A",
+            "text": "It requires expensive satellite subscriptions"
+          },
+          {
+            "key": "B",
+            "text": "Up to fifty percent of water is lost to evaporation and runoff"
+          },
+          {
+            "key": "C",
+            "text": "Plant roots cannot absorb untreated freshwater"
+          },
+          {
+            "key": "D",
+            "text": "It damages underground electrical lines"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'Conventional flood irrigation is notoriously wasteful, losing up to fifty percent of water to surface evaporation and runoff' denilmiştir."
+      },
+      {
+        "id": "lis_b1_03_q2",
+        "question": "What were the empirical results of smart drip irrigation in the Konya basin trial?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Ten percent water savings with lower crop yield"
+          },
+          {
+            "key": "B",
+            "text": "Thirty-five percent water reduction and twelve percent yield increase"
+          },
+          {
+            "key": "C",
+            "text": "Complete soil salinization within six months"
+          },
+          {
+            "key": "D",
+            "text": "Higher electricity costs with no water savings"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'diminish total agricultural water consumption by thirty-five percent while increasing crop yield by twelve percent' ifadesi geçer."
+      }
+    ]
+  },
+  {
+    "id": "lis_b1_04",
+    "university_id": "hacettepe",
+    "level": "B1",
+    "type": "while_listening",
+    "title": "The Mechanism of Antibiotics and Bacterial Resistance",
+    "subtitle": "Hacettepe Üniversitesi Tıp & Eczacılık Semineri",
+    "target_university": "Hacettepe Üniversitesi",
+    "duration_minutes": 10,
+    "lecture_duration_seconds": 90,
+    "instructions_tr": "Antibiyotiklerin çalışma mekanizması ve direnç sorununu dinleyip soruları cevaplayınız.",
+    "audio_script": "In nineteen twenty-eight, Alexander Fleming serendipitously discovered penicillin, inaugurating the antibiotic era. Antibiotics function by selectively attacking cellular components unique to bacteria that are absent in human mammalian cells. For instance, beta-lactam antibiotics inhibit the synthesis of peptidoglycan, the rigid structural molecule that forms bacterial cell walls. Without this protective wall, osmotic pressure causes the bacterial cell to burst and die. However, widespread overprescription of antibiotics in veterinary livestock and clinical medicine has accelerated antibacterial resistance. Through spontaneous genetic mutation and horizontal gene transfer via plasmids, resistant bacterial strains produce enzymes like beta-lactamases that neutralize medical drugs. The World Health Organization warns that superbugs could cause ten million annual fatalities by 2050 unless novel antimicrobial therapies are developed.",
+    "suggested_notes_tr": [
+      "Keşif: Alexander Fleming (1928, Penisilin)",
+      "Çalışma mekanizması: Peptidoglikan hücre duvarı sentezini engelleme -> Hücre patlar",
+      "Direnç nedeni: Hayvancılık ve tıpta aşırı/gereksiz kullanım",
+      "Direnç mekanizması: Genetik mutasyon, plazmidler ile gen aktarımı, beta-laktamaz enzimleri",
+      "DSÖ uyarısı: 2050 yılına kadar yılda 10 milyon ölüm riski"
+    ],
+    "questions": [
+      {
+        "id": "lis_b1_04_q1",
+        "question": "How do beta-lactam antibiotics selectively destroy bacterial cells without harming human cells?",
+        "options": [
+          {
+            "key": "A",
+            "text": "By increasing intracellular glucose oxidation"
+          },
+          {
+            "key": "B",
+            "text": "By inhibiting peptidoglycan cell wall synthesis"
+          },
+          {
+            "key": "C",
+            "text": "By blocking human hormone receptors"
+          },
+          {
+            "key": "D",
+            "text": "By generating high body fever"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'beta-lactam antibiotics inhibit the synthesis of peptidoglycan, the rigid structural molecule that forms bacterial cell walls' denilmiştir."
+      },
+      {
+        "id": "lis_b1_04_q2",
+        "question": "What is one major mechanism by which bacteria share resistance genes with each other?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Horizontal gene transfer via plasmids"
+          },
+          {
+            "key": "B",
+            "text": "Airborne sound vibrations"
+          },
+          {
+            "key": "C",
+            "text": "Thermal conduction in water"
+          },
+          {
+            "key": "D",
+            "text": "Cellular respiration shutdown"
+          }
+        ],
+        "correct_answer": "A",
+        "explanation_tr": "'Through spontaneous genetic mutation and horizontal gene transfer via plasmids' bilgisi verilmiştir."
+      }
+    ]
+  },
+  {
+    "id": "lis_b1_05",
+    "university_id": "ege",
+    "level": "B1",
+    "type": "while_listening",
+    "title": "Geothermal Energy Development in Western Anatolia",
+    "subtitle": "Ege Üniversitesi Jeotermal Enerji Dersi",
+    "target_university": "Ege Üniversitesi",
+    "duration_minutes": 10,
+    "lecture_duration_seconds": 85,
+    "instructions_tr": "Ege Bölgesi jeotermal enerji santralleri hakkındaki dersi dinleyiniz.",
+    "audio_script": "Western Anatolia is one of the world's most tectonically active geothermal zones due to widespread continental extensional faulting along the Aegean graben systems. Deep subsurface reservoirs contain pressurized water superheated to over two hundred degrees Celsius by geothermal magma gradients. In binary-cycle power stations, this hydrothermal fluid is extracted through deep boreholes to vaporize a secondary working fluid with a lower boiling point, which drives electrical generation turbines. Crucially, contemporary environmental standards mandate complete closed-loop reinjection. Once the heat is extracted, the cooled mineralized brine must be pumped back into the subterranean reservoir to prevent surface river contamination and preserve aquifer pressure. Turkey is currently ranked fourth globally in installed geothermal electricity capacity.",
+    "suggested_notes_tr": [
+      "Jeolojik yapı: Ege graben sistemleri, tektonik fay hatları",
+      "Sıcaklık: Yeraltında 200°C'yi aşan basınçlı hidrotermal akışkan",
+      "İkili çevrim santralleri (Binary-cycle): İkincil akışkanı buharlaştırıp türbini çevirir",
+      "Çevre kuralı: Kapalı devre geri basma (Reinjection) zorunlu",
+      "Türkiye konumu: Dünyada kurulu güçte 4. sırada"
+    ],
+    "questions": [
+      {
+        "id": "lis_b1_05_q1",
+        "question": "Why must cooled geothermal brine be reinjected into subterranean reservoirs?",
+        "options": [
+          {
+            "key": "A",
+            "text": "To increase surface river acidity for farming"
+          },
+          {
+            "key": "B",
+            "text": "To prevent surface river contamination and sustain aquifer pressure"
+          },
+          {
+            "key": "C",
+            "text": "To stop local tectonic earthquakes immediately"
+          },
+          {
+            "key": "D",
+            "text": "To generate hydrogen fuel at the surface"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'cooled mineralized brine must be pumped back into the subterranean reservoir to prevent surface river contamination and preserve aquifer pressure' denilmiştir."
+      },
+      {
+        "id": "lis_b1_05_q2",
+        "question": "What is Turkey's global ranking in installed geothermal power capacity?",
+        "options": [
+          {
+            "key": "A",
+            "text": "First"
+          },
+          {
+            "key": "B",
+            "text": "Fourth"
+          },
+          {
+            "key": "C",
+            "text": "Tenth"
+          },
+          {
+            "key": "D",
+            "text": "Twentieth"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'Turkey is currently ranked fourth globally in installed geothermal electricity capacity' cümlesi mevcuttur."
+      }
+    ]
+  },
+  {
+    "id": "lis_b1_06",
+    "university_id": "gazi",
+    "level": "B1",
+    "type": "while_listening",
+    "title": "Cybersecurity Architecture and Phishing Defenses",
+    "subtitle": "Gazi Üniversitesi Bilişim Güvenliği Dersi",
+    "target_university": "Gazi Üniversitesi",
+    "duration_minutes": 10,
+    "lecture_duration_seconds": 85,
+    "instructions_tr": "Siber saldırı yöntemleri ve kimlik avı korumasını dinleyip soruları cevaplayınız.",
+    "audio_script": "In contemporary information security, social engineering attacks such as phishing remain the single most pervasive vector for corporate data breaches. Rather than attempting to crack complex cryptographic firewalls, malicious actors exploit human cognitive heuristics through deception. A typical spear-phishing email mimics an urgent communication from a university administrator or banking official, prompting the recipient to click a fraudulent hyperlink and input credentials. Robust organizational cybersecurity requires a multi-layered defense model. First, machine-learning email filters analyze sender domain signatures and quarantine suspicious attachments. Second, mandating multi-factor authentication ensures that stolen passwords alone are insufficient to compromise accounts. Finally, regular employee simulation drills build institutional vigilance against social manipulation.",
+    "suggested_notes_tr": [
+      "Kimlik avı (Phishing): Sosyal mühendislik ve insan zaafını hedef alır",
+      "Mekanizma: Acil durum izlenimi veren sahte kurumsal e-posta ile şifre çalma",
+      "Çok katmanlı savunma:",
+      "1. Makine öğrenimli alan adı ve ek tarama filtreleri",
+      "2. Çok faktörlü kimlik doğrulama (MFA - Multi-factor auth)",
+      "3. Düzenli personel simülasyon eğitimleri"
+    ],
+    "questions": [
+      {
+        "id": "lis_b1_06_q1",
+        "question": "Why is multi-factor authentication (MFA) considered an essential defense against phishing?",
+        "options": [
+          {
+            "key": "A",
+            "text": "It permanently deletes fraudulent emails from servers"
+          },
+          {
+            "key": "B",
+            "text": "Stolen passwords alone are insufficient to access accounts"
+          },
+          {
+            "key": "C",
+            "text": "It prevents computers from connecting to the internet"
+          },
+          {
+            "key": "D",
+            "text": "It eliminates the need for software updates"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'mandating multi-factor authentication ensures that stolen passwords alone are insufficient to compromise accounts' denilmiştir."
+      },
+      {
+        "id": "lis_b1_06_q2",
+        "question": "What primary vulnerability do social engineering attacks exploit?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Physical hardware cable damage"
+          },
+          {
+            "key": "B",
+            "text": "Human cognitive heuristics and trust"
+          },
+          {
+            "key": "C",
+            "text": "Satellite weather interference"
+          },
+          {
+            "key": "D",
+            "text": "Outdated screen monitors"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'malicious actors exploit human cognitive heuristics through deception' ifadesi geçer."
+      }
+    ]
+  },
+  {
+    "id": "lis_b1_07",
+    "university_id": "itu",
+    "level": "B1",
+    "type": "while_listening",
+    "title": "Satellite Earth Observation and Environmental Monitoring",
+    "subtitle": "İTÜ Uzay ve Uydu Mühendisliği Semineri",
+    "target_university": "İstanbul Teknik Üniversitesi",
+    "duration_minutes": 10,
+    "lecture_duration_seconds": 90,
+    "instructions_tr": "Uydularla Dünya gözlemi ve çevre izleme teknolojisini dinleyin.",
+    "audio_script": "Earth observation satellites operating in low Earth orbit provide critical spatial telemetry for tracking planetary climate shifts. Optical multi-spectral sensors capture sunlight reflected from the Earth's surface across various electromagnetic wavelengths, including invisible near-infrared bands. Because healthy plant chlorophyll absorbs red light while strongly reflecting near-infrared radiation, agronomists calculate the Normalized Difference Vegetation Index (NDVI) to assess regional crop drought stress and forest canopy health. In addition to optical cameras, synthetic aperture radar satellites can penetrate thick cloud cover and nighttime darkness, measuring ground deformation down to millimeter precision. This radar capability allows civil engineers to detect subtle tectonic subsidence around major bridges, dams, and municipal aquifers before catastrophic failures occur.",
+    "suggested_notes_tr": [
+      "Yörünge: Alçak Dünya Yörüngesi (Low Earth Orbit - LEO)",
+      "Çok bantlı optik sensörler: Kızılötesi ve görünür ışık dalga boyları",
+      "NDVI İndeksi: Klorofil kırmızı ışığı emer, yakın kızılötesini yansıtır -> Kuraklık/orman sağlığı takibi",
+      "Sentetik Açıklıklı Radar (SAR): Bulut ve gece fark etmeksizin milimetrik yer çökmesini tespit eder"
+    ],
+    "questions": [
+      {
+        "id": "lis_b1_07_q1",
+        "question": "How does the Normalized Difference Vegetation Index (NDVI) detect healthy plant growth?",
+        "options": [
+          {
+            "key": "A",
+            "text": "By measuring microwave radiation from tree bark"
+          },
+          {
+            "key": "B",
+            "text": "By calculating the ratio between absorbed red light and reflected near-infrared"
+          },
+          {
+            "key": "C",
+            "text": "By detecting nitrogen gas release from leaves"
+          },
+          {
+            "key": "D",
+            "text": "By measuring soil temperature variations"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'healthy plant chlorophyll absorbs red light while strongly reflecting near-infrared radiation, agronomists calculate the Normalized Difference Vegetation Index' denilmiştir."
+      },
+      {
+        "id": "lis_b1_07_q2",
+        "question": "What is the primary advantage of synthetic aperture radar (SAR) satellites?",
+        "options": [
+          {
+            "key": "A",
+            "text": "They operate without battery power"
+          },
+          {
+            "key": "B",
+            "text": "They can penetrate cloud cover and darkness to measure millimeter ground deformation"
+          },
+          {
+            "key": "C",
+            "text": "They predict earthquakes months in advance"
+          },
+          {
+            "key": "D",
+            "text": "They replace all ground weather stations"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'synthetic aperture radar satellites can penetrate thick cloud cover and nighttime darkness, measuring ground deformation down to millimeter precision' bilgisi verilir."
+      }
+    ]
+  },
+  {
+    "id": "lis_b1_08",
+    "university_id": "ytu",
+    "level": "B1",
+    "type": "while_listening",
+    "title": "Autonomous Drones in Post-Disaster Search and Rescue",
+    "subtitle": "YTÜ Mekatronik ve Robotik Dersi",
+    "target_university": "Yıldız Teknik Üniversitesi",
+    "duration_minutes": 10,
+    "lecture_duration_seconds": 85,
+    "instructions_tr": "Afet sonrası arama kurtarmada insansız hava araçlarının rolünü dinleyin.",
+    "audio_script": "Following major seismic disasters, the first seventy-two hours represent the golden window for rescuing victims trapped beneath structural rubble. However, collapsed infrastructure often prevents human rescue teams and heavy vehicles from reaching devastated urban zones. Autonomous unmanned aerial vehicles equipped with thermal imaging cameras and acoustic sensors can rapidly survey disaster perimeters. Thermal infrared sensors detect human body heat signatures even under concrete debris or at night, transmitting precise GPS coordinates to response commanders. Furthermore, lightweight drone swarms can deploy temporary cellular mesh communications, enabling trapped survivors to send emergency signals from their smartphones. Robotic reconnaissance minimizes search times while keeping emergency responders safe from secondary aftershock collapses.",
+    "suggested_notes_tr": [
+      "İlk 72 saat: 'Altın saatler' (En kritik kurtarma penceresi)",
+      "İHA Donanımı: Termal kızılötesi kameralar ve akustik sensörler",
+      "Termal algılama: Beton moloz altındaki ve geceki vücut ısısını tespit edip GPS koordinatı gönderir",
+      "Hücresel ağ: İHA sürüleri geçici hücresel ağ kurarak telefon sinyali almayı sağlar"
+    ],
+    "questions": [
+      {
+        "id": "lis_b1_08_q1",
+        "question": "What critical capability do thermal infrared sensors provide during post-earthquake search operations?",
+        "options": [
+          {
+            "key": "A",
+            "text": "They clear collapsed concrete walls automatically"
+          },
+          {
+            "key": "B",
+            "text": "They detect human body heat signatures beneath debris and in darkness"
+          },
+          {
+            "key": "C",
+            "text": "They purify contaminated city drinking water"
+          },
+          {
+            "key": "D",
+            "text": "They repair electrical grid cables"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'Thermal infrared sensors detect human body heat signatures even under concrete debris or at night' denilmiştir."
+      },
+      {
+        "id": "lis_b1_08_q2",
+        "question": "How can drone swarms reestablish contact with survivors when city antennas collapse?",
+        "options": [
+          {
+            "key": "A",
+            "text": "By dropping paper maps into streets"
+          },
+          {
+            "key": "B",
+            "text": "By establishing temporary cellular mesh networks for smartphones"
+          },
+          {
+            "key": "C",
+            "text": "By emitting high-frequency acoustic sirens"
+          },
+          {
+            "key": "D",
+            "text": "By using laser projection on clouds"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'deploy temporary cellular mesh communications, enabling trapped survivors to send emergency signals from their smartphones' ifadesi mevcuttur."
+      }
+    ]
+  },
+  {
+    "id": "lis_b1_09",
+    "university_id": "koc",
+    "level": "B1",
+    "type": "while_listening",
+    "title": "The Psychology of Consumer Brand Attachment",
+    "subtitle": "Koç Üniversitesi Davranışsal Pazarlama Semineri",
+    "target_university": "Koç Üniversitesi",
+    "duration_minutes": 10,
+    "lecture_duration_seconds": 85,
+    "instructions_tr": "Tüketicilerin markalara duygusal bağlılık geliştirmesinin psikolojik temellerini dinleyin.",
+    "audio_script": "In behavioral marketing, brand attachment refers to the emotional bond connecting a consumer's personal self-identity with a specific commercial brand. Cognitive psychologists have demonstrated that consumers do not evaluate products solely on utilitarian attributes like price or functionality. Rather, brands function as psychological symbols through which individuals express their ideal self-concept and social group belonging. When a brand embodies values that mirror an individual's personal ethics—such as environmental sustainability or technological innovation—consumers develop intense emotional loyalty. Neurological imaging scans indicate that loyal consumers exhibit brain activation patterns in regions associated with interpersonal affection when viewing preferred brand logos, making them highly resistant to switching to competitors despite price increases.",
+    "suggested_notes_tr": [
+      "Marka bağlılığı: Tüketici kimliği ile marka arasındaki duygusal bağ",
+      "Rasyonellik ötesi: Tüketiciler sadece fiyat ve işleve bakmaz; ideal benliklerini markayla ifade eder",
+      "Nörolojik bulgu: Sadık tüketicilerin beyin taramalarında sevgi ve şefkat merkezleri aktive olur",
+      "Sonuç: Fiyat artışına rağmen rakip markaya geçişe direnç gösterirler"
+    ],
+    "questions": [
+      {
+        "id": "lis_b1_09_q1",
+        "question": "Why do consumers often remain loyal to specific brands despite higher prices?",
+        "options": [
+          {
+            "key": "A",
+            "text": "There are no alternative products available in stores"
+          },
+          {
+            "key": "B",
+            "text": "Brands serve as psychological extensions of their personal identity and values"
+          },
+          {
+            "key": "C",
+            "text": "Consumers are legally obligated by purchase contracts"
+          },
+          {
+            "key": "D",
+            "text": "Advertising laws forbid price comparisons"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'brands function as psychological symbols through which individuals express their ideal self-concept and social group belonging' denilmiştir."
+      },
+      {
+        "id": "lis_b1_09_q2",
+        "question": "What do neuroimaging studies reveal about consumers viewing preferred brand logos?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Activation in neural regions associated with interpersonal affection"
+          },
+          {
+            "key": "B",
+            "text": "Sudden drops in auditory brain processing"
+          },
+          {
+            "key": "C",
+            "text": "Complete deactivation of long-term memory"
+          },
+          {
+            "key": "D",
+            "text": "Elevated physical pain responses"
+          }
+        ],
+        "correct_answer": "A",
+        "explanation_tr": "'exhibit brain activation patterns in regions associated with interpersonal affection when viewing preferred brand logos' bilgisi verilir."
+      }
+    ]
+  },
+  {
+    "id": "lis_b1_10",
+    "university_id": "sabanci",
+    "level": "B1",
+    "type": "while_listening",
+    "title": "Nanotechnology and Graphene Water Filtration",
+    "subtitle": "Sabancı Üniversitesi Malzeme Mühendisliği",
+    "target_university": "Sabancı Üniversitesi",
+    "duration_minutes": 10,
+    "lecture_duration_seconds": 90,
+    "instructions_tr": "Grafen nanotüpler ve su arıtma teknolojilerini dinleyip soruları cevaplayın.",
+    "audio_script": "Access to clean drinking water is one of the most critical challenges of the twenty-first century. Traditional reverse osmosis desalination requires massive electrical energy to force seawater through dense polymer membranes at high hydrostatic pressures. However, materials scientists are revolutionizing water purification through graphene oxide membranes. Graphene, an atomic monolayer of carbon atoms arranged in a hexagonal lattice, possesses unprecedented tensile strength and chemical resistance. When perforated with sub-nanometer pores, graphene membranes allow water molecules to permeate at extraordinary velocities while completely obstructing larger dissolved sodium and chloride salt ions. Laboratory trials indicate that graphene filtration could reduce the energy consumption of industrial seawater desalination by up to fifty percent, making clean water accessible to arid coastal regions globally.",
+    "suggested_notes_tr": [
+      "Geleneksel Ters Osmoz (Reverse Osmosis): Çok yüksek enerji ve basınç gerektirir",
+      "Grafen oksit membranlar: Tek atom kalınlığında karbon, altıgen örgü yapısı",
+      "Çalışma prensibi: Milimetrenin milyonda biri gözeneklerden su molekülleri geçer, tuz (Na/Cl) iyonları bloke edilir",
+      "Avantaj: Tuzdan arındırmada enerji tüketimini %50'ye kadar düşürebilir"
+    ],
+    "questions": [
+      {
+        "id": "lis_b1_10_q1",
+        "question": "What structural feature of graphene oxide membranes allows them to desalinate seawater?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Thick layers of absorbent cotton fibers"
+          },
+          {
+            "key": "B",
+            "text": "Sub-nanometer pores that permit water molecules while blocking salt ions"
+          },
+          {
+            "key": "C",
+            "text": "Electric currents that evaporate seawater instantly"
+          },
+          {
+            "key": "D",
+            "text": "Chemical chlorine additives embedded in the lattice"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'When perforated with sub-nanometer pores, graphene membranes allow water molecules to permeate at extraordinary velocities while completely obstructing larger dissolved sodium and chloride salt ions' denilmiştir."
+      },
+      {
+        "id": "lis_b1_10_q2",
+        "question": "By how much could graphene membranes reduce the energy consumption of industrial desalination?",
+        "options": [
+          {
+            "key": "A",
+            "text": "By five percent"
+          },
+          {
+            "key": "B",
+            "text": "By up to fifty percent"
+          },
+          {
+            "key": "C",
+            "text": "By ninety-nine percent"
+          },
+          {
+            "key": "D",
+            "text": "No energy savings are expected"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'reduce the energy consumption of industrial seawater desalination by up to fifty percent' ifadesi mevcuttur."
+      }
+    ]
+  },
+  {
+    "id": "lis_b2_05",
+    "university_id": "metu",
+    "level": "B2",
+    "type": "note_taking",
+    "title": "Microplastics in Marine Trophic Chains",
+    "subtitle": "ODTÜ Çevre Mühendisliği ve Oşinografi Dersi",
+    "target_university": "Orta Doğu Teknik Üniversitesi",
+    "duration_minutes": 12,
+    "lecture_duration_seconds": 95,
+    "instructions_tr": "Bu bir Note-Taking sınavıdır. Dinleme esnasında not defterine ana fikirleri ve sayısal verileri kaydediniz; ardından soruları yanıtlayınız.",
+    "audio_script": "Good morning. In today's marine biology seminar, we examine the ecotoxicological dynamics of microplastics across aquatic food webs. Microplastics, defined as synthetic polymer fragments under five millimeters in diameter, originate from two primary sources: primary microbeads manufactured for industrial cosmetics, and secondary fragments generated via mechanical weathering and solar ultraviolet photolysis of discarded packaging. Once washed into marine environments, buoyant microplastics adsorb hydrophobic organic pollutants, such as polychlorinated biphenyls and DDT, from surrounding seawater at concentrations up to a million times higher than ambient levels. Filter-feeding zooplankton indiscriminately ingest these toxin-coated synthetic particles, mistakenly treating them as organic phytoplankton. As apex marine predators like tuna and swordfish consume thousands of contaminated prey species, chemical toxins bioaccumulate and biomagnify up the trophic pyramid, ultimately reaching human seafood consumers and inducing endocrine disruption.",
+    "suggested_notes_tr": [
+      "Mikroplastik tanımı: 5 mm'den küçük polimer parçacıkları",
+      "Birincil vs. İkincil kaynaklar: Kozmetik mikrotanecikleri vs. Güneş ve mekanik aşınmayla parçalanan ambalajlar",
+      "Toksik adsorpsiyon: Çevre suyundan PCB ve DDT gibi kirleticileri 1 milyon kat konsantrasyonda emer",
+      "Trofik basamaklar: Zooplankton -> Balıklar -> Apex avcılar (Ton balığı) -> İnsan",
+      "Biyoakümülasyon ve Biyomagnifikasyon: Besin zincirinde zehir yoğunlaşır, endokrin sistemi bozar"
+    ],
+    "questions": [
+      {
+        "id": "lis_b2_05_q1",
+        "question": "What is the defining particle size limit for microplastics?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Under five millimeters in diameter"
+          },
+          {
+            "key": "B",
+            "text": "Over ten centimeters"
+          },
+          {
+            "key": "C",
+            "text": "Visible only under electron microscopes"
+          },
+          {
+            "key": "D",
+            "text": "Under one nanometer"
+          }
+        ],
+        "correct_answer": "A",
+        "explanation_tr": "'defined as synthetic polymer fragments under five millimeters in diameter' denilmiştir."
+      },
+      {
+        "id": "lis_b2_05_q2",
+        "question": "Why do microplastics pose an amplified chemical toxicity risk to marine organisms?",
+        "options": [
+          {
+            "key": "A",
+            "text": "They evaporate and increase water salinity"
+          },
+          {
+            "key": "B",
+            "text": "They adsorb hydrophobic organic pollutants at concentrations a million times above ambient seawater"
+          },
+          {
+            "key": "C",
+            "text": "They emit nuclear gamma rays"
+          },
+          {
+            "key": "D",
+            "text": "They freeze ocean surface currents"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'adsorb hydrophobic organic pollutants ... at concentrations up to a million times higher than ambient levels' denilmiştir."
+      }
+    ]
+  },
+  {
+    "id": "lis_b2_06",
+    "university_id": "bilkent",
+    "level": "B2",
+    "type": "note_taking",
+    "title": "Behavioral Economics and Choice Architecture",
+    "subtitle": "Bilkent COPE Tarzı Note-Taking Sınavı",
+    "target_university": "Bilkent Üniversitesi",
+    "duration_minutes": 12,
+    "lecture_duration_seconds": 95,
+    "instructions_tr": "Davranışsal iktisat ve 'Dürtme' (Nudge) teorisini dinleyerek not alınız.",
+    "audio_script": "Traditional neoclassical economics rested upon the premise of Homo economicus—an idealized human agent possessing infinite cognitive capacity and relentless rationality. However, behavioral economists Richard Thaler and Cass Sunstein proved that human decision-making is systematically bounded by cognitive heuristics, emotional biases, and inertia. To improve social outcomes without coercive mandates, they formulated 'nudge theory' and choice architecture. A nudge alters the context in which individuals make choices without forbidding any options or altering economic incentives. For example, in organ donation policy, countries operating under opt-in systems—where citizens must actively sign a donor card—exhibit consent rates around fifteen percent. Conversely, in opt-out regimes, where citizens are automatically registered as organ donors unless they explicitly check a box to decline, consent rates exceed ninety percent. Simply altering the default choice leverages human status-quo inertia to save thousands of lives.",
+    "suggested_notes_tr": [
+      "Homo economicus eleştirisi: İnsanlar kusursuz rasyonel değil; önyargı ve eylemsizlik (inertia) sahibidir",
+      "Nudge (Dürtme) Teorisi: Thaler & Sunstein. Seçenekleri yasaklamadan karar bağlamını düzenleme (Choice architecture)",
+      "Organ bağışı örneği:",
+      "  - Opt-in (katılmak için form doldur): %15 rıza",
+      "  - Opt-out (otomatik kayıtlı, istemeyen çıkar): %90+ rıza",
+      "Sonuç: Varsayılan (default) seçeneği değiştirmek insan eylemsizliğini kamu yararına dönüştürür"
+    ],
+    "questions": [
+      {
+        "id": "lis_b2_06_q1",
+        "question": "How does 'nudge theory' influence human decision-making?",
+        "options": [
+          {
+            "key": "A",
+            "text": "By imposing heavy financial criminal penalties"
+          },
+          {
+            "key": "B",
+            "text": "By altering choice architecture without forbidding options or changing economic payoffs"
+          },
+          {
+            "key": "C",
+            "text": "By eliminating all consumer choices entirely"
+          },
+          {
+            "key": "D",
+            "text": "By broadcasting mandatory television propaganda"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'alters the context in which individuals make choices without forbidding any options or altering economic incentives' denilmiştir."
+      },
+      {
+        "id": "lis_b2_06_q2",
+        "question": "Why do opt-out organ donation policies achieve consent rates exceeding ninety percent?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Citizens receive monthly tax deductions"
+          },
+          {
+            "key": "B",
+            "text": "They leverage human status-quo bias and inertia as the default setting"
+          },
+          {
+            "key": "C",
+            "text": "Citizens are threatened with legal prosecution"
+          },
+          {
+            "key": "D",
+            "text": "Doctors choose donors randomly without patient consent"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'Simply altering the default choice leverages human status-quo inertia to save thousands of lives' ifadesi yer alır."
+      }
+    ]
+  },
+  {
+    "id": "lis_b2_07",
+    "university_id": "boun",
+    "level": "B2",
+    "type": "while_listening",
+    "title": "Quantum Computing: Superposition and Entanglement",
+    "subtitle": "Boğaziçi Üniversitesi Kuantum Bilişim Dersi",
+    "target_university": "Boğaziçi Üniversitesi",
+    "duration_minutes": 12,
+    "lecture_duration_seconds": 90,
+    "instructions_tr": "Kuantum bilgisayarların temel ilkelerini dinleyip soruları cevaplayınız.",
+    "audio_script": "Classical digital computers store and process information in binary digits, or bits, which exist strictly in one of two deterministic states: zero or one. Quantum computers, by contrast, utilize quantum bits, or qubits, which harness the bizarre principles of quantum mechanics. The first fundamental principle is quantum superposition. Thanks to wave-particle duality, a qubit can exist in a linear combination of both zero and one simultaneously until a physical measurement collapses its wavefunction. This allows a quantum processor containing three hundred qubits to represent more computational states simultaneously than there are atoms in the observable universe. The second principle is quantum entanglement, an interconnected state where the measurement of one qubit instantaneously determines the state of its paired partner, regardless of physical separation. Together, superposition and entanglement enable quantum algorithms to solve complex molecular simulations and factor massive prime numbers exponentially faster than classical supercomputers.",
+    "suggested_notes_tr": [
+      "Klasik bit vs. Kuantum kübiti (qubit): 0 veya 1 deterministik vs. Süperpozisyon",
+      "Kuantum süperpozisyon: Ölçüm yapılana kadar aynı anda 0 ve 1 durumunda bulunabilme",
+      "Kapasite: 300 kübit, evrendeki atom sayısından daha fazla durumu aynı anda temsil edebilir",
+      "Kuantum dolanıklık (Entanglement): Birbirinden bağımsız iki kübitin anında birbirinin durumunu belirlemesi",
+      "Uygulamalar: Moleküler simülasyonlar, asallara ayırma, şifre kırma"
+    ],
+    "questions": [
+      {
+        "id": "lis_b2_07_q1",
+        "question": "What allows a quantum qubit to represent multiple states simultaneously?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Higher electrical voltage inside copper wires"
+          },
+          {
+            "key": "B",
+            "text": "The principle of quantum superposition"
+          },
+          {
+            "key": "C",
+            "text": "Liquid cooling fans"
+          },
+          {
+            "key": "D",
+            "text": "Classical binary logic gates"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'The first fundamental principle is quantum superposition ... a qubit can exist in a linear combination of both zero and one simultaneously' denilmiştir."
+      },
+      {
+        "id": "lis_b2_07_q2",
+        "question": "How does quantum entanglement link paired qubits?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Through physical fiber-optic cables"
+          },
+          {
+            "key": "B",
+            "text": "Measuring one qubit instantaneously determines the state of its partner across space"
+          },
+          {
+            "key": "C",
+            "text": "By increasing mechanical resistance between processors"
+          },
+          {
+            "key": "D",
+            "text": "By synchronizing their battery recharge cycles"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'measurement of one qubit instantaneously determines the state of its paired partner, regardless of physical separation' bilgisi verilir."
+      }
+    ]
+  },
+  {
+    "id": "lis_b2_08",
+    "university_id": "itu",
+    "level": "B2",
+    "type": "while_listening",
+    "title": "Urban Heat Islands and Bioclimatic Architecture",
+    "subtitle": "İTÜ Mimarlık ve Şehir Planlama Semineri",
+    "target_university": "İstanbul Teknik Üniversitesi",
+    "duration_minutes": 12,
+    "lecture_duration_seconds": 90,
+    "instructions_tr": "Kentsel ısı adası etkisi ve biyoklimatik mimari çözümlerini dinleyin.",
+    "audio_script": "The urban heat island phenomenon occurs when metropolitan centers experience ambient air temperatures several degrees higher than surrounding rural peripheries. This thermal disparity stems from modern urban morphology: dark asphalt roadways and dense concrete structures possess high thermal mass and low albedo, absorbing solar radiation during peak daylight and reradiating sensible heat well into the night. Furthermore, tall skyscrapers create deep urban canyons that trap anthropogenic heat emitted by vehicular combustion and air conditioning units. Bioclimatic architects mitigate this thermal trap through passive environmental engineering. First, retrofitting building roofs with high-albedo cool paints and intensive vegetative green roofs reduces surface absorption and promotes evapotranspirative cooling. Second, designing municipal street orientations to align with prevailing sea breezes ventilates trapped pollutants, lowering city center temperatures by up to four degrees Celsius.",
+    "suggested_notes_tr": [
+      "Kentsel Isı Adası (UHI): Şehir merkezlerinin kırsala göre birkaç derece daha sıcak olması",
+      "Nedenleri: Düşük albedo (yansıtma) ve yüksek termal kütleye sahip koyu asfalt ve beton; klima ve egzoz ısısı",
+      "Kentsel kanyonlar: Gökdelenlerin rüzgarı kesmesi ve ısıyı hapsetmesi",
+      "Biyoklimatik çözümler:",
+      "  1. Yüksek albedolu boyalar ve yeşil çatılar (Evapotranspirasyon ile soğutma)",
+      "  2. Sokak yönelimini hakim rüzgarlara göre ayarlayarak doğal havalandırma (4°C'ye kadar düşüş)"
+    ],
+    "questions": [
+      {
+        "id": "lis_b2_08_q1",
+        "question": "What material characteristic of asphalt and concrete exacerbates the urban heat island effect?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Excessive water transparency"
+          },
+          {
+            "key": "B",
+            "text": "Low albedo and high thermal heat retention"
+          },
+          {
+            "key": "C",
+            "text": "High electrical conductivity"
+          },
+          {
+            "key": "D",
+            "text": "Frequent chemical combustion"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'dark asphalt roadways and dense concrete structures possess high thermal mass and low albedo, absorbing solar radiation' denilmiştir."
+      },
+      {
+        "id": "lis_b2_08_q2",
+        "question": "How do vegetative green roofs contribute to urban cooling?",
+        "options": [
+          {
+            "key": "A",
+            "text": "By reflecting radar signals"
+          },
+          {
+            "key": "B",
+            "text": "Through evapotranspirative cooling and reduced solar heat absorption"
+          },
+          {
+            "key": "C",
+            "text": "By absorbing city noise pollution exclusively"
+          },
+          {
+            "key": "D",
+            "text": "By generating artificial wind currents"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'vegetative green roofs reduces surface absorption and promotes evapotranspirative cooling' ifadesi yer alır."
+      }
+    ]
+  },
+  {
+    "id": "lis_b2_09",
+    "university_id": "ankara",
+    "level": "B2",
+    "type": "while_listening",
+    "title": "Biofuels: First vs. Second Generation Bioethanol",
+    "subtitle": "Ankara Üniversitesi Kimya Mühendisliği Dersi",
+    "target_university": "Ankara Üniversitesi",
+    "duration_minutes": 12,
+    "lecture_duration_seconds": 90,
+    "instructions_tr": "Birinci ve ikinci nesil biyoyakıtların farklarını dinleyiniz.",
+    "audio_script": "As nations strive to decarbonize transportation, liquid biofuels have emerged as critical transition fuels. However, there is a fundamental technological and ethical division between first and second-generation biofuels. First-generation bioethanol is derived from edible food crops, such as sugarcane and corn, by fermenting simple starch sugars. While technologically straightforward, this sparked the 'food versus fuel' debate, as diverting arable farmland toward ethanol production precipitated global grain price inflation and deforestation. In contrast, second-generation advanced biofuels utilize non-food lignocellulosic biomass, including agricultural residues like wheat straw, corn husks, and dedicated energy grasses. Breaking down resilient lignocellulose requires complex enzymatic hydrolysis and specialized microbial fermentation, but it avoids competition with human food supplies while generating eighty percent fewer greenhouse emissions than petroleum.",
+    "suggested_notes_tr": [
+      "Birinci nesil: Mısır, şeker kamışı gibi yenilebilir gıda ürünlerinden üretilir",
+      "Sorun: 'Gıda vs. Yakıt' krizi, gıda enflasyonu ve tarım arazisi rekabeti",
+      "İkinci nesil: Lignoselülozik atıklar (buğday samanı, mısır koçanı, odunsu artıklar)",
+      "Üretim süreci: Enzimatik hidroliz ve mikrobiyal fermantasyon",
+      "Avantaj: Gıda arzını tehdit etmez, petrole göre %80 daha az sera gazı salımı"
+    ],
+    "questions": [
+      {
+        "id": "lis_b2_09_q1",
+        "question": "What major ethical dilemma arose from first-generation bioethanol production?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Excessive nuclear radiation in crop soils"
+          },
+          {
+            "key": "B",
+            "text": "The 'food versus fuel' conflict causing grain price spikes and food insecurity"
+          },
+          {
+            "key": "C",
+            "text": "Engines corroding within twenty-four hours"
+          },
+          {
+            "key": "D",
+            "text": "Severe shortages of copper catalyst metals"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'sparked the food versus fuel debate, as diverting arable farmland toward ethanol production precipitated global grain price inflation' denilmiştir."
+      },
+      {
+        "id": "lis_b2_09_q2",
+        "question": "What feedstock is utilized in second-generation advanced biofuels?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Refined white sugar exclusively"
+          },
+          {
+            "key": "B",
+            "text": "Non-edible lignocellulosic agricultural residues and energy grasses"
+          },
+          {
+            "key": "C",
+            "text": "Purified petroleum distillates"
+          },
+          {
+            "key": "D",
+            "text": "Dairy milk proteins"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'second-generation advanced biofuels utilize non-food lignocellulosic biomass, including agricultural residues like wheat straw' bilgisi mevcuttur."
+      }
+    ]
+  },
+  {
+    "id": "lis_b2_10",
+    "university_id": "hacettepe",
+    "level": "B2",
+    "type": "while_listening",
+    "title": "Corporate Governance and Whistleblower Protections",
+    "subtitle": "Hacettepe Üniversitesi Hukuk ve İş Etiği",
+    "target_university": "Hacettepe Üniversitesi",
+    "duration_minutes": 12,
+    "lecture_duration_seconds": 90,
+    "instructions_tr": "Şirket içi ihbarcılık (whistleblowing) ve hukuk mekanizmalarını dinleyin.",
+    "audio_script": "Corporate whistleblower mechanisms represent an indispensable pillar of modern institutional integrity. When executives engage in accounting fraud, toxic waste dumping, or product safety concealment, external government regulators often lack internal visibility. Employees working within the firm possess granular first-hand evidence of systemic malfeasance. However, prospective whistleblowers face acute retaliation risks, including immediate termination, industry blacklisting, and civil lawsuits for disclosing trade secrets. Modern corporate governance frameworks, such as the Sarbanes-Oxley Act and European Union whistleblower directives, establish robust legal shields. These laws mandate confidential anonymous reporting channels, enforce punitive statutory damages against employers who retaliate, and occasionally award financial bounties to informants whose disclosures prevent massive fraud against investors.",
+    "suggested_notes_tr": [
+      "İhbarcı (Whistleblower): Şirket içi yolsuzluğu, sahtekarlığı veya çevre suçunu ifşa eden çalışan",
+      "Karşılaşılan riskler: İşten kovulma, sektörde kara listeye alınma, ticari sır davaları",
+      "Hukuki korumalar (Sarbanes-Oxley, AB direktifleri):",
+      "  - Gizli ve anonim ihbar kanalları",
+      "  - Misilleme yapan işverene ağır tazminat cezaları",
+      "  - Finansal ödül (bounty) sistemleri"
+    ],
+    "questions": [
+      {
+        "id": "lis_b2_10_q1",
+        "question": "Why do internal employees play a vital role in detecting corporate malfeasance?",
+        "options": [
+          {
+            "key": "A",
+            "text": "They have full authority to rewrite corporate bylaws"
+          },
+          {
+            "key": "B",
+            "text": "They possess first-hand granular evidence invisible to external regulators"
+          },
+          {
+            "key": "C",
+            "text": "They own majority shareholder votes"
+          },
+          {
+            "key": "D",
+            "text": "They are exempt from all federal tax laws"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'Employees working within the firm possess granular first-hand evidence of systemic malfeasance' denilmiştir."
+      },
+      {
+        "id": "lis_b2_10_q2",
+        "question": "Which legal protection is mandated by modern whistleblower directives?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Mandatory public television interviews"
+          },
+          {
+            "key": "B",
+            "text": "Confidential anonymous reporting channels and shields against employer retaliation"
+          },
+          {
+            "key": "C",
+            "text": "Instant promotion to the board of directors"
+          },
+          {
+            "key": "D",
+            "text": "Automatic transfer to a government agency"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'These laws mandate confidential anonymous reporting channels, enforce punitive statutory damages against employers who retaliate' denilmiştir."
+      }
+    ]
+  },
+  {
+    "id": "lis_c1_05",
+    "university_id": "boun",
+    "level": "C1",
+    "type": "note_taking",
+    "title": "Algorithmic Echo Chambers and Democratic Polarization",
+    "subtitle": "Boğaziçi BUEPT Tarzı Note-Taking Sınavı",
+    "target_university": "Boğaziçi Üniversitesi",
+    "duration_minutes": 15,
+    "lecture_duration_seconds": 105,
+    "instructions_tr": "Bu bir Note-Taking sınavıdır. Dinleme esnasında sorular gizlidir. Aşağıdaki dijital not defterine kavramları not alınız; dinleme bittikten sonra soruları açıp yanıtlayınız.",
+    "audio_script": "Good morning. Today we examine the epistemological crisis triggered by algorithmic information filtering in digital public spheres. Contemporary social media platforms operate upon surveillance capitalism business models: user attentional retention is the primary monetizable commodity. To maximize engagement metrics, recommendation algorithms prioritize content that triggers intense visceral arousal, particularly righteous moral indignation. When users interact with sensationalist partisan posts, the neural ranking system constructs an epistemological filter bubble. The algorithm systematically conceals nuanced moderate discourse while inundating the user with affirming ideological narratives. This generates epistemic echo chambers where confirmation bias operates unimpeded. Sociological studies at Harvard demonstrate that this algorithmic tribalism destroys the shared empirical baseline necessary for democratic deliberation. When citizens of a republic cannot agree upon verified scientific or historical facts, governance degenerates into affective polarization where opposing factions view each other not as political rivals, but as existential threats to the body politic.",
+    "suggested_notes_tr": [
+      "Gözetim Kapitalizmi (Surveillance Capitalism): Kullanıcı dikkati paraya dönüştürülen ana metadır",
+      "Algoritmik öncelik: Ahlaki öfke (moral indignation) ve duygusal uyarılmayı tetikleyen içerikler öne çıkarılır",
+      "Filtre balonu ve Yankı odası: Karşıt/ılımlı görüşler gizlenir, yanlı içerikler sürekli beslenir",
+      "Demokratik kriz: Ortak ampirik gerçeklik zemini yok olur; siyasi rakipler varoluşsal düşman olarak algılanır"
+    ],
+    "questions": [
+      {
+        "id": "lis_c1_05_q1",
+        "question": "According to the lecturer, what type of emotional arousal do social media recommendation algorithms preferentially amplify to maximize user retention?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Tranquil intellectual reflection"
+          },
+          {
+            "key": "B",
+            "text": "Righteous moral indignation and visceral outrage"
+          },
+          {
+            "key": "C",
+            "text": "Artistic melancholy"
+          },
+          {
+            "key": "D",
+            "text": "Mathematical skepticism"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'recommendation algorithms prioritize content that triggers intense visceral arousal, particularly righteous moral indignation' denilmiştir."
+      },
+      {
+        "id": "lis_c1_05_q2",
+        "question": "What is the primary societal consequence when algorithmic filter bubbles destroy a shared empirical baseline?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Rapid deflation of corporate tech stocks"
+          },
+          {
+            "key": "B",
+            "text": "Democratic governance degenerates into acute affective polarization"
+          },
+          {
+            "key": "C",
+            "text": "Higher voter turnout across all demographics"
+          },
+          {
+            "key": "D",
+            "text": "Decreased municipal broadband infrastructure spending"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'destroys the shared empirical baseline ... governance degenerates into affective polarization' ifadesi geçer."
+      }
+    ]
+  },
+  {
+    "id": "lis_c1_06",
+    "university_id": "hacettepe",
+    "level": "C1",
+    "type": "note_taking",
+    "title": "Neuroplasticity and Synaptic Consolidation in Sleep",
+    "subtitle": "Hacettepe Üniversitesi Nörobilim Dersi",
+    "target_university": "Hacettepe Üniversitesi",
+    "duration_minutes": 15,
+    "lecture_duration_seconds": 105,
+    "instructions_tr": "Nöroplastisite ve uykuda hafıza pekiştirme dersini dinleyip not alınız.",
+    "audio_script": "For centuries, the human brain was conceptualized as a static, immutable anatomical apparatus once biological adulthood was reached. Modern neurobiology has demolished this dogma through the paradigm of neuroplasticity—the nervous system's capacity to structurally reorganize its architecture and synaptic connectivity in response to experiential learning. Long-term potentiation, or LTP, serves as the primary cellular mechanism underlying memory formation: repeated high-frequency stimulation between presynaptic and postsynaptic neurons strengthens dendritic receptor density. However, synaptic potentiation alone is insufficient for permanent knowledge retention; it requires sleep-dependent consolidation. During slow-wave non-REM sleep, the hippocampus acts as a temporary buffer, replaying newly acquired neuronal firing sequences to the neocortex via sharp-wave ripples. This active system consolidation permanently stabilizes fragile short-term memories into enduring cortical schemas. Concurrently, during REM sleep, synaptic pruning downscales redundant neural connections, optimizing metabolic efficiency and integrating abstract conceptual insights.",
+    "suggested_notes_tr": [
+      "Nöroplastisite: Beynin yetişkinlikte de deneyimle sinaptik yapısını yeniden şekillendirme kapasitesi",
+      "LTP (Long-Term Potentiation): Sık uyarılan sinapslarda reseptör yoğunluğunun artmasıyla güçlenme",
+      "Slow-Wave (Non-REM) uykusu: Hipokampüs geçici bellek tamponu gibi davranıp 'keskin dalga dalgalanmaları' (sharp-wave ripples) ile neokortekse aktarır",
+      "REM uykusu: Sinaptik budama (synaptic pruning) ile gereksiz bağlar temizlenir, soyut bağlantılar kurulur"
+    ],
+    "questions": [
+      {
+        "id": "lis_c1_06_q1",
+        "question": "What role does the hippocampus play during slow-wave non-REM sleep?",
+        "options": [
+          {
+            "key": "A",
+            "text": "It permanently deletes all declarative linguistic memories"
+          },
+          {
+            "key": "B",
+            "text": "It replays firing sequences via sharp-wave ripples to transfer memories to the neocortex"
+          },
+          {
+            "key": "C",
+            "text": "It synthesizes physical bone calcium reserves"
+          },
+          {
+            "key": "D",
+            "text": "It slows down cardiac muscle contraction"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'the hippocampus acts as a temporary buffer, replaying newly acquired neuronal firing sequences to the neocortex via sharp-wave ripples' denilmiştir."
+      },
+      {
+        "id": "lis_c1_06_q2",
+        "question": "What is the primary function of synaptic pruning during REM sleep?",
+        "options": [
+          {
+            "key": "A",
+            "text": "It downscales redundant neural connections to optimize metabolic efficiency"
+          },
+          {
+            "key": "B",
+            "text": "It induces permanent motor paralysis after waking"
+          },
+          {
+            "key": "C",
+            "text": "It generates auditory hallucinations exclusively"
+          },
+          {
+            "key": "D",
+            "text": "It halts all blood circulation to the brain"
+          }
+        ],
+        "correct_answer": "A",
+        "explanation_tr": "'synaptic pruning downscales redundant neural connections, optimizing metabolic efficiency' bilgisi verilir."
+      }
+    ]
+  },
+  {
+    "id": "lis_c1_07",
+    "university_id": "bilkent",
+    "level": "C1",
+    "type": "while_listening",
+    "title": "International Trade Law and Sovereign Debt Restructuring",
+    "subtitle": "Bilkent Uluslararası Hukuk Semineri",
+    "target_university": "Bilkent Üniversitesi",
+    "duration_minutes": 15,
+    "lecture_duration_seconds": 100,
+    "instructions_tr": "Uluslararası ticaret hukuku ve devlet borçları yapılandırmasını dinleyip soruları cevaplayınız.",
+    "audio_script": "When sovereign nation-states encounter balance-of-payments crises and face fiscal insolvency, the international legal architecture lacks a statutory bankruptcy mechanism analogous to domestic corporate liquidation courts. Sovereign immunity shields state infrastructure from direct judicial asset seizure abroad. Consequently, sovereign debt restructuring relies heavily on decentralized contractual arrangements between debtor states and international bondholder cartels. A recurring legal obstacle is the 'holdout creditor' problem. Speculative hedge funds, termed vulture funds, purchase defaulted sovereign bonds on secondary markets at steep discounts, deliberately refusing to participate in negotiated debt haircuts. They then litigate in New York or London commercial courts, demanding one hundred percent face-value repayment plus accrued punitive interest. To neutralize predatory holdout litigation, contemporary sovereign bond indentures incorporate Collective Action Clauses (CACs). Under modern aggregation CACs, if a supermajority of creditors—typically seventy-five percent—approves a restructuring agreement, the modified financial terms become legally binding across all outstanding bondholders, preserving the sovereign debtor's fiscal solvency.",
+    "suggested_notes_tr": [
+      "Devlet iflası: Uluslararası hukukta kurumsal iflas mahkemeleri benzeri bir üst organ yoktur",
+      "Holdout alacaklı / Akbaba fon (Vulture fund) sorunu: İndirimli borcu alıp yapılandırmayı reddederek mahkemede %100 tahsilat talep ederler",
+      "Çözüm: Kolektif Eylem Klozları (Collective Action Clauses - CACs)",
+      "Çalışma prensibi: Alacaklıların %75 gibi bir nitelikli çoğunluğu anlaştığında karar tüm tahvil sahipleri için bağlayıcı olur"
+    ],
+    "questions": [
+      {
+        "id": "lis_c1_07_q1",
+        "question": "What strategy is pursued by speculative 'vulture funds' during sovereign debt crises?",
+        "options": [
+          {
+            "key": "A",
+            "text": "They donate emergency humanitarian medical grants to debtor states"
+          },
+          {
+            "key": "B",
+            "text": "They acquire discounted defaulted bonds and litigate in foreign courts for full face-value repayment"
+          },
+          {
+            "key": "C",
+            "text": "They forgive national debts unconditionally"
+          },
+          {
+            "key": "D",
+            "text": "They establish international commercial trading banks"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'purchase defaulted sovereign bonds on secondary markets at steep discounts ... demanding one hundred percent face-value repayment' denilmiştir."
+      },
+      {
+        "id": "lis_c1_07_q2",
+        "question": "How do Collective Action Clauses (CACs) prevent holdout creditors from derailing debt restructuring?",
+        "options": [
+          {
+            "key": "A",
+            "text": "They revoke the debtor state's diplomatic sovereignty"
+          },
+          {
+            "key": "B",
+            "text": "Supermajority approval legally binds all outstanding bondholders to the modified terms"
+          },
+          {
+            "key": "C",
+            "text": "They eliminate all bond trading on secondary markets"
+          },
+          {
+            "key": "D",
+            "text": "They replace commercial currency with gold bullion"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'if a supermajority of creditors ... approves a restructuring agreement, the modified financial terms become legally binding across all outstanding bondholders' denilmiştir."
+      }
+    ]
+  },
+  {
+    "id": "lis_c1_08",
+    "university_id": "metu",
+    "level": "C1",
+    "type": "while_listening",
+    "title": "Cryosphere Feedbacks and Abrupt Climate Tipping Points",
+    "subtitle": "ODTÜ İklim Fiziği ve Okyanus Bilimleri Dersi",
+    "target_university": "Orta Doğu Teknik Üniversitesi",
+    "duration_minutes": 15,
+    "lecture_duration_seconds": 100,
+    "instructions_tr": "Kriyosfer geri besleme döngüleri ve iklim eşik noktalarını dinleyin.",
+    "audio_script": "Climate science increasingly focuses on nonlinear dynamics: critical thresholds where minor incremental shifts in atmospheric greenhouse concentrations precipitate irreversible, self-reinforcing biophysical transformations, known as tipping points. Among the most precarious systems is the polar cryosphere. The ice-albedo positive feedback loop illustrates this vulnerability. Bright sea ice reflects up to eighty-five percent of incoming solar radiation back into space. As rising global temperatures melt Arctic ice sheets, reflective white surfaces are replaced by dark ocean water, which absorbs over ninety percent of solar thermal energy. This accelerated oceanic heat absorption triggers further sea ice melting in an escalating spiral. Concurrently, warming Arctic temperatures destabilize sub-polar permafrost, unleashing vast subterranean reservoirs of sequestered methane gas. Because methane possesses a greenhouse warming potential approximately eighty times greater than carbon dioxide over a twenty-year horizon, permafrost thaw threatens to trigger runaway global warming that transcends human emissions mitigation.",
+    "suggested_notes_tr": [
+      "Eşik Noktaları (Tipping Points): Küçük artışların geri döndürülemez, kendi kendini besleyen döngüleri tetiklemesi",
+      "Buz-Albedo geri beslemesi: Beyaz buz %85 yansıtır; eriyince yerini alan koyu okyanus %90 soğurur -> Isınma hızlanır",
+      "Permafrost erimesi: Donmuş toprak altındaki metan gazı salınır",
+      "Metan tehlikesi: 20 yıllık vadede CO2'den 80 kat daha güçlü sera etkisi yaratır -> Kontrol dışı ısınma"
+    ],
+    "questions": [
+      {
+        "id": "lis_c1_08_q1",
+        "question": "Why does melting Arctic sea ice create a positive feedback loop accelerating global warming?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Open dark ocean water absorbs over ninety percent of solar radiation instead of reflecting it"
+          },
+          {
+            "key": "B",
+            "text": "Cold sea water cools deep volcanic magma vents"
+          },
+          {
+            "key": "C",
+            "text": "Ice melting halts the flow of atmospheric oxygen"
+          },
+          {
+            "key": "D",
+            "text": "It triggers immediate global tectonic shifts"
+          }
+        ],
+        "correct_answer": "A",
+        "explanation_tr": "'reflective white surfaces are replaced by dark ocean water, which absorbs over ninety percent of solar thermal energy' denilmiştir."
+      },
+      {
+        "id": "lis_c1_08_q2",
+        "question": "Why is the thawing of Arctic permafrost regarded as an alarming climate tipping point?",
+        "options": [
+          {
+            "key": "A",
+            "text": "It permanently freezes transatlantic shipping lanes"
+          },
+          {
+            "key": "B",
+            "text": "It releases sequestered methane, which is eighty times more potent than carbon dioxide in the short term"
+          },
+          {
+            "key": "C",
+            "text": "It increases polar agricultural crop yields too rapidly"
+          },
+          {
+            "key": "D",
+            "text": "It eliminates the Earth's geomagnetic field"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'methane possesses a greenhouse warming potential approximately eighty times greater than carbon dioxide over a twenty-year horizon' ifadesi yer alır."
+      }
+    ]
+  },
+  {
+    "id": "lis_c1_09",
+    "university_id": "koc",
+    "level": "C1",
+    "type": "while_listening",
+    "title": "Synthetic Genomics and Directed Molecular Evolution",
+    "subtitle": "Koç Üniversitesi Moleküler Biyoloji Semineri",
+    "target_university": "Koç Üniversitesi",
+    "duration_minutes": 15,
+    "lecture_duration_seconds": 100,
+    "instructions_tr": "Sentetik genomik ve yönlendirilmiş evrim teknolojisini dinleyin.",
+    "audio_script": "The transition from classical recombinant DNA technology to synthetic genomics marks a paradigm shift from reading and editing genetic codes to writing de novo artificial genomes. Pioneered by synthetic biologist Craig Venter, researchers synthesized the complete bacterial genome of Mycoplasma mycoides chemically from raw nucleotides and transplanted it into anucleated recipient cells, generating viable synthetic organism capable of independent replication. Concurrently, Nobel laureate Frances Arnold developed the methodology of directed evolution, harnessing Darwinian natural selection in test tubes. By generating iterative rounds of random mutagenesis across targeted gene sequences and screening for optimal enzymatic phenotypes, directed evolution creates biocatalysts with unprecedented catalytic efficiency. These engineered enzymes synthesize complex pharmaceutical molecules without petroleum solvents, degrade non-biodegradable plastics in landfills, and optimize biohydrogen generation. However, dual-use biosecurity risks necessitate stringent genomic surveillance to prevent malicious synthesis of biological pathogens.",
+    "suggested_notes_tr": [
+      "Sentetik Genomik: DNA'yı okuma/düzenlemeden baştan yapay genom yazmaya geçiş (De novo sentez)",
+      "Craig Venter: Mycoplasma mycoides genomunu kimyasal olarak sentezleyip hücreye aktardı",
+      "Frances Arnold (Yönlendirilmiş Evrim): Test tüpünde mutasyon ve seçilimle üstün enzimler üretme",
+      "Uygulamalar: Yeşil ilaç üretimi, plastik parçalayan enzimler, hidrojen üretimi",
+      "Biyogüvenlik riski: Sentetik patojen üretimini önlemek için genomik denetim şart"
+    ],
+    "questions": [
+      {
+        "id": "lis_c1_09_q1",
+        "question": "How does directed evolution optimize enzymes in laboratory environments?",
+        "options": [
+          {
+            "key": "A",
+            "text": "By exposing test tubes to zero-gravity vacuum chambers"
+          },
+          {
+            "key": "B",
+            "text": "Through iterative rounds of random mutagenesis coupled with selective phenotype screening"
+          },
+          {
+            "key": "C",
+            "text": "By freezing DNA at absolute zero"
+          },
+          {
+            "key": "D",
+            "text": "Through manual mechanical carving of protein atoms"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'generating iterative rounds of random mutagenesis across targeted gene sequences and screening for optimal enzymatic phenotypes' denilmiştir."
+      },
+      {
+        "id": "lis_c1_09_q2",
+        "question": "What is one major ecological application of enzymes engineered through directed evolution?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Degrading non-biodegradable plastic polymers in landfills"
+          },
+          {
+            "key": "B",
+            "text": "Producing nuclear fission fuel"
+          },
+          {
+            "key": "C",
+            "text": "Preventing tectonic continental drift"
+          },
+          {
+            "key": "D",
+            "text": "Eliminating atmospheric nitrogen"
+          }
+        ],
+        "correct_answer": "A",
+        "explanation_tr": "'degrade non-biodegradable plastics in landfills, and optimize biohydrogen generation' bilgisi verilir."
+      }
+    ]
+  },
+  {
+    "id": "lis_c1_10",
+    "university_id": "ankara",
+    "level": "C1",
+    "type": "while_listening",
+    "title": "Constitutional Jurisprudence and the Counter-Majoritarian Dilemma",
+    "subtitle": "Ankara Üniversitesi Anayasa Hukuku Dersi",
+    "target_university": "Ankara Üniversitesi",
+    "duration_minutes": 15,
+    "lecture_duration_seconds": 100,
+    "instructions_tr": "Anayasa yargısı ve çoğunlukçu demokrasi arasındaki gerilimi dinleyin.",
+    "audio_script": "In constitutional theory, judicial review refers to the institutional power of supreme or constitutional courts to invalidate legislative statutes enacted by elected parliaments if they violate fundamental constitutional protections. In nineteen sixty-two, legal scholar Alexander Bickel coined the phrase 'the counter-majoritarian difficulty' to encapsulate the core philosophical tension of judicial review: how can a constitutional democracy justify allowing a small panel of unelected, life-tenured judges to overturn laws passed by the democratically elected representatives of the popular majority? Defenders of constitutionalism, rooted in Ronald Dworkin’s rights-based jurisprudence, counter that authentic democracy is not crude majoritarian tyranny. True democratic legitimacy requires substantive preconditions: universal franchise, freedom of speech, and the protection of minority populations against majoritarian prejudice. When constitutional courts strike down discriminatory legislation, they are not thwarting democracy; they are upholding the fundamental constitutional integrity that makes democratic self-governance morally legitimate in the first place.",
+    "suggested_notes_tr": [
+      "Anayasa Yargısı (Judicial Review): Seçilmiş parlamentoların yasalarını anayasaya aykırılık gerekçesiyle iptal etme yetkisi",
+      "Karşı-Çoğunlukçu İkilem (Alexander Bickel, 1962): Seçilmemiş yargıçların halkın seçtiği temsilcilerin yasalarını iptal etmesinin demokratik meşruiyeti",
+      "Dworkin'in Haklar Temelli Hukuk Felsefesi: Demokrasi kaba çoğunluk tahakkümü (majoritarian tyranny) değildir",
+      "Yargı denetiminin meşruiyeti: Azınlık haklarını koruyarak demokratik sistemin ahlaki ve hukuki zeminini muhafaza eder"
+    ],
+    "questions": [
+      {
+        "id": "lis_c1_10_q1",
+        "question": "What is Alexander Bickel's 'counter-majoritarian difficulty' primarily concerned with?",
+        "options": [
+          {
+            "key": "A",
+            "text": "The expense of conducting national legislative elections"
+          },
+          {
+            "key": "B",
+            "text": "The philosophical tension of unelected judges invalidating laws passed by elected majorities"
+          },
+          {
+            "key": "C",
+            "text": "The lack of female candidates in municipal elections"
+          },
+          {
+            "key": "D",
+            "text": "The regulation of commercial lobbying contributions"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'how can a constitutional democracy justify allowing a small panel of unelected, life-tenured judges to overturn laws passed by the democratically elected representatives' denilmiştir."
+      },
+      {
+        "id": "lis_c1_10_q2",
+        "question": "According to Ronald Dworkin's jurisprudence, why is judicial review essential to democracy?",
+        "options": [
+          {
+            "key": "A",
+            "text": "It guarantees that parliaments never meet"
+          },
+          {
+            "key": "B",
+            "text": "It preserves substantive rights and minority protections necessary for democratic legitimacy"
+          },
+          {
+            "key": "C",
+            "text": "It allows judges to collect sovereign taxes directly"
+          },
+          {
+            "key": "D",
+            "text": "It replaces political parties with civil servants"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'True democratic legitimacy requires substantive preconditions ... protection of minority populations against majoritarian prejudice' ifadesi yer alır."
+      }
+    ]
+  },
+  {
+    "id": "lis_c2_03",
+    "university_id": "boun",
+    "level": "C2",
+    "type": "note_taking",
+    "title": "Epistemological Fallibilism and Underdetermination of Scientific Theory",
+    "subtitle": "Boğaziçi BUEPT Doktora & İleri C2 Note-Taking",
+    "target_university": "Boğaziçi Üniversitesi",
+    "duration_minutes": 15,
+    "lecture_duration_seconds": 110,
+    "instructions_tr": "Bilim felsefesi ve Quine-Duhem tezini dinleyiniz. Dinlerken notlarınızı dijital deftere kaydediniz; ardından soruları yanıtlayınız.",
+    "audio_script": "In the philosophy of science, the Duhem-Quine thesis articulates the holist underdetermination of scientific theory by empirical evidence. Classical logical positivism presupposed that individual scientific hypotheses could be subjected to isolated experimental verification or Popperian falsification. Willard Van Orman Quine decisively undermined this atomistic reductionism by asserting that our knowledge of the world faces the tribunal of experience not as disconnected propositions, but as an interconnected web of belief. When an empirical observation contradicts a theoretical prediction, logic alone cannot specify which particular thread within the theoretical fabric is falsified. A recalcitrant observation can always be accommodated by introducing auxiliary hypotheses, re-calibrating observational instruments, or revising background assumptions. Consequently, multiple rival theoretical paradigms can remain logically compatible with identical empirical data sets. Scientific realism must therefore embrace fallibilism: recognizing that empirical paradigms are underdetermined heuristic models rather than mirror reflections of metaphysical reality.",
+    "suggested_notes_tr": [
+      "Duhem-Quine Tezi: Bilimsel teorilerin ampirik veriler tarafından 'yetersiz belirlenimi' (underdetermination)",
+      "İnanç Ağı (Web of Belief - Quine): Bilgilerimiz tekil doğrulamaya değil, bütüncül bir ağ halinde deneyime tabi tutulur",
+      "Yanlışlamanın imkansızlığı: Çelişen bir gözlemde hangi hipotezin çöktüğü bilinemez; yardımcı hipotezler veya araç kalibrasyonuyla teori kurtarılabilir",
+      "Sonuç: Birbiriyle çelişen iki rakip teori aynı veri setiyle tamamen uyumlu olabilir",
+      "Epistemolojik yanılabilirlik (Fallibilism): Bilimsel modeller metafiziksel mutlak gerçeklik değil, heuristik inşalardır"
+    ],
+    "questions": [
+      {
+        "id": "lis_c2_03_q1",
+        "question": "What is the core argument of the Duhem-Quine underdetermination thesis?",
+        "options": [
+          {
+            "key": "A",
+            "text": "All scientific theories can be definitively proven true using mathematics alone"
+          },
+          {
+            "key": "B",
+            "text": "Empirical evidence is insufficient to uniquely determine a single scientific theory over rival paradigms"
+          },
+          {
+            "key": "C",
+            "text": "Physical reality does not exist outside the human mind"
+          },
+          {
+            "key": "D",
+            "text": "Hypothesis testing requires no auxiliary experimental assumptions"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'multiple rival theoretical paradigms can remain logically compatible with identical empirical data sets' denilmiştir."
+      },
+      {
+        "id": "lis_c2_03_q2",
+        "question": "How did W.V.O. Quine conceptualize human knowledge in relation to empirical experience?",
+        "options": [
+          {
+            "key": "A",
+            "text": "As an interconnected holistic web of belief"
+          },
+          {
+            "key": "B",
+            "text": "As disconnected, isolated linguistic atoms"
+          },
+          {
+            "key": "C",
+            "text": "As an immutable theological hierarchy"
+          },
+          {
+            "key": "D",
+            "text": "As pure sensory illusion devoid of syntax"
+          }
+        ],
+        "correct_answer": "A",
+        "explanation_tr": "'faces the tribunal of experience not as disconnected propositions, but as an interconnected web of belief' ifadesi mevcuttur."
+      }
+    ]
+  },
+  {
+    "id": "lis_c2_04",
+    "university_id": "metu",
+    "level": "C2",
+    "type": "note_taking",
+    "title": "Posthumanism, Cyborg Ontology, and the Dissolution of Liberal Humanism",
+    "subtitle": "ODTÜ İleri Felsefe ve Eleştirel Teori",
+    "target_university": "Orta Doğu Teknik Üniversitesi",
+    "duration_minutes": 15,
+    "lecture_duration_seconds": 110,
+    "instructions_tr": "Posthümanizm ve siborg ontolojisi üzerine akademik dersi dinleyip not alınız.",
+    "audio_script": "Critical posthumanism mounts an ontological deconstruction of the Enlightenment humanist subject—the sovereign, rational, autonomous individual historically constructed through patriarchal, colonial, and anthropocentric exclusions. As cultural theorist Donna Haraway demonstrated in her seminal Cyborg Manifesto, technological interfaces have irreversibly collapsed the foundational dualisms underpinning Western metaphysics: the ontological boundaries between nature and culture, organism and mechanism, human and animal. The cyborg figure is not a dystopic alienation from an Edenic natural origin, but an affirmation of hybridity, relationality, and leaky boundaries. In the contemporary Anthropocene, human survival necessitates abandoning the illusion of sovereign planetary mastery. A relational posthumanist ethics demands acknowledging non-human agency and technological imbrication, recognizing that human subjectivity is fundamentally distributed across ecological webs, algorithmic neural networks, and biological symbiogeneses.",
+    "suggested_notes_tr": [
+      "Aydınlanma hümanist öznesinin eleştirisi: Evrensel değil; sömürgeci, eril ve antroposentrik bir kurgudur",
+      "Donna Haraway (Siborg Manifestosu): Doğa/kültür, mekanizma/organizma, insan/hayvan ikiliklerinin yıkılması",
+      "Siborg ontolojisi: Saflık/köken arayışı değil; melezlik, ilişkisellik ve geçirgen sınırlar (leaky boundaries)",
+      "İlişkisel posthümanist etik: İnsanın egemen efendi yanılsamasından vazgeçip biyolojik, ekolojik ve algoritmik ağlarla paylaşılan failliği (distributed agency) tanıması"
+    ],
+    "questions": [
+      {
+        "id": "lis_c2_04_q1",
+        "question": "What metaphysical dualisms are dismantled by Donna Haraway's cyborg ontology?",
+        "options": [
+          {
+            "key": "A",
+            "text": "The mathematical dichotomy between positive and negative integers"
+          },
+          {
+            "key": "B",
+            "text": "The dualisms between nature and culture, organism and machine, and human and animal"
+          },
+          {
+            "key": "C",
+            "text": "The boundary between alternating and direct electrical current"
+          },
+          {
+            "key": "D",
+            "text": "The divide between ancient and medieval Latin syntax"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'collapsed the foundational dualisms ... between nature and culture, organism and mechanism, human and animal' denilmiştir."
+      },
+      {
+        "id": "lis_c2_04_q2",
+        "question": "What does relational posthumanist ethics demand in the Anthropocene?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Absolute technological domination over biological ecosystems"
+          },
+          {
+            "key": "B",
+            "text": "Recognizing distributed non-human agency and human ecological imbrication"
+          },
+          {
+            "key": "C",
+            "text": "The immediate prohibition of all prosthetic medical technology"
+          },
+          {
+            "key": "D",
+            "text": "A return to pre-industrial feudal agriculture"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'demands acknowledging non-human agency and technological imbrication, recognizing that human subjectivity is fundamentally distributed' ifadesi yer alır."
+      }
+    ]
+  },
+  {
+    "id": "lis_c2_05",
+    "university_id": "bilkent",
+    "level": "C2",
+    "type": "while_listening",
+    "title": "Frankfurt School Critique of Instrumental Reason",
+    "subtitle": "Bilkent Üniversitesi Eleştirel Teori Semineri",
+    "target_university": "Bilkent Üniversitesi",
+    "duration_minutes": 15,
+    "lecture_duration_seconds": 105,
+    "instructions_tr": "Adorno ve Horkheimer'ın 'Aydınlanmanın Diyalektiği' ve araçsal akıl eleştirisini dinleyin.",
+    "audio_script": "In 'Dialectic of Enlightenment', Frankfurt School theorists Max Horkheimer and Theodor Adorno interrogated why humanity, instead of entering a truly human condition, was sinking into a new kind of barbarism. Their diagnosis centered upon the catastrophic degeneration of subjective reason into pure instrumental rationality. The Enlightenment promised emancipation from myth and theological superstition through scientific understanding. However, in subduing external nature, reason was stripped of its capacity to evaluate objective moral ends, values, and human justice. Instrumental reason became an operational calculating technique dedicated solely to utilitarian mastery, technical efficiency, and commodity exchange. Consequently, nature—and ultimately human beings themselves—were reduced to quantifiable, manipulable objects of administrative control. When reason is reduced to a tool of domination, bureaucratic efficiency culminates not in human liberation, but in totalitarian administration and industrial mass destruction.",
+    "suggested_notes_tr": [
+      "Horkheimer & Adorno: 'Aydınlanmanın Diyalektiği' (Dialectic of Enlightenment)",
+      "Sorun: İnsanlığın aydınlanmayla özgürleşmek yerine yeni bir barbarlığa ve tahakküme sürüklenmesi",
+      "Araçsal Akıl (Instrumental Reason): Amacı ve adaleti sorgulama yeteneğini kaybedip sadece teknik verimlilik ve hesaplamaya indirgenmiş akıl",
+      "Sonuç: Doğanın ve insanın metaya, niceliksel ve manipüle edilebilir nesneye dönüştürülmesi; totaliter yönetim"
+    ],
+    "questions": [
+      {
+        "id": "lis_c2_05_q1",
+        "question": "What primary degeneration of Enlightenment reason did Adorno and Horkheimer identify?",
+        "options": [
+          {
+            "key": "A",
+            "text": "The resurgence of medieval astrological belief"
+          },
+          {
+            "key": "B",
+            "text": "The reduction of objective reason to instrumental rationality and technical calculation"
+          },
+          {
+            "key": "C",
+            "text": "The complete abolition of written legal constitutions"
+          },
+          {
+            "key": "D",
+            "text": "The refusal of scholars to utilize mathematics"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'Their diagnosis centered upon the catastrophic degeneration of subjective reason into pure instrumental rationality' denilmiştir."
+      },
+      {
+        "id": "lis_c2_05_q2",
+        "question": "How are human beings treated when instrumental reason governs social administration?",
+        "options": [
+          {
+            "key": "A",
+            "text": "As autonomous, inviolable moral sovereigns"
+          },
+          {
+            "key": "B",
+            "text": "As quantifiable, manipulable objects of administrative and economic control"
+          },
+          {
+            "key": "C",
+            "text": "As divine theological entities"
+          },
+          {
+            "key": "D",
+            "text": "As non-cognitive biological flora"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'nature—and ultimately human beings themselves—were reduced to quantifiable, manipulable objects of administrative control' bilgisi geçer."
+      }
+    ]
+  },
+  {
+    "id": "lis_c2_06",
+    "university_id": "sabanci",
+    "level": "C2",
+    "type": "while_listening",
+    "title": "Biosemiotics and Jakob von Uexküll's Umwelt Theory",
+    "subtitle": "Sabancı Üniversitesi Biyosemiyotik Dersi",
+    "target_university": "Sabancı Üniversitesi",
+    "duration_minutes": 15,
+    "lecture_duration_seconds": 105,
+    "instructions_tr": "Biyosemiyotik ve canlıların algısal dünyalarını (Umwelt) anlatan dersi dinleyiniz.",
+    "audio_script": "Biosemiotics bridges theoretical biology and semiotics by positing that life is fundamentally mediated through sign processes and meaning-making, or semiosis. Early twentieth-century theoretical biologist Jakob von Uexküll overthrew mechanistic behaviorism by introducing the concept of the 'Umwelt'—the subjective perceptual bubble unique to every organism. Mechanistic science assumes an objective, universal physical environment, or 'Umgebung', identical for all creatures. Uexküll proved that an organism does not interact with the entirety of physical reality, but only with those environmental cues for which its specialized sensory receptors, or 'Merkorgane', are physiologically tuned. For a blind tick, the world consists of only three operational carrier signs: the scent of butyric acid, the thermal heat of mammalian blood, and the hairiness of skin. All other physical stimuli—colors, symphonies, chemical pollutants—are non-existent within its phenomenological reality. Thus, nature is not a monolithic physical mechanism, but a vast, polyphonic polyphony of interlocking perceptual Umwelten.",
+    "suggested_notes_tr": [
+      "Biyosemiyotik: Yaşamın işaret süreçleri ve anlamlandırma (semiosis) ile kurulduğu tezi",
+      "Jakob von Uexküll: 'Umwelt' (Öznel algı dünyası) kavramı",
+      "Umgebung (Nesnel çevre) vs. Umwelt: Canlılar tüm fiziksel evrenle değil, alıcılarının (Merkorgane) algıladığı işaretlerle etkileşir",
+      "Kene örneği: Sadece bütirik asit kokusu, memeli vücut ısısı ve deri tüyü onun gerçekliğidir; gerisi yoktur",
+      "Sonuç: Doğa tek parça mekanik bir saat değil, iç içe geçmiş öznel algı dünyalarının polifonik senfonisidir"
+    ],
+    "questions": [
+      {
+        "id": "lis_c2_06_q1",
+        "question": "What is the fundamental distinction between 'Umgebung' and 'Umwelt' in Uexküll's theoretical biology?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Umgebung is microscopic while Umwelt is macroscopic"
+          },
+          {
+            "key": "B",
+            "text": "Umgebung is the objective physical environment, whereas Umwelt is the organism's subjective perceptual reality"
+          },
+          {
+            "key": "C",
+            "text": "Umgebung applies to plants while Umwelt applies only to bacteria"
+          },
+          {
+            "key": "D",
+            "text": "There is no theoretical distinction between the terms"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'Mechanistic science assumes an objective, universal physical environment, or Umgebung ... Uexküll proved that an organism does not interact with the entirety of physical reality, but only with its Umwelt' denilmiştir."
+      },
+      {
+        "id": "lis_c2_06_q2",
+        "question": "According to biosemiotics, what constitutes an organism's reality?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Every physical particle existing in quantum space"
+          },
+          {
+            "key": "B",
+            "text": "Only those environmental carrier signs that its physiological receptors can sense and interpret"
+          },
+          {
+            "key": "C",
+            "text": "Human linguistic translations exclusively"
+          },
+          {
+            "key": "D",
+            "text": "Electromagnetic gravity alone"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'an organism does not interact with the entirety of physical reality, but only with those environmental cues for which its specialized sensory receptors ... are physiologically tuned' denilmiştir."
+      }
+    ]
+  },
+  {
+    "id": "lis_c2_07",
+    "university_id": "koc",
+    "level": "C2",
+    "type": "while_listening",
+    "title": "Systemic Risk, Network Topology, and Financial Contagion",
+    "subtitle": "Koç Üniversitesi İleri Ekonometri ve Finans Semineri",
+    "target_university": "Koç Üniversitesi",
+    "duration_minutes": 15,
+    "lecture_duration_seconds": 105,
+    "instructions_tr": "Finansal ağ topolojisi ve sistemik çöküş modellemelerini dinleyiniz.",
+    "audio_script": "The two-thousand-eight global financial collapse decisively demonstrated that systemic risk cannot be appraised by evaluating individual financial institutions in micro-prudential isolation. Modern macroprudential econometrics models financial stability through complex network topology. Financial systems are structured as directed, weighted graphs where nodes represent banking institutions and edges denote interbank obligations, derivative exposures, and collateralized debt cross-holdings. In quiescent economic periods, dense interconnectedness enhances financial resilience by dissipating localized liquidity shocks across the entire network. However, network theorists Andrew Haldane and Robert May revealed a non-linear tipping point: when shocks exceed a critical threshold, dense topological interconnectedness transforms into a hyper-efficient conduit for financial contagion. As distressed institutions liquidate illiquid assets in fire sales, asset depreciation cascades through counterparty balance sheets, triggering systemic insolvency. Effective macroprudential regulation requires identifying systemic topologically central nodes and enforcing countercyclical capital buffers.",
+    "suggested_notes_tr": [
+      "Mikro-ihtiyati tecrit eleştirisi: Kurumları tek başına incelemek sistemik riski ölçemez",
+      "Ağ Topolojisi (Network Topology): Bankalar düğüm (node), türev/borç bağları kenar (edge) olan yönlü çizge",
+      "Çift taraflı etki (Haldane & May):",
+      "  - Sakin dönemde yoğun bağlantılılık yerel şokları dağıtarak direnç sağlar",
+      "  - Kriz anında ise sistemik bulaşma (contagion) kanalına dönüşür",
+      "Mekanizma: Varlık yangın satışı (fire sale) -> Bilanço erimesi -> Zincirleme iflas",
+      "Çözüm: Ağın merkezindeki kritik düğümlere döngü karşıtı sermaye tamponu (countercyclical buffer) zorunluluğu"
+    ],
+    "questions": [
+      {
+        "id": "lis_c2_07_q1",
+        "question": "How does dense network interconnectedness exhibit non-linear behavior during financial crises?",
+        "options": [
+          {
+            "key": "A",
+            "text": "It permanently freezes all currency exchange rates"
+          },
+          {
+            "key": "B",
+            "text": "It dissipates small shocks in calm periods, but amplifies contagion once a critical shock threshold is exceeded"
+          },
+          {
+            "key": "C",
+            "text": "It eliminates the need for central banking authorities"
+          },
+          {
+            "key": "D",
+            "text": "It guarantees perpetual economic growth"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'In quiescent economic periods, dense interconnectedness enhances financial resilience ... when shocks exceed a critical threshold, dense topological interconnectedness transforms into a hyper-efficient conduit for financial contagion' denilmiştir."
+      },
+      {
+        "id": "lis_c2_07_q2",
+        "question": "What is the macroprudential regulatory response to topologically central financial nodes?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Nationalizing all retail consumer branches"
+          },
+          {
+            "key": "B",
+            "text": "Enforcing heightened countercyclical capital buffers and stress-testing interbank exposures"
+          },
+          {
+            "key": "C",
+            "text": "Prohibiting all electronic interbank transactions"
+          },
+          {
+            "key": "D",
+            "text": "Forbidding foreign commercial investment"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'identifying systemic topologically central nodes and enforcing countercyclical capital buffers' ifadesi geçer."
+      }
+    ]
+  },
+  {
+    "id": "lis_c2_08",
+    "university_id": "ankara",
+    "level": "C2",
+    "type": "while_listening",
+    "title": "Necropolitics, Sovereignty, and Spaces of Exception in Border Regimes",
+    "subtitle": "Ankara Üniversitesi Siyaset Felsefesi Dersi",
+    "target_university": "Ankara Üniversitesi",
+    "duration_minutes": 15,
+    "lecture_duration_seconds": 110,
+    "instructions_tr": "Nekropolitika ve egemen istisna halleri üzerine felsefi dersi dinleyin.",
+    "audio_script": "Achille Mbembe’s seminal paradigm of 'necropolitics' reformulates classical theories of sovereignty by positing that ultimate sovereign power resides not in the management and optimization of biological life—as Michel Foucault argued in his biopolitical lectures—but in the sovereign prerogative to dictate who is disposable and who may be exposed to death. Synthesizing Giorgio Agamben’s concept of the 'state of exception' with postcolonial critique, Mbembe demonstrates that modern sovereignty materializes most tangibly in geographical border regimes. Frontiers, offshore detention centers, and militarized maritime boundaries operate as contemporary spaces of exception where constitutional guarantees and international humanitarian law are suspended through administrative decree. Within these necropolitical zones, stateless refugees are stripped of political existence, reduced to what Agamben termed 'bare life'—human existence devoid of juridical rights. By weaponizing hostile geography—forcing migrants into treacherous desert expanses or unnavigable maritime channels—the sovereign state manufactures conditions of mass mortality while preserving formal legal deniability.",
+    "suggested_notes_tr": [
+      "Achille Mbembe (Nekropolitika): Nihai egemenlik gücü yaşamı yönetmekte değil, kimin ölüme terk edileceğini (disposable) belirlemektir",
+      "Agamben'in İstisna Hali (State of Exception): Anayasal hakların ve uluslararası hukukun askıya alındığı alanlar",
+      "Sınır rejimleri ve gözaltı kampları: Modern istisna mekanları",
+      "Çıplak Yaşam (Bare Life): Hukuki haklarından arındırılmış saf biyolojik varoluş",
+      "Coğrafyanın silah haline getirilmesi: Çöl veya tehlikeli deniz rotalarına iterek ölümü doğallaştırma ve hukuki sorumluluktan kaçınma"
+    ],
+    "questions": [
+      {
+        "id": "lis_c2_08_q1",
+        "question": "What is the defining prerogative of sovereign power according to Achille Mbembe's necropolitics?",
+        "options": [
+          {
+            "key": "A",
+            "text": "The monetary printing of physical fiat currency"
+          },
+          {
+            "key": "B",
+            "text": "The capacity to dictate who is disposable and expose targeted populations to death"
+          },
+          {
+            "key": "C",
+            "text": "The scientific mapping of planetary geography"
+          },
+          {
+            "key": "D",
+            "text": "The management of domestic agricultural production"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'ultimate sovereign power resides ... in the sovereign prerogative to dictate who is disposable and who may be exposed to death' denilmiştir."
+      },
+      {
+        "id": "lis_c2_08_q2",
+        "question": "How does Giorgio Agamben characterize 'bare life' (homo sacer)?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Human biological existence stripped of juridical rights and political status"
+          },
+          {
+            "key": "B",
+            "text": "A citizen exercising full constitutional democratic voting rights"
+          },
+          {
+            "key": "C",
+            "text": "An immortal mythological archetype"
+          },
+          {
+            "key": "D",
+            "text": "A diplomat holding international sovereign immunity"
+          }
+        ],
+        "correct_answer": "A",
+        "explanation_tr": "'reduced to what Agamben termed bare life—human existence devoid of juridical rights' bilgisi yer alır."
+      }
+    ]
+  },
+  {
+    "id": "lis_c2_09",
+    "university_id": "itu",
+    "level": "C2",
+    "type": "while_listening",
+    "title": "Thermodynamic Entropy, Information Theory, and Cosmological Arrows of Time",
+    "subtitle": "İTÜ Teorik Fizik ve Kozmoloji Semineri",
+    "target_university": "İstanbul Teknik Üniversitesi",
+    "duration_minutes": 15,
+    "lecture_duration_seconds": 110,
+    "instructions_tr": "Termodinamik entropi, bilgi teorisi ve zamanın oku dersini dinleyin.",
+    "audio_script": "The macroscopic unidirectionality of time represents one of the most enigmatic conundrums in fundamental physics. While the microscopic laws of classical mechanics, quantum wavefunctions, and general relativity are strictly time-reversal symmetric, human macroscopic reality exhibits an immutable chronological arrow pointing inexorably from past to future. The second law of thermodynamics grounds this asymmetry in statistical entropy: the spontaneous evolution of isolated thermodynamic systems from macrostates of low multiplicity to macrostates of overwhelmingly higher probability. In the nineteen forties, Claude Shannon formulated mathematical information theory, proving that thermodynamic entropy is mathematically isomorphic to information entropy: entropy quantifies the missing microscopic information required to specify a physical microstate given macroscopic thermodynamic coordinates. To account for why our present universe has not already reached thermal equilibrium or 'heat death', cosmologists postulate the Past Hypothesis: our universe originated in an extraordinarily low-entropy gravitational boundary condition at the Big Bang, establishing the thermodynamic reservoir from which all cosmic complexity and subjective time flow.",
+    "suggested_notes_tr": [
+      "Mikroskopik simetri vs. Makroskopik asimetri: Temel fizik denklemleri zaman simetriktir ama gerçekte zaman tek yönlü akar",
+      "Termodinamiğin 2. Yasası: Yalıtılmış sistemlerde entropi (olasılık/düzensizlik) daima artar",
+      "Claude Shannon (Bilgi Teorisi): Termodinamik entropi, eksik mikroskobik bilgi ile matematiksel olarak özdeştir (izomorfik)",
+      "Geçmiş Hipotezi (Past Hypothesis): Evren Büyük Patlama anında olağanüstü düşük entropili bir başlangıç sınır durumundaydı; bu rezerv bugün karmaşıklığı ve zaman akışını besler"
+    ],
+    "questions": [
+      {
+        "id": "lis_c2_09_q1",
+        "question": "What mathematical isomorphism did Claude Shannon demonstrate between thermodynamics and information theory?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Thermodynamic entropy is isomorphic to missing microscopic information"
+          },
+          {
+            "key": "B",
+            "text": "Electrical voltage is identical to cosmic dark matter"
+          },
+          {
+            "key": "C",
+            "text": "Sound velocity is isomorphic to quantum gravitational curvature"
+          },
+          {
+            "key": "D",
+            "text": "Biological cell reproduction is mathematically identical to binary code"
+          }
+        ],
+        "correct_answer": "A",
+        "explanation_tr": "'Shannon formulated mathematical information theory, proving that thermodynamic entropy is mathematically isomorphic to information entropy: entropy quantifies the missing microscopic information' denilmiştir."
+      },
+      {
+        "id": "lis_c2_09_q2",
+        "question": "What is the 'Past Hypothesis' proposed by contemporary cosmologists?",
+        "options": [
+          {
+            "key": "A",
+            "text": "The universe has no physical beginning in time"
+          },
+          {
+            "key": "B",
+            "text": "The universe began in an extraordinary state of exceptionally low gravitational entropy at the Big Bang"
+          },
+          {
+            "key": "C",
+            "text": "Time moves backward in black hole horizons"
+          },
+          {
+            "key": "D",
+            "text": "Entropy decreases spontaneously across cosmic clusters"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'cosmologists postulate the Past Hypothesis: our universe originated in an extraordinarily low-entropy gravitational boundary condition at the Big Bang' denilmiştir."
+      }
+    ]
+  },
+  {
+    "id": "lis_c2_10",
+    "university_id": "general",
+    "level": "C2",
+    "type": "while_listening",
+    "title": "Structural Semiotics and Derrida's Différance",
+    "subtitle": "Genel C2 İleri Felsefe ve Dilbilim",
+    "target_university": "Genel Hazırlık & CEFR C2",
+    "duration_minutes": 15,
+    "lecture_duration_seconds": 110,
+    "instructions_tr": "Jacques Derrida'nın yapısöküm (deconstruction) ve différance kavramını dinleyip soruları yanıtlayın.",
+    "audio_script": "In twentieth-century continental philosophy, Jacques Derrida's deconstructive intervention radicalized Saussurean structural linguistics by interrogating the Western metaphysical tradition of the 'metaphysics of presence'. Ferdinand de Saussure had demonstrated that language is a system of differential signs without positive terms: a signifier signifies only by virtue of what it is not within a relational network. Derrida observed that Western philosophy had persistently repressed this differential nature by seeking an ultimate 'transcendental signified'—an unmediated, self-present origin such as God, Reason, or Sensory Immediacy. To deconstruct this illusion, Derrida coined the neologism 'différance', combining the dual French meanings of differing and deferring. Meaning, Derrida asserts, is never fully present in a discrete linguistic sign; it is spatially differentiated from other signifiers and temporally deferred across an infinite chain of sign substitution. Because meaning is perpetually postponed, all texts contain unresolvable internal contradictions, or aporias, that systematically undo their own totalizing claims.",
+    "suggested_notes_tr": [
+      "Jacques Derrida ve Yapısöküm (Deconstruction)",
+      "Varlık Metafiziği (Metaphysics of Presence): Batı felsefesinin nihai bir 'Aşkın Gösterilen' (Tanrı, Akıl, Özne) arayışının eleştirisi",
+      "Différance kavramı: Fransızca 'differ' (farklılaşmak) ve 'defer' (ertelemek) kelimelerinin birleşimi",
+      "Anlamın yapısı: Anlam hiçbir zaman tek bir kelimede tam olarak 'mevcut' değildir; uzamsal olarak farklılaşır ve zamansal olarak sonsuz zincirde ertelenir",
+      "Aporia (Çıkmaz): Tüm metinler kendi iddialarını bozan içsel çözülemez çelişkiler barındırır"
+    ],
+    "questions": [
+      {
+        "id": "lis_c2_10_q1",
+        "question": "What dual meanings are combined in Jacques Derrida's neologism 'différance'?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Definition and deduction"
+          },
+          {
+            "key": "B",
+            "text": "Differing in space and deferring in time"
+          },
+          {
+            "key": "C",
+            "text": "Describing and destroying"
+          },
+          {
+            "key": "D",
+            "text": "Demonstration and debate"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'coined the neologism différance, combining the dual French meanings of differing and deferring' denilmiştir."
+      },
+      {
+        "id": "lis_c2_10_q2",
+        "question": "Why did Derrida argue that meaning is never fully present in a single linguistic sign?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Because vowels have no acoustic resonance"
+          },
+          {
+            "key": "B",
+            "text": "Meaning is spatially differentiated from other signs and temporally deferred across an infinite chain of signifiers"
+          },
+          {
+            "key": "C",
+            "text": "Because language was invented recently"
+          },
+          {
+            "key": "D",
+            "text": "Because human memory has limited neurological storage"
+          }
+        ],
+        "correct_answer": "B",
+        "explanation_tr": "'Meaning, Derrida asserts, is never fully present in a discrete linguistic sign; it is spatially differentiated from other signifiers and temporally deferred across an infinite chain of sign substitution' denilmiştir."
+      }
+    ]
   }
 ]
