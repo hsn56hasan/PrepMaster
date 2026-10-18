@@ -3527,5 +3527,2337 @@
     "correct_answer": "A",
     "explanation_tr": "'Unless X mandates Y, doing Z poses intolerable perils' kalıbı 'Eğer X, Y'yi zorunlu kılmazsa, Z'yi uygulamak kabul edilemez anayasal tehlikeler doğurur' demektir. 'Unless' koşul bağlacı 'if ... not' yapısına denktir. A seçeneğinde: 'poses intolerable constitutional perils' -> 'creates unacceptable constitutional dangers', 'deploying deep neural networks within criminal sentencing' -> 'incorporating opaque deep learning algorithms into criminal judicial sentencing', 'unless statutory frameworks mandate rigorous auditability' -> 'if legal regulations do not enforce strict audit mechanisms' eşleştirmeleriyle cümle hem dilbilgisel hem anlamsal açıdan kusursuz yeniden ifade edilmiştir.\n\nAkademik İpucu (Bilkent PAE): 'Unless' (medikçe/madıkça) yapısının 'if ... not' ve 'intolerable = unacceptable', 'statutory = legal', 'mandate = enforce' eşanlamlılarıyla dönüştürülmesi Bilkent PAE Restatement sorularında sıklıkla karşımıza çıkan temel bir ölçme standardıdır.",
     "explanation_en": "'Unless' is logically equivalent to 'if not'. Option A precisely parallels the conditional danger: deploying neural networks creates unacceptable constitutional hazards if legal frameworks fail to mandate strict audits."
+  },
+  {
+    "id": "q-hacettepe-01",
+    "university_id": "hacettepe",
+    "level": "C1",
+    "category": "Restatement",
+    "question": "Choose the sentence that is closest in meaning to the sentence given below:\n\n'Had the peer-review committee not identified methodological oversights during the initial audit, the flawed clinical trial data would almost certainly have been disseminated worldwide.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "The flawed clinical trial data was published globally because the audit committee failed to recognize methodological errors in time."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "The dissemination of the erroneous clinical trial data was prevented only because the peer-review audit successfully pinpointed methodological shortcomings."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Even though the audit committee noticed methodological problems, they were unable to halt the worldwide distribution of the trial results."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "If the clinical trials had been conducted without methodological oversights, the peer-review committee would have approved their global distribution."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "'Had the committee not identified...' kalıbı Type 3 Inverted Conditional (Gizli 'If the committee hadn't identified...') yapısıdır ve geçmişte gerçekleşmiş bir koşulun tersini ifade eder. Denetim komitesi yöntemsel hataları fark ettiği için hatalı klinik verilerin dünyaya yayılması engellenmiştir. B şıkkındaki 'The dissemination... was prevented only because the peer-review audit successfully pinpointed methodological shortcomings' cümlesi bu nedeni ve sonucu birebir aktarır.",
+    "explanation_en": "The sentence employs an inverted third conditional ('Had ... not identified') indicating that the peer review successfully caught the errors and thus averted worldwide distribution of the flawed data, precisely mirrored in B."
+  },
+  {
+    "id": "q-hacettepe-02",
+    "university_id": "hacettepe",
+    "level": "B2",
+    "category": "Restatement",
+    "question": "Choose the sentence that is closest in meaning to the sentence given below:\n\n'Not only did the introduction of mechanized harvesting techniques quadruple regional crop yields, but it also precipitated unprecedented rural-to-urban labor migration.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "Mechanized harvesting techniques led to a fourfold increase in agricultural output, while simultaneously triggering an unprecedented influx of rural workers into cities."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Rural-to-urban migration increased four times faster than crop yields despite the modernization of regional harvesting methods."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Agricultural yields would not have quadrupled had rural workers not migrated en masse to urban industrial centers."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "The advent of mechanized harvesting was solely responsible for urban population growth, without contributing significantly to crop production."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Not only... but also...' korelatif yapısı iki önemli olayın birlikte gerçekleştiğini vurgular: hasadın 4 katına çıkması ('quadruple') ve benzeri görülmemiş bir kırdan kente göçün tetiklenmesi ('precipitated unprecedented migration'). A şıkkında 'fourfold increase' (dört kat artış) ve 'simultaneously triggering an unprecedented influx' ifadeleri her iki durumu eksiksiz karşılar.",
+    "explanation_en": "The correlative structure 'Not only... but also...' asserts two concurrent outcomes: a fourfold increase in crop output and unprecedented rural-to-urban migration. Choice A restates both facets accurately."
+  },
+  {
+    "id": "q-hacettepe-03",
+    "university_id": "hacettepe",
+    "level": "C1",
+    "category": "Restatement",
+    "question": "Choose the sentence that is closest in meaning to the sentence given below:\n\n'Despite widespread skepticism regarding its economic feasibility, the municipal council proceeded with the carbon-capture initiative, citing imperative ecological commitments.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "Because the carbon-capture initiative was deemed commercially lucrative, the city administration ignored objections regarding its environmental damage."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Although many doubted whether the carbon-capture project was financially viable, the municipal council enacted it due to unavoidable environmental responsibilities."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "The city council abandoned the carbon-capture scheme once economists demonstrated that its ecological benefits were heavily exaggerated."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Had the municipal authorities not faced widespread skepticism, they would have postponed their environmental carbon-capture commitments."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "'Despite widespread skepticism regarding its economic feasibility' (ekonomik uygulanabilirliğine yönelik yaygın şüpheye rağmen), projenin finansal uygulanabilirliğinin sorgulandığını gösterir. 'Citing imperative ecological commitments' ise belediyenin zorunlu çevresel taahhütleri gerekçe göstererek projeyi sürdürdüğünü ifade eder. B şıkkı bu zıtlık ve gerekçe bağlamını mükemmel şekilde yeniden ifade eder.",
+    "explanation_en": "The concessive 'Despite' introduces doubts about financial feasibility ('financially viable'), contrasted with the council's decision to proceed based on binding ecological duties, perfectly aligned with B."
+  },
+  {
+    "id": "q-hacettepe-04",
+    "university_id": "hacettepe",
+    "level": "B2",
+    "category": "Restatement",
+    "question": "Choose the sentence that is closest in meaning to the sentence given below:\n\n'The more strictly regulatory bodies enforce antimicrobial stewardship in poultry farming, the less frequently multi-drug resistant pathogen strains emerge in local clinical environments.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "Rigorous oversight of antibiotic usage in poultry farming directly correlates with a reduction in the incidence of multi-drug resistant pathogens in nearby healthcare settings."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Unless regulatory bodies relax their antibiotic guidelines for poultry, multi-drug resistant pathogens will proliferate uncontrollably in hospitals."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "The emergence of drug-resistant pathogens in clinics has forced regulatory bodies to prohibit all chemical interventions in poultry farming."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Stricter antimicrobial rules in poultry facilities have had negligible impact on the rate of resistant bacterial infections diagnosed in clinical centers."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'The more [X], the less [Y]' yapısı doğrudan ters orantılı bir korelasyon belirtir: Tavuk çiftliklerinde antibiyotik denetimi ne kadar sıkı uygulanırsa, klinik ortamlarda dirençli patojenler o kadar az ortaya çıkar. A şıkkındaki 'Rigorous oversight... directly correlates with a reduction in the incidence...' bu orantısal ilişkiyi eksiksiz ifade eder.",
+    "explanation_en": "The comparative correlation 'The more..., the less...' indicates an inverse relationship between enforcement of antibiotic guidelines and the emergence of resistant strains, as captured in A."
+  },
+  {
+    "id": "q-hacettepe-05",
+    "university_id": "hacettepe",
+    "level": "B2",
+    "category": "Paragraph Comprehension",
+    "passage": "Advances in CRISPR-Cas9 genome editing have fundamentally transformed therapeutic prospects for monogenic disorders. By introducing targeted double-strand breaks at specific genomic loci, cellular repair machinery can be co-opted to excise deleterious mutations. However, translating somatic editing to clinical permanence requires mitigating off-target cleavages, where non-homologous sequences are inadvertently altered. Contemporary research focuses on high-fidelity Cas variants and transient ribonucleoprotein delivery vehicles to minimize such genomic promiscuity.",
+    "question": "According to the passage, what is a primary prerequisite for the safe clinical deployment of CRISPR-Cas9 therapies?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "Accelerating cellular division to outpace harmful non-homologous genetic mutations."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Significantly curbing unintended cleavage events at unintended chromosomal sites."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Replacing ribonucleoprotein delivery systems entirely with permanent viral vectors."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Restricting genome editing protocols exclusively to polygenic immunological conditions."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Metinde 'translating somatic editing to clinical permanence requires mitigating off-target cleavages, where non-homologous sequences are inadvertently altered' denmektedir. Yani güvenli klinik kullanım için hedeflenmemiş/istenmeyen kesimlerin ('off-target cleavages') azaltılması zorunludur. B şıkkında 'curbing unintended cleavage events at unintended chromosomal sites' bu gereksinimi tam olarak özetler.",
+    "explanation_en": "The passage states that translating somatic editing to permanent clinical application requires mitigating off-target cleavages, which corresponds directly to choice B."
+  },
+  {
+    "id": "q-hacettepe-06",
+    "university_id": "hacettepe",
+    "level": "C1",
+    "category": "Paragraph Comprehension",
+    "passage": "Educational policy historically prioritized summative assessments—high-stakes examinations designed to quantify cumulative knowledge acquisition at terminal instructional junctures. However, cognitive psychologists argue that such evaluative rubrics often induce debilitating performance anxiety while providing meager diagnostic utility for iterative pedagogical refinement. Conversely, formative assessments, characterized by low-stakes diagnostic feedback embedded within the learning trajectory, foster metacognitive awareness and enable educators to rectify conceptual misconceptions dynamically.",
+    "question": "It can be inferred from the text that formative assessments are considered superior for pedagogy because they:",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "Offer immediate, low-stress feedback that actively guides ongoing instructional adjustments and student self-regulation."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Completely replace the need for academic grading and standardized curricular benchmarks."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Focus exclusively on measuring terminal knowledge retention under strict timed conditions."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Eliminate the instructor's responsibility to diagnose underlying cognitive misconceptions."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Metinde formative değerlendirmelerin 'low-stakes diagnostic feedback embedded within the learning trajectory' sağladığı, 'foster metacognitive awareness' (üstbilişsel farkındalık) kazandırdığı ve öğretmenlerin kavram yanılgılarını dinamik olarak düzeltmesine imkan verdiği belirtilmiştir. Bu durum A seçeneğinde 'immediate, low-stress feedback that actively guides ongoing instructional adjustments and student self-regulation' olarak özetlenmiştir.",
+    "explanation_en": "The author contrasts stressful summative exams with formative assessments that provide low-stakes diagnostic feedback during the learning process, fostering metacognition and real-time guidance (Choice A)."
+  },
+  {
+    "id": "q-hacettepe-07",
+    "university_id": "hacettepe",
+    "level": "B2",
+    "category": "Paragraph Comprehension",
+    "passage": "The concept of cognitive reserve explains why two individuals with equivalent neuropathological Alzheimer's burden may display vastly divergent clinical symptomatology. Epidemiological investigations indicate that sustained engagement in intellectually stimulating occupations, bilingualism, and extensive tertiary education confer neuroprotective resilience. Rather than preventing amyloid beta accumulation per se, cognitive reserve enables the brain to recruit alternative neural circuitry, thereby preserving functional independence despite ongoing structural atrophy.",
+    "question": "Which of the following best summarizes how cognitive reserve operates according to the passage?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "It completely eradicates the accumulation of pathological amyloid beta plaques in brain tissue."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "It activates alternative neural networks that help sustain cognitive performance in spite of underlying brain degeneration."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "It limits educational engagement in older age to protect vulnerable cerebral structures from stress."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "It ensures that individuals with low neurodevelopmental exposure experience fewer clinical symptoms."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Metnin son cümlesinde: 'Rather than preventing amyloid beta accumulation per se, cognitive reserve enables the brain to recruit alternative neural circuitry, thereby preserving functional independence despite ongoing structural atrophy' denmektedir. Yani amiloid birikimini sıfırlamaz; alternatif nöral yolları devreye sokarak yapısal küçülmeye rağmen fonksiyonelliği korur. Bu doğrudan B seçeneğidir.",
+    "explanation_en": "The passage clearly specifies that cognitive reserve operates not by eliminating amyloid plaques, but by enabling the brain to recruit compensatory neural pathways, maintaining functional independence (B)."
+  },
+  {
+    "id": "q-hacettepe-08",
+    "university_id": "hacettepe",
+    "level": "C1",
+    "category": "Paragraph Comprehension",
+    "passage": "Mangrove biomes represent some of the most carbon-dense ecosystems globally, sequestering blue carbon in their anaerobic sediment at rates up to ten times greater than terrestrial tropical rainforests. Furthermore, their complex aerial prop-root architecture attenuates destructive wave energy during cyclonic surges, shielding coastal settlements from catastrophic erosion. Nevertheless, unregulated aquaculture expansion and coastal real estate developments have decimated approximately 35% of global mangrove coverage since 1980, releasing immense sequestered carbon back into the atmosphere.",
+    "question": "The author's discussion of mangroves implies that their destruction constitutes a dual ecological hazard because:",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "It diminishes vital natural storm buffers for coastal communities while simultaneously accelerating atmospheric greenhouse gas releases."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "It deprives commercial fisheries of aquaculture territory while permanently raising terrestrial soil salinity."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "It prevents tropical rainforests from absorbing blue carbon through their terrestrial root networks."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "It shifts all cyclonic surge energy directly inland toward arid desert regions."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Metinde mangrovların iki kritik rolü vurgulanmaktadır: (1) Mavi karbonu hapsederek atmosferi koruması ve (2) Kıyı yerleşimlerini fırtına dalgalarından ('wave energy during cyclonic surges') ve erozyondan koruması. Yok edilmeleri durumunda hem fırtına kalkanı kalkar hem de depolanan devasa karbon atmosfere salınır. A seçeneği bu çifte tehdidi kusursuz şekilde ifade eder.",
+    "explanation_en": "The passage highlights two major functions: carbon sequestration and physical protection against coastal surges. Losing them unleashes sequestered carbon and removes coastal protection, making A the correct deduction."
+  },
+  {
+    "id": "q-hacettepe-09",
+    "university_id": "hacettepe",
+    "level": "B2",
+    "category": "Academic Structure & Reading",
+    "question": "Choose the option that correctly completes the sentence with appropriate participial reduction and clause syntax:\n\n'Having analyzed the spectral variance across thirty anomalous stellar formations, _______.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "a revised taxonomy of high-energy cosmic radiation was proposed by the astrophysics research consortium."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "the astrophysics research consortium proposed a revised taxonomy of high-energy cosmic radiation."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "the data confirmed that several unexpected gravitational anomalies had indeed been recorded."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "further observational funding was urgently requested from the national science foundation."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Cümle 'Having analyzed...' ile başlayan bir Perfect Participle yapısıyla başlamaktadır. İngilizce dilbilgisinde 'dangling participle' (boşta kalan sıfat-fiil) hatasından kaçınmak için ana cümlenin öznesi, bu analizi bizzat yapan kişi veya kurum olmalıdır. Analizi yapan 'astrophysics research consortium' olduğundan, özne olarak 'the astrophysics research consortium' ile başlayan B şıkkı dilbilgisel olarak tek doğrudur.",
+    "explanation_en": "To avoid a dangling participle, the subject of the main clause must logically perform the action of analyzing ('Having analyzed...'). The consortium performed the analysis, making B syntactically correct."
+  },
+  {
+    "id": "q-hacettepe-10",
+    "university_id": "hacettepe",
+    "level": "C1",
+    "category": "Academic Structure & Reading",
+    "question": "Select the option that appropriately constructs an emphatic cleft sentence to highlight the critical variable:\n\n'_______ that ultimately prompted the supervisory committee to invalidate the clinical trial findings.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "It was the systematic omission of baseline control data"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Although the baseline control data were omitted"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Because they omitted the baseline control data"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "There was an omission of baseline control data"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Soru '... that ultimately prompted the supervisory committee...' yapısıyla birleşen bir It-Cleft (vurgu cümlesi) gerektirmektedir. 'It was [odak öge] that...' kalıbı akademik metinlerde belirli bir etkeni vurgulamak için sıkça kullanılır. A şıkkı 'It was the systematic omission of baseline control data' cümleyi gramer ve vurgu açısından eksiksiz tamamlar.",
+    "explanation_en": "The sentence requires an it-cleft construction ('It was [noun phrase] that...') to provide emphatic focus on the causal agent, making A the only syntactically sound completion."
+  },
+  {
+    "id": "q-hacettepe-11",
+    "university_id": "hacettepe",
+    "level": "C1",
+    "category": "Academic Structure & Reading",
+    "question": "Choose the grammatically correct form to complete the sentence requiring the formal academic subjunctive mood:\n\n'The institutional ethics board recommended that the principal investigator _______ all secondary trial parameters to the open-science depository before publishing the manuscript.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "submits"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "submitted"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "submit"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "would submit"
+      }
+    ],
+    "correct_answer": "C",
+    "explanation_tr": "'Recommend that + subject + [base form of verb]' kuralı formal akademik dilde 'Mandative Subjunctive' olarak adlandırılır. Özne tekil dahi olsa fiil yalın halde (bare infinitive / base form) kullanılır. Dolayısıyla 'the principal investigator submit' (C şıkkı) tek doğru akademik kullanımdır.",
+    "explanation_en": "Verbs of recommendation, demand, or insistence followed by a 'that' clause trigger the mandative subjunctive, requiring the base form of the verb ('submit') regardless of the third-person singular subject."
+  },
+  {
+    "id": "q-hacettepe-12",
+    "university_id": "hacettepe",
+    "level": "B2",
+    "category": "Academic Structure & Reading",
+    "question": "Which of the following sentences exhibits the most formal academic register appropriate for a doctoral dissertation abstract?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "We looked into lots of things about water pollution and found out that factories were doing bad stuff to the local rivers."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Quantitative chromatographic analysis revealed substantial elevations of industrial effluent concentrations across adjacent fluvial networks."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "The scientists were totally shocked because the river water turned out to be way more contaminated than anyone thought."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "You can easily tell that the water quality gets pretty terrible whenever nearby plants dump their toxic waste."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Akademik tez ve makale özetlerinde nesnel, nominalize edilmiş (isimleştirilmiş) ve kesin terminolojiye dayanan resmi dil (academic register) kullanılır. A, C ve D şıklarında gayriresmi kelimeler ('lots of things', 'bad stuff', 'totally shocked', 'way more', 'pretty terrible', 'you can easily tell') yer alırken, B şıkkı 'Quantitative chromatographic analysis revealed substantial elevations...' ifadesiyle kusursuz bir akademik üslup sergiler.",
+    "explanation_en": "Option B uses precise scientific nominalization, objective passive voice, and formal academic vocabulary ('quantitative chromatographic analysis', 'substantial elevations', 'fluvial networks'), characteristic of doctoral research."
+  },
+  {
+    "id": "q-ankara-01",
+    "university_id": "ankara",
+    "level": "B1",
+    "category": "Cloze Test",
+    "question": "Choose the most appropriate discourse marker to complete the blank in the environmental engineering excerpt:\n\n'Photovoltaic solar cell efficiency has improved markedly over the past decade; _______, the capital cost of stationary grid-scale storage batteries remains a prohibitive hurdle for developing rural communities.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "nonetheless"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "furthermore"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "similarly"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "namely"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Cümlenin ilk kısmında güneş hücrelerinin verimliliğinin belirgin şekilde arttığı (olumlu gelişme), noktalı virgülden sonra ise batarya depolama maliyetlerinin gelişmekte olan kırsal topluluklar için hala engel teşkil ettiği (olumsuz durum) ifade edilmektedir. İki yargı arasındaki tezatlığı bağlamak için bir zıtlık zarfı (contrastive adverb) gereklidir. 'Nonetheless' (yine de / buna rağmen) doğru cevaptır. 'Furthermore' ekleme, 'similarly' benzerlik, 'namely' açıklama bildirir.",
+    "explanation_en": "The first clause notes technological progress, while the second introduces an ongoing economic impediment. 'Nonetheless' provides the required concessive contrast."
+  },
+  {
+    "id": "q-ankara-02",
+    "university_id": "ankara",
+    "level": "B2",
+    "category": "Cloze Test",
+    "question": "Select the correct connective phrase to complete the economics text:\n\n'The central monetary authority enacted stringent reserve ratio mandates; _______, speculative capital flight decelerated and currency exchange volatility was brought under control within two quarters.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "on the contrary"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "subsequently"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "in case"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "otherwise"
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Metinde merkez bankasının sıkı karşılık oranları getirdiği ve bu kararın ardından ('ardından / akabinde') spekülatif sermaye kaçışının yavaşlayıp döviz oynaklığının kontrol altına alındığı kronolojik bir neden-sonuç akışıyla verilmektedir. 'Subsequently' (sonrasında / akabinde) zaman ve sonuç ilişkisini doğru şekilde tamamlar. 'On the contrary' tam aksine, 'otherwise' aksi takdirde demektir.",
+    "explanation_en": "'Subsequently' denotes temporal succession and consequential progression, accurately connecting the central bank's policy intervention with the resulting market stabilization."
+  },
+  {
+    "id": "q-ankara-03",
+    "university_id": "ankara",
+    "level": "B2",
+    "category": "Cloze Test",
+    "question": "Fill in the blank with the appropriate transition marker:\n\n'Classical microeconomic models presupposed that human consumers act as perfectly rational utility maximizers; _______, empirical behavioral economics reveals that cognitive heuristics and emotional biases systematically distort financial judgment.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "conversely"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "in addition"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "for instance"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "consequently"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Klasik modellerin insanları 'tamamen rasyonel' kabul ettiği varsayımı ile davranışsal ekonominin 'bilişsel önyargıların kararları sistematik olarak saptırdığı' bulgusu birbirinin tam zıddıdır (opposite perspectives). Karşıtlık ve antitez bildiren 'conversely' (aksine / tam tersine) cümleyi mantıksal olarak doğru bağlar.",
+    "explanation_en": "The sentence contrasts classical theory with empirical behavioral findings. 'Conversely' is the appropriate transitional adverb introducing an opposing viewpoint or contrary reality."
+  },
+  {
+    "id": "q-ankara-04",
+    "university_id": "ankara",
+    "level": "C1",
+    "category": "Cloze Test",
+    "question": "Choose the formal academic conjunction that correctly completes the sentence:\n\n'Higher education institutions must safeguard intellectual autonomy and methodological diversity, _______ uninhibited scholarly critique is the foundational prerequisite of scientific discovery.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "inasmuch as"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "even though"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "so that"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "whereas"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Inasmuch as' resmi akademik İngilizcede 'since / because / -dığı için' anlamında gerekçe ve neden bildiren bağlaçtır. İkinci cümlede engellenmemiş bilimsel eleştirinin bilimsel keşfin temel ön koşulu olduğu gerekçe olarak sunulduğundan 'inasmuch as' (mademki, -dığı cihetle, çünkü) tam uyum sağlar. 'Even though' zıtlık, 'so that' amaç, 'whereas' karşılaştırma bildirir.",
+    "explanation_en": "'Inasmuch as' is a formal causal conjunction meaning 'considering that' or 'since', providing the foundational justification for preserving institutional intellectual autonomy."
+  },
+  {
+    "id": "q-ankara-05",
+    "university_id": "ankara",
+    "level": "B1",
+    "category": "Reading Analysis",
+    "passage": "Carbon pricing mechanisms, primarily emissions trading systems and direct carbon levies, seek to internalize the negative environmental externalities of fossil fuel combustion. By attaching an explicit price to each metric ton of carbon dioxide equivalent released, these policies incentivize industrial enterprises to adopt cleaner manufacturing technologies or transition to renewable energy portfolios. Proponents emphasize that revenue generated through carbon taxation can be rebated to low-income households or reinvested in public green infrastructure.",
+    "question": "What is the primary objective of carbon pricing policies as described in the passage?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "To incorporate the true ecological costs of greenhouse emissions into industrial production decisions."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "To completely ban all fossil fuel extraction within developing economies."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "To replace municipal public infrastructure entirely with private corporate utilities."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "To reduce government tax revenues by exempting industrial polluters from national tariffs."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Metnin ilk cümlesinde açıkça: 'Carbon pricing mechanisms... seek to internalize the negative environmental externalities of fossil fuel combustion' (fosil yakıt kullanımının olumsuz çevresel dışsallıklarını içselleştirmeyi amaçlar) denmektedir. Bu da sanayi üretim kararlarında ekolojik maliyetlerin doğrudan hesaba katılmasını ('incorporate true ecological costs') ifade eder. Dolayısıyla A şıkkı ana hedeftir.",
+    "explanation_en": "The passage identifies the primary aim as internalizing the negative externalities of fossil fuel emissions, which directly corresponds to choice A."
+  },
+  {
+    "id": "q-ankara-06",
+    "university_id": "ankara",
+    "level": "B2",
+    "category": "Reading Analysis",
+    "passage": "Linguistic anthropologists have observed that digital communication platforms do not degrade formal literacy, as alarmist commentators frequently claim. Instead, internet-mediated discourse fosters a form of complex 'digital diglossia,' wherein young communicators code-switch effortlessly between standard orthography in formal academic contexts and inventive, truncated phonetic vernaculars on peer messaging platforms. Such adaptability reflects nuanced socio-pragmatic competence rather than cognitive linguistic deficit.",
+    "question": "According to the passage, the use of informal language on digital platforms reflects:",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "An irreversible deterioration in overall verbal and cognitive aptitude."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "A sophisticated pragmatic ability to adapt linguistic registers depending on social context."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "An inability of youth to distinguish between academic and non-academic vocabularies."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "A deliberate political rejection of standardized spelling rules across all school systems."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Yazar, dijital iletişimin dili bozmadığını ('do not degrade formal literacy'), aksine gençlerin ortama göre zahmetsizce dil değiştirebildiğini ('code-switch effortlessly') ve bunun 'nuanced socio-pragmatic competence' (incelikli sosyo-pragmatik yetkinlik) gösterdiğini belirtmektedir. B seçeneğinde 'sophisticated pragmatic ability to adapt linguistic registers depending on social context' ifadesi bu analizi birebir yansıtır.",
+    "explanation_en": "The author argues that digital communication demonstrates code-switching and 'socio-pragmatic competence' across different registers rather than any cognitive deficit, supporting option B."
+  },
+  {
+    "id": "q-ankara-07",
+    "university_id": "ankara",
+    "level": "B2",
+    "category": "Reading Analysis",
+    "passage": "In pediatric neurobiology, excessive passive screen exposure during early critical windows has been associated with attenuated white-matter tract integrity in regions supporting emergent literacy and executive functioning. However, researchers emphasize that content and social interaction mediate these outcomes significantly. Co-viewing educational programming alongside an active caregiver who scaffolded verbal queries mitigated nearly all observed disparities in linguistic comprehension tests.",
+    "question": "What critical nuance does the passage introduce regarding screen exposure in young children?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "The adverse neural impacts can be largely counteracted when screen time is accompanied by interactive parental dialogue."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Passive screen time is universally beneficial for advancing white-matter tract structural development."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Caregiver scaffolding has no measurable effect on emergent literacy metrics."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Educational television should be viewed exclusively in complete isolation from adult intervention."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Metinde pasif ekran maruziyetinin olumsuz etki yapabileceği ancak ebeveynin çocukla birlikte izleyip sözel sorularla destek vermesinin ('co-viewing... alongside an active caregiver who scaffolded verbal queries') bu olumsuzlukları neredeyse tamamen ortadan kaldırdığı ('mitigated nearly all observed disparities') belirtilmektedir. A şıkkı bu önemli istisnayı/nüansı doğru aktarır.",
+    "explanation_en": "The author introduces a qualifying factor: parental scaffolding and co-viewing mitigate almost all adverse impacts on comprehension, directly confirming A."
+  },
+  {
+    "id": "q-ankara-08",
+    "university_id": "ankara",
+    "level": "C1",
+    "category": "Reading Analysis",
+    "passage": "Predictive risk-assessment algorithms deployed within criminal justice systems are often heralded as objective instruments capable of expunging human cognitive bias from bail and sentencing determinations. Nonetheless, critical legal theorists argue that such algorithmic tools frequently re-inscribe historical systemic disparities under a veneer of mathematical neutrality. Because predictive models rely on historical arrest datasets—which themselves reflect disproportionate policing of marginalized communities—the output replicates and legitimizes pre-existing institutional biases.",
+    "question": "Which of the following best captures the author's critique of judicial risk-assessment algorithms?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "They fail because software developers lack advanced mathematical training in multivariate statistics."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "They mask and perpetuate entrenched historical biases because their training data stem from unequal law enforcement patterns."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "They are significantly more subjective and erratic than arbitrary discretionary rulings by individual judges."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "They operate flawlessly only when applied to corporate white-collar crimes rather than street offenses."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Metindeki temel eleştiri şudur: Bu algoritmalar matematiksel bir tarafsızlık kisvesi ('veneer of mathematical neutrality') altında geçmişteki eşitsiz polis uygulamalarını içeren verilerle eğitildiği için kurumsal önyargıları yeniden üretir ve meşrulaştırır ('replicates and legitimizes pre-existing institutional biases'). B seçeneği 'mask and perpetuate entrenched historical biases because their training data stem from unequal law enforcement patterns' ile bunu eksiksiz özetler.",
+    "explanation_en": "The critique focuses on how algorithms perpetuate systemic biases because they ingest biased historical arrest data under the guise of mathematical neutrality, perfectly stated in B."
+  },
+  {
+    "id": "q-ankara-09",
+    "university_id": "ankara",
+    "level": "B1",
+    "category": "Vocabulary in Context",
+    "question": "Read the sentence below and choose the word closest in meaning to the highlighted word 'mitigate':\n\n'Urban planners recommend planting dense vegetated corridors along highways to MITIGATE airborne particulate pollution.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "alleviate"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "exacerbate"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "prolong"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "disregard"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Mitigate' fiili Akademik Kelime Listesi'nde (AWL) yer alır ve 'hafifletmek, şiddetini azaltmak, yatıştırmak' anlamına gelir. 'Alleviate' kelimesi de 'hafifletmek, dindirmek' anlamıyla 'mitigate' kelimesinin en yakın eşanlamlısıdır. 'Exacerbate' (kötüleştirmek), 'prolong' (uzatmak), 'disregard' (göz ardı etmek) zıt veya alakasız anlamlardadır.",
+    "explanation_en": "'Mitigate' means to make less severe, harmful, or painful. Its closest academic synonym among the choices is 'alleviate' (Choice A). 'Exacerbate' is an antonym."
+  },
+  {
+    "id": "q-ankara-10",
+    "university_id": "ankara",
+    "level": "B2",
+    "category": "Vocabulary in Context",
+    "question": "Read the sentence and identify the word that best replaces 'scrutinize' without changing the meaning:\n\n'Before granting regulatory approval for the new pediatric vaccine, the biomedical agency will SCRUTINIZE the clinical data for any anomalies.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "examine meticulously"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "casually browse"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "superficially alter"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "prematurely endorse"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Scrutinize' akademik dilde 'dikkatle, en ince ayrıntısına kadar incelemek' anlamına gelir. Bu nedenle 'examine meticulously' (titizlikle incelemek) ifadesi tam karşılığıdır. Diğer seçenekler (üstünkörü göz atmak, yüzeysel olarak değiştirmek, erkenden onaylamak) tamamen zıttır.",
+    "explanation_en": "'Scrutinize' signifies subjecting something to rigorous, critical, and detailed examination, which is accurately conveyed by 'examine meticulously' (A)."
+  },
+  {
+    "id": "q-ankara-11",
+    "university_id": "ankara",
+    "level": "B2",
+    "category": "Vocabulary in Context",
+    "question": "Select the word that most accurately completes the sentence according to formal academic usage:\n\n'A quiet, ergonomically designed study environment is highly _______ to sustained concentration and scholastic achievement.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "conducive"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "detrimental"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "indifferent"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "consecutive"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Be conducive to something' akademik bir kalıp olup 'bir şeye ortam hazırlamak, katkıda bulunmak, elverişli olmak' anlamına gelir. Sessiz ve ergonomik bir çalışma ortamının odaklanmaya elverişli olduğu ifade edildiğinden 'conducive' (A şıkkı) doğru cevaptır. 'Detrimental' zararlı, 'indifferent' kayıtsız, 'consecutive' ardışık demektir.",
+    "explanation_en": "The adjective 'conducive' (frequently paired with 'to') means making a certain situation or outcome likely or possible. It fits the positive learning context in A."
+  },
+  {
+    "id": "q-ankara-12",
+    "university_id": "ankara",
+    "level": "C1",
+    "category": "Vocabulary in Context",
+    "question": "Identify the word that best fits the blank based on its academic collocation and definition:\n\n'Auditors noted an inexplicable _______ between the reported laboratory expenditure figures and the bank accounts registered in the fiscal registry.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "discrepancy"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "concurrence"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "uniformity"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "coincidence"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Discrepancy' iki veya daha fazla kayıt, rakam veya ifade arasındaki 'uyuşmazlık, tutarsızlık, çelişki' anlamına gelen akademik bir kelimedir (AWL). Denetçilerin bildirilen harcamalar ile banka hesapları arasında açıklanamayan bir uyuşmazlık bulması 'inexplicable discrepancy' kalıbıyla ifade edilir. 'Concurrence' uyuşma, 'uniformity' tektiplik demektir.",
+    "explanation_en": "'Discrepancy' refers to a lack of compatibility or similarity between two or more facts or financial figures. It forms the standard collocation 'inexplicable discrepancy' (A)."
+  },
+  {
+    "id": "q-gazi-01",
+    "university_id": "gazi",
+    "level": "B1",
+    "category": "Use of English",
+    "question": "Choose the correct prepositional relative pronoun to complete the sentence:\n\n'The stringent safety protocols _______ the laboratory technicians adhered successfully prevented any biohazard exposure during the viral handling procedures.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "to which"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "in where"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "for whom"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "at that"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "İngilizcede 'adhere' fiili 'to' edatıyla kullanılır ('adhere to protocols' = protokollere bağlı kalmak/uymak). Bir sıfat cümleciğinde (relative clause) bu edat cümlenin başına çekildiğinde 'the protocols to which the technicians adhered' biçimini alır. Bu nedenle doğru cevap 'to which' (A) seçeneğidir.",
+    "explanation_en": "The verb 'adhere' strictly collocates with the preposition 'to'. In formal relative clauses, the preposition precedes the relative pronoun: 'protocols to which the technicians adhered' (A)."
+  },
+  {
+    "id": "q-gazi-02",
+    "university_id": "gazi",
+    "level": "B2",
+    "category": "Use of English",
+    "question": "Select the relative structure that best completes the academic sentence:\n\n'The international climate summit established a binding multilateral framework _______ member states are legally obligated to reduce industrial greenhouse emissions by 40%.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "under which"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "of what"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "which to"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "with that"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Framework' (çerçeve/anlaşma) veya 'treaty' gibi yasal bağlayıcılığı olan belgeler altında yükümlülük üstlenildiğinde 'under an agreement / under a framework' kalıbı kullanılır. Dolayısıyla sıfat cümleciği 'under which member states are obligated...' şeklinde kurulmalıdır. A şıkkı 'under which' tam uygundur.",
+    "explanation_en": "Obligations established pursuant to a treaty, statute, or framework take the preposition 'under'. Hence, 'framework under which member states are legally obligated' is correct."
+  },
+  {
+    "id": "q-gazi-03",
+    "university_id": "gazi",
+    "level": "B1",
+    "category": "Use of English",
+    "question": "Choose the linker that best completes the sentence showing concession:\n\n'_______ the municipal authorities allocated substantial capital to electric bus fleets, peak-hour traffic congestion showed little signs of abating.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "Even though"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Because"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Provided that"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "In order that"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Belediyenin otobüs filolarına büyük bütçe ayırmasına rağmen (beklenti olumlu), trafik yoğunluğunun azalmaması (beklenmeyen olumsuz sonuç) bir zıtlık ve ödün (concession) ilişkisidir. Cümle başında yan cümleyi bağlayan 'Even though' (-e rağmen / -sa da) doğru cevaptır. 'Because' neden, 'Provided that' şart, 'In order that' amaç bildirir.",
+    "explanation_en": "'Even though' introduces a concessive clause where the outcome (traffic not improving) defies the expectation set by the substantial financial investment in public transit."
+  },
+  {
+    "id": "q-gazi-04",
+    "university_id": "gazi",
+    "level": "B2",
+    "category": "Use of English",
+    "question": "Identify the conjunction that logically completes the conditional requirement:\n\n'Archaeological excavations at the newly discovered Bronze Age necropolis cannot resume _______ the ministry of culture issues a formal protective conservation decree.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "unless"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "as long as"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "inasmuch as"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "since"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Cannot resume ... unless ...' yapısı 'Bakanlık resmi koruma kararnamesi çıkarmadıkça kazılar yeniden başlayamaz' anlamını kurar. 'Unless' ('if not' / -medikçe, -madıkça) olumsuz ana cümle ile şart ilişkisini kusursuz kurar. 'As long as' olumlu şart, 'since' neden bildirir.",
+    "explanation_en": "'Unless' means 'except if' or 'if... not', correctly creating the negative condition required for resuming archaeological excavations."
+  },
+  {
+    "id": "q-gazi-05",
+    "university_id": "gazi",
+    "level": "B1",
+    "category": "Grammar",
+    "question": "Select the option that correctly expresses strong past deduction based on physical evidence:\n\n'The fossilized bone fragments were retrieved from a stratum dating back 50,000 years; therefore, hominins _______ in this high-altitude alpine basin far earlier than previously assumed.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "must have settled"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "should settle"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "can settle"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "ought to have settled"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "50.000 yıl öncesine ait fosillerin bulunması somut bir jeolojik kanıttır. Geçmişe yönelik güçlü bir mantıksal çıkarım (strong past logical deduction) yapmak için 'must have + V3' kalıbı kullanılır ('yerleşmiş olmalılar'). 'Should settle' şimdiki/gelecek tavsiye, 'ought to have settled' ise gerçekleşmemiş geçmiş beklenti bildirir.",
+    "explanation_en": "Strong logical deduction about past events supported by concrete empirical evidence requires 'must have + past participle' ('must have settled')."
+  },
+  {
+    "id": "q-gazi-06",
+    "university_id": "gazi",
+    "level": "B2",
+    "category": "Grammar",
+    "question": "Complete the mixed conditional sentence with the correct verb combination:\n\n'If the epidemiologists _______ the anomalous mutation patterns during the initial screening last autumn, the entire municipal health system _______ in such severe crisis today.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "had detected / would not be"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "detected / will not be"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "would detect / had not been"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "detect / are not"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Bu cümle tipik bir 'Mixed Conditional' (Karma Koşul) örneğidir. Koşul kısmı geçmişteki bir eyleme aittir ('last autumn' -> Had + V3: 'had detected'), sonuç kısmı ise bugünkü durumu ifade etmektedir ('today' -> would/could + base form: 'would not be'). Dolayısıyla A şıkkı 'had detected / would not be' gramer açısından tek doğrudur.",
+    "explanation_en": "This is a Type 3 + Type 2 mixed conditional: past hypothetical condition ('last autumn' -> 'had detected') paired with a present resulting state ('today' -> 'would not be')."
+  },
+  {
+    "id": "q-gazi-07",
+    "university_id": "gazi",
+    "level": "B2",
+    "category": "Grammar",
+    "question": "Choose the modal verb phrase that expresses past impossibility:\n\n'Given that the optical telescope was shut down for scheduled maintenance throughout October, the astronomers _______ the gamma-ray burst recorded on October 14th.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "could not have observed"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "must not observe"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "should not observe"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "need not have observed"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Teleskobun tüm Ekim ayı boyunca bakım için kapalı olması sebebiyle astronomların 14 Ekim'deki patlamayı gözlemlemiş olmaları imkansızdır. Geçmişe yönelik imkansızlık veya olumsuz kesin çıkarım 'could not have + V3' (ya da 'cannot have + V3') ile kurulur ('gözlemlemiş olamazlar'). A şıkkı doğrudur.",
+    "explanation_en": "Past negative impossibility given incontrovertible contravening circumstances (telescope was powered down) is expressed by 'could not have + past participle'."
+  },
+  {
+    "id": "q-gazi-08",
+    "university_id": "gazi",
+    "level": "B2",
+    "category": "Grammar",
+    "question": "Select the correct inverted clause following the negative restrictive adverbial:\n\n'Seldom _______ such dramatic shifts in atmospheric pressure recorded without an accompanying tropical squall.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "have meteorologists observed"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "meteorologists have observed"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "meteorologists observed"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "did meteorologists observed"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Seldom', 'Rarely', 'Scarcely' gibi olumsuz veya kısıtlayıcı zarflar cümle başında yer aldığında, cümlenin ana ögeleri devrik (inversion) yapıya geçer: Zarf + Yardımcı Fiil + Özne + Fiil. Present Perfect yapısında 'Seldom have meteorologists observed...' (A şıkkı) doğru devrik dizilimdir.",
+    "explanation_en": "When negative or restrictive adverbs like 'Seldom' occupy the sentence-initial position, subject-auxiliary inversion is mandatory: 'Seldom have meteorologists observed...' (A)."
+  },
+  {
+    "id": "q-gazi-09",
+    "university_id": "gazi",
+    "level": "B1",
+    "category": "Academic Collocations",
+    "question": "Select the verb that correctly collocates with 'a grave threat' in formal academic discourse:\n\n'Invasive aquatic plants _______ a grave threat to endemic fish species by depleting dissolved oxygen concentrations in lacustrine ecosystems.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "pose"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "make"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "lay"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "render"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Akademik İngilizcede 'tehdit oluşturmak / tehlike arz etmek' anlamındaki en yaygın ve standart eşdizimlilik (academic collocation) 'pose a threat / pose a danger / pose a risk' yapısıdır. 'Make a threat' kişisel tehdit savurmak anlamına gelir ve bu bilimsel bağlama uymaz. Doğru cevap 'pose' (A) seçeneğidir.",
+    "explanation_en": "'Pose a threat / risk' is the standard academic collocation denoting presenting a danger to ecosystems or populations. 'Make a threat' refers to verbal intimidation."
+  },
+  {
+    "id": "q-gazi-10",
+    "university_id": "gazi",
+    "level": "B2",
+    "category": "Academic Collocations",
+    "question": "Choose the verb that forms the appropriate collocation with 'empirical research':\n\n'Before formulating broad sociological hypotheses, researchers are expected to _______ rigorous empirical research in representative communities.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "conduct"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "fabricate"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "commit"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "practice"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Bilimsel araştırmalar için 'araştırma yürütmek / gerçekleştirmek' fiili 'conduct research / carry out research' kalıbıyla kurulur. 'Fabricate research' veri uydurmak/sahtecilik yapmak, 'commit' suç işlemek veya taahhüt etmek anlamına gelir. Doğru akademik eşdizim 'conduct' (A) fiilidir.",
+    "explanation_en": "The canonical academic verb collocating with 'research', 'investigation', or 'experiments' is 'conduct' ('conduct empirical research')."
+  },
+  {
+    "id": "q-gazi-11",
+    "university_id": "gazi",
+    "level": "B2",
+    "category": "Academic Collocations",
+    "question": "Which verb accurately completes the academic collocation with 'findings':\n\n'Subsequent replication attempts by independent neurobiology laboratories failed to _______ the initial findings of the study.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "corroborate"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "confiscate"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "extrapolate"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "instigate"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Bilimsel metodolojide önceki bulguları 'doğrulamak, teyit etmek, delillerle desteklemek' anlamında kullanılan en üst düzey akademik eşdizim 'corroborate findings / corroborate evidence' yapısıdır. 'Confiscate' el koymak, 'extrapolate' genellemek/tahmin yürütmek, 'instigate' kışkırtmak demektir. A şıkkı doğrudur.",
+    "explanation_en": "'Corroborate findings' is the established academic collocation meaning to confirm or give support to research findings with additional evidence."
+  },
+  {
+    "id": "q-gazi-12",
+    "university_id": "gazi",
+    "level": "B2",
+    "category": "Academic Collocations",
+    "question": "Select the verb that correctly pairs with 'a distinction':\n\n'Philosophers of science frequently _______ a sharp distinction between correlation and genuine causal mechanisms.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "draw"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "cast"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "split"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "sever"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "İki kavram arasında 'ayrım yapmak, sınır çizmek' ifadesi İngilizcede 'draw a distinction between X and Y' eşdizimi ile söylenir. 'Draw' fiili bu bağlamda mecazi olarak iki kavram arasına çizgi çekip ayırt etmeyi anlatır. Dolayısıyla doğru cevap 'draw' (A) seçeneğidir.",
+    "explanation_en": "The standard scholarly collocation for recognizing or establishing a conceptual boundary between two entities is 'draw a distinction' (Choice A)."
+  },
+  {
+    "id": "q-ege-01",
+    "university_id": "ege",
+    "level": "B1",
+    "category": "Sentence Completion",
+    "question": "Choose the option that logically and grammatically completes the conditional sentence:\n\n'Provided that coastal municipalities strictly regulate industrial discharge into the Aegean gulf, _______.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "benthic marine ecosystems will gradually recover their biodiversity over the coming decade."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "industrial water contamination would have worsened uncontrollably last century."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "untreated heavy metals had already destroyed littoral breeding grounds."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "local fisheries were forced to cease all commercial operations immediately."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Provided that...' (şartıyla / eğer) Type 1 koşul yapısıyla Present Simple alan bir yan cümle başlatır ('strictly regulate'). Ana cümlede mantıksal ve zamansal olarak geleceğe yönelik olumlu bir sonuç ('will gradually recover...') beklenir. A şıkkı hem zaman uyumu (Future Simple: 'will gradually recover') hem de anlam bütünlüğü açısından tek geçerli tamamlayıcıdır.",
+    "explanation_en": "'Provided that' introduces a real present condition (Type 1), logically requiring a future result clause: 'benthic marine ecosystems will gradually recover...' (Choice A)."
+  },
+  {
+    "id": "q-ege-02",
+    "university_id": "ege",
+    "level": "B2",
+    "category": "Sentence Completion",
+    "question": "Select the clause that best completes the sentence conveying concessive contrast:\n\n'In spite of profound cultural disparities between the two surveyed Mediterranean cohorts, _______.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "both demographic groups exhibited virtually identical psychosocial responses to economic uncertainty."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "their dietary habits showed complete disagreement on every nutritional parameter."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "neither group was able to participate in any statistical survey protocols."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "cultural differences are notoriously impossible to measure through empirical questionnaires."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'In spite of profound cultural disparities' (-e rağmen / derin kültürel farklılıklara rağmen) ifadesi ana cümlede bu farklılıklara zıt düşen beklenmedik bir benzerlik veya ortaklık gerektirir. A şıkkında 'her iki demografik grubun ekonomik belirsizliğe neredeyse tamamen aynı psikososyal tepkileri verdiği' belirtilerek bu zıtlık mantıksal olarak kusursuz tamamlanır.",
+    "explanation_en": "The prepositional phrase 'In spite of disparities' sets up a concessive contrast, which is fulfilled by observing unexpected behavioral uniformity ('virtually identical psychosocial responses') in A."
+  },
+  {
+    "id": "q-ege-03",
+    "university_id": "ege",
+    "level": "B1",
+    "category": "Sentence Completion",
+    "question": "Choose the clause that accurately expresses purpose following the main statement:\n\n'Regional agricultural cooperatives heavily subsidized subterranean drip irrigation equipment so that _______.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "subsistence farmers could conserve scarce aquifers during prolonged summer droughts."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "surface evaporation had already depleted all accessible freshwater reservoirs."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "although modern pumps required substantial electrical grid connectivity."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "in order to abandon traditional olive and fig orchards entirely."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'So that' (-sın diye / amacıyla) amaç bildiren bir bağlaçtır ve geçmiş zaman ana cümlesi ('subsidized') ile birlikte genellikle 'could / would + V1' yapısını alır. Damla sulama ekipmanlarının sübvanse edilme amacı çiftçilerin kuraklıkta kıt su kaynaklarını koruyabilmesidir ('could conserve scarce aquifers'). A şıkkı hem anlam hem gramer olarak doğrudur.",
+    "explanation_en": "'So that' introduces a purpose clause. With a past-tense main clause ('subsidized'), modal harmony calls for 'could + verb' ('could conserve scarce aquifers') as in A."
+  },
+  {
+    "id": "q-ege-04",
+    "university_id": "ege",
+    "level": "B2",
+    "category": "Sentence Completion",
+    "question": "Select the clause that creates a grammatically sound academic comparison:\n\n'Whereas conventional petrochemical polymers persist in terrestrial soils for centuries without degrading, _______.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "novel polylactic acid bioplastics decompose into harmless organic matter within six months under industrial composting conditions."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "petroleum refineries continue to dominate global hydrocarbon production chains."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "environmental plastic accumulation is widely considered an intractable crisis by ecotoxicologists."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "soil degradation prevents indigenous plant species from establishing deep root systems."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Whereas' (oysa ki, -e karşılık) iki zıt veya karşıt grubu karşılaştırmak için kullanılır. Geleneksel petrokimyasal polimerlerin yüzyıllarca çözünmeden kaldığı tespiti karşısında 'novel polylactic acid bioplastics decompose... within six months' (yeni biyoplastiklerin 6 ayda çözünmesi) tam bir karşıt alternatif oluşturur. A şıkkı doğrudur.",
+    "explanation_en": "'Whereas' sets up a direct contrast between the non-biodegradability of conventional petrochemical polymers and the rapid decomposition of novel bioplastics (A)."
+  },
+  {
+    "id": "q-ege-05",
+    "university_id": "ege",
+    "level": "B1",
+    "category": "Contextual Inference",
+    "passage": "Grid operators integrating high penetrations of wind and solar power face a phenomenon known as intermittency. Unlike thermal turbines whose rotational inertia naturally stabilizes grid frequency at 50 Hertz, inverter-based renewable generators decouple power generation from mechanical frequency response. During sudden overcast periods or localized wind lulls, rapid power drops can destabilize municipal distribution networks unless utility-scale lithium-ion battery storage or pumped-storage hydroelectricity can dispatch compensatory electricity within milliseconds.",
+    "question": "It can be inferred from the passage that modern electric grids with high renewable penetration:",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "Require ultra-fast dispatchable backup mechanisms to compensate for the absence of natural mechanical inertia."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Operate at fundamentally lower voltage frequencies than fossil-fueled thermal generating stations."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Can completely eliminate the necessity of electrical energy storage systems during cloud cover."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Are naturally more resilient to sudden atmospheric changes than traditional power systems."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Metinden anlaşıldığı üzere, rüzgar ve güneş sistemleri mekanik ataletten yoksundur ('decouple power generation from mechanical frequency response') ve ani düşüşlerde şebekeyi çökertebilir; bu nedenle milisaniyeler içinde devreye girebilecek batarya ya da hidroelektrik gibi ultra hızlı yedekleme mekanizmalarına ('dispatch compensatory electricity within milliseconds') ihtiyaç duyarlar. Bu durum doğrudan A seçeneğini kanıtlar.",
+    "explanation_en": "The passage implies that because renewables lack mechanical rotational inertia, grids require rapid-response storage technologies (batteries, pumped hydro) to maintain frequency stability (A)."
+  },
+  {
+    "id": "q-ege-06",
+    "university_id": "ege",
+    "level": "B2",
+    "category": "Contextual Inference",
+    "passage": "Modern industrial agriculture relies extensively on vast monocultures—genetically homogenous crop stands designed to optimize mechanized planting and combine harvesting. While this uniformity yields unprecedented harvest efficiency, agroecologists caution that it strips agroecosystems of evolutionary resilience. When an adapted viral or fungal pathogen breaches a monoculture's chemical defenses, the genetic uniformity of the host population enables catastrophic blight propagation without biological resistance firewalls.",
+    "question": "The author's argument regarding crop monocultures suggests that agricultural efficiency is achieved at the expense of:",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "Systemic ecological resistance against widespread pathogen outbreaks."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Mechanized harvesting speed and labor cost reductions."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "The chemical stability of industrial synthetic fertilizers."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Agricultural land availability across developing nations."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Yazar, monokültürün hasat verimliliği sağladığını ('unprecedented harvest efficiency') ancak genetik tektiplik yüzünden 'evolutionary resilience'ı yok ettiğini ve bir patojen girdiğinde tüm mahsulün hızla yok olmasına yol açtığını belirtmektedir. Dolayısıyla verimlilik, ekolojik direnç ve bağışıklık pahasına ('at the expense of systemic ecological resistance') elde edilmektedir. A seçeneği doğrudur.",
+    "explanation_en": "The passage makes an implicit trade-off explicit: maximized short-term harvesting efficiency sacrifices evolutionary resilience and defense against catastrophic pathogen proliferation (A)."
+  },
+  {
+    "id": "q-ege-07",
+    "university_id": "ege",
+    "level": "B2",
+    "category": "Contextual Inference",
+    "passage": "Benthic bottom trawling involves dragging heavy weighted nets along the continental shelf to capture demersal fish species. While economically lucrative for commercial fleets, acoustic seabed imaging demonstrates that trawling obliterates cold-water coral gardens, sea pens, and biogenic sediment structures that require centuries to accrete. Marine biologists advocating for no-trawl marine protected areas assert that preserving these benthic nursery grounds is vital even for commercial fleets, as juvenile fish depend on intact complex seabed morphology for predator avoidance.",
+    "question": "Based on the text, what ironic consequence of unrestricted bottom trawling do marine biologists point out?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "It ultimately undermines commercial fishing itself by demolishing the benthic nurseries necessary for fish population replenishment."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "It inadvertently increases cold-water coral accretion rates along the continental shelf."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "It causes commercial vessels to exhaust their diesel fuel reserves in protected marine areas."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "It forces juvenile fish to prey upon predatory species across open pelagic waters."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Metindeki ironik durum şudur: Ticari balıkçı filoları daha çok balık yakalamak için dip trolü çekerken aslında yavru balıkların hayatta kalması için gereken ve yüzlerce yılda oluşan dip yuvalarını yok etmektedir. Dolayısıyla kontrolsüz dip trolü, uzun vadede bizzat ticari balıkçılığın kendi geleceğini baltalamaktadır ('undermines commercial fishing itself'). Bu durum A şıkkında açıkça ifade edilmiştir.",
+    "explanation_en": "The passage highlights an ironic paradox: commercial trawling destroys the very benthic nursery habitats that ensure future fish stocks, thereby sabotaging long-term commercial yields (A)."
+  },
+  {
+    "id": "q-ege-08",
+    "university_id": "ege",
+    "level": "B2",
+    "category": "Contextual Inference",
+    "passage": "The Urban Heat Island (UHI) effect manifests when dense impervious surfaces, asphalt thoroughfares, and concrete architecture absorb shortwave solar radiation and re-radiate it as sensible heat throughout nocturnal hours. In Mediterranean coastal cities, this thermal trapping impedes nighttime radiative cooling, compelling sustained air conditioning use that expels anthropogenic waste heat into urban canyons. Civil engineers propose that replacing dark bituminous roofs with high-albedo coatings and expanding urban tree canopies can break this positive feedback loop.",
+    "question": "What does the passage imply regarding the relationship between air conditioning use and the Urban Heat Island effect?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "Air conditioning offers immediate internal thermal comfort but exacerbates external urban warming through waste heat discharge."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Air conditioning directly cools outdoor urban canyons by absorbing sensible thermal energy."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Air conditioning systems are completely ineffective in buildings coated with high-albedo materials."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Air conditioning eliminates the need for urban tree canopies and green infrastructure planning."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Metinde klimanın ('air conditioning') binaları soğuturken dışarıya sıcak atık ısı ('expels anthropogenic waste heat into urban canyons') üflediği ve bunun bir 'positive feedback loop' (kısır döngü/şiddetlenen döngü) yaratarak kentsel ısı adasını daha da artırdığı belirtilmektedir. A şıkkı bu neden-sonuç ilişkisini net bir şekilde ifade eder.",
+    "explanation_en": "The text demonstrates that while air conditioning cools building interiors, its expelled waste heat compounds the external heat island effect, creating a vicious cyclical loop (A)."
+  },
+  {
+    "id": "q-ege-09",
+    "university_id": "ege",
+    "level": "B1",
+    "category": "Paragraph Flow",
+    "passage": "(I) The olive tree (Olea europaea) has stood as a quintessential cornerstone of Mediterranean agrarian ecology for millennia. (II) Its deep taproot architecture enables sustained survival in drought-prone calcareous soils where cereal cultivars wither. (III) Furthermore, the antioxidant polyphenols present in extra-virgin olive oil offer scientifically documented cardiovascular benefits. (IV) Commercial citrus production in Florida experienced severe logistical bottlenecks due to unseasonal frost events. (V) Consequently, traditional olive groves continue to provide both ecological stability and vital economic livelihood across rural Aegean communities.",
+    "question": "Choose the sentence that disrupts the thematic coherence and unity of the paragraph:",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "Sentence I"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Sentence II"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Sentence III"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Sentence IV"
+      }
+    ],
+    "correct_answer": "D",
+    "explanation_tr": "Paragraf bütünüyle Akdeniz ve Ege havzasındaki zeytin ağacının (Olea europaea) kuraklığa dayanıklılığı, ekolojik ve ekonomik değeri üzerinedir. IV. cümlede ise aniden Florida'daki narenciye üretimi ve don olaylarından bahsedilmektedir ('Commercial citrus production in Florida...'). Bu cümle paragrafın tematik bütünlüğünü tamamen bozmaktadır. Doğru cevap D'dir.",
+    "explanation_en": "The entire paragraph discusses the botanical resilience and socioeconomic value of olive trees in the Mediterranean. Sentence IV suddenly introduces Florida citrus logistics, breaking thematic coherence."
+  },
+  {
+    "id": "q-ege-10",
+    "university_id": "ege",
+    "level": "B2",
+    "category": "Paragraph Flow",
+    "passage": "(I) Seawater reverse osmosis desalination has emerged as a premier technical solution to potable water scarcity in arid coastal regions. (II) High-pressure semipermeable membranes effectively filter dissolved sodium and chloride ions from intake ocean water. (III) However, the disposal of hypersaline effluent brine represents a formidable environmental challenge. (IV) Space exploration agencies have invested heavily in closed-loop urine recycling systems for long-duration orbital missions. (V) When discharged directly into shallow coastal bays, dense brine plumes sink to the seabed, suffocating fragile seagrass beds and marine organisms.",
+    "question": "Which sentence should be removed because it is irrelevant to the development of the main topic?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "Sentence II"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Sentence III"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Sentence IV"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Sentence V"
+      }
+    ],
+    "correct_answer": "C",
+    "explanation_tr": "Paragraf kıyı bölgelerindeki deniz suyu arıtma (desalination) teknolojisi ve bunun sonucunda açığa çıkan yüksek tuzlu atık suyun (brine) deniz ekosistemine verdiği zararları tartışmaktadır. IV. cümle ise uzay ajanslarının yörünge görevlerindeki su geri dönüşüm sistemlerinden bahsetmektedir ('Space exploration agencies...'). Bu cümle konunun dışındadır. Doğru cevap C'dir.",
+    "explanation_en": "The paragraph develops the process and ecological risks of marine desalination and brine disposal. Sentence IV abruptly introduces astronaut urine recycling in space, disrupting cohesion (C)."
+  },
+  {
+    "id": "q-ege-11",
+    "university_id": "ege",
+    "level": "B2",
+    "category": "Paragraph Flow",
+    "passage": "Western Anatolia possesses abundant geothermal enthalpy due to extensive tectonic faulting across the Aegean Graben System. Deep geothermal fluid reservoirs can be tapped to drive steam turbines for baseload electricity generation. _______. Unless these non-condensable acidic gases are captured and reinjected back into deep geologic strata, they trigger localized acid precipitation and degrade adjacent agricultural orchards.",
+    "question": "Which of the following sentences best fills the blank to maintain logical and rhetorical flow?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "However, geothermal fluids frequently carry substantial quantities of dissolved hydrogen sulfide and carbon dioxide."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Solar energy installations are substantially cheaper to maintain than geothermal wells."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "The geothermal gradient of the Earth decreases rapidly as one approaches the oceanic trenches."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Traditional coal-fired power stations produce fly ash that must be stored in specialized containment ponds."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Boşluktan sonraki cümleye dikkat edilmelidir: 'Unless these non-condensable acidic gases are captured...' (Bu yoğunlaşmayan asidik gazlar tutulup geri enjekte edilmedikçe...). 'These... gases' göndermesinin (referent) mantıklı olabilmesi için boşluğa gelecek cümlenin bu asidik gazlardan (hidrojen sülfür ve karbondioksit) bahsetmesi gerekir. A şıkkı 'geothermal fluids frequently carry substantial quantities of dissolved hydrogen sulfide and carbon dioxide' bu referansı tam olarak kurar.",
+    "explanation_en": "The subsequent sentence refers back to 'these non-condensable acidic gases'. Option A introduces these specific gases (hydrogen sulfide and carbon dioxide), providing the indispensable antecedent."
+  },
+  {
+    "id": "q-ege-12",
+    "university_id": "ege",
+    "level": "B2",
+    "category": "Paragraph Flow",
+    "passage": "(I) Microplastic particles originating from synthetic textile laundering and fragmenting commercial debris now saturate marine pelagic zones. (II) Pelagic planktivorous organisms and filter-feeding bivalves ingest these microscopic particles, mistaking them for organic prey. (III) Once consumed, persistent hydrophobic organic pollutants adsorbed onto plastic surfaces translocate across epithelial membranes into animal lipid tissues. (IV) Modern textile mills have largely automated their loom spinning operations to reduce worker labor overhead. (V) Consequently, these bioaccumulative toxins biomagnify up the trophic cascade, eventually presenting toxicological hazards to apex predators and human consumers.",
+    "question": "Which sentence in the text interrupts the logical progression of ideas?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "Sentence I"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Sentence II"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Sentence III"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Sentence IV"
+      }
+    ],
+    "correct_answer": "D",
+    "explanation_tr": "Paragraf mikroplastiklerin deniz canlıları tarafından yutulması ve toksinlerin besin zinciri boyunca (trofik basamaklar) en üst avcılara ve insanlara kadar birikmesi (biyomagnifikasyon) sürecini adım adım açıklamaktadır. IV. cümlede ise tekstil fabrikalarındaki dokuma tezgahlarının işgücü maliyetlerini kısmak için otomatikleştirildiği söylenmektedir. Bu cümle ekolojik zincir konusunun tamamen dışındadır. Doğru cevap D'dir.",
+    "explanation_en": "The paragraph traces the ecotoxicological chain of microplastic ingestion and biomagnification in marine food webs. Sentence IV discusses loom automation costs, completely breaking the narrative flow (D)."
+  },
+  {
+    "id": "q-koc-01",
+    "university_id": "koc",
+    "level": "C1",
+    "category": "Advanced Academic Reading",
+    "passage": "In contemporary social epistemology, Miranda Fricker conceptualizes 'epistemic injustice' as a wrong done to someone specifically in their capacity as a knower. Within this taxonomy, testimonial injustice occurs when prejudice causes a hearer to give a deflated level of credibility to a speaker's word. In institutional settings such as judicial tribunals or medical consultations, this credibility deficit is frequently structural rather than interpersonal, manifesting through systemic discursive marginalization. When marginalized speakers anticipate that their testimony will be reflexively discredited or deemed unintelligible, they may engage in 'testimonial smothering'—a coerced self-censorship designed to preempt adverse institutional censure.",
+    "question": "According to the passage, 'testimonial smothering' occurs primarily because:",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "Speakers deliberately withhold complex vocabulary to prevent misunderstanding among uneducated listeners."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Marginalized individuals preemptively suppress their own testimony having recognized that the institution will reflexively discount or mischaracterize it."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Legal adjudicators explicitly forbid speakers from presenting empirical counter-evidence during testimony."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Speakers lack sufficient epistemic certainty regarding the objective truth of their own lived experiences."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Metnin son cümlesinde 'testimonial smothering' kavramı şöyle tanımlanır: 'When marginalized speakers anticipate that their testimony will be reflexively discredited or deemed unintelligible, they may engage in 'testimonial smothering'—a coerced self-censorship designed to preempt adverse institutional censure.' Yani konuşmacı, kurumun sözlerini peşinen değersizleştireceğini veya yanlış yorumlayacağını bildiği için kendi ifadesini önceden sansürler/bastırır. B seçeneği bu mekanizmayı eksiksiz açıklar.",
+    "explanation_en": "The passage explicitly defines testimonial smothering as coerced self-censorship occurring when speakers anticipate that institutional prejudices will reflexively discredit or misunderstand their testimony (B)."
+  },
+  {
+    "id": "q-koc-02",
+    "university_id": "koc",
+    "level": "C2",
+    "category": "Advanced Academic Reading",
+    "passage": "The advent of quantum computational supremacy threatens to render asymmetric public-key cryptography—predicated on the intractable prime factorization and discrete logarithm problems underpinning RSA and elliptic-curve protocols—functionally obsolete via Shor's algorithm. While quantum key distribution (QKD) leverages Heisenberg's uncertainty principle to guarantee information-theoretic security against eavesdropping, its deployment across terrestrial fiber networks remains circumscribed by photon attenuation limits. Consequently, the geopolitical divergence between states possessing quantum-resistant post-quantum lattice cryptography and those tethered to legacy cryptosystems portends a structural epistemic asymmetry in global intelligence and sovereign data integrity.",
+    "question": "The author's analysis implies that the global transition to quantum-safe communication systems is characterized by which geopolitical risk?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "A widening intelligence disparity where nations with advanced post-quantum algorithms can compromise the sovereign communications of technologically lagging states."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "The complete abandonment of fiber-optic terrestrial infrastructure in favor of low-orbit acoustic telecommunications."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "An international consensus eliminating state-sponsored intelligence gathering through standardized lattice algorithms."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "The irreversible decryption of Heisenberg uncertainty principles by commercial quantum processors."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Metnin son cümlesinde yazar, kuantum dirençli kafes tabanlı kriptografiye (post-quantum lattice cryptography) sahip devletler ile eski kripto sistemlere bağımlı kalan devletler arasındaki jeopolitik ayrışmanın 'a structural epistemic asymmetry in global intelligence and sovereign data integrity' (küresel istihbarat ve egemen veri bütünlüğünde yapısal bir bilgi asimetrisi) doğuracağını belirtmektedir. Bu durum, kuantum teknolojisinde önde gidenlerin geride kalanların egemen iletişimlerini kırabileceği bir istihbarat uçurumu riskini (A şıkkı) gösterir.",
+    "explanation_en": "The final sentence warns of a 'structural epistemic asymmetry in global intelligence' arising from unequal cryptographic capabilities, which choice A translates into strategic disparity in compromising sovereign data."
+  },
+  {
+    "id": "q-koc-03",
+    "university_id": "koc",
+    "level": "C1",
+    "category": "Advanced Academic Reading",
+    "passage": "Neoclassical trade theory posits that persistent current account deficits naturally self-correct through flexible exchange-rate depreciation, which nominally elevates import prices while rendering domestic exports internationally competitive. However, structuralist economists demonstrate that this adjustment mechanism is frequently derailed in developing economies burdened by substantial foreign-denominated sovereign debt and inelastic import demand for essential capital goods. Under such structural constraints, currency depreciation triggers severe balance-sheet deterioration and imported inflationary spirals, stifling domestic industrial output rather than catalyzing an export-led renaissance.",
+    "question": "Which of the following best articulates the structuralist objection to the neoclassical view of currency depreciation?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "Currency depreciation invariably eliminates all foreign currency debt obligations through automatic central bank write-downs."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "In economies with foreign debt and inelastic capital imports, depreciation exacerbates financial distress and inflation rather than boosting export performance."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Neoclassical models fail to account for the fact that flexible exchange rates permanently suppress import prices."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Developing nations always possess highly elastic demand for non-essential luxury consumer products."
+      }
+    ],
+    "correct_answer": "B",
+    "explanation_tr": "Neoklasik teori paranın değer kaybetmesinin ihracatı artırarak cari açığı kapatacağını öne sürer. Ancak yapısalcı ekonomistlerin itirazı şudur: Yabancı para cinsinden borcu olan ve sermaye malları ithalatı esnek olmayan (inelastic) ülkelerde, devalüasyon şirket ve devlet bilançolarını bozar, ithal enflasyonu tetikler ve ihracat artışı sağlamak yerine üretimi boğar. B şıkkı bu itirazı eksiksiz özetler.",
+    "explanation_en": "Structuralists argue that in debt-burdened economies reliant on critical imports, depreciation causes balance-sheet distress and imported inflation instead of export-led recovery (B)."
+  },
+  {
+    "id": "q-koc-04",
+    "university_id": "koc",
+    "level": "C2",
+    "category": "Advanced Academic Reading",
+    "passage": "In evolutionary cognitive biology, human moral psychology is increasingly conceptualized as an ensemble of domain-specific intuitive heuristics calibrated to Pleistocene hunter-gatherer social ecologies. These heuristics—governing reciprocal altruism, cheater detection, and parochial ingroup solidarity—evolved because they conferred decisive reproductive fitness within small, genetically proximate nomadic bands. However, applying these ancestral heuristics to complex, anonymous globalized polities frequently generates profound cognitive dissonance. When modern institutional policy requires impartial utilitarian optimization, our evolved moral modules reflexively revolt, prioritizing tribal loyalty and immediate deontological taboos over welfare-maximizing macro-level trade-offs.",
+    "question": "The author's core thesis regarding evolved moral heuristics suggests that:",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "Heuristics that enhanced ancestral evolutionary survival in small bands are frequently ill-suited for the impartial demands of modern global governance."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Pleistocene hunter-gatherers developed sophisticated utilitarian calculations to allocate resources across multinational federations."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Modern institutions should dismantle all regulatory frameworks to allow tribal moral intuitions to operate uninhibited."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Evolutionary adaptations have completely erased all traces of ingroup solidarity from contemporary civil societies."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Yazarın ana tezi şudur: Küçük avcı-toplayıcı kabilelerinde üreme başarısı sağlayan kabileci ve sezgisel ahlak modülleri ('evolved moral modules'), günümüzün anonim ve karmaşık küresel toplumlarında tarafsız, faydacı makro kararlar alınması gerektiğinde uyumsuzluk ('profound cognitive dissonance') yaratır. A seçeneği 'Heuristics that enhanced ancestral evolutionary survival... are frequently ill-suited for the impartial demands of modern global governance' diyerek metnin ana fikrini tam olarak yansıtır.",
+    "explanation_en": "The passage argues that ancestral heuristics designed for small Pleistocene nomadic bands conflict with the impersonal, impartial requirements of modern large-scale political governance (A)."
+  },
+  {
+    "id": "q-koc-05",
+    "university_id": "koc",
+    "level": "C1",
+    "category": "Critical Analysis",
+    "question": "Consider the following policy argument:\n\n'The municipal council must immediately ban the commercial deployment of autonomous electric delivery rovers on city pedestrian sidewalks. Sidewalks exist solely for pedestrians, and permitting robotic delivery vehicles will lead to sidewalk congestion, pedestrian injuries, and the complete destruction of neighborhood social cohesion.'\n\nWhich of the following identifies the most significant logical weakness or unstated assumption in this argument?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "It assumes without empirical evidence that autonomous rovers cannot be regulated, speed-restricted, or scheduled during off-peak hours to avert congestion and injuries."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "It fails to specify whether the electric batteries powering the delivery rovers are composed of lithium or nickel."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "It assumes that pedestrians walk at exactly the same speed regardless of atmospheric weather conditions."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "It overlooks the fact that city municipal councils are prohibited by constitutional law from debating transportation bylaws."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Argümandaki temel mantıksal zafiyet (slippery slope / kaygan zemin ve temelsiz varsayım), otonom teslimat robotlarının hiçbir düzenleme, hız sınırı veya saat kısıtlaması getirilemeyeceğini, doğrudan kaçınılmaz bir felakete ve mahalle uyumunun çöküşüne yol açacağını delilsiz kabul etmesidir. A şıkkı bu metodolojik ve mantıksal açığı tam olarak ortaya koyar.",
+    "explanation_en": "The argument commits a catastrophic slippery slope fallacy by assuming rovers cannot be managed via technical regulations or off-peak scheduling, which choice A correctly pinpoints as its core flaw."
+  },
+  {
+    "id": "q-koc-06",
+    "university_id": "koc",
+    "level": "C1",
+    "category": "Critical Analysis",
+    "question": "Read the excerpt from an epidemiological methodology paper:\n\n'The predictive model forecasted that the influenza strain would infect 40% of the metropolitan population within six weeks. However, subsequent clinical hospital admissions accounted for less than 3% of the populace over the entire winter season. Therefore, mathematical modeling is an entirely fundamentally flawed discipline that should play no role in public health emergency planning.'\n\nWhat critical flaw characterizes the author's reasoning?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "It makes a sweeping, overgeneralized dismissal of an entire scientific methodology based on the discrepancy of a single predictive trial."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "It relies too heavily on hospital admission records rather than veterinary surveillance metrics."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "It fails to state whether the influenza pathogen belonged to Type A or Type B strains."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "It ignores the fact that mathematical algorithms are universally immune to parameter errors."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Yazar tek bir modelin tahminindeki sapmadan yola çıkarak tüm matematiksel modelleme disiplinini bütünüyle çöpe atmakta ('an entirely fundamentally flawed discipline that should play no role...') ve aceleci genelleme (hasty generalization / sweeping overgeneralization) yapmaktadır. A şıkkı bu mantık hatasını doğrudan teşhis eder.",
+    "explanation_en": "The reasoning commits a hasty overgeneralization fallacy by repudiating the entire scientific discipline of mathematical modeling based on a single predictive discrepancy (A)."
+  },
+  {
+    "id": "q-koc-07",
+    "university_id": "koc",
+    "level": "C2",
+    "category": "Critical Analysis",
+    "question": "An archaeological theorist argues: 'Proponents of the 'Upper Paleolithic Revolution' hypothesis claim that symbolic abstract cognition emerged abruptly in Western Europe 40,000 years ago due to a spontaneous neurological mutation. Yet, recent excavations across the Levant and Southern Africa reveal engraved ochre pieces, perforated shell beads, and complex burial practices dating back over 100,000 years.'\n\nHow does the author's empirical evidence undermine the rival hypothesis?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "By providing chronologically earlier artifacts from outside Europe, demonstrating that symbolic cognition was a gradual, pan-African evolutionary development rather than a localized sudden mutation."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "By demonstrating that European cave art was produced exclusively by Neanderthal artisans rather than Homo sapiens."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "By proving that mineral ochre could only be processed using high-temperature smelting technologies."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "By establishing that symbolic abstraction is biologically restricted to modern agrarian societies."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Karşı hipotez sembolik zihnin 40.000 yıl önce Batı Avrupa'da ani bir mutasyonla ortaya çıktığını savunmaktadır. Yazar ise Afrika ve Levant'ta 100.000 yıl öncesine ait işlenmiş aşıboyası ve boncuklar sunarak, bu becerinin çok daha eski, kıta dışı ve kademeli bir evrimsel süreç olduğunu kanıtlar. Bu durum A seçeneğinde eksiksiz açıklanmıştır.",
+    "explanation_en": "Presenting 100,000-year-old archaeological evidence from Africa and the Levant directly disproves the claim of an abrupt, 40,000-year-old localized European mutation, validating choice A."
+  },
+  {
+    "id": "q-koc-08",
+    "university_id": "koc",
+    "level": "C1",
+    "category": "Critical Analysis",
+    "question": "Review the author's commentary on artificial intelligence in academic publishing:\n\n'While automated language models can synthesize vast corpora and expedite preliminary literature summaries, delegating scholarly peer-review or interpretive synthesis to generative algorithms risks diluting intellectual accountability and canonizing algorithmic hallucinations. We must enforce uncompromising provenance protocols rather than surrendering intellectual stewardship to opaque neural networks.'\n\nWhich descriptor best captures the author's rhetorical stance?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "Pragmatically cautious, acknowledging instrumental utility while warning against relinquishing critical human oversight."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Uncritically utopian, advocating the immediate automation of all scientific peer-review workflows."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Completely technophobic, dismissing all forms of algorithmic computational assistance in libraries."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Apathetic, suggesting that technological shifts in academic publishing are entirely inconsequential."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Yazar yapay zekanın geniş literatürü tarama ve özetleme gibi pratik faydalarını kabul etmekte ('While automated language models can synthesize vast corpora...'), ancak akran denetimi gibi kritik alanlarda insan gözetiminin ve sorumluluğunun devredilmesine karşı ciddi bir şekilde uyarmaktadır. Bu yaklaşım 'pragmatically cautious' (pragmatik ve temkinli) olarak A şıkkında doğru tanımlanmıştır.",
+    "explanation_en": "The author's tone balances recognition of AI's functional benefits for summarizing literature with serious cautionary warnings regarding peer-review integrity, characterizing a pragmatically cautious stance (A)."
+  },
+  {
+    "id": "q-koc-09",
+    "university_id": "koc",
+    "level": "C1",
+    "category": "High-Level Restatement",
+    "question": "Choose the sentence that is closest in meaning to the sentence given below:\n\n'No sooner had the central depository unpegged its sovereign currency from the foreign reserve basket than aggressive short-selling triggered a liquidity freeze that necessitated emergency multilateral intervention.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "Immediately after the central depository decoupled its currency from the foreign reserves, intense speculative short-selling caused a severe liquidity crisis requiring international emergency aid."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "The central depository waited until multilateral organizations intervened before choosing to unpeg its currency from foreign reserves."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Aggressive short-selling was halted completely when the central depository decided to peg its sovereign currency to international reserves."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Despite widespread short-selling, the unpegging of the national currency did not create any significant liquidity shortages in domestic markets."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'No sooner had [X] than [Y]' kalıbı 'X olur olmaz hemen Y gerçekleşti' anlamını veren bir zaman ve neden-sonuç yapısıdır. Merkez bankasının kuru serbest bırakmasının (unpeg) hemen ardından spekülatif açığa satışların likidite krizini tetiklediği ve uluslararası acil müdahaleyi zorunlu kıldığı belirtilmiştir. A seçeneği 'Immediately after... decoupled... caused a severe liquidity crisis requiring international emergency aid' ile bu anlamı tam karşılar.",
+    "explanation_en": "'No sooner had... than...' denotes immediate temporal succession and causality. Option A captures the exact sequence: decoupling triggered short-selling, causing an acute liquidity crisis requiring intervention."
+  },
+  {
+    "id": "q-koc-10",
+    "university_id": "koc",
+    "level": "C2",
+    "category": "High-Level Restatement",
+    "question": "Choose the sentence that is closest in meaning to the sentence given below:\n\n'Hardly can the widespread adoption of robotic surgical platforms be attributed to superior tactile feedback alone; rather, it reflects a decisive institutional drive to mitigate surgeon fatigue and standardize operative precision.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "The rapid expansion of robotic surgical systems is driven not primarily by improved touch sensitivity, but by healthcare facilities seeking to curb operator exhaustion and ensure uniform surgical accuracy."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Robotic surgical platforms have failed to gain hospital acceptance because surgeons demand greater tactile feedback than current software can deliver."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Only when robotic platforms achieve tactile feedback superior to human hands will hospitals invest in reducing surgical fatigue."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Surgeon fatigue has increased dramatically following the institutional mandate requiring all complex procedures to be executed robotically."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Hardly can [X] be attributed to [Y] alone; rather, it reflects [Z]' yapısı, X'in asıl sebebinin sadece Y (dokunma hissi) olmadığını, asıl belirleyici faktörün Z (cerrah yorgunluğunu azaltmak ve ameliyat hassasiyetini standartlaştırmak) olduğunu vurgular. A şıkkı 'driven not primarily by improved touch sensitivity, but by healthcare facilities seeking to curb operator exhaustion and ensure uniform surgical accuracy' diyerek bu ayrımı kusursuz verir.",
+    "explanation_en": "The sentence refutes the notion that tactile feedback is the sole cause, pointing to fatigue mitigation and precision standardization as the primary drivers, accurately paraphrased in A."
+  },
+  {
+    "id": "q-koc-11",
+    "university_id": "koc",
+    "level": "C1",
+    "category": "High-Level Restatement",
+    "question": "Choose the sentence that is closest in meaning to the sentence given below:\n\n'Far from demonstrating that cognitive decline is an inescapable corollary of biological aging, recent neuroimaging trials corroborate that sustained intellectual engagement dynamically attenuates cerebral atrophy.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "Rather than proving that mental deterioration inevitably accompanies aging, modern neuroimaging studies show that continuous cognitive stimulation actively moderates brain tissue decline."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Neuroimaging studies have definitively confirmed that cerebral atrophy cannot be slowed down regardless of an individual's intellectual habits."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Biological aging leads directly to severe cerebral atrophy unless individuals completely abstain from demanding cognitive tasks."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Recent clinical evidence proves that intellectual engagement accelerates the biological aging process of cerebral structures."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Far from demonstrating [X], recent trials corroborate that [Y]' kalıbı 'X'i göstermek şöyle dursun / tam aksine Y'yi kanıtlamaktadır' anlamına gelir. Bilişsel gerilemenin yaşlanmanın kaçınılmaz bir sonucu olduğunu göstermek şöyle dursun, zihinsel faaliyetin beyin küçülmesini aktif olarak yavaşlattığını ortaya koyar. A şıkkındaki 'Rather than proving... modern studies show that continuous cognitive stimulation actively moderates brain tissue decline' cümlesi bunu birebir aktarır.",
+    "explanation_en": "'Far from [X]' negates the first premise (that cognitive decline is an inevitable corollary of aging) and reinforces that mental stimulation mitigates atrophy, perfectly matched in A."
+  },
+  {
+    "id": "q-koc-12",
+    "university_id": "koc",
+    "level": "C2",
+    "category": "High-Level Restatement",
+    "question": "Choose the sentence that is closest in meaning to the sentence given below:\n\n'Under no circumstances would the bioethics oversight panel have sanctioned the genetic trial had the research team failed to incorporate fail-safe mechanisms against off-target mutagenesis.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "The bioethics committee authorized the genetic experiment solely because the investigators integrated robust fail-safe protections against unintended genetic mutations."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Even though the investigators omitted safeguards against off-target mutagenesis, the bioethics panel granted immediate unconditional approval."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "The research team was penalized by the bioethics board after off-target genetic mutations compromised the trial participants."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Had the bioethics panel reviewed the fail-safe protocols more thoroughly, they would have prohibited the genetic trial under all circumstances."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Under no circumstances would [the panel] have sanctioned... had the team failed to incorporate...' yapısı çift olumsuzluk içeren devrik bir Type 3 koşul cümlesidir ('Ekip istenmeyen mutasyonlara karşı güvenlik önlemleri almasaydı komite hiçbir koşulda deneye izin vermezdi'). Bu da komitenin deneye izin vermesinin yegane koşulunun bu güvenlik önlemlerinin dahil edilmiş olması anlamına gelir. A şıkkı bu zorunlu koşulu ve sonucu eksiksiz karşılar.",
+    "explanation_en": "The inverted conditional with negative inversion ('Under no circumstances... had they failed') establishes an absolute requirement: approval occurred strictly because robust fail-safe mechanisms were incorporated (A)."
+  },
+  {
+    "id": "q-sabanci-01",
+    "university_id": "sabanci",
+    "level": "B2",
+    "category": "Search Reading",
+    "passage": "A 2024 industrial metallurgical survey examined global lithium extraction and battery-grade refining efficiencies across major producing regions. In Chile's Salar de Atacama brine operations, solar evaporation ponds require approximately 18 to 24 months to yield concentrated brine (around 6% lithium content), consuming 500,000 liters of water per metric ton of lithium carbonate equivalent, with an overall mineral recovery rate of 42%. By contrast, Australian hard-rock pegmatite operations (spodumene ore) achieve rapid mechanical crushing and acid roasting within 48 to 72 hours, recording an extraction recovery rate of 68%, though generating 8.5 metric tons of solid carbonaceous tailings per refined ton. Meanwhile, direct lithium extraction (DLE) pilot reactors in North America achieved 89% recovery efficiencies in under 6 hours while recycling 96% of associated process water.",
+    "question": "According to the passage, which extraction method demonstrated the highest mineral recovery rate while maintaining the shortest processing timeframe?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "Direct lithium extraction (DLE) pilot reactors in North America"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Solar brine evaporation ponds in the Salar de Atacama"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Australian hard-rock spodumene pegmatite processing"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Subterranean continental shelf seabed dredging"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Metindeki veriler tarandığında (search reading): Şili Atacama havuzları 18-24 ay sürmekte ve %42 verim sağlamaktadır; Avustralya spodumen madenciliği 48-72 saatte %68 verim almaktadır; Kuzey Amerika'daki doğrudan lityum çıkarma (DLE) pilot reaktörleri ise 6 saatin altında ('under 6 hours') %89 geri kazanım verimliliği ('89% recovery efficiencies') kaydetmiştir. Bu nedenle hem en yüksek verim oranı hem de en kısa süre DLE reaktörlerine aittir. Doğru cevap A'dır.",
+    "explanation_en": "Scanning the numerical data reveals that North American DLE pilot reactors achieved the highest recovery (89%) within the shortest timeframe (under 6 hours), directly answering the prompt (Choice A)."
+  },
+  {
+    "id": "q-sabanci-02",
+    "university_id": "sabanci",
+    "level": "C1",
+    "category": "Search Reading",
+    "passage": "A multi-city municipal transit study monitored electric scooter sharing schemes across five European metropolitan hubs (Paris, Berlin, Milan, Oslo, and Madrid) between 2021 and 2023. Fleet telemetry indicated that 64% of all micro-mobility trips replaced walking or mass transit journeys rather than private passenger automobile commutes. Only in Oslo, where municipal planners integrated scooters into suburban rail hubs through unified contactless ticketing, did modal substitution of private cars exceed 38%. Furthermore, the lifecycle carbon footprint of dockless e-scooters averaged 126 g CO2-eq per passenger-kilometer, largely attributable to the emissions of diesel maintenance vans tasked with daily battery swaps and rebalancing, whereas geofenced dock-based pedal-assist bicycles generated merely 28 g CO2-eq per passenger-kilometer.",
+    "question": "According to the study's empirical metrics, what operational factor was primarily responsible for the elevated lifecycle carbon emissions of dockless e-scooters?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "The emissions generated by diesel service vans conducting daily fleet rebalancing and battery exchanges."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "The raw electricity consumed during nocturnal charging from renewable solar arrays."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "The high aluminum manufacturing costs of dock-based pedal-assist bicycles."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "The implementation of geofenced parking speed limits across inner-city corridors."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Metinde e-scooter'ların yaşam döngüsü karbon ayak izinin (126 g CO2-eq) yüksek olmasının ana sebebi doğrudan şöyle açıklanır: 'largely attributable to the emissions of diesel maintenance vans tasked with daily battery swaps and rebalancing' (büyük ölçüde günlük batarya değişimi ve filo dengelemesi yapan dizel servis minibüslerinin emisyonlarından kaynaklanmaktadır). Bu tespit doğrudan A seçeneğini doğrular.",
+    "explanation_en": "Scanning for the cause of elevated carbon footprints locates the phrase 'largely attributable to the emissions of diesel maintenance vans tasked with daily battery swaps and rebalancing', confirming A."
+  },
+  {
+    "id": "q-sabanci-03",
+    "university_id": "sabanci",
+    "level": "B2",
+    "category": "Search Reading",
+    "passage": "In next-generation photovoltaic engineering, metal-halide perovskite solar cells have achieved power conversion efficiencies exceeding 25.7% in laboratory prototypes, rivaling monocrystalline silicon (26.1%). Nevertheless, operational stability remains the principal technical bottleneck. Silicon modules typically exhibit degradation rates of less than 0.5% per annum, guaranteeing a 25-year operational warranty. Conversely, unencapsulated perovskites undergo rapid photo-thermal degradation when exposed to temperatures exceeding 60°C and ambient relative humidity above 50%, losing over 20% of their baseline conversion efficiency within 1,000 hours of continuous illumination due to phase segregation of halide anions.",
+    "question": "Based on the technical data provided, under what specific environmental conditions do unencapsulated perovskite solar cells lose more than 20% of their baseline efficiency?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "When subjected to ambient temperatures above 60°C and relative humidity exceeding 50% over 1,000 hours."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "When operated continuously under sub-zero polar temperatures in dry vacuum chambers."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "When encapsulated within waterproof silicon modules for more than 25 continuous years."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "When power conversion efficiencies drop permanently below 5% under artificial infrared lamps."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Metindeki koşullar tarandığında: 'when exposed to temperatures exceeding 60°C and ambient relative humidity above 50%, losing over 20% of their baseline conversion efficiency within 1,000 hours of continuous illumination' ifadesi açıkça görülür. Yani 60°C üzeri sıcaklık ve %50 üzeri bağıl nemde 1.000 saat içinde veriminin %20'sinden fazlasını kaybetmektedir. Bu doğrudan A seçeneğidir.",
+    "explanation_en": "The passage explicitly correlates the >20% efficiency loss within 1,000 hours with exposure to 'temperatures exceeding 60°C and ambient relative humidity above 50%', which matches option A verbatim."
+  },
+  {
+    "id": "q-sabanci-04",
+    "university_id": "sabanci",
+    "level": "C1",
+    "category": "Search Reading",
+    "passage": "A longitudinal study by the National Higher Education Observatory tracked 42,000 undergraduate engineering students across forty public universities between 2016 and 2022. Overall first-to-second year retention averaged 74.2%. However, cross-demographic disaggregation exposed stark discrepancies: first-generation students in non-cohort engineering tracks registered an attrition rate of 39.8%, compared to only 14.1% among continuing-generation peers. Crucially, in institutions that implemented mandatory peer-mentorship workshops and subsidized course materials during the freshman year, the retention rate among first-generation engineering undergraduates climbed to 82.6%, closing the performance gap by over 16 percentage points.",
+    "question": "According to the empirical findings in the text, what institutional intervention successfully elevated first-generation engineering retention to 82.6%?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "Instituting required peer-mentorship seminars alongside subsidized foundational course materials."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Abolishing all laboratory testing and replacing written examinations with oral interviews."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Increasing freshman engineering tuition fees to finance advanced robotics laboratories."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Restricting engineering program enrollment exclusively to continuing-generation candidates."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Metinde %82,6'ya yükselen tutunma oranının (retention rate) arkasındaki müdahale açıkça belirtilmektedir: 'in institutions that implemented mandatory peer-mentorship workshops and subsidized course materials during the freshman year, the retention rate among first-generation engineering undergraduates climbed to 82.6%'. Bu da A şıkkında belirtilen 'required peer-mentorship seminars alongside subsidized foundational course materials' ifadesiyle birebir örtüşür.",
+    "explanation_en": "Scanning for the 82.6% figure identifies the causal condition: 'mandatory peer-mentorship workshops and subsidized course materials during the freshman year', as stated in A."
+  },
+  {
+    "id": "q-sabanci-05",
+    "university_id": "sabanci",
+    "level": "C1",
+    "category": "Synthesizing Text",
+    "passage": "[Text A]\nProponents of remote workplace autonomy emphasize that eliminating daily commuting relieves chronic occupational stress, providing employees with temporal flexibility that enhances deep-focus analytical productivity. Surveyed knowledge workers frequently report higher job satisfaction and subjective well-being when afforded control over their domestic schedules.\n\n[Text B]\nOrganizational sociologists counter that persistent remote arrangements erode spontaneous intra-firm knowledge spillover and degrade psychological camaraderie. Asynchronous communication silos cross-functional departments, impeding the serendipitous interactions that catalyze radical breakthrough innovations and long-term institutional loyalty.",
+    "question": "Which of the following statements best synthesizes the core tension presented across both texts?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "While remote work enhances individual autonomous productivity and personal well-being, it poses risks to collaborative innovation and informal organizational cohesion."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Both authors agree that eliminating daily commuting leads to immediate bankruptcy for corporate enterprises."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Text A proves that knowledge workers produce higher quality patents only when placed in open-plan office spaces."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Neither text acknowledges that asynchronous communication has any measurable influence on company culture."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "İki metnin sentezi yapıldığında: Metin A, uzaktan çalışmanın bireysel özerkliği, derin odaklanmayı ve iş doyumunu artırdığını savunurken; Metin B, bunun ekipler arası spontane bilgi paylaşımını ve kurumsal bağı zayıflatarak yenilikçiliği köreltebileceğini vurgular. A şıkkı bu iki karşıt tezi mükemmel bir diyalektik sentezle birleştirir: 'While remote work enhances individual autonomous productivity... it poses risks to collaborative innovation and informal organizational cohesion.'",
+    "explanation_en": "Synthesizing both passages requires reconciling individual well-being/focus benefits (Text A) with the institutional erosion of serendipitous collaboration and cohesion (Text B), as achieved in A."
+  },
+  {
+    "id": "q-sabanci-06",
+    "university_id": "sabanci",
+    "level": "C1",
+    "category": "Synthesizing Text",
+    "passage": "[Text A]\nAdvocates of the 'Green Growth' paradigm argue that technological innovation, carbon taxation, and renewable electrification can achieve absolute decoupling—expanding gross domestic product while driving greenhouse gas emissions toward net-zero thresholds without curbing aggregate consumption.\n\n[Text B]\nConversely, 'Degrowth' ecological economists assert that perpetual economic expansion on a finite planet is thermodynamic folly. They maintain that efficiency gains trigger the Jevons paradox—where increased efficiency lowers operational costs, ultimately stimulating higher aggregate resource throughput—thereby necessitating deliberate structural reductions in material consumption.",
+    "question": "A comprehensive synthesis of the two texts reveals that the fundamental disagreement centers on:",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "Whether technological efficiency alone can decouple GDP growth from ecological degradation, or if absolute reductions in material throughput are essential."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Whether renewable electricity generation should be funded through municipal bonds or international private equity."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Whether thermodynamic laws apply to biological organisms residing in temperate continental climates."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Whether carbon taxation should be abolished to accelerate industrial manufacturing across developing markets."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "İki metnin odaklandığı temel ayrışma noktası (core disagreement) şudur: 'Yeşil Büyüme' teknolojik verimlilik ve yenilenebilir enerji ile ekonomik büyümeyi çevresel zarardan tamamen ayrıştırmanın (decoupling) mümkün olduğunu savunurken; 'Küçülme' (Degrowth) savunucuları Jevons paradoksuna dikkat çekerek verimlilik artsa bile toplam tüketim azaltılmadıkça ekolojik çöküşün önlenemeyeceğini iddia eder. A şıkkı bu temel tartışmayı eksiksiz sentezler.",
+    "explanation_en": "The synthesis hinges on the clash between decoupling economic expansion via technological efficiency (Green Growth) versus the necessity of capping and reducing absolute material throughput (Degrowth), captured in A."
+  },
+  {
+    "id": "q-sabanci-07",
+    "university_id": "sabanci",
+    "level": "B2",
+    "category": "Synthesizing Text",
+    "passage": "[Text A]\nThe open-access publishing movement democratizes scientific literacy by eliminating expensive subscription paywalls, ensuring that researchers in the Global South, independent scholars, and the general public enjoy unfettered access to publicly funded scholarly discoveries.\n\n[Text B]\nHowever, shifting the revenue model from subscription fees to author-facing Article Processing Charges (APCs) erects new financial barricades. Early-career scholars and researchers from underfunded universities are frequently priced out of prestigious open journals, while unscrupulous predatory publishers proliferate to exploit the pay-to-publish incentive structure.",
+    "question": "Which conclusion best reflects a synthesis of both perspectives regarding open-access publishing?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "While open-access removes paywalls for readers, it inadvertently introduces exclusionary author fees and facilitates predatory publishing practices."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Open-access publishing has completely solved all funding inequalities across international scientific faculties."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Subscription paywalls remain the only morally defensible method for distributing peer-reviewed research."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Independent scholars prefer predatory journals because they ensure higher citation counts and faster peer review."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Sentez: Metin A okuyucular için engellerin kalktığını ve bilginin demokratikleştiğini anlatır; Metin B ise yayın maliyetinin yazara yüklenmesiyle (APC) parasız araştırmacıların saf dışı kaldığını ve yağmacı dergilerin türediğini belirtir. A seçeneği 'While open-access removes paywalls for readers, it inadvertently introduces exclusionary author fees and facilitates predatory publishing practices' diyerek iki metni kusursuz birleştirir.",
+    "explanation_en": "Synthesizing both viewpoints recognizes the reader-side democratization (Text A) alongside the author-side financial exclusion and predatory exploitation induced by APCs (Text B), as formulated in A."
+  },
+  {
+    "id": "q-sabanci-08",
+    "university_id": "sabanci",
+    "level": "C1",
+    "category": "Synthesizing Text",
+    "passage": "[Text A]\nDeep neural networks excel at perceptual pattern recognition, absorbing immense unstructured datasets to yield state-of-the-art results in computer vision and natural language processing. However, they remain 'black boxes' vulnerable to catastrophic hallucination and unable to perform robust compositional deduction.\n\n[Text B]\nSymbolic artificial intelligence operates on explicit, human-interpretable rules and formal logic, ensuring verifiable deductive reasoning and explainability. Nevertheless, classical symbolic frameworks are notoriously brittle when confronted with noisy, continuous real-world sensor streams and fail to scale organically.",
+    "question": "What synthesis can be deduced regarding the development of next-generation artificial intelligence?",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "Advancing toward reliable artificial intelligence likely requires hybrid neuro-symbolic systems that marry neural pattern recognition with symbolic formal reasoning."
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "Computer scientists should abandon deep learning entirely in favor of hand-coded twentieth-century expert systems."
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "Symbolic artificial intelligence is completely immune to any logical errors when processing unstructured sensor streams."
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "Neural networks possess inherent formal logic capabilities that make explainability frameworks redundant."
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Metin A derin öğrenmenin örüntü tanımada harika olduğunu ancak açıklanabilirlik ve mantıksal çıkarımda zayıf olduğunu (kara kutu) söyler. Metin B sembolik yapay zekanın mantıksal çıkarım ve kural tabanlı doğrulamada üstün olduğunu ancak gürültülü gerçek dünya verisinde kırılgan olduğunu belirtir. Gelecek nesil yapay zeka için iki metnin birleşik sentezi, bu iki yaklaşımı birleştiren melez 'nöro-sembolik' (hybrid neuro-symbolic) mimarilere duyulan ihtiyaçtır. Doğru cevap A'dır.",
+    "explanation_en": "The logical synthesis of complementary strengths (neural perceptual prowess + symbolic deductive explainability) points toward hybrid neuro-symbolic architectures, as captured in A."
+  },
+  {
+    "id": "q-sabanci-09",
+    "university_id": "sabanci",
+    "level": "B2",
+    "category": "Academic Vocabulary",
+    "question": "Choose the word closest in meaning to 'ubiquitous' in the academic sentence:\n\n'In contemporary urban sociology, smartphones have become UBIQUITOUS instruments, fundamentally reshaping patterns of civic engagement.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "omnipresent"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "antiquated"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "ephemeral"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "cumbersome"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Ubiquitous' akademik İngilizcede 'her yerde bulunan, çok yaygın' anlamına gelir. 'Omnipresent' kelimesi de 'her yerde hazır ve nazır / her yerde var olan' anlamıyla birebir eşanlamlıdır. 'Antiquated' eski/çağdışı, 'ephemeral' geçici/kısa ömürlü, 'cumbersome' hantal demektir. Doğru cevap A'dır.",
+    "explanation_en": "'Ubiquitous' means present, appearing, or found everywhere. Its exact academic synonym is 'omnipresent' (Choice A). 'Ephemeral' means fleeting, and 'antiquated' means obsolete."
+  },
+  {
+    "id": "q-sabanci-10",
+    "university_id": "sabanci",
+    "level": "C1",
+    "category": "Academic Vocabulary",
+    "question": "Select the verb that best fits the blank meaning 'to provide evidence to support or prove the truth of a claim':\n\n'The research team was unable to _______ their theoretical hypothesis with empirical biomarker data from the clinical cohort.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "substantiate"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "repudiate"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "obfuscate"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "dissipate"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Substantiate' akademik dilde bir iddiayı veya hipotezi 'delillerle doğrulamak, kanıtlamak, somut verilerle desteklemek' demektir. 'Repudiate' reddetmek, 'obfuscate' kasten karmaşıklaştırıp anlaşılmaz kılmak, 'dissipate' dağıtıp yok etmek anlamına gelir. Doğru cevap 'substantiate' (A) seçeneğidir.",
+    "explanation_en": "'Substantiate' means to provide evidence to support or prove the truth of an assertion or hypothesis. 'Repudiate' means to reject or deny, making A the correct term."
+  },
+  {
+    "id": "q-sabanci-11",
+    "university_id": "sabanci",
+    "level": "B2",
+    "category": "Academic Vocabulary",
+    "question": "Choose the adjective that best describes a situation that seems self-contradictory yet expresses a possible truth:\n\n'It is _______ that as energy-efficient technologies reduce fuel consumption per vehicle, total national petroleum demand often increases due to increased driving frequency.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "paradoxical"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "monotonous"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "redundant"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "negligible"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "Araç başına yakıt tüketimi düşerken toplam ulusal yakıt talebinin artması, görünüşte çelişkili ama gerçekte olan bir durumu (Jevons Paradox) ifade eder. 'Görünüşte çelişkili ama altında mantıklı bir gerçek yatan' durumlar için 'paradoxical' (A şıkkı) kullanılır. 'Monotonous' tekdüze, 'redundant' gereksiz/fazlalık, 'negligible' ihmal edilebilir demektir.",
+    "explanation_en": "A situation that seems contradictory or contrary to common sense yet exhibits an underlying empirical reality is 'paradoxical' (A). This describes Jevons' Paradox in economics."
+  },
+  {
+    "id": "q-sabanci-12",
+    "university_id": "sabanci",
+    "level": "C1",
+    "category": "Academic Vocabulary",
+    "question": "Select the noun that best fills the blank in the political science text meaning 'an agent or factor that precipitates significant change':\n\n'The abrupt elimination of fuel subsidies served as a potent _______ for widespread urban protests and systemic governance reform.'",
+    "options": [
+      {
+        "key": "A",
+        "id": "A",
+        "text": "catalyst"
+      },
+      {
+        "key": "B",
+        "id": "B",
+        "text": "deterrent"
+      },
+      {
+        "key": "C",
+        "id": "C",
+        "text": "bottleneck"
+      },
+      {
+        "key": "D",
+        "id": "D",
+        "text": "residue"
+      }
+    ],
+    "correct_answer": "A",
+    "explanation_tr": "'Catalyst' (katalizör) kelimesi hem kimyada hem de sosyal bilimlerde büyük değişimleri başlatan veya hızlandıran 'hızlandırıcı faktör / tetikleyici etken' anlamında mecazi olarak sıkça kullanılır ('a potent catalyst for protest and reform'). 'Deterrent' caydırıcı etken, 'bottleneck' darboğaz, 'residue' kalıntı demektir. Doğru cevap A'dır.",
+    "explanation_en": "'Catalyst' is commonly used metaphorically in social sciences to denote an event, person, or factor that precipitates or accelerates significant change (Choice A)."
   }
 ]

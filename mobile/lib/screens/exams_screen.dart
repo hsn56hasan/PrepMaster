@@ -5,6 +5,8 @@ import '../services/api_service.dart';
 import '../theme/app_theme.dart';
 import 'exam_runner_screen.dart';
 import 'listening_screen.dart';
+import 'university_paywall_sheet.dart';
+import 'student_document_scan_sheet.dart';
 
 class ExamsScreen extends StatelessWidget {
   final University currentUniversity;
@@ -17,6 +19,22 @@ class ExamsScreen extends StatelessWidget {
   });
 
   void _launchMockExam(BuildContext context) async {
+    final hasAccess = await ApiService().checkUniversityAccess(universityId: currentUniversity.id);
+    if (!context.mounted) return;
+    if (!hasAccess) {
+      UniversityPaywallSheet.show(
+        context,
+        universityId: currentUniversity.id,
+        universityName: currentUniversity.name,
+        onUnlockSuccess: () {
+          if (context.mounted) {
+            _launchMockExam(context);
+          }
+        },
+      );
+      return;
+    }
+
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Resmi muafiyet deneme sınavı hazırlanıyor...'), duration: Duration(seconds: 1)),
     );
@@ -43,6 +61,22 @@ class ExamsScreen extends StatelessWidget {
   }
 
   void _launchExam(BuildContext context, {String? category, String? level}) async {
+    final hasAccess = await ApiService().checkUniversityAccess(universityId: currentUniversity.id);
+    if (!context.mounted) return;
+    if (!hasAccess) {
+      UniversityPaywallSheet.show(
+        context,
+        universityId: currentUniversity.id,
+        universityName: currentUniversity.name,
+        onUnlockSuccess: () {
+          if (context.mounted) {
+            _launchExam(context, category: category, level: level);
+          }
+        },
+      );
+      return;
+    }
+
     final questions = await ApiService().getQuestions(
       universityId: currentUniversity.id,
       level: level ?? currentLevel,
@@ -77,7 +111,17 @@ class ExamsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Okul Denemeleri & Modüller'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.document_scanner_outlined),
+            tooltip: 'Öğrenci Belgesi Doğrula',
+            onPressed: () {
+              StudentDocumentScanSheet.show(context);
+            },
+          ),
+        ],
       ),
+
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [

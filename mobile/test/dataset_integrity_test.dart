@@ -14,8 +14,9 @@ void main() {
       final jsonStr = file.readAsStringSync();
       final List<dynamic> jsonList = jsonDecode(jsonStr);
 
-      expect(jsonList.length, greaterThanOrEqualTo(105));
+      expect(jsonList.length, greaterThanOrEqualTo(195));
 
+      final Map<String, int> universityCounts = {};
       for (var i = 0; i < jsonList.length; i++) {
         final item = jsonList[i];
         final question = Question.fromJson(item);
@@ -24,6 +25,17 @@ void main() {
         expect(question.options.length, greaterThanOrEqualTo(2), reason: 'Item $i options < 2');
         expect(question.correctAnswer.isNotEmpty, isTrue, reason: 'Item $i missing correct answer');
         expect(question.explanationTr.isNotEmpty, isTrue, reason: 'Item $i missing explanation');
+
+        universityCounts[question.universityId] = (universityCounts[question.universityId] ?? 0) + 1;
+      }
+
+      const targetUniversities = ['hacettepe', 'ankara', 'gazi', 'ege', 'koc', 'sabanci'];
+      for (final uni in targetUniversities) {
+        expect(
+          universityCounts[uni] ?? 0,
+          greaterThanOrEqualTo(12),
+          reason: 'University $uni has fewer than 12 questions (${universityCounts[uni] ?? 0})',
+        );
       }
     });
 

@@ -24,7 +24,9 @@ from database import (
     bulk_upsert_mistakes, bulk_upsert_vocab_progress,
     create_user, authenticate_user, verify_student, get_verification_status,
     create_student_otp, verify_student_otp,
-    verify_student_by_document, unlock_university_membership, check_university_access
+    verify_student_by_document, unlock_university_membership, check_university_access,
+    create_3ds_session, verify_3ds_code, generate_gib_receipt,
+    upsert_google_user, request_password_reset, confirm_password_reset
 )
 from document_scanner import (
     scan_student_document, extract_text_from_bytes, SAMPLE_DOCUMENTS
@@ -212,16 +214,83 @@ class DocumentScanRequest(BaseModel):
     document_text: Optional[str] = Field(None, max_length=50000)
     sample_key: Optional[str] = Field(None, max_length=50)
 
+class Init3DSRequest(BaseModel):
+    user_id: Optional[int] = Field(1, ge=1)
+    university_id: str = Field(..., max_length=50, pattern=r"^[a-zA-Z0-9_-]+$")
+    card_holder: Optional[str] = Field("Öğrenci", max_length=100)
+    card_number: str = Field(..., min_length=12, max_length=30)
+    expire_month: Optional[str] = Field("12", max_length=4)
+    expire_year: Optional[str] = Field("28", max_length=4)
+    cvv: str = Field(..., min_length=3, max_length=4)
+    amount_try: Optional[float] = Field(50.0, ge=1.0)
+
+    @field_validator("card_holder", mode="before")
+    @classmethod
+    def sanitize_holder(cls, v):
+        return sanitize_text(v, strip_tags=True)
+
+    @field_validator("card_number")
+    @classmethod
+    def validate_card_number(cls, v):
+        clean = re.sub(r"[\s-]", "", v or "")
+        if not clean.isdigit() or len(clean) < 12 or len(clean) > 19:
+            raise ValueError("Geçersiz kredi kartı numarası: 12-19 haneli sayısal değer olmalıdır.")
+        return clean
+
+    @field_validator("cvv")
+    @classmethod
+    def validate_cvv(cls, v):
+        clean = (v or "").strip()
+        if not clean.isdigit() or len(clean) < 3 or len(clean) > 4:
+            raise ValueError("Geçersiz CVV kodu: 3 veya 4 haneli sayısal değer olmalıdır.")
+        return clean
+
 class UnlockMembershipRequest(BaseModel):
     user_id: Optional[int] = Field(1, ge=1)
     university_id: str = Field(..., max_length=50, pattern=r"^[a-zA-Z0-9_-]+$")
     card_holder: Optional[str] = Field("Öğrenci", max_length=100)
     card_number: Optional[str] = Field("**** **** **** 4242", max_length=30)
+    session_id: Optional[str] = Field(None, max_length=100)
+    sms_code: Optional[str] = Field(None, max_length=20)
 
-    @field_validator("card_holder", "card_number", mode="before")
+    @field_validator("card_holder", "card_number", "session_id", "sms_code", mode="before")
     @classmethod
     def sanitize_membership_inputs(cls, v):
+        if v is None:
+            return None
         return sanitize_text(v, strip_tags=True)
+
+class GoogleAuthRequest(BaseModel):
+    token: Optional[str] = Field(None, max_length=2000)
+    email: str = Field(..., min_length=5, max_length=255, pattern=r"^[\w\.-]+@[\w\.-]+\.\w+$")
+    name: Optional[str] = Field(None, max_length=100)
+    full_name: Optional[str] = Field(None, max_length=100)
+    avatar_url: Optional[str] = Field(None, max_length=1000)
+
+    @field_validator("email", "name", "full_name", mode="before")
+    @classmethod
+    def sanitize_auth_fields(cls, v):
+        if v is None:
+            return None
+        return sanitize_text(str(v), strip_tags=True)
+
+class ForgotPasswordRequest(BaseModel):
+    email: str = Field(..., min_length=5, max_length=255, pattern=r"^[\w\.-]+@[\w\.-]+\.\w+$")
+
+    @field_validator("email", mode="before")
+    @classmethod
+    def sanitize_email(cls, v):
+        return sanitize_text(str(v), strip_tags=True)
+
+class ResetPasswordRequest(BaseModel):
+    email: str = Field(..., min_length=5, max_length=255, pattern=r"^[\w\.-]+@[\w\.-]+\.\w+$")
+    reset_code: str = Field(..., min_length=6, max_length=6, pattern=r"^\d{6}$")
+    new_password: str = Field(..., min_length=6, max_length=128)
+
+    @field_validator("email", "reset_code", mode="before")
+    @classmethod
+    def sanitize_reset_fields(cls, v):
+        return sanitize_text(str(v), strip_tags=True)
 
 # --- Authentication & Student Verification Endpoints ---
 @app.post("/api/auth/register")
@@ -262,6 +331,42 @@ def login_endpoint(req: LoginRequest, request: Request, _=Depends(rate_limit_log
         "token_type": "Bearer",
         "expires_in": expires_in
     }
+
+@app.post("/api/auth/google")
+def google_auth_endpoint(req: GoogleAuthRequest, request: Request):
+    enforce_rate_limit(request, scope="auth_google", max_requests=10, window_seconds=60, identifier=req.email)
+    display_name = req.full_name or req.name or ""
+    user = upsert_google_user(email=req.email, name=display_name, avatar_url=req.avatar_url or "")
+    uni = next((u for u in universities_data if u["id"] == user.get("university_id")), universities_data[0])
+    user["university"] = uni
+    token, expires_in = create_session_token(user["id"], user["username"], user["email"])
+    return {
+        "status": "success",
+        "access_token": token,
+        "token": token,
+        "token_type": "Bearer",
+        "expires_in": expires_in,
+        "user": user,
+        "provider": "google"
+    }
+
+@app.post("/api/auth/forgot-password")
+def forgot_password_endpoint(req: ForgotPasswordRequest, request: Request):
+    enforce_rate_limit(request, scope="auth_forgot_password", max_requests=5, window_seconds=60, identifier=req.email)
+    res = request_password_reset(email=req.email)
+    if not res.get("success"):
+        if res.get("cooldown"):
+            raise HTTPException(status_code=400, detail=res.get("detail", "Lütfen bekleyin."))
+        raise HTTPException(status_code=400, detail=res.get("detail", "Şifre sıfırlama kodu oluşturulamadı."))
+    return res
+
+@app.post("/api/auth/reset-password")
+def reset_password_endpoint(req: ResetPasswordRequest, request: Request):
+    enforce_rate_limit(request, scope="auth_reset_password", max_requests=10, window_seconds=60, identifier=req.email)
+    res = confirm_password_reset(email=req.email, reset_code=req.reset_code, new_password=req.new_password)
+    if not res.get("success"):
+        raise HTTPException(status_code=400, detail=res.get("detail", "Şifre sıfırlama başarısız."))
+    return res
 
 @app.get("/api/auth/me")
 def current_user_endpoint(request: Request, user_id: int = 1):
@@ -391,17 +496,50 @@ async def upload_student_document_endpoint(
     doc_text = extract_text_from_bytes(content, filename)
     return await _process_scanned_document(doc_text, filename, target_user_id)
 
+@app.post("/api/membership/3d-init")
+def init_3ds_payment_endpoint(req: Init3DSRequest, request: Request):
+    token_user = get_current_user_from_request(request)
+    target_id = token_user["user_id"] if token_user else (req.user_id or 1)
+
+    session_data = create_3ds_session(
+        user_id=target_id,
+        university_id=req.university_id,
+        card_holder=req.card_holder or "Öğrenci",
+        card_number=req.card_number,
+        amount_try=req.amount_try or 50.0
+    )
+    return session_data
+
 @app.post("/api/membership/unlock")
 def unlock_membership_endpoint(req: UnlockMembershipRequest, request: Request):
     token_user = get_current_user_from_request(request)
-    target_id = token_user["user_id"] if token_user else req.user_id
+    target_id = token_user["user_id"] if token_user else (req.user_id or 1)
+
+    card_holder = req.card_holder or "Öğrenci"
+    clean_card = re.sub(r"[\s-]", "", req.card_number or "")
+    card_last_four = clean_card[-4:] if len(clean_card) >= 4 else "4242"
+
+    if req.session_id:
+        if not req.sms_code:
+            raise HTTPException(status_code=400, detail="3D Secure SMS doğrulama kodu zorunludur.")
+        verify_res = verify_3ds_code(req.session_id, req.sms_code)
+        if not verify_res.get("success"):
+            raise HTTPException(status_code=400, detail=verify_res.get("detail", "3D Secure SMS doğrulaması başarısız."))
+        session_info = verify_res.get("session", {})
+        if session_info.get("card_holder"):
+            card_holder = session_info["card_holder"]
+        if session_info.get("card_number_masked"):
+            card_last_four = session_info["card_number_masked"][-4:]
+    elif req.sms_code:
+        raise HTTPException(status_code=400, detail="3D Secure oturum kimliği (session_id) eksik.")
 
     res = unlock_university_membership(
         user_id=target_id,
         university_id=req.university_id,
-        card_holder=req.card_holder or "Öğrenci",
-        card_last_four=(req.card_number or "4242")[-4:],
-        price_try=50.0
+        card_holder=card_holder,
+        card_last_four=card_last_four,
+        price_try=50.0,
+        session_id=req.session_id
     )
     return res
 

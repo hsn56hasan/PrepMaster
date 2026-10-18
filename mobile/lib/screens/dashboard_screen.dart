@@ -10,6 +10,8 @@ import 'university_picker_dialog.dart';
 import 'listening_screen.dart';
 import 'writing_screen.dart';
 import 'speaking_screen.dart';
+import 'university_paywall_sheet.dart';
+import 'student_document_scan_sheet.dart';
 import '../services/sync_service.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -60,8 +62,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
       builder: (_) => UniversityPickerDialog(
         universities: _universities,
         selectedUniversity: widget.currentUniversity,
-        onSelect: (uni) {
-          widget.onUniversityChange(uni);
+        onSelect: (uni) async {
+          final hasAccess = await ApiService().checkUniversityAccess(universityId: uni.id);
+          if (!mounted) return;
+          if (!hasAccess) {
+            UniversityPaywallSheet.show(
+              context,
+              universityId: uni.id,
+              universityName: uni.name,
+              onUnlockSuccess: () {
+                widget.onUniversityChange(uni);
+                _loadData();
+              },
+            );
+          } else {
+            widget.onUniversityChange(uni);
+          }
         },
       ),
     );
@@ -129,6 +145,56 @@ class _DashboardScreenState extends State<DashboardScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (!isOtpStep) ...[
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(ctx);
+                    StudentDocumentScanSheet.show(
+                      context,
+                      onUniversityVerified: (uniId, uniName) {
+                        final matchedUni = _universities.firstWhere(
+                          (u) => u.id == uniId,
+                          orElse: () => widget.currentUniversity,
+                        );
+                        widget.onUniversityChange(matchedUni);
+                        _loadData();
+                      },
+                    );
+                  },
+                  borderRadius: BorderRadius.circular(12),
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.teal.shade50,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.teal.shade200),
+                    ),
+                    child: const Row(
+                      children: [
+                        Icon(Icons.document_scanner_rounded, color: Colors.teal, size: 20),
+                        SizedBox(width: 8),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('E-Devlet Belgesi ile Anında Doğrula', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.teal)),
+                              Text('Barkodlu öğrenci belgesi veya test şablonu', style: TextStyle(fontSize: 10, color: Colors.grey)),
+                            ],
+                          ),
+                        ),
+                        Icon(Icons.arrow_forward_ios, size: 12, color: Colors.teal),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                const Row(
+                  children: [
+                    Expanded(child: Divider()),
+                    Padding(padding: EdgeInsets.symmetric(horizontal: 8), child: Text('VEYA E-POSTA İLE', style: TextStyle(fontSize: 9, color: Colors.grey, fontWeight: FontWeight.bold))),
+                    Expanded(child: Divider()),
+                  ],
+                ),
+                const SizedBox(height: 10),
                 const Text(
                   'Üniversite .edu.tr e-posta ve öğrenci numaranızı girerek 6 haneli doğrulama kodunu talep edin.',
                   style: TextStyle(fontSize: 12, color: Colors.grey),
@@ -322,6 +388,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   void _startFullMockExam() async {
+    final hasAccess = await ApiService().checkUniversityAccess(universityId: widget.currentUniversity.id);
+    if (!mounted) return;
+    if (!hasAccess) {
+      UniversityPaywallSheet.show(
+        context,
+        universityId: widget.currentUniversity.id,
+        universityName: widget.currentUniversity.name,
+        onUnlockSuccess: () {
+          if (mounted) {
+            _loadData();
+            _startFullMockExam();
+          }
+        },
+      );
+      return;
+    }
+
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Resmi muafiyet deneme sınavı hazırlanıyor...'),
@@ -895,6 +978,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
             icon: const Icon(Icons.verified_user_outlined, color: Colors.green),
             onPressed: _openVerificationDialog,
             tooltip: 'Öğrenci Doğrulama',
+          ),
+          IconButton(
+            icon: const Icon(Icons.document_scanner_outlined, color: Colors.teal),
+            onPressed: () {
+              StudentDocumentScanSheet.show(
+                context,
+                onUniversityVerified: (uniId, uniName) {
+                  final matchedUni = _universities.firstWhere(
+                    (u) => u.id == uniId,
+                    orElse: () => widget.currentUniversity,
+                  );
+                  widget.onUniversityChange(matchedUni);
+                  _loadData();
+                },
+              );
+            },
+            tooltip: 'E-Devlet Belgesi Tara',
           ),
           IconButton(
             icon: const Icon(Icons.cloud_sync_outlined, color: AppTheme.brandBlue),

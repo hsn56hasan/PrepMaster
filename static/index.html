@@ -897,12 +897,34 @@
             <input type="text" id="login-identifier" placeholder="ornek@itu.edu.tr veya kullanıcı adı" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
           </div>
           <div>
-            <label class="block text-xs font-bold text-slate-600 mb-1">Şifre:</label>
+            <div class="flex items-center justify-between mb-1">
+              <label class="block text-xs font-bold text-slate-600">Şifre:</label>
+              <button type="button" onclick="openForgotPassword()" class="text-[11px] font-semibold text-blue-600 hover:text-blue-700 hover:underline">
+                Şifremi Unuttum?
+              </button>
+            </div>
             <input type="password" id="login-password" placeholder="••••••••" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
           </div>
           <div id="login-error-msg" class="hidden p-2.5 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-700 font-semibold"></div>
           <button onclick="submitLogin()" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md transition flex items-center justify-center gap-2">
             <i data-lucide="log-in" class="w-4 h-4"></i> Giriş Yap
+          </button>
+
+          <!-- Divider -->
+          <div class="relative my-3 text-center">
+            <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-slate-200"></div></div>
+            <span class="relative bg-white px-2 text-[11px] text-slate-400 font-bold uppercase tracking-wider">veya</span>
+          </div>
+
+          <!-- Google Sign-In Button -->
+          <button type="button" onclick="signInWithGoogle()" id="btn-google-login" class="w-full py-2.5 bg-white hover:bg-slate-50 border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white text-slate-700 font-bold text-xs rounded-xl shadow-sm transition flex items-center justify-center gap-2">
+            <svg class="w-4 h-4" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+            </svg>
+            Google ile Giriş Yap
           </button>
         </div>
 
@@ -1089,7 +1111,7 @@
     </div>
   </div>
 
-  <!-- ================= 50 TL ÜNİVERSİTE ÜYELİK & PAYWALL MODAL ================= -->
+  <!-- ================= 50 TL ÜNİVERSİTE ÜYELİK & 3D SECURE PAYWALL MODAL ================= -->
   <div id="university-paywall-modal" class="hidden fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm p-4 overflow-y-auto flex items-center justify-center">
     <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-100 dark:border-slate-700 space-y-4 my-auto">
       
@@ -1100,8 +1122,8 @@
             <i data-lucide="lock" class="w-5 h-5"></i>
           </div>
           <div>
-            <h3 class="font-black text-slate-800 dark:text-white text-sm">Üniversite Sınav Paketi</h3>
-            <p class="text-[11px] text-slate-400">Farklı okul sınavları için tek seferlik üyelik</p>
+            <h3 class="font-black text-slate-800 dark:text-white text-sm" id="paywall-modal-title">Üniversite Sınav Paketi</h3>
+            <p class="text-[11px] text-slate-400">3D Secure Sanal POS & GİB E-Arşiv Fişi</p>
           </div>
         </div>
         <button onclick="closeUniversityPaywallModal()" class="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg">
@@ -1109,66 +1131,184 @@
         </button>
       </div>
 
-      <!-- Bilgi & Okul Karşılaştırması -->
-      <div class="p-4 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-slate-700 dark:to-slate-700/80 rounded-2xl border border-amber-200 dark:border-slate-600 space-y-2.5">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-slate-500 dark:text-slate-400">Kayıtlı Okulunuz:</span>
-          <span class="text-xs font-extrabold text-emerald-600 bg-emerald-100 dark:bg-emerald-900/50 px-2 py-0.5 rounded-lg" id="paywall-user-uni-badge">Ücretsiz</span>
-        </div>
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-slate-500 dark:text-slate-400">Açılacak Okul:</span>
-          <span class="text-xs font-black text-blue-700 dark:text-blue-300" id="paywall-target-uni-name">-</span>
-        </div>
-        <div class="flex items-center justify-between pt-2 border-t border-amber-200 dark:border-slate-600">
-          <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Üyelik Ücreti:</span>
-          <div class="text-right">
-            <span class="text-xl font-black text-amber-700 dark:text-amber-400">50 TL</span>
-            <span class="text-[10px] text-slate-400 block font-semibold">Ömür boyu sınırsız erişim</span>
+      <!-- ADIM 1: Kart Bilgileri ve Tutar -->
+      <div id="paywall-view-card" class="space-y-4">
+        <!-- Bilgi & Okul Karşılaştırması -->
+        <div class="p-4 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-slate-700 dark:to-slate-700/80 rounded-2xl border border-amber-200 dark:border-slate-600 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-500 dark:text-slate-400">Kayıtlı Okulunuz:</span>
+            <span class="text-xs font-extrabold text-emerald-600 bg-emerald-100 dark:bg-emerald-900/50 px-2 py-0.5 rounded-lg" id="paywall-user-uni-badge">Ücretsiz</span>
           </div>
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-500 dark:text-slate-400">Açılacak Okul:</span>
+            <span class="text-xs font-black text-blue-700 dark:text-blue-300" id="paywall-target-uni-name">-</span>
+          </div>
+          <div class="flex items-center justify-between pt-2 border-t border-amber-200 dark:border-slate-600">
+            <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Üyelik Ücreti:</span>
+            <div class="text-right">
+              <span class="text-xl font-black text-amber-700 dark:text-amber-400">50 TL</span>
+              <span class="text-[10px] text-slate-400 block font-semibold">KDV Dahil (20% KDV: 8.33 TL)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dahil Olan Özellikler -->
+        <div class="space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
+          <div class="flex items-center gap-2">
+            <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+            <span>Tüm resmi muafiyet ve kur sınavı denemeleri</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+            <span>Özel akademik listening parçaları ve soru setleri</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+            <span>Resmi GİB E-Arşiv Fişi ve ömür boyu sınırsız erişim</span>
+          </div>
+        </div>
+
+        <!-- Kart Formu -->
+        <div class="space-y-3 pt-2 border-t border-slate-100 dark:border-slate-700">
+          <div>
+            <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Kart Sahibi:</label>
+            <input type="text" id="paywall-card-holder" placeholder="Ad Soyad" value="Ahmet Yılmaz" class="w-full p-2.5 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500 font-semibold">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Kart Numarası:</label>
+            <input type="text" id="paywall-card-number" placeholder="5528 •••• •••• 0001" value="5528 7900 0000 0001" class="w-full p-2.5 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500 font-mono">
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Son Kullanma:</label>
+              <input type="text" id="paywall-card-expiry" placeholder="12/28" value="12/28" class="w-full p-2.5 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500 font-mono text-center">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">CVV:</label>
+              <input type="text" id="paywall-card-cvv" placeholder="•••" value="123" class="w-full p-2.5 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500 font-mono text-center">
+            </div>
+          </div>
+
+          <div id="paywall-status-msg" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+
+          <button onclick="init3DSecurePayment()" id="btn-submit-paywall-unlock" class="w-full py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-black text-xs rounded-xl shadow-lg shadow-amber-500/25 transition flex items-center justify-center gap-2">
+            <i data-lucide="shield-check" class="w-4 h-4"></i> 50 TL ile 3D Secure Güvenli Öde
+          </button>
         </div>
       </div>
 
-      <!-- Dahil Olan Özellikler -->
-      <div class="space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
-        <div class="flex items-center gap-2">
-          <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
-          <span>Bu üniversiteye ait tüm resmi muafiyet ve kur denemeleri</span>
+      <!-- ADIM 2: 3D Secure Banka SMS Onay Ekranı -->
+      <div id="paywall-view-3ds" class="hidden space-y-4">
+        <div class="p-3 bg-blue-50 dark:bg-slate-700 rounded-2xl border border-blue-200 dark:border-slate-600 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-md">
+            <i data-lucide="shield" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h4 class="text-xs font-black text-slate-800 dark:text-white">PrepMaster Sanal POS 3D Secure</h4>
+            <p class="text-[10px] text-slate-500 dark:text-slate-300">Banka Güvenlik Onayı Doğrulama Adımı</p>
+          </div>
         </div>
-        <div class="flex items-center gap-2">
-          <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
-          <span>Özel akademik listening parçaları ve soru setleri</span>
+
+        <div class="bg-slate-50 dark:bg-slate-700/50 p-3 rounded-2xl border border-slate-200 dark:border-slate-600 text-xs space-y-2">
+          <div class="flex justify-between"><span class="text-slate-500">İşlem Tutarı:</span><span class="font-bold text-slate-800 dark:text-white">50.00 TL</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">Ödeme Yapılan Kart:</span><span id="3ds-card-masked" class="font-mono font-bold text-slate-800 dark:text-white">**** **** **** 0001</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">SMS Gönderilen Tel:</span><span id="3ds-masked-phone" class="font-mono text-slate-700 dark:text-slate-300">+90 (532) *** ** 42</span></div>
         </div>
-        <div class="flex items-center gap-2">
-          <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
-          <span>Örnek essay konuları ve speaking alıştırmaları</span>
+
+        <div class="space-y-2">
+          <label class="block text-xs font-bold text-slate-700 dark:text-slate-200 text-center">
+            Telefonunuza SMS ile gönderilen 6 haneli kodu giriniz:
+          </label>
+          <input type="text" id="paywall-3ds-code" maxlength="6" placeholder="• • • • • •" class="w-full text-center tracking-[0.4em] text-2xl font-mono font-black p-3 bg-white dark:bg-slate-700 border-2 border-amber-400 focus:border-amber-500 rounded-2xl text-slate-800 dark:text-white focus:outline-none shadow-sm">
+          
+          <div class="flex items-center justify-between p-2 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 rounded-xl text-[11px]">
+            <span class="text-amber-800 dark:text-amber-300 font-semibold">Sandbox Test Kodu:</span>
+            <button type="button" onclick="fillSandbox3DSCode()" class="font-mono font-bold text-amber-700 dark:text-amber-300 bg-amber-200/80 dark:bg-amber-900 px-2 py-0.5 rounded-lg hover:bg-amber-300 transition cursor-pointer">
+              <span id="3ds-code-sandbox-val">654321</span> (Doldur)
+            </button>
+          </div>
+
+          <div class="flex items-center justify-center gap-1.5 text-xs font-bold text-slate-600 dark:text-slate-300 py-1">
+            <i data-lucide="clock" class="w-4 h-4 text-amber-500 animate-pulse"></i>
+            <span>Kalan Süre: </span>
+            <span id="3ds-countdown-timer" class="font-mono text-amber-600 dark:text-amber-400">180 sn</span>
+          </div>
+
+          <div id="paywall-3ds-error" class="hidden p-3 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200"></div>
+
+          <button onclick="verify3DSecurePayment()" id="btn-verify-3ds" class="w-full py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-black text-xs rounded-xl shadow-lg shadow-emerald-500/25 transition flex items-center justify-center gap-2">
+            <i data-lucide="check-circle" class="w-4 h-4"></i> Onayla ve Ödemeyi Tamamla
+          </button>
+          <button onclick="backToPaywallCardStep()" class="w-full py-2 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 text-xs font-bold transition">
+            ← Kart Bilgilerine Geri Dön
+          </button>
         </div>
       </div>
 
-      <!-- Hızlı Ödeme Kart Formu -->
-      <div class="space-y-3 pt-2 border-t border-slate-100 dark:border-slate-700">
-        <div>
-          <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Kart Sahibi:</label>
-          <input type="text" id="paywall-card-holder" placeholder="Ad Soyad" value="Öğrenci" class="w-full p-2.5 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500 font-semibold">
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Kart Numarası:</label>
-          <input type="text" id="paywall-card-number" placeholder="4242 •••• •••• 4242" value="4242 4242 4242 4242" class="w-full p-2.5 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500 font-mono">
-        </div>
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Son Kullanma:</label>
-            <input type="text" id="paywall-card-expiry" placeholder="12/28" value="12/28" class="w-full p-2.5 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500 font-mono text-center">
+      <!-- ADIM 3: GİB E-Arşiv Fişi ve Başarı Ekranı -->
+      <div id="paywall-view-receipt" class="hidden space-y-3.5">
+        <div class="text-center space-y-1">
+          <div class="w-12 h-12 mx-auto rounded-2xl bg-emerald-100 text-emerald-600 dark:bg-emerald-900/50 dark:text-emerald-400 flex items-center justify-center shadow-inner">
+            <i data-lucide="check" class="w-6 h-6 stroke-[3]"></i>
           </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">CVV:</label>
-            <input type="text" id="paywall-card-cvv" placeholder="•••" value="424" class="w-full p-2.5 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500 font-mono text-center">
+          <h3 class="font-black text-slate-800 dark:text-white text-base">Ödeme Başarıyla Onaylandı!</h3>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400">Üniversite hazırlık sınav paketi hesabınıza tanımlandı.</p>
+        </div>
+
+        <!-- Resmi GİB E-Arşiv Fişi -->
+        <div class="p-4 bg-slate-50 dark:bg-slate-700/60 rounded-2xl border-2 border-slate-200 dark:border-slate-600 space-y-2 text-xs font-mono">
+          <div class="text-center pb-2 border-b border-dashed border-slate-300 dark:border-slate-500">
+            <p class="text-[9px] font-bold text-slate-500 dark:text-slate-400">T.C. HAZİNE VE MALİYE BAKANLIĞI</p>
+            <p class="text-[9px] font-bold text-slate-500 dark:text-slate-400">GELİR İDARESİ BAŞKANLIĞI (GİB)</p>
+            <p class="text-[11px] font-black text-slate-800 dark:text-white mt-0.5">E-ARŞİV FATURA / PERAKENDE SATIŞ FİŞİ</p>
+          </div>
+
+          <div class="space-y-1 pt-1 text-[11px]">
+            <div class="flex justify-between">
+              <span class="text-slate-500 font-sans">Fiş / Fatura No:</span>
+              <span id="receipt-no-display" class="font-bold text-blue-700 dark:text-blue-300">EARSIV-2026-XXXX</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-500 font-sans">Tarih / Saat:</span>
+              <span id="receipt-date-display" class="text-slate-700 dark:text-slate-200">-</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-500 font-sans">Vergi Dairesi:</span>
+              <span class="text-slate-700 dark:text-slate-200">Mecidiyeköy V.D. - 8930491823</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-500 font-sans">Alıcı / Müşteri:</span>
+              <span id="receipt-holder-display" class="font-bold text-slate-800 dark:text-white">-</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-500 font-sans">Hizmet:</span>
+              <span id="receipt-desc-display" class="text-slate-800 dark:text-white font-sans text-right font-medium">-</span>
+            </div>
+          </div>
+
+          <div class="border-t border-dashed border-slate-300 dark:border-slate-500 pt-2 space-y-1 text-[11px]">
+            <div class="flex justify-between">
+              <span class="text-slate-500 font-sans">Net Matrah:</span>
+              <span id="receipt-net-display" class="font-bold text-slate-700 dark:text-slate-200">41.67 TL</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-500 font-sans">KDV (%20):</span>
+              <span id="receipt-vat-display" class="font-bold text-slate-700 dark:text-slate-200">8.33 TL</span>
+            </div>
+            <div class="flex justify-between pt-1 border-t border-slate-300 dark:border-slate-500 text-sm font-black">
+              <span class="font-sans text-slate-800 dark:text-white">TOPLAM:</span>
+              <span id="receipt-gross-display" class="text-emerald-600 dark:text-emerald-400">50.00 TL</span>
+            </div>
+          </div>
+
+          <div class="p-2 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-200 dark:border-emerald-800 text-center text-[10px] text-emerald-800 dark:text-emerald-300 font-bold flex items-center justify-center gap-1.5 font-sans">
+            <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+            <span>GİB E-Arşiv Fatura Sistemi Onaylı</span>
           </div>
         </div>
 
-        <div id="paywall-status-msg" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
-
-        <button onclick="submitUniversityUnlockPayment()" id="btn-submit-paywall-unlock" class="w-full py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-black text-xs rounded-xl shadow-lg shadow-amber-500/25 transition flex items-center justify-center gap-2">
-          <i data-lucide="credit-card" class="w-4 h-4"></i> 50 TL ile Kilidi Aç ve Başla
+        <button onclick="finishPaywallAndStart()" id="btn-paywall-finish" class="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-black text-xs rounded-xl shadow-lg shadow-blue-500/25 transition flex items-center justify-center gap-2">
+          <i data-lucide="play" class="w-4 h-4"></i> Hemen Sınavlara Başla
         </button>
       </div>
 
@@ -1182,5 +1322,298 @@
   <script src="/static/js/speaking.js?v=1.1"></script>
   <script src="/static/js/writing_ai.js?v=1.1"></script>
   <script src="/static/js/app.js?v=1.1"></script>
+
+  <!-- 3D Secure Sanal POS & GİB E-Arşiv Fişi Entegrasyonu -->
+  <script>
+    (function() {
+      let active3DSSessionId = null;
+      let active3DSSmsCode = null;
+      let active3DSTimer = null;
+      let active3DSSecondsLeft = 180;
+
+      window.init3DSecurePayment = async function() {
+        const uniId = window.currentPaywallTargetUniId || (window.appState && window.appState.currentUniversity) || "itu";
+        const cardHolder = (document.getElementById("paywall-card-holder")?.value || "Öğrenci").trim();
+        const cardNumber = (document.getElementById("paywall-card-number")?.value || "").replace(/[\s-]/g, "");
+        const cardExpiry = (document.getElementById("paywall-card-expiry")?.value || "12/28").trim();
+        const cardCvv = (document.getElementById("paywall-card-cvv")?.value || "123").trim();
+        const btn = document.getElementById("btn-submit-paywall-unlock");
+        const statusMsg = document.getElementById("paywall-status-msg");
+
+        if (statusMsg) statusMsg.classList.add("hidden");
+
+        if (!cardNumber || cardNumber.length < 12 || !/^\d+$/.test(cardNumber)) {
+          if (statusMsg) {
+            statusMsg.className = "p-3 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200";
+            statusMsg.innerText = "Lütfen geçerli bir kart numarası giriniz (en az 12 hane).";
+            statusMsg.classList.remove("hidden");
+          }
+          return;
+        }
+
+        if (!cardCvv || cardCvv.length < 3 || cardCvv.length > 4 || !/^\d+$/.test(cardCvv)) {
+          if (statusMsg) {
+            statusMsg.className = "p-3 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200";
+            statusMsg.innerText = "Lütfen 3 veya 4 haneli CVV kodunu giriniz.";
+            statusMsg.classList.remove("hidden");
+          }
+          return;
+        }
+
+        const [expMonth, expYear] = cardExpiry.split("/");
+
+        if (btn) {
+          btn.disabled = true;
+          btn.innerHTML = `<span class="animate-spin inline-block mr-2">⏳</span> 3D Secure Başlatılıyor...`;
+        }
+
+        try {
+          const userId = window.appState?.currentUser?.id || 1;
+          const res = await fetch("/api/membership/3d-init", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              user_id: userId,
+              university_id: uniId,
+              card_holder: cardHolder,
+              card_number: cardNumber,
+              expire_month: expMonth || "12",
+              expire_year: expYear || "28",
+              cvv: cardCvv,
+              amount_try: 50.0
+            })
+          });
+
+          const data = await res.json();
+          if (!res.ok) {
+            throw new Error(data.detail || "3D Secure oturumu başlatılamadı.");
+          }
+
+          active3DSSessionId = data.session_id;
+          active3DSSmsCode = data.sms_code_sandbox || data.sms_code;
+
+          // Populate 3DS view
+          const maskedCardEl = document.getElementById("3ds-card-masked");
+          if (maskedCardEl) maskedCardEl.innerText = "**** **** **** " + cardNumber.slice(-4);
+
+          const phoneEl = document.getElementById("3ds-masked-phone");
+          if (phoneEl) phoneEl.innerText = data.masked_phone || "+90 (532) *** ** 42";
+
+          const hintEl = document.getElementById("3ds-code-sandbox-val");
+          if (hintEl) hintEl.innerText = active3DSSmsCode;
+
+          const codeInput = document.getElementById("paywall-3ds-code");
+          if (codeInput) {
+            codeInput.value = "";
+            setTimeout(() => codeInput.focus(), 100);
+          }
+
+          // Start 180s countdown timer
+          if (active3DSTimer) clearInterval(active3DSTimer);
+          active3DSSecondsLeft = data.expires_in_seconds || 180;
+          const timerEl = document.getElementById("3ds-countdown-timer");
+          if (timerEl) timerEl.innerText = active3DSSecondsLeft + " sn";
+
+          active3DSTimer = setInterval(() => {
+            active3DSSecondsLeft--;
+            if (timerEl) timerEl.innerText = active3DSSecondsLeft + " sn";
+            if (active3DSSecondsLeft <= 0) {
+              clearInterval(active3DSTimer);
+              active3DSTimer = null;
+              const errEl = document.getElementById("paywall-3ds-error");
+              if (errEl) {
+                errEl.innerText = "Doğrulama kodunun süresi doldu. Lütfen tekrar deneyin.";
+                errEl.classList.remove("hidden");
+              }
+              const verifyBtn = document.getElementById("btn-verify-3ds");
+              if (verifyBtn) verifyBtn.disabled = true;
+            }
+          }, 1000);
+
+          // Switch view
+          document.getElementById("paywall-view-card")?.classList.add("hidden");
+          document.getElementById("paywall-view-3ds")?.classList.remove("hidden");
+          document.getElementById("paywall-3ds-error")?.classList.add("hidden");
+          if (window.lucide) window.lucide.createIcons();
+
+        } catch (err) {
+          if (statusMsg) {
+            statusMsg.className = "p-3 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200";
+            statusMsg.innerText = "Hata: " + err.message;
+            statusMsg.classList.remove("hidden");
+          }
+        } finally {
+          if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = `<i data-lucide="shield-check" class="w-4 h-4"></i> 50 TL ile 3D Secure Güvenli Öde`;
+            if (window.lucide) window.lucide.createIcons();
+          }
+        }
+      };
+
+      window.fillSandbox3DSCode = function() {
+        const input = document.getElementById("paywall-3ds-code");
+        if (input && active3DSSmsCode) {
+          input.value = active3DSSmsCode;
+        }
+      };
+
+      window.verify3DSecurePayment = async function() {
+        const uniId = window.currentPaywallTargetUniId || (window.appState && window.appState.currentUniversity) || "itu";
+        const code = (document.getElementById("paywall-3ds-code")?.value || "").trim();
+        const errEl = document.getElementById("paywall-3ds-error");
+        const btn = document.getElementById("btn-verify-3ds");
+        const cardHolder = (document.getElementById("paywall-card-holder")?.value || "Öğrenci").trim();
+        const cardNumber = (document.getElementById("paywall-card-number")?.value || "").replace(/[\s-]/g, "");
+
+        if (errEl) errEl.classList.add("hidden");
+
+        if (!code || code.length !== 6) {
+          if (errEl) {
+            errEl.innerText = "Lütfen 6 haneli doğrulama kodunu eksiksiz giriniz.";
+            errEl.classList.remove("hidden");
+          }
+          return;
+        }
+
+        if (btn) {
+          btn.disabled = true;
+          btn.innerHTML = `<span class="animate-spin inline-block mr-2">⏳</span> Doğrulanıyor ve Fiş Üretiliyor...`;
+        }
+
+        try {
+          const userId = window.appState?.currentUser?.id || 1;
+          const res = await fetch("/api/membership/unlock", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              user_id: userId,
+              university_id: uniId,
+              session_id: active3DSSessionId,
+              sms_code: code,
+              card_holder: cardHolder,
+              card_number: cardNumber
+            })
+          });
+
+          const data = await res.json();
+          if (!res.ok) {
+            throw new Error(data.detail || "SMS kodu doğrulanamadı.");
+          }
+
+          // Clear timer
+          if (active3DSTimer) {
+            clearInterval(active3DSTimer);
+            active3DSTimer = null;
+          }
+
+          // Update user state
+          if (window.appState?.currentUser) {
+            window.appState.currentUser.unlocked_universities = data.unlocked_universities || [];
+            localStorage.setItem("auth_user", JSON.stringify(window.appState.currentUser));
+          }
+
+          // Render Receipt View
+          const receipt = data.receipt || {};
+          const receiptNo = receipt.receipt_no || data.reference || "EARSIV-2026-XXXX";
+          const receiptDate = receipt.payment_date ? new Date(receipt.payment_date).toLocaleString("tr-TR") : new Date().toLocaleString("tr-TR");
+
+          const rNoEl = document.getElementById("receipt-no-display");
+          if (rNoEl) rNoEl.innerText = receiptNo;
+
+          const rDateEl = document.getElementById("receipt-date-display");
+          if (rDateEl) rDateEl.innerText = receiptDate;
+
+          const rHolderEl = document.getElementById("receipt-holder-display");
+          if (rHolderEl) rHolderEl.innerText = receipt.card_holder || cardHolder;
+
+          const rDescEl = document.getElementById("receipt-desc-display");
+          if (rDescEl) rDescEl.innerText = (receipt.description || `${uniId.toUpperCase()} Hazırlık Sınav Paketi`);
+
+          const rNetEl = document.getElementById("receipt-net-display");
+          if (rNetEl) rNetEl.innerText = (receipt.net_amount ? receipt.net_amount.toFixed(2) : "41.67") + " TL";
+
+          const rVatEl = document.getElementById("receipt-vat-display");
+          if (rVatEl) rVatEl.innerText = (receipt.vat_amount ? receipt.vat_amount.toFixed(2) : "8.33") + " TL";
+
+          const rGrossEl = document.getElementById("receipt-gross-display");
+          if (rGrossEl) rGrossEl.innerText = (receipt.gross_amount ? receipt.gross_amount.toFixed(2) : "50.00") + " TL";
+
+          // Switch to receipt view
+          document.getElementById("paywall-view-3ds")?.classList.add("hidden");
+          document.getElementById("paywall-view-receipt")?.classList.remove("hidden");
+          if (window.lucide) window.lucide.createIcons();
+
+          if (typeof showNotification === "function") {
+            showNotification(`✓ ${uniId.toUpperCase()} hazırlık sınav paketi 50 TL karşılığında başarıyla açıldı!`, "emerald");
+          }
+
+        } catch (err) {
+          if (errEl) {
+            errEl.innerText = "Doğrulama Hatası: " + err.message;
+            errEl.classList.remove("hidden");
+          }
+        } finally {
+          if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = `<i data-lucide="check-circle" class="w-4 h-4"></i> Onayla ve Ödemeyi Tamamla`;
+            if (window.lucide) window.lucide.createIcons();
+          }
+        }
+      };
+
+      window.backToPaywallCardStep = function() {
+        if (active3DSTimer) {
+          clearInterval(active3DSTimer);
+          active3DSTimer = null;
+        }
+        document.getElementById("paywall-view-3ds")?.classList.add("hidden");
+        document.getElementById("paywall-view-card")?.classList.remove("hidden");
+        if (window.lucide) window.lucide.createIcons();
+      };
+
+      window.finishPaywallAndStart = function() {
+        const modal = document.getElementById("university-paywall-modal");
+        if (modal) modal.classList.add("hidden");
+
+        const callback = window.pendingUnlockCallback;
+        if (callback && typeof callback === "function") {
+          callback();
+        } else if (typeof renderExams === "function") {
+          renderExams();
+        }
+      };
+
+      // Wrap openUniversityPaywallModal to ensure state reset
+      const _origOpenModal = window.openUniversityPaywallModal;
+      window.openUniversityPaywallModal = function(targetUniId, onUnlockCallback = null) {
+        window.currentPaywallTargetUniId = targetUniId;
+        window.pendingUnlockCallback = onUnlockCallback;
+        if (_origOpenModal) {
+          _origOpenModal(targetUniId, onUnlockCallback);
+        } else {
+          const m = document.getElementById("university-paywall-modal");
+          if (m) m.classList.remove("hidden");
+        }
+
+        // Reset views
+        document.getElementById("paywall-view-card")?.classList.remove("hidden");
+        document.getElementById("paywall-view-3ds")?.classList.add("hidden");
+        document.getElementById("paywall-view-receipt")?.classList.add("hidden");
+        document.getElementById("paywall-status-msg")?.classList.add("hidden");
+        document.getElementById("paywall-3ds-error")?.classList.add("hidden");
+
+        const btn = document.getElementById("btn-submit-paywall-unlock");
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = `<i data-lucide="shield-check" class="w-4 h-4"></i> 50 TL ile 3D Secure Güvenli Öde`;
+        }
+        if (window.lucide) window.lucide.createIcons();
+      };
+
+      // Make submitUniversityUnlockPayment invoke 3DS payment
+      window.submitUniversityUnlockPayment = window.init3DSecurePayment;
+    })();
+  </script>
 </body>
 </html>
