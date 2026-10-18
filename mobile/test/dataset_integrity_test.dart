@@ -46,14 +46,14 @@ void main() {
       }
     });
 
-    test('Listening JSON loads and parses all 4 tracks with questions', () {
+    test('Listening JSON loads and parses all 8 tracks with questions', () {
       final file = File('assets/data/listening.json');
       expect(file.existsSync(), isTrue);
 
       final jsonStr = file.readAsStringSync();
       final List<dynamic> jsonList = jsonDecode(jsonStr);
 
-      expect(jsonList.length, 4);
+      expect(jsonList.length, 8);
 
       for (var i = 0; i < jsonList.length; i++) {
         final item = jsonList[i];
