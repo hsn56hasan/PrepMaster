@@ -5,6 +5,9 @@ window.listeningState = {
   currentTrack: null,
   audio: null,
   speechUtterance: null,
+  speechTimer: null,
+  usingSpeechFallback: false,
+  speechCharOffset: 0,
   isPlaying: false,
   playbackRate: 1.0,
   duration: 0,
@@ -109,6 +112,16 @@ async function loadListeningHub(targetLevel = null) {
   }
 }
 
+function estimateTrackDuration(track) {
+  if (!track) return 90;
+  if (track.audio_script && track.audio_script.trim().length > 0) {
+    const words = track.audio_script.trim().split(/\s+/).length;
+    const estSeconds = Math.max(20, Math.round(words / 2.4));
+    return track.lecture_duration_seconds || estSeconds;
+  }
+  return track.lecture_duration_seconds || 90;
+}
+
 function startListeningTrack(trackId) {
   const track = window.listeningState.tracks.find(t => t.id === trackId);
   if (!track) return;
@@ -120,16 +133,19 @@ function startListeningTrack(trackId) {
   window.listeningState.userNotes = "";
   window.listeningState.questionsRevealed = track.type !== 'note_taking';
   window.listeningState.currentTime = 0;
-  window.listeningState.duration = track.lecture_duration_seconds || 90;
+  window.listeningState.speechCharOffset = 0;
+  window.listeningState.usingSpeechFallback = false;
+  window.listeningState.duration = estimateTrackDuration(track);
 
-  // Initialize Audio
-  initTrackAudio(track);
-
-  // Switch to Runner UI
+  // Switch to Runner UI first so DOM elements exist before audio metadata loads
   document.getElementById("listening-hub-view")?.classList.add("hidden");
   document.getElementById("listening-runner-view")?.classList.remove("hidden");
 
   renderListeningRunner();
+
+  // Initialize Audio after DOM is rendered
+  initTrackAudio(track);
+  syncAudioProgressUI();
 }
 
 function exitListeningRunner() {
@@ -143,6 +159,11 @@ function renderListeningRunner() {
   if (!t) return;
 
   const isNoteTaking = t.type === 'note_taking';
+  const curFormatted = formatAudioTime(window.listeningState.currentTime || 0);
+  const durFormatted = formatAudioTime(window.listeningState.duration || estimateTrackDuration(t));
+  const sliderVal = (window.listeningState.duration > 0)
+    ? Math.min(100, Math.max(0, ((window.listeningState.currentTime || 0) / window.listeningState.duration) * 100))
+    : 0;
 
   const container = document.getElementById("listening-runner-content");
   if (!container) return;
@@ -202,9 +223,9 @@ function renderListeningRunner() {
         <!-- İlerleme / Seek Bar & Süre Göstergesi -->
         <div class="pt-2">
           <div class="flex items-center gap-3">
-            <span id="audio-time-current" class="text-xs font-mono text-slate-300 w-10 text-right">00:00</span>
-            <input type="range" id="audio-seek-slider" min="0" max="100" value="0" step="0.1" oninput="onSeekSliderChange(this.value)" class="flex-1 h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500">
-            <span id="audio-time-duration" class="text-xs font-mono text-slate-400 w-10">01:30</span>
+            <span id="audio-time-current" class="text-xs font-mono text-slate-300 w-10 text-right">${curFormatted}</span>
+            <input type="range" id="audio-seek-slider" min="0" max="100" value="${sliderVal}" step="0.1" oninput="onSeekSliderChange(this.value)" class="flex-1 h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500">
+            <span id="audio-time-duration" class="text-xs font-mono text-slate-400 w-10">${durFormatted}</span>
           </div>
         </div>
       </div>
@@ -224,7 +245,7 @@ function renderListeningRunner() {
           <textarea id="listening-notes-input" oninput="saveUserNotes(this.value)" rows="5" class="w-full p-4 text-xs font-mono bg-amber-50/40 border border-amber-200 rounded-2xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-400 placeholder:text-slate-400 leading-relaxed" placeholder="Örn: - Confirmation bias: Peter Wason 1960&#10;- Framing effect: Kahneman & Tversky 1981 (%90 survival vs %10 mortality)...">${window.listeningState.userNotes}</textarea>
 
           ${!window.listeningState.questionsRevealed ? `
-            <div class="p-6 bg-gradient-to-r from-amber-500/10 to-orange-500/10 border-2 border-dashed border-amber-300 rounded-2xl text-center space-y-3">
+            <div id="listening-questions-lock-box" class="p-6 bg-gradient-to-r from-amber-500/10 to-orange-500/10 border-2 border-dashed border-amber-300 rounded-2xl text-center space-y-3">
               <i data-lucide="lock" class="w-8 h-8 mx-auto text-amber-600"></i>
               <h4 class="text-sm font-extrabold text-amber-900">Sorular Şu Anda Gizli (Gerçek Sınav Kuralı)</h4>
               <p class="text-xs text-amber-800 max-w-md mx-auto">
@@ -290,7 +311,13 @@ function saveUserNotes(val) {
 function revealListeningQuestions() {
   pauseAudioPlayback();
   window.listeningState.questionsRevealed = true;
-  renderListeningRunner();
+  const lockBox = document.getElementById("listening-questions-lock-box");
+  if (lockBox) lockBox.classList.add("hidden");
+  const qContainer = document.getElementById("listening-questions-container");
+  if (qContainer) {
+    qContainer.classList.remove("hidden");
+    qContainer.classList.add("space-y-6", "pt-4");
+  }
 }
 
 function selectListeningAnswer(qId, key) {
@@ -309,21 +336,106 @@ function selectListeningAnswer(qId, key) {
   }
 }
 
-// --- REAL HTML5 AUDIO & MP3 STREAMING ENGINE ---
+// --- REAL HTML5 AUDIO & WEB SPEECH SYNTHESIS TIMER ENGINE ---
 function formatAudioTime(seconds) {
-  if (isNaN(seconds) || seconds < 0) return "00:00";
+  if (!isFinite(seconds) || isNaN(seconds) || seconds < 0) return "00:00";
   const mins = Math.floor(seconds / 60);
   const secs = Math.floor(seconds % 60);
   return `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
 }
 
+function getEffectiveDuration() {
+  const audio = window.listeningState.audio;
+  if (!window.listeningState.usingSpeechFallback && audio && audio.duration && isFinite(audio.duration) && audio.duration > 0) {
+    return audio.duration;
+  }
+  if (window.listeningState.duration && isFinite(window.listeningState.duration) && window.listeningState.duration > 0) {
+    return window.listeningState.duration;
+  }
+  return estimateTrackDuration(window.listeningState.currentTrack);
+}
+
+function syncAudioProgressUI() {
+  const cur = Math.max(0, window.listeningState.currentTime || 0);
+  const dur = Math.max(1, getEffectiveDuration());
+  window.listeningState.duration = dur;
+
+  const curEl = document.getElementById("audio-time-current");
+  const durEl = document.getElementById("audio-time-duration");
+  const slider = document.getElementById("audio-seek-slider");
+
+  if (curEl) curEl.innerText = formatAudioTime(cur);
+  if (durEl) durEl.innerText = formatAudioTime(dur);
+  if (slider) slider.value = Math.min(100, Math.max(0, (cur / dur) * 100));
+}
+
+const AVAILABLE_MP3_TRACKS = new Set([
+  'lis_bilkent_01', 'lis_bilkent_02',
+  'lis_buept_01', 'lis_buept_02',
+  'lis_itu_01', 'lis_itu_02',
+  'lis_odtu_01', 'lis_odtu_02'
+]);
+
+function startPlaybackTicker() {
+  stopPlaybackTicker();
+  let lastTick = performance.now();
+
+  window.listeningState.speechTimer = setInterval(() => {
+    const now = performance.now();
+    const deltaSec = Math.max(0.05, Math.min(1.0, (now - lastTick) / 1000));
+    lastTick = now;
+
+    if (!window.listeningState.isPlaying) return;
+
+    const audio = window.listeningState.audio;
+    const rate = window.listeningState.playbackRate || 1.0;
+
+    if (!window.listeningState.usingSpeechFallback && audio && !audio.paused && !audio.error) {
+      if (typeof audio.currentTime === 'number' && audio.currentTime > 0) {
+        window.listeningState.currentTime = audio.currentTime;
+      } else {
+        window.listeningState.currentTime = (window.listeningState.currentTime || 0) + deltaSec * rate;
+      }
+      if (audio.duration && isFinite(audio.duration) && audio.duration > 0) {
+        window.listeningState.duration = audio.duration;
+      }
+      syncAudioProgressUI();
+    } else if (window.listeningState.usingSpeechFallback) {
+      const dur = getEffectiveDuration();
+      window.listeningState.currentTime = Math.min(dur, (window.listeningState.currentTime || 0) + deltaSec * rate);
+      syncAudioProgressUI();
+
+      if (window.listeningState.currentTime >= dur) {
+        window.listeningState.isPlaying = false;
+        stopPlaybackTicker();
+        updateAudioControlsUI(false);
+      }
+    }
+  }, 250);
+}
+
+function stopPlaybackTicker() {
+  if (window.listeningState.speechTimer) {
+    clearInterval(window.listeningState.speechTimer);
+    window.listeningState.speechTimer = null;
+  }
+}
+
 function initTrackAudio(track) {
+  stopPlaybackTicker();
   if (window.listeningState.audio) {
     try {
       window.listeningState.audio.pause();
       window.listeningState.audio.src = '';
     } catch (_) {}
     window.listeningState.audio = null;
+  }
+
+  // If this track does not have a pre-rendered MP3 file, use Web Speech Synthesis directly without 404
+  if (!track || !AVAILABLE_MP3_TRACKS.has(track.id)) {
+    window.listeningState.usingSpeechFallback = true;
+    syncAudioProgressUI();
+    return;
   }
 
   // Primary: MP3 file from static audio directory
@@ -333,27 +445,32 @@ function initTrackAudio(track) {
   audio.playbackRate = window.listeningState.playbackRate;
 
   audio.addEventListener('loadedmetadata', () => {
-    window.listeningState.duration = audio.duration;
-    const durEl = document.getElementById("audio-time-duration");
-    if (durEl) durEl.innerText = formatAudioTime(audio.duration);
+    if (audio.duration && isFinite(audio.duration) && audio.duration > 0) {
+      window.listeningState.duration = audio.duration;
+    }
+    syncAudioProgressUI();
   });
 
   audio.addEventListener('timeupdate', () => {
-    if (!audio.duration) return;
-    window.listeningState.currentTime = audio.currentTime;
-    const curEl = document.getElementById("audio-time-current");
-    const slider = document.getElementById("audio-seek-slider");
-    if (curEl) curEl.innerText = formatAudioTime(audio.currentTime);
-    if (slider) slider.value = (audio.currentTime / audio.duration) * 100;
+    if (window.listeningState.usingSpeechFallback) return;
+    window.listeningState.currentTime = audio.currentTime || 0;
+    if (audio.duration && isFinite(audio.duration) && audio.duration > 0) {
+      window.listeningState.duration = audio.duration;
+    }
+    syncAudioProgressUI();
   });
 
   audio.addEventListener('ended', () => {
+    stopPlaybackTicker();
     window.listeningState.isPlaying = false;
+    window.listeningState.currentTime = getEffectiveDuration();
+    syncAudioProgressUI();
     updateAudioControlsUI(false);
   });
 
-  audio.addEventListener('error', (e) => {
-    console.warn("HTML5 audio playback error, falling back to Web Speech Synthesis:", e);
+  audio.addEventListener('error', () => {
+    window.listeningState.usingSpeechFallback = true;
+    syncAudioProgressUI();
   });
 
   window.listeningState.audio = audio;
@@ -371,22 +488,37 @@ function startAudioPlayback() {
   const track = window.listeningState.currentTrack;
   if (!track) return;
 
+  // Reset to 0 if previously finished
+  const dur = getEffectiveDuration();
+  if (window.listeningState.currentTime >= dur - 0.5) {
+    window.listeningState.currentTime = 0;
+    window.listeningState.speechCharOffset = 0;
+    if (window.listeningState.audio) {
+      try { window.listeningState.audio.currentTime = 0; } catch (_) {}
+    }
+  }
+
   const audio = window.listeningState.audio;
-  if (audio && audio.src && !audio.error) {
+  if (!window.listeningState.usingSpeechFallback && audio && audio.src && !audio.error) {
     audio.playbackRate = window.listeningState.playbackRate;
     audio.play().then(() => {
+      window.listeningState.usingSpeechFallback = false;
       window.listeningState.isPlaying = true;
       updateAudioControlsUI(true);
+      startPlaybackTicker();
     }).catch(err => {
       console.warn("Audio play failed, falling back to speech synthesis:", err);
+      window.listeningState.usingSpeechFallback = true;
       playAudioSynthesis();
     });
   } else {
+    window.listeningState.usingSpeechFallback = true;
     playAudioSynthesis();
   }
 }
 
 function pauseAudioPlayback() {
+  stopPlaybackTicker();
   if (window.listeningState.audio) {
     try { window.listeningState.audio.pause(); } catch (_) {}
   }
@@ -395,6 +527,7 @@ function pauseAudioPlayback() {
   }
   window.listeningState.isPlaying = false;
   updateAudioControlsUI(false);
+  syncAudioProgressUI();
 }
 
 function stopAudioPlayback() {
@@ -405,21 +538,30 @@ function stopAudioPlayback() {
     } catch (_) {}
   }
   window.listeningState.currentTime = 0;
-  const curEl = document.getElementById("audio-time-current");
-  const slider = document.getElementById("audio-seek-slider");
-  if (curEl) curEl.innerText = "00:00";
-  if (slider) slider.value = 0;
+  window.listeningState.speechCharOffset = 0;
+  syncAudioProgressUI();
 }
 
 function onSeekSliderChange(percentVal) {
-  const percent = parseFloat(percentVal);
+  const percent = Math.min(100, Math.max(0, parseFloat(percentVal) || 0));
+  const dur = getEffectiveDuration();
+  const targetTime = (percent / 100) * dur;
+  window.listeningState.currentTime = targetTime;
+
   const audio = window.listeningState.audio;
-  if (audio && audio.duration) {
-    audio.currentTime = (percent / 100) * audio.duration;
-    window.listeningState.currentTime = audio.currentTime;
-    const curEl = document.getElementById("audio-time-current");
-    if (curEl) curEl.innerText = formatAudioTime(audio.currentTime);
+  if (!window.listeningState.usingSpeechFallback && audio && !audio.error && audio.duration && isFinite(audio.duration)) {
+    try {
+      audio.currentTime = (percent / 100) * audio.duration;
+    } catch (_) {}
+  } else if (window.listeningState.currentTrack?.audio_script) {
+    const script = window.listeningState.currentTrack.audio_script;
+    window.listeningState.speechCharOffset = Math.floor((percent / 100) * script.length);
+    if (window.listeningState.isPlaying) {
+      playAudioSynthesis();
+    }
   }
+
+  syncAudioProgressUI();
 }
 
 function setAudioVolume(volVal) {
@@ -447,7 +589,7 @@ function setPlaybackRate(rate) {
   if (window.listeningState.audio) {
     window.listeningState.audio.playbackRate = rate;
   }
-  if (window.listeningState.speechUtterance && window.listeningState.isPlaying) {
+  if (window.listeningState.usingSpeechFallback && window.listeningState.isPlaying) {
     playAudioSynthesis();
   }
 }
@@ -459,30 +601,71 @@ function playAudioSynthesis() {
     return;
   }
 
-  window.speechSynthesis.cancel();
+  window.listeningState.usingSpeechFallback = true;
+  stopPlaybackTicker();
+  try { window.speechSynthesis.cancel(); } catch (_) {}
 
-  const utterance = new SpeechSynthesisUtterance(track.audio_script);
+  const fullScript = track.audio_script || "";
+  const dur = getEffectiveDuration();
+  const ratio = dur > 0 ? Math.min(0.98, Math.max(0, (window.listeningState.currentTime || 0) / dur)) : 0;
+
+  let startIdx = Math.floor(ratio * fullScript.length);
+  if (startIdx > 0 && startIdx < fullScript.length) {
+    const nextSpace = fullScript.indexOf(" ", startIdx);
+    if (nextSpace !== -1 && nextSpace - startIdx < 25) {
+      startIdx = nextSpace + 1;
+    }
+  }
+  window.listeningState.speechCharOffset = startIdx;
+
+  const remainingScript = fullScript.slice(startIdx).trim() || fullScript;
+  const utterance = new SpeechSynthesisUtterance(remainingScript);
   utterance.lang = 'en-US';
-  utterance.rate = window.listeningState.playbackRate;
+  utterance.rate = window.listeningState.playbackRate || 1.0;
+
+  const volInput = document.getElementById("audio-volume");
+  if (volInput) {
+    utterance.volume = parseFloat(volInput.value) || 1.0;
+  }
 
   const voices = window.speechSynthesis.getVoices();
-  const enVoice = voices.find(v => v.lang.startsWith('en')) || voices[0];
+  const enVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('en')) || voices[0];
   if (enVoice) utterance.voice = enVoice;
+
+  // Immediately activate UI and ticker so seconds count up smoothly
+  window.listeningState.isPlaying = true;
+  updateAudioControlsUI(true);
+  syncAudioProgressUI();
+  startPlaybackTicker();
 
   utterance.onstart = () => {
     window.listeningState.isPlaying = true;
     updateAudioControlsUI(true);
+    if (!window.listeningState.speechTimer) {
+      startPlaybackTicker();
+    }
+  };
+
+  utterance.onboundary = (event) => {
+    if (typeof event.charIndex === 'number' && fullScript.length > 0) {
+      const absChar = Math.min(fullScript.length, startIdx + event.charIndex);
+      window.listeningState.speechCharOffset = absChar;
+    }
   };
 
   utterance.onend = () => {
+    // Ignore onend caused by manual cancel/pause
+    if (!window.listeningState.isPlaying) return;
+    stopPlaybackTicker();
     window.listeningState.isPlaying = false;
+    window.listeningState.currentTime = getEffectiveDuration();
+    syncAudioProgressUI();
     updateAudioControlsUI(false);
   };
 
   utterance.onerror = (e) => {
-    console.error("Speech error:", e);
-    window.listeningState.isPlaying = false;
-    updateAudioControlsUI(false);
+    if (e && (e.error === 'canceled' || e.error === 'interrupted')) return;
+    console.warn("Speech synthesis warning:", e);
   };
 
   window.listeningState.speechUtterance = utterance;

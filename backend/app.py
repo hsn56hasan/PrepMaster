@@ -6,7 +6,7 @@ from typing import List, Optional, Dict, Any
 from fastapi import FastAPI, HTTPException, Query, Request, Depends, status, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, PlainTextResponse
 from pydantic import BaseModel, Field, field_validator
 
 import sys
@@ -30,6 +30,9 @@ from database import (
 )
 from document_scanner import (
     scan_student_document, extract_text_from_bytes, SAMPLE_DOCUMENTS
+)
+from paytr_service import (
+    generate_paytr_iframe_token, verify_paytr_callback_hash, parse_merchant_oid
 )
 
 from security import (
@@ -554,6 +557,62 @@ def check_membership_endpoint(university_id: str, request: Request, user_id: int
         "price_try": 50.0,
         "requires_membership": not has_access
     }
+
+
+class PayTRTokenRequest(BaseModel):
+    user_id: Optional[int] = Field(1, ge=1)
+    university_id: str = Field(..., max_length=50, pattern=r"^[a-zA-Z0-9_-]+$")
+    email: Optional[str] = Field("ogrenci@itu.edu.tr", max_length=255)
+    user_name: Optional[str] = Field("PrepMaster Öğrencisi", max_length=100)
+
+
+@app.post("/api/payment/paytr/token")
+def create_paytr_token_endpoint(req: PayTRTokenRequest, request: Request):
+    token_user = get_current_user_from_request(request)
+    target_id = token_user["user_id"] if token_user else (req.user_id or 1)
+    profile = get_profile(target_id)
+    client_ip = request.client.host if request.client else "127.0.0.1"
+
+    res = generate_paytr_iframe_token(
+        user_id=target_id,
+        university_id=req.university_id,
+        email=profile.get("email") or req.email or "ogrenci@itu.edu.tr",
+        user_name=profile.get("full_name") or req.user_name or "PrepMaster Öğrencisi",
+        user_ip=client_ip,
+        price_try=50.0
+    )
+    if res.get("status") != "success":
+        raise HTTPException(status_code=400, detail=res.get("reason", "PayTR token oluşturulamadı."))
+    return res
+
+
+@app.post("/api/payment/paytr/callback")
+async def paytr_webhook_callback_endpoint(request: Request):
+    """
+    PayTR Resmi Bildirim URL (Webhook Adım 2):
+    PayTR sunucusundan gelen POST isteğini HMAC-SHA256 ile doğrular,
+    ödemesi onaylanan üniversitenin kilidini açar ve 'OK' yanıtı döner.
+    """
+    form = await request.form()
+    merchant_oid = str(form.get("merchant_oid", ""))
+    status_val = str(form.get("status", ""))
+    total_amount = str(form.get("total_amount", ""))
+    received_hash = str(form.get("hash", ""))
+
+    if not verify_paytr_callback_hash(merchant_oid, status_val, total_amount, received_hash):
+        raise HTTPException(status_code=400, detail="PAYTR notification failed: bad hash")
+
+    if status_val == "success":
+        parsed = parse_merchant_oid(merchant_oid)
+        unlock_university_membership(
+            user_id=parsed["user_id"] or 1,
+            university_id=parsed["university_id"] or "itu",
+            card_holder="PayTR Sanal POS",
+            card_last_four="PAYT",
+            price_try=float(total_amount) / 100.0 if total_amount.isdigit() else 50.0
+        )
+
+    return PlainTextResponse("OK")
 
 
 
