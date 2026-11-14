@@ -890,6 +890,7 @@ def get_questions(
     university_id: Optional[str] = None,
     level: Optional[str] = None,
     category: Optional[str] = None,
+    strict_uni: bool = False,
 ):
     token_user = get_current_user_from_request(request)
     if university_id and university_id not in ["all", "general"]:
@@ -906,8 +907,13 @@ def get_questions(
 
     filtered = questions_data
     if university_id and university_id != "all":
-        # match specific university or general questions
-        filtered = [q for q in filtered if q["university_id"] in [university_id, "general"]]
+        if strict_uni or university_id == "general":
+            filtered = [q for q in filtered if q["university_id"] == university_id]
+        else:
+            # Üniversiteye özel sorular en başta, ardından genel havuz
+            uni_only = [q for q in filtered if q["university_id"] == university_id]
+            gen_only = [q for q in filtered if q["university_id"] == "general"]
+            filtered = uni_only + gen_only
     else:
         # "all" eskiden kilitli üniversitelerin sorularını da döndürüyordu.
         filtered = [q for q in filtered if _has_access(token_user, q["university_id"])]
@@ -965,11 +971,17 @@ def get_writing_guides(level: Optional[str] = None):
 def get_listening_list(
     university_id: Optional[str] = None,
     level: Optional[str] = None,
-    type: Optional[str] = None
+    type: Optional[str] = None,
+    strict_uni: bool = False,
 ):
     results = listening_data
     if university_id and university_id != "all":
-        results = [item for item in results if item.get("university_id") == university_id or item.get("university_id") == "general"]
+        if strict_uni or university_id == "general":
+            results = [item for item in results if item.get("university_id") == university_id]
+        else:
+            uni_only = [item for item in results if item.get("university_id") == university_id]
+            gen_only = [item for item in results if item.get("university_id") == "general"]
+            results = uni_only + gen_only
     if type and type != "all":
         results = [item for item in results if item.get("type") == type]
     if level and level != "all":
@@ -1383,11 +1395,17 @@ def get_overall_stats(request: Request):
 @app.get("/api/speaking")
 def get_speaking_tasks(
     university_id: Optional[str] = None,
-    level: Optional[str] = None
+    level: Optional[str] = None,
+    strict_uni: bool = False,
 ):
     results = speaking_data
     if university_id and university_id != "all":
-        results = [t for t in results if t.get("university_id") in [university_id, "general"]]
+        if strict_uni or university_id == "general":
+            results = [t for t in results if t.get("university_id") == university_id]
+        else:
+            uni_only = [t for t in results if t.get("university_id") == university_id]
+            gen_only = [t for t in results if t.get("university_id") == "general"]
+            results = uni_only + gen_only
     if level and level != "all":
         lvl_upper = level.upper()
         lvl_matches = [t for t in results if t.get("level", "").upper() == lvl_upper]
@@ -1599,40 +1617,39 @@ def generate_mock_exam(university_id: str, request: Request, level: Optional[str
     uni = next((u for u in universities_data if u["id"] == university_id), universities_data[0])
     target_level = (level or "B2").upper()
 
-    # 1. Select matching university questions strictly matching level
-    level_questions = [q for q in questions_data if q.get("level", "").upper() == target_level]
-    uni_questions = [q for q in level_questions if q.get("university_id") == university_id]
-    other_questions = [q for q in level_questions if q.get("university_id") != university_id]
-    combined_questions = uni_questions + other_questions
+    # 1. Select questions strictly from THIS university's 36-question pool first (zero cross-school overlap)
+    uni_all_questions = [q for q in questions_data if q.get("university_id") == university_id]
+    uni_exact_level = [q for q in uni_all_questions if q.get("level", "").upper() == target_level]
 
-    # If fewer than 15 questions, supplement from closest adjacent level without high-level jumps
-    if len(combined_questions) < 15:
-        adjacent_map = {
-            "A1": ["A2"],
-            "A2": ["A1", "B1"],
-            "B1": ["A2", "B2"],
-            "B2": ["B1", "C1"],
-            "C1": ["B2", "C2"],
-            "C2": ["C1"]
-        }
-        allowed = adjacent_map.get(target_level, ["B2"])
-        supp = [q for q in questions_data if q.get("level", "").upper() in allowed and q not in combined_questions]
-        combined_questions.extend(supp)
+    adjacent_order = {
+        "A1": ["A2", "B1", "B2", "C1", "C2"],
+        "A2": ["A1", "B1", "B2", "C1", "C2"],
+        "B1": ["B2", "A2", "C1", "A1", "C2"],
+        "B2": ["B1", "C1", "A2", "C2", "A1"],
+        "C1": ["B2", "C2", "B1", "A2", "A1"],
+        "C2": ["C1", "B2", "B1", "A2", "A1"]
+    }
+    uni_adj_questions = []
+    for adj_lvl in adjacent_order.get(target_level, ["B1", "C1"]):
+        uni_adj_questions.extend([q for q in uni_all_questions if q.get("level", "").upper() == adj_lvl])
 
-    # Üniversiteye özel sorular önce; her denemede farklı bir seçki gelsin.
-    uni_pool = [q for q in combined_questions if q.get("university_id") == university_id]
-    rest_pool = [q for q in combined_questions if q.get("university_id") != university_id]
-    random.shuffle(uni_pool)
-    random.shuffle(rest_pool)
-    final_questions = (uni_pool + rest_pool)[:15]
-    random.shuffle(final_questions)
+    random.shuffle(uni_exact_level)
+    random.shuffle(uni_adj_questions)
+    combined_uni = uni_exact_level + uni_adj_questions
 
-    # 2. Select matching listening track for target_level
-    lis_track = next((lt for lt in listening_data if lt.get("level", "").upper() == target_level), None)
-    if not lis_track and target_level == "A1":
-        lis_track = next((lt for lt in listening_data if lt.get("level", "").upper() == "A2"), None)
+    if len(combined_uni) < 15:
+        gen_supp = [q for q in questions_data if q.get("university_id") == "general" and q.get("level", "").upper() == target_level]
+        random.shuffle(gen_supp)
+        combined_uni.extend(gen_supp)
+
+    final_questions = combined_uni[:15]
+
+    # 2. Select matching listening track for THIS university and target_level
+    lis_track = next((lt for lt in listening_data if lt.get("university_id") == university_id and lt.get("level", "").upper() == target_level), None)
     if not lis_track:
-        lis_track = next((lt for lt in listening_data if lt.get("university_id") == university_id), listening_data[0] if listening_data else None)
+        lis_track = next((lt for lt in listening_data if lt.get("university_id") == university_id), None)
+    if not lis_track:
+        lis_track = next((lt for lt in listening_data if lt.get("level", "").upper() == target_level), listening_data[0] if listening_data else None)
 
     # 3. Select matching essay prompt for target_level
     essay_guide = next((wg for wg in writing_guides_data if wg.get("level", "").upper() == target_level), None)
@@ -1641,17 +1658,17 @@ def generate_mock_exam(university_id: str, request: Request, level: Optional[str
     if not essay_guide:
         essay_guide = writing_guides_data[0] if writing_guides_data else None
 
-    # 4. Select matching speaking prompt for target_level
-    spk_task = next((st for st in speaking_data if st.get("level", "").upper() == target_level), None)
-    if not spk_task and target_level == "A1":
-        spk_task = next((st for st in speaking_data if st.get("level", "").upper() == "A2"), None)
+    # 4. Select matching speaking prompt for THIS university and target_level
+    spk_task = next((st for st in speaking_data if st.get("university_id") == university_id and st.get("level", "").upper() == target_level), None)
     if not spk_task:
-        spk_task = speaking_data[0] if speaking_data else None
+        spk_task = next((st for st in speaking_data if st.get("university_id") == university_id), None)
+    if not spk_task:
+        spk_task = next((st for st in speaking_data if st.get("level", "").upper() == target_level), speaking_data[0] if speaking_data else None)
 
     return {
         "university": uni,
         "level": target_level,
-        "exam_title": f"{uni.get('name')} {target_level} Seviye Deneme Sınavı",
+        "exam_title": f"{uni.get('name')} ({uni.get('exam_name')}) • {target_level} Deneme Sınavı",
         "duration_minutes": uni.get("duration_minutes", 120),
         "passing_score": uni.get("passing_score", 60),
         "sections": {

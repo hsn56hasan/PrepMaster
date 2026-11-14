@@ -13,45 +13,74 @@ window.speakingState = {
   durationElapsed: 0
 };
 
+function setSpeakingPoolMode(mode) {
+  window.speakingState.poolMode = mode;
+  loadSpeakingHub(window.speakingState.activeLevelFilter || 'all');
+}
+window.setSpeakingPoolMode = setSpeakingPoolMode;
+
 async function loadSpeakingHub(targetLevel = null) {
   const container = document.getElementById("speaking-tasks-list");
   const filterBar = document.getElementById("speaking-filter-bar");
   if (!container) return;
 
   const currentLevel = window.appState?.currentLevel || 'B2';
-  const activeLevel = targetLevel !== null ? targetLevel : currentLevel;
+  const activeLevel = targetLevel !== null ? targetLevel : 'all';
+  window.speakingState.activeLevelFilter = activeLevel;
+  const poolMode = window.speakingState.poolMode || 'school';
+  window.speakingState.poolMode = poolMode;
+
+  const uniObj = window.appState?.currentUniversity || { id: 'itu', short_name: 'İTÜ' };
+  const uniId = uniObj.id || 'itu';
+  const shortName = uniObj.short_name || uniId.toUpperCase();
 
   // Render Level Filter Bar
   if (filterBar) {
     const levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
     filterBar.innerHTML = `
-      <span class="text-xs font-bold text-slate-500 mr-2 flex items-center gap-1">
-        <i data-lucide="filter" class="w-3.5 h-3.5"></i> Mülakat Kuru:
-      </span>
-      ${levels.map(lvl => {
-        const isSelected = activeLevel === lvl;
-        return `
-          <button onclick="loadSpeakingHub('${lvl}')" class="px-3 py-1 rounded-xl text-xs font-bold transition ${isSelected ? 'bg-indigo-600 text-white shadow-sm' : 'bg-white text-slate-600 hover:bg-slate-200 border border-slate-200'}">
-            ${lvl} ${lvl === currentLevel ? '★' : ''}
-          </button>
-        `;
-      }).join('')}
-      <button onclick="loadSpeakingHub('all')" class="px-3 py-1 rounded-xl text-xs font-bold transition ${activeLevel === 'all' ? 'bg-slate-800 text-white shadow-sm' : 'bg-white text-slate-600 hover:bg-slate-200 border border-slate-200'}">
-        Tüm Kurlar
-      </button>
+      <div class="flex items-center gap-1.5 flex-wrap">
+        <span class="text-xs font-bold text-slate-500 mr-1 flex items-center gap-1">
+          <i data-lucide="filter" class="w-3.5 h-3.5"></i> Mülakat Kuru:
+        </span>
+        <button onclick="loadSpeakingHub('all')" class="px-3 py-1 rounded-xl text-xs font-bold transition ${activeLevel === 'all' ? 'bg-slate-900 text-white shadow-sm' : 'bg-white text-slate-600 hover:bg-slate-200 border border-slate-200'}">
+          Tüm Kurlar (6 Görev)
+        </button>
+        ${levels.map(lvl => {
+          const isSelected = activeLevel === lvl;
+          return `
+            <button onclick="loadSpeakingHub('${lvl}')" class="px-3 py-1 rounded-xl text-xs font-bold transition ${isSelected ? 'bg-indigo-600 text-white shadow-sm' : 'bg-white text-slate-600 hover:bg-slate-200 border border-slate-200'}">
+              ${lvl} ${lvl === currentLevel ? '★' : ''}
+            </button>
+          `;
+        }).join('')}
+      </div>
+      <div class="ml-auto flex items-center gap-1 bg-white p-1 rounded-xl border border-slate-200 text-[11px] font-bold">
+        <button onclick="setSpeakingPoolMode('school')" class="px-2.5 py-1 rounded-lg transition ${poolMode === 'school' ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:bg-slate-100'}">
+          Sadece ${shortName} Özel (6 Görev)
+        </button>
+        <button onclick="setSpeakingPoolMode('all')" class="px-2.5 py-1 rounded-lg transition ${poolMode === 'all' ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:bg-slate-100'}">
+          ${shortName} + Genel Havuz
+        </button>
+      </div>
     `;
   }
 
   container.innerHTML = `
     <div class="col-span-full p-8 text-center text-slate-400">
       <i data-lucide="loader-2" class="w-6 h-6 animate-spin mx-auto mb-2 text-indigo-600"></i>
-      ${activeLevel === 'all' ? 'Tüm' : activeLevel} seviyesi konuşma görevleri yükleniyor...
+      ${shortName} konuşma görevleri yükleniyor...
     </div>
   `;
   if (window.lucide) window.lucide.createIcons();
 
   try {
-    const url = activeLevel && activeLevel !== 'all' ? `/api/speaking?level=${activeLevel}` : '/api/speaking';
+    const params = new URLSearchParams();
+    if (activeLevel && activeLevel !== 'all') params.set('level', activeLevel);
+    if (uniId && uniId !== 'general') {
+      params.set('university_id', uniId);
+      if (poolMode === 'school') params.set('strict_uni', 'true');
+    }
+    const url = `/api/speaking?${params.toString()}`;
     const res = await fetch(url);
     const tasks = await res.json();
     window.speakingState.tasks = tasks;

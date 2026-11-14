@@ -28,13 +28,17 @@ function trackQuestionTimeEnter() {
   activeExamState.lastQuestionEnterTime = Date.now();
 }
 
-async function startExamSimulation(universityId = null, level = null, category = null) {
-  const uniId = universityId || window.appState.currentUniversity.id;
+async function startExamSimulation(universityId = null, level = null, category = null, strictUni = false) {
+  const uniObj = window.appState?.currentUniversity || { id: "itu", short_name: "İTÜ", name: "İTÜ" };
+  const uniId = universityId || uniObj.id;
   const targetLevel = level || window.appState.currentLevel;
   const userId = window.appState.currentUser?.id || 1;
 
   try {
     let url = `/api/questions?university_id=${uniId}&user_id=${userId}`;
+    if (strictUni && uniId !== 'general') {
+      url += `&strict_uni=true`;
+    }
     if (targetLevel && targetLevel !== 'all') {
       url += `&level=${targetLevel}`;
     }
@@ -46,7 +50,7 @@ async function startExamSimulation(universityId = null, level = null, category =
     if (res.status === 403) {
       if (window.openUniversityPaywallModal) {
         window.openUniversityPaywallModal(uniId, () => {
-          startExamSimulation(uniId, targetLevel, category);
+          startExamSimulation(uniId, targetLevel, category, strictUni);
         });
         return;
       }
@@ -55,7 +59,7 @@ async function startExamSimulation(universityId = null, level = null, category =
 
     if (!questions || questions.length === 0) {
       // Graceful fallback to general questions of the user's level
-      const fallbackRes = await fetch(`/api/questions?level=${targetLevel}`);
+      const fallbackRes = await fetch(`/api/questions?level=${targetLevel !== 'all' ? targetLevel : 'B2'}`);
       questions = await fallbackRes.json();
       if (!questions || questions.length === 0) {
         alert(`${targetLevel} seviyesine uygun soru bulunamadı.`);
@@ -63,7 +67,8 @@ async function startExamSimulation(universityId = null, level = null, category =
       }
     }
 
-    launchExamWithQuestions(questions, uniId, targetLevel, false);
+    const customTitle = `${uniId.toUpperCase()} • ${category && category !== 'all' ? category : 'Özel Sınav'} (${targetLevel === 'all' ? 'Tüm Kurlar' : targetLevel})`;
+    launchExamWithQuestions(questions, uniId, targetLevel === 'all' ? (window.appState.currentLevel || 'B2') : targetLevel, false, null, customTitle);
 
   } catch (err) {
     console.error("Exam start error:", err);

@@ -317,7 +317,8 @@ async function loadDashboardStats() {
 // ---------------- İNTERAKTİF KUR ALIŞTIRMALARI & SORU BANKASI ----------------
 const practiceState = {
   category: "all",
-  pool: "all", // "all" (26 Üniversite) veya "school" (Seçili Okul + Genel)
+  pool: "school_only", // "school_only" (Sadece Seçili Okulun 36 Sorusu), "school_plus_general", "all_unlocked"
+  levelScope: "current", // "current" (Seçili Kur) veya "all_levels" (Okulun Tüm 36 Sorusu)
   answers: {}, // { [questionId]: selectedKey }
   questionsById: {}
 };
@@ -351,6 +352,11 @@ function setPracticeCategory(cat) {
 
 function setPracticePool(poolMode) {
   practiceState.pool = poolMode;
+  loadPracticeQuestions();
+}
+
+function setPracticeLevelScope(scopeMode) {
+  practiceState.levelScope = scopeMode;
   loadPracticeQuestions();
 }
 
@@ -473,21 +479,36 @@ async function loadPracticeQuestions() {
   const container = document.getElementById("practice-questions-list");
   if (!container) return;
 
-  const lvl = window.appState.currentLevel;
-  const uni = window.appState.currentUniversity?.id || "itu";
+  const lvl = window.appState.currentLevel || "B2";
+  const uniObj = window.appState.currentUniversity || { id: "itu", short_name: "İTÜ", name: "İstanbul Teknik Üniversitesi" };
+  const uni = uniObj.id || "itu";
+  const shortName = uniObj.short_name || uni.toUpperCase();
 
   try {
-    const res = await fetch(`/api/questions?level=${lvl}`);
-    const allLevelQuestions = await res.json();
-
-    for (const q of allLevelQuestions) {
-      practiceState.questionsById[q.id] = q;
+    let url = `/api/questions`;
+    const params = new URLSearchParams();
+    if (practiceState.levelScope === "current") {
+      params.set("level", lvl);
+    }
+    if (practiceState.pool === "school_only" && uni !== "general") {
+      params.set("university_id", uni);
+      params.set("strict_uni", "true");
+    } else if (practiceState.pool === "school_plus_general" && uni !== "general") {
+      params.set("university_id", uni);
     }
 
-    // Havuz filtresi ("all" veya "school")
-    const poolFiltered = practiceState.pool === "school"
-      ? allLevelQuestions.filter(q => q.university_id === uni || q.university_id === "general")
-      : allLevelQuestions;
+    let res = await fetch(`${url}?${params.toString()}`);
+    if (res.status === 403) {
+      // Kilitli üniversite ise açık olan genel havuz sorularına düş
+      const fallbackParams = new URLSearchParams();
+      if (practiceState.levelScope === "current") fallbackParams.set("level", lvl);
+      res = await fetch(`/api/questions?${fallbackParams.toString()}`);
+    }
+    const poolFiltered = await res.json();
+
+    for (const q of poolFiltered) {
+      practiceState.questionsById[q.id] = q;
+    }
 
     // Kategori sayılarını hesapla
     const catCounts = { all: poolFiltered.length };
@@ -524,13 +545,18 @@ async function loadPracticeQuestions() {
           }).join("")}
         </div>
 
-        <div class="flex items-center gap-1 bg-white p-1 rounded-xl border border-slate-200 text-[11px] font-bold">
-          <button type="button" onclick="setPracticePool('all')" class="px-2.5 py-1 rounded-lg transition ${practiceState.pool === 'all' ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:bg-slate-100'}">
-            Tüm 26 Üniversite
-          </button>
-          <button type="button" onclick="setPracticePool('school')" class="px-2.5 py-1 rounded-lg transition ${practiceState.pool === 'school' ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:bg-slate-100'}">
-            Sadece ${uni.toUpperCase()} + Genel
-          </button>
+        <div class="flex flex-wrap items-center gap-1.5">
+          <div class="flex items-center gap-1 bg-white p-1 rounded-xl border border-slate-200 text-[11px] font-bold">
+            <button type="button" onclick="setPracticePool('school_only'); setPracticeLevelScope('current');" class="px-2.5 py-1 rounded-lg transition ${practiceState.pool === 'school_only' && practiceState.levelScope === 'current' ? 'bg-indigo-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100'}">
+              Sadece ${shortName} (${lvl} • 6 Soru)
+            </button>
+            <button type="button" onclick="setPracticePool('school_only'); setPracticeLevelScope('all_levels');" class="px-2.5 py-1 rounded-lg transition ${practiceState.pool === 'school_only' && practiceState.levelScope === 'all_levels' ? 'bg-indigo-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100'}">
+              ${shortName} Tüm Kurlar (36 Soru)
+            </button>
+            <button type="button" onclick="setPracticePool('school_plus_general'); setPracticeLevelScope('current');" class="px-2.5 py-1 rounded-lg transition ${practiceState.pool === 'school_plus_general' ? 'bg-indigo-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100'}">
+              ${shortName} + Genel Havuz
+            </button>
+          </div>
         </div>
       `;
     }
@@ -550,6 +576,7 @@ async function loadPracticeQuestions() {
 window.selectPracticeOption = selectPracticeOption;
 window.setPracticeCategory = setPracticeCategory;
 window.setPracticePool = setPracticePool;
+window.setPracticeLevelScope = setPracticeLevelScope;
 window.resetPracticeSession = resetPracticeSession;
 
 async function loadWritingGuides(targetLevel = null) {
@@ -703,144 +730,164 @@ function renderExamsTab(targetLevel = null) {
   if (!container) return;
 
   const lvl = (targetLevel || window.appState.currentLevel || "B2").toUpperCase();
-  if (badgeEl) badgeEl.innerText = `${lvl} (Hedef Kur)`;
-
-  let module1 = {
-    badge: `Use of English • ${lvl}`,
-    badgeColor: "bg-indigo-100 text-indigo-700",
-    title: "Temel Dilbilgisi & Cümle Kurma",
-    desc: `${lvl} seviyesine uygun zamanlar, bağlaçlar, cümle kurma kuralları ve günlük soru kalıpları.`,
-    category: "Use of English"
+  const u = window.appState.currentUniversity || {
+    id: "itu",
+    name: "İstanbul Teknik Üniversitesi",
+    short_name: "İTÜ",
+    exam_name: "İTÜ Proficiency",
+    passing_score: 60,
+    duration_minutes: 150,
+    sections: []
   };
 
-  let module2 = {
-    badge: `Okuma & Kelime • ${lvl}`,
-    badgeColor: "bg-amber-100 text-amber-700",
-    title: "Akademik Kelime & Okuma Testi",
-    desc: `${lvl} seviyesinde kısa akademik ve günlük metinler üzerinden ana fikir ve kelime soruları.`,
-    category: "Reading"
-  };
+  if (badgeEl) badgeEl.innerText = `${u.short_name || u.id.toUpperCase()} • ${lvl} Kuru`;
 
-  let module3 = {
-    badge: `Dilbilgisi • ${lvl}`,
-    badgeColor: "bg-emerald-100 text-emerald-700",
-    title: "Grammar & Boşluk Doldurma",
-    desc: `${lvl} seviyesine özel hazırlanmış çoktan seçmeli dilbilgisi ve boşluk tamamlama soruları.`,
-    category: "Grammar"
-  };
-
-  if (['B1', 'B2'].includes(lvl)) {
-    module1 = {
-      badge: `Restatement • ${lvl}`,
-      badgeColor: "bg-indigo-100 text-indigo-700",
-      title: "Restatement (En Yakın Anlam) Atölyesi",
-      desc: `${lvl} seviyesinde cümle paraphrase etme, eşanlamlı yapılar ve anlam bütünlüğü analizi.`,
-      category: "Restatement"
-    };
-    module2 = {
-      badge: `Akademik Okuma • ${lvl}`,
-      badgeColor: "bg-amber-100 text-amber-700",
-      title: "Akademik Reading & Çıkarım Testi",
-      desc: `${lvl} sınav formatında makaleler üzerinden ana fikir, detay, yazar tutumu ve kelime soruları.`,
-      category: "Reading"
-    };
-    module3 = {
-      badge: `Cloze Test • ${lvl}`,
-      badgeColor: "bg-emerald-100 text-emerald-700",
-      title: "Grammar & Cloze Test Serisi",
-      desc: `${lvl} hazırlık müfredatına uygun zamanlar, bağlaçlar ve paragraf içi boşluk doldurma.`,
-      category: "Cloze Test"
-    };
-  } else if (['C1', 'C2'].includes(lvl)) {
-    module1 = {
-      badge: `İleri Düzey • ${lvl}`,
-      badgeColor: "bg-purple-100 text-purple-700",
-      title: "İleri Düzey Restatement & Text Analysis",
-      desc: `Boğaziçi BUEPT ve ODTÜ EPE standardında karmaşık felsefi ve bilimsel cümle paraphrase testleri.`,
-      category: "Restatement"
-    };
-    module2 = {
-      badge: `Akademik Analiz • ${lvl}`,
-      badgeColor: "bg-rose-100 text-rose-700",
-      title: "Akademik Makale & Eleştirel Okuma",
-      desc: `${lvl} seviyesinde yüksek lisans ve lisans muafiyetine yönelik akademik makale çıkarım soruları.`,
-      category: "Reading"
-    };
-    module3 = {
-      badge: `Sentence Completion • ${lvl}`,
-      badgeColor: "bg-teal-100 text-teal-700",
-      title: "Cümle & Paragraf Tamamlama Serisi",
-      desc: `İleri düzey akademik geçiş bağlaçları, retorik akış ve paragraf tamamlama soruları.`,
-      category: "Sentence Completion"
-    };
-  }
+  const sectionBadgesHtml = (u.sections || []).map(sec => `
+    <span class="px-2.5 py-1 bg-white/10 border border-white/15 rounded-xl text-[11px] font-bold text-slate-100">
+      ${sec.title} (%${sec.weight})
+    </span>
+  `).join('');
 
   container.innerHTML = `
-    <!-- Full Mock Exam Card -->
+    <!-- Seçili Üniversite Özel Paket Özeti Banner -->
+    <div class="col-span-full p-6 rounded-3xl bg-gradient-to-r from-slate-900 via-blue-950 to-indigo-950 text-white shadow-lg border border-blue-500/20 space-y-4">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <div>
+          <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+            <span class="px-2.5 py-0.5 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 rounded-full text-[11px] font-black uppercase">
+              ${u.short_name} Özel Sınav Havuzu
+            </span>
+            <span class="px-2.5 py-0.5 bg-blue-500/20 text-blue-200 border border-blue-400/30 rounded-full text-[11px] font-bold">
+              Geçme Barajı: %${u.passing_score || 60} • Süre: ${u.duration_minutes || 120} dk
+            </span>
+          </div>
+          <h3 class="text-lg sm:text-xl font-black text-white">${u.name} — ${u.exam_name} Paketi</h3>
+          <p class="text-xs text-slate-300 mt-1">${u.description || `${u.name} hazırlık muafiyet sınav formatına birebir uyumlu özgün soru ve deneme paketi.`}</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-2 shrink-0 text-center">
+          <div class="p-2.5 bg-white/10 rounded-2xl border border-white/10">
+            <div class="text-base font-black text-emerald-400">36</div>
+            <div class="text-[10px] text-slate-300 font-bold">Özgün Soru</div>
+          </div>
+          <div class="p-2.5 bg-white/10 rounded-2xl border border-white/10">
+            <div class="text-base font-black text-blue-300">6</div>
+            <div class="text-[10px] text-slate-300 font-bold">Listening Ders</div>
+          </div>
+          <div class="p-2.5 bg-white/10 rounded-2xl border border-white/10">
+            <div class="text-base font-black text-purple-300">6</div>
+            <div class="text-[10px] text-slate-300 font-bold">Speaking Görev</div>
+          </div>
+        </div>
+      </div>
+
+      ${sectionBadgesHtml ? `
+        <div class="pt-3 border-t border-white/10 flex items-center gap-2 flex-wrap">
+          <span class="text-[11px] font-bold text-slate-400">Resmi Sınav Bölümleri:</span>
+          ${sectionBadgesHtml}
+        </div>
+      ` : ''}
+    </div>
+
+    <!-- 1. Tam Muafiyet Deneme Sınavı (${lvl}) -->
     <div class="p-5 rounded-2xl border-2 border-blue-600 bg-blue-50/20 flex flex-col justify-between shadow-sm">
       <div>
         <div class="flex items-center justify-between mb-2">
-          <span class="px-2.5 py-0.5 bg-blue-600 text-white text-[11px] font-bold rounded-lg uppercase">Tam Deneme</span>
+          <span class="px-2.5 py-0.5 bg-blue-600 text-white text-[11px] font-bold rounded-lg uppercase">${u.short_name} Tam Deneme</span>
           <span class="px-2.5 py-0.5 bg-blue-100 text-blue-800 text-xs font-black rounded-lg">Seviye: ${lvl}</span>
         </div>
-        <h4 class="font-extrabold text-slate-800 text-base mb-1">Resmi Muafiyet / ${lvl} Kur Bitirme Denemesi</h4>
+        <h4 class="font-extrabold text-slate-800 text-base mb-1">${u.short_name} (${u.exam_name}) • ${lvl} Muafiyet Denemesi</h4>
         <p class="text-xs text-slate-600 leading-relaxed mb-4">
-          ${lvl} müfredatına özel seçilmiş 15 soru, dinleme parçası ve yazma/konuşma sınav simülasyonu.
+          Tamamı ${u.name} özel soru havuzundan seçilen 15 soru, ${u.short_name} akademik dinleme dersi ve konuşma/yazma simülasyonu.
         </p>
       </div>
-      <button onclick="startFullMockExam(null, '${lvl}')" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center justify-center gap-1.5">
-        <i data-lucide="play" class="w-3.5 h-3.5"></i> ${lvl} Deneme Sınavını Başlat
+      <button onclick="startFullMockExam('${u.id}', '${lvl}')" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center justify-center gap-1.5">
+        <i data-lucide="play" class="w-3.5 h-3.5"></i> ${u.short_name} ${lvl} Deneme Sınavını Başlat
       </button>
     </div>
 
-    <!-- Modül 1 -->
-    <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-slate-300 transition flex flex-col justify-between">
+    <!-- 2. Okulun Tüm 36 Özgün Sorusunu Kapsayan Büyük Maraton -->
+    <div class="p-5 rounded-2xl border-2 border-indigo-600 bg-indigo-50/20 flex flex-col justify-between shadow-sm">
       <div>
         <div class="flex items-center justify-between mb-2">
-          <span class="px-2.5 py-0.5 ${module1.badgeColor} text-[11px] font-bold rounded-lg uppercase">${module1.badge}</span>
-          <span class="text-xs text-slate-500 font-semibold">${lvl} Modülü</span>
+          <span class="px-2.5 py-0.5 bg-indigo-600 text-white text-[11px] font-bold rounded-lg uppercase">Tam Paket Maratonu</span>
+          <span class="px-2.5 py-0.5 bg-indigo-100 text-indigo-800 text-xs font-black rounded-lg">36 Özgün Soru</span>
         </div>
-        <h4 class="font-extrabold text-slate-800 text-base mb-1">${module1.title}</h4>
+        <h4 class="font-extrabold text-slate-800 text-base mb-1">${u.short_name} Özel Soru Bankası Tam Maraton (A1–C2)</h4>
         <p class="text-xs text-slate-600 leading-relaxed mb-4">
-          ${module1.desc}
+          ${u.name} için özel hazırlanmış 36 özgün sorunun tamamını (Grammar, Vocabulary, Reading, Restatement, Cloze, Sentence Comp.) tek sınavda çözün.
         </p>
       </div>
-      <button onclick="startExamSimulation(null, '${lvl}', '${module1.category}')" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs rounded-xl transition">
-        ${module1.category} Sorularını Çöz
+      <button onclick="startExamSimulation('${u.id}', 'all', 'all', true)" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center justify-center gap-1.5">
+        <i data-lucide="award" class="w-3.5 h-3.5"></i> ${u.short_name} 36 Soruluk Tam Maratonu Başlat
       </button>
     </div>
 
-    <!-- Modül 2 -->
-    <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-slate-300 transition flex flex-col justify-between">
+    <!-- 3. Seçili Kur (${lvl}) Özel Testi -->
+    <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-blue-300 transition flex flex-col justify-between">
       <div>
         <div class="flex items-center justify-between mb-2">
-          <span class="px-2.5 py-0.5 ${module2.badgeColor} text-[11px] font-bold rounded-lg uppercase">${module2.badge}</span>
-          <span class="text-xs text-slate-500 font-semibold">${lvl} Modülü</span>
+          <span class="px-2.5 py-0.5 bg-emerald-100 text-emerald-800 text-[11px] font-bold rounded-lg uppercase">${u.short_name} • ${lvl} Kuru</span>
+          <span class="text-xs text-slate-500 font-semibold">6 Özgün Soru</span>
         </div>
-        <h4 class="font-extrabold text-slate-800 text-base mb-1">${module2.title}</h4>
+        <h4 class="font-extrabold text-slate-800 text-base mb-1">${u.short_name} ${lvl} Kur Bitirme Kısa Testi</h4>
         <p class="text-xs text-slate-600 leading-relaxed mb-4">
-          ${module2.desc}
+          Sadece ${u.name} ${lvl} kuru için hazırlanmış 6 farklı soru tipini (Grammar, Vocab, Reading, Restatement, Cloze, Sentence Comp.) içerir.
         </p>
       </div>
-      <button onclick="startExamSimulation(null, '${lvl}', '${module2.category}')" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs rounded-xl transition">
-        ${module2.category} Sorularını Çöz
+      <button onclick="startExamSimulation('${u.id}', '${lvl}', 'all', true)" class="w-full py-2.5 bg-slate-100 hover:bg-emerald-600 hover:text-white text-slate-800 font-bold text-xs rounded-xl transition">
+        ${u.short_name} ${lvl} Özel Testini Çöz
       </button>
     </div>
 
-    <!-- Modül 3 -->
-    <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-slate-300 transition flex flex-col justify-between">
+    <!-- 4. Reading & Restatement Modülü -->
+    <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-blue-300 transition flex flex-col justify-between">
       <div>
         <div class="flex items-center justify-between mb-2">
-          <span class="px-2.5 py-0.5 ${module3.badgeColor} text-[11px] font-bold rounded-lg uppercase">${module3.badge}</span>
-          <span class="text-xs text-slate-500 font-semibold">${lvl} Modülü</span>
+          <span class="px-2.5 py-0.5 bg-amber-100 text-amber-800 text-[11px] font-bold rounded-lg uppercase">${u.short_name} • Reading</span>
+          <span class="text-xs text-slate-500 font-semibold">Tüm Kurlar</span>
         </div>
-        <h4 class="font-extrabold text-slate-800 text-base mb-1">${module3.title}</h4>
+        <h4 class="font-extrabold text-slate-800 text-base mb-1">${u.short_name} Akademik Reading & Makale Analizi</h4>
         <p class="text-xs text-slate-600 leading-relaxed mb-4">
-          ${module3.desc}
+          ${u.name} (${u.exam_name}) akademik monograf ve makale parçaları üzerinden çıkarım ve ana fikir soruları.
         </p>
       </div>
-      <button onclick="startExamSimulation(null, '${lvl}', '${module3.category}')" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs rounded-xl transition">
-        ${module3.category} Sorularını Çöz
+      <button onclick="startExamSimulation('${u.id}', 'all', 'Reading', true)" class="w-full py-2.5 bg-slate-100 hover:bg-amber-600 hover:text-white text-slate-800 font-bold text-xs rounded-xl transition">
+        ${u.short_name} Reading Sorularını Çöz
+      </button>
+    </div>
+
+    <!-- 5. Restatement & Sentence Completion Modülü -->
+    <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-blue-300 transition flex flex-col justify-between">
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <span class="px-2.5 py-0.5 bg-purple-100 text-purple-800 text-[11px] font-bold rounded-lg uppercase">${u.short_name} • Restatement</span>
+          <span class="text-xs text-slate-500 font-semibold">Tüm Kurlar</span>
+        </div>
+        <h4 class="font-extrabold text-slate-800 text-base mb-1">${u.short_name} Restatement (Yakın Anlam) Testi</h4>
+        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+          ${u.exam_name} sınavında en çok puan getiren paraphrase ve cümle yeniden ifade etme soruları.
+        </p>
+      </div>
+      <button onclick="startExamSimulation('${u.id}', 'all', 'Restatement', true)" class="w-full py-2.5 bg-slate-100 hover:bg-purple-600 hover:text-white text-slate-800 font-bold text-xs rounded-xl transition">
+        ${u.short_name} Restatement Sorularını Çöz
+      </button>
+    </div>
+
+    <!-- 6. Use of English (Grammar & Vocabulary) Modülü -->
+    <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-blue-300 transition flex flex-col justify-between">
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <span class="px-2.5 py-0.5 bg-rose-100 text-rose-800 text-[11px] font-bold rounded-lg uppercase">${u.short_name} • Grammar & Vocab</span>
+          <span class="text-xs text-slate-500 font-semibold">Tüm Kurlar</span>
+        </div>
+        <h4 class="font-extrabold text-slate-800 text-base mb-1">${u.short_name} Grammar & Akademik Kelime Testi</h4>
+        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+          ${u.name} hazırlık müfredatına özel akademik dilbilgisi ve kelime (AWL) soruları.
+        </p>
+      </div>
+      <button onclick="startExamSimulation('${u.id}', 'all', 'Grammar', true)" class="w-full py-2.5 bg-slate-100 hover:bg-rose-600 hover:text-white text-slate-800 font-bold text-xs rounded-xl transition">
+        ${u.short_name} Grammar Sorularını Çöz
       </button>
     </div>
   `;
@@ -965,6 +1012,10 @@ async function selectUniversity(uniId) {
     loadDashboardStats();
   } else if (window.appState.activeTab === 'exams') {
     renderExamsTab();
+  } else if (window.appState.activeTab === 'listening' && window.loadListeningHub) {
+    window.loadListeningHub('all');
+  } else if (window.appState.activeTab === 'speaking' && window.loadSpeakingHub) {
+    window.loadSpeakingHub('all');
   }
 }
 
