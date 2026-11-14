@@ -240,19 +240,23 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
     """
     async def dispatch(self, request: Request, call_next) -> Response:
         response = await call_next(request)
+        is_payment_result = request.url.path == "/odeme-sonuc"
 
         # 1. Content-Security-Policy
         # Permissive enough for embedded Tailwind CDN, Lucide, Google Fonts, and audio Blobs
         # Strict enough to block unauthorized script injection and framing
         csp_directives = [
             "default-src 'self'",
-            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com",
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com https://www.paytr.com",
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net",
             "font-src 'self' https://fonts.gstatic.com data:",
             "img-src 'self' data: https: https://cdn-icons-png.flaticon.com",
             "media-src 'self' blob: data:",
             "connect-src 'self'",
-            "frame-ancestors 'none'",
+            # PayTR ödeme penceresi (kart bilgisi yalnızca orada girilir)
+            "frame-src https://www.paytr.com",
+            # PayTR penceresi ödeme sonrası /odeme-sonuc sayfasını kendi içinde açar
+            "frame-ancestors 'self' https://www.paytr.com" if is_payment_result else "frame-ancestors 'none'",
             "base-uri 'self'",
             "form-action 'self'"
         ]
@@ -265,7 +269,10 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
         response.headers["X-Content-Type-Options"] = "nosniff"
 
         # 4. Clickjacking defense
-        response.headers["X-Frame-Options"] = "DENY"
+        if is_payment_result:
+            response.headers["X-Frame-Options"] = "SAMEORIGIN"
+        else:
+            response.headers["X-Frame-Options"] = "DENY"
 
         # 5. Cross-site leakage defense
         response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"

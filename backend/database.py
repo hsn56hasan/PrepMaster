@@ -244,7 +244,22 @@ def init_db():
     if "verification_status" not in s_cols:
         conn.execute("ALTER TABLE student_verifications ADD COLUMN verification_status TEXT DEFAULT 'pending'")
 
-    conn.execute("""
+    conn.executescript("""
+        -- PayTR siparişleri: kilit yalnızca imzalı bildirim gelince ve sipariş
+        -- 'pending' iken BİR KEZ açılır (PayTR aynı bildirimi birden çok kez gönderebilir).
+        CREATE TABLE IF NOT EXISTS paytr_orders (
+            merchant_oid TEXT PRIMARY KEY,
+            user_id INTEGER NOT NULL,
+            university_id TEXT NOT NULL,
+            amount_kurus INTEGER NOT NULL,
+            status TEXT NOT NULL DEFAULT 'pending',   -- pending | success | failed | amount_mismatch
+            total_amount_kurus INTEGER,
+            failed_reason TEXT,
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+            updated_at TEXT
+        );
+        CREATE INDEX IF NOT EXISTS idx_paytr_orders_user ON paytr_orders(user_id);
+
         CREATE TABLE IF NOT EXISTS university_purchases (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             user_id INTEGER,
@@ -1116,6 +1131,41 @@ def upsert_google_user(email: str, name: str = "", avatar_url: str = "") -> Dict
 
     conn.close()
     return get_profile(new_user_id)
+
+
+def create_paytr_order(merchant_oid: str, user_id: int, university_id: str, amount_kurus: int) -> None:
+    conn = get_db()
+    with conn:
+        conn.execute("""
+            INSERT INTO paytr_orders (merchant_oid, user_id, university_id, amount_kurus, status)
+            VALUES (?, ?, ?, ?, 'pending')
+        """, (merchant_oid, user_id, university_id, amount_kurus))
+    conn.close()
+
+
+def get_paytr_order(merchant_oid: str) -> Optional[Dict[str, Any]]:
+    conn = get_db()
+    row = conn.execute("SELECT * FROM paytr_orders WHERE merchant_oid = ?", (merchant_oid,)).fetchone()
+    conn.close()
+    return dict(row) if row else None
+
+
+def finish_paytr_order(merchant_oid: str, new_status: str, total_amount_kurus: Optional[int],
+                       failed_reason: str = "") -> bool:
+    """
+    Siparişi 'pending'den new_status'e taşır. Yalnızca bu çağrı taşıdıysa True döner;
+    böylece aynı bildirim ikinci kez geldiğinde kilit ikinci kez açılmaz.
+    """
+    conn = get_db()
+    with conn:
+        cur = conn.execute("""
+            UPDATE paytr_orders
+            SET status = ?, total_amount_kurus = ?, failed_reason = ?, updated_at = CURRENT_TIMESTAMP
+            WHERE merchant_oid = ? AND status = 'pending'
+        """, (new_status, total_amount_kurus, failed_reason[:300], merchant_oid))
+        changed = cur.rowcount == 1
+    conn.close()
+    return changed
 
 
 def user_exists_with_email(email: str) -> bool:

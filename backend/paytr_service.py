@@ -27,8 +27,9 @@ def get_paytr_config() -> Dict[str, str]:
         "merchant_key": os.getenv("PAYTR_MERCHANT_KEY", "").strip(),
         "merchant_salt": os.getenv("PAYTR_MERCHANT_SALT", "").strip(),
         "test_mode": os.getenv("PAYTR_TEST_MODE", "1").strip(),
-        "ok_url": os.getenv("PAYTR_OK_URL", "http://localhost:8050/?payment=success").strip(),
-        "fail_url": os.getenv("PAYTR_FAIL_URL", "http://localhost:8050/?payment=failed").strip(),
+        # Boş bırakılırsa istek adresinden türetilir (…/odeme-sonuc?durum=…)
+        "ok_url": os.getenv("PAYTR_OK_URL", "").strip(),
+        "fail_url": os.getenv("PAYTR_FAIL_URL", "").strip(),
     }
 
 
@@ -57,6 +58,10 @@ def generate_paytr_iframe_token(
     user_name: str = "PrepMaster Ogrenci",
     user_ip: str = "127.0.0.1",
     price_try: float = 50.0,
+    user_phone: str = "",
+    user_address: str = "Türkiye",
+    ok_url: str = "",
+    fail_url: str = "",
 ) -> Dict[str, Any]:
     """
     PayTR iFrame API Adım 1:
@@ -97,14 +102,15 @@ def generate_paytr_iframe_token(
         "payment_amount": str(payment_amount),
         "paytr_token": paytr_token,
         "user_basket": user_basket,
-        "debug_on": "1",
+        # Canlıda hata ayrıntısı müşteriye gösterilmesin
+        "debug_on": "1" if os.getenv("PAYTR_DEBUG", "0").strip() == "1" else "0",
         "no_installment": str(no_installment),
         "max_installment": str(max_installment),
         "user_name": user_name,
-        "user_address": "Turkiye Universiteler Kampusu",
-        "user_phone": "05320000000",
-        "merchant_ok_url": cfg["ok_url"],
-        "merchant_fail_url": cfg["fail_url"],
+        "user_address": user_address or "Türkiye",
+        "user_phone": user_phone,
+        "merchant_ok_url": ok_url or cfg["ok_url"],
+        "merchant_fail_url": fail_url or cfg["fail_url"],
         "timeout_limit": "30",
         "currency": currency,
         "test_mode": test_mode,

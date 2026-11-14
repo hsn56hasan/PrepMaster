@@ -1146,6 +1146,41 @@
         </button>
       </div>
 
+      <!-- PayTR ile ödeme (kart bilgisi yalnızca PayTR'nin penceresinde girilir) -->
+      <div id="paywall-view-paytr" class="hidden space-y-4">
+        <div id="paytr-step-phone" class="space-y-3">
+          <div class="p-3 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 rounded-xl text-xs text-amber-900 dark:text-amber-200">
+            <span class="font-black">50 TL</span> — tek seferlik, bu üniversitenin tüm denemeleri hesabınızda açılır.
+          </div>
+          <label for="paytr-phone" class="block text-xs font-bold text-slate-600 dark:text-slate-300">Cep telefonu</label>
+          <input type="tel" id="paytr-phone" inputmode="tel" autocomplete="tel" placeholder="05XX XXX XX XX"
+                 class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500">
+          <p class="text-[11px] text-slate-400">Ödeme altyapısı (PayTR) güvenlik kontrolü için istiyor. Kart bilgileriniz PrepMaster'a gelmez, doğrudan PayTR'nin güvenli sayfasında girilir.</p>
+          <button type="button" id="btn-paytr-start" onclick="startPaytrPayment()"
+                  class="w-full py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-black text-xs rounded-xl shadow-lg shadow-amber-500/25 transition flex items-center justify-center gap-2">
+            <i data-lucide="shield-check" class="w-4 h-4"></i> PayTR ile Güvenli Öde (50 TL)
+          </button>
+        </div>
+        <div id="paytr-step-frame" class="hidden space-y-2">
+          <div id="paytr-frame-holder" class="min-h-[420px] rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white"></div>
+          <p id="paytr-wait-msg" class="text-[11px] text-slate-500 dark:text-slate-400 text-center">Ödeme tamamlanınca paketiniz otomatik açılacak.</p>
+        </div>
+        <div id="paytr-step-done" class="hidden space-y-3 text-center">
+          <div class="w-12 h-12 mx-auto rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center">
+            <i data-lucide="check" class="w-6 h-6 stroke-[3]"></i>
+          </div>
+          <h3 class="font-black text-slate-800 dark:text-white text-base">Ödeme alındı, paket açıldı!</h3>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400">Faturanız e-posta adresinize ayrıca gönderilecek.</p>
+          <button type="button" onclick="finishPaywallAndStart()" class="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-black text-xs rounded-xl">Denemelere Başla</button>
+        </div>
+        <div id="paytr-msg" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+      </div>
+
+      <!-- Ödeme altyapısı kapalıyken -->
+      <div id="paywall-view-unavailable" class="hidden p-4 bg-slate-50 dark:bg-slate-700/50 rounded-2xl text-xs text-slate-600 dark:text-slate-300">
+        Ödeme şu an alınamıyor. Lütfen daha sonra tekrar deneyin.
+      </div>
+
       <!-- ADIM 1: Kart Bilgileri ve Tutar -->
       <div id="paywall-view-card" class="space-y-4">
         <!-- Bilgi & Okul Karşılaştırması -->
@@ -1656,5 +1691,6 @@
       window.submitUniversityUnlockPayment = window.init3DSecurePayment;
     })();
   </script>
+  <script src="/static/js/paytr.js?v=1.0"></script>
 </body>
 </html>

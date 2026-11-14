@@ -28,6 +28,7 @@ from database import (
     verify_student_by_document, unlock_university_membership, check_university_access,
     create_3ds_session, verify_3ds_code, generate_gib_receipt,
     upsert_google_user, request_password_reset, confirm_password_reset, user_exists_with_email,
+    create_paytr_order, get_paytr_order, finish_paytr_order,
     record_study_day
 )
 from document_scanner import (
@@ -715,31 +716,97 @@ def check_membership_endpoint(university_id: str, request: Request):
 
 
 class PayTRTokenRequest(BaseModel):
-    user_id: Optional[int] = Field(1, ge=1)
     university_id: str = Field(..., max_length=50, pattern=r"^[a-zA-Z0-9_-]+$")
-    email: Optional[str] = Field("ogrenci@itu.edu.tr", max_length=255)
-    user_name: Optional[str] = Field("PrepMaster Öğrencisi", max_length=100)
+    # PayTR müşteri telefonu zorunlu tutuyor (dolandırıcılık kontrolü)
+    user_phone: str = Field(..., min_length=10, max_length=20)
+
+    @field_validator("user_phone")
+    @classmethod
+    def normalize_phone(cls, v):
+        digits = re.sub(r"\D", "", v or "")
+        if digits.startswith("90") and len(digits) == 12:
+            digits = "0" + digits[2:]
+        if len(digits) == 10 and digits.startswith("5"):
+            digits = "0" + digits
+        if not re.fullmatch(r"05\d{9}", digits):
+            raise ValueError("Geçerli bir cep telefonu girin (05XX XXX XX XX).")
+        return digits
+
+
+def _payer_ip(request: Request) -> str:
+    """
+    PayTR gerçek müşteri IP'sini ister. X-Real-IP'yi nginx kendisi yazar ($remote_addr);
+    X-Forwarded-For'un en solundaki değer istemci tarafından uydurulabildiği için kullanılmaz.
+    """
+    real = (request.headers.get("X-Real-IP") or "").strip()
+    if real:
+        return real
+    return request.client.host if request.client else "127.0.0.1"
+
+
+def _paytr_result_url(request: Request, outcome: str) -> str:
+    base = str(request.base_url).rstrip("/")
+    proto = (request.headers.get("X-Forwarded-Proto") or "").strip()
+    if proto in ("http", "https") and base.startswith(("http://", "https://")):
+        base = proto + "://" + base.split("://", 1)[1]
+    return f"{base}/odeme-sonuc?durum={outcome}"
 
 
 @app.post("/api/payment/paytr/token")
 def create_paytr_token_endpoint(req: PayTRTokenRequest, request: Request):
-    target_id = require_current_user(request)["user_id"]
-    if not is_paytr_live_configured() and not DEMO_MODE:
+    """
+    PayTR iFrame ödemesini başlatır: bir 'pending' sipariş açar ve PayTR'den ödeme sayfası
+    token'ı alır. Kart bilgisi hiçbir zaman bu sunucuya gelmez; PayTR'nin penceresinde girilir.
+    Kilit burada AÇILMAZ — yalnızca PayTR'nin imzalı bildirimi (/callback) açar.
+    """
+    target_id = _current_user_id(request)
+    if not is_paytr_live_configured():
         raise HTTPException(status_code=503, detail="Ödeme altyapısı henüz yapılandırılmadı.")
+    if not any(u["id"] == req.university_id for u in universities_data) or req.university_id == "general":
+        raise HTTPException(status_code=400, detail="Bilinmeyen üniversite.")
+    if check_university_access(target_id, req.university_id):
+        raise HTTPException(status_code=400, detail="Bu üniversitenin içeriği hesabınızda zaten açık.")
+
     profile = get_profile(target_id)
-    client_ip = request.client.host if request.client else "127.0.0.1"
+    email = (profile.get("email") or "").strip()
+    if not email or not email.isascii():
+        raise HTTPException(status_code=400, detail="Ödeme için hesabınızdaki e-posta adresi Türkçe karakter içermemeli.")
 
     res = generate_paytr_iframe_token(
         user_id=target_id,
         university_id=req.university_id,
-        email=profile.get("email") or req.email or "ogrenci@itu.edu.tr",
-        user_name=profile.get("full_name") or req.user_name or "PrepMaster Öğrencisi",
-        user_ip=client_ip,
-        price_try=MEMBERSHIP_PRICE_TRY
+        email=email,
+        user_name=(profile.get("full_name") or profile.get("username") or "PrepMaster Ogrencisi")[:60],
+        user_ip=_payer_ip(request),
+        price_try=MEMBERSHIP_PRICE_TRY,
+        user_phone=req.user_phone,
+        ok_url=_paytr_result_url(request, "basarili"),
+        fail_url=_paytr_result_url(request, "basarisiz"),
     )
     if res.get("status") != "success":
-        raise HTTPException(status_code=400, detail=res.get("reason", "PayTR token oluşturulamadı."))
-    return res
+        raise HTTPException(status_code=400, detail=res.get("reason", "PayTR ödeme sayfası açılamadı."))
+    create_paytr_order(res["merchant_oid"], target_id, req.university_id, int(round(MEMBERSHIP_PRICE_TRY * 100)))
+    return {
+        "merchant_oid": res["merchant_oid"],
+        "iframe_url": res["iframe_url"],
+        "amount_try": MEMBERSHIP_PRICE_TRY,
+    }
+
+
+@app.get("/api/payment/paytr/orders/{merchant_oid}")
+def paytr_order_status_endpoint(merchant_oid: str, request: Request):
+    """Web, ödeme penceresi açıkken bunu sorar; kilit açıldı mı burada görünür."""
+    uid = _current_user_id(request)
+    order = get_paytr_order(merchant_oid[:64])
+    if not order or order["user_id"] != uid:
+        raise HTTPException(status_code=404, detail="Sipariş bulunamadı.")
+    profile = get_profile(uid)
+    return {
+        "merchant_oid": order["merchant_oid"],
+        "university_id": order["university_id"],
+        "status": order["status"],
+        "unlocked_universities": profile.get("unlocked_universities", []),
+    }
 
 
 @app.post("/api/payment/paytr/callback")
@@ -758,19 +825,28 @@ async def paytr_webhook_callback_endpoint(request: Request):
     if not verify_paytr_callback_hash(merchant_oid, status_val, total_amount, received_hash):
         raise HTTPException(status_code=400, detail="PAYTR notification failed: bad hash")
 
+    # Bildirim imzalı; artık PayTR'ye her durumda "OK" dönülür (aksi halde tekrar tekrar gönderir).
+    order = get_paytr_order(merchant_oid)
+    if not order:
+        return PlainTextResponse("OK")  # bizim açmadığımız sipariş: hiçbir hesaba dokunma
+
+    paid_kurus = int(total_amount) if total_amount.isdigit() else 0
     if status_val == "success":
-        parsed = parse_merchant_oid(merchant_oid)
-        paid_kurus = int(total_amount) if total_amount.isdigit() else 0
-        valid_uni = any(u["id"] == parsed["university_id"] for u in universities_data)
-        # Ayrıştırılamayan sipariş ya da eksik tutar hiçbir hesabın kilidini açmaz.
-        if parsed["user_id"] and valid_uni and paid_kurus >= int(MEMBERSHIP_PRICE_TRY * 100):
+        if paid_kurus < order["amount_kurus"]:
+            finish_paytr_order(merchant_oid, "amount_mismatch", paid_kurus, "Ödenen tutar sipariş tutarından düşük")
+        elif finish_paytr_order(merchant_oid, "success", paid_kurus):
+            # Yalnızca 'pending' -> 'success' geçişini yapan bildirim kilidi açar (tekrarlar açmaz)
             unlock_university_membership(
-                user_id=parsed["user_id"],
-                university_id=parsed["university_id"],
+                user_id=order["user_id"],
+                university_id=order["university_id"],
                 card_holder="PayTR Sanal POS",
                 card_last_four="PAYT",
-                price_try=paid_kurus / 100.0
+                price_try=paid_kurus / 100.0,
+                session_id=merchant_oid,
             )
+    else:
+        reason = f'{form.get("failed_reason_code", "")} {form.get("failed_reason_msg", "")}'.strip()
+        finish_paytr_order(merchant_oid, "failed", paid_kurus, reason)
 
     return PlainTextResponse("OK")
 
@@ -1592,6 +1668,12 @@ def get_student_report_summary(request: Request):
         "mistake_details": mistakes[:15],
         "generated_at": datetime.utcnow().strftime("%d.%m.%Y %H:%M")
     }
+
+
+# --- PayTR ödeme sonucu sayfası (PayTR penceresi buraya yönlendirir) ---
+@app.get("/odeme-sonuc")
+def payment_result_page():
+    return FileResponse(STATIC_DIR / "odeme-sonuc.html", media_type="text/html")
 
 
 # --- Static files ---

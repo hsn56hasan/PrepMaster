@@ -30,3 +30,6 @@ mobile/.pub/
 .env
 .env.*
 !.env.example
+
+# Veritabanı göç yedekleri (öğrenci verisi içerir)
+*.db.yedek-*
