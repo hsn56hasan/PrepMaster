@@ -27,8 +27,11 @@ async function applyServerProfile() {
     window.appState.currentUniversity ||
     window.appState.allUniversities[0];
   if (profile && window.appState.currentUser) {
-    // Kilit bilgisi (unlocked_universities, verified_university) da güncel kalsın
+    // Kilit bilgisi (unlocked_universities, verified_university, verification_status) da güncel kalsın
     Object.assign(window.appState.currentUser, {
+      university_id: profile.university_id || window.appState.currentUser.university_id,
+      student_number: profile.student_number || window.appState.currentUser.student_number,
+      is_verified_student: profile.is_verified_student,
       unlocked_universities: profile.unlocked_universities,
       verified_university: profile.verified_university,
       verification_status: profile.verification_status,

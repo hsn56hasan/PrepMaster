@@ -253,6 +253,11 @@ def init_db():
     if "verification_status" not in s_cols:
         conn.execute("ALTER TABLE student_verifications ADD COLUMN verification_status TEXT DEFAULT 'pending'")
 
+    cursor.execute("PRAGMA table_info(exam_attempts)")
+    ea_cols = [r[1] for r in cursor.fetchall()]
+    if ea_cols and "user_id" not in ea_cols:
+        conn.execute("ALTER TABLE exam_attempts ADD COLUMN user_id INTEGER DEFAULT 1")
+
     conn.executescript("""
         -- PayTR siparişleri: kilit yalnızca imzalı bildirim gelince ve sipariş
         -- 'pending' iken BİR KEZ açılır (PayTR aynı bildirimi birden çok kez gönderebilir).
@@ -1288,6 +1293,277 @@ def confirm_password_reset(email: str, reset_code: str, new_password: str) -> Di
         "success": True,
         "message": "Şifreniz başarıyla güncellendi. Yeni şifrenizle giriş yapabilirsiniz."
     }
+
+
+# =============================================================================
+# YÖNETİCİ PANELİ (ADMIN) VERİTABANI İŞLEMLERİ
+# =============================================================================
+
+def admin_list_students(
+    search: str = "",
+    university_filter: str = "",
+    verification_filter: str = ""
+) -> Dict[str, Any]:
+    conn = get_db()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT id, email, username, full_name, university_id, student_number,
+               is_verified_student, verification_status, verified_university,
+               unlocked_universities, current_level, target_score, streak_days,
+               created_at, last_active
+        FROM users
+        ORDER BY id DESC
+    """)
+    rows = cursor.fetchall()
+
+    # Sınav istatistiklerini tek sorguda topla
+    exam_map = {}
+    try:
+        cursor.execute("""
+            SELECT COALESCE(user_id, 1) as uid, COUNT(*) as exam_count, ROUND(AVG(score), 1) as avg_score
+            FROM exam_attempts
+            GROUP BY COALESCE(user_id, 1)
+        """)
+        exam_map = {r["uid"]: {"exam_count": r["exam_count"], "avg_score": r["avg_score"] or 0.0} for r in cursor.fetchall()}
+    except Exception:
+        exam_map = {}
+
+    # Son doğrulama kayıtlarını topla
+    verif_map = {}
+    try:
+        cursor.execute("""
+            SELECT user_id, university_id, edu_email, student_id_number, verification_type,
+                   verification_status, notes, verified_at
+            FROM student_verifications
+            ORDER BY id ASC
+        """)
+        for vr in cursor.fetchall():
+            verif_map[vr["user_id"]] = dict(vr)
+    except Exception:
+        verif_map = {}
+
+    # Satın alma istatistikleri
+    total_purchases = 0
+    total_revenue = 0.0
+    try:
+        cursor.execute("SELECT COUNT(*) as cnt, COALESCE(SUM(price_try), 0) as rev FROM university_purchases")
+        p_row = cursor.fetchone()
+        total_purchases = p_row["cnt"] if p_row else 0
+        total_revenue = round(float(p_row["rev"] or 0.0), 2) if p_row else 0.0
+    except Exception:
+        pass
+
+    students = []
+    verified_total = 0
+    unverified_total = 0
+    total_exams_all = sum(v["exam_count"] for v in exam_map.values())
+
+    q = (search or "").strip().lower()
+    uni_f = (university_filter or "").strip().lower()
+    ver_f = (verification_filter or "").strip().lower()
+
+    for r in rows:
+        u = dict(r)
+        is_ver = bool(u.get("is_verified_student") == 1 or u.get("verification_status") == "verified")
+        if is_ver:
+            verified_total += 1
+        else:
+            unverified_total += 1
+
+        try:
+            unlocked = json.loads(u.get("unlocked_universities") or '["general"]')
+            if not isinstance(unlocked, list):
+                unlocked = ["general"]
+        except Exception:
+            unlocked = ["general"]
+
+        if is_ver and u.get("verified_university") and u["verified_university"] not in unlocked:
+            unlocked.append(u["verified_university"])
+        if "general" not in unlocked:
+            unlocked.append("general")
+
+        u["unlocked_universities"] = unlocked
+        u["is_verified"] = is_ver
+        u["exam_count"] = exam_map.get(u["id"], {}).get("exam_count", 0)
+        u["avg_score"] = exam_map.get(u["id"], {}).get("avg_score", 0.0)
+        u["latest_verification"] = verif_map.get(u["id"])
+
+        # Filtreleme
+        if q:
+            haystack = " ".join([
+                str(u.get("full_name") or ""),
+                str(u.get("username") or ""),
+                str(u.get("email") or ""),
+                str(u.get("student_number") or ""),
+                str(u.get("university_id") or "")
+            ]).lower()
+            if q not in haystack:
+                continue
+
+        if uni_f and uni_f != "all":
+            if (u.get("university_id") or "").lower() != uni_f and uni_f not in [x.lower() for x in unlocked]:
+                continue
+
+        if ver_f == "verified" and not is_ver:
+            continue
+        if ver_f == "unverified" and is_ver:
+            continue
+
+        students.append(u)
+
+    conn.close()
+    return {
+        "summary": {
+            "total_students": len(rows),
+            "verified_students": verified_total,
+            "unverified_students": unverified_total,
+            "total_exams_completed": total_exams_all,
+            "total_purchases": total_purchases,
+            "total_revenue_try": total_revenue
+        },
+        "students": students
+    }
+
+
+def admin_update_student_access(
+    user_id: int,
+    unlocked_universities: List[str],
+    primary_university_id: Optional[str] = None,
+    is_verified: Optional[bool] = None,
+    student_number: Optional[str] = None,
+    admin_note: str = ""
+) -> Dict[str, Any]:
+    conn = get_db()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM users WHERE id = ?", (user_id,))
+    row = cursor.fetchone()
+    if not row:
+        conn.close()
+        return {"success": False, "detail": "Öğrenci kaydı bulunamadı."}
+
+    current = dict(row)
+
+    # Temiz üniversite listesi oluştur
+    clean_unlocked = []
+    for uid in (unlocked_universities or []):
+        s = str(uid).strip().lower()
+        if s and s not in clean_unlocked:
+            clean_unlocked.append(s)
+    if "general" not in clean_unlocked:
+        clean_unlocked.append("general")
+
+    new_uni_id = (primary_university_id or current.get("university_id") or "itu").strip().lower()
+    new_stu_no = student_number.strip() if student_number is not None else (current.get("student_number") or "")
+
+    if is_verified is None:
+        ver_int = current.get("is_verified_student", 0)
+        ver_status = current.get("verification_status", "unverified")
+        ver_uni = current.get("verified_university")
+    elif is_verified:
+        ver_int = 1
+        ver_status = "verified"
+        ver_uni = new_uni_id
+        if new_uni_id not in clean_unlocked:
+            clean_unlocked.append(new_uni_id)
+    else:
+        ver_int = 0
+        ver_status = "unverified"
+        ver_uni = None
+
+    with conn:
+        conn.execute("""
+            UPDATE users
+            SET university_id = ?,
+                student_number = ?,
+                is_verified_student = ?,
+                verification_status = ?,
+                verified_university = ?,
+                unlocked_universities = ?
+            WHERE id = ?
+        """, (
+            new_uni_id,
+            new_stu_no,
+            ver_int,
+            ver_status,
+            ver_uni,
+            json.dumps(clean_unlocked),
+            user_id
+        ))
+
+        if is_verified is not None:
+            note_txt = admin_note.strip() or (
+                f"Yönetici paneli üzerinden {'onaylandı' if is_verified else 'onay kaldırıldı'}. "
+                f"Açık okullar: {', '.join(clean_unlocked)}"
+            )
+            conn.execute("""
+                INSERT INTO student_verifications
+                (user_id, university_id, edu_email, student_id_number, verification_type, verification_status, notes)
+                VALUES (?, ?, ?, ?, 'admin_panel', ?, ?)
+            """, (
+                user_id,
+                new_uni_id,
+                current.get("email") or "",
+                new_stu_no,
+                ver_status,
+                note_txt
+            ))
+
+    conn.close()
+    return {
+        "success": True,
+        "user_id": user_id,
+        "university_id": new_uni_id,
+        "is_verified": bool(ver_int == 1),
+        "verification_status": ver_status,
+        "unlocked_universities": clean_unlocked,
+        "student_number": new_stu_no,
+        "message": "Öğrenci üniversite erişim yetkileri ve doğrulama durumu güncellendi."
+    }
+
+
+def admin_reset_student_password(user_id: int, new_password: str) -> Dict[str, Any]:
+    if not new_password or len(new_password.strip()) < 6:
+        return {"success": False, "detail": "Yeni şifre en az 6 karakter olmalıdır."}
+    conn = get_db()
+    row = conn.execute("SELECT id, email, full_name FROM users WHERE id = ?", (user_id,)).fetchone()
+    if not row:
+        conn.close()
+        return {"success": False, "detail": "Öğrenci bulunamadı."}
+
+    pw_hash = hash_password(new_password.strip())
+    with conn:
+        conn.execute("UPDATE users SET password_hash = ? WHERE id = ?", (pw_hash, user_id))
+    conn.close()
+    return {
+        "success": True,
+        "message": f"{row['full_name'] or row['email']} adlı öğrencinin şifresi güncellendi."
+    }
+
+
+def admin_delete_student(user_id: int) -> Dict[str, Any]:
+    if user_id == 1:
+        return {"success": False, "detail": "Varsayılan sistem öğrenci hesabı (ID: 1) silinemez."}
+    conn = get_db()
+    row = conn.execute("SELECT id, full_name, email FROM users WHERE id = ?", (user_id,)).fetchone()
+    if not row:
+        conn.close()
+        return {"success": False, "detail": "Öğrenci bulunamadı."}
+
+    with conn:
+        conn.execute("DELETE FROM student_verifications WHERE user_id = ?", (user_id,))
+        conn.execute("DELETE FROM exam_attempts WHERE user_id = ?", (user_id,))
+        conn.execute("DELETE FROM vocab_progress WHERE user_id = ?", (user_id,))
+        conn.execute("DELETE FROM question_bookmarks WHERE user_id = ?", (user_id,))
+        conn.execute("DELETE FROM mistake_vault WHERE user_id = ?", (user_id,))
+        conn.execute("DELETE FROM users WHERE id = ?", (user_id,))
+    conn.close()
+    return {
+        "success": True,
+        "message": f"{row['full_name'] or row['email']} adlı öğrenci kaydı silindi."
+    }
+
 
 
 

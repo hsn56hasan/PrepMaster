@@ -29,7 +29,9 @@ from database import (
     create_3ds_session, verify_3ds_code, generate_gib_receipt,
     upsert_google_user, request_password_reset, confirm_password_reset, user_exists_with_email,
     create_paytr_order, get_paytr_order, finish_paytr_order,
-    record_study_day
+    record_study_day,
+    admin_list_students, admin_update_student_access,
+    admin_reset_student_password, admin_delete_student
 )
 from document_scanner import (
     scan_student_document, extract_text_from_bytes, SAMPLE_DOCUMENTS
@@ -1730,6 +1732,138 @@ def download_android_apk():
             "Cache-Control": "public, max-age=3600"
         }
     )
+
+
+# --- Bağımsız Yönetici Paneli (Admin) API & Arayüz Uç Noktaları ---
+import hmac as _hmac
+
+ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "admin").strip()
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "PrepMasterAdmin2026!").strip()
+
+
+class AdminLoginRequest(BaseModel):
+    username: str = Field(..., min_length=1, max_length=80)
+    password: str = Field(..., min_length=1, max_length=128)
+
+
+class AdminStudentAccessRequest(BaseModel):
+    unlocked_universities: List[str] = Field(default_factory=lambda: ["general"])
+    primary_university_id: Optional[str] = Field(None, max_length=50)
+    is_verified: Optional[bool] = None
+    student_number: Optional[str] = Field(None, max_length=40)
+    admin_note: Optional[str] = Field("", max_length=300)
+
+
+class AdminPasswordResetRequest(BaseModel):
+    new_password: str = Field(..., min_length=6, max_length=128)
+
+
+def _require_admin(request: Request) -> Dict[str, Any]:
+    auth_header = request.headers.get("Authorization")
+    if not auth_header or not auth_header.startswith("Bearer "):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Yönetici oturumu gerekli."
+        )
+    payload = verify_session_token(auth_header.split(" ", 1)[1].strip())
+    if payload.get("role") != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Bu işlem yalnızca sistem yöneticileri içindir."
+        )
+    return payload
+
+
+@app.post("/api/admin/login")
+def admin_login_endpoint(req: AdminLoginRequest, request: Request):
+    enforce_rate_limit(request, scope="admin_login", max_requests=8, window_seconds=60, identifier=req.username)
+    user_ok = _hmac.compare_digest(req.username.strip().encode("utf-8"), ADMIN_USERNAME.encode("utf-8"))
+    pass_ok = _hmac.compare_digest(req.password.encode("utf-8"), ADMIN_PASSWORD.encode("utf-8"))
+    if not (user_ok and pass_ok):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Yönetici kullanıcı adı veya şifre hatalı."
+        )
+    token, expires_in = create_session_token(
+        user_id=0,
+        username=ADMIN_USERNAME,
+        email="admin@prepmaster.local",
+        role="admin",
+        expires_in_hours=12
+    )
+    return {
+        "success": True,
+        "token": token,
+        "expires_in": expires_in,
+        "admin": {
+            "username": ADMIN_USERNAME,
+            "role": "admin"
+        }
+    }
+
+
+@app.get("/api/admin/students")
+def admin_get_students_endpoint(
+    request: Request,
+    search: str = Query("", max_length=120),
+    university_id: str = Query("", max_length=50),
+    verification: str = Query("", max_length=30)
+):
+    _require_admin(request)
+    res = admin_list_students(
+        search=search,
+        university_filter=university_id,
+        verification_filter=verification
+    )
+    res["universities"] = universities_data
+    return res
+
+
+@app.post("/api/admin/students/{target_user_id}/access")
+def admin_update_student_access_endpoint(
+    target_user_id: int,
+    req: AdminStudentAccessRequest,
+    request: Request
+):
+    _require_admin(request)
+    res = admin_update_student_access(
+        user_id=target_user_id,
+        unlocked_universities=req.unlocked_universities,
+        primary_university_id=req.primary_university_id,
+        is_verified=req.is_verified,
+        student_number=req.student_number,
+        admin_note=req.admin_note or ""
+    )
+    if not res.get("success"):
+        raise HTTPException(status_code=404, detail=res.get("detail", "Öğrenci güncellenemedi."))
+    return res
+
+
+@app.post("/api/admin/students/{target_user_id}/reset-password")
+def admin_reset_student_password_endpoint(
+    target_user_id: int,
+    req: AdminPasswordResetRequest,
+    request: Request
+):
+    _require_admin(request)
+    res = admin_reset_student_password(user_id=target_user_id, new_password=req.new_password)
+    if not res.get("success"):
+        raise HTTPException(status_code=400, detail=res.get("detail", "Şifre güncellenemedi."))
+    return res
+
+
+@app.delete("/api/admin/students/{target_user_id}")
+def admin_delete_student_endpoint(target_user_id: int, request: Request):
+    _require_admin(request)
+    res = admin_delete_student(user_id=target_user_id)
+    if not res.get("success"):
+        raise HTTPException(status_code=400, detail=res.get("detail", "Öğrenci silinemedi."))
+    return res
+
+
+@app.get("/admin")
+def serve_admin_panel():
+    return FileResponse(STATIC_DIR / "admin.html", media_type="text/html")
 
 
 # --- Static files ---

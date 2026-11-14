@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="tr" class="h-full bg-slate-950">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PrepMaster Yönetim Paneli | Öğrenci & Üniversite Erişim Merkezi</title>
+  <link rel="icon" type="image/x-icon" href="/static/prepmaster.ico" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+  </style>
+</head>
+<body class="min-h-full bg-slate-950 text-slate-100 antialiased">
+
+  <!-- ================= 1. TAM EKRAN YÖNETİCİ GİRİŞ EKRANI ================= -->
+  <div id="admin-login-screen" class="fixed inset-0 z-50 bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-900 p-4 flex flex-col items-center justify-center">
+    <div class="max-w-md w-full space-y-6">
+      <div class="text-center space-y-2">
+        <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-tr from-indigo-600 to-blue-500 text-white shadow-xl shadow-indigo-500/30 border border-white/15">
+          <i data-lucide="shield-check" class="w-8 h-8"></i>
+        </div>
+        <h1 class="text-2xl font-black tracking-tight text-white">PrepMaster Yönetim Paneli</h1>
+        <p class="text-xs text-slate-400">Öğrenci Kayıtları, Belge Onayı ve Üniversite Erişim Yetkilendirme Merkezi</p>
+      </div>
+
+      <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 shadow-2xl space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1.5">Yönetici Kullanıcı Adı:</label>
+          <input type="text" id="admin-username" placeholder="admin" value="admin" class="w-full p-3 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1.5">Yönetici Şifresi:</label>
+          <input type="password" id="admin-password" placeholder="••••••••••••" onkeydown="if(event.key==='Enter') submitAdminLogin()" class="w-full p-3 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+
+        <div id="admin-login-error" class="hidden p-3 rounded-xl bg-rose-950/70 border border-rose-700 text-rose-200 text-xs font-semibold"></div>
+
+        <button onclick="submitAdminLogin()" id="btn-admin-login" class="w-full py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-black text-xs rounded-xl shadow-lg shadow-indigo-500/25 transition flex items-center justify-center gap-2">
+          <i data-lucide="lock" class="w-4 h-4"></i> Yönetim Paneline Giriş Yap
+        </button>
+
+        <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-500">
+          <span>Yalnızca Yetkili Yönetici Erişimi</span>
+          <a href="/" class="text-indigo-400 hover:text-indigo-300 font-semibold underline">← Öğrenci Sitesine Dön</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 2. ANA YÖNETİM PANELİ EKRANI ================= -->
+  <div id="admin-dashboard-screen" class="hidden min-h-screen flex flex-col bg-slate-950">
+
+    <!-- Üst Bar -->
+    <header class="bg-slate-900/90 border-b border-slate-800 sticky top-0 z-30 backdrop-blur-md">
+      <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-blue-500 flex items-center justify-center text-white shadow-md">
+            <i data-lucide="shield" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-black text-base text-white">PrepMaster Admin</span>
+              <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 rounded-full">Yönetici Paneli</span>
+            </div>
+            <p class="text-[11px] text-slate-400">Öğrenci Kayıtları ve Üniversite Paket Yetkilendirme</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2.5">
+          <button onclick="loadAdminData()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+            <i data-lucide="refresh-cw" class="w-4 h-4 text-indigo-400"></i>
+            <span>Yenile</span>
+          </button>
+          <a href="/" target="_blank" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+            <i data-lucide="external-link" class="w-4 h-4 text-emerald-400"></i>
+            <span class="hidden sm:inline">Öğrenci Sitesi</span>
+          </a>
+          <button onclick="logoutAdmin()" class="px-3.5 py-2 bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/30 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+            <i data-lucide="log-out" class="w-4 h-4"></i>
+            <span>Çıkış</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- İçerik Gövdesi -->
+    <main class="flex-1 max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+      <!-- Özet İstatistik Kartları -->
+      <div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
+        <div class="p-4 bg-slate-900 border border-slate-800 rounded-2xl">
+          <div class="flex items-center justify-between text-slate-400 text-xs font-semibold mb-1">
+            <span>Toplam Öğrenci</span>
+            <i data-lucide="users" class="w-4 h-4 text-blue-400"></i>
+          </div>
+          <div id="kpi-total-students" class="text-2xl font-black text-white">0</div>
+          <div class="text-[11px] text-slate-500 mt-0.5">Kayıtlı öğrenci hesabı</div>
+        </div>
+
+        <div class="p-4 bg-slate-900 border border-slate-800 rounded-2xl">
+          <div class="flex items-center justify-between text-slate-400 text-xs font-semibold mb-1">
+            <span>Doğrulanmış Öğrenci</span>
+            <i data-lucide="badge-check" class="w-4 h-4 text-emerald-400"></i>
+          </div>
+          <div id="kpi-verified-students" class="text-2xl font-black text-emerald-400">0</div>
+          <div class="text-[11px] text-slate-500 mt-0.5">E-Devlet / Yönetici onaylı</div>
+        </div>
+
+        <div class="p-4 bg-slate-900 border border-slate-800 rounded-2xl">
+          <div class="flex items-center justify-between text-slate-400 text-xs font-semibold mb-1">
+            <span>Doğrulama Bekleyen</span>
+            <i data-lucide="clock" class="w-4 h-4 text-amber-400"></i>
+          </div>
+          <div id="kpi-unverified-students" class="text-2xl font-black text-amber-400">0</div>
+          <div class="text-[11px] text-slate-500 mt-0.5">Henüz belge doğrulamamış</div>
+        </div>
+
+        <div class="p-4 bg-slate-900 border border-slate-800 rounded-2xl">
+          <div class="flex items-center justify-between text-slate-400 text-xs font-semibold mb-1">
+            <span>Çözülen Denemeler</span>
+            <i data-lucide="file-check" class="w-4 h-4 text-indigo-400"></i>
+          </div>
+          <div id="kpi-total-exams" class="text-2xl font-black text-indigo-400">0</div>
+          <div class="text-[11px] text-slate-500 mt-0.5">Tamamlanan sınav oturumu</div>
+        </div>
+
+        <div class="p-4 bg-slate-900 border border-slate-800 rounded-2xl col-span-2 lg:col-span-1">
+          <div class="flex items-center justify-between text-slate-400 text-xs font-semibold mb-1">
+            <span>Paket Satışı & Gelir</span>
+            <i data-lucide="credit-card" class="w-4 h-4 text-teal-400"></i>
+          </div>
+          <div id="kpi-total-revenue" class="text-2xl font-black text-teal-400">0 TL</div>
+          <div id="kpi-total-purchases" class="text-[11px] text-slate-500 mt-0.5">0 ek üniversite paketi</div>
+        </div>
+      </div>
+
+      <!-- Arama ve Filtreleme Çubuğu -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+        <div class="flex-1 relative">
+          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3"></i>
+          <input type="text" id="filter-search" oninput="loadAdminData()" placeholder="Öğrenci adı, kullanıcı adı, e-posta veya öğrenci numarası ile ara..." class="w-full pl-10 pr-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2.5">
+          <select id="filter-university" onchange="loadAdminData()" class="px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-slate-200 font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <option value="">Tüm Üniversiteler (11 Okul)</option>
+            <option value="itu">İTÜ (İstanbul Teknik)</option>
+            <option value="boun">Boğaziçi Üniversitesi</option>
+            <option value="metu">ODTÜ (Orta Doğu Teknik)</option>
+            <option value="bilkent">Bilkent Üniversitesi</option>
+            <option value="ytu">YTÜ (Yıldız Teknik)</option>
+            <option value="hacettepe">Hacettepe Üniversitesi</option>
+            <option value="ankara">Ankara Üniversitesi</option>
+            <option value="gazi">Gazi Üniversitesi</option>
+            <option value="ege">Ege Üniversitesi</option>
+            <option value="koc">Koç Üniversitesi</option>
+            <option value="sabanci">Sabancı Üniversitesi</option>
+          </select>
+
+          <select id="filter-verification" onchange="loadAdminData()" class="px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-slate-200 font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <option value="">Tüm Doğrulama Durumları</option>
+            <option value="verified">✓ Doğrulanmış Öğrenciler</option>
+            <option value="unverified">⏳ Doğrulanmamış Öğrenciler</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Öğrenci Kayıtları Tablosu -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-xl">
+        <div class="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
+          <div>
+            <h2 class="text-sm font-black text-white">Kayıtlı Öğrenciler & Üniversite Erişim Yetkileri</h2>
+            <p class="text-[11px] text-slate-400">Herhangi bir öğrencinin yanındaki "Üniversite Erişimi Tanımla" butonuna tıklayarak istediğiniz üniversiteleri ücretsiz açabilirsiniz.</p>
+          </div>
+          <span id="table-count-badge" class="text-xs font-extrabold px-3 py-1 bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 rounded-full">0 Öğrenci</span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-slate-800 bg-slate-900/50 text-[11px] font-extrabold text-slate-400 uppercase tracking-wider">
+                <th class="py-3.5 px-4">ID / Öğrenci</th>
+                <th class="py-3.5 px-4">İletişim & Öğrenci No</th>
+                <th class="py-3.5 px-4">Ana Okul & Kur</th>
+                <th class="py-3.5 px-4">Belge Doğrulama</th>
+                <th class="py-3.5 px-4">Açık Üniversite Paketleri (Erişim)</th>
+                <th class="py-3.5 px-4">Deneme / Kayıt</th>
+                <th class="py-3.5 px-4 text-right">Yönetici İşlemleri</th>
+              </tr>
+            </thead>
+            <tbody id="admin-students-tbody" class="divide-y divide-slate-800/80 text-xs">
+              <!-- JS ile doldurulur -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ================= 3. ÖĞRENCİ ÜNİVERSİTE ERİŞİM & ONAY YÖNETİM MODALI ================= -->
+  <div id="student-access-modal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm p-4 overflow-y-auto flex items-center justify-center">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-6 shadow-2xl space-y-5 my-auto">
+
+      <!-- Modal Başlığı -->
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-2xl bg-indigo-600/20 border border-indigo-500/30 text-indigo-400 flex items-center justify-center">
+            <i data-lucide="key-round" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h3 class="font-black text-white text-base" id="modal-student-title">Öğrenci Üniversite Erişim Yönetimi</h3>
+            <p class="text-xs text-slate-400" id="modal-student-subtitle">-</p>
+          </div>
+        </div>
+        <button onclick="closeStudentAccessModal()" class="p-1.5 text-slate-400 hover:text-white rounded-lg">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- 1. Bölüm: Ana Üniversite, Öğrenci No ve Doğrulama Durumu -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-slate-800/60 p-4 rounded-2xl border border-slate-800">
+        <div>
+          <label class="block text-[11px] font-bold text-slate-300 mb-1">Ana Üniversite:</label>
+          <select id="edit-primary-uni" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <option value="itu">İTÜ (İstanbul Teknik)</option>
+            <option value="boun">Boğaziçi Üniversitesi</option>
+            <option value="metu">ODTÜ (Orta Doğu Teknik)</option>
+            <option value="bilkent">Bilkent Üniversitesi</option>
+            <option value="ytu">YTÜ (Yıldız Teknik)</option>
+            <option value="hacettepe">Hacettepe Üniversitesi</option>
+            <option value="ankara">Ankara Üniversitesi</option>
+            <option value="gazi">Gazi Üniversitesi</option>
+            <option value="ege">Ege Üniversitesi</option>
+            <option value="koc">Koç Üniversitesi</option>
+            <option value="sabanci">Sabancı Üniversitesi</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold text-slate-300 mb-1">Öğrenci Numarası:</label>
+          <input type="text" id="edit-student-no" placeholder="Örn: 150240789" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold text-slate-300 mb-1">Belge Doğrulama Durumu:</label>
+          <select id="edit-verified-status" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <option value="true">✓ Doğrulanmış Öğrenci (Onaylı)</option>
+            <option value="false">⏳ Doğrulanmamış</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 2. Bölüm: 11 Üniversite Paket Erişim Yetkileri -->
+      <div class="space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h4 class="text-xs font-extrabold text-white uppercase tracking-wider">Açık Üniversite Sınav Paketleri (11 Üniversite)</h4>
+            <p class="text-[11px] text-slate-400">İşaretlediğiniz tüm üniversitelerin hazırlık ve muafiyet sınavları bu öğrenciye ücretsiz açılır.</p>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <button type="button" onclick="selectAllUniversitiesInModal(true)" class="px-2.5 py-1.5 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 rounded-lg text-[11px] font-bold transition">
+              + Tümünü Aç (11 Okul)
+            </button>
+            <button type="button" onclick="selectOnlyPrimaryUniInModal()" class="px-2.5 py-1.5 bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-500/30 rounded-lg text-[11px] font-bold transition">
+              Sadece Ana Okulu
+            </button>
+            <button type="button" onclick="selectAllUniversitiesInModal(false)" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-[11px] font-bold transition">
+              Temizle
+            </button>
+          </div>
+        </div>
+
+        <div id="modal-universities-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+          <!-- JS ile 11 üniversite checkbox kartı oluşturulur -->
+        </div>
+      </div>
+
+      <!-- 3. Bölüm: Yönetici Notu -->
+      <div>
+        <label class="block text-[11px] font-bold text-slate-300 mb-1">Yönetici Notu (İsteğe Bağlı):</label>
+        <input type="text" id="edit-admin-note" placeholder="Örn: Yönetici tarafından tüm üniversite paketleri tanımlandı." class="w-full p-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+      </div>
+
+      <div id="access-modal-msg" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+
+      <!-- Kaydet / İptal -->
+      <div class="pt-3 border-t border-slate-800 flex items-center justify-end gap-2.5">
+        <button type="button" onclick="closeStudentAccessModal()" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-bold transition">
+          Vazgeç
+        </button>
+        <button type="button" onclick="saveStudentAccessChanges()" id="btn-save-access" class="px-6 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl text-xs font-black shadow-lg shadow-emerald-500/25 transition flex items-center gap-2">
+          <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+          <span>Yetkileri Kaydet ve Tanımla</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= 4. ŞİFRE SIFIRLAMA MODALI ================= -->
+  <div id="reset-pass-modal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm p-4 flex items-center justify-center">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+        <h3 class="font-black text-white text-sm" id="reset-pass-title">Öğrenci Şifresini Güncelle</h3>
+        <button onclick="closeResetPassModal()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <div>
+        <label class="block text-xs font-bold text-slate-300 mb-1">Yeni Şifre (En az 6 karakter):</label>
+        <input type="text" id="admin-new-student-pass" placeholder="Örn: Ogrenci2026!" class="w-full p-3 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500">
+      </div>
+      <div class="flex justify-end gap-2 pt-2">
+        <button onclick="closeResetPassModal()" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-xl text-xs font-bold">İptal</button>
+        <button onclick="submitAdminPasswordReset()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-black">Şifreyi Güncelle</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bildirim Toast -->
+  <div id="admin-toast" class="hidden fixed bottom-5 right-5 z-[90] px-4 py-3 rounded-2xl shadow-2xl text-xs font-extrabold border"></div>
+
+  <script>
+    const ALL_UNIVERSITIES = [
+      { id: "itu", code: "İTÜ", name: "İstanbul Teknik Üniversitesi" },
+      { id: "boun", code: "BOÜN", name: "Boğaziçi Üniversitesi" },
+      { id: "metu", code: "ODTÜ", name: "Orta Doğu Teknik Üniversitesi" },
+      { id: "bilkent", code: "BİLKENT", name: "Bilkent Üniversitesi" },
+      { id: "ytu", code: "YTÜ", name: "Yıldız Teknik Üniversitesi" },
+      { id: "hacettepe", code: "HACETTEPE", name: "Hacettepe Üniversitesi" },
+      { id: "ankara", code: "ANKARA", name: "Ankara Üniversitesi" },
+      { id: "gazi", code: "GAZİ", name: "Gazi Üniversitesi" },
+      { id: "ege", code: "EGE", name: "Ege Üniversitesi" },
+      { id: "koc", code: "KOÇ", name: "Koç Üniversitesi" },
+      { id: "sabanci", code: "SABANCI", name: "Sabancı Üniversitesi" }
+    ];
+
+    let adminStudentsList = [];
+    let activeEditStudentId = null;
+    let activeResetStudentId = null;
+
+    function getAdminToken() {
+      return localStorage.getItem("prepmaster_admin_token") || "";
+    }
+
+    function showAdminToast(msg, type = "emerald") {
+      const el = document.getElementById("admin-toast");
+      if (!el) return;
+      el.className = type === "rose"
+        ? "fixed bottom-5 right-5 z-[90] px-4 py-3 rounded-2xl shadow-2xl text-xs font-extrabold bg-rose-950 text-rose-200 border border-rose-700"
+        : "fixed bottom-5 right-5 z-[90] px-4 py-3 rounded-2xl shadow-2xl text-xs font-extrabold bg-emerald-950 text-emerald-200 border border-emerald-700";
+      el.innerText = msg;
+      el.classList.remove("hidden");
+      setTimeout(() => el.classList.add("hidden"), 3500);
+    }
+
+    async function adminFetch(url, options = {}) {
+      const headers = new Headers(options.headers || {});
+      const token = getAdminToken();
+      if (token) headers.set("Authorization", `Bearer ${token}`);
+      if (options.body && !headers.has("Content-Type")) {
+        headers.set("Content-Type", "application/json");
+      }
+      const res = await fetch(url, { ...options, headers });
+      if (res.status === 401 || res.status === 403) {
+        localStorage.removeItem("prepmaster_admin_token");
+        showLoginView();
+      }
+      return res;
+    }
+
+    function showLoginView() {
+      document.getElementById("admin-login-screen")?.classList.remove("hidden");
+      document.getElementById("admin-dashboard-screen")?.classList.add("hidden");
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    function showDashboardView() {
+      document.getElementById("admin-login-screen")?.classList.add("hidden");
+      document.getElementById("admin-dashboard-screen")?.classList.remove("hidden");
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    async function submitAdminLogin() {
+      const username = (document.getElementById("admin-username")?.value || "").trim();
+      const password = (document.getElementById("admin-password")?.value || "").trim();
+      const errEl = document.getElementById("admin-login-error");
+      if (errEl) errEl.classList.add("hidden");
+
+      if (!username || !password) {
+        if (errEl) {
+          errEl.innerText = "Lütfen yönetici kullanıcı adı ve şifresini girin.";
+          errEl.classList.remove("hidden");
+        }
+        return;
+      }
+
+      try {
+        const res = await fetch("/api/admin/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.detail || "Giriş başarısız.");
+        }
+        localStorage.setItem("prepmaster_admin_token", data.token);
+        showDashboardView();
+        await loadAdminData();
+        showAdminToast("✓ Yönetim paneline giriş yapıldı.");
+      } catch (err) {
+        if (errEl) {
+          errEl.innerText = err.message;
+          errEl.classList.remove("hidden");
+        }
+      }
+    }
+
+    function logoutAdmin() {
+      localStorage.removeItem("prepmaster_admin_token");
+      showLoginView();
+    }
+
+    function getUniLabel(uniId) {
+      const found = ALL_UNIVERSITIES.find(u => u.id === (uniId || "").toLowerCase());
+      return found ? found.code : (uniId || "-").toUpperCase();
+    }
+
+    async function loadAdminData() {
+      const search = (document.getElementById("filter-search")?.value || "").trim();
+      const uni = document.getElementById("filter-university")?.value || "";
+      const ver = document.getElementById("filter-verification")?.value || "";
+
+      const params = new URLSearchParams();
+      if (search) params.set("search", search);
+      if (uni) params.set("university_id", uni);
+      if (ver) params.set("verification", ver);
+
+      try {
+        const res = await adminFetch(`/api/admin/students?${params.toString()}`);
+        if (!res.ok) return;
+        const data = await res.json();
+
+        adminStudentsList = data.students || [];
+        const s = data.summary || {};
+
+        document.getElementById("kpi-total-students").innerText = s.total_students ?? 0;
+        document.getElementById("kpi-verified-students").innerText = s.verified_students ?? 0;
+        document.getElementById("kpi-unverified-students").innerText = s.unverified_students ?? 0;
+        document.getElementById("kpi-total-exams").innerText = s.total_exams_completed ?? 0;
+        document.getElementById("kpi-total-revenue").innerText = `${s.total_revenue_try ?? 0} TL`;
+        document.getElementById("kpi-total-purchases").innerText = `${s.total_purchases ?? 0} ek üniversite paketi`;
+        document.getElementById("table-count-badge").innerText = `${adminStudentsList.length} Öğrenci`;
+
+        renderStudentsTable(adminStudentsList);
+      } catch (err) {
+        console.error("Admin load error:", err);
+      }
+    }
+
+    function renderStudentsTable(students) {
+      const tbody = document.getElementById("admin-students-tbody");
+      if (!tbody) return;
+
+      if (!students.length) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" class="py-10 text-center text-slate-500 font-semibold">
+              Arama kriterlerine uygun öğrenci kaydı bulunamadı.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = students.map(st => {
+        const unlocked = (st.unlocked_universities || []).filter(u => u !== "general");
+        const unlockedBadges = unlocked.length > 0
+          ? unlocked.map(uid => `<span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 rounded-md font-bold text-[10px]">${getUniLabel(uid)}</span>`).join(" ")
+          : `<span class="text-slate-500 text-[11px]">Sadece Genel Havuz</span>`;
+
+        const verifBadge = st.is_verified
+          ? `<span class="inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 rounded-full text-[11px] font-extrabold">✓ Doğrulandı</span>`
+          : `<span class="inline-flex items-center gap-1 px-2.5 py-1 bg-amber-500/15 text-amber-300 border border-amber-500/30 rounded-full text-[11px] font-bold">⏳ Doğrulanmadı</span>`;
+
+        const verifNote = st.latest_verification?.notes
+          ? `<div class="text-[10px] text-slate-400 mt-1 max-w-[220px] truncate" title="${st.latest_verification.notes}">${st.latest_verification.notes}</div>`
+          : "";
+
+        const createdDate = st.created_at ? new Date(st.created_at).toLocaleDateString("tr-TR") : "-";
+
+        return `
+          <tr class="hover:bg-slate-800/40 transition">
+            <td class="py-3.5 px-4">
+              <div class="flex items-center gap-2.5">
+                <span class="w-8 h-8 rounded-xl bg-slate-800 border border-slate-700 text-slate-300 font-mono font-bold text-[11px] flex items-center justify-center">#${st.id}</span>
+                <div>
+                  <div class="font-extrabold text-white text-xs">${st.full_name || "-"}</div>
+                  <div class="text-[11px] text-slate-400 font-mono">@${st.username || "-"}</div>
+                </div>
+              </div>
+            </td>
+
+            <td class="py-3.5 px-4">
+              <div class="font-semibold text-slate-200">${st.email || "-"}</div>
+              <div class="text-[11px] text-slate-400 font-mono">Öğrenci No: <strong class="text-slate-300">${st.student_number || "-"}</strong></div>
+            </td>
+
+            <td class="py-3.5 px-4">
+              <span class="px-2.5 py-1 bg-blue-500/15 text-blue-300 border border-blue-500/30 rounded-lg font-extrabold text-[11px]">${getUniLabel(st.university_id)}</span>
+              <span class="ml-1 px-2 py-0.5 bg-slate-800 text-slate-300 rounded-md font-bold text-[10px]">${st.current_level || "B2"}</span>
+            </td>
+
+            <td class="py-3.5 px-4">
+              ${verifBadge}
+              ${verifNote}
+            </td>
+
+            <td class="py-3.5 px-4">
+              <div class="flex flex-wrap gap-1 max-w-xs">${unlockedBadges}</div>
+            </td>
+
+            <td class="py-3.5 px-4">
+              <div class="font-bold text-slate-200">${st.exam_count || 0} Deneme <span class="text-emerald-400">(%${st.avg_score || 0})</span></div>
+              <div class="text-[10px] text-slate-500">Kayıt: ${createdDate}</div>
+            </td>
+
+            <td class="py-3.5 px-4 text-right">
+              <div class="inline-flex items-center gap-1.5">
+                <button onclick="openStudentAccessModal(${st.id})" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-[11px] font-extrabold shadow transition flex items-center gap-1">
+                  <i data-lucide="key-round" class="w-3.5 h-3.5"></i>
+                  <span>Üniversite Erişimi Tanımla</span>
+                </button>
+                <button onclick="quickGrantAllUniversities(${st.id})" title="Tek Tıkla 11 Üniversitenin Tamamını Aç" class="px-2.5 py-1.5 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 rounded-xl text-[11px] font-bold transition">
+                  +11 Okul
+                </button>
+                <button onclick="openResetPassModal(${st.id})" title="Öğrenci Şifresini Değiştir" class="p-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl border border-slate-700 transition">
+                  <i data-lucide="key" class="w-3.5 h-3.5"></i>
+                </button>
+                ${st.id !== 1 ? `
+                <button onclick="deleteStudentAccount(${st.id})" title="Öğrenci Kaydını Sil" class="p-1.5 bg-rose-950/60 hover:bg-rose-900/80 text-rose-300 rounded-xl border border-rose-800/60 transition">
+                  <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                </button>` : ""}
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("");
+
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    function openStudentAccessModal(userId) {
+      const st = adminStudentsList.find(s => s.id === userId);
+      if (!st) return;
+      activeEditStudentId = userId;
+
+      document.getElementById("modal-student-title").innerText = `${st.full_name || st.username} (#${st.id})`;
+      document.getElementById("modal-student-subtitle").innerText = `${st.email} • Kullanıcı Adı: @${st.username}`;
+      document.getElementById("edit-primary-uni").value = (st.university_id || "itu").toLowerCase();
+      document.getElementById("edit-student-no").value = st.student_number || "";
+      document.getElementById("edit-verified-status").value = st.is_verified ? "true" : "false";
+      document.getElementById("edit-admin-note").value = "";
+      document.getElementById("access-modal-msg")?.classList.add("hidden");
+
+      const unlockedSet = new Set((st.unlocked_universities || []).map(x => x.toLowerCase()));
+      const grid = document.getElementById("modal-universities-grid");
+      grid.innerHTML = ALL_UNIVERSITIES.map(u => {
+        const checked = unlockedSet.has(u.id) ? "checked" : "";
+        return `
+          <label class="flex items-center gap-2.5 p-3 rounded-2xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700 cursor-pointer select-none transition">
+            <input type="checkbox" name="uni-access-check" value="${u.id}" ${checked} class="w-4 h-4 rounded accent-indigo-500">
+            <div class="truncate">
+              <div class="text-xs font-extrabold text-white">${u.code}</div>
+              <div class="text-[10px] text-slate-400 truncate">${u.name}</div>
+            </div>
+          </label>
+        `;
+      }).join("");
+
+      document.getElementById("student-access-modal")?.classList.remove("hidden");
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    function closeStudentAccessModal() {
+      document.getElementById("student-access-modal")?.classList.add("hidden");
+      activeEditStudentId = null;
+    }
+
+    function selectAllUniversitiesInModal(checked) {
+      document.querySelectorAll('input[name="uni-access-check"]').forEach(cb => {
+        cb.checked = checked;
+      });
+    }
+
+    function selectOnlyPrimaryUniInModal() {
+      const primary = document.getElementById("edit-primary-uni")?.value || "itu";
+      document.querySelectorAll('input[name="uni-access-check"]').forEach(cb => {
+        cb.checked = (cb.value === primary);
+      });
+    }
+
+    async function saveStudentAccessChanges() {
+      if (!activeEditStudentId) return;
+      const primaryUni = document.getElementById("edit-primary-uni")?.value || "itu";
+      const studentNo = document.getElementById("edit-student-no")?.value || "";
+      const isVerified = document.getElementById("edit-verified-status")?.value === "true";
+      const adminNote = document.getElementById("edit-admin-note")?.value || "";
+
+      const selectedUnis = ["general"];
+      document.querySelectorAll('input[name="uni-access-check"]:checked').forEach(cb => {
+        selectedUnis.push(cb.value);
+      });
+
+      const btn = document.getElementById("btn-save-access");
+      if (btn) btn.disabled = true;
+
+      try {
+        const res = await adminFetch(`/api/admin/students/${activeEditStudentId}/access`, {
+          method: "POST",
+          body: JSON.stringify({
+            unlocked_universities: selectedUnis,
+            primary_university_id: primaryUni,
+            is_verified: isVerified,
+            student_number: studentNo,
+            admin_note: adminNote
+          })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || "Yetkiler güncellenemedi.");
+
+        closeStudentAccessModal();
+        await loadAdminData();
+        showAdminToast(`✓ Öğrenci #${activeEditStudentId} üniversite erişim yetkileri güncellendi!`);
+      } catch (err) {
+        showAdminToast("Hata: " + err.message, "rose");
+      } finally {
+        if (btn) btn.disabled = false;
+      }
+    }
+
+    async function quickGrantAllUniversities(userId) {
+      const st = adminStudentsList.find(s => s.id === userId);
+      if (!st) return;
+      const allIds = ["general", ...ALL_UNIVERSITIES.map(u => u.id)];
+
+      try {
+        const res = await adminFetch(`/api/admin/students/${userId}/access`, {
+          method: "POST",
+          body: JSON.stringify({
+            unlocked_universities: allIds,
+            primary_university_id: st.university_id || "itu",
+            is_verified: true,
+            student_number: st.student_number || "",
+            admin_note: "Yönetici tarafından 11 üniversitenin tamamına tam erişim verildi."
+          })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || "İşlem başarısız.");
+        await loadAdminData();
+        showAdminToast(`✓ ${st.full_name || st.username} için 11 üniversitenin tamamı açıldı!`);
+      } catch (err) {
+        showAdminToast("Hata: " + err.message, "rose");
+      }
+    }
+
+    function openResetPassModal(userId) {
+      const st = adminStudentsList.find(s => s.id === userId);
+      if (!st) return;
+      activeResetStudentId = userId;
+      document.getElementById("reset-pass-title").innerText = `Şifre Güncelle: ${st.full_name || st.username}`;
+      document.getElementById("admin-new-student-pass").value = "";
+      document.getElementById("reset-pass-modal")?.classList.remove("hidden");
+    }
+
+    function closeResetPassModal() {
+      document.getElementById("reset-pass-modal")?.classList.add("hidden");
+      activeResetStudentId = null;
+    }
+
+    async function submitAdminPasswordReset() {
+      if (!activeResetStudentId) return;
+      const newPassword = (document.getElementById("admin-new-student-pass")?.value || "").trim();
+      if (newPassword.length < 6) {
+        showAdminToast("Yeni şifre en az 6 karakter olmalıdır.", "rose");
+        return;
+      }
+      try {
+        const res = await adminFetch(`/api/admin/students/${activeResetStudentId}/reset-password`, {
+          method: "POST",
+          body: JSON.stringify({ new_password: newPassword })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || "Şifre güncellenemedi.");
+        closeResetPassModal();
+        showAdminToast("✓ " + data.message);
+      } catch (err) {
+        showAdminToast("Hata: " + err.message, "rose");
+      }
+    }
+
+    async function deleteStudentAccount(userId) {
+      const st = adminStudentsList.find(s => s.id === userId);
+      if (!st) return;
+      if (!confirm(`${st.full_name || st.username} (${st.email}) adlı öğrenci kaydını silmek istediğinize emin misiniz?`)) {
+        return;
+      }
+      try {
+        const res = await adminFetch(`/api/admin/students/${userId}`, { method: "DELETE" });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || "Silinemedi.");
+        await loadAdminData();
+        showAdminToast("✓ " + data.message);
+      } catch (err) {
+        showAdminToast("Hata: " + err.message, "rose");
+      }
+    }
+
+    // Başlangıç kontrolü
+    window.addEventListener("DOMContentLoaded", () => {
+      if (getAdminToken()) {
+        showDashboardView();
+        loadAdminData();
+      } else {
+        showLoginView();
+      }
+    });
+  </script>
+</body>
+</html>
