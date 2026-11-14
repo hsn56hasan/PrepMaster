@@ -317,8 +317,8 @@ async function loadDashboardStats() {
 // ---------------- İNTERAKTİF KUR ALIŞTIRMALARI & SORU BANKASI ----------------
 const practiceState = {
   category: "all",
-  pool: "school_only", // "school_only" (Sadece Seçili Okulun 36 Sorusu), "school_plus_general", "all_unlocked"
-  levelScope: "current", // "current" (Seçili Kur) veya "all_levels" (Okulun Tüm 36 Sorusu)
+  pool: "school_only", // "school_only" (Sadece Seçili Okulun 180 Sorusu), "school_plus_general", "all_unlocked"
+  levelScope: "current", // "current" (Seçili Kur - 30 Soru) veya "all_levels" (Okulun Tüm 180 Sorusu)
   answers: {}, // { [questionId]: selectedKey }
   questionsById: {}
 };

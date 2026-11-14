@@ -1756,7 +1756,7 @@ def get_mobile_app_info():
         "features": [
             "Web hesabınızla anlık Bulut Senkronizasyon (Kaldığınız yerden devam)",
             "İnternetsiz (Offline) Kelime Kartları ve Gramer Pratik Modu",
-            "11 Üniversite Muafiyet Deneme Sınavı & Akademik Dinleme (MP3)",
+            "26 Üniversite Muafiyet Deneme Sınavı (30 Soru/Kur) & 24 Akademik Dinleme (MP3)",
             "E-Devlet Öğrenci Belgesi Tarama ve AI Writing / Speaking Değerlendirme"
         ]
     }

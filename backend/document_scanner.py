@@ -2,7 +2,7 @@ import io
 import re
 from typing import Dict, Any, Optional
 
-# 11 Üniversite için Anahtar Kelime ve Eşleştirme Haritası
+# 26 Üniversite için Anahtar Kelime ve Eşleştirme Haritası
 UNIVERSITY_MAPPINGS = [
     {
         "id": "itu",
@@ -295,7 +295,7 @@ UNIVERSITY_MAPPINGS = [
     }
 ]
 
-# E-Devlet Örnek Öğrenci Belgesi Şablonları (11 Üniversite)
+# E-Devlet Örnek Öğrenci Belgesi Şablonları (26 Üniversite)
 SAMPLE_DOCUMENTS = {
     "itu": """
 T.C. YÜKSEKÖĞRETİM KURULU BAŞKANLIĞI
@@ -713,7 +713,7 @@ def _extract_line_field(raw_text: str, patterns: list) -> Optional[str]:
 def scan_student_document(raw_text: str, filename: str = "") -> Dict[str, Any]:
     """
     Öğrenci belgesi metnini çok katmanlı olarak analiz eder:
-    - Üniversite adını tespit eder (11 üniversite)
+    - Üniversite adını tespit eder (26 üniversite)
     - Ad Soyad, Fakülte/Birim, Bölüm/Program bilgilerini çıkarır
     - Öğrenci numarasını çıkarır
     - E-Devlet barkod numarasını çıkarır
