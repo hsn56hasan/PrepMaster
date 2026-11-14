@@ -31,3 +31,7 @@ Türkiye'deki **26 üniversitenin** İngilizce hazırlık muafiyet (İTÜ Profic
 - **6698 Sayılı KVKK Yasal Belgeler & Öğrenci Destek Hattı:**
   - Aydınlatma Metni (`PM-KVKK-01`), Açık Rıza Beyanı (`PM-KVKK-02`), Gizlilik & Çerez Politikası (`PM-KVKK-03`), Kullanıcı Sözleşmesi (`PM-HUKUK-04`) ve KVKK Başvuru Formu (`PM-KVKK-05`).
   - **Resmi Destek İletişim:** `prepmasteryonetici@gmail.com` | Tel & WhatsApp: `0539 838 18 87`.
+- **Canlı E-Posta Altyapısı (Brevo / Resend / SMTP) & Hamburger Menü Düzeni:**
+  - `backend/email_service.py` ile Railway planlarıyla tam uyumlu **Brevo HTTPS API**, **Resend HTTPS API** ve **SMTP** desteği; şifre sıfırlama, `.edu.tr` OTP, hoş geldin, Destek/KVKK bildirimi, üniversite açılış bilgilendirmesi ve `/admin` üzerinden canlı test e-postası gönderimi aktiftir.
+  - Üst menü öğeleri ve `Destek & KVKK` erişimi `☰` hamburger menüde sadeleştirilmiştir.
+  - **Bekleyen Adım:** PayTR mağaza başvurusu onaylandığında `PAYTR_MERCHANT_ID`, `PAYTR_MERCHANT_KEY` ve `PAYTR_MERCHANT_SALT` değişkenleri tanımlanarak ödeme akışı canlıya açılacaktır.
