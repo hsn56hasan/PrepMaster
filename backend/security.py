@@ -29,8 +29,41 @@ from starlette.responses import Response
 # 1. Environment & Cryptographic Configuration
 # -----------------------------------------------------------------------------
 ENVIRONMENT = os.getenv("ENVIRONMENT", "development").lower()
-SECRET_KEY = os.getenv("SECRET_KEY", "prepmaster_secure_jwt_secret_change_in_production_2026")
-LEGACY_SALT = os.getenv("PASSWORD_SALT", "prepmaster_salt_2026")
+IS_PRODUCTION = ENVIRONMENT == "production"
+
+# Depoda/örnek dosyalarda bir zamanlar yayımlanmış değerler: bunlarla imzalanan
+# token'ları herkes üretebilir, bu yüzden hiçbir ortamda kabul edilmez.
+_KNOWN_PUBLIC_SECRETS = {
+    "",
+    "prepmaster_secure_jwt_secret_change_in_production_2026",
+    "prepmaster_salt_2026",
+    "change_me",
+}
+
+# DEMO_MODE=1 yalnızca geliştirme içindir: e-posta/SMS altyapısı olmadığından
+# doğrulama kodlarını yanıtta döndürür ve simüle ödeme/Google girişine izin verir.
+DEMO_MODE = os.getenv("DEMO_MODE", "0").strip().lower() in ("1", "true", "yes")
+if DEMO_MODE and IS_PRODUCTION:
+    raise RuntimeError(
+        "DEMO_MODE=1 üretim ortamında (ENVIRONMENT=production) kullanılamaz: "
+        "doğrulama kodlarını istemciye açar ve ödemesiz üyelik açtırır."
+    )
+
+_env_secret = os.getenv("SECRET_KEY", "").strip()
+if _env_secret in _KNOWN_PUBLIC_SECRETS or len(_env_secret) < 32:
+    if IS_PRODUCTION:
+        raise RuntimeError(
+            "SECRET_KEY tanımlı değil, çok kısa (<32 karakter) ya da depoda yayımlanmış bir değer. "
+            "Üretmek için: python -c \"import secrets; print(secrets.token_urlsafe(48))\""
+        )
+    # Geliştirmede her açılışta rastgele anahtar: oturumlar yeniden başlatınca düşer.
+    _env_secret = secrets.token_urlsafe(48)
+    print("[security] UYARI: SECRET_KEY ayarlı değil; geçici rastgele anahtar kullanılıyor.")
+SECRET_KEY = _env_secret
+
+# Yalnızca eski SHA-256 parolalarını doğrulamak için; yeni parolalar PBKDF2 + kişiye özel tuz kullanır.
+# Boş değer tuzsuz SHA-256 demek olurdu (ör. seed kullanıcının "123456" hash'i eşleşirdi), bu yüzden "or".
+LEGACY_SALT = os.getenv("PASSWORD_SALT") or "prepmaster_salt_2026"
 SESSION_EXPIRY_HOURS = int(os.getenv("SESSION_EXPIRY_HOURS", "24"))
 
 # CORS Allowed Origins
@@ -469,6 +502,26 @@ def get_current_user_from_request(request: Request) -> Optional[Dict[str, Any]]:
         return verify_session_token(token)
     except HTTPException:
         return None
+
+
+def require_current_user(request: Request) -> Dict[str, Any]:
+    """
+    Kullanıcı kimliği YALNIZCA imzalı oturum token'ından alınır.
+    İstek gövdesindeki/sorgudaki user_id'ye asla güvenilmez.
+    """
+    auth_header = request.headers.get("Authorization")
+    if not auth_header or not auth_header.startswith("Bearer "):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Bu işlem için giriş yapmanız gerekiyor.",
+            headers={"WWW-Authenticate": "Bearer"}
+        )
+    payload = verify_session_token(auth_header.split(" ", 1)[1].strip())
+    try:
+        payload["user_id"] = int(payload.get("user_id"))
+    except (TypeError, ValueError):
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Geçersiz oturum.")
+    return payload
 
 # Synchronize sys.modules so both 'security' and 'backend.security' point to this identical module singleton
 import sys

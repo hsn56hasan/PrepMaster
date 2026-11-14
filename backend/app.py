@@ -1,4 +1,5 @@
 import json
+import random
 import re
 from datetime import datetime
 from pathlib import Path
@@ -26,13 +27,15 @@ from database import (
     create_student_otp, verify_student_otp,
     verify_student_by_document, unlock_university_membership, check_university_access,
     create_3ds_session, verify_3ds_code, generate_gib_receipt,
-    upsert_google_user, request_password_reset, confirm_password_reset
+    upsert_google_user, request_password_reset, confirm_password_reset,
+    record_study_day
 )
 from document_scanner import (
     scan_student_document, extract_text_from_bytes, SAMPLE_DOCUMENTS
 )
 from paytr_service import (
-    generate_paytr_iframe_token, verify_paytr_callback_hash, parse_merchant_oid
+    generate_paytr_iframe_token, verify_paytr_callback_hash, parse_merchant_oid,
+    is_paytr_live_configured
 )
 
 from security import (
@@ -50,8 +53,79 @@ from security import (
     sanitize_text,
     create_session_token,
     verify_session_token,
-    get_current_user_from_request
+    get_current_user_from_request,
+    require_current_user,
+    DEMO_MODE,
 )
+import os
+import httpx
+
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID", "").strip()
+MEMBERSHIP_PRICE_TRY = 50.0
+
+# E-posta/SMS altyapısı olmadığı için bu kodlar yalnızca DEMO_MODE'da yanıtta döner.
+# Aksi halde başkasının e-postasıyla kod isteyip yanıttan okumak hesabı ele geçirmeye yeterdi.
+_SECRET_CODE_FIELDS = ("otp_code", "reset_code", "reset_code_sandbox", "demo_code", "sms_code", "sms_code_sandbox")
+
+
+def _hide_codes(res: Dict[str, Any]) -> Dict[str, Any]:
+    if DEMO_MODE:
+        return res
+    return {k: v for k, v in res.items() if k not in _SECRET_CODE_FIELDS}
+
+
+def _require_demo(feature: str):
+    if not DEMO_MODE:
+        raise HTTPException(
+            status_code=503,
+            detail=f"{feature} henüz gerçek altyapıya bağlanmadı; yalnızca geliştirme (DEMO_MODE) ortamında çalışır."
+        )
+
+
+def _listening_question_map() -> Dict[str, Dict[str, Any]]:
+    """
+    Dinleme sorularını Hata Kasası ve sınav motorunun anladığı soru biçimine çevirir.
+    Ses olmadan da çözülebilsin diye dinleme metni (transkript) sorunun başına eklenir.
+    """
+    out: Dict[str, Dict[str, Any]] = {}
+    for track in listening_data:
+        for lq in track.get("questions", []):
+            out[lq["id"]] = {
+                "id": lq["id"],
+                "university_id": track.get("university_id", "general"),
+                "level": track.get("level", "B2"),
+                "category": "Listening",
+                "question": f"[Dinleme: {track.get('title', '')}]\n\n{track.get('audio_script', '')}\n\n{lq['question']}",
+                "options": lq["options"],
+                "correct_answer": lq["correct_answer"],
+                "explanation_tr": lq.get("explanation_tr", ""),
+                "explanation_en": lq.get("explanation_en", ""),
+                "source": "listening",
+                "track_id": track.get("id"),
+            }
+    return out
+
+
+def _all_question_map() -> Dict[str, Dict[str, Any]]:
+    q_map = {q["id"]: q for q in questions_data}
+    q_map.update(_listening_question_map())
+    return q_map
+
+
+def _record_study(request: Request) -> None:
+    """Giriş yapmış öğrencinin çalışma gününü seriye işler (girişsiz istekte bir şey yapmaz)."""
+    token_user = get_current_user_from_request(request)
+    if token_user:
+        record_study_day(token_user["user_id"])
+
+
+def _has_access(token_user: Optional[Dict[str, Any]], university_id: str) -> bool:
+    """Giriş yapmamış kullanıcı yalnızca genel içeriği görür; kimlik her zaman token'dan gelir."""
+    if not university_id or university_id in ("general", "all"):
+        return True
+    if not token_user:
+        return False
+    return check_university_access(token_user["user_id"], university_id)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
@@ -116,6 +190,9 @@ class ExamSubmitRequest(BaseModel):
     answers: Dict[str, str] = Field(...) # question_id -> chosen option key (e.g. "B")
     question_times: Optional[Dict[str, int]] = Field(default_factory=dict)
     is_mistake_practice: Optional[bool] = False
+    # Sınavda gösterilen TÜM soru kimlikleri. Verilirse boş bırakılanlar yanlış sayılır;
+    # eskiden puan "doğru / cevaplanan" idi ve boş bırakmak puanı şişiriyordu.
+    question_ids: Optional[List[str]] = Field(default=None, max_length=500)
 
     @field_validator("answers", mode="before")
     @classmethod
@@ -295,6 +372,16 @@ class ResetPasswordRequest(BaseModel):
     def sanitize_reset_fields(cls, v):
         return sanitize_text(str(v), strip_tags=True)
 
+@app.get("/api/config")
+def public_config():
+    """İstemcinin hangi akışları göstereceğini bilmesi için (gizli bilgi içermez)."""
+    return {
+        "demo_mode": DEMO_MODE,
+        "google_client_id": GOOGLE_CLIENT_ID or None,
+        "paytr_configured": is_paytr_live_configured(),
+        "membership_price_try": MEMBERSHIP_PRICE_TRY,
+    }
+
 # --- Authentication & Student Verification Endpoints ---
 @app.post("/api/auth/register")
 def register_endpoint(req: RegisterRequest, request: Request, _=Depends(rate_limit_register)):
@@ -339,7 +426,31 @@ def login_endpoint(req: LoginRequest, request: Request, _=Depends(rate_limit_log
 def google_auth_endpoint(req: GoogleAuthRequest, request: Request):
     enforce_rate_limit(request, scope="auth_google", max_requests=10, window_seconds=60, identifier=req.email)
     display_name = req.full_name or req.name or ""
-    user = upsert_google_user(email=req.email, name=display_name, avatar_url=req.avatar_url or "")
+    email = req.email
+
+    if GOOGLE_CLIENT_ID:
+        # Google ID token'ını Google'a doğrulat; e-posta istemciden değil token'dan alınır.
+        if not req.token:
+            raise HTTPException(status_code=401, detail="Google kimlik belirteci eksik.")
+        try:
+            r = httpx.get("https://oauth2.googleapis.com/tokeninfo", params={"id_token": req.token}, timeout=5)
+        except httpx.HTTPError:
+            raise HTTPException(status_code=503, detail="Google doğrulama servisine ulaşılamadı.")
+        info = r.json() if r.status_code == 200 else {}
+        if (
+            info.get("aud") != GOOGLE_CLIENT_ID
+            or info.get("iss") not in ("accounts.google.com", "https://accounts.google.com")
+            or str(info.get("email_verified")).lower() != "true"
+            or not info.get("email")
+        ):
+            raise HTTPException(status_code=401, detail="Google kimliği doğrulanamadı.")
+        email = info["email"]
+        display_name = info.get("name") or display_name
+    else:
+        # Gerçek Google girişi yapılandırılmadıysa simülasyon yalnızca geliştirmede açıktır.
+        _require_demo("Google ile giriş")
+
+    user = upsert_google_user(email=email, name=display_name, avatar_url=req.avatar_url or "")
     uni = next((u for u in universities_data if u["id"] == user.get("university_id")), universities_data[0])
     user["university"] = uni
     token, expires_in = create_session_token(user["id"], user["username"], user["email"])
@@ -361,7 +472,7 @@ def forgot_password_endpoint(req: ForgotPasswordRequest, request: Request):
         if res.get("cooldown"):
             raise HTTPException(status_code=400, detail=res.get("detail", "Lütfen bekleyin."))
         raise HTTPException(status_code=400, detail=res.get("detail", "Şifre sıfırlama kodu oluşturulamadı."))
-    return res
+    return _hide_codes(res)
 
 @app.post("/api/auth/reset-password")
 def reset_password_endpoint(req: ResetPasswordRequest, request: Request):
@@ -372,20 +483,20 @@ def reset_password_endpoint(req: ResetPasswordRequest, request: Request):
     return res
 
 @app.get("/api/auth/me")
-def current_user_endpoint(request: Request, user_id: int = 1):
-    token_user = get_current_user_from_request(request)
-    target_id = token_user["user_id"] if token_user else user_id
+def current_user_endpoint(request: Request):
+    token_user = require_current_user(request)
+    target_id = token_user["user_id"]
     user = get_profile(target_id)
     uni = next((u for u in universities_data if u["id"] == user.get("university_id")), universities_data[0])
     user["university"] = uni
-    if token_user:
-        user["authenticated_via"] = "bearer_token"
+    user["authenticated_via"] = "bearer_token"
     return user
 
 @app.post("/api/student/verify")
-def student_verify_endpoint(req: StudentVerifyRequest):
+def student_verify_endpoint(req: StudentVerifyRequest, request: Request):
+    token_user = require_current_user(request)
     res = verify_student(
-        user_id=req.user_id or 1,
+        user_id=token_user["user_id"],
         university_id=req.university_id,
         edu_email=req.edu_email,
         student_number=req.student_number,
@@ -395,28 +506,30 @@ def student_verify_endpoint(req: StudentVerifyRequest):
 
 @app.post("/api/student/request-otp")
 def student_request_otp_endpoint(req: StudentOtpRequest, request: Request, _=Depends(rate_limit_otp_request)):
+    require_current_user(request)
     if not req.email or "@" not in req.email:
         raise HTTPException(status_code=400, detail="Geçerli bir e-posta adresi giriniz.")
     enforce_rate_limit(request, scope="otp_request_email", max_requests=3, window_seconds=60, identifier=req.email)
     res = create_student_otp(email=req.email, student_number=req.student_number or "")
     if not res.get("success"):
         raise HTTPException(status_code=400, detail=res.get("detail", "OTP kodu oluşturulamadı."))
-    return res
+    return _hide_codes(res)
 
 @app.post("/api/student/verify-otp")
 def student_verify_otp_endpoint(req: StudentOtpVerifyRequest, request: Request, _=Depends(rate_limit_otp_verify)):
     if not req.email or not req.otp_code:
         raise HTTPException(status_code=400, detail="E-posta ve 6 haneli doğrulama kodunu eksiksiz giriniz.")
     enforce_rate_limit(request, scope="otp_verify_email", max_requests=5, window_seconds=60, identifier=req.email)
-    res = verify_student_otp(email=req.email, otp_code=req.otp_code, user_id=req.user_id or 1)
+    token_user = require_current_user(request)
+    res = verify_student_otp(email=req.email, otp_code=req.otp_code, user_id=token_user["user_id"])
     if not res.get("success"):
         raise HTTPException(status_code=400, detail=res.get("detail", "Doğrulama başarısız."))
     return res
 
 
 @app.get("/api/student/status")
-def student_status_endpoint(user_id: int = 1):
-    return get_verification_status(user_id)
+def student_status_endpoint(request: Request):
+    return get_verification_status(require_current_user(request)["user_id"])
 
 @app.get("/api/student/sample-documents")
 def get_sample_documents():
@@ -467,12 +580,14 @@ async def _process_scanned_document(doc_text: str, filename: str, target_user_id
 
 @app.post("/api/student/scan-document")
 async def scan_student_document_endpoint(req: DocumentScanRequest, request: Request):
-    token_user = get_current_user_from_request(request)
-    target_user_id = token_user["user_id"] if token_user else (req.user_id or 1)
+    target_user_id = require_current_user(request)["user_id"]
 
     doc_text = ""
     filename = ""
 
+    if req.sample_key:
+        # Örnek belgeler herkese açık; bunlarla doğrulama yalnızca demoda yapılabilir.
+        _require_demo("Örnek belge ile doğrulama")
     if req.sample_key and req.sample_key in SAMPLE_DOCUMENTS:
         doc_text = SAMPLE_DOCUMENTS[req.sample_key]
         filename = f"{req.sample_key}_edevlet.txt"
@@ -486,13 +601,8 @@ async def scan_student_document_endpoint(req: DocumentScanRequest, request: Requ
 async def upload_student_document_endpoint(
     request: Request,
     file: UploadFile = File(...),
-    user_id: Optional[int] = Form(1)
 ):
-    target_user_id = user_id or 1
-    if request:
-        token_user = get_current_user_from_request(request)
-        if token_user:
-            target_user_id = token_user["user_id"]
+    target_user_id = require_current_user(request)["user_id"]
 
     filename = file.filename or "belge.pdf"
     content = await file.read()
@@ -501,56 +611,51 @@ async def upload_student_document_endpoint(
 
 @app.post("/api/membership/3d-init")
 def init_3ds_payment_endpoint(req: Init3DSRequest, request: Request):
-    token_user = get_current_user_from_request(request)
-    target_id = token_user["user_id"] if token_user else (req.user_id or 1)
+    # Simüle 3D Secure: SMS'i banka değil sunucu üretiyor; gerçek ödeme PayTR iFrame ile alınır.
+    _require_demo("Simüle 3D Secure ödeme")
+    target_id = require_current_user(request)["user_id"]
 
     session_data = create_3ds_session(
         user_id=target_id,
         university_id=req.university_id,
         card_holder=req.card_holder or "Öğrenci",
         card_number=req.card_number,
-        amount_try=req.amount_try or 50.0
+        amount_try=MEMBERSHIP_PRICE_TRY
     )
-    return session_data
+    return _hide_codes(session_data)
 
 @app.post("/api/membership/unlock")
 def unlock_membership_endpoint(req: UnlockMembershipRequest, request: Request):
-    token_user = get_current_user_from_request(request)
-    target_id = token_user["user_id"] if token_user else (req.user_id or 1)
+    # Canlıda üyelik YALNIZCA PayTR'nin imzalı bildirimiyle (/api/payment/paytr/callback) açılır.
+    _require_demo("Simüle ödeme ile üyelik açma")
+    target_id = require_current_user(request)["user_id"]
 
-    card_holder = req.card_holder or "Öğrenci"
-    clean_card = re.sub(r"[\s-]", "", req.card_number or "")
-    card_last_four = clean_card[-4:] if len(clean_card) >= 4 else "4242"
-
-    if req.session_id:
-        if not req.sms_code:
-            raise HTTPException(status_code=400, detail="3D Secure SMS doğrulama kodu zorunludur.")
-        verify_res = verify_3ds_code(req.session_id, req.sms_code)
-        if not verify_res.get("success"):
-            raise HTTPException(status_code=400, detail=verify_res.get("detail", "3D Secure SMS doğrulaması başarısız."))
-        session_info = verify_res.get("session", {})
-        if session_info.get("card_holder"):
-            card_holder = session_info["card_holder"]
-        if session_info.get("card_number_masked"):
-            card_last_four = session_info["card_number_masked"][-4:]
-    elif req.sms_code:
-        raise HTTPException(status_code=400, detail="3D Secure oturum kimliği (session_id) eksik.")
+    # Ödeme oturumu olmadan kilit açılamaz (eskiden session_id gönderilmezse 3DS atlanıyordu).
+    if not req.session_id or not req.sms_code:
+        raise HTTPException(status_code=400, detail="3D Secure oturum kimliği ve SMS doğrulama kodu zorunludur.")
+    verify_res = verify_3ds_code(req.session_id, req.sms_code)
+    if not verify_res.get("success"):
+        raise HTTPException(status_code=400, detail=verify_res.get("detail", "3D Secure SMS doğrulaması başarısız."))
+    session_info = verify_res.get("session", {})
+    # Oturum, bu kullanıcıya ve bu üniversiteye ait olmalı.
+    if session_info.get("user_id") != target_id or session_info.get("university_id") != req.university_id:
+        raise HTTPException(status_code=403, detail="Bu ödeme oturumu size veya bu üniversiteye ait değil.")
+    card_holder = session_info.get("card_holder") or "Öğrenci"
+    card_last_four = (session_info.get("card_number_masked") or "0000")[-4:]
 
     res = unlock_university_membership(
         user_id=target_id,
         university_id=req.university_id,
         card_holder=card_holder,
         card_last_four=card_last_four,
-        price_try=50.0,
+        price_try=MEMBERSHIP_PRICE_TRY,
         session_id=req.session_id
     )
     return res
 
 @app.get("/api/membership/check")
-def check_membership_endpoint(university_id: str, request: Request, user_id: int = 1):
-    token_user = get_current_user_from_request(request)
-    target_id = token_user["user_id"] if token_user else user_id
-    has_access = check_university_access(target_id, university_id)
+def check_membership_endpoint(university_id: str, request: Request):
+    has_access = _has_access(get_current_user_from_request(request), university_id)
     return {
         "university_id": university_id,
         "has_access": has_access,
@@ -568,8 +673,9 @@ class PayTRTokenRequest(BaseModel):
 
 @app.post("/api/payment/paytr/token")
 def create_paytr_token_endpoint(req: PayTRTokenRequest, request: Request):
-    token_user = get_current_user_from_request(request)
-    target_id = token_user["user_id"] if token_user else (req.user_id or 1)
+    target_id = require_current_user(request)["user_id"]
+    if not is_paytr_live_configured() and not DEMO_MODE:
+        raise HTTPException(status_code=503, detail="Ödeme altyapısı henüz yapılandırılmadı.")
     profile = get_profile(target_id)
     client_ip = request.client.host if request.client else "127.0.0.1"
 
@@ -579,7 +685,7 @@ def create_paytr_token_endpoint(req: PayTRTokenRequest, request: Request):
         email=profile.get("email") or req.email or "ogrenci@itu.edu.tr",
         user_name=profile.get("full_name") or req.user_name or "PrepMaster Öğrencisi",
         user_ip=client_ip,
-        price_try=50.0
+        price_try=MEMBERSHIP_PRICE_TRY
     )
     if res.get("status") != "success":
         raise HTTPException(status_code=400, detail=res.get("reason", "PayTR token oluşturulamadı."))
@@ -604,13 +710,17 @@ async def paytr_webhook_callback_endpoint(request: Request):
 
     if status_val == "success":
         parsed = parse_merchant_oid(merchant_oid)
-        unlock_university_membership(
-            user_id=parsed["user_id"] or 1,
-            university_id=parsed["university_id"] or "itu",
-            card_holder="PayTR Sanal POS",
-            card_last_four="PAYT",
-            price_try=float(total_amount) / 100.0 if total_amount.isdigit() else 50.0
-        )
+        paid_kurus = int(total_amount) if total_amount.isdigit() else 0
+        valid_uni = any(u["id"] == parsed["university_id"] for u in universities_data)
+        # Ayrıştırılamayan sipariş ya da eksik tutar hiçbir hesabın kilidini açmaz.
+        if parsed["user_id"] and valid_uni and paid_kurus >= int(MEMBERSHIP_PRICE_TRY * 100):
+            unlock_university_membership(
+                user_id=parsed["user_id"],
+                university_id=parsed["university_id"],
+                card_holder="PayTR Sanal POS",
+                card_last_four="PAYT",
+                price_try=paid_kurus / 100.0
+            )
 
     return PlainTextResponse("OK")
 
@@ -649,22 +759,10 @@ def get_questions(
     university_id: Optional[str] = None,
     level: Optional[str] = None,
     category: Optional[str] = None,
-    user_id: int = 1
 ):
+    token_user = get_current_user_from_request(request)
     if university_id and university_id not in ["all", "general"]:
-        target_id = user_id
-        if request:
-            token_user = get_current_user_from_request(request)
-            if token_user:
-                target_id = token_user["user_id"]
-            else:
-                uid_param = request.query_params.get("user_id")
-                if uid_param:
-                    try:
-                        target_id = int(uid_param)
-                    except ValueError:
-                        pass
-        if not check_university_access(target_id, university_id):
+        if not _has_access(token_user, university_id):
             raise HTTPException(
                 status_code=403,
                 detail={
@@ -679,6 +777,9 @@ def get_questions(
     if university_id and university_id != "all":
         # match specific university or general questions
         filtered = [q for q in filtered if q["university_id"] in [university_id, "general"]]
+    else:
+        # "all" eskiden kilitli üniversitelerin sorularını da döndürüyordu.
+        filtered = [q for q in filtered if _has_access(token_user, q["university_id"])]
     if level and level != "all":
         filtered = [q for q in filtered if q["level"].upper() == level.upper()]
     if category and category != "all":
@@ -708,7 +809,8 @@ def get_vocabulary(
     return result
 
 @app.post("/api/vocabulary/{word_id}/status")
-def update_word_status(word_id: str, req: VocabStatusRequest):
+def update_word_status(word_id: str, req: VocabStatusRequest, request: Request):
+    _record_study(request)
     if req.status not in ["mastered", "learning", "unreviewed"]:
         raise HTTPException(status_code=400, detail="Invalid status")
     set_vocab_status(word_id, req.status)
@@ -754,8 +856,40 @@ def get_listening_detail(item_id: str):
             return item
     raise HTTPException(status_code=404, detail="Listening item not found")
 
+class ListeningAnswerRequest(BaseModel):
+    question_id: str = Field(..., max_length=100, pattern=r"^[a-zA-Z0-9_-]+$")
+    chosen_answer: str = Field(..., max_length=5, pattern=r"^[A-Ea-e]$")
+
+
+@app.post("/api/listening/answer")
+def listening_answer_endpoint(req: ListeningAnswerRequest, request: Request):
+    """
+    Dinlemede verilen tek bir cevabı işler: yanlışsa Hata Kasası'na yazar, doğruysa kasadan düşer.
+    Eskiden bu iş /api/exam/submit'e gönderiliyordu; dinleme soruları orada tanınmadığı için
+    yanlış kasaya hiç düşmüyor, üstüne %0'lık sahte bir deneme kaydı açılıyordu.
+    """
+    q = _listening_question_map().get(req.question_id)
+    if not q:
+        raise HTTPException(status_code=404, detail="Dinleme sorusu bulunamadı.")
+    _record_study(request)
+    chosen = req.chosen_answer.upper()
+    is_correct = chosen == q["correct_answer"]
+    if is_correct:
+        resolve_mistake(q["id"])
+    else:
+        record_mistake(
+            question_id=q["id"],
+            university_id=q["university_id"],
+            level=q["level"],
+            category="Listening",
+            wrong_answer=chosen,
+        )
+    return {"question_id": q["id"], "is_correct": is_correct, "correct_answer": q["correct_answer"]}
+
+
 @app.post("/api/writing/evaluate")
-def evaluate_essay_endpoint(req: EssayEvaluateRequest, _=Depends(rate_limit_ai_writing)):
+def evaluate_essay_endpoint(req: EssayEvaluateRequest, request: Request, _=Depends(rate_limit_ai_writing)):
+    _record_study(request)
     import re
     text = req.essay.strip()
     words = re.findall(r"\b[A-Za-z0-9'-]+\b", text)
@@ -920,19 +1054,27 @@ def evaluate_essay_endpoint(req: EssayEvaluateRequest, _=Depends(rate_limit_ai_w
     }
 
 @app.post("/api/exam/submit")
-def submit_exam(req: ExamSubmitRequest):
-    q_map = {q["id"]: q for q in questions_data}
+def submit_exam(req: ExamSubmitRequest, request: Request):
+    _record_study(request)
+    q_map = _all_question_map()
     correct_count = 0
     results_detail = []
     category_times = {} # category -> list of seconds
     
     question_times = req.question_times or {}
-    
-    for q_id, chosen_key in req.answers.items():
-        q = q_map.get(q_id)
-        if not q:
-            continue
-        
+    answers = {k: v for k, v in req.answers.items() if v}
+
+    # Puanın paydası: gösterilen sorular (verildiyse), yoksa cevaplananlar.
+    presented = [qid for qid in (req.question_ids or list(answers.keys())) if qid in q_map]
+    presented = list(dict.fromkeys(presented + [qid for qid in answers if qid in q_map]))
+    if not presented:
+        # Tanınan soru yoksa (ör. dinleme soruları) sahte bir %0 deneme kaydı açma.
+        raise HTTPException(status_code=400, detail="Gönderilen cevaplar tanınan bir soruya ait değil.")
+
+    for q_id in presented:
+        q = q_map[q_id]
+        chosen_key = answers.get(q_id)
+
         is_correct = (chosen_key == q["correct_answer"])
         time_spent = question_times.get(q_id, 0)
         category = q.get("category", "General")
@@ -946,8 +1088,8 @@ def submit_exam(req: ExamSubmitRequest):
             correct_count += 1
             # If resolved in mistake practice or regular test
             resolve_mistake(q_id)
-        else:
-            # Save into mistake vault
+        elif chosen_key:
+            # Save into mistake vault (boş bırakılan soru kasaya yazılmaz, ama yanlış sayılır)
             record_mistake(
                 question_id=q_id,
                 university_id=q.get("university_id", req.university_id),
@@ -969,7 +1111,7 @@ def submit_exam(req: ExamSubmitRequest):
             "options": q["options"]
         })
     
-    total_answered = len(req.answers)
+    total_answered = len(presented)
     score_percentage = round((correct_count / max(total_answered, 1)) * 100, 1)
     avg_time = round(req.duration_seconds / max(total_answered, 1), 1) if total_answered > 0 else 0
     
@@ -1020,7 +1162,7 @@ def submit_exam(req: ExamSubmitRequest):
 @app.get("/api/mistakes")
 def get_mistake_vault(is_resolved: bool = False):
     mistakes = get_mistakes(is_resolved=is_resolved)
-    q_map = {q["id"]: q for q in questions_data}
+    q_map = _all_question_map()
     
     enriched = []
     for m in mistakes:
@@ -1046,8 +1188,10 @@ def exam_history():
     return get_exam_history()
 
 @app.get("/api/stats")
-def get_overall_stats():
-    profile = get_profile()
+def get_overall_stats(request: Request):
+    # Seri ve profil giriş yapan öğrenciye ait olmalı (diğer sayılar kullanıcı bazlı veri göçünde ayrılacak).
+    token_user = get_current_user_from_request(request)
+    profile = get_profile(token_user["user_id"]) if token_user else get_profile()
     history = get_exam_history(limit=50)
     vocab_progress = get_vocab_progress()
     unresolved_mistakes = get_mistake_count()
@@ -1095,7 +1239,8 @@ def get_speaking_task(task_id: str):
     return task
 
 @app.post("/api/speaking/evaluate")
-def evaluate_speaking(req: SpeakingEvaluateRequest, _=Depends(rate_limit_ai_speaking)):
+def evaluate_speaking(req: SpeakingEvaluateRequest, request: Request, _=Depends(rate_limit_ai_speaking)):
+    _record_study(request)
     text = (req.transcript or "").strip()
     words = re.findall(r"\b[A-Za-z']+\b", text)
     word_count = len(words)
@@ -1247,21 +1392,8 @@ def sync_push(req: SyncPushRequest):
 
 # --- Mock Exam Mode (Full University Trial Exam) ---
 @app.get("/api/exam/mock/{university_id}")
-def generate_mock_exam(university_id: str, request: Request, level: Optional[str] = None, user_id: int = 1):
-    target_id = user_id
-    if request:
-        token_user = get_current_user_from_request(request)
-        if token_user:
-            target_id = token_user["user_id"]
-        else:
-            uid_param = request.query_params.get("user_id")
-            if uid_param:
-                try:
-                    target_id = int(uid_param)
-                except ValueError:
-                    pass
-
-    if not check_university_access(target_id, university_id):
+def generate_mock_exam(university_id: str, request: Request, level: Optional[str] = None):
+    if not _has_access(get_current_user_from_request(request), university_id):
         raise HTTPException(
             status_code=403,
             detail={
@@ -1295,7 +1427,13 @@ def generate_mock_exam(university_id: str, request: Request, level: Optional[str
         supp = [q for q in questions_data if q.get("level", "").upper() in allowed and q not in combined_questions]
         combined_questions.extend(supp)
 
-    final_questions = combined_questions[:15]
+    # Üniversiteye özel sorular önce; her denemede farklı bir seçki gelsin.
+    uni_pool = [q for q in combined_questions if q.get("university_id") == university_id]
+    rest_pool = [q for q in combined_questions if q.get("university_id") != university_id]
+    random.shuffle(uni_pool)
+    random.shuffle(rest_pool)
+    final_questions = (uni_pool + rest_pool)[:15]
+    random.shuffle(final_questions)
 
     # 2. Select matching listening track for target_level
     lis_track = next((lt for lt in listening_data if lt.get("level", "").upper() == target_level), None)

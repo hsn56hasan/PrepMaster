@@ -728,15 +728,10 @@ async function submitListeningExam() {
     // If wrong, register mistake in backend
     if (!isCorrect && chosen) {
       try {
-        await fetch('/api/exam/submit', {
+        await fetch('/api/listening/answer', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            university_id: track.university_id,
-            level: track.level,
-            duration_seconds: 60,
-            answers: { [q.id]: chosen }
-          })
+          body: JSON.stringify({ question_id: q.id, chosen_answer: chosen })
         });
       } catch (e) {
         console.warn("Could not sync mistake:", e);

@@ -2,8 +2,9 @@ import 'dart:convert';
 import 'dart:io' show Platform;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'auth_http.dart';
 
 import '../models/university.dart';
 import '../models/question.dart';
@@ -43,7 +44,7 @@ class ApiService {
   // --- Universities ---
   Future<List<University>> getUniversities() async {
     try {
-      final res = await http.get(Uri.parse('$baseUrl/api/universities')).timeout(const Duration(seconds: 3));
+      final res = await AuthHttp.instance.get(Uri.parse('$baseUrl/api/universities')).timeout(const Duration(seconds: 3));
       if (res.statusCode == 200) {
         final List<dynamic> list = json.decode(utf8.decode(res.bodyBytes));
         return list.map((e) => University.fromJson(e)).toList();
@@ -63,7 +64,7 @@ class ApiService {
         if (level != null && level != 'all') 'level': level,
         if (category != null && category != 'all') 'category': category,
       });
-      final res = await http.get(uri).timeout(const Duration(seconds: 3));
+      final res = await AuthHttp.instance.get(uri).timeout(const Duration(seconds: 3));
       if (res.statusCode == 200) {
         final List<dynamic> list = json.decode(utf8.decode(res.bodyBytes));
         return list.map((e) => Question.fromJson(e)).toList();
@@ -96,7 +97,7 @@ class ApiService {
         if (level != null && level != 'all') 'level': level,
         if (search != null && search.isNotEmpty) 'search': search,
       });
-      final res = await http.get(uri).timeout(const Duration(seconds: 3));
+      final res = await AuthHttp.instance.get(uri).timeout(const Duration(seconds: 3));
       if (res.statusCode == 200) {
         final List<dynamic> list = json.decode(utf8.decode(res.bodyBytes));
         return list.map((e) => VocabularyItem.fromJson(e)).toList();
@@ -133,7 +134,7 @@ class ApiService {
     await prefs.setString('vocab_$wordId', status);
 
     try {
-      await http.post(
+      await AuthHttp.instance.post(
         Uri.parse('$baseUrl/api/vocabulary/$wordId/status'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'status': status}),
@@ -145,7 +146,7 @@ class ApiService {
   Future<List<WritingGuide>> getWritingGuides({String? level}) async {
     final query = level != null && level.isNotEmpty && level != 'all' ? '?level=$level' : '';
     try {
-      final res = await http.get(Uri.parse('$baseUrl/api/writing-guides$query')).timeout(const Duration(seconds: 3));
+      final res = await AuthHttp.instance.get(Uri.parse('$baseUrl/api/writing-guides$query')).timeout(const Duration(seconds: 3));
       if (res.statusCode == 200) {
         final List<dynamic> list = json.decode(utf8.decode(res.bodyBytes));
         return list.map((e) => WritingGuide.fromJson(e)).toList();
@@ -173,9 +174,10 @@ class ApiService {
     required Map<String, String> answers,
     required Map<String, int> questionTimes,
     bool isMistakePractice = false,
+    List<String>? questionIds,
   }) async {
     try {
-      final res = await http.post(
+      final res = await AuthHttp.instance.post(
         Uri.parse('$baseUrl/api/exam/submit'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
@@ -185,6 +187,7 @@ class ApiService {
           'answers': answers,
           'question_times': questionTimes,
           'is_mistake_practice': isMistakePractice,
+          'question_ids': ?questionIds,
         }),
       ).timeout(const Duration(seconds: 4));
 
@@ -221,7 +224,9 @@ class ApiService {
       }
     });
 
-    final score = ((correct / (answers.isEmpty ? 1 : answers.length)) * 100).roundToDouble();
+    // Boş bırakılan sorular da paydaya girer (yoksa boş bırakmak puanı şişirir).
+    final total = questionIds != null && questionIds.length > answers.length ? questionIds.length : answers.length;
+    final score = ((correct / (total == 0 ? 1 : total)) * 100).roundToDouble();
 
     // Save mistakes locally
     final prefs = await SharedPreferences.getInstance();
@@ -238,9 +243,9 @@ class ApiService {
     return ExamResult(
       attemptId: DateTime.now().millisecondsSinceEpoch,
       score: score,
-      totalQuestions: answers.length,
+      totalQuestions: total,
       correctCount: correct,
-      wrongCount: answers.length - correct,
+      wrongCount: total - correct,
       durationSeconds: durationSeconds,
       timeAnalytics: {
         'avg_time_per_question': (durationSeconds / (answers.isEmpty ? 1 : answers.length)).roundToDouble(),
@@ -253,7 +258,7 @@ class ApiService {
   // --- Mistake Vault ---
   Future<List<MistakeItem>> getMistakes() async {
     try {
-      final res = await http.get(Uri.parse('$baseUrl/api/mistakes')).timeout(const Duration(seconds: 3));
+      final res = await AuthHttp.instance.get(Uri.parse('$baseUrl/api/mistakes')).timeout(const Duration(seconds: 3));
       if (res.statusCode == 200) {
         final List<dynamic> list = json.decode(utf8.decode(res.bodyBytes));
         return list.map((e) => MistakeItem.fromJson(e)).toList();
@@ -294,7 +299,7 @@ class ApiService {
     await prefs.setStringList('local_mistakes', rawMistakes);
 
     try {
-      await http.post(
+      await AuthHttp.instance.post(
         Uri.parse('$baseUrl/api/mistakes/$questionId/resolve'),
         headers: {'Content-Type': 'application/json'},
       ).timeout(const Duration(seconds: 2));
@@ -316,15 +321,19 @@ class ApiService {
     }
 
     try {
-      await http.post(
-        Uri.parse('$baseUrl/api/exam/submit'),
+      // Dinleme soruları /api/exam/submit'te tanınmıyordu; kendi uç noktası var.
+      final isListening = category.toLowerCase() == 'listening' || questionId.startsWith('lis_');
+      await AuthHttp.instance.post(
+        Uri.parse(isListening ? '$baseUrl/api/listening/answer' : '$baseUrl/api/exam/submit'),
         headers: {'Content-Type': 'application/json'},
-        body: json.encode({
-          'university_id': universityId,
-          'level': level,
-          'duration_seconds': 60,
-          'answers': {questionId: wrongAnswer},
-        }),
+        body: json.encode(isListening
+            ? {'question_id': questionId, 'chosen_answer': wrongAnswer}
+            : {
+                'university_id': universityId,
+                'level': level,
+                'duration_seconds': 60,
+                'answers': {questionId: wrongAnswer},
+              }),
       ).timeout(const Duration(seconds: 2));
     } catch (_) {}
   }
@@ -332,7 +341,7 @@ class ApiService {
   // --- Dashboard Stats ---
   Future<Map<String, dynamic>> getStats() async {
     try {
-      final res = await http.get(Uri.parse('$baseUrl/api/stats')).timeout(const Duration(seconds: 3));
+      final res = await AuthHttp.instance.get(Uri.parse('$baseUrl/api/stats')).timeout(const Duration(seconds: 3));
       if (res.statusCode == 200) {
         return json.decode(utf8.decode(res.bodyBytes));
       }
@@ -361,7 +370,7 @@ class ApiService {
         if (level != null && level != 'all') 'level': level,
         if (type != null && type != 'all') 'type': type,
       });
-      final res = await http.get(uri).timeout(const Duration(seconds: 3));
+      final res = await AuthHttp.instance.get(uri).timeout(const Duration(seconds: 3));
       if (res.statusCode == 200) {
         final List<dynamic> list = json.decode(utf8.decode(res.bodyBytes));
         return list.map((e) => ListeningTrack.fromJson(e)).toList();
@@ -387,7 +396,7 @@ class ApiService {
     String? level,
   }) async {
     try {
-      final res = await http.post(
+      final res = await AuthHttp.instance.post(
         Uri.parse('$baseUrl/api/writing/evaluate'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
@@ -563,7 +572,7 @@ class ApiService {
     final queryString = queryParams.isNotEmpty ? '?${queryParams.join('&')}' : '';
 
     try {
-      final res = await http.get(Uri.parse('$baseUrl/api/speaking$queryString')).timeout(const Duration(seconds: 3));
+      final res = await AuthHttp.instance.get(Uri.parse('$baseUrl/api/speaking$queryString')).timeout(const Duration(seconds: 3));
       if (res.statusCode == 200) {
         final List<dynamic> data = json.decode(utf8.decode(res.bodyBytes));
         return data.map((e) => SpeakingTask.fromJson(e)).toList();
@@ -595,7 +604,7 @@ class ApiService {
   }) async {
     // Try backend evaluation
     try {
-      final res = await http.post(
+      final res = await AuthHttp.instance.post(
         Uri.parse('$baseUrl/api/speaking/evaluate'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
@@ -689,7 +698,7 @@ class ApiService {
   Future<Map<String, dynamic>> getMockExam(String universityId, {String? level}) async {
     final query = level != null && level.isNotEmpty && level != 'all' ? '?level=$level' : '';
     try {
-      final res = await http.get(Uri.parse('$baseUrl/api/exam/mock/$universityId$query')).timeout(const Duration(seconds: 4));
+      final res = await AuthHttp.instance.get(Uri.parse('$baseUrl/api/exam/mock/$universityId$query')).timeout(const Duration(seconds: 4));
       if (res.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(utf8.decode(res.bodyBytes));
         if (data['sections'] != null && data['sections']['multiple_choice'] != null) {
@@ -712,7 +721,7 @@ class ApiService {
   // --- Student Summary Report Card ---
   Future<Map<String, dynamic>> getReportSummary() async {
     try {
-      final res = await http.get(Uri.parse('$baseUrl/api/report/summary')).timeout(const Duration(seconds: 4));
+      final res = await AuthHttp.instance.get(Uri.parse('$baseUrl/api/report/summary')).timeout(const Duration(seconds: 4));
       if (res.statusCode == 200) {
         return json.decode(utf8.decode(res.bodyBytes));
       }
@@ -750,7 +759,7 @@ class ApiService {
     required String password,
   }) async {
     try {
-      final res = await http.post(
+      final res = await AuthHttp.instance.post(
         Uri.parse('$baseUrl/api/auth/login'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
@@ -762,6 +771,7 @@ class ApiService {
       final data = json.decode(utf8.decode(res.bodyBytes));
       if (res.statusCode == 200 && data['status'] == 'success') {
         final user = data['user'];
+        await AuthHttp.saveToken((data['access_token'] ?? data['token'])?.toString());
         await saveCurrentUser(user);
         return {'success': true, 'user': user};
       } else {
@@ -781,7 +791,7 @@ class ApiService {
     String? studentNumber,
   }) async {
     try {
-      final res = await http.post(
+      final res = await AuthHttp.instance.post(
         Uri.parse('$baseUrl/api/auth/register'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
@@ -797,6 +807,7 @@ class ApiService {
       final data = json.decode(utf8.decode(res.bodyBytes));
       if (res.statusCode == 200 && data['status'] == 'success') {
         final user = data['user'];
+        await AuthHttp.saveToken((data['access_token'] ?? data['token'])?.toString());
         await saveCurrentUser(user);
         return {'success': true, 'user': user};
       } else {
@@ -809,11 +820,16 @@ class ApiService {
 
   Future<Map<String, dynamic>?> getCurrentUser({int userId = 1}) async {
     try {
-      final res = await http.get(Uri.parse('$baseUrl/api/auth/me?user_id=$userId')).timeout(const Duration(seconds: 3));
+      final res = await AuthHttp.instance.get(Uri.parse('$baseUrl/api/auth/me')).timeout(const Duration(seconds: 3));
       if (res.statusCode == 200) {
         final user = json.decode(utf8.decode(res.bodyBytes));
         await saveCurrentUser(user);
         return user;
+      }
+      if (res.statusCode == 401) {
+        // Oturum geçersiz: yerel kopyaya güvenme, yeniden giriş iste.
+        await clearSavedUser();
+        return null;
       }
     } catch (_) {}
     return await loadSavedUser();
@@ -853,6 +869,7 @@ class ApiService {
       await prefs.remove('auth_user_data');
       await prefs.remove('unlocked_universities');
       await prefs.remove('verified_university');
+      await prefs.remove(AuthHttp.tokenKey);
     } catch (_) {}
   }
 
@@ -863,11 +880,11 @@ class ApiService {
     int userId = 1,
   }) async {
     try {
-      final Map<String, dynamic> body = {'user_id': userId};
+      final Map<String, dynamic> body = {};
       if (documentText != null) body['document_text'] = documentText;
       if (sampleKey != null) body['sample_key'] = sampleKey;
 
-      final res = await http.post(
+      final res = await AuthHttp.instance.post(
         Uri.parse('$baseUrl/api/student/scan-document'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode(body),
@@ -896,62 +913,10 @@ class ApiService {
         return {'success': false, 'message': data['detail'] ?? 'Belge doğrulanamadı.'};
       }
     } catch (_) {}
-
-    // Offline simulation fallback
-    String detected = sampleKey ?? 'itu';
-    if (documentText != null && documentText.isNotEmpty) {
-      final t = documentText.toLowerCase();
-      if (t.contains('hacettepe')) {
-        detected = 'hacettepe';
-      } else if (t.contains('ankara')) {
-        detected = 'ankara';
-      } else if (t.contains('gazi')) {
-        detected = 'gazi';
-      } else if (t.contains('ege')) {
-        detected = 'ege';
-      } else if (t.contains('koç') || t.contains('koc')) {
-        detected = 'koc';
-      } else if (t.contains('sabancı') || t.contains('sabanci')) {
-        detected = 'sabanci';
-      } else if (t.contains('boğaziçi') || t.contains('bogazici') || t.contains('boun')) {
-        detected = 'boun';
-      } else if (t.contains('orta doğu') || t.contains('odtu') || t.contains('metu')) {
-        detected = 'metu';
-      } else if (t.contains('itu') || t.contains('istanbul teknik')) {
-        detected = 'itu';
-      }
-    }
-
-    final barcode = 'EDEVLET-${detected.toUpperCase()}-2026';
-    final user = await loadSavedUser() ?? <String, dynamic>{'id': userId, 'username': 'student'};
-    user['verified_university'] = detected;
-    user['university_id'] = detected;
-    user['is_verified_student'] = 1;
-    user['verification_status'] = 'verified';
-    List<dynamic> unlocked = user['unlocked_universities'] is List
-        ? List.from(user['unlocked_universities'])
-        : ['general'];
-    if (!unlocked.contains(detected)) unlocked.add(detected);
-    user['unlocked_universities'] = unlocked;
-    await saveCurrentUser(user);
-
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString('current_uni_id', detected);
-      await prefs.setString('verified_university', detected);
-      await prefs.setStringList('unlocked_universities', unlocked.map((e) => e.toString()).toList());
-    } catch (_) {}
-
+    // Belge yalnızca sunucuda doğrulanabilir; çevrimdışıyken onay verilmez.
     return {
-      'success': true,
-      'status': 'success',
-      'matched_university_id': detected,
-      'matched_university_name': detected.toUpperCase(),
-      'student_number': '221049102',
-      'document_barcode': barcode,
-      'is_active_student': true,
-      'unlocked_universities': unlocked,
-      'message': 'Belgeniz başarıyla tarandı ve onaylandı.',
+      'success': false,
+      'message': 'Belge doğrulaması için internet bağlantısı gerekiyor.',
     };
   }
 
@@ -967,11 +932,10 @@ class ApiService {
     int userId = 1,
   }) async {
     try {
-      final res = await http.post(
+      final res = await AuthHttp.instance.post(
         Uri.parse('$baseUrl/api/membership/3d-init'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
-          'user_id': userId,
           'university_id': universityId,
           'card_holder': cardHolder,
           'card_number': cardNumber,
@@ -982,23 +946,15 @@ class ApiService {
         }),
       ).timeout(const Duration(seconds: 5));
 
+      final data = json.decode(utf8.decode(res.bodyBytes));
       if (res.statusCode == 200) {
-        final data = json.decode(utf8.decode(res.bodyBytes));
         return {'success': true, ...data};
       }
+      return {'success': false, 'message': data['detail']?.toString() ?? 'Ödeme başlatılamadı.'};
     } catch (_) {}
 
-    // Offline simulation fallback
-    return {
-      'success': true,
-      'status': 'success',
-      'session_id': '3DS-${DateTime.now().millisecondsSinceEpoch}',
-      'masked_phone': '+90 5** *** ** 84',
-      'sms_code_sandbox': '123456',
-      'expires_in_seconds': 180,
-      'amount_try': 50.0,
-      'currency': 'TRY',
-    };
+    // Ödeme yalnızca sunucu üzerinden alınabilir; çevrimdışı "başarılı" yanıt üretilmez.
+    return {'success': false, 'message': 'Ödeme için internet bağlantısı gerekiyor.'};
   }
 
   Future<Map<String, dynamic>> unlockUniversityMembership({
@@ -1011,7 +967,6 @@ class ApiService {
   }) async {
     try {
       final Map<String, dynamic> body = {
-        'user_id': userId,
         'university_id': universityId,
         'card_holder': cardHolder,
         'card_number': cardNumber,
@@ -1019,7 +974,7 @@ class ApiService {
       if (sessionId != null) body['session_id'] = sessionId;
       if (smsCode != null) body['sms_code'] = smsCode;
 
-      final res = await http.post(
+      final res = await AuthHttp.instance.post(
         Uri.parse('$baseUrl/api/membership/unlock'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode(body),
@@ -1045,54 +1000,8 @@ class ApiService {
       }
     } catch (_) {}
 
-    // Offline simulation fallback
-    const double grossAmount = 50.00;
-    const double vatRate = 0.20;
-    final double netAmount = double.parse((grossAmount / (1.0 + vatRate)).toStringAsFixed(2));
-    final double vatAmount = double.parse((grossAmount - netAmount).toStringAsFixed(2));
-    final receiptNo = 'EARSIV-2026-${(1000 + DateTime.now().millisecondsSinceEpoch % 9000)}';
-
-    final user = await loadSavedUser();
-    List<dynamic> unlockedList = [];
-    if (user != null && user['unlocked_universities'] is List) {
-      unlockedList = List.from(user['unlocked_universities']);
-    }
-    if (!unlockedList.contains(universityId)) {
-      unlockedList.add(universityId);
-    }
-    if (user != null) {
-      user['unlocked_universities'] = unlockedList;
-      await saveCurrentUser(user);
-    }
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setStringList('unlocked_universities', unlockedList.map((e) => e.toString()).toList());
-    } catch (_) {}
-
-    final cleanCard = cardNumber.replaceAll(' ', '');
-    final lastFour = cleanCard.length >= 4 ? cleanCard.substring(cleanCard.length - 4) : '0001';
-
-    return {
-      'success': true,
-      'status': 'success',
-      'message': 'Ödeme onaylandı ve üniversite erişimi açıldı.',
-      'unlocked_university': universityId,
-      'university_id': universityId,
-      'unlocked_universities': unlockedList,
-      'price_try': grossAmount,
-      'reference': receiptNo,
-      'invoice_number': receiptNo,
-      'receipt': {
-        'receipt_no': receiptNo,
-        'gross_amount': grossAmount,
-        'vat_rate': vatRate,
-        'vat_amount': vatAmount,
-        'net_amount': netAmount,
-        'currency': 'TRY',
-        'payment_date': DateTime.now().toIso8601String(),
-        'card_last_four': lastFour,
-      },
-    };
+    // Kilit yalnızca sunucu onayıyla açılır; çevrimdışıyken ücretsiz açılmaz.
+    return {'success': false, 'message': 'Ödeme için internet bağlantısı gerekiyor.'};
   }
 
   Future<bool> checkUniversityAccess({
@@ -1104,8 +1013,7 @@ class ApiService {
     // 1. Check local session state first
     final user = await loadSavedUser();
     if (user != null) {
-      if (user['verified_university'] == universityId ||
-          user['university_id'] == universityId) {
+      if (user['verified_university'] == universityId) {
         return true;
       }
       final unlocked = user['unlocked_universities'];
@@ -1124,19 +1032,12 @@ class ApiService {
       if (verifiedUni == universityId) {
         return true;
       }
-      // If user has not loaded any user profile yet, check current_uni_id fallback
-      if (user == null) {
-        final currentUniId = prefs.getString('current_uni_id');
-        if (currentUniId == universityId) {
-          return true;
-        }
-      }
     } catch (_) {}
 
     // 2. Try remote backend check
     try {
-      final res = await http.get(
-        Uri.parse('$baseUrl/api/membership/check?university_id=$universityId&user_id=$userId'),
+      final res = await AuthHttp.instance.get(
+        Uri.parse('$baseUrl/api/membership/check?university_id=$universityId'),
       ).timeout(const Duration(seconds: 3));
       if (res.statusCode == 200) {
         final data = json.decode(utf8.decode(res.bodyBytes));

@@ -904,7 +904,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     final uni = widget.currentUniversity;
-    final streak = _stats?['profile']?['streak_days'] ?? 1;
+    final streak = _stats?['profile']?['streak_days'] ?? 0;
     final totalExams = _stats?['total_exams_taken'] ?? 0;
     final avgScore = _stats?['average_exam_score'] ?? 0;
     final masteredVocab = _stats?['mastered_vocab'] ?? 0;

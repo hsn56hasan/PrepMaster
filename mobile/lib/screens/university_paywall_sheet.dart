@@ -50,7 +50,7 @@ class _UniversityPaywallSheetState extends State<UniversityPaywallSheet> {
 
   String sessionId = '';
   String maskedPhone = '+90 5** *** ** 84';
-  String receiptNo = 'EARSIV-2026-9284';
+  String receiptNo = '-';
   double grossAmount = 50.00;
   double vatAmount = 8.33;
   double netAmount = 41.67;
@@ -116,9 +116,18 @@ class _UniversityPaywallSheetState extends State<UniversityPaywallSheet> {
 
     if (!mounted) return;
 
+    // Sunucu ödeme oturumu açmadıysa SMS adımına geçme (eskiden sahte oturumla devam ediyordu).
+    if (res['success'] != true || res['session_id'] == null) {
+      setState(() {
+        isLoading = false;
+        errorMessage = res['message']?.toString() ?? 'Ödeme başlatılamadı.';
+      });
+      return;
+    }
+
     setState(() {
       isLoading = false;
-      sessionId = res['session_id']?.toString() ?? '3DS-SESSION-${DateTime.now().millisecondsSinceEpoch}';
+      sessionId = res['session_id'].toString();
       maskedPhone = res['masked_phone']?.toString() ?? '+90 5** *** ** 84';
       currentStep = 2;
     });
@@ -441,7 +450,7 @@ class _UniversityPaywallSheetState extends State<UniversityPaywallSheet> {
               const SizedBox(height: 8),
               const Center(
                 child: Text(
-                  'GİB E-Arşiv Fatura Sistemi Onaylı',
+                  'Ödeme özeti — fatura değildir; faturanız e-postayla ayrıca gönderilir',
                   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green, fontSize: 16),
                 ),
               ),
@@ -464,7 +473,7 @@ class _UniversityPaywallSheetState extends State<UniversityPaywallSheet> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Fatura No: $receiptNo', key: const Key('text_receipt_no'), style: const TextStyle(fontWeight: FontWeight.bold)),
+                    Text('İşlem No: $receiptNo', key: const Key('text_receipt_no'), style: const TextStyle(fontWeight: FontWeight.bold)),
                     const Divider(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

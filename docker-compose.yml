@@ -21,7 +21,8 @@ services:
       - HOST=0.0.0.0
       - ENVIRONMENT=production
       - PREPMASTER_DB_PATH=/app/data/prepmaster.db
-      - SECRET_KEY=${SECRET_KEY:-prepmaster_secure_jwt_secret_change_in_production_2026}
+      # Varsayılan YOK: .env içinde tanımlanmazsa konteyner bilerek açılmaz.
+      - SECRET_KEY=${SECRET_KEY:?SECRET_KEY .env dosyasinda tanimlanmali}
     volumes:
       - prepmaster_data:/app/data
       - ./static/audio:/app/static/audio:ro

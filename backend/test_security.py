@@ -28,13 +28,15 @@ from fastapi.testclient import TestClient
 from backend.app import app
 from backend.database import init_db, get_db, create_user, authenticate_user
 import backend.security as sec
+import backend.app as app_module
+_AUTH = {"Authorization": "Bearer " + sec.create_session_token(1, "ituhazirlik", "ogrenci@itu.edu.tr")[0]}
 
 
 class TestSecuritySuite(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         init_db()
-        cls.client = TestClient(app)
+        cls.client = TestClient(app, headers=_AUTH)
 
     @classmethod
     def tearDownClass(cls):

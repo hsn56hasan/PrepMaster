@@ -6,7 +6,7 @@ Target:
   - Lockout after 3 invalid attempts
   - Replay prevention on verified session
   - Exact tax calculation check: gross == net + vat
-  - Receipt regex check: ^EARSIV-2026-[A-F0-9]{4}$
+  - Receipt regex check: ^PM-2026-[A-F0-9]{4}$
   - Boundary, tampering, and expiration stress tests
 """
 
@@ -34,6 +34,14 @@ db.DB_PATH = TEST_DB_PATH
 from fastapi.testclient import TestClient
 from backend.app import app
 import backend.security as sec
+import backend.app as app_module
+
+
+def _demo_client(user_id: int = 1, username: str = "ituhazirlik", email: str = "ogrenci@itu.edu.tr"):
+    """Simülasyon akışlarını test eder: DEMO_MODE açık, istekler user_id'nin oturum token'ıyla gider."""
+    app_module.DEMO_MODE = True
+    token, _ = sec.create_session_token(user_id, username, email)
+    return TestClient(app, headers={"Authorization": f"Bearer {token}"})
 
 
 class TestAdversarialPayment3DS(unittest.TestCase):
@@ -45,7 +53,7 @@ class TestAdversarialPayment3DS(unittest.TestCase):
             except Exception:
                 pass
         db.init_db()
-        cls.client = TestClient(app)
+        cls.client = _demo_client()
 
     @classmethod
     def tearDownClass(cls):
@@ -286,11 +294,11 @@ class TestAdversarialPayment3DS(unittest.TestCase):
             self.assertEqual(r["vat_amount"], 8.33)
 
     # =========================================================================
-    # 5. Receipt Regex Check: ^EARSIV-2026-[A-F0-9]{4}$
+    # 5. Receipt Regex Check: ^PM-2026-[A-F0-9]{4}$
     # =========================================================================
     def test_adversarial_receipt_regex_check(self):
-        """Empirically test 10,000 receipts against exact regex ^EARSIV-2026-[A-F0-9]{4}$."""
-        pattern = re.compile(r"^EARSIV-2026-[A-F0-9]{4}$")
+        """Empirically test 10,000 receipts against exact regex ^PM-2026-[A-F0-9]{4}$."""
+        pattern = re.compile(r"^PM-2026-[A-F0-9]{4}$")
 
         generated_refs = set()
         for i in range(10000):
@@ -299,8 +307,8 @@ class TestAdversarialPayment3DS(unittest.TestCase):
 
             # Must match exact regex
             match = pattern.match(receipt_no)
-            self.assertIsNotNone(match, f"Receipt '{receipt_no}' failed to match regex ^EARSIV-2026-[A-F0-9]{{4}}$ on iteration {i}")
-            self.assertEqual(len(receipt_no), 16, f"Receipt length must be exactly 16 chars: {receipt_no}")
+            self.assertIsNotNone(match, f"Receipt '{receipt_no}' failed to match regex ^PM-2026-[A-F0-9]{{4}}$ on iteration {i}")
+            self.assertEqual(len(receipt_no), 12, f"Receipt length must be exactly 12 chars: {receipt_no}")
 
             # Check suffix is uppercase hex
             suffix = receipt_no.split("-")[2]

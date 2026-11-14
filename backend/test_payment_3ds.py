@@ -5,7 +5,7 @@ Authoritative specifications: ORIGINAL_REQUEST.md (R2) & PROJECT.md (Interface C
 Tests:
 1. /api/membership/3d-init: Session creation, masked phone (+90...), 6-digit SMS code, 180s expiry
 2. SMS code validation: Sandbox validation, wrong code rejection (HTTP 400), attempt limits
-3. GİB E-Arşiv Receipt Format: EARSIV-2026-XXXX format compliance
+3. Payment summary number format: PM-2026-XXXX format compliance
 4. Statutory Tax Breakdown: 50.00 TL gross, 20% VAT (8.33 TL), 41.67 TL net, exact mathematical equality
 5. /api/membership/unlock with 3DS: Successful verification, SQLite unlocked_universities update, purchase record
 6. Replay attack defense: Expired or consumed 3DS sessions cannot be reused
@@ -33,6 +33,14 @@ from fastapi.testclient import TestClient
 from backend.app import app
 from backend.database import init_db, get_db, check_university_access, unlock_university_membership
 import backend.security as sec
+import backend.app as app_module
+
+
+def _demo_client(user_id: int = 1, username: str = "ituhazirlik", email: str = "ogrenci@itu.edu.tr"):
+    """Simülasyon akışlarını test eder: DEMO_MODE açık, istekler user_id'nin oturum token'ıyla gider."""
+    app_module.DEMO_MODE = True
+    token, _ = sec.create_session_token(user_id, username, email)
+    return TestClient(app, headers={"Authorization": f"Bearer {token}"})
 
 
 class TestPayment3DSSuite(unittest.TestCase):
@@ -45,7 +53,7 @@ class TestPayment3DSSuite(unittest.TestCase):
             except Exception:
                 pass
         init_db()
-        cls.client = TestClient(app)
+        cls.client = _demo_client()
 
     @classmethod
     def tearDownClass(cls):
@@ -188,7 +196,7 @@ class TestPayment3DSSuite(unittest.TestCase):
     # 3. GİB E-Arşiv Format & Statutory Tax Breakdown Tests
     # =========================================================================
     def test_gib_earsiv_format_and_tax_breakdown(self):
-        """Verify statutory financial breakdown: 50.00 TL gross, 20% VAT (8.33 TL), 41.67 TL net, and EARSIV-2026-XXXX format."""
+        """Verify statutory financial breakdown: 50.00 TL gross, 20% VAT (8.33 TL), 41.67 TL net, and PM-2026-XXXX format."""
         # 1. Statutory derivation verification
         gross_statutory = 50.00
         vat_rate_statutory = 0.20
@@ -222,13 +230,13 @@ class TestPayment3DSSuite(unittest.TestCase):
         self.assertEqual(unlock_res.status_code, 200)
         data = unlock_res.json()
 
-        # 3. Verify Receipt Format EARSIV-2026-XXXX
+        # 3. Verify Receipt Format PM-2026-XXXX
         receipt = data.get("receipt", {})
         receipt_no = receipt.get("receipt_no") or receipt.get("invoice_number") or data.get("reference")
         self.assertIsNotNone(receipt_no, "Receipt number / reference must be returned")
         self.assertTrue(
-            bool(re.match(r"^EARSIV-2026-[A-Z0-9]{4,}$", receipt_no)),
-            f"Receipt number must match EARSIV-2026-XXXX format, got: {receipt_no}"
+            bool(re.match(r"^PM-2026-[A-Z0-9]{4,}$", receipt_no)),
+            f"Receipt number must match PM-2026-XXXX format, got: {receipt_no}"
         )
 
         # 4. Verify Financial Breakdown in Receipt
@@ -334,17 +342,15 @@ class TestPayment3DSSuite(unittest.TestCase):
         })
         self.assertEqual(replay_unlock.status_code, 400)
 
-    def test_legacy_unlock_direct_fallback(self):
-        """Verify legacy direct /api/membership/unlock calls without session_id still work gracefully."""
+    def test_unlock_without_3ds_session_rejected(self):
+        """session_id/sms_code olmadan doğrudan kilit açma (eski ödemesiz yol) reddedilmeli."""
         res = self.client.post("/api/membership/unlock", json={
-            "user_id": 1,
-            "university_id": "hacettepe",
+            "university_id": "bilkent",
             "card_holder": "Legacy Mobile User",
             "card_number": "4242 4242 4242 4242"
         })
-        self.assertEqual(res.status_code, 200)
-        data = res.json()
-        self.assertTrue(data.get("success") is True or data.get("status") == "success")
+        self.assertEqual(res.status_code, 400)
+        self.assertFalse(check_university_access(1, "bilkent"))
 
 
 if __name__ == "__main__":

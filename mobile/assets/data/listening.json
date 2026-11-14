@@ -28,18 +28,18 @@
           },
           {
             "key": "B",
-            "text": "Subjects prioritize seeking confirming evidence over attempting to disconfirm hypotheses."
-          },
-          {
-            "key": "C",
             "text": "Decision-makers rely solely on mathematical probabilities in laboratories."
           },
           {
-            "key": "D",
+            "key": "C",
             "text": "Social media algorithms have reduced the impact of confirmation bias."
+          },
+          {
+            "key": "D",
+            "text": "Subjects prioritize seeking confirming evidence over attempting to disconfirm hypotheses."
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "D",
         "explanation_tr": "Derste belirtildiği üzere Wason'ın 1960 yılındaki deneyi, insanların hipotezlerini yanlışlamaya (falsify) çalışmak yerine doğrulamaya yönelik kanıt aradıklarını (confirming instances) göstermiştir."
       },
       {
@@ -48,22 +48,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Choices are evaluated based on how outcomes are framed as gains or losses."
+            "text": "Rational agents calculate statistical risks identically in all circumstances."
           },
           {
             "key": "B",
-            "text": "Patients consistently prefer riskier medical procedures regardless of wording."
+            "text": "Choices are evaluated based on how outcomes are framed as gains or losses."
           },
           {
             "key": "C",
-            "text": "Rational agents calculate statistical risks identically in all circumstances."
+            "text": "Patients consistently prefer riskier medical procedures regardless of wording."
           },
           {
             "key": "D",
             "text": "Risk tolerance increases when negative outcomes are emphasized."
           }
         ],
-        "correct_answer": "A",
+        "correct_answer": "B",
         "explanation_tr": "Kahneman ve Tversky'nin Çerçeveleme Etkisi (Framing Effect) teorisine göre, kararlar seçeneğin bir kazanç (gain) mı yoksa kayıp (loss) olarak mı sunulduğuna bağlı olarak tamamen değişir."
       },
       {
@@ -76,18 +76,18 @@
           },
           {
             "key": "B",
-            "text": "To illustrate how ideological echo chambers amplify belief validation."
+            "text": "To contrast digital media with printed scientific literature."
           },
           {
             "key": "C",
-            "text": "To prove that digital communication eliminates cognitive shortcuts."
+            "text": "To illustrate how ideological echo chambers amplify belief validation."
           },
           {
             "key": "D",
-            "text": "To contrast digital media with printed scientific literature."
+            "text": "To prove that digital communication eliminates cognitive shortcuts."
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "Konuşmacı, sosyal medya algoritmalarının ideolojik 'yankı odaları' (echo chambers) yaratarak doğrulama yanlılığını pekiştirdiğini ve farklı görüşleri dışladığını vurgulamak için sosyal medyadan bahsetmiştir."
       },
       {
@@ -96,22 +96,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Patients show higher willingness to undergo surgery."
+            "text": "Physicians refuse to execute the operation."
           },
           {
             "key": "B",
-            "text": "Consent rates decrease sharply due to risk aversion framing."
-          },
-          {
-            "key": "C",
             "text": "Patients demand mathematical proof before deciding."
           },
           {
+            "key": "C",
+            "text": "Patients show higher willingness to undergo surgery."
+          },
+          {
             "key": "D",
-            "text": "Physicians refuse to execute the operation."
+            "text": "Consent rates decrease sharply due to risk aversion framing."
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "D",
         "explanation_tr": "Metinde aynı istatistiğin '%10 ölüm oranı' (mortality rate) olarak çerçevelenmesi durumunda kabul oranlarının sert bir şekilde düştüğü ('decline precipitously') ifade edilmiştir."
       }
     ]
@@ -141,22 +141,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Through bi-directional decentralized networks across regional hubs."
-          },
-          {
-            "key": "B",
             "text": "Through a unidirectional flow from centralized power plants to passive users."
           },
           {
+            "key": "B",
+            "text": "Through automated smart meters installed at consumer homes."
+          },
+          {
             "key": "C",
-            "text": "By storing solar energy in decentralized residential batteries."
+            "text": "Through bi-directional decentralized networks across regional hubs."
           },
           {
             "key": "D",
-            "text": "Through automated smart meters installed at consumer homes."
+            "text": "By storing solar energy in decentralized residential batteries."
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "Konuşmacı, geleneksel şebekelerin yüz yılı aşkın süredir merkezi santrallerden pasif kullanıcılara tek yönlü (unidirectional flow) çalıştığını belirtmiştir."
       },
       {
@@ -165,7 +165,7 @@
         "options": [
           {
             "key": "A",
-            "text": "Their reliance on fossil fuel combustion."
+            "text": "The inability of consumers to measure their daily consumption."
           },
           {
             "key": "B",
@@ -173,14 +173,14 @@
           },
           {
             "key": "C",
-            "text": "Their intermittent and decentralized production characteristics."
+            "text": "Their reliance on fossil fuel combustion."
           },
           {
             "key": "D",
-            "text": "The inability of consumers to measure their daily consumption."
+            "text": "Their intermittent and decentralized production characteristics."
           }
         ],
-        "correct_answer": "C",
+        "correct_answer": "D",
         "explanation_tr": "Rüzgar ve güneş enerjisinin en temel sorunu kesintili (intermittent) ve merkezi olmayan (decentralized) yapısıdır."
       },
       {
@@ -189,22 +189,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Bi-directional digital communication and dynamic load balancing."
-          },
-          {
-            "key": "B",
             "text": "Complete reliance on coal-fired generation stations."
           },
           {
+            "key": "B",
+            "text": "Bi-directional digital communication and dynamic load balancing."
+          },
+          {
             "key": "C",
-            "text": "Elimination of energy storage requirements."
+            "text": "A reduction in electrical sensors across the network."
           },
           {
             "key": "D",
-            "text": "A reduction in electrical sensors across the network."
+            "text": "Elimination of energy storage requirements."
           }
         ],
-        "correct_answer": "A",
+        "correct_answer": "B",
         "explanation_tr": "Akıllı şebekeleri ayıran özellik iki yönlü dijital iletişim (bi-directional digital communication) ve dinamik yük dengelemesidir."
       },
       {
@@ -213,7 +213,7 @@
         "options": [
           {
             "key": "A",
-            "text": "Replacing power transmission cables completely."
+            "text": "Generating wind energy during daylight hours."
           },
           {
             "key": "B",
@@ -221,11 +221,11 @@
           },
           {
             "key": "C",
-            "text": "Generating wind energy during daylight hours."
+            "text": "Eliminating consumer demand entirely."
           },
           {
             "key": "D",
-            "text": "Eliminating consumer demand entirely."
+            "text": "Replacing power transmission cables completely."
           }
         ],
         "correct_answer": "B",
@@ -259,22 +259,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Because rural regions consume significantly more electrical energy."
-          },
-          {
-            "key": "B",
             "text": "Because asphalt and concrete absorb solar radiation and release heat at night."
           },
           {
-            "key": "C",
+            "key": "B",
             "text": "Because green roofs generate artificial thermal emissions."
           },
           {
-            "key": "D",
+            "key": "C",
             "text": "Because wind currents are entirely absent in rural districts."
+          },
+          {
+            "key": "D",
+            "text": "Because rural regions consume significantly more electrical energy."
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "Metinde asfalt ve beton gibi geçirimsiz yüzeylerin güneş enerjisini emip gece yayması sonucu kentsel ısı adası oluştuğu belirtilmiştir."
       },
       {
@@ -287,7 +287,7 @@
           },
           {
             "key": "B",
-            "text": "The structural load capacity of concrete columns."
+            "text": "The rate at which vegetation produces oxygen during daylight."
           },
           {
             "key": "C",
@@ -295,7 +295,7 @@
           },
           {
             "key": "D",
-            "text": "The rate at which vegetation produces oxygen during daylight."
+            "text": "The structural load capacity of concrete columns."
           }
         ],
         "correct_answer": "C",
@@ -307,22 +307,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Up to ten percent."
+            "text": "Nearly eighty percent."
           },
           {
             "key": "B",
-            "text": "Up to twenty-five percent."
-          },
-          {
-            "key": "C",
             "text": "Up to forty percent."
           },
           {
+            "key": "C",
+            "text": "Up to ten percent."
+          },
+          {
             "key": "D",
-            "text": "Nearly eighty percent."
+            "text": "Up to twenty-five percent."
           }
         ],
-        "correct_answer": "C",
+        "correct_answer": "B",
         "explanation_tr": "Konuşmacı 'surface heat absorption is reduced by up to forty percent' demiştir."
       },
       {
@@ -335,7 +335,7 @@
           },
           {
             "key": "B",
-            "text": "Reducing stormwater runoff and facilitating evaporative cooling."
+            "text": "Trapping nighttime heat within building interiors."
           },
           {
             "key": "C",
@@ -343,10 +343,10 @@
           },
           {
             "key": "D",
-            "text": "Trapping nighttime heat within building interiors."
+            "text": "Reducing stormwater runoff and facilitating evaporative cooling."
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "D",
         "explanation_tr": "Yeşil çatılar yağmur suyu akışını azaltır (reduce stormwater runoff) ve buharlaşma yoluyla serinletme (evaporative cooling) sağlar."
       }
     ]
@@ -376,7 +376,7 @@
         "options": [
           {
             "key": "A",
-            "text": "The physical overheating of hospital computer server hardware."
+            "text": "The failure of convolutional networks to detect melanoma cells accurately."
           },
           {
             "key": "B",
@@ -384,11 +384,11 @@
           },
           {
             "key": "C",
-            "text": "The complete prohibition of artificial intelligence software in European hospitals."
+            "text": "The physical overheating of hospital computer server hardware."
           },
           {
             "key": "D",
-            "text": "The failure of convolutional networks to detect melanoma cells accurately."
+            "text": "The complete prohibition of artificial intelligence software in European hospitals."
           }
         ],
         "correct_answer": "B",
@@ -400,7 +400,7 @@
         "options": [
           {
             "key": "A",
-            "text": "The right to inspect the source code of hospital software."
+            "text": "The right to sue attending software engineers automatically."
           },
           {
             "key": "B",
@@ -408,7 +408,7 @@
           },
           {
             "key": "C",
-            "text": "The right to sue attending software engineers automatically."
+            "text": "The right to inspect the source code of hospital software."
           },
           {
             "key": "D",
@@ -470,22 +470,22 @@
         "options": [
           {
             "key": "A",
-            "text": "The definitive proof that cognitive aging is strictly dictated by inherited nucleotide sequences."
-          },
-          {
-            "key": "B",
-            "text": "The transition from genetic and structural determinism to dynamic gene-environment and neural plasticity models."
-          },
-          {
-            "key": "C",
             "text": "The discovery that pharmacological modulators can completely replace lifestyle modifications in dementia care."
           },
           {
-            "key": "D",
+            "key": "B",
             "text": "The realization that synaptic arborization ceases entirely once the brain reaches biological maturity."
+          },
+          {
+            "key": "C",
+            "text": "The transition from genetic and structural determinism to dynamic gene-environment and neural plasticity models."
+          },
+          {
+            "key": "D",
+            "text": "The definitive proof that cognitive aging is strictly dictated by inherited nucleotide sequences."
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "Dersin ana teması, geleneksel nörobiyolojinin 'genetik kodun değiştirilemez bir yazgı olduğu ve yetişkin beyninin sabit kaldığı' yönündeki determinist dogmasının yıkılmasıdır. Konuşmacı, epigenetik (dinamik gen-çevre etkileşimi) ve nöroplastisite (ömür boyu süren beyin esnekliği) sayesinde insan beyninin dinamik olarak yeniden yapılandığını vurgulamaktadır."
       },
       {
@@ -494,11 +494,11 @@
         "options": [
           {
             "key": "A",
-            "text": "They permanently alter the fundamental nucleotide sequence of the organism's DNA."
+            "text": "They eradicate beta-amyloid plaques before any synaptic damage can occur in the hippocampus."
           },
           {
             "key": "B",
-            "text": "They eradicate beta-amyloid plaques before any synaptic damage can occur in the hippocampus."
+            "text": "They permanently alter the fundamental nucleotide sequence of the organism's DNA."
           },
           {
             "key": "C",
@@ -518,7 +518,7 @@
         "options": [
           {
             "key": "A",
-            "text": "Their brains establish redundant synaptic connections and recruit compensatory neural networks."
+            "text": "They rely exclusively on synthetic epigenetic drugs to halt natural cellular senescence."
           },
           {
             "key": "B",
@@ -530,10 +530,10 @@
           },
           {
             "key": "D",
-            "text": "They rely exclusively on synthetic epigenetic drugs to halt natural cellular senescence."
+            "text": "Their brains establish redundant synaptic connections and recruit compensatory neural networks."
           }
         ],
-        "correct_answer": "A",
+        "correct_answer": "D",
         "explanation_tr": "Metne göre zihinsel olarak aktif bireyler sinaptik yedeklilik (dense synaptic redundancies) biriktirir. Beyinde beta-amiloid plakları oluşsa bile, dirençli beyinler telafi edici ağları (compensatory networks) devreye sokarak klinik demans semptomlarının ortaya çıkmasını yıllarca geciktirir."
       },
       {
@@ -542,22 +542,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Intellectual decline is an unavoidable biological fate that renders lifestyle choices inconsequential."
-          },
-          {
-            "key": "B",
-            "text": "Proactive lifestyle modifications grant individuals meaningful regulatory influence over brain health."
-          },
-          {
-            "key": "C",
             "text": "Genetic inheritance accounts for nearly all cognitive disparities observed in elderly populations."
           },
           {
-            "key": "D",
+            "key": "B",
             "text": "Adult neurogenesis is a laboratory artifact with negligible relevance to real-world neural preservation."
+          },
+          {
+            "key": "C",
+            "text": "Proactive lifestyle modifications grant individuals meaningful regulatory influence over brain health."
+          },
+          {
+            "key": "D",
+            "text": "Intellectual decline is an unavoidable biological fate that renders lifestyle choices inconsequential."
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "Konuşmacı sonuç bölümünde bilişsel uzun ömürlülüğün genetik olarak önceden belirlenmediğini ('neither genetically predetermined nor fatalistically destined to decay'), bilinçli yaşam tarzı seçimleriyle zihnimizin moleküler mimarisi üzerinde önemli bir düzenleme gücüne ('substantial regulatory agency') sahip olduğumuzu savunmaktadır."
       }
     ]
@@ -596,11 +596,11 @@
           },
           {
             "key": "C",
-            "text": "By proving that financial penalties are the only effective mechanism to modify consumer behavior."
+            "text": "By establishing that market consumers consistently calculate optimal long-term utility."
           },
           {
             "key": "D",
-            "text": "By establishing that market consumers consistently calculate optimal long-term utility."
+            "text": "By proving that financial penalties are the only effective mechanism to modify consumer behavior."
           }
         ],
         "correct_answer": "A",
@@ -612,7 +612,7 @@
         "options": [
           {
             "key": "A",
-            "text": "It enforces compulsory participation by imposing severe legal fines on non-compliant citizens."
+            "text": "It completely removes negative alternatives from the consumer's decision environment."
           },
           {
             "key": "B",
@@ -620,11 +620,11 @@
           },
           {
             "key": "C",
-            "text": "It completely removes negative alternatives from the consumer's decision environment."
+            "text": "It requires citizens to pass economic literacy examinations before choosing."
           },
           {
             "key": "D",
-            "text": "It requires citizens to pass economic literacy examinations before choosing."
+            "text": "It enforces compulsory participation by imposing severe legal fines on non-compliant citizens."
           }
         ],
         "correct_answer": "B",
@@ -636,22 +636,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Citizen participation rates drop significantly due to heightened administrative paperwork."
-          },
-          {
-            "key": "B",
             "text": "The financial cost of administering public welfare programs triples immediately."
           },
           {
-            "key": "C",
+            "key": "B",
             "text": "Participation rates frequently surge from under thirty percent to over ninety percent."
           },
           {
-            "key": "D",
+            "key": "C",
             "text": "Citizens lose their fundamental legal right to withdraw from the government program."
+          },
+          {
+            "key": "D",
+            "text": "Citizen participation rates drop significantly due to heightened administrative paperwork."
           }
         ],
-        "correct_answer": "C",
+        "correct_answer": "B",
         "explanation_tr": "Konuşmacı, klasik opt-in (onay vererek katılma) sisteminde katılımın %30'un altında kaldığını, ancak varsayılanın opt-out (otomatik dahil olup dilediğinde çıkabilme) yapılmasıyla katılım oranlarının sıklıkla %90'ın üzerine çıktığını ('surges past ninety percent') belirtmektedir."
       },
       {
@@ -660,22 +660,22 @@
         "options": [
           {
             "key": "A",
-            "text": "It fails to achieve any statistically measurable impact on public welfare outcomes."
-          },
-          {
-            "key": "B",
             "text": "It may cross the boundary into covert psychological manipulation when citizens lack transparency."
           },
           {
-            "key": "C",
+            "key": "B",
             "text": "It forces private commercial enterprises to bear the full expense of policy reforms."
           },
           {
-            "key": "D",
+            "key": "C",
             "text": "It restricts personal freedom of choice by outlawing unhealthy consumer products."
+          },
+          {
+            "key": "D",
+            "text": "It fails to achieve any statistically measurable impact on public welfare outcomes."
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "Metnin sonunda etik eleştirmenlerin şeffaflık konusuna dikkat çektiği ve vatandaşların kurumsal yönlendirmeden habersiz olduğu durumlarda bu ince psikolojik dürtmelerin örtük bir babacıl manipülasyona dönüşüp dönüşmediğini sorguladığı ('border on covert paternalistic manipulation') aktarılmıştır."
       }
     ]
@@ -706,11 +706,11 @@
         "options": [
           {
             "key": "A",
-            "text": "Utilizing the residual by-products, effluent, or surplus energy of one facility as feedstock for another."
+            "text": "Centralizing all regional manufacturing processes under a single state-owned conglomerate."
           },
           {
             "key": "B",
-            "text": "Centralizing all regional manufacturing processes under a single state-owned conglomerate."
+            "text": "Utilizing the residual by-products, effluent, or surplus energy of one facility as feedstock for another."
           },
           {
             "key": "C",
@@ -721,7 +721,7 @@
             "text": "Subsidizing virgin material extraction through international carbon credit markets."
           }
         ],
-        "correct_answer": "A",
+        "correct_answer": "B",
         "explanation_tr": "Konuşmacıya göre endüstriyel simbiyozun temel çalışma prensibi, bir üretim tesisinin atık yan ürünlerinin, atık suyunun veya fazla termal enerjisinin başka bir komşu tesis için hammadde (feedstock) ya da enerji kaynağı olarak yeniden kullanılmasıdır."
       },
       {
@@ -734,7 +734,7 @@
           },
           {
             "key": "B",
-            "text": "It is extracted from municipal wastewater filtration beds to fertilize agricultural land."
+            "text": "It is generated as an organic precipitate during pharmaceutical enzyme fermentation."
           },
           {
             "key": "C",
@@ -742,7 +742,7 @@
           },
           {
             "key": "D",
-            "text": "It is generated as an organic precipitate during pharmaceutical enzyme fermentation."
+            "text": "It is extracted from municipal wastewater filtration beds to fertilize agricultural land."
           }
         ],
         "correct_answer": "C",
@@ -754,11 +754,11 @@
         "options": [
           {
             "key": "A",
-            "text": "Complete elimination of industrial electricity tariffs and zero solid waste generation."
+            "text": "Over three million cubic meters of groundwater saved and over six hundred thousand tons of CO2 abated."
           },
           {
             "key": "B",
-            "text": "A fifty percent reduction in global maritime shipping and total reforestation of regional wetlands."
+            "text": "Complete elimination of industrial electricity tariffs and zero solid waste generation."
           },
           {
             "key": "C",
@@ -766,10 +766,10 @@
           },
           {
             "key": "D",
-            "text": "Over three million cubic meters of groundwater saved and over six hundred thousand tons of CO2 abated."
+            "text": "A fifty percent reduction in global maritime shipping and total reforestation of regional wetlands."
           }
         ],
-        "correct_answer": "D",
+        "correct_answer": "A",
         "explanation_tr": "Konuşmacı somut çevresel kazanımlar olarak yıllık 3 milyon metreküpten fazla yeraltı suyu tasarrufu sağlandığını ve 600.000 tonun üzerinde net karbondioksit azaltımı (CO2 abatement) gerçekleştirildiğini vurgulamıştır."
       },
       {
@@ -778,22 +778,22 @@
         "options": [
           {
             "key": "A",
-            "text": "High government excise taxation applied uniquely to closed-loop manufacturing facilities."
-          },
-          {
-            "key": "B",
             "text": "Co-dependency risk, where the disruption of an anchor tenant imperils downstream material supply."
           },
           {
-            "key": "C",
+            "key": "B",
             "text": "The inability of chemical engineers to measure thermodynamic heat transfer across steam pipes."
+          },
+          {
+            "key": "C",
+            "text": "High government excise taxation applied uniquely to closed-loop manufacturing facilities."
           },
           {
             "key": "D",
             "text": "The legal prohibition against transferring secondary steam across industrial property lines."
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "Konuşmacı, tesislerin birbirine yapısal olarak bağımlı hale gelmesiyle oluşan co-dependency (ortak bağımlılık) riskine dikkat çekmiştir. Ana bir çıpa tesisin (anchor tenant) üretimi durdurması veya kapanması, yan ürüne muhtaç alt tesislerin tedarik zincirini derhal istikrarsızlaştırabilir."
       }
     ]
@@ -828,18 +828,18 @@
           },
           {
             "key": "B",
-            "text": "To align strength and stiffness with anticipated aerodynamic load trajectories."
+            "text": "To allow the aircraft skin to melt harmlessly during atmospheric re-entry."
           },
           {
             "key": "C",
-            "text": "To guarantee that the fuselage expands uniformly at high altitudes."
+            "text": "To align strength and stiffness with anticipated aerodynamic load trajectories."
           },
           {
             "key": "D",
-            "text": "To allow the aircraft skin to melt harmlessly during atmospheric re-entry."
+            "text": "To guarantee that the fuselage expands uniformly at high altitudes."
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "Karbon Elyaf Takviyeli Polimerler (CFRP) anizotropik bir yapıya sahiptir; bu sayede mühendisler lifleri belirli yönlere dizerek mukavemet ve rijitliği beklenen aerodinamik yük rotalarına göre özelleştirebilirler."
       },
       {
@@ -848,11 +848,11 @@
         "options": [
           {
             "key": "A",
-            "text": "Composites make up over fifty percent of structural weight, saving approximately twenty percent of fuel."
+            "text": "Composites make up ninety percent of structural weight, saving over fifty percent of fuel."
           },
           {
             "key": "B",
-            "text": "Composites make up twenty percent of structural weight, saving five percent of fuel."
+            "text": "Composites make up over fifty percent of structural weight, saving approximately twenty percent of fuel."
           },
           {
             "key": "C",
@@ -860,10 +860,10 @@
           },
           {
             "key": "D",
-            "text": "Composites make up ninety percent of structural weight, saving over fifty percent of fuel."
+            "text": "Composites make up twenty percent of structural weight, saving five percent of fuel."
           }
         ],
-        "correct_answer": "A",
+        "correct_answer": "B",
         "explanation_tr": "Ders anlatımında modern uçaklarda (Boeing 787 ve Airbus A350) kompozitlerin toplam gövde ağırlığının %50'sinden fazlasını oluşturduğu ve klasik alüminyum uçaklara kıyasla yaklaşık %20 yakıt tasarrufu sağladığı açıkça ifade edilmiştir."
       },
       {
@@ -872,11 +872,11 @@
         "options": [
           {
             "key": "A",
-            "text": "It causes immediate hydraulic system fires in the cockpit."
+            "text": "It permanently degrades the aircraft's autopilot navigation software."
           },
           {
             "key": "B",
-            "text": "It permanently degrades the aircraft's autopilot navigation software."
+            "text": "It causes immediate hydraulic system fires in the cockpit."
           },
           {
             "key": "C",
@@ -896,22 +896,22 @@
         "options": [
           {
             "key": "A",
-            "text": "By requiring ground technicians to dismantle the entire fuselage after every flight."
-          },
-          {
-            "key": "B",
-            "text": "By spraying chemical fluorescent dye along exterior wing surfaces during takeoff."
-          },
-          {
-            "key": "C",
             "text": "By using piezoelectric and fiber-optic sensors to monitor acoustic and ultrasonic signals."
           },
           {
-            "key": "D",
+            "key": "B",
+            "text": "By requiring ground technicians to dismantle the entire fuselage after every flight."
+          },
+          {
+            "key": "C",
             "text": "By transmitting high-voltage electrical shocks through the wings to test conductivity."
+          },
+          {
+            "key": "D",
+            "text": "By spraying chemical fluorescent dye along exterior wing surfaces during takeoff."
           }
         ],
-        "correct_answer": "C",
+        "correct_answer": "A",
         "explanation_tr": "Gömülü Yapısal Sağlık İzleme (SHM) sistemleri, kompozit katmanlara yerleştirilen piezoelektrik sensörler ve fiber-optik Bragg ızgaraları aracılığıyla akustik emisyonları ve ultrasonik dalgaları sürekli izleyerek arızaları önceden tespit eder."
       }
     ]
@@ -946,18 +946,18 @@
           },
           {
             "key": "B",
-            "text": "At nine o'clock in the evening."
+            "text": "It is open twenty-four hours."
           },
           {
             "key": "C",
-            "text": "At ten o'clock at night."
+            "text": "At nine o'clock in the evening."
           },
           {
             "key": "D",
-            "text": "It is open twenty-four hours."
+            "text": "At ten o'clock at night."
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "Metinde kütüphanenin sabah sekizden akşam dokuza kadar (until nine in the evening) açık olduğu açıkça belirtilmiştir."
       },
       {
@@ -966,7 +966,7 @@
         "options": [
           {
             "key": "A",
-            "text": "Up to three books."
+            "text": "An unlimited number of books."
           },
           {
             "key": "B",
@@ -974,14 +974,14 @@
           },
           {
             "key": "C",
-            "text": "Up to five books."
+            "text": "Up to three books."
           },
           {
             "key": "D",
-            "text": "An unlimited number of books."
+            "text": "Up to five books."
           }
         ],
-        "correct_answer": "C",
+        "correct_answer": "D",
         "explanation_tr": "Konuşmacı lisans öğrencilerinin en fazla beş kitap (up to five books) alabileceğini söylemektedir."
       },
       {
@@ -990,29 +990,29 @@
         "options": [
           {
             "key": "A",
-            "text": "Only the first floor."
+            "text": "All floors are silent zones."
           },
           {
             "key": "B",
-            "text": "The second and third floors."
-          },
-          {
-            "key": "C",
             "text": "The third and fourth floors."
           },
           {
+            "key": "C",
+            "text": "Only the first floor."
+          },
+          {
             "key": "D",
-            "text": "All floors are silent zones."
+            "text": "The second and third floors."
           }
         ],
-        "correct_answer": "C",
+        "correct_answer": "B",
         "explanation_tr": "Konuşmacı üçüncü ve dördüncü katlarda sessizliğin zorunlu olduğunu (silence is mandatory on the third and fourth floors) vurgulamıştır."
       }
     ]
   },
   {
     "id": "lis_odtu_a2",
-    "university_id": "odtu",
+    "university_id": "metu",
     "level": "A2",
     "type": "note_taking",
     "title": "Student Club Registration & Sports Center",
@@ -1036,11 +1036,11 @@
         "options": [
           {
             "key": "A",
-            "text": "Next Monday and Tuesday."
+            "text": "Next Tuesday and Wednesday."
           },
           {
             "key": "B",
-            "text": "Next Tuesday and Wednesday."
+            "text": "Only on Friday morning."
           },
           {
             "key": "C",
@@ -1048,10 +1048,10 @@
           },
           {
             "key": "D",
-            "text": "Only on Friday morning."
+            "text": "Next Monday and Tuesday."
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "Konuşmacı kulüp oryantasyonunun önümüzdeki Salı ve Çarşamba günleri yapılacağını (next Tuesday and Wednesday) ifade etmiştir."
       },
       {
@@ -1060,22 +1060,22 @@
         "options": [
           {
             "key": "A",
-            "text": "A high school diploma and passport."
-          },
-          {
-            "key": "B",
             "text": "A medical report and two photos."
           },
           {
+            "key": "B",
+            "text": "No documents are required."
+          },
+          {
             "key": "C",
-            "text": "A student transcript and bank receipt."
+            "text": "A high school diploma and passport."
           },
           {
             "key": "D",
-            "text": "No documents are required."
+            "text": "A student transcript and bank receipt."
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "Kayıt için bir sağlık raporu ve iki adet fotoğraf (a medical report and two photos) getirilmesi gerektiği belirtilmiştir."
       },
       {
@@ -1084,22 +1084,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Earning academic credits for graduation."
-          },
-          {
-            "key": "B",
-            "text": "Getting free lunch at the cafeteria."
-          },
-          {
-            "key": "C",
             "text": "Making lifelong friends."
           },
           {
-            "key": "D",
+            "key": "B",
             "text": "Avoiding attendance requirements."
+          },
+          {
+            "key": "C",
+            "text": "Earning academic credits for graduation."
+          },
+          {
+            "key": "D",
+            "text": "Getting free lunch at the cafeteria."
           }
         ],
-        "correct_answer": "C",
+        "correct_answer": "A",
         "explanation_tr": "Konuşmacı bir kulübe katılmanın ömür boyu sürecek dostluklar kurmanın en iyi yolu olduğunu (best way to make lifelong friends) söylemiştir."
       }
     ]
@@ -1129,22 +1129,22 @@
         "options": [
           {
             "key": "A",
-            "text": "To eliminate all motor vehicles from campus by 2025."
-          },
-          {
-            "key": "B",
-            "text": "To achieve complete carbon neutrality by 2030."
-          },
-          {
-            "key": "C",
             "text": "To double cafeteria capacity by 2035."
           },
           {
-            "key": "D",
+            "key": "B",
             "text": "To construct new solar buildings only."
+          },
+          {
+            "key": "C",
+            "text": "To achieve complete carbon neutrality by 2030."
+          },
+          {
+            "key": "D",
+            "text": "To eliminate all motor vehicles from campus by 2025."
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "Derste İTÜ'nün hedefinin 2030 yılına kadar tam karbon nötrlüğü sağlamak olduğu (carbon neutrality by 2030) açıkça belirtilmiştir."
       },
       {
@@ -1153,22 +1153,22 @@
         "options": [
           {
             "key": "A",
-            "text": "It is incinerated to generate campus electricity."
-          },
-          {
-            "key": "B",
-            "text": "It is sold to municipal waste contractors."
-          },
-          {
-            "key": "C",
             "text": "It is composted and used as fertilizer for green spaces."
           },
           {
-            "key": "D",
+            "key": "B",
             "text": "It is processed into animal feed for local farms."
+          },
+          {
+            "key": "C",
+            "text": "It is sold to municipal waste contractors."
+          },
+          {
+            "key": "D",
+            "text": "It is incinerated to generate campus electricity."
           }
         ],
-        "correct_answer": "C",
+        "correct_answer": "A",
         "explanation_tr": "Yemekhane organik atıklarının kompost tesisinde işlenerek kimyasal madde olmadan kampüs yeşil alanlarını gübrelemede kullanıldığı ifade edilmiştir."
       },
       {
@@ -1181,18 +1181,18 @@
           },
           {
             "key": "B",
-            "text": "Installing filtered water refilling stations across faculties."
+            "text": "Increasing plastic recycling taxes on campus."
           },
           {
             "key": "C",
-            "text": "Increasing plastic recycling taxes on campus."
+            "text": "Installing filtered water refilling stations across faculties."
           },
           {
             "key": "D",
             "text": "Providing free bottled water to all first-year students."
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "Fakültelere kurulan arıtmalı su doldurma istasyonları sayesinde tek kullanımlık pet şişelerin %80 azaldığı belirtilmiştir."
       }
     ]
@@ -1222,7 +1222,7 @@
         "options": [
           {
             "key": "A",
-            "text": "It requires fewer total hours of overall semester commitment."
+            "text": "It allows students to skip complex theoretical textbook chapters."
           },
           {
             "key": "B",
@@ -1230,7 +1230,7 @@
           },
           {
             "key": "C",
-            "text": "It allows students to skip complex theoretical textbook chapters."
+            "text": "It requires fewer total hours of overall semester commitment."
           },
           {
             "key": "D",
@@ -1250,18 +1250,18 @@
           },
           {
             "key": "B",
-            "text": "Testing oneself or summarizing concepts without looking at notes."
+            "text": "Reading lecture slides silently for multiple hours."
           },
           {
             "key": "C",
-            "text": "Reading lecture slides silently for multiple hours."
+            "text": "Testing oneself or summarizing concepts without looking at notes."
           },
           {
             "key": "D",
             "text": "Listening to classical music while reviewing vocabulary."
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "Aktif hatırlama, notlara bakmadan soru çözmek veya kavramları kendi cümleleriyle özetlemektir (summarizing concepts in their own words without looking at notes)."
       },
       {
@@ -1270,22 +1270,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Lack of cognitive intelligence."
-          },
-          {
-            "key": "B",
-            "text": "Ineffective study habits and poor time allocation."
-          },
-          {
-            "key": "C",
             "text": "Excessive campus extracurricular activities."
           },
           {
-            "key": "D",
+            "key": "B",
+            "text": "Lack of cognitive intelligence."
+          },
+          {
+            "key": "C",
             "text": "High cost of academic course books."
+          },
+          {
+            "key": "D",
+            "text": "Ineffective study habits and poor time allocation."
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "D",
         "explanation_tr": "Konuşmacı öğrencilerin zeka eksikliğinden değil, zamanlarını yanlış tahsis etmekten ve verimsiz çalışma yöntemlerinden (poor time allocation) zorlandığını söylemiştir."
       }
     ]
@@ -1320,18 +1320,18 @@
           },
           {
             "key": "B",
-            "text": "The classical boundary between subjective interiority and public expression."
+            "text": "The division between artificial intelligence and biological evolution."
           },
           {
             "key": "C",
-            "text": "The division between artificial intelligence and biological evolution."
+            "text": "The classical boundary between subjective interiority and public expression."
           },
           {
             "key": "D",
             "text": "The economic disparity between industrialized and emerging nations."
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "Konuşmacı içsel düşüncelerin çözülmesinin öznel iç dünya ile kamusal ifade arasındaki klasik Kartezyen sınırı (classical Cartesian boundary between subjective interiority and public expression) yıktığını belirtmiştir."
       },
       {
@@ -1340,22 +1340,22 @@
         "options": [
           {
             "key": "A",
-            "text": "It increases computational latency in medical diagnostic software."
-          },
-          {
-            "key": "B",
             "text": "It infringes upon the cognitive autonomy required for authentic voluntary consent."
           },
           {
-            "key": "C",
+            "key": "B",
             "text": "It diminishes financial returns for neurotechnology developers."
+          },
+          {
+            "key": "C",
+            "text": "It increases computational latency in medical diagnostic software."
           },
           {
             "key": "D",
             "text": "It invalidates mathematical models of cortical synchronization."
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "Deontolojik etiğe göre zihinsel özerklik ahlaki eylemliliğin önkoşuludur; zihinsel durumlara harici müdahale gönüllü rıza kavramını zedeler."
       },
       {
@@ -1364,29 +1364,29 @@
         "options": [
           {
             "key": "A",
-            "text": "Complete prohibition of all biomedical interface research."
-          },
-          {
-            "key": "B",
-            "text": "Establishing sui generis legal neuro-rights safeguarding mental privacy."
-          },
-          {
-            "key": "C",
             "text": "Privatizing cognitive algorithms under proprietary patents."
           },
           {
-            "key": "D",
+            "key": "B",
             "text": "Mandating cognitive enhancement implants for all citizens."
+          },
+          {
+            "key": "C",
+            "text": "Complete prohibition of all biomedical interface research."
+          },
+          {
+            "key": "D",
+            "text": "Establishing sui generis legal neuro-rights safeguarding mental privacy."
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "D",
         "explanation_tr": "Konuşmacı zihinsel mahremiyeti ve psikolojik sürekliliği güvence altına almak için 'sui generis neuro-rights' (özgün nöro-haklar) oluşturulması gerektiğini savunmuştur."
       }
     ]
   },
   {
     "id": "lis_odtu_c2",
-    "university_id": "odtu",
+    "university_id": "metu",
     "level": "C2",
     "type": "while_listening",
     "title": "Quantum Computational Paradigms & Cryptographic Resilience",
@@ -1409,22 +1409,22 @@
         "options": [
           {
             "key": "A",
-            "text": "It increases electricity consumption in classical server farms."
-          },
-          {
-            "key": "B",
             "text": "It reduces the intractability of integer factorization to polynomial time."
           },
           {
-            "key": "C",
+            "key": "B",
             "text": "It disables fiber-optic transmission lines physically."
           },
           {
-            "key": "D",
+            "key": "C",
             "text": "It introduces thermal noise into semiconductor chips."
+          },
+          {
+            "key": "D",
+            "text": "It increases electricity consumption in classical server farms."
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "Shor algoritması, RSA'nın dayandığı tamsayı çarpanlarına ayırma zorluğunu kuantum üst üste binme ile polinomik zamanda çözülebilir hale getirir."
       },
       {
@@ -1433,7 +1433,7 @@
         "options": [
           {
             "key": "A",
-            "text": "Lattice-based algebraic structures and learning-with-errors problems."
+            "text": "Pure brute-force enumeration of DES keys."
           },
           {
             "key": "B",
@@ -1441,14 +1441,14 @@
           },
           {
             "key": "C",
-            "text": "Classical Newtonian mechanics and optical mirrors."
+            "text": "Lattice-based algebraic structures and learning-with-errors problems."
           },
           {
             "key": "D",
-            "text": "Pure brute-force enumeration of DES keys."
+            "text": "Classical Newtonian mechanics and optical mirrors."
           }
         ],
-        "correct_answer": "A",
+        "correct_answer": "C",
         "explanation_tr": "Kuantum sonrası kriptografi, kuantum bilgisayarların dahi polinom zamanda çözemediği kafes tabanlı (lattice-based) cebirsel yapılara ve 'learning-with-errors' problemlerine dayanır."
       },
       {
@@ -1457,22 +1457,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Thermodynamic equilibrium and heat dissipation."
-          },
-          {
-            "key": "B",
-            "text": "The Heisenberg uncertainty principle and the no-cloning theorem."
-          },
-          {
-            "key": "C",
             "text": "Electromagnetic radiation shielding in underground tunnels."
           },
           {
-            "key": "D",
+            "key": "B",
+            "text": "Thermodynamic equilibrium and heat dissipation."
+          },
+          {
+            "key": "C",
             "text": "Radioactive decay rates of isotopic elements."
+          },
+          {
+            "key": "D",
+            "text": "The Heisenberg uncertainty principle and the no-cloning theorem."
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "D",
         "explanation_tr": "Kuantum anahtar dağıtımı (QKD), Heisenberg belirsizlik ilkesi ve kuantum klonlanamazlık teoremi sayesinde dinleme girişiminde dalga fonksiyonunun çökmesini sağlayarak izinsiz erişimi anında tespit eder."
       }
     ]
@@ -1507,7 +1507,7 @@
           },
           {
             "key": "B",
-            "text": "At 9:00 AM"
+            "text": "At 12:00 PM"
           },
           {
             "key": "C",
@@ -1515,7 +1515,7 @@
           },
           {
             "key": "D",
-            "text": "At 12:00 PM"
+            "text": "At 9:00 AM"
           }
         ],
         "correct_answer": "C",
@@ -1531,18 +1531,18 @@
           },
           {
             "key": "B",
-            "text": "Five books"
+            "text": "Ten books"
           },
           {
             "key": "C",
-            "text": "Seven books"
+            "text": "Five books"
           },
           {
             "key": "D",
-            "text": "Ten books"
+            "text": "Seven books"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "'First-year students can borrow up to five books for two weeks' ifadesi geçmektedir."
       },
       {
@@ -1555,18 +1555,18 @@
           },
           {
             "key": "B",
-            "text": "On the ground floor entrance"
+            "text": "In the outdoor garden"
           },
           {
             "key": "C",
-            "text": "On the second floor near the reference desk"
+            "text": "On the ground floor entrance"
           },
           {
             "key": "D",
-            "text": "In the outdoor garden"
+            "text": "On the second floor near the reference desk"
           }
         ],
-        "correct_answer": "C",
+        "correct_answer": "D",
         "explanation_tr": "Bilgisayarların 2. katta danışmanın (reference desk) yanında olduğu söylenmiştir."
       }
     ]
@@ -1596,7 +1596,7 @@
         "options": [
           {
             "key": "A",
-            "text": "Grammar tests in the cafeteria"
+            "text": "Sports competitions"
           },
           {
             "key": "B",
@@ -1604,7 +1604,7 @@
           },
           {
             "key": "C",
-            "text": "Sports competitions"
+            "text": "Grammar tests in the cafeteria"
           },
           {
             "key": "D",
@@ -1620,22 +1620,22 @@
         "options": [
           {
             "key": "A",
-            "text": "They receive extra homework"
-          },
-          {
-            "key": "B",
-            "text": "They must change their department"
-          },
-          {
-            "key": "C",
             "text": "They cannot take the final level exam"
           },
           {
-            "key": "D",
+            "key": "B",
             "text": "They pay an administrative fine"
+          },
+          {
+            "key": "C",
+            "text": "They receive extra homework"
+          },
+          {
+            "key": "D",
+            "text": "They must change their department"
           }
         ],
-        "correct_answer": "C",
+        "correct_answer": "A",
         "explanation_tr": "'If you miss more than twenty percent of classes, you cannot take the final level exam' denilmiştir."
       }
     ]
@@ -1664,22 +1664,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Mashed potatoes"
-          },
-          {
-            "key": "B",
             "text": "Rice"
           },
           {
+            "key": "B",
+            "text": "Mashed potatoes"
+          },
+          {
             "key": "C",
-            "text": "Pasta"
+            "text": "Mixed salad"
           },
           {
             "key": "D",
-            "text": "Mixed salad"
+            "text": "Pasta"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "Öğrenci açıkça 'Rice, please' cevabını vermiştir."
       },
       {
@@ -1688,7 +1688,7 @@
         "options": [
           {
             "key": "A",
-            "text": "Twenty liras"
+            "text": "Fifty liras"
           },
           {
             "key": "B",
@@ -1696,11 +1696,11 @@
           },
           {
             "key": "C",
-            "text": "Fifty liras"
+            "text": "Free of charge"
           },
           {
             "key": "D",
-            "text": "Free of charge"
+            "text": "Twenty liras"
           }
         ],
         "correct_answer": "B",
@@ -1733,11 +1733,11 @@
         "options": [
           {
             "key": "A",
-            "text": "Every five minutes"
+            "text": "Once an hour"
           },
           {
             "key": "B",
-            "text": "Every ten minutes"
+            "text": "Every five minutes"
           },
           {
             "key": "C",
@@ -1745,10 +1745,10 @@
           },
           {
             "key": "D",
-            "text": "Once an hour"
+            "text": "Every ten minutes"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "D",
         "explanation_tr": "Metinde 'every ten minutes between eight in the morning and six in the evening' denilmektedir."
       },
       {
@@ -1757,22 +1757,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Cash ticket"
-          },
-          {
-            "key": "B",
             "text": "Student transport card"
           },
           {
+            "key": "B",
+            "text": "Library membership form"
+          },
+          {
             "key": "C",
-            "text": "Passport"
+            "text": "Cash ticket"
           },
           {
             "key": "D",
-            "text": "Library membership form"
+            "text": "Passport"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "'Please show your student transport card to the driver' ifadesi yer almaktadır."
       }
     ]
@@ -1802,22 +1802,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Fifty liras per month"
-          },
-          {
-            "key": "B",
             "text": "One hundred liras annually"
           },
           {
+            "key": "B",
+            "text": "Fifty liras per month"
+          },
+          {
             "key": "C",
-            "text": "It is completely free"
+            "text": "Only senior students can join"
           },
           {
             "key": "D",
-            "text": "Only senior students can join"
+            "text": "It is completely free"
           }
         ],
-        "correct_answer": "C",
+        "correct_answer": "D",
         "explanation_tr": "'Joining a club is free for all enrolled students' cümlesi kulüplerin tamamen ücretsiz olduğunu belirtir."
       },
       {
@@ -1830,18 +1830,18 @@
           },
           {
             "key": "B",
-            "text": "At 4:00 PM"
+            "text": "At 6:00 PM"
           },
           {
             "key": "C",
-            "text": "At 6:00 PM"
+            "text": "At 4:00 PM"
           },
           {
             "key": "D",
             "text": "At midnight"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "'before four o'clock today' denilerek saat 16:00'da kapanacağı söylenmiştir."
       }
     ]
@@ -1874,18 +1874,18 @@
           },
           {
             "key": "B",
-            "text": "Shelf number four"
-          },
-          {
-            "key": "C",
             "text": "Shelf number seven"
           },
           {
-            "key": "D",
+            "key": "C",
             "text": "Behind the cash register"
+          },
+          {
+            "key": "D",
+            "text": "Shelf number four"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "D",
         "explanation_tr": "Görevli 'That textbook is on shelf number four' demiştir."
       },
       {
@@ -1894,22 +1894,22 @@
         "options": [
           {
             "key": "A",
-            "text": "On the sales receipt"
+            "text": "Inside the front cover of the book"
           },
           {
             "key": "B",
-            "text": "On the bookstore website"
+            "text": "On the sales receipt"
           },
           {
             "key": "C",
-            "text": "Inside the front cover of the book"
+            "text": "On the bookstore website"
           },
           {
             "key": "D",
             "text": "Sent by email"
           }
         ],
-        "correct_answer": "C",
+        "correct_answer": "A",
         "explanation_tr": "'there is an access code inside the front cover' bilgisi verilmiştir."
       }
     ]
@@ -1939,7 +1939,7 @@
         "options": [
           {
             "key": "A",
-            "text": "Only on Monday mornings"
+            "text": "After 8:00 PM"
           },
           {
             "key": "B",
@@ -1947,7 +1947,7 @@
           },
           {
             "key": "C",
-            "text": "After 8:00 PM"
+            "text": "Only on Monday mornings"
           },
           {
             "key": "D",
@@ -1963,11 +1963,11 @@
         "options": [
           {
             "key": "A",
-            "text": "Call the city hospital"
+            "text": "Book online via the student portal"
           },
           {
             "key": "B",
-            "text": "Book online via the student portal"
+            "text": "Visit in person on weekends"
           },
           {
             "key": "C",
@@ -1975,10 +1975,10 @@
           },
           {
             "key": "D",
-            "text": "Visit in person on weekends"
+            "text": "Call the city hospital"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "'please book an appointment online through the student medical portal' ifadesi geçer."
       }
     ]
@@ -2007,22 +2007,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Due to extreme summer heat"
-          },
-          {
-            "key": "B",
-            "text": "Because of heavy rain and wind"
-          },
-          {
-            "key": "C",
             "text": "The football field is under construction"
           },
           {
-            "key": "D",
+            "key": "B",
             "text": "Lack of referee availability"
+          },
+          {
+            "key": "C",
+            "text": "Due to extreme summer heat"
+          },
+          {
+            "key": "D",
+            "text": "Because of heavy rain and wind"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "D",
         "explanation_tr": "'expect heavy rain and cooler winds, so the outdoor football matches will be moved inside' denilmiştir."
       },
       {
@@ -2035,18 +2035,18 @@
           },
           {
             "key": "B",
-            "text": "Eighteen degrees"
+            "text": "Twenty-four degrees"
           },
           {
             "key": "C",
-            "text": "Twenty-four degrees"
+            "text": "Eighteen degrees"
           },
           {
             "key": "D",
             "text": "Thirty-five degrees"
           }
         ],
-        "correct_answer": "C",
+        "correct_answer": "B",
         "explanation_tr": "'temperatures climbing to twenty-four degrees' cümlesi yer almaktadır."
       }
     ]
@@ -2075,7 +2075,7 @@
         "options": [
           {
             "key": "A",
-            "text": "Ten pages"
+            "text": "One hundred pages"
           },
           {
             "key": "B",
@@ -2083,14 +2083,14 @@
           },
           {
             "key": "C",
-            "text": "Fifty pages"
+            "text": "Ten pages"
           },
           {
             "key": "D",
-            "text": "One hundred pages"
+            "text": "Fifty pages"
           }
         ],
-        "correct_answer": "C",
+        "correct_answer": "D",
         "explanation_tr": "'Each student receives fifty free printed pages per month' ifadesi geçmektedir."
       },
       {
@@ -2103,18 +2103,18 @@
           },
           {
             "key": "B",
-            "text": "Computers reset automatically at midnight"
+            "text": "Internet access is restricted"
           },
           {
             "key": "C",
-            "text": "Internet access is restricted"
+            "text": "Computers reset automatically at midnight"
           },
           {
             "key": "D",
             "text": "The screens turn off during class"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "'all desktop computers reset automatically every night at midnight' denilmiştir."
       }
     ]
@@ -2144,23 +2144,23 @@
         "options": [
           {
             "key": "A",
-            "text": "In the sports cafeteria"
-          },
-          {
-            "key": "B",
-            "text": "In lecture hall B"
-          },
-          {
-            "key": "C",
             "text": "Inside the metro station"
           },
           {
-            "key": "D",
+            "key": "B",
+            "text": "In the sports cafeteria"
+          },
+          {
+            "key": "C",
             "text": "At the campus gate"
+          },
+          {
+            "key": "D",
+            "text": "In lecture hall B"
           }
         ],
-        "correct_answer": "B",
-        "explanation_tr": "'found in lecture hall B yesterday afternoon' denilmiştir."
+        "correct_answer": "D",
+        "explanation_tr": "'found in lecture hall D yesterday afternoon' denilmiştir."
       },
       {
         "id": "lis_a1_10_q2",
@@ -2168,22 +2168,22 @@
         "options": [
           {
             "key": "A",
-            "text": "A monetary reward"
+            "text": "A purchase receipt for the laptop"
           },
           {
             "key": "B",
-            "text": "A letter from the department dean"
-          },
-          {
-            "key": "C",
             "text": "Their official student ID card"
           },
           {
+            "key": "C",
+            "text": "A letter from the department dean"
+          },
+          {
             "key": "D",
-            "text": "A purchase receipt for the laptop"
+            "text": "A monetary reward"
           }
         ],
-        "correct_answer": "C",
+        "correct_answer": "B",
         "explanation_tr": "'Bring your official student ID card to claim your belongings' ifadesi yer alır."
       }
     ]
@@ -2214,7 +2214,7 @@
         "options": [
           {
             "key": "A",
-            "text": "At 5:00 AM"
+            "text": "At 8:30 AM"
           },
           {
             "key": "B",
@@ -2222,7 +2222,7 @@
           },
           {
             "key": "C",
-            "text": "At 8:30 AM"
+            "text": "At 5:00 AM"
           },
           {
             "key": "D",
@@ -2238,22 +2238,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Hotel accommodations"
-          },
-          {
-            "key": "B",
             "text": "Breakfast meals"
           },
           {
+            "key": "B",
+            "text": "Chartered bus transportation"
+          },
+          {
             "key": "C",
-            "text": "Dinner expenses"
+            "text": "Hotel accommodations"
           },
           {
             "key": "D",
-            "text": "Chartered bus transportation"
+            "text": "Dinner expenses"
           }
         ],
-        "correct_answer": "C",
+        "correct_answer": "D",
         "explanation_tr": "'students are responsible for their own dinner expenses' denilmiştir."
       }
     ]
@@ -2283,22 +2283,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Nearly ten percent"
-          },
-          {
-            "key": "B",
-            "text": "Nearly twenty-five percent"
-          },
-          {
-            "key": "C",
             "text": "Nearly fifty percent"
           },
           {
-            "key": "D",
+            "key": "B",
             "text": "One hundred percent"
+          },
+          {
+            "key": "C",
+            "text": "Nearly ten percent"
+          },
+          {
+            "key": "D",
+            "text": "Nearly twenty-five percent"
           }
         ],
-        "correct_answer": "C",
+        "correct_answer": "A",
         "explanation_tr": "'humans forget nearly fifty percent of newly learned information within twenty-four hours' bilgisi verilir."
       },
       {
@@ -2311,18 +2311,18 @@
           },
           {
             "key": "B",
-            "text": "They transfer knowledge into permanent long-term storage"
+            "text": "They automatically grade essay exams"
           },
           {
             "key": "C",
-            "text": "They automatically grade essay exams"
+            "text": "They transfer knowledge into permanent long-term storage"
           },
           {
             "key": "D",
             "text": "They eliminate all grammar errors"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "'allows language students to transfer words from short-term memory into permanent long-term storage' denilmiştir."
       }
     ]
@@ -2352,22 +2352,22 @@
         "options": [
           {
             "key": "A",
-            "text": "It generates double the electrical output"
-          },
-          {
-            "key": "B",
-            "text": "It automatically shuts down for safety"
-          },
-          {
-            "key": "C",
             "text": "Its blades reverse rotational direction"
           },
           {
-            "key": "D",
+            "key": "B",
+            "text": "It generates double the electrical output"
+          },
+          {
+            "key": "C",
             "text": "It switches to solar mode"
+          },
+          {
+            "key": "D",
+            "text": "It automatically shuts down for safety"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "D",
         "explanation_tr": "'automatically shut down during extreme gales exceeding twenty-five meters per second to prevent mechanical failure' denilmiştir."
       },
       {
@@ -2380,18 +2380,18 @@
           },
           {
             "key": "B",
-            "text": "Lift force"
-          },
-          {
-            "key": "C",
             "text": "Frictional resistance"
           },
           {
-            "key": "D",
+            "key": "C",
             "text": "Magnetic repulsion"
+          },
+          {
+            "key": "D",
+            "text": "Lift force"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "D",
         "explanation_tr": "'as wind passes over them, lift force causes the rotor to spin' bilgisi açıkça yer alır."
       }
     ]
@@ -2425,11 +2425,11 @@
           },
           {
             "key": "B",
-            "text": "By migrating nomadic hunters"
+            "text": "Via medieval railway routes"
           },
           {
             "key": "C",
-            "text": "Via medieval railway routes"
+            "text": "By migrating nomadic hunters"
           },
           {
             "key": "D",
@@ -2445,7 +2445,7 @@
         "options": [
           {
             "key": "A",
-            "text": "They require continuous daily rain"
+            "text": "They cannot survive sunlight"
           },
           {
             "key": "B",
@@ -2453,11 +2453,11 @@
           },
           {
             "key": "C",
-            "text": "They only grow in dense rainforests"
+            "text": "They require continuous daily rain"
           },
           {
             "key": "D",
-            "text": "They cannot survive sunlight"
+            "text": "They only grow in dense rainforests"
           }
         ],
         "correct_answer": "B",
@@ -2491,22 +2491,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Insulin"
-          },
-          {
-            "key": "B",
             "text": "Melatonin"
           },
           {
+            "key": "B",
+            "text": "Dopamine"
+          },
+          {
             "key": "C",
-            "text": "Adrenaline"
+            "text": "Insulin"
           },
           {
             "key": "D",
-            "text": "Dopamine"
+            "text": "Adrenaline"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "'the brain suppresses the sleep hormone melatonin, making us alert' denilmiştir."
       },
       {
@@ -2515,11 +2515,11 @@
         "options": [
           {
             "key": "A",
-            "text": "Blue light disrupts evening melatonin secretion"
+            "text": "It stimulates ear canal infections"
           },
           {
             "key": "B",
-            "text": "It lowers body temperature too rapidly"
+            "text": "Blue light disrupts evening melatonin secretion"
           },
           {
             "key": "C",
@@ -2527,10 +2527,10 @@
           },
           {
             "key": "D",
-            "text": "It stimulates ear canal infections"
+            "text": "It lowers body temperature too rapidly"
           }
         ],
-        "correct_answer": "A",
+        "correct_answer": "B",
         "explanation_tr": "'Exposing eyes to bright blue light from smartphone screens before bed disrupts melatonin secretion' ifadesi yer alır."
       }
     ]
@@ -2560,22 +2560,22 @@
         "options": [
           {
             "key": "A",
-            "text": "It carves material from large solid metal blocks"
-          },
-          {
-            "key": "B",
-            "text": "It deposits successive layers of material on top of each other"
-          },
-          {
-            "key": "C",
             "text": "It requires manual hand carving"
           },
           {
-            "key": "D",
+            "key": "B",
+            "text": "It carves material from large solid metal blocks"
+          },
+          {
+            "key": "C",
             "text": "It only produces two-dimensional paper printouts"
+          },
+          {
+            "key": "D",
+            "text": "It deposits successive layers of material on top of each other"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "D",
         "explanation_tr": "'a 3D printer deposits successive layers of plastic, resin, or metal powder on top of each other' denilmiştir."
       },
       {
@@ -2584,22 +2584,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Automotive tire retreading"
-          },
-          {
-            "key": "B",
             "text": "Medical prosthetics"
           },
           {
+            "key": "B",
+            "text": "Textile spinning"
+          },
+          {
             "key": "C",
-            "text": "Oil refining"
+            "text": "Automotive tire retreading"
           },
           {
             "key": "D",
-            "text": "Textile spinning"
+            "text": "Oil refining"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "'custom medical prosthetics, and architectural modeling' cümlesi mevcuttur."
       }
     ]
@@ -2628,22 +2628,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Cities have no rain"
-          },
-          {
-            "key": "B",
             "text": "Urban flowers are free from intensive agricultural pesticides"
           },
           {
-            "key": "C",
+            "key": "B",
             "text": "Urban bees are fed artificial sugar water"
+          },
+          {
+            "key": "C",
+            "text": "Cities have no rain"
           },
           {
             "key": "D",
             "text": "Hives are kept indoors at warm temperatures"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "Metinde kırsaldaki monokültür ve kimyasal ilaçlamaya (insecticides) kıyasla şehirde çeşitlilik ve pestisitsiz çiçekler vurgulanmıştır."
       },
       {
@@ -2660,11 +2660,11 @@
           },
           {
             "key": "C",
-            "text": "Eradication of mosquito larvae"
+            "text": "Cleaning soil pollutants"
           },
           {
             "key": "D",
-            "text": "Cleaning soil pollutants"
+            "text": "Eradication of mosquito larvae"
           }
         ],
         "correct_answer": "A",
@@ -2697,22 +2697,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Through tension in cables and compression down the towers"
+            "text": "Only through horizontal steel beams"
           },
           {
             "key": "B",
-            "text": "Through floating pontoons beneath the deck"
-          },
-          {
-            "key": "C",
             "text": "Via magnetic repulsion rails"
           },
           {
+            "key": "C",
+            "text": "Through tension in cables and compression down the towers"
+          },
+          {
             "key": "D",
-            "text": "Only through horizontal steel beams"
+            "text": "Through floating pontoons beneath the deck"
           }
         ],
-        "correct_answer": "A",
+        "correct_answer": "C",
         "explanation_tr": "'transfers upward into tension along the cables, and then downward into compression through the towers' ifadesi yer alır."
       },
       {
@@ -2721,11 +2721,11 @@
         "options": [
           {
             "key": "A",
-            "text": "Oldest operational bridge"
+            "text": "First bridge made entirely of carbon fiber"
           },
           {
             "key": "B",
-            "text": "Longest main suspension span in the world"
+            "text": "Oldest operational bridge"
           },
           {
             "key": "C",
@@ -2733,10 +2733,10 @@
           },
           {
             "key": "D",
-            "text": "First bridge made entirely of carbon fiber"
+            "text": "Longest main suspension span in the world"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "D",
         "explanation_tr": "'holds the world record for the longest main suspension span, measuring 2,023 meters' denilmiştir."
       }
     ]
@@ -2771,18 +2771,18 @@
           },
           {
             "key": "B",
-            "text": "Up to fifty percent of water is lost to evaporation and runoff"
-          },
-          {
-            "key": "C",
             "text": "Plant roots cannot absorb untreated freshwater"
           },
           {
-            "key": "D",
+            "key": "C",
             "text": "It damages underground electrical lines"
+          },
+          {
+            "key": "D",
+            "text": "Up to fifty percent of water is lost to evaporation and runoff"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "D",
         "explanation_tr": "'Conventional flood irrigation is notoriously wasteful, losing up to fifty percent of water to surface evaporation and runoff' denilmiştir."
       },
       {
@@ -2791,22 +2791,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Ten percent water savings with lower crop yield"
-          },
-          {
-            "key": "B",
             "text": "Thirty-five percent water reduction and twelve percent yield increase"
           },
           {
-            "key": "C",
+            "key": "B",
             "text": "Complete soil salinization within six months"
           },
           {
-            "key": "D",
+            "key": "C",
             "text": "Higher electricity costs with no water savings"
+          },
+          {
+            "key": "D",
+            "text": "Ten percent water savings with lower crop yield"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "'diminish total agricultural water consumption by thirty-five percent while increasing crop yield by twelve percent' ifadesi geçer."
       }
     ]
@@ -2837,22 +2837,22 @@
         "options": [
           {
             "key": "A",
-            "text": "By increasing intracellular glucose oxidation"
-          },
-          {
-            "key": "B",
             "text": "By inhibiting peptidoglycan cell wall synthesis"
           },
           {
+            "key": "B",
+            "text": "By increasing intracellular glucose oxidation"
+          },
+          {
             "key": "C",
-            "text": "By blocking human hormone receptors"
+            "text": "By generating high body fever"
           },
           {
             "key": "D",
-            "text": "By generating high body fever"
+            "text": "By blocking human hormone receptors"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "'beta-lactam antibiotics inhibit the synthesis of peptidoglycan, the rigid structural molecule that forms bacterial cell walls' denilmiştir."
       },
       {
@@ -2861,11 +2861,11 @@
         "options": [
           {
             "key": "A",
-            "text": "Horizontal gene transfer via plasmids"
+            "text": "Airborne sound vibrations"
           },
           {
             "key": "B",
-            "text": "Airborne sound vibrations"
+            "text": "Horizontal gene transfer via plasmids"
           },
           {
             "key": "C",
@@ -2876,7 +2876,7 @@
             "text": "Cellular respiration shutdown"
           }
         ],
-        "correct_answer": "A",
+        "correct_answer": "B",
         "explanation_tr": "'Through spontaneous genetic mutation and horizontal gene transfer via plasmids' bilgisi verilmiştir."
       }
     ]
@@ -2931,22 +2931,22 @@
         "options": [
           {
             "key": "A",
-            "text": "First"
+            "text": "Twentieth"
           },
           {
             "key": "B",
-            "text": "Fourth"
+            "text": "First"
           },
           {
             "key": "C",
-            "text": "Tenth"
+            "text": "Fourth"
           },
           {
             "key": "D",
-            "text": "Twentieth"
+            "text": "Tenth"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "'Turkey is currently ranked fourth globally in installed geothermal electricity capacity' cümlesi mevcuttur."
       }
     ]
@@ -3006,18 +3006,18 @@
           },
           {
             "key": "B",
-            "text": "Human cognitive heuristics and trust"
+            "text": "Outdated screen monitors"
           },
           {
             "key": "C",
-            "text": "Satellite weather interference"
+            "text": "Human cognitive heuristics and trust"
           },
           {
             "key": "D",
-            "text": "Outdated screen monitors"
+            "text": "Satellite weather interference"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "'malicious actors exploit human cognitive heuristics through deception' ifadesi geçer."
       }
     ]
@@ -3047,22 +3047,22 @@
         "options": [
           {
             "key": "A",
-            "text": "By measuring microwave radiation from tree bark"
+            "text": "By measuring soil temperature variations"
           },
           {
             "key": "B",
-            "text": "By calculating the ratio between absorbed red light and reflected near-infrared"
-          },
-          {
-            "key": "C",
             "text": "By detecting nitrogen gas release from leaves"
           },
           {
+            "key": "C",
+            "text": "By calculating the ratio between absorbed red light and reflected near-infrared"
+          },
+          {
             "key": "D",
-            "text": "By measuring soil temperature variations"
+            "text": "By measuring microwave radiation from tree bark"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "'healthy plant chlorophyll absorbs red light while strongly reflecting near-infrared radiation, agronomists calculate the Normalized Difference Vegetation Index' denilmiştir."
       },
       {
@@ -3071,7 +3071,7 @@
         "options": [
           {
             "key": "A",
-            "text": "They operate without battery power"
+            "text": "They replace all ground weather stations"
           },
           {
             "key": "B",
@@ -3083,7 +3083,7 @@
           },
           {
             "key": "D",
-            "text": "They replace all ground weather stations"
+            "text": "They operate without battery power"
           }
         ],
         "correct_answer": "B",
@@ -3120,18 +3120,18 @@
           },
           {
             "key": "B",
-            "text": "They detect human body heat signatures beneath debris and in darkness"
+            "text": "They purify contaminated city drinking water"
           },
           {
             "key": "C",
-            "text": "They purify contaminated city drinking water"
+            "text": "They detect human body heat signatures beneath debris and in darkness"
           },
           {
             "key": "D",
             "text": "They repair electrical grid cables"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "'Thermal infrared sensors detect human body heat signatures even under concrete debris or at night' denilmiştir."
       },
       {
@@ -3148,11 +3148,11 @@
           },
           {
             "key": "C",
-            "text": "By emitting high-frequency acoustic sirens"
+            "text": "By using laser projection on clouds"
           },
           {
             "key": "D",
-            "text": "By using laser projection on clouds"
+            "text": "By emitting high-frequency acoustic sirens"
           }
         ],
         "correct_answer": "B",
@@ -3185,11 +3185,11 @@
         "options": [
           {
             "key": "A",
-            "text": "There are no alternative products available in stores"
+            "text": "Brands serve as psychological extensions of their personal identity and values"
           },
           {
             "key": "B",
-            "text": "Brands serve as psychological extensions of their personal identity and values"
+            "text": "There are no alternative products available in stores"
           },
           {
             "key": "C",
@@ -3200,7 +3200,7 @@
             "text": "Advertising laws forbid price comparisons"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "'brands function as psychological symbols through which individuals express their ideal self-concept and social group belonging' denilmiştir."
       },
       {
@@ -3209,11 +3209,11 @@
         "options": [
           {
             "key": "A",
-            "text": "Activation in neural regions associated with interpersonal affection"
+            "text": "Sudden drops in auditory brain processing"
           },
           {
             "key": "B",
-            "text": "Sudden drops in auditory brain processing"
+            "text": "Elevated physical pain responses"
           },
           {
             "key": "C",
@@ -3221,10 +3221,10 @@
           },
           {
             "key": "D",
-            "text": "Elevated physical pain responses"
+            "text": "Activation in neural regions associated with interpersonal affection"
           }
         ],
-        "correct_answer": "A",
+        "correct_answer": "D",
         "explanation_tr": "'exhibit brain activation patterns in regions associated with interpersonal affection when viewing preferred brand logos' bilgisi verilir."
       }
     ]
@@ -3262,11 +3262,11 @@
           },
           {
             "key": "C",
-            "text": "Electric currents that evaporate seawater instantly"
+            "text": "Chemical chlorine additives embedded in the lattice"
           },
           {
             "key": "D",
-            "text": "Chemical chlorine additives embedded in the lattice"
+            "text": "Electric currents that evaporate seawater instantly"
           }
         ],
         "correct_answer": "B",
@@ -3278,22 +3278,22 @@
         "options": [
           {
             "key": "A",
-            "text": "By five percent"
+            "text": "No energy savings are expected"
           },
           {
             "key": "B",
-            "text": "By up to fifty percent"
+            "text": "By five percent"
           },
           {
             "key": "C",
-            "text": "By ninety-nine percent"
+            "text": "By up to fifty percent"
           },
           {
             "key": "D",
-            "text": "No energy savings are expected"
+            "text": "By ninety-nine percent"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "'reduce the energy consumption of industrial seawater desalination by up to fifty percent' ifadesi mevcuttur."
       }
     ]
@@ -3332,11 +3332,11 @@
           },
           {
             "key": "C",
-            "text": "Visible only under electron microscopes"
+            "text": "Under one nanometer"
           },
           {
             "key": "D",
-            "text": "Under one nanometer"
+            "text": "Visible only under electron microscopes"
           }
         ],
         "correct_answer": "A",
@@ -3348,7 +3348,7 @@
         "options": [
           {
             "key": "A",
-            "text": "They evaporate and increase water salinity"
+            "text": "They freeze ocean surface currents"
           },
           {
             "key": "B",
@@ -3360,7 +3360,7 @@
           },
           {
             "key": "D",
-            "text": "They freeze ocean surface currents"
+            "text": "They evaporate and increase water salinity"
           }
         ],
         "correct_answer": "B",
@@ -3395,22 +3395,22 @@
         "options": [
           {
             "key": "A",
-            "text": "By imposing heavy financial criminal penalties"
-          },
-          {
-            "key": "B",
             "text": "By altering choice architecture without forbidding options or changing economic payoffs"
           },
           {
+            "key": "B",
+            "text": "By imposing heavy financial criminal penalties"
+          },
+          {
             "key": "C",
-            "text": "By eliminating all consumer choices entirely"
+            "text": "By broadcasting mandatory television propaganda"
           },
           {
             "key": "D",
-            "text": "By broadcasting mandatory television propaganda"
+            "text": "By eliminating all consumer choices entirely"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "'alters the context in which individuals make choices without forbidding any options or altering economic incentives' denilmiştir."
       },
       {
@@ -3419,22 +3419,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Citizens receive monthly tax deductions"
+            "text": "Doctors choose donors randomly without patient consent"
           },
           {
             "key": "B",
-            "text": "They leverage human status-quo bias and inertia as the default setting"
-          },
-          {
-            "key": "C",
             "text": "Citizens are threatened with legal prosecution"
           },
           {
+            "key": "C",
+            "text": "Citizens receive monthly tax deductions"
+          },
+          {
             "key": "D",
-            "text": "Doctors choose donors randomly without patient consent"
+            "text": "They leverage human status-quo bias and inertia as the default setting"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "D",
         "explanation_tr": "'Simply altering the default choice leverages human status-quo inertia to save thousands of lives' ifadesi yer alır."
       }
     ]
@@ -3469,7 +3469,7 @@
           },
           {
             "key": "B",
-            "text": "The principle of quantum superposition"
+            "text": "Classical binary logic gates"
           },
           {
             "key": "C",
@@ -3477,10 +3477,10 @@
           },
           {
             "key": "D",
-            "text": "Classical binary logic gates"
+            "text": "The principle of quantum superposition"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "D",
         "explanation_tr": "'The first fundamental principle is quantum superposition ... a qubit can exist in a linear combination of both zero and one simultaneously' denilmiştir."
       },
       {
@@ -3489,22 +3489,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Through physical fiber-optic cables"
+            "text": "By synchronizing their battery recharge cycles"
           },
           {
             "key": "B",
-            "text": "Measuring one qubit instantaneously determines the state of its partner across space"
-          },
-          {
-            "key": "C",
             "text": "By increasing mechanical resistance between processors"
           },
           {
+            "key": "C",
+            "text": "Through physical fiber-optic cables"
+          },
+          {
             "key": "D",
-            "text": "By synchronizing their battery recharge cycles"
+            "text": "Measuring one qubit instantaneously determines the state of its partner across space"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "D",
         "explanation_tr": "'measurement of one qubit instantaneously determines the state of its paired partner, regardless of physical separation' bilgisi verilir."
       }
     ]
@@ -3536,22 +3536,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Excessive water transparency"
-          },
-          {
-            "key": "B",
             "text": "Low albedo and high thermal heat retention"
           },
           {
-            "key": "C",
+            "key": "B",
             "text": "High electrical conductivity"
           },
           {
-            "key": "D",
+            "key": "C",
             "text": "Frequent chemical combustion"
+          },
+          {
+            "key": "D",
+            "text": "Excessive water transparency"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "'dark asphalt roadways and dense concrete structures possess high thermal mass and low albedo, absorbing solar radiation' denilmiştir."
       },
       {
@@ -3560,22 +3560,22 @@
         "options": [
           {
             "key": "A",
-            "text": "By reflecting radar signals"
-          },
-          {
-            "key": "B",
-            "text": "Through evapotranspirative cooling and reduced solar heat absorption"
-          },
-          {
-            "key": "C",
             "text": "By absorbing city noise pollution exclusively"
           },
           {
-            "key": "D",
+            "key": "B",
             "text": "By generating artificial wind currents"
+          },
+          {
+            "key": "C",
+            "text": "Through evapotranspirative cooling and reduced solar heat absorption"
+          },
+          {
+            "key": "D",
+            "text": "By reflecting radar signals"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "'vegetative green roofs reduces surface absorption and promotes evapotranspirative cooling' ifadesi yer alır."
       }
     ]
@@ -3610,18 +3610,18 @@
           },
           {
             "key": "B",
-            "text": "The 'food versus fuel' conflict causing grain price spikes and food insecurity"
+            "text": "Severe shortages of copper catalyst metals"
           },
           {
             "key": "C",
-            "text": "Engines corroding within twenty-four hours"
+            "text": "The 'food versus fuel' conflict causing grain price spikes and food insecurity"
           },
           {
             "key": "D",
-            "text": "Severe shortages of copper catalyst metals"
+            "text": "Engines corroding within twenty-four hours"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "'sparked the food versus fuel debate, as diverting arable farmland toward ethanol production precipitated global grain price inflation' denilmiştir."
       },
       {
@@ -3630,22 +3630,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Refined white sugar exclusively"
-          },
-          {
-            "key": "B",
             "text": "Non-edible lignocellulosic agricultural residues and energy grasses"
           },
           {
+            "key": "B",
+            "text": "Refined white sugar exclusively"
+          },
+          {
             "key": "C",
-            "text": "Purified petroleum distillates"
+            "text": "Dairy milk proteins"
           },
           {
             "key": "D",
-            "text": "Dairy milk proteins"
+            "text": "Purified petroleum distillates"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "'second-generation advanced biofuels utilize non-food lignocellulosic biomass, including agricultural residues like wheat straw' bilgisi mevcuttur."
       }
     ]
@@ -3677,7 +3677,7 @@
         "options": [
           {
             "key": "A",
-            "text": "They have full authority to rewrite corporate bylaws"
+            "text": "They are exempt from all federal tax laws"
           },
           {
             "key": "B",
@@ -3689,7 +3689,7 @@
           },
           {
             "key": "D",
-            "text": "They are exempt from all federal tax laws"
+            "text": "They have full authority to rewrite corporate bylaws"
           }
         ],
         "correct_answer": "B",
@@ -3701,22 +3701,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Mandatory public television interviews"
+            "text": "Automatic transfer to a government agency"
           },
           {
             "key": "B",
-            "text": "Confidential anonymous reporting channels and shields against employer retaliation"
-          },
-          {
-            "key": "C",
             "text": "Instant promotion to the board of directors"
           },
           {
+            "key": "C",
+            "text": "Mandatory public television interviews"
+          },
+          {
             "key": "D",
-            "text": "Automatic transfer to a government agency"
+            "text": "Confidential anonymous reporting channels and shields against employer retaliation"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "D",
         "explanation_tr": "'These laws mandate confidential anonymous reporting channels, enforce punitive statutory damages against employers who retaliate' denilmiştir."
       }
     ]
@@ -3746,11 +3746,11 @@
         "options": [
           {
             "key": "A",
-            "text": "Tranquil intellectual reflection"
+            "text": "Righteous moral indignation and visceral outrage"
           },
           {
             "key": "B",
-            "text": "Righteous moral indignation and visceral outrage"
+            "text": "Tranquil intellectual reflection"
           },
           {
             "key": "C",
@@ -3761,7 +3761,7 @@
             "text": "Mathematical skepticism"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "'recommendation algorithms prioritize content that triggers intense visceral arousal, particularly righteous moral indignation' denilmiştir."
       },
       {
@@ -3770,22 +3770,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Rapid deflation of corporate tech stocks"
+            "text": "Higher voter turnout across all demographics"
           },
           {
             "key": "B",
-            "text": "Democratic governance degenerates into acute affective polarization"
+            "text": "Rapid deflation of corporate tech stocks"
           },
           {
             "key": "C",
-            "text": "Higher voter turnout across all demographics"
+            "text": "Democratic governance degenerates into acute affective polarization"
           },
           {
             "key": "D",
             "text": "Decreased municipal broadband infrastructure spending"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "'destroys the shared empirical baseline ... governance degenerates into affective polarization' ifadesi geçer."
       }
     ]
@@ -3815,22 +3815,22 @@
         "options": [
           {
             "key": "A",
-            "text": "It permanently deletes all declarative linguistic memories"
-          },
-          {
-            "key": "B",
-            "text": "It replays firing sequences via sharp-wave ripples to transfer memories to the neocortex"
-          },
-          {
-            "key": "C",
             "text": "It synthesizes physical bone calcium reserves"
           },
           {
-            "key": "D",
+            "key": "B",
+            "text": "It permanently deletes all declarative linguistic memories"
+          },
+          {
+            "key": "C",
             "text": "It slows down cardiac muscle contraction"
+          },
+          {
+            "key": "D",
+            "text": "It replays firing sequences via sharp-wave ripples to transfer memories to the neocortex"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "D",
         "explanation_tr": "'the hippocampus acts as a temporary buffer, replaying newly acquired neuronal firing sequences to the neocortex via sharp-wave ripples' denilmiştir."
       },
       {
@@ -3839,22 +3839,22 @@
         "options": [
           {
             "key": "A",
-            "text": "It downscales redundant neural connections to optimize metabolic efficiency"
-          },
-          {
-            "key": "B",
             "text": "It induces permanent motor paralysis after waking"
           },
           {
-            "key": "C",
+            "key": "B",
             "text": "It generates auditory hallucinations exclusively"
+          },
+          {
+            "key": "C",
+            "text": "It downscales redundant neural connections to optimize metabolic efficiency"
           },
           {
             "key": "D",
             "text": "It halts all blood circulation to the brain"
           }
         ],
-        "correct_answer": "A",
+        "correct_answer": "C",
         "explanation_tr": "'synaptic pruning downscales redundant neural connections, optimizing metabolic efficiency' bilgisi verilir."
       }
     ]
@@ -3892,11 +3892,11 @@
           },
           {
             "key": "C",
-            "text": "They forgive national debts unconditionally"
+            "text": "They establish international commercial trading banks"
           },
           {
             "key": "D",
-            "text": "They establish international commercial trading banks"
+            "text": "They forgive national debts unconditionally"
           }
         ],
         "correct_answer": "B",
@@ -3912,18 +3912,18 @@
           },
           {
             "key": "B",
-            "text": "Supermajority approval legally binds all outstanding bondholders to the modified terms"
+            "text": "They eliminate all bond trading on secondary markets"
           },
           {
             "key": "C",
-            "text": "They eliminate all bond trading on secondary markets"
+            "text": "Supermajority approval legally binds all outstanding bondholders to the modified terms"
           },
           {
             "key": "D",
             "text": "They replace commercial currency with gold bullion"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "'if a supermajority of creditors ... approves a restructuring agreement, the modified financial terms become legally binding across all outstanding bondholders' denilmiştir."
       }
     ]
@@ -3961,11 +3961,11 @@
           },
           {
             "key": "C",
-            "text": "Ice melting halts the flow of atmospheric oxygen"
+            "text": "It triggers immediate global tectonic shifts"
           },
           {
             "key": "D",
-            "text": "It triggers immediate global tectonic shifts"
+            "text": "Ice melting halts the flow of atmospheric oxygen"
           }
         ],
         "correct_answer": "A",
@@ -3977,11 +3977,11 @@
         "options": [
           {
             "key": "A",
-            "text": "It permanently freezes transatlantic shipping lanes"
+            "text": "It releases sequestered methane, which is eighty times more potent than carbon dioxide in the short term"
           },
           {
             "key": "B",
-            "text": "It releases sequestered methane, which is eighty times more potent than carbon dioxide in the short term"
+            "text": "It eliminates the Earth's geomagnetic field"
           },
           {
             "key": "C",
@@ -3989,10 +3989,10 @@
           },
           {
             "key": "D",
-            "text": "It eliminates the Earth's geomagnetic field"
+            "text": "It permanently freezes transatlantic shipping lanes"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "'methane possesses a greenhouse warming potential approximately eighty times greater than carbon dioxide over a twenty-year horizon' ifadesi yer alır."
       }
     ]
@@ -4031,11 +4031,11 @@
           },
           {
             "key": "C",
-            "text": "By freezing DNA at absolute zero"
+            "text": "Through manual mechanical carving of protein atoms"
           },
           {
             "key": "D",
-            "text": "Through manual mechanical carving of protein atoms"
+            "text": "By freezing DNA at absolute zero"
           }
         ],
         "correct_answer": "B",
@@ -4092,11 +4092,11 @@
         "options": [
           {
             "key": "A",
-            "text": "The expense of conducting national legislative elections"
+            "text": "The regulation of commercial lobbying contributions"
           },
           {
             "key": "B",
-            "text": "The philosophical tension of unelected judges invalidating laws passed by elected majorities"
+            "text": "The expense of conducting national legislative elections"
           },
           {
             "key": "C",
@@ -4104,10 +4104,10 @@
           },
           {
             "key": "D",
-            "text": "The regulation of commercial lobbying contributions"
+            "text": "The philosophical tension of unelected judges invalidating laws passed by elected majorities"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "D",
         "explanation_tr": "'how can a constitutional democracy justify allowing a small panel of unelected, life-tenured judges to overturn laws passed by the democratically elected representatives' denilmiştir."
       },
       {
@@ -4116,7 +4116,7 @@
         "options": [
           {
             "key": "A",
-            "text": "It guarantees that parliaments never meet"
+            "text": "It replaces political parties with civil servants"
           },
           {
             "key": "B",
@@ -4128,7 +4128,7 @@
           },
           {
             "key": "D",
-            "text": "It replaces political parties with civil servants"
+            "text": "It guarantees that parliaments never meet"
           }
         ],
         "correct_answer": "B",
@@ -4162,22 +4162,22 @@
         "options": [
           {
             "key": "A",
-            "text": "All scientific theories can be definitively proven true using mathematics alone"
-          },
-          {
-            "key": "B",
             "text": "Empirical evidence is insufficient to uniquely determine a single scientific theory over rival paradigms"
           },
           {
+            "key": "B",
+            "text": "All scientific theories can be definitively proven true using mathematics alone"
+          },
+          {
             "key": "C",
-            "text": "Physical reality does not exist outside the human mind"
+            "text": "Hypothesis testing requires no auxiliary experimental assumptions"
           },
           {
             "key": "D",
-            "text": "Hypothesis testing requires no auxiliary experimental assumptions"
+            "text": "Physical reality does not exist outside the human mind"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "'multiple rival theoretical paradigms can remain logically compatible with identical empirical data sets' denilmiştir."
       },
       {
@@ -4186,7 +4186,7 @@
         "options": [
           {
             "key": "A",
-            "text": "As an interconnected holistic web of belief"
+            "text": "As pure sensory illusion devoid of syntax"
           },
           {
             "key": "B",
@@ -4194,14 +4194,14 @@
           },
           {
             "key": "C",
-            "text": "As an immutable theological hierarchy"
+            "text": "As an interconnected holistic web of belief"
           },
           {
             "key": "D",
-            "text": "As pure sensory illusion devoid of syntax"
+            "text": "As an immutable theological hierarchy"
           }
         ],
-        "correct_answer": "A",
+        "correct_answer": "C",
         "explanation_tr": "'faces the tribunal of experience not as disconnected propositions, but as an interconnected web of belief' ifadesi mevcuttur."
       }
     ]
@@ -4239,11 +4239,11 @@
           },
           {
             "key": "C",
-            "text": "The boundary between alternating and direct electrical current"
+            "text": "The divide between ancient and medieval Latin syntax"
           },
           {
             "key": "D",
-            "text": "The divide between ancient and medieval Latin syntax"
+            "text": "The boundary between alternating and direct electrical current"
           }
         ],
         "correct_answer": "B",
@@ -4259,18 +4259,18 @@
           },
           {
             "key": "B",
-            "text": "Recognizing distributed non-human agency and human ecological imbrication"
+            "text": "A return to pre-industrial feudal agriculture"
           },
           {
             "key": "C",
-            "text": "The immediate prohibition of all prosthetic medical technology"
+            "text": "Recognizing distributed non-human agency and human ecological imbrication"
           },
           {
             "key": "D",
-            "text": "A return to pre-industrial feudal agriculture"
+            "text": "The immediate prohibition of all prosthetic medical technology"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "'demands acknowledging non-human agency and technological imbrication, recognizing that human subjectivity is fundamentally distributed' ifadesi yer alır."
       }
     ]
@@ -4304,18 +4304,18 @@
           },
           {
             "key": "B",
-            "text": "The reduction of objective reason to instrumental rationality and technical calculation"
+            "text": "The refusal of scholars to utilize mathematics"
           },
           {
             "key": "C",
-            "text": "The complete abolition of written legal constitutions"
+            "text": "The reduction of objective reason to instrumental rationality and technical calculation"
           },
           {
             "key": "D",
-            "text": "The refusal of scholars to utilize mathematics"
+            "text": "The complete abolition of written legal constitutions"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "'Their diagnosis centered upon the catastrophic degeneration of subjective reason into pure instrumental rationality' denilmiştir."
       },
       {
@@ -4324,11 +4324,11 @@
         "options": [
           {
             "key": "A",
-            "text": "As autonomous, inviolable moral sovereigns"
+            "text": "As quantifiable, manipulable objects of administrative and economic control"
           },
           {
             "key": "B",
-            "text": "As quantifiable, manipulable objects of administrative and economic control"
+            "text": "As autonomous, inviolable moral sovereigns"
           },
           {
             "key": "C",
@@ -4339,7 +4339,7 @@
             "text": "As non-cognitive biological flora"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "'nature—and ultimately human beings themselves—were reduced to quantifiable, manipulable objects of administrative control' bilgisi geçer."
       }
     ]
@@ -4370,22 +4370,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Umgebung is microscopic while Umwelt is macroscopic"
-          },
-          {
-            "key": "B",
-            "text": "Umgebung is the objective physical environment, whereas Umwelt is the organism's subjective perceptual reality"
-          },
-          {
-            "key": "C",
             "text": "Umgebung applies to plants while Umwelt applies only to bacteria"
           },
           {
-            "key": "D",
+            "key": "B",
             "text": "There is no theoretical distinction between the terms"
+          },
+          {
+            "key": "C",
+            "text": "Umgebung is microscopic while Umwelt is macroscopic"
+          },
+          {
+            "key": "D",
+            "text": "Umgebung is the objective physical environment, whereas Umwelt is the organism's subjective perceptual reality"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "D",
         "explanation_tr": "'Mechanistic science assumes an objective, universal physical environment, or Umgebung ... Uexküll proved that an organism does not interact with the entirety of physical reality, but only with its Umwelt' denilmiştir."
       },
       {
@@ -4398,18 +4398,18 @@
           },
           {
             "key": "B",
-            "text": "Only those environmental carrier signs that its physiological receptors can sense and interpret"
+            "text": "Human linguistic translations exclusively"
           },
           {
             "key": "C",
-            "text": "Human linguistic translations exclusively"
+            "text": "Only those environmental carrier signs that its physiological receptors can sense and interpret"
           },
           {
             "key": "D",
             "text": "Electromagnetic gravity alone"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "'an organism does not interact with the entirety of physical reality, but only with those environmental cues for which its specialized sensory receptors ... are physiologically tuned' denilmiştir."
       }
     ]
@@ -4442,7 +4442,7 @@
         "options": [
           {
             "key": "A",
-            "text": "It permanently freezes all currency exchange rates"
+            "text": "It guarantees perpetual economic growth"
           },
           {
             "key": "B",
@@ -4454,7 +4454,7 @@
           },
           {
             "key": "D",
-            "text": "It guarantees perpetual economic growth"
+            "text": "It permanently freezes all currency exchange rates"
           }
         ],
         "correct_answer": "B",
@@ -4470,18 +4470,18 @@
           },
           {
             "key": "B",
-            "text": "Enforcing heightened countercyclical capital buffers and stress-testing interbank exposures"
+            "text": "Prohibiting all electronic interbank transactions"
           },
           {
             "key": "C",
-            "text": "Prohibiting all electronic interbank transactions"
+            "text": "Enforcing heightened countercyclical capital buffers and stress-testing interbank exposures"
           },
           {
             "key": "D",
             "text": "Forbidding foreign commercial investment"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "'identifying systemic topologically central nodes and enforcing countercyclical capital buffers' ifadesi geçer."
       }
     ]
@@ -4512,22 +4512,22 @@
         "options": [
           {
             "key": "A",
-            "text": "The monetary printing of physical fiat currency"
+            "text": "The management of domestic agricultural production"
           },
           {
             "key": "B",
-            "text": "The capacity to dictate who is disposable and expose targeted populations to death"
+            "text": "The monetary printing of physical fiat currency"
           },
           {
             "key": "C",
-            "text": "The scientific mapping of planetary geography"
+            "text": "The capacity to dictate who is disposable and expose targeted populations to death"
           },
           {
             "key": "D",
-            "text": "The management of domestic agricultural production"
+            "text": "The scientific mapping of planetary geography"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "'ultimate sovereign power resides ... in the sovereign prerogative to dictate who is disposable and who may be exposed to death' denilmiştir."
       },
       {
@@ -4536,22 +4536,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Human biological existence stripped of juridical rights and political status"
-          },
-          {
-            "key": "B",
             "text": "A citizen exercising full constitutional democratic voting rights"
           },
           {
-            "key": "C",
+            "key": "B",
             "text": "An immortal mythological archetype"
           },
           {
-            "key": "D",
+            "key": "C",
             "text": "A diplomat holding international sovereign immunity"
+          },
+          {
+            "key": "D",
+            "text": "Human biological existence stripped of juridical rights and political status"
           }
         ],
-        "correct_answer": "A",
+        "correct_answer": "D",
         "explanation_tr": "'reduced to what Agamben termed bare life—human existence devoid of juridical rights' bilgisi yer alır."
       }
     ]
@@ -4581,11 +4581,11 @@
         "options": [
           {
             "key": "A",
-            "text": "Thermodynamic entropy is isomorphic to missing microscopic information"
+            "text": "Biological cell reproduction is mathematically identical to binary code"
           },
           {
             "key": "B",
-            "text": "Electrical voltage is identical to cosmic dark matter"
+            "text": "Thermodynamic entropy is isomorphic to missing microscopic information"
           },
           {
             "key": "C",
@@ -4593,10 +4593,10 @@
           },
           {
             "key": "D",
-            "text": "Biological cell reproduction is mathematically identical to binary code"
+            "text": "Electrical voltage is identical to cosmic dark matter"
           }
         ],
-        "correct_answer": "A",
+        "correct_answer": "B",
         "explanation_tr": "'Shannon formulated mathematical information theory, proving that thermodynamic entropy is mathematically isomorphic to information entropy: entropy quantifies the missing microscopic information' denilmiştir."
       },
       {
@@ -4609,18 +4609,18 @@
           },
           {
             "key": "B",
-            "text": "The universe began in an extraordinary state of exceptionally low gravitational entropy at the Big Bang"
+            "text": "Entropy decreases spontaneously across cosmic clusters"
           },
           {
             "key": "C",
-            "text": "Time moves backward in black hole horizons"
+            "text": "The universe began in an extraordinary state of exceptionally low gravitational entropy at the Big Bang"
           },
           {
             "key": "D",
-            "text": "Entropy decreases spontaneously across cosmic clusters"
+            "text": "Time moves backward in black hole horizons"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "C",
         "explanation_tr": "'cosmologists postulate the Past Hypothesis: our universe originated in an extraordinarily low-entropy gravitational boundary condition at the Big Bang' denilmiştir."
       }
     ]
@@ -4651,22 +4651,22 @@
         "options": [
           {
             "key": "A",
-            "text": "Definition and deduction"
-          },
-          {
-            "key": "B",
-            "text": "Differing in space and deferring in time"
-          },
-          {
-            "key": "C",
             "text": "Describing and destroying"
           },
           {
-            "key": "D",
+            "key": "B",
             "text": "Demonstration and debate"
+          },
+          {
+            "key": "C",
+            "text": "Definition and deduction"
+          },
+          {
+            "key": "D",
+            "text": "Differing in space and deferring in time"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "D",
         "explanation_tr": "'coined the neologism différance, combining the dual French meanings of differing and deferring' denilmiştir."
       },
       {
@@ -4675,11 +4675,11 @@
         "options": [
           {
             "key": "A",
-            "text": "Because vowels have no acoustic resonance"
+            "text": "Meaning is spatially differentiated from other signs and temporally deferred across an infinite chain of signifiers"
           },
           {
             "key": "B",
-            "text": "Meaning is spatially differentiated from other signs and temporally deferred across an infinite chain of signifiers"
+            "text": "Because human memory has limited neurological storage"
           },
           {
             "key": "C",
@@ -4687,10 +4687,10 @@
           },
           {
             "key": "D",
-            "text": "Because human memory has limited neurological storage"
+            "text": "Because vowels have no acoustic resonance"
           }
         ],
-        "correct_answer": "B",
+        "correct_answer": "A",
         "explanation_tr": "'Meaning, Derrida asserts, is never fully present in a discrete linguistic sign; it is spatially differentiated from other signifiers and temporally deferred across an infinite chain of sign substitution' denilmiştir."
       }
     ]

@@ -367,7 +367,9 @@ async function finishExam() {
         duration_seconds: durationSpent,
         answers: activeExamState.userAnswers,
         question_times: activeExamState.questionTimes,
-        is_mistake_practice: activeExamState.isMistakeExam
+        is_mistake_practice: activeExamState.isMistakeExam,
+        // Boş bırakılan sorular da puana yanlış olarak girsin
+        question_ids: activeExamState.questions.map(q => q.id)
       })
     });
 

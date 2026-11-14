@@ -157,6 +157,7 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
         answers: _userAnswers,
         questionTimes: _questionTimes,
         isMistakePractice: widget.isMistakeExam,
+        questionIds: widget.questions.map((q) => q.id).toList(),
       );
 
       if (!mounted) return;

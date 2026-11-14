@@ -265,7 +265,7 @@ class ExamResultScreen extends StatelessWidget {
                             ],
                           ),
                           Text(
-                            'Yanıt: ${d.chosenAnswer} | Doğru: ${d.correctAnswer}',
+                            'Yanıt: ${d.chosenAnswer.isEmpty ? "Boş" : d.chosenAnswer} | Doğru: ${d.correctAnswer}',
                             style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppTheme.textMuted),
                           ),
                         ],

@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'api_service.dart';
+import 'auth_http.dart';
 
 class SyncService {
   static final SyncService _instance = SyncService._internal();
@@ -11,7 +11,7 @@ class SyncService {
 
   Future<Map<String, dynamic>?> pullSync() async {
     try {
-      final res = await http.get(
+      final res = await AuthHttp.instance.get(
         Uri.parse('${_api.baseUrl}/api/sync/pull'),
       ).timeout(const Duration(seconds: 4));
 
@@ -29,7 +29,7 @@ class SyncService {
     List<Map<String, dynamic>>? examAttempts,
   }) async {
     try {
-      final res = await http.post(
+      final res = await AuthHttp.instance.post(
         Uri.parse('${_api.baseUrl}/api/sync/push'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
@@ -52,7 +52,7 @@ class SyncService {
     required String studentNumber,
   }) async {
     try {
-      final res = await http.post(
+      final res = await AuthHttp.instance.post(
         Uri.parse('${_api.baseUrl}/api/student/verify'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
@@ -81,7 +81,7 @@ class SyncService {
     required String studentNumber,
   }) async {
     try {
-      final res = await http.post(
+      final res = await AuthHttp.instance.post(
         Uri.parse('${_api.baseUrl}/api/student/request-otp'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
@@ -106,7 +106,7 @@ class SyncService {
     required String otpCode,
   }) async {
     try {
-      final res = await http.post(
+      final res = await AuthHttp.instance.post(
         Uri.parse('${_api.baseUrl}/api/student/verify-otp'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
@@ -141,7 +141,7 @@ class SyncService {
 
   Future<Map<String, dynamic>> getStudentStatus() async {
     try {
-      final res = await http.get(
+      final res = await AuthHttp.instance.get(
         Uri.parse('${_api.baseUrl}/api/student/status'),
       ).timeout(const Duration(seconds: 3));
 

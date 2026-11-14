@@ -27,7 +27,7 @@
   },
   {
     "id": "spk_odtu_01",
-    "university_id": "odtu",
+    "university_id": "metu",
     "target_university": "Orta Doğu Teknik Üniversitesi (ODTÜ EPE)",
     "level": "C1",
     "title": "Problem-Solution Speech: Sustainable Urban Expansion",
@@ -131,7 +131,7 @@
   },
   {
     "id": "spk_odtu_02",
-    "university_id": "odtu",
+    "university_id": "metu",
     "target_university": "Orta Doğu Teknik Üniversitesi (ODTÜ EPE)",
     "level": "C1",
     "title": "Engineering Solution: Mitigating Global Freshwater Scarcity",
@@ -258,7 +258,7 @@
   },
   {
     "id": "spk_odtu_c2",
-    "university_id": "odtu",
+    "university_id": "metu",
     "target_university": "Orta Doğu Teknik Üniversitesi (C2 İleri Mülakat)",
     "level": "C2",
     "title": "Critique of Macroeconomic Paradigms in Global Energy Transition",

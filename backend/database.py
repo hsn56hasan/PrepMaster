@@ -143,9 +143,13 @@ def init_db():
     if "is_verified_student" not in cols:
         conn.execute("ALTER TABLE users ADD COLUMN is_verified_student INTEGER DEFAULT 0")
     if "unlocked_universities" not in cols:
-        conn.execute("ALTER TABLE users ADD COLUMN unlocked_universities TEXT DEFAULT '[\"itu\", \"general\"]'")
+        conn.execute("ALTER TABLE users ADD COLUMN unlocked_universities TEXT DEFAULT '[\"general\"]'")
     if "verified_university" not in cols:
-        conn.execute("ALTER TABLE users ADD COLUMN verified_university TEXT DEFAULT 'itu'")
+        conn.execute("ALTER TABLE users ADD COLUMN verified_university TEXT")
+    if "last_study_date" not in cols:
+        # Seri için İstanbul takvim günü (YYYY-MM-DD); last_active'ten ayrı tutulur
+        # çünkü last_active profil güncellemesinde de değişiyor.
+        conn.execute("ALTER TABLE users ADD COLUMN last_study_date TEXT")
 
     cursor.execute("PRAGMA table_info(student_verifications)")
     s_cols = [r[1] for r in cursor.fetchall()]
@@ -234,7 +238,7 @@ def get_profile(user_id: int = 1) -> Dict[str, Any]:
     cursor.execute("""
         SELECT id, email, username, full_name, university_id, current_level, target_score, streak_days, 
                is_verified_student, verification_status, student_number, last_active,
-               unlocked_universities, verified_university
+               unlocked_universities, verified_university, last_study_date
         FROM users WHERE id = ?
     """, (user_id,))
     row = cursor.fetchone()
@@ -260,6 +264,7 @@ def get_profile(user_id: int = 1) -> Dict[str, Any]:
 
         data["unlocked_universities"] = unlocked
         data["verified_university"] = primary_uni
+        data["streak_days"] = _effective_streak(data.get("streak_days"), data.get("last_study_date"))
         return data
 
     # Fallback to legacy user_profile
@@ -292,6 +297,53 @@ def get_profile(user_id: int = 1) -> Dict[str, Any]:
         "last_active": datetime.now().isoformat()
     }
 
+def _istanbul_today():
+    # Türkiye'de yaz saati yok: UTC+3 sabit.
+    return (datetime.now(timezone.utc) + timedelta(hours=3)).date()
+
+
+def _effective_streak(streak, last_study_date) -> int:
+    """Dün ya da bugün çalışılmadıysa seri bozulmuştur: 0 gösterilir."""
+    if not last_study_date:
+        return 0
+    try:
+        last = datetime.strptime(str(last_study_date)[:10], "%Y-%m-%d").date()
+    except ValueError:
+        return 0
+    if (_istanbul_today() - last).days > 1:
+        return 0
+    return int(streak or 0)
+
+
+def record_study_day(user_id: int) -> int:
+    """
+    Kullanıcının bugün çalıştığını kaydeder ve güncel seriyi döndürür.
+    Aynı gün tekrar çağrılırsa değişmez; dün çalıştıysa +1; daha eskiyse 1'den başlar.
+    """
+    today = _istanbul_today()
+    conn = get_db()
+    row = conn.execute("SELECT streak_days, last_study_date FROM users WHERE id = ?", (user_id,)).fetchone()
+    if not row:
+        conn.close()
+        return 0
+    streak = int(row["streak_days"] or 0)
+    last = None
+    if row["last_study_date"]:
+        try:
+            last = datetime.strptime(str(row["last_study_date"])[:10], "%Y-%m-%d").date()
+        except ValueError:
+            last = None
+    if last == today:
+        conn.close()
+        return max(streak, 1)
+    streak = streak + 1 if last == today - timedelta(days=1) else 1
+    with conn:
+        conn.execute("UPDATE users SET streak_days = ?, last_study_date = ? WHERE id = ?",
+                     (streak, today.isoformat(), user_id))
+    conn.close()
+    return streak
+
+
 def update_profile(university_id: str, current_level: str, target_score: int, user_id: int = 1) -> Dict[str, Any]:
     conn = get_db()
     with conn:
@@ -312,12 +364,13 @@ def create_user(email: str, username: str, password: str, full_name: str, univer
     import json
     conn = get_db()
     pw_hash = hash_password(password)
-    initial_unlocked = json.dumps([university_id, "general"])
+    # Kayıtta seçilen üniversite belgeyle doğrulanana kadar ücretsiz açılmaz.
+    initial_unlocked = json.dumps(["general"])
     with conn:
         cursor = conn.execute("""
             INSERT INTO users (email, username, password_hash, full_name, university_id, student_number, is_verified_student, verification_status, unlocked_universities, verified_university)
             VALUES (?, ?, ?, ?, ?, ?, 0, 'pending', ?, ?)
-        """, (email.lower().strip(), username.strip(), pw_hash, full_name.strip(), university_id, student_number.strip(), initial_unlocked, university_id))
+        """, (email.lower().strip(), username.strip(), pw_hash, full_name.strip(), university_id, student_number.strip(), initial_unlocked, None))
         user_id = cursor.lastrowid
     conn.close()
     return get_profile(user_id)
@@ -456,8 +509,14 @@ def verify_student_by_document(user_id: int, matched_uni_id: str, student_number
     }
 
 def generate_gib_receipt(card_last_four: str = "4242", card_holder: str = "Öğrenci", university_id: str = "general") -> Dict[str, Any]:
+    """
+    Ödeme ÖZETİ üretir — resmi fatura DEĞİLDİR.
+    Eskiden uydurma vergi dairesi/numarası ve "GİB E-Arşiv onaylı" ibaresiyle
+    fatura gibi gösteriliyordu; gerçek para alınırken bu yanıltıcı ve yasal risk.
+    Gerçek e-Arşiv faturası GİB portalı veya bir entegratör üzerinden ayrıca kesilmelidir.
+    """
     seq = secrets.token_hex(2).upper()
-    receipt_no = f"EARSIV-2026-{seq}"
+    receipt_no = f"PM-2026-{seq}"
     gross_amount = 50.00
     vat_rate = 0.20
     net_amount = round(gross_amount / (1.0 + vat_rate), 2)
@@ -479,9 +538,7 @@ def generate_gib_receipt(card_last_four: str = "4242", card_holder: str = "Öğr
         "card_holder": card_holder or "Öğrenci",
         "payment_method": "3D Secure Sanal POS (Mastercard/Visa)",
         "university_id": university_id,
-        "tax_office": "Mecidiyeköy Vergi Dairesi",
-        "tax_number": "8930491823",
-        "gib_status": "GİB E-Arşiv Fatura Sistemi Onaylı",
+        "document_type": "Ödeme özeti (fatura değildir)",
         "description": f"PrepMaster Hazırlık Sınav Paketi - {university_id.upper()}"
     }
 
@@ -661,10 +718,12 @@ def check_university_access(user_id: int, university_id: str) -> bool:
     row = cursor.fetchone()
     conn.close()
     if not row:
-        return True
+        # Var olmayan kullanıcı hiçbir kilitli içeriğe erişemez.
+        return False
 
-    # If it's their own registered / verified university, it's 100% free!
-    if row["university_id"] == university_id or row["verified_university"] == university_id:
+    # Yalnızca belgeyle DOĞRULANMIŞ üniversite ücretsizdir. Kayıtta seçilen
+    # university_id tek başına yetmez; yoksa herkes istediği okulu seçip paywall'u atlardı.
+    if row["verified_university"] == university_id:
         return True
 
     raw_unlocked = row["unlocked_universities"]
@@ -950,7 +1009,7 @@ def upsert_google_user(email: str, name: str = "", avatar_url: str = "") -> Dict
         clean_username = f"{clean_username}_{secrets.token_hex(2)}"
 
     display_name = name.strip() if name and name.strip() else clean_username
-    initial_unlocked = json.dumps(["itu", "general"])
+    initial_unlocked = json.dumps(["general"])
     dummy_oauth_hash = f"oauth2:google:{secrets.token_hex(16)}"
 
     with conn:
@@ -960,7 +1019,7 @@ def upsert_google_user(email: str, name: str = "", avatar_url: str = "") -> Dict
                 student_number, is_verified_student, verification_status, 
                 unlocked_universities, verified_university
             )
-            VALUES (?, ?, ?, ?, 'itu', '', 0, 'pending', ?, 'itu')
+            VALUES (?, ?, ?, ?, 'itu', '', 0, 'pending', ?, NULL)
         """, (clean_email, clean_username, dummy_oauth_hash, display_name, initial_unlocked))
         new_user_id = cur.lastrowid
 

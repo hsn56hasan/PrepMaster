@@ -176,9 +176,13 @@ def verify_paytr_callback_hash(
     PayTR Bildirim URL'si (Webhook Adım 2) HMAC-SHA256 imza doğrulaması.
     Sahte ödeme bildirimlerini engeller.
     """
+    # Anahtarlar girilmemişse imza, kaynak kodda açık duran sandbox değerleriyle
+    # hesaplanırdı ve herkes sahte "ödeme başarılı" bildirimi üretebilirdi.
+    if not is_paytr_live_configured():
+        return False
     cfg = get_paytr_config()
-    merchant_key = (cfg["merchant_key"] or "sandbox_merchant_key").encode("utf-8")
-    merchant_salt = (cfg["merchant_salt"] or "sandbox_merchant_salt").decode("utf-8") if isinstance(cfg["merchant_salt"], bytes) else (cfg["merchant_salt"] or "sandbox_merchant_salt")
+    merchant_key = cfg["merchant_key"].encode("utf-8")
+    merchant_salt = cfg["merchant_salt"]
 
     hash_str = f"{merchant_oid}{merchant_salt}{status}{total_amount}"
     expected_hash = base64.b64encode(
@@ -201,4 +205,5 @@ def parse_merchant_oid(merchant_oid: str) -> Dict[str, Optional[Any]]:
             return {"user_id": user_id, "university_id": university_id}
     except Exception:
         pass
-    return {"user_id": 1, "university_id": "itu"}
+    # Ayrıştırılamayan sipariş hiçbir kullanıcıya bağlanmaz.
+    return {"user_id": None, "university_id": None}

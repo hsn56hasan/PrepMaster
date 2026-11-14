@@ -223,7 +223,7 @@ async function loadDashboardStats() {
     const mistakeNavBadge = document.getElementById("nav-mistakes-badge");
     const recentListEl = document.getElementById("dashboard-recent-exams");
 
-    if (streakEl) streakEl.innerText = `${data.profile.streak_days || 1} Gün`;
+    if (streakEl) streakEl.innerText = `${data.profile.streak_days ?? 0} Gün`;
     if (examsCountEl) examsCountEl.innerText = data.total_exams_taken;
     if (avgScoreEl) avgScoreEl.innerText = `%${data.average_exam_score}`;
     if (vocabCountEl) vocabCountEl.innerText = `${data.mastered_vocab} / ${data.total_vocab}`;
@@ -1162,7 +1162,10 @@ function updateThemeIcon(isDark) {
 async function checkCurrentUser() {
   try {
     const stored = localStorage.getItem("auth_user");
-    if (stored) {
+    // Token'sız kayıtlı kullanıcı sunucu tarafından tanınmaz; yeniden giriş gerekir.
+    if (stored && !localStorage.getItem("prepmaster_token")) {
+      localStorage.removeItem("auth_user");
+    } else if (stored) {
       const user = JSON.parse(stored);
       window.appState.currentUser = user;
       const nameEl = document.getElementById("header-user-name");
@@ -1400,7 +1403,6 @@ window.deleteMistakeItem = deleteMistakeItem;
 window.syncCloudData = syncCloudData;
 window.openStudentVerifyModal = openStudentVerifyModal;
 window.closeStudentVerifyModal = closeStudentVerifyModal;
-window.submitStudentVerification = submitStudentVerification;
 window.loadStudentStatus = loadStudentStatus;
 window.openPrintableReportModal = openPrintableReportModal;
 window.closePrintableReportModal = closePrintableReportModal;

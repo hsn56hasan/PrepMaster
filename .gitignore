@@ -22,3 +22,6 @@ mobile/.pub/
 *.swo
 .agents/
 
+
+# Yerel deneme hesabı bilgileri
+*.local.md

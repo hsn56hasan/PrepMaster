@@ -31,6 +31,14 @@ from fastapi.testclient import TestClient
 from backend.app import app
 from backend.database import init_db, get_db, create_user, authenticate_user
 import backend.security as sec
+import backend.app as app_module
+
+
+def _demo_client(user_id: int = 1, username: str = "ituhazirlik", email: str = "ogrenci@itu.edu.tr"):
+    """Simülasyon akışlarını test eder: DEMO_MODE açık, istekler user_id'nin oturum token'ıyla gider."""
+    app_module.DEMO_MODE = True
+    token, _ = sec.create_session_token(user_id, username, email)
+    return TestClient(app, headers={"Authorization": f"Bearer {token}"})
 
 
 class TestAuthExpansionSuite(unittest.TestCase):
@@ -42,7 +50,7 @@ class TestAuthExpansionSuite(unittest.TestCase):
             except Exception:
                 pass
         init_db()
-        cls.client = TestClient(app)
+        cls.client = _demo_client()
 
     @classmethod
     def tearDownClass(cls):
