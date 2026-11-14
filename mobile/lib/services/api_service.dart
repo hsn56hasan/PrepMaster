@@ -874,15 +874,19 @@ class ApiService {
 
   // --- Şifremi unuttum (kod yalnızca e-postayla gelir) ---
   /// Sunucuda e-posta ayarlıysa true; "Şifremi unuttum" bağlantısı buna göre gösterilir.
-  Future<bool> isPasswordResetAvailable() async {
+  Future<bool> isPasswordResetAvailable() async =>
+      (await getPublicConfig())['password_reset_available'] == true;
+
+  /// Sunucunun açık ayarları (demo_mode, paytr_configured, password_reset_available).
+  /// Bağlantı yoksa boş döner: demo kapalı, ödeme ve şifre sıfırlama kapalı sayılır.
+  Future<Map<String, dynamic>> getPublicConfig() async {
     try {
       final res = await AuthHttp.instance.get(Uri.parse('$baseUrl/api/config')).timeout(const Duration(seconds: 3));
       if (res.statusCode == 200) {
-        final data = json.decode(utf8.decode(res.bodyBytes));
-        return data['password_reset_available'] == true;
+        return Map<String, dynamic>.from(json.decode(utf8.decode(res.bodyBytes)) as Map);
       }
     } catch (_) {}
-    return false;
+    return {};
   }
 
   Future<Map<String, dynamic>> requestPasswordReset(String email) async {

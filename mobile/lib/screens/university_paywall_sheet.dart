@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../services/api_service.dart';
 import '../theme/app_theme.dart';
 import 'student_document_scan_sheet.dart';
+import 'locked_university_sheet.dart';
 
 class UniversityPaywallSheet extends StatefulWidget {
   final String universityId;
@@ -15,21 +16,31 @@ class UniversityPaywallSheet extends StatefulWidget {
     this.onUnlockSuccess,
   });
 
+  /// Canlıda uygulama içinde ödeme alınmaz (Google Play kuralları): kilitli paket ekranı
+  /// gösterilir. Simüle kart / 3D Secure akışı yalnızca sunucu DEMO_MODE'dayken açılır.
   static Future<bool?> show(
     BuildContext context, {
     required String universityId,
     required String universityName,
     VoidCallback? onUnlockSuccess,
-  }) {
+  }) async {
+    final demo = (await ApiService().getPublicConfig())['demo_mode'] == true;
+    if (!context.mounted) return null;
     return showModalBottomSheet<bool>(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (ctx) => UniversityPaywallSheet(
-        universityId: universityId,
-        universityName: universityName,
-        onUnlockSuccess: onUnlockSuccess,
-      ),
+      builder: (ctx) => demo
+          ? UniversityPaywallSheet(
+              universityId: universityId,
+              universityName: universityName,
+              onUnlockSuccess: onUnlockSuccess,
+            )
+          : LockedUniversitySheet(
+              universityId: universityId,
+              universityName: universityName,
+              onUnlockSuccess: onUnlockSuccess,
+            ),
     );
   }
 
