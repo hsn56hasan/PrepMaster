@@ -5,6 +5,8 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'auth_http.dart';
+import 'outbox.dart';
+import 'sync_service.dart';
 
 import '../models/university.dart';
 import '../models/question.dart';
@@ -133,13 +135,30 @@ class ApiService {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('vocab_$wordId', status);
 
+    bool sent = false;
     try {
-      await AuthHttp.instance.post(
+      final res = await AuthHttp.instance.post(
         Uri.parse('$baseUrl/api/vocabulary/$wordId/status'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'status': status}),
       ).timeout(const Duration(seconds: 2));
+      sent = res.statusCode == 200;
     } catch (_) {}
+    if (!sent) await Outbox.addVocab(wordId, status);
+  }
+
+  /// Seçili üniversite / seviye: web ile aynı profil kaydına yazılır.
+  Future<void> updateProfile({required String universityId, required String level}) async {
+    bool sent = false;
+    try {
+      final res = await AuthHttp.instance.post(
+        Uri.parse('$baseUrl/api/profile'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'university_id': universityId, 'current_level': level}),
+      ).timeout(const Duration(seconds: 3));
+      sent = res.statusCode == 200;
+    } catch (_) {}
+    if (!sent) await Outbox.setProfile(universityId, level);
   }
 
   // --- Writing Guides ---
@@ -228,17 +247,34 @@ class ApiService {
     final total = questionIds != null && questionIds.length > answers.length ? questionIds.length : answers.length;
     final score = ((correct / (total == 0 ? 1 : total)) * 100).roundToDouble();
 
-    // Save mistakes locally
+    // Save mistakes locally + giden kutusuna (bağlantı gelince web ile eşitlenir)
     final prefs = await SharedPreferences.getInstance();
     List<String> rawMistakes = prefs.getStringList('local_mistakes') ?? [];
     for (var d in details) {
       if (!d.isCorrect) {
         if (!rawMistakes.contains(d.questionId)) rawMistakes.add(d.questionId);
+        await Outbox.addMistake({
+          'question_id': d.questionId,
+          'university_id': universityId,
+          'level': d.level,
+          'category': d.category,
+          'last_wrong_answer': d.chosenAnswer,
+        });
       } else {
         rawMistakes.remove(d.questionId);
+        await Outbox.addResolved(d.questionId);
       }
     }
     await prefs.setStringList('local_mistakes', rawMistakes);
+    await Outbox.addExamAttempt({
+      'university_id': universityId,
+      'level': level,
+      'score': score,
+      'total_questions': total,
+      'correct_count': correct,
+      'duration_seconds': durationSeconds,
+      'answers': answers,
+    });
 
     return ExamResult(
       attemptId: DateTime.now().millisecondsSinceEpoch,
@@ -298,12 +334,15 @@ class ApiService {
     rawMistakes.remove(questionId);
     await prefs.setStringList('local_mistakes', rawMistakes);
 
+    bool sent = false;
     try {
-      await AuthHttp.instance.post(
+      final res = await AuthHttp.instance.post(
         Uri.parse('$baseUrl/api/mistakes/$questionId/resolve'),
         headers: {'Content-Type': 'application/json'},
       ).timeout(const Duration(seconds: 2));
+      sent = res.statusCode == 200;
     } catch (_) {}
+    if (!sent) await Outbox.addResolved(questionId);
   }
 
   Future<void> recordMistake({
@@ -320,10 +359,11 @@ class ApiService {
       await prefs.setStringList('local_mistakes', rawMistakes);
     }
 
+    bool sent = false;
     try {
       // Dinleme soruları /api/exam/submit'te tanınmıyordu; kendi uç noktası var.
       final isListening = category.toLowerCase() == 'listening' || questionId.startsWith('lis_');
-      await AuthHttp.instance.post(
+      final res = await AuthHttp.instance.post(
         Uri.parse(isListening ? '$baseUrl/api/listening/answer' : '$baseUrl/api/exam/submit'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode(isListening
@@ -335,7 +375,17 @@ class ApiService {
                 'answers': {questionId: wrongAnswer},
               }),
       ).timeout(const Duration(seconds: 2));
+      sent = res.statusCode == 200;
     } catch (_) {}
+    if (!sent) {
+      await Outbox.addMistake({
+        'question_id': questionId,
+        'university_id': universityId,
+        'level': level,
+        'category': category,
+        'last_wrong_answer': wrongAnswer,
+      });
+    }
   }
 
   // --- Dashboard Stats ---
@@ -773,6 +823,8 @@ class ApiService {
         final user = data['user'];
         await AuthHttp.saveToken((data['access_token'] ?? data['token'])?.toString());
         await saveCurrentUser(user);
+        // Web'de yapılanları telefona çek, telefonda bekleyenleri gönder
+        await SyncService().syncNow();
         return {'success': true, 'user': user};
       } else {
         return {'success': false, 'message': data['detail'] ?? 'Giriş başarısız.'};
@@ -809,6 +861,8 @@ class ApiService {
         final user = data['user'];
         await AuthHttp.saveToken((data['access_token'] ?? data['token'])?.toString());
         await saveCurrentUser(user);
+        // Web'de yapılanları telefona çek, telefonda bekleyenleri gönder
+        await SyncService().syncNow();
         return {'success': true, 'user': user};
       } else {
         return {'success': false, 'message': data['detail'] ?? 'Kayıt başarısız.'};
@@ -870,6 +924,12 @@ class ApiService {
       await prefs.remove('unlocked_universities');
       await prefs.remove('verified_university');
       await prefs.remove(AuthHttp.tokenKey);
+      // Bir sonraki öğrenci öncekinin ilerlemesini görmesin
+      await prefs.remove('local_mistakes');
+      for (final k in prefs.getKeys().where((k) => k.startsWith('vocab_')).toList()) {
+        await prefs.remove(k);
+      }
+      await Outbox.clear();
     } catch (_) {}
   }
 

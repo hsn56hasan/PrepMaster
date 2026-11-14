@@ -646,6 +646,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               onPressed: () async {
                 await ApiService().clearSavedUser();
                 if (ctx.mounted) Navigator.pop(ctx);
+                await _loadData();
                 if (mounted) {
                   setState(() {});
                   messenger.showSnackBar(
@@ -746,6 +747,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   final res = await ApiService().login(identifier: ident, password: pass);
                                   if (res['success'] == true) {
                                     if (ctx.mounted) Navigator.pop(ctx);
+                                    // Giriş eşitlemeyi tetikledi; panel bu öğrencinin verisini göstersin
+                                    await _loadData();
                                     if (mounted) {
                                       setState(() {});
                                       messenger.showSnackBar(
@@ -844,6 +847,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
                                   if (res['success'] == true) {
                                     if (ctx.mounted) Navigator.pop(ctx);
+                                    await _loadData();
                                     if (mounted) {
                                       setState(() {});
                                       messenger.showSnackBar(

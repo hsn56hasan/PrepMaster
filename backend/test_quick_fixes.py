@@ -132,12 +132,13 @@ class TestQuickFixes(unittest.TestCase):
         self.assertGreater(len(seen), 1, "Her deneme aynı soruları aynı sırayla getiriyor")
 
     def test_unanswered_questions_count_as_wrong(self):
+        _, auth = self._register("boscu")
         qs = [q for q in load("questions.json") if q["university_id"] == "general"][:4]
         res = self.client.post("/api/exam/submit", json={
             "university_id": "general", "level": "B2", "duration_seconds": 60,
             "answers": {qs[0]["id"]: qs[0]["correct_answer"]},
             "question_ids": [q["id"] for q in qs],
-        })
+        }, headers=auth)
         self.assertEqual(res.status_code, 200, res.text)
         self.assertEqual(res.json()["score"], 25.0)  # eskiden 100.0 idi
 
@@ -146,26 +147,28 @@ class TestQuickFixes(unittest.TestCase):
         track = load("listening.json")[0]
         lq = track["questions"][0]
         wrong = next(o["key"] for o in lq["options"] if o["key"] != lq["correct_answer"])
-        before = len(db.get_exam_history(limit=1000))
-        res = self.client.post("/api/listening/answer", json={"question_id": lq["id"], "chosen_answer": wrong})
+        uid, auth = self._register("dinleyici")
+        before = len(db.get_exam_history(uid, limit=1000))
+        res = self.client.post("/api/listening/answer", json={"question_id": lq["id"], "chosen_answer": wrong}, headers=auth)
         self.assertEqual(res.status_code, 200, res.text)
         self.assertFalse(res.json()["is_correct"])
-        vault = self.client.get("/api/mistakes").json()
+        vault = self.client.get("/api/mistakes", headers=auth).json()
         item = next((m for m in vault if m["question_id"] == lq["id"]), None)
         self.assertIsNotNone(item, "Dinleme yanlışı Hata Kasası'nda görünmüyor")
         self.assertIn(track["title"], item["question_details"]["question"])
-        self.assertEqual(len(db.get_exam_history(limit=1000)), before, "Sahte deneme kaydı açıldı")
+        self.assertEqual(len(db.get_exam_history(uid, limit=1000)), before, "Sahte deneme kaydı açıldı")
         # doğru cevap kasadan düşürür
-        self.client.post("/api/listening/answer", json={"question_id": lq["id"], "chosen_answer": lq["correct_answer"]})
-        self.assertFalse(any(m["question_id"] == lq["id"] for m in self.client.get("/api/mistakes").json()))
+        self.client.post("/api/listening/answer", json={"question_id": lq["id"], "chosen_answer": lq["correct_answer"]}, headers=auth)
+        self.assertFalse(any(m["question_id"] == lq["id"] for m in self.client.get("/api/mistakes", headers=auth).json()))
 
     def test_exam_submit_with_only_unknown_ids_creates_no_attempt(self):
-        before = len(db.get_exam_history(limit=1000))
+        uid, auth = self._register("bilinmeyenci")
+        before = len(db.get_exam_history(uid, limit=1000))
         res = self.client.post("/api/exam/submit", json={
             "university_id": "boun", "level": "C1", "duration_seconds": 60, "answers": {"yok-boyle-soru": "A"},
-        })
+        }, headers=auth)
         self.assertEqual(res.status_code, 400)
-        self.assertEqual(len(db.get_exam_history(limit=1000)), before)
+        self.assertEqual(len(db.get_exam_history(uid, limit=1000)), before)
 
     # #7 ODTÜ kimliği
     def test_no_orphan_odtu_university_id(self):

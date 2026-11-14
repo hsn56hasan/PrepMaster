@@ -39,7 +39,7 @@ Kısaltmalar: **K** küçük (saatler) · **O** orta (1–2 gün) · **B** büy�
 **Kod tarafı (~3–5 iş günü tahmini):**
 | # | İş | Neden | İş |
 |---|---|---|---|
-| 11 | **Kullanıcı bazlı veri**: `vocab_progress`, `mistake_vault`, `question_bookmarks` anahtarı yalnızca kelime/soru id'si; `exam_attempts.user_id` hep 1; `/api/profile, /mistakes, /stats, /sync, /report` kimlik sormuyor. | Şu an herkes herkesin verisini görüp değiştiriyor. Kişiselleştirme önerilerinin hiçbiri bunsuz anlamlı değil. | O–B |
+| 11 | ✅ **(14.11 yapıldı — web ↔ mobil eşitleme dahil; `backend/test_per_user_sync.py`)** **Kullanıcı bazlı veri**: `vocab_progress`, `mistake_vault`, `question_bookmarks` anahtarı yalnızca kelime/soru id'si; `exam_attempts.user_id` hep 1; `/api/profile, /mistakes, /stats, /sync, /report` kimlik sormuyor. | Şu an herkes herkesin verisini görüp değiştiriyor. Kişiselleştirme önerilerinin hiçbiri bunsuz anlamlı değil. | O–B |
 | 12 | **PayTR iFrame'i web'e bağlamak** (simüle 3DS yerine), nginx CSP'ye `frame-src paytr.com`, gerçek müşteri IP'si (`--proxy-headers`), tekrar eden bildirime karşı sipariş tablosu, `debug_on=0`. | Şu an canlıda ödeme almanın hiçbir yolu yok. | O |
 | 13 | **E-posta gönderimi** (Resend: 3.000/ay ücretsiz, Brevo: 300/gün ücretsiz) + şifre sıfırlama ekranı. | Şifre sıfırlama ve OTP canlıda çalışmıyor. | K–O |
 | 14 | Öğrenci belgesi yerine **.edu.tr e-posta doğrulaması** (belge şartsa: doğrula, dosyayı hemen sil). | KVKK kararları TC kimlik no içeren belge kopyası saklamayı aşırı veri işleme sayıyor. | O |

@@ -1,6 +1,10 @@
 import 'dart:convert';
+
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'api_service.dart';
 import 'auth_http.dart';
+import 'outbox.dart';
 
 class SyncService {
   static final SyncService _instance = SyncService._internal();
@@ -9,40 +13,78 @@ class SyncService {
 
   final ApiService _api = ApiService();
 
-  Future<Map<String, dynamic>?> pullSync() async {
+  bool _running = false;
+
+  /// Geriye dönük ad: dashboard'daki "eşitle" butonu bunu çağırıyor.
+  Future<Map<String, dynamic>?> pullSync() => syncNow();
+
+  /// Web ile eşitleme: önce çevrimdışı giden kutusunu sunucuya gönderir, sonra
+  /// sunucudaki güncel hâli telefona yazar. Giriş yoksa ya da bağlantı yoksa null döner
+  /// ve giden kutusu korunur (bir sonraki denemede gönderilir).
+  Future<Map<String, dynamic>?> syncNow() async {
+    if (_running) return null;
+    _running = true;
     try {
+      final token = await AuthHttp.readToken();
+      if (token == null || token.isEmpty) return null;
+
+      // 1) Giden kutusu
+      final body = await Outbox.buildPushBody();
+      if (body != null) {
+        final res = await AuthHttp.instance.post(
+          Uri.parse('${_api.baseUrl}/api/sync/push'),
+          headers: {'Content-Type': 'application/json'},
+          body: json.encode(body),
+        ).timeout(const Duration(seconds: 6));
+        if (res.statusCode != 200) return null;
+        await Outbox.clear();
+      }
+
+      // 2) Sunucudaki güncel hâl
       final res = await AuthHttp.instance.get(
         Uri.parse('${_api.baseUrl}/api/sync/pull'),
-      ).timeout(const Duration(seconds: 4));
-
-      if (res.statusCode == 200) {
-        return json.decode(utf8.decode(res.bodyBytes));
-      }
-    } catch (_) {}
-    return null;
+      ).timeout(const Duration(seconds: 6));
+      if (res.statusCode != 200) return null;
+      final data = Map<String, dynamic>.from(json.decode(utf8.decode(res.bodyBytes)) as Map);
+      await _applyServerState(data);
+      return data;
+    } catch (_) {
+      return null;
+    } finally {
+      _running = false;
+    }
   }
 
-  Future<bool> pushSync({
-    Map<String, dynamic>? profile,
-    List<Map<String, dynamic>>? mistakes,
-    Map<String, String>? vocabProgress,
-    List<Map<String, dynamic>>? examAttempts,
-  }) async {
-    try {
-      final res = await AuthHttp.instance.post(
-        Uri.parse('${_api.baseUrl}/api/sync/push'),
-        headers: {'Content-Type': 'application/json'},
-        body: json.encode({
-          'profile': profile,
-          'mistakes': mistakes,
-          'vocab_progress': vocabProgress,
-          'exam_attempts': examAttempts,
-        }),
-      ).timeout(const Duration(seconds: 4));
+  Future<void> _applyServerState(Map<String, dynamic> data) async {
+    final prefs = await SharedPreferences.getInstance();
 
-      return res.statusCode == 200;
-    } catch (_) {
-      return false;
+    // Kelime durumları: telefondaki önbelleği sunucudakiyle değiştir
+    for (final k in prefs.getKeys().where((k) => k.startsWith('vocab_')).toList()) {
+      await prefs.remove(k);
+    }
+    final vocab = data['vocab_progress'];
+    if (vocab is Map) {
+      for (final e in vocab.entries) {
+        await prefs.setString('vocab_${e.key}', e.value.toString());
+      }
+    }
+
+    // Hata Kasası: sunucudaki çözülmemiş yanlışlar
+    final mistakes = data['mistakes'];
+    if (mistakes is List) {
+      await prefs.setStringList(
+        'local_mistakes',
+        mistakes.map((m) => (m as Map)['question_id'].toString()).toList(),
+      );
+    }
+
+    // Profil: seçili üniversite / seviye ve kilit bilgisi
+    final profile = data['profile'];
+    if (profile is Map) {
+      final p = Map<String, dynamic>.from(profile);
+      if (p['university_id'] != null) await prefs.setString('current_uni_id', p['university_id'].toString());
+      if (p['current_level'] != null) await prefs.setString('current_level', p['current_level'].toString());
+      await _api.saveCurrentUser(p);
     }
   }
 
@@ -56,7 +98,6 @@ class SyncService {
         Uri.parse('${_api.baseUrl}/api/student/verify'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
-          'user_id': 1,
           'university_id': universityId,
           'edu_email': eduEmail,
           'student_number': studentNumber,
@@ -68,11 +109,11 @@ class SyncService {
       }
     } catch (_) {}
 
-    final isValid = eduEmail.toLowerCase().endsWith('.edu.tr') || studentNumber.length >= 6;
+    // Doğrulama yalnızca sunucuda yapılabilir; çevrimdışıyken "doğrulandı" denmez.
     return {
-      'is_verified': isValid,
-      'verification_status': isValid ? 'verified' : 'pending',
-      'message': isValid ? 'Öğrenci kaydınız başarıyla doğrulandı (Çevrimdışı Mod)!' : 'Öğrenci belgeniz incelemeye alındı.',
+      'is_verified': false,
+      'verification_status': 'pending',
+      'message': 'Öğrenci doğrulaması için internet bağlantısı gerekiyor.',
     };
   }
 

@@ -11,6 +11,43 @@ document.addEventListener("DOMContentLoaded", async () => {
   await initApp();
 });
 
+// Sunucudaki profili uygular. Giriş yoksa varsayılanlarla devam eder.
+async function applyServerProfile() {
+  let profile = null;
+  if (window.appState.currentUser) {
+    try {
+      const profRes = await fetch('/api/profile');
+      if (profRes.ok) profile = await profRes.json();
+    } catch (_) {}
+  }
+  window.appState.currentLevel = (profile && profile.current_level) || window.appState.currentLevel || 'B2';
+  const uniId = profile && profile.university_id;
+  window.appState.currentUniversity =
+    window.appState.allUniversities.find(u => u.id === uniId) ||
+    window.appState.currentUniversity ||
+    window.appState.allUniversities[0];
+  if (profile && window.appState.currentUser) {
+    // Kilit bilgisi (unlocked_universities, verified_university) da güncel kalsın
+    Object.assign(window.appState.currentUser, {
+      unlocked_universities: profile.unlocked_universities,
+      verified_university: profile.verified_university,
+      verification_status: profile.verification_status,
+      streak_days: profile.streak_days,
+    });
+    localStorage.setItem("auth_user", JSON.stringify(window.appState.currentUser));
+  }
+}
+
+// Giriş, kayıt ve "eşitle" sonrası: bu öğrencinin verisini sunucudan yeniden yükler.
+// Telefonda yapılanlar (kelime, Hata Kasası, denemeler, seçili okul/seviye) böylece web'e gelir.
+async function reloadUserData() {
+  await applyServerProfile();
+  renderUniversityHeader();
+  renderLevelSelector();
+  switchTab(window.appState.activeTab || 'dashboard');
+  loadStudentStatus();
+}
+
 async function initApp() {
   try {
     // 0. Initialize Theme & Auth
@@ -21,20 +58,8 @@ async function initApp() {
     const uniRes = await fetch('/api/universities');
     window.appState.allUniversities = await uniRes.json();
 
-    // 2. Fetch User Profile
-    const profRes = await fetch('/api/profile');
-    const profile = await profRes.json();
-    
-    window.appState.currentLevel = profile.current_level || 'B2';
-    if (!window.appState.currentUniversity) {
-      window.appState.currentUniversity = profile.university || window.appState.allUniversities[0];
-    }
-
-    if (window.appState.currentUser) {
-      const uUni = window.appState.currentUser.verified_university || window.appState.currentUser.university_id;
-      const matched = window.appState.allUniversities.find(u => u.id === uUni);
-      if (matched) window.appState.currentUniversity = matched;
-    }
+    // 2. Kullanıcının sunucudaki profili (seçili üniversite/seviye mobil ile ortaktır)
+    await applyServerProfile();
 
     // 3. Render Initial State
     renderUniversityHeader();
@@ -213,6 +238,7 @@ function switchTab(tabName) {
 async function loadDashboardStats() {
   try {
     const res = await fetch('/api/stats');
+    if (!res.ok) return;  // giriş yok: kartlar varsayılan hâlinde kalır
     const data = await res.json();
 
     const streakEl = document.getElementById("stat-streak");
@@ -660,8 +686,8 @@ function openUniversityModal() {
   if (!modal || !list) return;
 
   const user = window.appState.currentUser;
-  const verifiedUni = user?.verified_university || user?.university_id || 'itu';
-  const unlocked = user?.unlocked_universities || [verifiedUni, 'general'];
+  const verifiedUni = user?.verified_university || null;  // yalnızca belgeyle doğrulanan okul ücretsiz
+  const unlocked = user?.unlocked_universities || ['general'];
 
   list.innerHTML = window.appState.allUniversities.map(u => {
     const isCurrent = u.id === window.appState.currentUniversity.id;
@@ -701,8 +727,8 @@ async function selectUniversity(uniId) {
   if (!selected) return;
 
   const user = window.appState.currentUser;
-  const verifiedUni = user?.verified_university || user?.university_id || 'itu';
-  const unlocked = user?.unlocked_universities || [verifiedUni, 'general'];
+  const verifiedUni = user?.verified_university || null;
+  const unlocked = user?.unlocked_universities || ['general'];
   const hasAccess = uniId === 'general' || uniId === verifiedUni || unlocked.includes(uniId);
 
   if (!hasAccess) {
@@ -861,12 +887,10 @@ async function syncCloudData() {
 
   try {
     const res = await fetch('/api/sync/pull');
-    const data = await res.json();
+    if (!res.ok) throw new Error("sync " + res.status);
+    await reloadUserData();
 
-    if (window.appState.activeTab === 'dashboard') loadDashboardStats();
-    else if (window.appState.activeTab === 'mistakes') loadMistakeVault();
-
-    showNotification("✓ Bulut senkronizasyonu tamamlandı. Tüm verileriniz güncel!", "emerald");
+    showNotification("✓ Telefonla eşitlendi. Tüm verileriniz güncel!", "emerald");
   } catch (err) {
     console.error("Cloud sync error:", err);
     showNotification("Senkronizasyon sırasında hata oluştu.", "rose");
@@ -1299,6 +1323,7 @@ async function submitLogin() {
     window.appState.currentUser = data.user;
     localStorage.setItem("auth_user", JSON.stringify(data.user));
     if (data.token) localStorage.setItem("prepmaster_token", data.token);
+    await reloadUserData();
 
     const nameEl = document.getElementById("header-user-name");
     if (nameEl) nameEl.innerText = (data.user.full_name || data.user.username).split(" ")[0];
@@ -1362,6 +1387,7 @@ async function submitRegister() {
     window.appState.currentUser = data.user;
     localStorage.setItem("auth_user", JSON.stringify(data.user));
     if (data.token) localStorage.setItem("prepmaster_token", data.token);
+    await reloadUserData();
 
     const nameEl = document.getElementById("header-user-name");
     if (nameEl) nameEl.innerText = (data.user.full_name || data.user.username).split(" ")[0];
@@ -1384,11 +1410,8 @@ function logoutUser() {
   window.appState.currentUser = null;
   localStorage.removeItem("auth_user");
   localStorage.removeItem("prepmaster_token");
-  const nameEl = document.getElementById("header-user-name");
-  if (nameEl) nameEl.innerText = "Giriş Yap";
-  closeAuthModal();
-  showNotification("Oturumunuz kapatıldı.", "rose");
-  setTimeout(() => openAuthModal(true), 400);
+  // Sayfayı yenile: önceki öğrencinin istatistikleri ve listeleri ekranda kalmasın
+  window.location.reload();
 }
 
 window.changeCurrentLevel = changeCurrentLevel;
@@ -1645,14 +1668,14 @@ function openUniversityPaywallModal(targetUniId, onUnlockCallback = null) {
 
   const targetUni = window.appState.allUniversities.find(u => u.id === targetUniId);
   const user = window.appState.currentUser;
-  const verifiedId = user?.verified_university || user?.university_id || "itu";
-  const userUni = window.appState.allUniversities.find(u => u.id === verifiedId);
+  const verifiedId = user?.verified_university || null;
+  const userUni = verifiedId ? window.appState.allUniversities.find(u => u.id === verifiedId) : null;
 
   const badgeEl = document.getElementById("paywall-user-uni-badge");
   const targetNameEl = document.getElementById("paywall-target-uni-name");
   const statusMsg = document.getElementById("paywall-status-msg");
 
-  if (badgeEl) badgeEl.innerText = `${userUni ? userUni.name : verifiedId.toUpperCase()} (Ücretsiz)`;
+  if (badgeEl) badgeEl.innerText = userUni ? `${userUni.name} (Ücretsiz)` : "Öğrenci belgesi doğrulanmadı";
   if (targetNameEl) targetNameEl.innerText = targetUni ? `${targetUni.name} (${targetUni.exam_name})` : targetUniId.toUpperCase();
   if (statusMsg) statusMsg.classList.add("hidden");
 

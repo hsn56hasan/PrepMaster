@@ -22,7 +22,7 @@ from database import (
     set_vocab_status, get_vocab_progress,
     record_mistake, resolve_mistake, delete_mistake,
     get_mistakes, get_mistake_count,
-    bulk_upsert_mistakes, bulk_upsert_vocab_progress,
+    bulk_upsert_mistakes, bulk_upsert_vocab_progress, bulk_resolve_mistakes,
     create_user, authenticate_user, verify_student, get_verification_status,
     create_student_otp, verify_student_otp,
     verify_student_by_document, unlock_university_membership, check_university_access,
@@ -110,6 +110,14 @@ def _all_question_map() -> Dict[str, Dict[str, Any]]:
     q_map = {q["id"]: q for q in questions_data}
     q_map.update(_listening_question_map())
     return q_map
+
+
+def _current_user_id(request: Request) -> int:
+    """Oturumu zorunlu kılar ve kullanıcının hâlâ var olduğunu doğrular."""
+    uid = require_current_user(request)["user_id"]
+    if not get_profile(uid):
+        raise HTTPException(status_code=401, detail="Hesap bulunamadı. Lütfen tekrar giriş yapın.")
+    return uid
 
 
 def _record_study(request: Request) -> None:
@@ -231,10 +239,12 @@ class SpeakingEvaluateRequest(BaseModel):
         return sanitize_text(v, strip_tags=False)
 
 class SyncPushRequest(BaseModel):
+    """Mobilin çevrimdışıyken biriktirdiği değişiklikler (giden kutusu)."""
     profile: Optional[Dict[str, Any]] = None
-    mistakes: Optional[List[Dict[str, Any]]] = None
+    mistakes: Optional[List[Dict[str, Any]]] = Field(default=None, max_length=2000)
+    resolved_mistakes: Optional[List[str]] = Field(default=None, max_length=2000)
     vocab_progress: Optional[Dict[str, str]] = None
-    exam_attempts: Optional[List[Dict[str, Any]]] = None
+    exam_attempts: Optional[List[Dict[str, Any]]] = Field(default=None, max_length=200)
 
 class RegisterRequest(BaseModel):
     email: str = Field(..., min_length=5, max_length=255, pattern=r"^[\w\.-]+@[\w\.-]+\.\w+$")
@@ -739,19 +749,22 @@ def get_university_by_id(uni_id: str):
     raise HTTPException(status_code=404, detail="University not found")
 
 @app.get("/api/profile")
-def get_user_profile():
-    profile = get_profile()
+def get_user_profile(request: Request):
+    profile = get_profile(_current_user_id(request))
     # attach university details
     uni = next((u for u in universities_data if u["id"] == profile.get("university_id")), universities_data[0])
     profile["university"] = uni
     return profile
 
 @app.post("/api/profile")
-def update_user_profile(req: ProfileUpdateRequest):
+def update_user_profile(req: ProfileUpdateRequest, request: Request):
+    uid = _current_user_id(request)
     valid_levels = ["A1", "A2", "B1", "B2", "C1", "C2"]
     if req.current_level.upper() not in valid_levels:
         raise HTTPException(status_code=400, detail="Invalid level. Must be one of: A1, A2, B1, B2, C1, C2")
-    return update_profile(req.university_id, req.current_level.upper(), req.target_score or 65)
+    if not any(u["id"] == req.university_id for u in universities_data):
+        raise HTTPException(status_code=400, detail="Bilinmeyen üniversite.")
+    return update_profile(uid, req.university_id, req.current_level.upper(), req.target_score or 65)
 
 @app.get("/api/questions")
 def get_questions(
@@ -788,10 +801,12 @@ def get_questions(
 
 @app.get("/api/vocabulary")
 def get_vocabulary(
+    request: Request,
     level: Optional[str] = None,
     search: Optional[str] = None
 ):
-    progress = get_vocab_progress()
+    token_user = get_current_user_from_request(request)
+    progress = get_vocab_progress(token_user["user_id"]) if token_user else {}
     result = []
     clean_search = sanitize_text(search, strip_tags=True, max_length=100) if search else None
     for item in vocabulary_data:
@@ -810,10 +825,11 @@ def get_vocabulary(
 
 @app.post("/api/vocabulary/{word_id}/status")
 def update_word_status(word_id: str, req: VocabStatusRequest, request: Request):
+    uid = _current_user_id(request)
     _record_study(request)
     if req.status not in ["mastered", "learning", "unreviewed"]:
         raise HTTPException(status_code=400, detail="Invalid status")
-    set_vocab_status(word_id, req.status)
+    set_vocab_status(uid, word_id[:100], req.status)
     return {"status": "ok", "word_id": word_id, "new_status": req.status}
 
 @app.get("/api/writing-guides")
@@ -868,6 +884,7 @@ def listening_answer_endpoint(req: ListeningAnswerRequest, request: Request):
     Eskiden bu iş /api/exam/submit'e gönderiliyordu; dinleme soruları orada tanınmadığı için
     yanlış kasaya hiç düşmüyor, üstüne %0'lık sahte bir deneme kaydı açılıyordu.
     """
+    uid = _current_user_id(request)
     q = _listening_question_map().get(req.question_id)
     if not q:
         raise HTTPException(status_code=404, detail="Dinleme sorusu bulunamadı.")
@@ -875,9 +892,10 @@ def listening_answer_endpoint(req: ListeningAnswerRequest, request: Request):
     chosen = req.chosen_answer.upper()
     is_correct = chosen == q["correct_answer"]
     if is_correct:
-        resolve_mistake(q["id"])
+        resolve_mistake(uid, q["id"])
     else:
         record_mistake(
+            user_id=uid,
             question_id=q["id"],
             university_id=q["university_id"],
             level=q["level"],
@@ -1055,6 +1073,7 @@ def evaluate_essay_endpoint(req: EssayEvaluateRequest, request: Request, _=Depen
 
 @app.post("/api/exam/submit")
 def submit_exam(req: ExamSubmitRequest, request: Request):
+    uid = _current_user_id(request)
     _record_study(request)
     q_map = _all_question_map()
     correct_count = 0
@@ -1087,10 +1106,11 @@ def submit_exam(req: ExamSubmitRequest, request: Request):
         if is_correct:
             correct_count += 1
             # If resolved in mistake practice or regular test
-            resolve_mistake(q_id)
+            resolve_mistake(uid, q_id)
         elif chosen_key:
             # Save into mistake vault (boş bırakılan soru kasaya yazılmaz, ama yanlış sayılır)
             record_mistake(
+                user_id=uid,
                 question_id=q_id,
                 university_id=q.get("university_id", req.university_id),
                 level=q.get("level", req.level),
@@ -1132,6 +1152,7 @@ def submit_exam(req: ExamSubmitRequest, request: Request):
     time_traps = [q for q in results_detail if q["time_spent"] >= 90]
     
     attempt_id = save_exam_attempt(
+        user_id=uid,
         university_id=req.university_id,
         level=req.level,
         score=score_percentage,
@@ -1160,8 +1181,8 @@ def submit_exam(req: ExamSubmitRequest, request: Request):
 
 # --- Mistake Vault Endpoints ---
 @app.get("/api/mistakes")
-def get_mistake_vault(is_resolved: bool = False):
-    mistakes = get_mistakes(is_resolved=is_resolved)
+def get_mistake_vault(request: Request, is_resolved: bool = False):
+    mistakes = get_mistakes(_current_user_id(request), is_resolved=is_resolved)
     q_map = _all_question_map()
     
     enriched = []
@@ -1174,27 +1195,26 @@ def get_mistake_vault(is_resolved: bool = False):
     return enriched
 
 @app.post("/api/mistakes/{question_id}/resolve")
-def resolve_mistake_endpoint(question_id: str):
-    resolve_mistake(question_id)
+def resolve_mistake_endpoint(question_id: str, request: Request):
+    resolve_mistake(_current_user_id(request), question_id)
     return {"status": "ok", "question_id": question_id}
 
 @app.delete("/api/mistakes/{question_id}")
-def delete_mistake_endpoint(question_id: str):
-    delete_mistake(question_id)
+def delete_mistake_endpoint(question_id: str, request: Request):
+    delete_mistake(_current_user_id(request), question_id)
     return {"status": "ok", "question_id": question_id}
 
 @app.get("/api/exam/history")
-def exam_history():
-    return get_exam_history()
+def exam_history(request: Request):
+    return get_exam_history(_current_user_id(request))
 
 @app.get("/api/stats")
 def get_overall_stats(request: Request):
-    # Seri ve profil giriş yapan öğrenciye ait olmalı (diğer sayılar kullanıcı bazlı veri göçünde ayrılacak).
-    token_user = get_current_user_from_request(request)
-    profile = get_profile(token_user["user_id"]) if token_user else get_profile()
-    history = get_exam_history(limit=50)
-    vocab_progress = get_vocab_progress()
-    unresolved_mistakes = get_mistake_count()
+    uid = _current_user_id(request)
+    profile = get_profile(uid)
+    history = get_exam_history(uid, limit=50)
+    vocab_progress = get_vocab_progress(uid)
+    unresolved_mistakes = get_mistake_count(uid)
     
     mastered_vocab = sum(1 for status in vocab_progress.values() if status == "mastered")
     total_vocab = len(vocabulary_data)
@@ -1343,11 +1363,13 @@ def evaluate_speaking(req: SpeakingEvaluateRequest, request: Request, _=Depends(
 
 # --- Cloud Sync Endpoints (Web-Mobile Two-Way Sync) ---
 @app.get("/api/sync/pull")
-def sync_pull():
-    profile = get_profile()
-    mistakes = get_mistakes()
-    vocab_progress = get_vocab_progress()
-    exam_history = get_exam_history(limit=100)
+def sync_pull(request: Request):
+    """Öğrencinin sunucudaki güncel hâli; web ve mobil aynı veriyi buradan alır."""
+    uid = _current_user_id(request)
+    profile = get_profile(uid)
+    mistakes = get_mistakes(uid)
+    vocab_progress = get_vocab_progress(uid)
+    exam_history = get_exam_history(uid, limit=100)
     
     return {
         "profile": profile,
@@ -1358,33 +1380,55 @@ def sync_pull():
     }
 
 @app.post("/api/sync/push")
-def sync_push(req: SyncPushRequest):
-    updates = {"profile_updated": False, "mistakes_synced": 0, "vocab_synced": 0, "exams_saved": 0}
-    
+def sync_push(req: SyncPushRequest, request: Request):
+    """
+    Mobilin çevrimdışı giden kutusunu uygular. Sıra önemli: önce yeni yanlışlar,
+    sonra çözülenler (aynı soru çevrimdışıyken önce yanlış sonra doğru yapıldıysa çözülmüş kalır).
+    """
+    uid = _current_user_id(request)
+    updates = {"profile_updated": False, "mistakes_synced": 0, "mistakes_resolved": 0,
+               "vocab_synced": 0, "exams_saved": 0}
+
     if req.profile:
-        update_profile(
-            university_id=req.profile.get("university_id", "itu"),
-            current_level=req.profile.get("current_level", "B2"),
-            target_score=req.profile.get("target_score", 65)
-        )
+        current = get_profile(uid)
+        uni = str(req.profile.get("university_id") or current.get("university_id") or "itu")
+        if not any(u["id"] == uni for u in universities_data):
+            uni = current.get("university_id") or "itu"
+        level = str(req.profile.get("current_level") or current.get("current_level") or "B2").upper()
+        if level not in ("A1", "A2", "B1", "B2", "C1", "C2"):
+            level = current.get("current_level") or "B2"
+        try:
+            target = int(req.profile.get("target_score") or current.get("target_score") or 65)
+        except (TypeError, ValueError):
+            target = 65
+        update_profile(uid, uni, level, max(0, min(100, target)))
         updates["profile_updated"] = True
-        
+
+    # Telefonda çevrimdışı çalışıldıysa bugün seriye işlensin
+    if req.mistakes or req.resolved_mistakes or req.vocab_progress or req.exam_attempts:
+        record_study_day(uid)
+
     if req.mistakes:
-        updates["mistakes_synced"] = bulk_upsert_mistakes(req.mistakes)
-        
+        updates["mistakes_synced"] = bulk_upsert_mistakes(uid, req.mistakes)
+
+    if req.resolved_mistakes:
+        updates["mistakes_resolved"] = bulk_resolve_mistakes(uid, req.resolved_mistakes)
+
     if req.vocab_progress:
-        updates["vocab_synced"] = bulk_upsert_vocab_progress(req.vocab_progress)
-        
+        updates["vocab_synced"] = bulk_upsert_vocab_progress(uid, req.vocab_progress)
+
     if req.exam_attempts:
         for ea in req.exam_attempts:
             save_exam_attempt(
-                university_id=ea.get("university_id", "itu"),
-                level=ea.get("level", "B2"),
-                score=ea.get("score", 0),
-                total_questions=ea.get("total_questions", 0),
-                correct_count=ea.get("correct_count", 0),
-                duration_seconds=ea.get("duration_seconds", 0),
-                answers=ea.get("answers", {})
+                user_id=uid,
+                university_id=str(ea.get("university_id", "itu"))[:50],
+                level=str(ea.get("level", "B2"))[:10],
+                score=max(0.0, min(100.0, float(ea.get("score") or 0))),
+                total_questions=max(0, int(ea.get("total_questions") or 0)),
+                correct_count=max(0, int(ea.get("correct_count") or 0)),
+                duration_seconds=max(0, int(ea.get("duration_seconds") or 0)),
+                answers=ea.get("answers") if isinstance(ea.get("answers"), dict) else {},
+                created_at=str(ea["created_at"])[:19].replace("T", " ") if ea.get("created_at") else None,
             )
             updates["exams_saved"] += 1
             
@@ -1472,11 +1516,12 @@ def generate_mock_exam(university_id: str, request: Request, level: Optional[str
 
 # --- Student Summary Report Card (PDF/Print View) ---
 @app.get("/api/report/summary")
-def get_student_report_summary():
-    profile = get_profile()
-    history = get_exam_history(limit=50)
-    mistakes = get_mistakes(is_resolved=False)
-    vocab_progress = get_vocab_progress()
+def get_student_report_summary(request: Request):
+    uid = _current_user_id(request)
+    profile = get_profile(uid)
+    history = get_exam_history(uid, limit=50)
+    mistakes = get_mistakes(uid, is_resolved=False)
+    vocab_progress = get_vocab_progress(uid)
     
     total_exams = len(history)
     avg_score = round(sum(h["score"] for h in history) / total_exams, 1) if total_exams > 0 else 0

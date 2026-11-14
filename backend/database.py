@@ -26,8 +26,91 @@ def get_db():
     conn.row_factory = sqlite3.Row
     return conn
 
+_PER_USER_TABLES = {
+    # tablo: (yeni şema, kopyalanacak sütunlar)
+    "vocab_progress": (
+        """CREATE TABLE vocab_progress (
+            user_id INTEGER NOT NULL,
+            word_id TEXT NOT NULL,
+            status TEXT DEFAULT 'learning',
+            review_count INTEGER DEFAULT 1,
+            last_reviewed TEXT DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (user_id, word_id)
+        )""",
+        ["word_id", "status", "review_count", "last_reviewed"],
+    ),
+    "question_bookmarks": (
+        """CREATE TABLE question_bookmarks (
+            user_id INTEGER NOT NULL,
+            question_id TEXT NOT NULL,
+            note TEXT,
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (user_id, question_id)
+        )""",
+        ["question_id", "note", "created_at"],
+    ),
+    "mistake_vault": (
+        """CREATE TABLE mistake_vault (
+            user_id INTEGER NOT NULL,
+            question_id TEXT NOT NULL,
+            university_id TEXT,
+            level TEXT,
+            category TEXT,
+            wrong_count INTEGER DEFAULT 1,
+            last_wrong_answer TEXT,
+            last_wrong_at TEXT DEFAULT CURRENT_TIMESTAMP,
+            is_resolved INTEGER DEFAULT 0,
+            resolved_at TEXT,
+            PRIMARY KEY (user_id, question_id)
+        )""",
+        ["question_id", "university_id", "level", "category", "wrong_count",
+         "last_wrong_answer", "last_wrong_at", "is_resolved", "resolved_at"],
+    ),
+}
+
+
+def _migrate_per_user_tables(conn) -> None:
+    """
+    Eski şemada (anahtar yalnızca kelime/soru kimliği) duran tabloları
+    (user_id, kimlik) anahtarlı şemaya taşır. Eski satırlar kendi user_id'leriyle
+    (çoğu varsayılan 1) korunur. Göçten önce veritabanının bir yedeği alınır.
+    """
+    pending = []
+    for table in _PER_USER_TABLES:
+        info = conn.execute(f"PRAGMA table_info({table})").fetchall()
+        if not info:
+            continue  # tablo yok: CREATE IF NOT EXISTS yeni şemayla kuracak
+        pk_cols = [r[1] for r in sorted(info, key=lambda r: r[5]) if r[5] > 0]
+        if pk_cols[:1] != ["user_id"]:
+            pending.append(table)
+    if not pending:
+        return
+
+    if DB_PATH.exists() and DB_PATH.stat().st_size > 0:
+        backup = DB_PATH.with_name(DB_PATH.name + ".yedek-kullanici-gocu-" + datetime.now().strftime("%Y%m%d-%H%M%S"))
+        import shutil
+        conn.commit()
+        shutil.copy2(DB_PATH, backup)
+
+    with conn:
+        for table in pending:
+            new_sql, cols = _PER_USER_TABLES[table]
+            old_cols = {r[1] for r in conn.execute(f"PRAGMA table_info({table})").fetchall()}
+            copy_cols = [c for c in cols if c in old_cols]
+            conn.execute(f"ALTER TABLE {table} RENAME TO {table}__eski")
+            conn.execute(new_sql)
+            user_expr = "COALESCE(user_id, 1)" if "user_id" in old_cols else "1"
+            col_list = ", ".join(copy_cols)
+            conn.execute(
+                f"INSERT OR IGNORE INTO {table} (user_id, {col_list}) "
+                f"SELECT {user_expr}, {col_list} FROM {table}__eski"
+            )
+            conn.execute(f"DROP TABLE {table}__eski")
+
+
 def init_db():
     conn = get_db()
+    _migrate_per_user_tables(conn)
     conn.executescript("""
         CREATE TABLE IF NOT EXISTS user_profile (
             id INTEGER PRIMARY KEY CHECK (id = 1),
@@ -88,24 +171,28 @@ def init_db():
             created_at TEXT DEFAULT CURRENT_TIMESTAMP
         );
 
+        -- Kullanıcı bazlı ilerleme tabloları: anahtar (user_id, kayıt_id).
+        -- Eskiden anahtar yalnızca kelime/soru kimliğiydi ve tüm öğrenciler aynı satırı paylaşıyordu.
         CREATE TABLE IF NOT EXISTS vocab_progress (
-            word_id TEXT PRIMARY KEY,
-            user_id INTEGER DEFAULT 1,
+            user_id INTEGER NOT NULL,
+            word_id TEXT NOT NULL,
             status TEXT DEFAULT 'learning',
             review_count INTEGER DEFAULT 1,
-            last_reviewed TEXT DEFAULT CURRENT_TIMESTAMP
+            last_reviewed TEXT DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (user_id, word_id)
         );
 
         CREATE TABLE IF NOT EXISTS question_bookmarks (
-            question_id TEXT PRIMARY KEY,
-            user_id INTEGER DEFAULT 1,
+            user_id INTEGER NOT NULL,
+            question_id TEXT NOT NULL,
             note TEXT,
-            created_at TEXT DEFAULT CURRENT_TIMESTAMP
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (user_id, question_id)
         );
 
         CREATE TABLE IF NOT EXISTS mistake_vault (
-            question_id TEXT PRIMARY KEY,
-            user_id INTEGER DEFAULT 1,
+            user_id INTEGER NOT NULL,
+            question_id TEXT NOT NULL,
             university_id TEXT,
             level TEXT,
             category TEXT,
@@ -113,7 +200,8 @@ def init_db():
             last_wrong_answer TEXT,
             last_wrong_at TEXT DEFAULT CURRENT_TIMESTAMP,
             is_resolved INTEGER DEFAULT 0,
-            resolved_at TEXT
+            resolved_at TEXT,
+            PRIMARY KEY (user_id, question_id)
         );
 
         -- 6-Digit Email OTP Verification Table --
@@ -232,7 +320,7 @@ def init_db():
 # Auto-initialize on import
 init_db()
 
-def get_profile(user_id: int = 1) -> Dict[str, Any]:
+def get_profile(user_id: int) -> Dict[str, Any]:
     conn = get_db()
     cursor = conn.cursor()
     cursor.execute("""
@@ -256,46 +344,22 @@ def get_profile(user_id: int = 1) -> Dict[str, Any]:
         elif isinstance(raw_unlocked, list):
             unlocked = raw_unlocked
 
-        primary_uni = data.get("verified_university") or data.get("university_id") or "itu"
-        if primary_uni not in unlocked:
-            unlocked.append(primary_uni)
+        # Yalnızca belgeyle DOĞRULANMIŞ üniversite açık sayılır (check_university_access ile aynı kural);
+        # kayıtta seçilen university_id tek başına kilidi açmaz.
+        verified_uni = data.get("verified_university")
+        if verified_uni and verified_uni not in unlocked:
+            unlocked.append(verified_uni)
         if "general" not in unlocked:
             unlocked.append("general")
 
         data["unlocked_universities"] = unlocked
-        data["verified_university"] = primary_uni
+        data["verified_university"] = verified_uni
         data["streak_days"] = _effective_streak(data.get("streak_days"), data.get("last_study_date"))
         return data
 
-    # Fallback to legacy user_profile
-    cursor.execute("SELECT university_id, current_level, target_score, streak_days, last_active FROM user_profile WHERE id = 1")
-    legacy = cursor.fetchone()
     conn.close()
-    if legacy:
-        data = dict(legacy)
-        data["is_verified_student"] = 1
-        data["verification_status"] = "verified"
-        data["student_number"] = "040220199"
-        data["unlocked_universities"] = ["itu", "general"]
-        data["verified_university"] = "itu"
-        return data
-
-    return {
-        "id": 1,
-        "email": "ogrenci@itu.edu.tr",
-        "username": "ituhazirlik",
-        "full_name": "İTÜ Hazırlık Öğrencisi",
-        "university_id": "itu",
-        "current_level": "B2",
-        "target_score": 65,
-        "streak_days": 1,
-        "is_verified_student": 1,
-        "verification_status": "verified",
-        "student_number": "040220199",
-        "unlocked_universities": ["itu", "general"],
-        "verified_university": "itu",
-        "last_active": datetime.now().isoformat()
-    }
+    # Kullanıcı yok: eskiden burada uydurma "doğrulanmış İTÜ öğrencisi" dönüyordu.
+    return {}
 
 def _istanbul_today():
     # Türkiye'de yaz saati yok: UTC+3 sabit.
@@ -344,7 +408,7 @@ def record_study_day(user_id: int) -> int:
     return streak
 
 
-def update_profile(university_id: str, current_level: str, target_score: int, user_id: int = 1) -> Dict[str, Any]:
+def update_profile(user_id: int, university_id: str, current_level: str, target_score: int) -> Dict[str, Any]:
     conn = get_db()
     with conn:
         conn.execute("""
@@ -352,11 +416,6 @@ def update_profile(university_id: str, current_level: str, target_score: int, us
             SET university_id = ?, current_level = ?, target_score = ?, last_active = CURRENT_TIMESTAMP
             WHERE id = ?
         """, (university_id, current_level, target_score, user_id))
-        conn.execute("""
-            UPDATE user_profile 
-            SET university_id = ?, current_level = ?, target_score = ?, last_active = CURRENT_TIMESTAMP
-            WHERE id = 1
-        """, (university_id, current_level, target_score))
     conn.close()
     return get_profile(user_id)
 
@@ -737,149 +796,181 @@ def check_university_access(user_id: int, university_id: str) -> bool:
     return False
 
 
-def save_exam_attempt(university_id: str, level: str, score: float, total_questions: int, 
-                      correct_count: int, duration_seconds: int, answers: Dict[str, Any]) -> int:
+def save_exam_attempt(user_id: int, university_id: str, level: str, score: float, total_questions: int,
+                      correct_count: int, duration_seconds: int, answers: Dict[str, Any],
+                      created_at: Optional[str] = None) -> int:
     conn = get_db()
     with conn:
         cursor = conn.execute("""
-            INSERT INTO exam_attempts (university_id, level, score, total_questions, correct_count, duration_seconds, answers_json)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        """, (university_id, level, score, total_questions, correct_count, duration_seconds, json.dumps(answers)))
+            INSERT INTO exam_attempts (user_id, university_id, level, score, total_questions, correct_count,
+                                       duration_seconds, answers_json, created_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, COALESCE(?, CURRENT_TIMESTAMP))
+        """, (user_id, university_id, level, score, total_questions, correct_count, duration_seconds,
+              json.dumps(answers), created_at))
         attempt_id = cursor.lastrowid
     conn.close()
     return attempt_id
 
-def get_exam_history(limit: int = 10) -> List[Dict[str, Any]]:
+
+def get_exam_history(user_id: int, limit: int = 10) -> List[Dict[str, Any]]:
     conn = get_db()
-    cursor = conn.cursor()
-    cursor.execute("""
+    rows = conn.execute("""
         SELECT id, university_id, level, score, total_questions, correct_count, duration_seconds, created_at
-        FROM exam_attempts 
+        FROM exam_attempts
+        WHERE user_id = ?
         ORDER BY id DESC LIMIT ?
-    """, (limit,))
-    rows = cursor.fetchall()
+    """, (user_id, limit)).fetchall()
     conn.close()
     return [dict(r) for r in rows]
 
-def set_vocab_status(word_id: str, status: str) -> None:
+
+def set_vocab_status(user_id: int, word_id: str, status: str) -> None:
     conn = get_db()
     with conn:
         conn.execute("""
-            INSERT INTO vocab_progress (word_id, status, review_count, last_reviewed)
-            VALUES (?, ?, 1, CURRENT_TIMESTAMP)
-            ON CONFLICT(word_id) DO UPDATE SET
+            INSERT INTO vocab_progress (user_id, word_id, status, review_count, last_reviewed)
+            VALUES (?, ?, ?, 1, CURRENT_TIMESTAMP)
+            ON CONFLICT(user_id, word_id) DO UPDATE SET
                 status = excluded.status,
                 review_count = review_count + 1,
                 last_reviewed = CURRENT_TIMESTAMP
-        """, (word_id, status))
+        """, (user_id, word_id, status))
     conn.close()
 
-def get_vocab_progress() -> Dict[str, str]:
+
+def get_vocab_progress(user_id: int) -> Dict[str, str]:
     conn = get_db()
-    cursor = conn.cursor()
-    cursor.execute("SELECT word_id, status FROM vocab_progress")
-    rows = cursor.fetchall()
+    rows = conn.execute("SELECT word_id, status FROM vocab_progress WHERE user_id = ?", (user_id,)).fetchall()
     conn.close()
     return {r["word_id"]: r["status"] for r in rows}
 
-def record_mistake(question_id: str, university_id: str, level: str, category: str, wrong_answer: str) -> None:
+
+def record_mistake(user_id: int, question_id: str, university_id: str, level: str, category: str,
+                   wrong_answer: str) -> None:
     conn = get_db()
     with conn:
         conn.execute("""
-            INSERT INTO mistake_vault (question_id, university_id, level, category, wrong_count, last_wrong_answer, last_wrong_at, is_resolved)
-            VALUES (?, ?, ?, ?, 1, ?, CURRENT_TIMESTAMP, 0)
-            ON CONFLICT(question_id) DO UPDATE SET
+            INSERT INTO mistake_vault (user_id, question_id, university_id, level, category, wrong_count,
+                                       last_wrong_answer, last_wrong_at, is_resolved)
+            VALUES (?, ?, ?, ?, ?, 1, ?, CURRENT_TIMESTAMP, 0)
+            ON CONFLICT(user_id, question_id) DO UPDATE SET
                 wrong_count = wrong_count + 1,
                 last_wrong_answer = excluded.last_wrong_answer,
                 last_wrong_at = CURRENT_TIMESTAMP,
                 is_resolved = 0,
                 resolved_at = NULL
-        """, (question_id, university_id, level, category, wrong_answer))
+        """, (user_id, question_id, university_id, level, category, wrong_answer))
     conn.close()
 
-def resolve_mistake(question_id: str) -> None:
+
+def resolve_mistake(user_id: int, question_id: str) -> None:
     conn = get_db()
     with conn:
         conn.execute("""
-            UPDATE mistake_vault 
+            UPDATE mistake_vault
             SET is_resolved = 1, resolved_at = CURRENT_TIMESTAMP
-            WHERE question_id = ?
-        """, (question_id,))
+            WHERE user_id = ? AND question_id = ?
+        """, (user_id, question_id))
     conn.close()
 
-def delete_mistake(question_id: str) -> None:
+
+def delete_mistake(user_id: int, question_id: str) -> None:
     conn = get_db()
     with conn:
-        conn.execute("DELETE FROM mistake_vault WHERE question_id = ?", (question_id,))
+        conn.execute("DELETE FROM mistake_vault WHERE user_id = ? AND question_id = ?", (user_id, question_id))
     conn.close()
 
-def get_mistakes(is_resolved: bool = False) -> List[Dict[str, Any]]:
+
+def get_mistakes(user_id: int, is_resolved: bool = False) -> List[Dict[str, Any]]:
     conn = get_db()
-    cursor = conn.cursor()
-    cursor.execute("""
-        SELECT question_id, university_id, level, category, wrong_count, last_wrong_answer, last_wrong_at, is_resolved, resolved_at
+    rows = conn.execute("""
+        SELECT question_id, university_id, level, category, wrong_count, last_wrong_answer, last_wrong_at,
+               is_resolved, resolved_at
         FROM mistake_vault
-        WHERE is_resolved = ?
+        WHERE user_id = ? AND is_resolved = ?
         ORDER BY last_wrong_at DESC
-    """, (1 if is_resolved else 0,))
-    rows = cursor.fetchall()
+    """, (user_id, 1 if is_resolved else 0)).fetchall()
     conn.close()
     return [dict(r) for r in rows]
 
-def get_mistake_count() -> int:
+
+def get_mistake_count(user_id: int) -> int:
     conn = get_db()
-    cursor = conn.cursor()
-    cursor.execute("SELECT COUNT(*) as cnt FROM mistake_vault WHERE is_resolved = 0")
-    row = cursor.fetchone()
+    row = conn.execute("SELECT COUNT(*) AS cnt FROM mistake_vault WHERE user_id = ? AND is_resolved = 0",
+                       (user_id,)).fetchone()
     conn.close()
     return row["cnt"] if row else 0
 
-def bulk_upsert_mistakes(mistakes: List[Dict[str, Any]]) -> int:
+
+def bulk_upsert_mistakes(user_id: int, mistakes: List[Dict[str, Any]]) -> int:
+    """
+    Mobilin çevrimdışıyken biriktirdiği YENİ yanlışları ekler. Çözülmüş bir hatayı
+    yeniden açar (öğrenci soruyu tekrar yanlış yaptı); asla "çözüldü" olarak işaretlemez —
+    çözme işlemleri ayrı listeyle (resolved_mistakes) gelir.
+    """
     conn = get_db()
-    inserted = 0
+    count = 0
     with conn:
         for m in mistakes:
-            qid = m.get("question_id")
+            qid = str(m.get("question_id") or "")[:100]
             if not qid:
                 continue
             conn.execute("""
-                INSERT INTO mistake_vault (question_id, university_id, level, category, wrong_count, last_wrong_answer, last_wrong_at, is_resolved)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                ON CONFLICT(question_id) DO UPDATE SET
-                    wrong_count = MAX(mistake_vault.wrong_count, excluded.wrong_count),
+                INSERT INTO mistake_vault (user_id, question_id, university_id, level, category, wrong_count,
+                                           last_wrong_answer, last_wrong_at, is_resolved)
+                VALUES (?, ?, ?, ?, ?, 1, ?, COALESCE(?, CURRENT_TIMESTAMP), 0)
+                ON CONFLICT(user_id, question_id) DO UPDATE SET
+                    wrong_count = mistake_vault.wrong_count + 1,
                     last_wrong_answer = excluded.last_wrong_answer,
                     last_wrong_at = excluded.last_wrong_at,
-                    is_resolved = excluded.is_resolved
+                    is_resolved = 0,
+                    resolved_at = NULL
             """, (
-                qid, 
-                m.get("university_id", "general"),
-                m.get("level", "B2"),
-                m.get("category", "General"),
-                m.get("wrong_count", 1),
-                m.get("last_wrong_answer", ""),
-                m.get("last_wrong_at", datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")),
-                1 if m.get("is_resolved") else 0
+                user_id, qid,
+                str(m.get("university_id") or "general")[:50],
+                str(m.get("level") or "B2")[:10],
+                str(m.get("category") or "General")[:100],
+                str(m.get("last_wrong_answer") or "")[:5],
+                m.get("last_wrong_at"),
             ))
-            inserted += 1
+            count += 1
     conn.close()
-    return inserted
+    return count
 
-def bulk_upsert_vocab_progress(vocab_map: Dict[str, str]) -> int:
+
+def bulk_resolve_mistakes(user_id: int, question_ids: List[str]) -> int:
+    conn = get_db()
+    count = 0
+    with conn:
+        for qid in question_ids:
+            cur = conn.execute("""
+                UPDATE mistake_vault SET is_resolved = 1, resolved_at = CURRENT_TIMESTAMP
+                WHERE user_id = ? AND question_id = ? AND is_resolved = 0
+            """, (user_id, str(qid)[:100]))
+            count += cur.rowcount
+    conn.close()
+    return count
+
+
+def bulk_upsert_vocab_progress(user_id: int, vocab_map: Dict[str, str]) -> int:
     conn = get_db()
     count = 0
     with conn:
         for word_id, status in vocab_map.items():
+            if status not in ("mastered", "learning", "unreviewed"):
+                continue
             conn.execute("""
-                INSERT INTO vocab_progress (word_id, status, last_reviewed)
-                VALUES (?, ?, CURRENT_TIMESTAMP)
-                ON CONFLICT(word_id) DO UPDATE SET
+                INSERT INTO vocab_progress (user_id, word_id, status, last_reviewed)
+                VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+                ON CONFLICT(user_id, word_id) DO UPDATE SET
                     status = excluded.status,
                     review_count = vocab_progress.review_count + 1,
                     last_reviewed = CURRENT_TIMESTAMP
-            """, (word_id, status))
+            """, (user_id, str(word_id)[:100], status))
             count += 1
     conn.close()
     return count
+
 
 def create_student_otp(email: str, student_number: str = "") -> Dict[str, Any]:
     conn = get_db()

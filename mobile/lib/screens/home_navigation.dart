@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/university.dart';
 import '../services/api_service.dart';
+import '../services/sync_service.dart';
 import '../theme/app_theme.dart';
 import 'dashboard_screen.dart';
 import 'exams_screen.dart';
@@ -32,6 +33,9 @@ class _HomeNavigationState extends State<HomeNavigation> {
   }
 
   Future<void> _initApp() async {
+    // Açılışta web ile eşitle: bekleyen çevrimdışı değişiklikleri gönder, sunucudaki
+    // güncel ilerlemeyi (kelime, Hata Kasası, seçili üniversite/seviye) çek.
+    await SyncService().syncNow();
     final prefs = await SharedPreferences.getInstance();
     final savedLevel = prefs.getString('current_level') ?? 'B2';
     final savedUniId = prefs.getString('current_uni_id') ?? 'itu';
@@ -61,6 +65,7 @@ class _HomeNavigationState extends State<HomeNavigation> {
     });
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('current_uni_id', uni.id);
+    await ApiService().updateProfile(universityId: uni.id, level: _currentLevel);
   }
 
   void _onLevelChange(String level) async {
@@ -69,6 +74,9 @@ class _HomeNavigationState extends State<HomeNavigation> {
     });
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('current_level', level);
+    if (_currentUniversity != null) {
+      await ApiService().updateProfile(universityId: _currentUniversity!.id, level: level);
+    }
   }
 
   void _onTabSwitch(int index) {
