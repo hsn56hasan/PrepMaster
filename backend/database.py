@@ -399,6 +399,24 @@ def init_db():
     if "used" not in pr_cols:
         conn.execute("ALTER TABLE password_resets ADD COLUMN used INTEGER DEFAULT 0")
 
+    if "kvkk_accepted_at" not in cols:
+        conn.execute("ALTER TABLE users ADD COLUMN kvkk_accepted_at TEXT")
+        conn.execute("UPDATE users SET kvkk_accepted_at = COALESCE(created_at, CURRENT_TIMESTAMP) WHERE kvkk_accepted_at IS NULL")
+
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS support_tickets (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER,
+            full_name TEXT,
+            email TEXT,
+            phone TEXT,
+            category TEXT DEFAULT 'general',
+            message TEXT NOT NULL,
+            status TEXT DEFAULT 'open',
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP
+        );
+    """)
+
     conn.commit()
     conn.close()
 
@@ -1625,6 +1643,47 @@ def admin_delete_student(user_id: int) -> Dict[str, Any]:
         "success": True,
         "message": f"{row['full_name'] or row['email']} adlı öğrenci kaydı silindi."
     }
+
+
+def create_support_ticket(
+    message: str,
+    category: str = "general",
+    full_name: str = "",
+    email: str = "",
+    phone: str = "",
+    user_id: Optional[int] = None,
+) -> Dict[str, Any]:
+    conn = get_db()
+    with conn:
+        cur = conn.execute("""
+            INSERT INTO support_tickets (user_id, full_name, email, phone, category, message, status)
+            VALUES (?, ?, ?, ?, ?, ?, 'open')
+        """, (
+            user_id,
+            (full_name or "").strip(),
+            (email or "").strip(),
+            (phone or "").strip(),
+            (category or "general").strip(),
+            (message or "").strip(),
+        ))
+        tid = cur.lastrowid
+    conn.close()
+    return {
+        "success": True,
+        "ticket_id": tid,
+        "message": "Destek talebiniz başarıyla kaydedildi. En kısa sürede size dönüş yapılacaktır."
+    }
+
+
+def list_support_tickets(limit: int = 50) -> List[Dict[str, Any]]:
+    conn = get_db()
+    rows = conn.execute("""
+        SELECT id, user_id, full_name, email, phone, category, message, status, created_at
+        FROM support_tickets
+        ORDER BY id DESC LIMIT ?
+    """, (limit,)).fetchall()
+    conn.close()
+    return [dict(r) for r in rows]
 
 
 

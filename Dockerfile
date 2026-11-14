@@ -45,4 +45,7 @@ EXPOSE 8050
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
   CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8050/api/student/status')" || exit 1
 
-CMD ["uvicorn", "backend.app:app", "--host", "0.0.0.0", "--port", "8050"]
+# --limit-concurrency: aynı anda en fazla 300 bağlantı/istek işlenir, fazlası anında 503 alır
+#   (sunucu belleği/CPU'su tükenmeden ayakta kalır)
+# --timeout-keep-alive: boşta bekleyen bağlantılar 5 sn sonra kapatılır (bağlantı tüketme saldırısı)
+CMD ["uvicorn", "backend.app:app", "--host", "0.0.0.0", "--port", "8050", "--limit-concurrency", "300", "--timeout-keep-alive", "5", "--backlog", "2048"]

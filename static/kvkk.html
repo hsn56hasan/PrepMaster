@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="tr" class="h-full bg-slate-950">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrepMaster - KVKK Aydınlatma Metni, Yasal Belgeler & Öğrenci Destek Merkezi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #fff !important; color: #000 !important; }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-200 antialiased">
+
+  <!-- Üst Bar -->
+  <header class="no-print bg-slate-900/90 border-b border-slate-800 sticky top-0 z-40 backdrop-blur-md">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-lg">
+          <i data-lucide="shield-check" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <span class="font-extrabold text-white text-base tracking-tight">PrepMaster</span>
+          <span class="block text-[11px] text-slate-400">KVKK, Hukuki Belgeler & Öğrenci Destek Merkezi</span>
+        </div>
+      </a>
+      <div class="flex items-center gap-2">
+        <button onclick="window.print()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold border border-slate-700 flex items-center gap-1.5 transition">
+          <i data-lucide="printer" class="w-4 h-4"></i>
+          <span>PDF / Yazdır</span>
+        </button>
+        <a href="/" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-extrabold shadow transition flex items-center gap-1.5">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          <span>Platforma Dön</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-8">
+
+    <!-- 1. ÖĞRENCİ DESTEK & VERİ SORUMLUSU İLETİŞİM KARTI -->
+    <section id="destek" class="bg-gradient-to-br from-blue-950 via-indigo-950 to-slate-900 border border-blue-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-5">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 rounded-full text-xs font-extrabold mb-2">
+            <i data-lucide="headset" class="w-3.5 h-3.5"></i> 7/24 Öğrenci Destek & İletişim Hattı
+          </span>
+          <h1 class="text-xl sm:text-2xl font-black text-white">PrepMaster Destek & KVKK İletişim Merkezi</h1>
+          <p class="text-xs sm:text-sm text-slate-300 mt-1">
+            Üniversite hazırlık paketleri, E-Devlet öğrenci belgesi doğrulama, teknik destek ve KVKK başvurularınız için doğrudan ulaşabilirsiniz.
+          </p>
+        </div>
+        <div class="text-left sm:text-right shrink-0">
+          <div class="text-xs font-bold text-slate-400">Veri Sorumlusu / Yetkili</div>
+          <div class="text-sm font-black text-white">Hasan Toprakcı</div>
+          <div class="text-[11px] text-blue-300">PrepMaster Platform Yönetimi</div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- E-Posta -->
+        <a href="mailto:toprakcihasan5@gmail.com" class="p-4 rounded-2xl bg-slate-900/80 hover:bg-slate-900 border border-slate-700/80 hover:border-blue-400 transition flex items-start gap-3.5">
+          <div class="w-10 h-10 rounded-xl bg-blue-600/20 text-blue-400 flex items-center justify-center shrink-0">
+            <i data-lucide="mail" class="w-5 h-5"></i>
+          </div>
+          <div class="min-w-0">
+            <div class="text-[11px] font-bold text-slate-400 uppercase">Resmi Destek E-Posta (Gmail)</div>
+            <div class="text-xs sm:text-sm font-extrabold text-white truncate mt-0.5">toprakcihasan5@gmail.com</div>
+            <div class="text-[11px] text-blue-400 font-semibold mt-1">E-Posta Gönder →</div>
+          </div>
+        </a>
+
+        <!-- Telefon -->
+        <a href="tel:+905398381887" class="p-4 rounded-2xl bg-slate-900/80 hover:bg-slate-900 border border-slate-700/80 hover:border-emerald-400 transition flex items-start gap-3.5">
+          <div class="w-10 h-10 rounded-xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center shrink-0">
+            <i data-lucide="phone-call" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-bold text-slate-400 uppercase">Telefon Destek Hattı</div>
+            <div class="text-xs sm:text-sm font-extrabold text-white mt-0.5">0539 838 18 87</div>
+            <div class="text-[11px] text-emerald-400 font-semibold mt-1">Hemen Ara (+90 539 838 18 87) →</div>
+          </div>
+        </a>
+
+        <!-- WhatsApp -->
+        <a href="https://wa.me/905398381887?text=Merhaba%2C%20PrepMaster%20%C3%B6%C4%9Frenci%20hesab%C4%B1m%20i%C3%A7in%20destek%20almak%20istiyorum." target="_blank" rel="noopener" class="p-4 rounded-2xl bg-slate-900/80 hover:bg-slate-900 border border-slate-700/80 hover:border-teal-400 transition flex items-start gap-3.5">
+          <div class="w-10 h-10 rounded-xl bg-teal-600/20 text-teal-400 flex items-center justify-center shrink-0">
+            <i data-lucide="message-circle" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-bold text-slate-400 uppercase">WhatsApp Hızlı Destek</div>
+            <div class="text-xs sm:text-sm font-extrabold text-white mt-0.5">0539 838 18 87</div>
+            <div class="text-[11px] text-teal-400 font-semibold mt-1">WhatsApp ile Mesaj Gönder →</div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- 2. BELGE LİSTESİ (İÇİNDEKİLER) -->
+    <nav class="no-print flex flex-wrap gap-2 bg-slate-900 border border-slate-800 p-3 rounded-2xl text-xs font-bold">
+      <a href="#kvkk-aydinlatma" class="px-3.5 py-2 rounded-xl bg-blue-600/20 text-blue-300 border border-blue-500/30 hover:bg-blue-600/30 transition">1. KVKK Aydınlatma Metni</a>
+      <a href="#acik-riza" class="px-3.5 py-2 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 transition">2. Açık Rıza Beyanı</a>
+      <a href="#gizlilik-cerez" class="px-3.5 py-2 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 transition">3. Gizlilik & Çerez Politikası</a>
+      <a href="#kullanici-sozlesmesi" class="px-3.5 py-2 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 transition">4. Kullanıcı & Hizmet Sözleşmesi</a>
+      <a href="#kvkk-basvuru" class="px-3.5 py-2 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 transition">5. KVKK Veri Sahibi Başvuru Formu</a>
+    </nav>
+
+    <!-- BELGE 1: 6698 SAYILI KVKK AYDINLATMA METNİ -->
+    <article id="kvkk-aydinlatma" class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4 leading-relaxed text-xs sm:text-sm text-slate-300">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div>
+          <span class="text-[11px] font-extrabold text-blue-400 uppercase tracking-wider">Belge No: PM-KVKK-01</span>
+          <h2 class="text-lg sm:text-xl font-black text-white mt-0.5">1. 6698 Sayılı Kişisel Verilerin Korunması Kanunu (KVKK) Aydınlatma Metni</h2>
+        </div>
+        <span class="text-xs font-bold text-slate-400">Yürürlük: 2026</span>
+      </div>
+
+      <p>
+        6698 sayılı Kişisel Verilerin Korunması Kanunu (<strong>"KVKK"</strong>) uyarınca, <strong>PrepMaster Üniversite Hazırlık & Muafiyet Platformu</strong> olarak, veri sorumlusu sıfatıyla kişisel verilerinizi aşağıda açıklanan amaçlar ve hukuki sebepler çerçevesinde işlemekte ve korumaktayız.
+      </p>
+
+      <h3 class="font-extrabold text-white text-sm pt-2">1.1. Veri Sorumlusunun Kimliği ve İletişim Bilgileri</h3>
+      <ul class="list-disc list-inside space-y-1 text-slate-300 bg-slate-800/60 p-4 rounded-2xl border border-slate-700/60">
+        <li><strong>Platform / Veri Sorumlusu:</strong> PrepMaster (Yönetici: Hasan Toprakcı)</li>
+        <li><strong>E-Posta Adresi:</strong> <a href="mailto:toprakcihasan5@gmail.com" class="text-blue-400 underline">toprakcihasan5@gmail.com</a></li>
+        <li><strong>Telefon / İletişim Hattı:</strong> <a href="tel:+905398381887" class="text-emerald-400 underline">0539 838 18 87</a> (+90 539 838 18 87)</li>
+      </ul>
+
+      <h3 class="font-extrabold text-white text-sm pt-2">1.2. İşlenen Kişisel Verileriniz</h3>
+      <ul class="list-disc list-inside space-y-1.5">
+        <li><strong>Kimlik ve Öğrencilik Bilgileri:</strong> Ad, soyad, kullanıcı adı, öğrenci numarası, kayıtlı olunan üniversite bilgisi.</li>
+        <li><strong>İletişim Bilgileri:</strong> E-posta adresi (üniversite <code>.edu.tr</code> veya şahsi e-posta), destek veya ödeme adımında paylaşılan telefon numarası.</li>
+        <li><strong>Öğrenci Belgesi Doğrulama Verileri:</strong> E-Devlet / YÖK barkodlu öğrenci belgesi doğrulama modülüne yüklenen veya girilen kurum adı, barkod numarası ve aktif öğrencilik durumu (yalnızca öğrencinin kendi üniversite paketini ücretsiz açmak amacıyla kontrol edilir).</li>
+        <li><strong>Akademik Çalışma ve Sınav Verileri:</strong> Çözülen deneme sınavları, doğru/yanlış sayıları, Hata Defteri kayıtları, kelime kartı ilerlemeleri, Writing ve Speaking alıştırma yanıtları.</li>
+        <li><strong>İşlem Güvenliği Verileri:</strong> Oturum belirteçleri (JWT), şifrelenmiş parola özeti (PBKDF2-HMAC-SHA256), DoS/Flood saldırı önleme kapsamındaki IP erişim kayıtları.</li>
+      </ul>
+
+      <h3 class="font-extrabold text-white text-sm pt-2">1.3. Kişisel Verilerin İşlenme Amaçları ve Hukuki Sebepleri</h3>
+      <p>
+        Kişisel verileriniz; KVKK Madde 5/2 kapsamında <em>"bir sözleşmenin kurulması veya ifasıyla doğrudan doğruya ilgili olması"</em>, <em>"veri sorumlusunun hukuki yükümlülüğünü yerine getirebilmesi"</em> ve <em>"ilgili kişinin temel hak ve özgürlüklerine zarar vermemek kaydıyla meşru menfaat"</em> hukuki sebeplerine dayanarak:
+      </p>
+      <ul class="list-disc list-inside space-y-1">
+        <li>Öğrenci hesabınızın oluşturulması, web ve mobil uygulama (Android APK / PWA) arasında ilerlemenizin eşitlenmesi,</li>
+        <li>Kendi üniversitenize ait hazırlık muafiyet sınav paketinin ücretsiz olarak tanımlanması için öğrencilik durumunuzun doğrulanması,</li>
+        <li>Ek üniversite sınav paketi satın alımlarında 3D Secure / PayTR ödeme süreçlerinin güvenli biçimde yürütülmesi,</li>
+        <li>Bilgi güvenliği süreçlerinin yürütülmesi ve DoS / kaba kuvvet saldırılarının engellenmesi amaçlarıyla işlenmektedir.</li>
+      </ul>
+
+      <h3 class="font-extrabold text-white text-sm pt-2">1.4. Kişisel Verilerin Aktarılması</h3>
+      <p>
+        Kişisel verileriniz üçüncü kişi veya kurumlara ticari amaçla <strong>kesinlikle satılmaz ve paylaşılmaz</strong>. Yalnızca ödeme işlemlerinde ödeme kuruluşu (PayTR) ile ve yasal zorunluluk halinde yetkili kamu kurumlarıyla mevzuata uygun biçimde paylaşılabilir. Kredi kartı bilgileriniz PrepMaster sunucularında saklanmaz.
+      </p>
+
+      <h3 class="font-extrabold text-white text-sm pt-2">1.5. KVKK Madde 11 Kapsamındaki Haklarınız</h3>
+      <p>
+        KVKK'nın 11. maddesi uyarınca; kişisel verilerinizin işlenip işlenmediğini öğrenme, işlenmişse bilgi talep etme, amacına uygun kullanılıp kullanılmadığını öğrenme, eksik veya yanlış işlenmişse düzeltilmesini isteme ve KVKK'nın 7. maddesi çerçevesinde <strong>silinmesini veya yok edilmesini isteme</strong> haklarına sahipsiniz. Taleplerinizi <a href="mailto:toprakcihasan5@gmail.com" class="text-blue-400 underline">toprakcihasan5@gmail.com</a> adresine veya <strong>0539 838 18 87</strong> numaralı destek hattımıza iletebilirsiniz.
+      </p>
+    </article>
+
+    <!-- BELGE 2: AÇIK RIZA BEYANI METNİ -->
+    <article id="acik-riza" class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4 leading-relaxed text-xs sm:text-sm text-slate-300">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div>
+          <span class="text-[11px] font-extrabold text-emerald-400 uppercase tracking-wider">Belge No: PM-KVKK-02</span>
+          <h2 class="text-lg sm:text-xl font-black text-white mt-0.5">2. Kişisel Verilerin İşlenmesine İlişkin Açık Rıza Beyanı</h2>
+        </div>
+        <span class="text-xs font-bold text-slate-400">6698 S. Kanun Md. 5/1</span>
+      </div>
+
+      <p>
+        PrepMaster Aydınlatma Metni'ni okudum ve anladım. 6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında;
+      </p>
+      <ul class="list-disc list-inside space-y-1.5">
+        <li>Üniversiteme özel hazırlık muafiyet içeriklerinin ücretsiz tanımlanabilmesi amacıyla kendi isteğimle yüklediğim <strong>E-Devlet / YÖK öğrenci belgesi ve barkod verilerimin</strong> doğrulanmak üzere işlenmesine,</li>
+        <li>Çözdüğüm deneme sınavları, kelime ilerlemelerim, Writing/Speaking alıştırma verilerimin <strong>kişiselleştirilmiş analiz ve bulut eşitleme</strong> hizmeti sunulması amacıyla kaydedilmesine,</li>
+        <li>Hesap güvenliği, şifre sıfırlama, doğrulama kodu (OTP) gönderimi ve destek taleplerimin yanıtlanması amacıyla e-posta adresim ve iletişim bilgilerim üzerinden tarafımla iletişime geçilmesine</li>
+      </ul>
+      <p class="font-bold text-white">
+        özgür irademle, bilgilendirilmiş olarak açık rıza veriyorum. (Açık rızanızı dilediğiniz zaman <a href="mailto:toprakcihasan5@gmail.com" class="text-blue-400 underline">toprakcihasan5@gmail.com</a> üzerinden geri çekebilir ve hesabınızın silinmesini talep edebilirsiniz.)
+      </p>
+    </article>
+
+    <!-- BELGE 3: GİZLİLİK VE ÇEREZ POLİTİKASI -->
+    <article id="gizlilik-cerez" class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4 leading-relaxed text-xs sm:text-sm text-slate-300">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div>
+          <span class="text-[11px] font-extrabold text-indigo-400 uppercase tracking-wider">Belge No: PM-KVKK-03</span>
+          <h2 class="text-lg sm:text-xl font-black text-white mt-0.5">3. Gizlilik, Veri Güvenliği ve Çerez (Cookie) Politikası</h2>
+        </div>
+        <span class="text-xs font-bold text-slate-400">Teknik Güvenlik</span>
+      </div>
+
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong>Zorunlu Oturum Depolaması (LocalStorage & JWT):</strong> PrepMaster, reklam veya üçüncü taraf takip çerezi kullanmaz. Yalnızca oturumunuzun açık kalması (`prepmaster_token`), karanlık/aydınlık tema tercihiniz (`prepmaster_theme`) ve çevrimdışı çalışma önbelleği için tarayıcı yerel depolaması kullanılır.</li>
+        <li><strong>Parola ve Kriptografik Güvenlik:</strong> Öğrenci şifreleri düz metin olarak asla saklanmaz; kullanıcıya özel tuz (salt) ve 100.000 iterasyonlu <code>PBKDF2-HMAC-SHA256</code> algoritması ile özetlenerek saklanır.</li>
+        <li><strong>DoS ve Kaba Kuvvet (Brute-Force) Koruması:</strong> Sistemin sürekliliğini korumak amacıyla aşırı istek gönderen IP adresleri otomatik hız sınırlandırması (Rate Limiting) ve geçici engelleme katmanı ile korunur.</li>
+      </ul>
+    </article>
+
+    <!-- BELGE 4: KULLANICI SÖZLEŞMESİ VE HİZMET KOŞULLARI -->
+    <article id="kullanici-sozlesmesi" class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4 leading-relaxed text-xs sm:text-sm text-slate-300">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div>
+          <span class="text-[11px] font-extrabold text-amber-400 uppercase tracking-wider">Belge No: PM-HUKUK-04</span>
+          <h2 class="text-lg sm:text-xl font-black text-white mt-0.5">4. Kullanıcı Sözleşmesi ve Dijital Hizmet Koşulları</h2>
+        </div>
+        <span class="text-xs font-bold text-slate-400">Hizmet Şartları</span>
+      </div>
+
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong>Hizmetin Kapsamı:</strong> PrepMaster; Türkiye'deki 26 üniversitenin İngilizce hazırlık ve muafiyet (Proficiency / İYS / EPE / BUEPT / PAE vb.) sınavlarına yönelik özgün kur sınavları, Listening ve Speaking simülasyonları sunan bağımsız bir eğitim platformudur.</li>
+        <li><strong>Kendi Üniversitene Ücretsiz Erişim:</strong> Öğrenciler, E-Devlet öğrenci belgelerini doğrulayarak veya yönetici onayıyla kendi üniversitelerinin hazırlık paketini ücretsiz kullanabilirler.</li>
+        <li><strong>Ek Üniversite Paketleri:</strong> Diğer üniversitelerin soru havuzlarına erişmek isteyen kullanıcılar paket başına 50 TL (KDV dahil) karşılığında veya yönetici tanımlamasıyla erişim sağlayabilir.</li>
+        <li><strong>Hesap Güvenliği ve Fikri Mülkiyet:</strong> Her öğrenci hesabı kişiye özeldir. Soruların, ses dosyalarının ve yazılı içeriklerin izinsiz kopyalanması veya ticari olarak çoğaltılması yasaktır.</li>
+      </ul>
+    </article>
+
+    <!-- BELGE 5: KVKK BAŞVURU USULÜ -->
+    <article id="kvkk-basvuru" class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4 leading-relaxed text-xs sm:text-sm text-slate-300">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div>
+          <span class="text-[11px] font-extrabold text-rose-400 uppercase tracking-wider">Belge No: PM-KVKK-05</span>
+          <h2 class="text-lg sm:text-xl font-black text-white mt-0.5">5. KVKK Madde 11 Veri Sahibi Başvuru Usulü ve Hesap Silme</h2>
+        </div>
+        <span class="text-xs font-bold text-slate-400">En Geç 30 Gün İçinde Yanıt</span>
+      </div>
+
+      <p>
+        Veri Sorumlusuna Başvuru Usul ve Esasları Hakkında Tebliğ uyarınca, kişisel verilerinizle ilgili bilgi alma, düzeltme veya <strong>hesabınızın ve tüm verilerinizin kalıcı olarak silinmesi</strong> taleplerinizi aşağıdaki kanallardan herhangi biriyle iletebilirsiniz:
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+        <div class="p-4 rounded-2xl bg-slate-800/70 border border-slate-700 space-y-1">
+          <div class="text-xs font-extrabold text-white">1. E-Posta veya Telefon ile Doğrudan Başvuru</div>
+          <p class="text-xs text-slate-300">Kayıtlı e-posta adresinizden <a href="mailto:toprakcihasan5@gmail.com?subject=KVKK%20Veri%20Sahibi%20Ba%C5%9Fvurusu" class="text-blue-400 underline font-bold">toprakcihasan5@gmail.com</a> adresine e-posta göndererek veya <a href="tel:+905398381887" class="text-emerald-400 underline font-bold">0539 838 18 87</a> numarasından ulaşarak talebinizi iletebilirsiniz.</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-slate-800/70 border border-slate-700 space-y-1">
+          <div class="text-xs font-extrabold text-white">2. Platform İçi Destek & KVKK Talep Formu</div>
+          <p class="text-xs text-slate-300">Ana sayfadaki <strong>"Destek & KVKK"</strong> penceresinden <em>"KVKK Veri / Hesap Silme Talebi"</em> kategorisini seçerek anında kayıt oluşturabilirsiniz. Başvurularınız en geç 30 gün içinde ücretsiz sonuçlandırılır.</p>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+  <script>
+    if (window.lucide) window.lucide.createIcons();
+  </script>
+</body>
+</html>

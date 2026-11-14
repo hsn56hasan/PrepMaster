@@ -1662,6 +1662,15 @@ async function submitRegister() {
     return;
   }
 
+  const kvkkBox = document.getElementById("reg-kvkk-consent");
+  if (kvkkBox && !kvkkBox.checked) {
+    if (errEl) {
+      errEl.innerText = "Kayıt olabilmek için KVKK Aydınlatma Metni, Açık Rıza Beyanı ve Kullanıcı Sözleşmesi'ni onaylamanız gerekmektedir.";
+      errEl.classList.remove("hidden");
+    }
+    return;
+  }
+
   try {
     const res = await fetch("/api/auth/register", {
       method: "POST",
@@ -2455,3 +2464,113 @@ window.closeApkDownloadModal = closeApkDownloadModal;
 window.trackApkDownloadClick = trackApkDownloadClick;
 window.copyApkDownloadLink = copyApkDownloadLink;
 window.installWebAppPWA = installWebAppPWA;
+
+// ---------------- DESTEK, İLETİŞİM & 6698 S. KVKK YASAL BELGELER MERKEZİ ----------------
+function openSupportKvkkModal(initialTab = "support") {
+  const modal = document.getElementById("support-kvkk-modal");
+  if (!modal) return;
+
+  // Kullanıcı giriş yapmışsa iletişim formunu otomatik doldur
+  const user = window.appState?.currentUser;
+  if (user) {
+    const nameInput = document.getElementById("support-form-name");
+    const emailInput = document.getElementById("support-form-email");
+    if (nameInput && !nameInput.value) nameInput.value = user.full_name || user.username || "";
+    if (emailInput && !emailInput.value) emailInput.value = user.email || "";
+  }
+
+  switchSupportKvkkTab(initialTab);
+  modal.classList.remove("hidden");
+  if (window.lucide) window.lucide.createIcons();
+}
+
+function closeSupportKvkkModal() {
+  const modal = document.getElementById("support-kvkk-modal");
+  if (modal) modal.classList.add("hidden");
+}
+
+function switchSupportKvkkTab(tab) {
+  const tabs = ["support", "kvkk", "riza", "sozlesme"];
+  tabs.forEach(t => {
+    const view = document.getElementById(`sk-view-${t}`);
+    const btn = document.getElementById(`tab-btn-sk-${t}`);
+    if (view) view.classList.toggle("hidden", t !== tab);
+    if (btn) {
+      btn.className = t === tab
+        ? "py-2 px-2 rounded-xl bg-white dark:bg-slate-800 text-blue-700 dark:text-blue-400 shadow-sm transition flex items-center justify-center gap-1.5"
+        : "py-2 px-2 rounded-xl text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition flex items-center justify-center gap-1.5";
+    }
+  });
+  if (window.lucide) window.lucide.createIcons();
+}
+
+async function copySupportText(text, label) {
+  try {
+    await navigator.clipboard.writeText(text);
+    showNotification(`✓ ${label} (${text}) panoya kopyalandı!`, "emerald");
+  } catch (_) {
+    prompt(`${label} Kopyalayın:`, text);
+  }
+}
+
+async function submitSupportTicketForm() {
+  const fullName = (document.getElementById("support-form-name")?.value || "").trim();
+  const email = (document.getElementById("support-form-email")?.value || "").trim();
+  const phone = (document.getElementById("support-form-phone")?.value || "").trim();
+  const category = document.getElementById("support-form-category")?.value || "Genel Destek";
+  const message = (document.getElementById("support-form-message")?.value || "").trim();
+  const statusEl = document.getElementById("support-form-status");
+  const btn = document.getElementById("btn-submit-support-ticket");
+
+  if (statusEl) statusEl.classList.add("hidden");
+
+  if (!message || message.length < 5) {
+    if (statusEl) {
+      statusEl.className = "p-2.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200";
+      statusEl.innerText = "Lütfen destek talebinizi veya mesajınızı en az 5 karakter olacak şekilde yazın.";
+      statusEl.classList.remove("hidden");
+    }
+    return;
+  }
+
+  if (btn) btn.disabled = true;
+  try {
+    const res = await fetch("/api/support/ticket", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        category,
+        full_name: fullName,
+        email,
+        phone,
+        message
+      })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.detail || "Destek talebi gönderilemedi.");
+    }
+    if (statusEl) {
+      statusEl.className = "p-2.5 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200";
+      statusEl.innerText = `✓ Talebiniz (#${data.ticket_id}) kaydedildi! Ayrıca acil durumlar için 0539 838 18 87 veya toprakcihasan5@gmail.com üzerinden ulaşabilirsiniz.`;
+      statusEl.classList.remove("hidden");
+    }
+    const msgInput = document.getElementById("support-form-message");
+    if (msgInput) msgInput.value = "";
+    showNotification("✓ Destek talebiniz başarıyla iletildi!", "emerald");
+  } catch (err) {
+    if (statusEl) {
+      statusEl.className = "p-2.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200";
+      statusEl.innerText = "Hata: " + err.message;
+      statusEl.classList.remove("hidden");
+    }
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+}
+
+window.openSupportKvkkModal = openSupportKvkkModal;
+window.closeSupportKvkkModal = closeSupportKvkkModal;
+window.switchSupportKvkkTab = switchSupportKvkkTab;
+window.copySupportText = copySupportText;
+window.submitSupportTicketForm = submitSupportTicketForm;

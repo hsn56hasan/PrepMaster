@@ -31,7 +31,8 @@ from database import (
     create_paytr_order, get_paytr_order, finish_paytr_order,
     record_study_day,
     admin_list_students, admin_update_student_access,
-    admin_reset_student_password, admin_delete_student
+    admin_reset_student_password, admin_delete_student,
+    create_support_ticket, list_support_tickets
 )
 from document_scanner import (
     scan_student_document, extract_text_from_bytes, SAMPLE_DOCUMENTS
@@ -44,6 +45,8 @@ from paytr_service import (
 
 from security import (
     SecurityHeadersMiddleware,
+    DoSProtectionMiddleware,
+    IS_PRODUCTION,
     ALLOWED_ORIGINS,
     rate_limiter,
     enforce_rate_limit,
@@ -158,6 +161,9 @@ app.add_middleware(
     allow_headers=["Content-Type", "Authorization", "X-Requested-With", "Accept", "Origin"],
     expose_headers=["Retry-After"]
 )
+
+# DoS / flood koruması: en dışta çalışır, kötüye kullanan istek uygulamaya hiç ulaşmaz
+app.add_middleware(DoSProtectionMiddleware)
 
 # Load JSON datasets
 def load_json(filename: str):
@@ -1785,7 +1791,9 @@ def download_android_apk():
 import hmac as _hmac
 
 ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "admin").strip()
-ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "PrepMasterAdmin2026!").strip()
+# Üretimde şifre YALNIZCA ortam değişkeninden gelir: koddaki varsayılan (depoda herkese açık)
+# şifre canlıda asla kabul edilmez. Geliştirmede kolaylık için varsayılan kalır.
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "").strip() or ("" if IS_PRODUCTION else "PrepMasterAdmin2026!")
 
 
 class AdminLoginRequest(BaseModel):
@@ -1824,6 +1832,13 @@ def _require_admin(request: Request) -> Dict[str, Any]:
 @app.post("/api/admin/login")
 def admin_login_endpoint(req: AdminLoginRequest, request: Request):
     enforce_rate_limit(request, scope="admin_login", max_requests=8, window_seconds=60, identifier=req.username)
+    # Kaba kuvvete karşı ikinci kat: aynı IP saatte en fazla 30 yönetici giriş denemesi
+    enforce_rate_limit(request, scope="admin_login_hourly", max_requests=30, window_seconds=3600)
+    if not ADMIN_PASSWORD:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Yönetici paneli yapılandırılmamış (ADMIN_PASSWORD ortam değişkeni eksik)."
+        )
     user_ok = _hmac.compare_digest(req.username.strip().encode("utf-8"), ADMIN_USERNAME.encode("utf-8"))
     pass_ok = _hmac.compare_digest(req.password.encode("utf-8"), ADMIN_PASSWORD.encode("utf-8"))
     if not (user_ok and pass_ok):
@@ -1911,6 +1926,71 @@ def admin_delete_student_endpoint(target_user_id: int, request: Request):
 @app.get("/admin")
 def serve_admin_panel():
     return FileResponse(STATIC_DIR / "admin.html", media_type="text/html")
+
+
+# --- Destek & KVKK Yasal Belgeler Uç Noktaları ---
+SUPPORT_CONTACT_INFO = {
+    "email": "toprakcihasan5@gmail.com",
+    "phone": "05398381887",
+    "phone_display": "0539 838 18 87",
+    "phone_intl": "+905398381887",
+    "whatsapp_url": "https://wa.me/905398381887",
+    "data_controller": "Hasan Toprakcı",
+    "platform": "PrepMaster - Üniversite Hazırlık & Muafiyet Platformu",
+    "kvkk_url": "/kvkk",
+    "documents": [
+        {"id": "kvkk-aydinlatma", "code": "PM-KVKK-01", "title": "6698 Sayılı KVKK Aydınlatma Metni"},
+        {"id": "acik-riza", "code": "PM-KVKK-02", "title": "Açık Rıza Beyanı Metni"},
+        {"id": "gizlilik-cerez", "code": "PM-KVKK-03", "title": "Gizlilik, Veri Güvenliği ve Çerez Politikası"},
+        {"id": "kullanici-sozlesmesi", "code": "PM-HUKUK-04", "title": "Kullanıcı Sözleşmesi ve Hizmet Koşulları"},
+        {"id": "kvkk-basvuru", "code": "PM-KVKK-05", "title": "KVKK Madde 11 Veri Sahibi Başvuru Formu"},
+    ],
+}
+
+
+class SupportTicketRequest(BaseModel):
+    category: str = Field("general", max_length=60)
+    full_name: Optional[str] = Field("", max_length=100)
+    email: Optional[str] = Field("", max_length=120)
+    phone: Optional[str] = Field("", max_length=40)
+    message: str = Field(..., min_length=5, max_length=4000)
+
+    @field_validator("category", "full_name", "email", "phone", "message", mode="before")
+    @classmethod
+    def _clean(cls, v):
+        return sanitize_text(v, strip_tags=True)
+
+
+@app.get("/api/support/info")
+def get_support_info_endpoint():
+    return SUPPORT_CONTACT_INFO
+
+
+@app.post("/api/support/ticket")
+def submit_support_ticket_endpoint(req: SupportTicketRequest, request: Request):
+    enforce_rate_limit(request, scope="support_ticket", max_requests=6, window_seconds=60)
+    token_user = get_current_user_from_request(request)
+    uid = token_user["user_id"] if token_user else None
+    return create_support_ticket(
+        message=req.message,
+        category=req.category,
+        full_name=req.full_name or (token_user.get("username", "") if token_user else ""),
+        email=req.email or (token_user.get("email", "") if token_user else ""),
+        phone=req.phone or "",
+        user_id=uid,
+    )
+
+
+@app.get("/api/admin/support-tickets")
+def admin_get_support_tickets_endpoint(request: Request):
+    _require_admin(request)
+    return {"tickets": list_support_tickets(limit=100)}
+
+
+@app.get("/kvkk")
+@app.get("/destek")
+def serve_kvkk_page():
+    return FileResponse(STATIC_DIR / "kvkk.html", media_type="text/html")
 
 
 # --- Static files ---

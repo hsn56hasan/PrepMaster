@@ -95,6 +95,10 @@
           <i data-lucide="smartphone" class="w-4 h-4 text-emerald-600"></i>
           <span class="hidden lg:inline">Mobil Uygulama (APK)</span>
         </button>
+        <button onclick="openSupportKvkkModal('support')" id="header-support-btn" title="Öğrenci Destek Hattı & KVKK Belgeleri" class="flex items-center gap-1.5 px-3 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 rounded-xl text-xs font-bold transition">
+          <i data-lucide="headset" class="w-4 h-4 text-blue-600"></i>
+          <span class="hidden lg:inline">Destek & KVKK</span>
+        </button>
         <button onclick="syncCloudData()" id="header-sync-btn" title="Web ve Mobil Verilerini Eşitle" class="flex items-center gap-1.5 px-3 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 rounded-xl text-xs font-bold transition">
           <i data-lucide="cloud" class="w-4 h-4 text-indigo-600" id="sync-icon"></i>
           <span class="hidden md:inline">Bulut Eşitle</span>
@@ -195,15 +199,29 @@
         </button>
       </div>
 
-      <!-- Bilgi Kutusu -->
-      <div class="p-4 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-3xl">
-        <div class="flex items-center gap-2 text-blue-700 font-bold text-xs mb-1">
-          <i data-lucide="sparkles" class="w-4 h-4"></i>
-          <span>Hazırlık İpucu</span>
+      <!-- Bilgi & Destek / KVKK Kutusu -->
+      <div class="p-4 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-3xl space-y-2.5">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-1.5 text-blue-800 font-extrabold text-xs">
+            <i data-lucide="headset" class="w-4 h-4 text-blue-600"></i>
+            <span>Öğrenci Destek & KVKK</span>
+          </div>
+          <button onclick="openSupportKvkkModal('kvkk')" class="text-[10px] font-extrabold text-indigo-700 bg-indigo-100 hover:bg-indigo-200 px-2 py-0.5 rounded-full transition">KVKK</button>
         </div>
-        <p class="text-[11px] text-slate-600 leading-relaxed">
-          Akademik sınavların kalbi <strong>Restatement</strong> ve <strong>Collocation</strong> yapılarıdır. Flashcard'ları her gün 10 dakika tekrar edin.
-        </p>
+        <div class="text-[11px] text-slate-700 space-y-1 font-medium">
+          <a href="mailto:toprakcihasan5@gmail.com" class="flex items-center gap-1.5 hover:text-blue-700 truncate" title="toprakcihasan5@gmail.com">
+            <i data-lucide="mail" class="w-3.5 h-3.5 text-blue-600 shrink-0"></i>
+            <span class="truncate">toprakcihasan5@gmail.com</span>
+          </a>
+          <a href="tel:+905398381887" class="flex items-center gap-1.5 hover:text-emerald-700">
+            <i data-lucide="phone" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
+            <span class="font-bold">0539 838 18 87</span>
+          </a>
+        </div>
+        <button onclick="openSupportKvkkModal('support')" class="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-[11px] rounded-xl shadow-sm transition flex items-center justify-center gap-1.5">
+          <i data-lucide="message-square-more" class="w-3.5 h-3.5"></i>
+          <span>Destek & Yasal Belgeler</span>
+        </button>
       </div>
     </aside>
 
@@ -1061,6 +1079,17 @@
               <input type="password" id="reg-password" placeholder="En az 6 karakter" onkeydown="if(event.key==='Enter') submitRegister()" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
           </div>
+          <!-- KVKK Aydınlatma & Açık Rıza Onay Kutusu -->
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">
+            <label class="flex items-start gap-2.5 cursor-pointer select-none">
+              <input type="checkbox" id="reg-kvkk-consent" checked class="mt-0.5 w-4 h-4 rounded accent-emerald-600 shrink-0">
+              <span class="text-[11px] text-slate-600 leading-relaxed">
+                <button type="button" onclick="openSupportKvkkModal('kvkk')" class="font-extrabold text-blue-700 underline">6698 Sayılı KVKK Aydınlatma Metni</button>'ni okudum; kişisel verilerimin işlenmesine ilişkin
+                <button type="button" onclick="openSupportKvkkModal('riza')" class="font-extrabold text-blue-700 underline">Açık Rıza Beyanı</button>'nı ve
+                <button type="button" onclick="openSupportKvkkModal('sozlesme')" class="font-extrabold text-blue-700 underline">Kullanıcı Sözleşmesi</button>'ni kabul ediyorum.
+              </span>
+            </label>
+          </div>
           <div id="register-error-msg" class="hidden p-2.5 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-700 font-semibold"></div>
           <button onclick="submitRegister()" class="w-full py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs rounded-xl shadow-lg shadow-emerald-500/25 transition flex items-center justify-center gap-2">
             <i data-lucide="user-plus" class="w-4 h-4"></i> Hesap Oluştur ve Belge Doğrulamaya Geç
@@ -1068,7 +1097,7 @@
         </div>
       </div>
 
-      <!-- Alt Bilgi & Mobil APK İndirme -->
+      <!-- Alt Bilgi, Destek İletişim & Mobil APK İndirme -->
       <div class="pt-3 border-t border-slate-100 space-y-2.5">
         <button type="button" onclick="openApkDownloadModal()" class="w-full py-2.5 px-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition flex items-center justify-between shadow-sm">
           <span class="flex items-center gap-2">
@@ -1077,8 +1106,31 @@
           </span>
           <span class="text-[10px] font-black px-2 py-0.5 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 rounded-full">18.3 MB ↓</span>
         </button>
+
+        <!-- Öğrenci Destek & KVKK Hızlı Erişim Barı -->
+        <div class="p-2.5 bg-blue-50/70 border border-blue-100 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px]">
+          <div class="text-slate-600 space-y-0.5">
+            <div class="font-extrabold text-slate-800 flex items-center gap-1">
+              <i data-lucide="headset" class="w-3.5 h-3.5 text-blue-600"></i>
+              <span>Öğrenci Destek:</span>
+              <a href="tel:+905398381887" class="text-blue-700 hover:underline font-bold">0539 838 18 87</a>
+            </div>
+            <div class="text-[10px] text-slate-500">
+              E-Posta: <a href="mailto:toprakcihasan5@gmail.com" class="text-blue-700 hover:underline font-semibold">toprakcihasan5@gmail.com</a>
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5 shrink-0">
+            <button type="button" onclick="openSupportKvkkModal('support')" class="px-2.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-[10px] transition">
+              Destek
+            </button>
+            <button type="button" onclick="openSupportKvkkModal('kvkk')" class="px-2.5 py-1.5 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 font-bold rounded-lg text-[10px] transition">
+              KVKK & Yasal
+            </button>
+          </div>
+        </div>
+
         <div class="flex items-center justify-between text-[11px] text-slate-400">
-          <span class="flex items-center gap-1"><i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i> E-Devlet Barkod Doğrulama</span>
+          <span class="flex items-center gap-1"><i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i> 6698 S. KVKK Uyumlu</span>
           <span>Kendi Okuluna %100 Ücretsiz</span>
         </div>
       </div>
@@ -1421,12 +1473,18 @@
       <!-- Doğrulama Sonuç & Sertifika Kartı -->
       <div id="doc-scan-result-msg" class="hidden p-4 rounded-2xl text-xs font-semibold"></div>
 
-      <!-- İlk Girişte Atla / Genel Havuzla Devam Et Seçeneği -->
-      <div id="doc-scan-skip-footer" class="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
-        <span>Belgenizi daha sonra üst menüden de yükleyebilirsiniz.</span>
-        <button type="button" onclick="skipDocScanAndEnterPlatform()" class="font-bold text-slate-600 hover:text-blue-700 underline">
-          Şimdilik Genel Havuz ile Devam Et →
-        </button>
+      <!-- İlk Girişte Atla / Genel Havuzla Devam Et Seçeneği + KVKK & Destek Bilgisi -->
+      <div id="doc-scan-skip-footer" class="pt-2 border-t border-slate-100 space-y-2 text-[11px] text-slate-400">
+        <div class="flex items-center justify-between">
+          <span>Belgenizi daha sonra üst menüden de yükleyebilirsiniz.</span>
+          <button type="button" onclick="skipDocScanAndEnterPlatform()" class="font-bold text-slate-600 hover:text-blue-700 underline">
+            Şimdilik Genel Havuz ile Devam Et →
+          </button>
+        </div>
+        <div class="flex flex-wrap items-center justify-between gap-2 pt-1.5 border-t border-slate-100 text-[10px] text-slate-500">
+          <span>🔒 Belgeleriniz <button type="button" onclick="openSupportKvkkModal('kvkk')" class="text-blue-600 font-bold underline">6698 S. KVKK Aydınlatma Metni</button> kapsamında korunur.</span>
+          <span>Destek: <a href="tel:+905398381887" class="font-bold text-slate-700 hover:underline">0539 838 18 87</a> • <a href="mailto:toprakcihasan5@gmail.com" class="font-bold text-blue-600 hover:underline">toprakcihasan5@gmail.com</a></span>
+        </div>
       </div>
 
     </div>
@@ -1781,13 +1839,183 @@
     </div>
   </div>
 
-  <script src="/static/js/auth_fetch.js?v=1.9"></script>
-  <script src="/static/js/flashcards.js?v=1.9"></script>
-  <script src="/static/js/exam.js?v=1.9"></script>
-  <script src="/static/js/listening.js?v=1.9"></script>
-  <script src="/static/js/speaking.js?v=1.9"></script>
-  <script src="/static/js/writing_ai.js?v=1.9"></script>
-  <script src="/static/js/app.js?v=1.9"></script>
+  <!-- ================= ÖĞRENCİ DESTEK, İLETİŞİM & 6698 S. KVKK YASAL BELGELER MERKEZİ MODAL ================= -->
+  <div id="support-kvkk-modal" class="hidden fixed inset-0 z-[80] bg-slate-900/75 backdrop-blur-sm p-4 overflow-y-auto flex items-center justify-center">
+    <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-2xl w-full p-6 shadow-2xl border border-slate-100 dark:border-slate-700 space-y-4 my-auto">
+
+      <!-- Modal Başlığı -->
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-700">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center shadow-lg shadow-blue-500/25">
+            <i data-lucide="headset" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="font-black text-slate-800 dark:text-white text-sm sm:text-base">Destek, İletişim & KVKK Yasal Belgeler Merkezi</h3>
+              <span class="text-[10px] font-black px-2 py-0.5 bg-blue-100 text-blue-800 rounded-full">6698 S. KVKK</span>
+            </div>
+            <p class="text-[11px] text-slate-400">7/24 Öğrenci Destek Hattı • Resmi Aydınlatma Metni & Kullanıcı Sözleşmesi</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeSupportKvkkModal()" class="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Sekmeler -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 bg-slate-100 dark:bg-slate-700 p-1.5 rounded-2xl text-[11px] font-bold">
+        <button type="button" onclick="switchSupportKvkkTab('support')" id="tab-btn-sk-support" class="py-2 px-2 rounded-xl bg-white dark:bg-slate-800 text-blue-700 dark:text-blue-400 shadow-sm transition flex items-center justify-center gap-1.5">
+          <i data-lucide="phone-call" class="w-3.5 h-3.5"></i>
+          <span>Destek & İletişim</span>
+        </button>
+        <button type="button" onclick="switchSupportKvkkTab('kvkk')" id="tab-btn-sk-kvkk" class="py-2 px-2 rounded-xl text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition flex items-center justify-center gap-1.5">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+          <span>KVKK Aydınlatma</span>
+        </button>
+        <button type="button" onclick="switchSupportKvkkTab('riza')" id="tab-btn-sk-riza" class="py-2 px-2 rounded-xl text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition flex items-center justify-center gap-1.5">
+          <i data-lucide="file-check" class="w-3.5 h-3.5"></i>
+          <span>Açık Rıza & Gizlilik</span>
+        </button>
+        <button type="button" onclick="switchSupportKvkkTab('sozlesme')" id="tab-btn-sk-sozlesme" class="py-2 px-2 rounded-xl text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition flex items-center justify-center gap-1.5">
+          <i data-lucide="scale" class="w-3.5 h-3.5"></i>
+          <span>Sözleşme & Başvuru</span>
+        </button>
+      </div>
+
+      <!-- SEKME 1: DESTEK & İLETİŞİM -->
+      <div id="sk-view-support" class="space-y-4">
+        <!-- Doğrudan İletişim Kartları -->
+        <div class="p-4 bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-950 text-white rounded-2xl border border-indigo-500/30 space-y-3">
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-[11px] font-extrabold text-emerald-300 uppercase tracking-wider">Doğrudan İletişim & Öğrenci Destek</div>
+              <div class="text-sm font-black text-white">Hasan Toprakcı — PrepMaster Destek Hattı</div>
+            </div>
+            <span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 rounded-full text-[10px] font-extrabold">Aktif Hat</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+            <!-- Gmail Kartı -->
+            <div class="p-3 rounded-xl bg-white/10 border border-white/15 flex items-center justify-between gap-2">
+              <div class="min-w-0">
+                <div class="text-[10px] text-slate-300 font-bold">Resmi Gmail Destek Adresi</div>
+                <a href="mailto:toprakcihasan5@gmail.com" class="font-extrabold text-white hover:text-blue-300 truncate block">toprakcihasan5@gmail.com</a>
+              </div>
+              <div class="flex items-center gap-1 shrink-0">
+                <a href="mailto:toprakcihasan5@gmail.com" class="px-2.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-[10px] font-bold">Mail At</a>
+                <button type="button" onclick="copySupportText('toprakcihasan5@gmail.com', 'E-posta adresi')" class="p-1.5 bg-white/10 hover:bg-white/20 rounded-lg text-white" title="Kopyala">
+                  <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Telefon & WhatsApp Kartı -->
+            <div class="p-3 rounded-xl bg-white/10 border border-white/15 flex items-center justify-between gap-2">
+              <div>
+                <div class="text-[10px] text-slate-300 font-bold">Telefon & WhatsApp Hattı</div>
+                <a href="tel:+905398381887" class="font-extrabold text-white hover:text-emerald-300 block">0539 838 18 87</a>
+              </div>
+              <div class="flex items-center gap-1 shrink-0">
+                <a href="tel:+905398381887" class="px-2.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-[10px] font-bold">Ara</a>
+                <a href="https://wa.me/905398381887?text=Merhaba%2C%20PrepMaster%20i%C3%A7in%20destek%20almak%20istiyorum." target="_blank" rel="noopener" class="px-2.5 py-1.5 bg-teal-600 hover:bg-teal-500 text-white rounded-lg text-[10px] font-bold">WhatsApp</a>
+                <button type="button" onclick="copySupportText('05398381887', 'Telefon numarası')" class="p-1.5 bg-white/10 hover:bg-white/20 rounded-lg text-white" title="Kopyala">
+                  <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Site İçi Hızlı Destek / KVKK Talep Formu -->
+        <div class="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-slate-200 dark:border-slate-600 space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="text-xs font-extrabold text-slate-800 dark:text-white flex items-center gap-1.5">
+              <i data-lucide="send" class="w-4 h-4 text-blue-600"></i>
+              <span>Hızlı Destek & KVKK Talep Formu</span>
+            </h4>
+            <span class="text-[10px] text-slate-400">Doğrudan yönetici paneline iletilir</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <input type="text" id="support-form-name" placeholder="Adınız Soyadınız" class="p-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl text-xs text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="email" id="support-form-email" placeholder="E-Posta Adresiniz" class="p-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl text-xs text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="tel" id="support-form-phone" placeholder="Telefon (İsteğe bağlı)" class="p-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl text-xs text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+          </div>
+
+          <select id="support-form-category" class="w-full p-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl text-xs font-semibold text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="Üniversite Erişim & Paket Tanımlama">Üniversite Erişim & Paket Tanımlama Talebi</option>
+            <option value="E-Devlet Öğrenci Belgesi Doğrulama">E-Devlet Öğrenci Belgesi Doğrulama Desteği</option>
+            <option value="Ödeme & Fatura İşlemleri">Ödeme & Paket İşlemleri</option>
+            <option value="Teknik Destek / Şifre İşlemleri">Teknik Destek / Hesap & Şifre İşlemleri</option>
+            <option value="KVKK Veri Sahibi / Hesap Silme Başvurusu">KVKK Madde 11 Başvurusu / Hesap & Veri Silme Talebi</option>
+          </select>
+
+          <textarea id="support-form-message" rows="3" placeholder="Talebinizi veya sorunuzu buraya yazın..." class="w-full p-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl text-xs text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+
+          <div id="support-form-status" class="hidden p-2.5 rounded-xl text-xs font-bold"></div>
+
+          <button type="button" id="btn-submit-support-ticket" onclick="submitSupportTicketForm()" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs rounded-xl shadow transition flex items-center justify-center gap-1.5">
+            <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+            <span>Destek Talebini Gönder</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- SEKME 2: 6698 SAYILI KVKK AYDINLATMA METNİ -->
+      <div id="sk-view-kvkk" class="hidden max-h-[55vh] overflow-y-auto pr-1 space-y-3 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+        <div class="p-3.5 bg-blue-50 dark:bg-slate-700 rounded-2xl border border-blue-200 dark:border-slate-600">
+          <div class="text-[10px] font-extrabold text-blue-700 dark:text-blue-300 uppercase">Belge No: PM-KVKK-01 • 6698 Sayılı Kanun Madde 10</div>
+          <h4 class="text-sm font-black text-slate-800 dark:text-white mt-0.5">Kişisel Verilerin Korunması Kanunu (KVKK) Aydınlatma Metni</h4>
+        </div>
+        <p><strong>1. Veri Sorumlusu:</strong> 6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") uyarınca kişisel verileriniz; Veri Sorumlusu sıfatıyla <strong>PrepMaster (Yönetici: Hasan Toprakcı)</strong> tarafından aşağıda açıklanan kapsamda işlenmektedir. İletişim: <strong>toprakcihasan5@gmail.com</strong> | Tel: <strong>0539 838 18 87</strong>.</p>
+        <p><strong>2. İşlenen Kişisel Veriler:</strong> Kimlik bilgileri (ad-soyad, kullanıcı adı, öğrenci numarası), iletişim bilgileri (e-posta adresi, paylaşılan telefon numarası), öğrenci belgesi doğrulama verileri (E-Devlet/YÖK barkod kodu, kurum adı, aktif öğrencilik durumu), akademik çalışma verileri (çözülen sınavlar, kelime ve hata defteri kayıtları) ve işlem güvenliği kayıtları (şifrelenmiş parola özeti, oturum ve DoS/hız sınırı güvenlik kayıtları).</p>
+        <p><strong>3. İşleme Amaçları ve Hukuki Sebepler:</strong> Verileriniz KVKK Madde 5/2 (sözleşmenin kurulması ve ifası, hukuki yükümlülük, meşru menfaat) kapsamında; öğrenci hesabınızın oluşturulması, kendi üniversitenizin hazırlık paketinin ücretsiz tanımlanması, web ve mobil uygulama senkronizasyonu, ödeme güvenliği ve siber saldırı (DoS/Brute-Force) önleme amaçlarıyla işlenir.</p>
+        <p><strong>4. Veri Aktarımı:</strong> Kişisel verileriniz üçüncü kişilere ticari amaçla <strong>kesinlikle satılmaz veya aktarılmaz</strong>. Yalnızca ödeme adımında güvenli ödeme kuruluşu (PayTR) ve yasal zorunluluk halinde yetkili resmi mercilerle paylaşılabilir.</p>
+        <p><strong>5. KVKK Madde 11 Kapsamındaki Haklarınız:</strong> Kişisel verilerinizin işlenip işlenmediğini öğrenme, düzeltilmesini veya <strong>hesabınızla birlikte tamamen silinmesini/yok edilmesini</strong> talep etme hakkına sahipsiniz. Taleplerinizi <strong>toprakcihasan5@gmail.com</strong> adresine, <strong>0539 838 18 87</strong> numaralı hattımıza veya "Destek & İletişim" sekmesindeki form üzerinden iletebilirsiniz.</p>
+      </div>
+
+      <!-- SEKME 3: AÇIK RIZA BEYANI & GİZLİLİK/ÇEREZ POLİTİKASI -->
+      <div id="sk-view-riza" class="hidden max-h-[55vh] overflow-y-auto pr-1 space-y-3 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+        <div class="p-3.5 bg-emerald-50 dark:bg-slate-700 rounded-2xl border border-emerald-200 dark:border-slate-600">
+          <div class="text-[10px] font-extrabold text-emerald-700 dark:text-emerald-300 uppercase">Belge No: PM-KVKK-02 & PM-KVKK-03</div>
+          <h4 class="text-sm font-black text-slate-800 dark:text-white mt-0.5">Açık Rıza Beyanı & Gizlilik / Çerez Politikası</h4>
+        </div>
+        <p><strong>Açık Rıza Beyanı (KVKK Md. 5/1):</strong> PrepMaster Aydınlatma Metni'ni okudum ve anladım. Kendi üniversitemin hazırlık muafiyet içeriklerinin ücretsiz tanımlanması amacıyla yüklediğim E-Devlet öğrenci belgesi/barkod verilerimin doğrulanmak üzere işlenmesine; deneme sınavı, kelime, Writing ve Speaking çalışma verilerimin bulut eşitleme ve seviye analizi amacıyla kaydedilmesine; doğrulama kodu (OTP), şifre sıfırlama ve destek bildirimleri için iletişim bilgilerimin kullanılmasına açık rıza veriyorum.</p>
+        <p><strong>Gizlilik ve Çerez (Cookie) Politikası:</strong> PrepMaster üçüncü taraf reklam veya takip çerezi kullanmaz. Yalnızca güvenli oturum belirteci (<code>prepmaster_token</code>), arayüz tema seçimi ve çevrimdışı çalışma verileri için zorunlu yerel depolama (LocalStorage) kullanılır. Şifreleriniz 100.000 iterasyonlu <code>PBKDF2-HMAC-SHA256</code> ile kriptografik olarak korunur.</p>
+      </div>
+
+      <!-- SEKME 4: KULLANICI SÖZLEŞMESİ & KVKK BAŞVURU USULÜ -->
+      <div id="sk-view-sozlesme" class="hidden max-h-[55vh] overflow-y-auto pr-1 space-y-3 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+        <div class="p-3.5 bg-indigo-50 dark:bg-slate-700 rounded-2xl border border-indigo-200 dark:border-slate-600">
+          <div class="text-[10px] font-extrabold text-indigo-700 dark:text-indigo-300 uppercase">Belge No: PM-HUKUK-04 & PM-KVKK-05</div>
+          <h4 class="text-sm font-black text-slate-800 dark:text-white mt-0.5">Kullanıcı Sözleşmesi, Hizmet Koşulları & KVKK Başvuru Formu</h4>
+        </div>
+        <p><strong>1. Hizmetin Konusu:</strong> PrepMaster; Türkiye'deki 26 üniversitenin İngilizce hazırlık ve muafiyet sınavlarına hazırlık amacıyla her kurda (A1–C2) özgün deneme sınavları, Listening ve Speaking simülasyonları sunan dijital eğitim platformudur.</p>
+        <p><strong>2. Ücretsiz ve Ücretli Paket Koşulları:</strong> Öğrenciler, E-Devlet öğrenci belgesi doğrulamasıyla veya yönetici onayıyla kendi üniversitelerinin hazırlık paketinden ücretsiz yararlanırlar. Farklı üniversitelerin paketleri paket başına 50 TL (KDV dahil) veya yönetici tanımlaması ile açılır.</p>
+        <p><strong>3. KVKK Başvuru ve Hesap Silme Usulü:</strong> KVKK Madde 11 kapsamındaki tüm veri silme, düzeltme ve bilgi alma başvurularınızı <strong>toprakcihasan5@gmail.com</strong> adresine e-posta göndererek, <strong>0539 838 18 87</strong> numaralı telefonu arayarak veya bu penceredeki "Destek & İletişim" sekmesinden "KVKK Veri Sahibi / Hesap Silme Başvurusu" seçerek iletebilirsiniz. Başvurular en geç 30 gün içinde ücretsiz sonuçlandırılır.</p>
+      </div>
+
+      <!-- Alt Bar: Tam Sayfa Yasal Belgeler Linki -->
+      <div class="pt-3 border-t border-slate-100 dark:border-slate-700 flex flex-wrap items-center justify-between gap-2 text-xs">
+        <a href="/kvkk" target="_blank" rel="noopener" class="font-extrabold text-blue-600 hover:text-blue-700 underline flex items-center gap-1">
+          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          <span>Tüm KVKK ve Hukuki Belgeleri Tam Sayfa Aç / Yazdır (/kvkk)</span>
+        </a>
+        <button type="button" onclick="closeSupportKvkkModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 font-bold rounded-xl transition">
+          Kapat
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="/static/js/auth_fetch.js?v=2.0"></script>
+  <script src="/static/js/flashcards.js?v=2.0"></script>
+  <script src="/static/js/exam.js?v=2.0"></script>
+  <script src="/static/js/listening.js?v=2.0"></script>
+  <script src="/static/js/speaking.js?v=2.0"></script>
+  <script src="/static/js/writing_ai.js?v=2.0"></script>
+  <script src="/static/js/app.js?v=2.0"></script>
 
   <!-- 3D Secure ödeme Entegrasyonu -->
   <script>

@@ -212,6 +212,32 @@
         </div>
       </div>
 
+      <!-- Gelen Destek & KVKK Talepleri Tablosu -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-xl">
+        <div class="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
+          <div>
+            <h2 class="text-sm font-black text-white">Gelen Öğrenci Destek & KVKK Talepleri</h2>
+            <p class="text-[11px] text-slate-400">Sitedeki Destek & KVKK formundan gönderilen talepler (Resmi İletişim: toprakcihasan5@gmail.com • 0539 838 18 87)</p>
+          </div>
+          <span id="tickets-count-badge" class="text-xs font-extrabold px-3 py-1 bg-blue-500/20 text-blue-300 border border-blue-500/30 rounded-full">0 Talep</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-slate-800 bg-slate-900/50 text-[11px] font-extrabold text-slate-400 uppercase tracking-wider">
+                <th class="py-3 px-4">ID / Tarih</th>
+                <th class="py-3 px-4">Öğrenci / İletişim</th>
+                <th class="py-3 px-4">Kategori</th>
+                <th class="py-3 px-4">Mesaj / Talep Detayı</th>
+              </tr>
+            </thead>
+            <tbody id="admin-tickets-tbody" class="divide-y divide-slate-800/80 text-xs">
+              <!-- JS ile doldurulur -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     </main>
   </div>
 
@@ -500,9 +526,41 @@
         document.getElementById("table-count-badge").innerText = `${adminStudentsList.length} Öğrenci`;
 
         renderStudentsTable(adminStudentsList);
+
+        const tRes = await adminFetch("/api/admin/support-tickets");
+        if (tRes.ok) {
+          const tData = await tRes.json();
+          const tickets = tData.tickets || [];
+          const badge = document.getElementById("tickets-count-badge");
+          if (badge) badge.innerText = `${tickets.length} Talep`;
+          renderSupportTicketsTable(tickets);
+        }
       } catch (err) {
         console.error("Admin load error:", err);
       }
+    }
+
+    function renderSupportTicketsTable(tickets) {
+      const tbody = document.getElementById("admin-tickets-tbody");
+      if (!tbody) return;
+      if (!tickets.length) {
+        tbody.innerHTML = `<tr><td colspan="4" class="py-6 text-center text-slate-500 font-semibold">Henüz gönderilmiş bir destek veya KVKK talebi bulunmuyor.</td></tr>`;
+        return;
+      }
+      tbody.innerHTML = tickets.map(t => {
+        const dt = t.created_at ? new Date(t.created_at).toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "short" }) : "-";
+        return `
+          <tr class="hover:bg-slate-800/40 transition">
+            <td class="py-3 px-4 font-mono text-[11px] text-slate-400">#${t.id}<br><span class="text-[10px] text-slate-500">${dt}</span></td>
+            <td class="py-3 px-4">
+              <div class="font-bold text-white">${t.full_name || "Ziyaretçi"}</div>
+              <div class="text-[11px] text-slate-400">${t.email || "-"} ${t.phone ? "• " + t.phone : ""}</div>
+            </td>
+            <td class="py-3 px-4"><span class="px-2.5 py-1 bg-blue-500/15 text-blue-300 border border-blue-500/30 rounded-lg font-bold text-[11px]">${t.category || "Genel"}</span></td>
+            <td class="py-3 px-4 text-slate-200 max-w-md">${t.message || ""}</td>
+          </tr>
+        `;
+      }).join("");
     }
 
     function renderStudentsTable(students) {

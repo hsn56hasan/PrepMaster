@@ -90,11 +90,13 @@ class SlidingWindowRateLimiter:
     Accurately tracks request frequency per sliding time window.
     Automatically purges expired keys to prevent memory exhaustion.
     """
-    def __init__(self, cleanup_interval_seconds: int = 300):
+    def __init__(self, cleanup_interval_seconds: int = 300, max_keys: int = 100_000):
         self._history: Dict[str, List[float]] = {}
+        self._bans: Dict[str, float] = {}          # anahtar -> yasak bitiş zamanı (epoch)
         self._lock = threading.Lock()
         self._last_cleanup = time.time()
         self._cleanup_interval = cleanup_interval_seconds
+        self._max_keys = max_keys
 
     def is_allowed(self, key: str, max_requests: int, window_seconds: int) -> Tuple[bool, int, int]:
         """
@@ -104,8 +106,9 @@ class SlidingWindowRateLimiter:
         """
         now = time.time()
         with self._lock:
-            # Periodic cleanup
-            if now - self._last_cleanup > self._cleanup_interval:
+            # Periodic cleanup (ya da bellek tavanı aşıldıysa hemen): çok sayıda sahte IP ile
+            # sözlüğü şişirip belleği tüketme saldırısına karşı.
+            if now - self._last_cleanup > self._cleanup_interval or len(self._history) > self._max_keys:
                 self._cleanup(now)
 
             timestamps = self._history.get(key, [])
@@ -128,17 +131,43 @@ class SlidingWindowRateLimiter:
         with self._lock:
             if key:
                 self._history.pop(key, None)
+                self._bans.pop(key, None)
             else:
                 self._history.clear()
+                self._bans.clear()
+
+    # --- Geçici yasaklama (tekrar tekrar sınırı aşan IP'ler) ---
+    def ban(self, key: str, seconds: int) -> None:
+        with self._lock:
+            self._bans[key] = time.time() + seconds
+
+    def ban_remaining(self, key: str) -> int:
+        """Yasak sürüyorsa kalan saniye, yoksa 0."""
+        with self._lock:
+            until = self._bans.get(key)
+            if not until:
+                return 0
+            remaining = until - time.time()
+            if remaining <= 0:
+                self._bans.pop(key, None)
+                return 0
+            return max(1, int(remaining))
 
     def _cleanup(self, now: float):
         self._last_cleanup = now
-        expired_keys = []
-        for k, v in self._history.items():
-            if not v or v[-1] < (now - 3600):
-                expired_keys.append(k)
+        over_cap = len(self._history) > self._max_keys
+        # Normalde 1 saatten eski anahtarlar silinir; bellek tavanı aşıldıysa 2 dakikadan eskiler.
+        horizon = 120 if over_cap else 3600
+        expired_keys = [k for k, v in self._history.items() if not v or v[-1] < (now - horizon)]
         for k in expired_keys:
             del self._history[k]
+        if len(self._history) > self._max_keys:
+            # Hâlâ fazlaysa en eski yarısını at (saldırı altında bellek sınırlı kalsın)
+            ordered = sorted(self._history.items(), key=lambda kv: kv[1][-1] if kv[1] else 0)
+            for k, _ in ordered[: len(ordered) // 2]:
+                del self._history[k]
+        for k in [k for k, until in self._bans.items() if until < now]:
+            del self._bans[k]
 
 
 # Global rate limiter instance
@@ -175,10 +204,19 @@ def _is_trusted_proxy(host: str) -> bool:
     return any(addr in n for n in nets)
 
 
+# Railway'de konteynere dışarıdan YALNIZCA Railway'in kenar (edge) vekili üzerinden ulaşılır ve
+# vekil, gerçek istemci IP'sini X-Real-IP başlığına yazar. Vekilin kendi adresi her istekte
+# farklı bir iç ağ adresi olabildiğinden TRUSTED_PROXY_IPS ile eşleştirmek yerine bu başlığa
+# doğrudan güvenilir. Başka bir barındırmada CLIENT_IP_HEADER ile açıkça ayarlanabilir.
+_ON_RAILWAY = bool(os.getenv("RAILWAY_ENVIRONMENT_ID") or os.getenv("RAILWAY_ENVIRONMENT"))
+CLIENT_IP_HEADER = os.getenv("CLIENT_IP_HEADER", "X-Real-IP" if _ON_RAILWAY else "").strip()
+
+
 def get_client_ip(request: Request) -> str:
     """
     İsteğin gerçek istemci IP'si (hız sınırı ve PayTR için).
 
+    - CLIENT_IP_HEADER ayarlıysa (Railway'de otomatik X-Real-IP) o başlık kullanılır.
     - Doğrudan bağlanan adres güvenilir bir aracı DEĞİLSE o adres kullanılır; başlıklara
       bakılmaz (X-Forwarded-For'u herkes uydurabilir, hız sınırını atlatmak için kullanılırdı).
     - Güvenilir aracıdan geldiyse: Cloudflare'in yazdığı CF-Connecting-IP, yoksa nginx'in
@@ -186,6 +224,14 @@ def get_client_ip(request: Request) -> str:
       bir öğrencinin yanlış şifreleri herkesi kilitleyecekti.)
     """
     peer = request.client.host if request.client and request.client.host else "127.0.0.1"
+    if CLIENT_IP_HEADER:
+        value = (request.headers.get(CLIENT_IP_HEADER) or "").split(",")[0].strip()
+        if value:
+            try:
+                return str(_ipaddress.ip_address(value))
+            except ValueError:
+                pass
+        return peer
     if not _is_trusted_proxy(peer):
         return peer
     for header in ("CF-Connecting-IP", "X-Real-IP"):
@@ -314,6 +360,144 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
         response.headers["Permissions-Policy"] = "camera=(), microphone=(self), geolocation=()"
 
         return response
+
+
+# -----------------------------------------------------------------------------
+# 3a. DoS / Flood Koruması (saf ASGI ara katmanı)
+# -----------------------------------------------------------------------------
+def _env_int(name: str, default: int) -> int:
+    try:
+        return int(os.getenv(name, str(default)))
+    except ValueError:
+        return default
+
+
+class _BodyTooLarge(Exception):
+    pass
+
+
+class DoSProtectionMiddleware:
+    """
+    Tek bir istemcinin sunucuyu boğmasını engeller:
+      1. IP başına genel istek sınırı (tüm yollar) ve daha sıkı /api/ sınırı
+      2. Kısa süreli patlama (burst) sınırı: saniyeler içinde yüzlerce istek
+      3. Sınırı tekrar tekrar aşan IP'ye geçici yasak (istek uygulamaya hiç ulaşmaz)
+      4. İstek gövdesi boyut sınırı (büyük gövdeyle bellek tüketme saldırısı -> 413)
+
+    Not: Bu katman tek kaynaklı kötüye kullanımı ve kaba kuvveti durdurur. Binlerce farklı
+    IP'den gelen hacimsel DDoS ağ kenarında (Railway edge / Cloudflare) karşılanmalıdır.
+    """
+
+    def __init__(self, app):
+        self.app = app
+        self.api_per_min = _env_int("DOS_API_REQUESTS_PER_MIN", 240)
+        self.all_per_min = _env_int("DOS_TOTAL_REQUESTS_PER_MIN", 600)
+        self.burst_count = _env_int("DOS_BURST_REQUESTS", 60)
+        self.burst_window = _env_int("DOS_BURST_WINDOW_SECONDS", 5)
+        self.strikes_to_ban = _env_int("DOS_STRIKES_BEFORE_BAN", 5)
+        self.ban_seconds = _env_int("DOS_BAN_SECONDS", 600)
+        self.max_body = _env_int("DOS_MAX_BODY_BYTES", 2 * 1024 * 1024)
+        self.max_upload = _env_int("DOS_MAX_UPLOAD_BYTES", 10 * 1024 * 1024)
+
+    @staticmethod
+    async def _reject(send, status_code: int, detail: str, retry_after: Optional[int] = None):
+        body = json.dumps({"detail": detail}, ensure_ascii=False).encode("utf-8")
+        headers = [
+            (b"content-type", b"application/json; charset=utf-8"),
+            (b"content-length", str(len(body)).encode()),
+        ]
+        if retry_after:
+            headers.append((b"retry-after", str(retry_after).encode()))
+        await send({"type": "http.response.start", "status": status_code, "headers": headers})
+        await send({"type": "http.response.body", "body": body})
+
+    def _strike(self, ip: str) -> None:
+        """Sınır aşımı sayılır; kısa sürede çok aşım olursa IP geçici olarak yasaklanır."""
+        allowed, _, _ = rate_limiter.is_allowed(f"dos:strike:{ip}", self.strikes_to_ban, 300)
+        if not allowed:
+            rate_limiter.ban(f"dos:ban:{ip}", self.ban_seconds)
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] != "http":
+            return await self.app(scope, receive, send)
+
+        request = Request(scope)
+        path = scope.get("path", "")
+        peer = scope.get("client")[0] if scope.get("client") else ""
+        ip = get_client_ip(request)
+
+        # Konteynerin kendi sağlık kontrolü (127.0.0.1, vekil başlığı yok) sınırlanmaz
+        is_local_healthcheck = peer in ("127.0.0.1", "::1") and not (
+            CLIENT_IP_HEADER and request.headers.get(CLIENT_IP_HEADER)
+        )
+
+        if not is_local_healthcheck:
+            # 1) Yasaklı IP: hiçbir işlem yapmadan reddet
+            banned_for = rate_limiter.ban_remaining(f"dos:ban:{ip}")
+            if banned_for:
+                return await self._reject(
+                    send, 429,
+                    f"Çok fazla istek gönderildiği için erişiminiz geçici olarak durduruldu. "
+                    f"{banned_for} saniye sonra tekrar deneyin.",
+                    banned_for,
+                )
+
+            # 2) Patlama, genel ve API sınırları
+            checks = [
+                (f"dos:burst:{ip}", self.burst_count, self.burst_window),
+                (f"dos:all:{ip}", self.all_per_min, 60),
+            ]
+            if path.startswith("/api/"):
+                checks.append((f"dos:api:{ip}", self.api_per_min, 60))
+            for key, limit, window in checks:
+                allowed, _, retry_after = rate_limiter.is_allowed(key, limit, window)
+                if not allowed:
+                    self._strike(ip)
+                    return await self._reject(
+                        send, 429,
+                        f"Çok fazla istek yapıldı. Lütfen {retry_after} saniye sonra tekrar deneyin.",
+                        retry_after,
+                    )
+
+        # 3) Gövde boyutu sınırı
+        limit = self.max_upload if path == "/api/student/upload-document" else self.max_body
+        headers = dict(scope.get("headers") or [])
+        raw_len = headers.get(b"content-length")
+        if raw_len is not None:
+            try:
+                declared = int(raw_len)
+            except ValueError:
+                return await self._reject(send, 400, "Geçersiz Content-Length başlığı.")
+            if declared > limit:
+                return await self._reject(
+                    send, 413, f"İstek gövdesi çok büyük (en fazla {limit // (1024 * 1024)} MB)."
+                )
+
+        received = 0
+        response_started = False
+
+        async def limited_receive():
+            nonlocal received
+            message = await receive()
+            if message.get("type") == "http.request":
+                received += len(message.get("body", b""))
+                if received > limit:
+                    raise _BodyTooLarge()
+            return message
+
+        async def tracking_send(message):
+            nonlocal response_started
+            if message.get("type") == "http.response.start":
+                response_started = True
+            await send(message)
+
+        try:
+            await self.app(scope, limited_receive, tracking_send)
+        except _BodyTooLarge:
+            if not response_started:
+                await self._reject(
+                    send, 413, f"İstek gövdesi çok büyük (en fazla {limit // (1024 * 1024)} MB)."
+                )
 
 
 # -----------------------------------------------------------------------------
