@@ -1617,7 +1617,7 @@ def generate_mock_exam(university_id: str, request: Request, level: Optional[str
     uni = next((u for u in universities_data if u["id"] == university_id), universities_data[0])
     target_level = (level or "B2").upper()
 
-    # 1. Select questions strictly from THIS university's 36-question pool first (zero cross-school overlap)
+    # 1. Select questions strictly from THIS university's 180-question pool (30 per level)
     uni_all_questions = [q for q in questions_data if q.get("university_id") == university_id]
     uni_exact_level = [q for q in uni_all_questions if q.get("level", "").upper() == target_level]
 
@@ -1637,12 +1637,12 @@ def generate_mock_exam(university_id: str, request: Request, level: Optional[str
     random.shuffle(uni_adj_questions)
     combined_uni = uni_exact_level + uni_adj_questions
 
-    if len(combined_uni) < 15:
+    if len(combined_uni) < 30:
         gen_supp = [q for q in questions_data if q.get("university_id") == "general" and q.get("level", "").upper() == target_level]
         random.shuffle(gen_supp)
         combined_uni.extend(gen_supp)
 
-    final_questions = combined_uni[:15]
+    final_questions = combined_uni[:30]
 
     # 2. Select matching listening track for THIS university and target_level
     lis_track = next((lt for lt in listening_data if lt.get("university_id") == university_id and lt.get("level", "").upper() == target_level), None)

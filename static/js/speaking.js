@@ -43,20 +43,20 @@ async function loadSpeakingHub(targetLevel = null) {
           <i data-lucide="filter" class="w-3.5 h-3.5"></i> Mülakat Kuru:
         </span>
         <button onclick="loadSpeakingHub('all')" class="px-3 py-1 rounded-xl text-xs font-bold transition ${activeLevel === 'all' ? 'bg-slate-900 text-white shadow-sm' : 'bg-white text-slate-600 hover:bg-slate-200 border border-slate-200'}">
-          Tüm Kurlar (6 Görev)
+          Tüm Kurlar (24 Görev)
         </button>
         ${levels.map(lvl => {
           const isSelected = activeLevel === lvl;
           return `
             <button onclick="loadSpeakingHub('${lvl}')" class="px-3 py-1 rounded-xl text-xs font-bold transition ${isSelected ? 'bg-indigo-600 text-white shadow-sm' : 'bg-white text-slate-600 hover:bg-slate-200 border border-slate-200'}">
-              ${lvl} ${lvl === currentLevel ? '★' : ''}
+              ${lvl} (4) ${lvl === currentLevel ? '★' : ''}
             </button>
           `;
         }).join('')}
       </div>
       <div class="ml-auto flex items-center gap-1 bg-white p-1 rounded-xl border border-slate-200 text-[11px] font-bold">
         <button onclick="setSpeakingPoolMode('school')" class="px-2.5 py-1 rounded-lg transition ${poolMode === 'school' ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:bg-slate-100'}">
-          Sadece ${shortName} Özel (6 Görev)
+          Sadece ${shortName} Özel (24 Görev)
         </button>
         <button onclick="setSpeakingPoolMode('all')" class="px-2.5 py-1 rounded-lg transition ${poolMode === 'all' ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:bg-slate-100'}">
           ${shortName} + Genel Havuz

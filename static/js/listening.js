@@ -48,20 +48,20 @@ async function loadListeningHub(targetLevel = null) {
           <i data-lucide="filter" class="w-3.5 h-3.5"></i> Kur:
         </span>
         <button onclick="loadListeningHub('all')" class="px-3 py-1 rounded-xl text-xs font-bold transition ${activeLevel === 'all' ? 'bg-slate-900 text-white shadow-sm' : 'bg-white text-slate-600 hover:bg-slate-200 border border-slate-200'}">
-          Tüm Kurlar (6 Ders)
+          Tüm Kurlar (24 Ders)
         </button>
         ${levels.map(lvl => {
           const isSelected = activeLevel === lvl;
           return `
             <button onclick="loadListeningHub('${lvl}')" class="px-3 py-1 rounded-xl text-xs font-bold transition ${isSelected ? 'bg-blue-600 text-white shadow-sm' : 'bg-white text-slate-600 hover:bg-slate-200 border border-slate-200'}">
-              ${lvl} ${lvl === currentLevel ? '★' : ''}
+              ${lvl} (4) ${lvl === currentLevel ? '★' : ''}
             </button>
           `;
         }).join('')}
       </div>
       <div class="ml-auto flex items-center gap-1 bg-white p-1 rounded-xl border border-slate-200 text-[11px] font-bold">
         <button onclick="setListeningPoolMode('school')" class="px-2.5 py-1 rounded-lg transition ${poolMode === 'school' ? 'bg-blue-600 text-white' : 'text-slate-600 hover:bg-slate-100'}">
-          Sadece ${shortName} Özel (6 Ders)
+          Sadece ${shortName} Özel (24 Ders)
         </button>
         <button onclick="setListeningPoolMode('all')" class="px-2.5 py-1 rounded-lg transition ${poolMode === 'all' ? 'bg-blue-600 text-white' : 'text-slate-600 hover:bg-slate-100'}">
           ${shortName} + Genel Havuz
