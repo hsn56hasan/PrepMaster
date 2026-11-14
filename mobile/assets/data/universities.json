@@ -477,5 +477,601 @@
       "ELAE 1. aşamasını geçemeyenler 2. aşamaya giremez; Use of English ve hızlı okuma pratiği yapın.",
       "Not alırken fikir geçişlerini ve konuşmacının vurguladığı istisnaları mutlaka işaretleyin."
     ]
+  },
+  {
+    "id": "marmara",
+    "name": "Marmara Üniversitesi",
+    "short_name": "Marmara",
+    "exam_name": "Marmara YDYO Hazırlık Muafiyet Sınavı",
+    "passing_score": 60,
+    "duration_minutes": 150,
+    "total_questions": 60,
+    "badge_color": "blue",
+    "description": "Marmara Üniversitesi Yabancı Diller Yüksekokulu tarafından düzenlenen; Use of English, Reading Comprehension, Listening ve Writing aşamalarından oluşan hazırlık yeterlik sınavı.",
+    "sections": [
+      {
+        "name": "Use of English & Grammar",
+        "questions_count": 20,
+        "weight_percent": 25,
+        "description": "Akademik dilbilgisi, zaman uyumu ve bağlaç yapıları."
+      },
+      {
+        "name": "Vocabulary in Context",
+        "questions_count": 15,
+        "weight_percent": 20,
+        "description": "Akademik metin içinde sözcük ve eşdizimlilik (collocation) seçimi."
+      },
+      {
+        "name": "Reading Comprehension",
+        "questions_count": 25,
+        "weight_percent": 35,
+        "description": "Uzun akademik parçalar üzerinden ana fikir ve çıkarım soruları."
+      },
+      {
+        "name": "Essay Writing",
+        "questions_count": 1,
+        "weight_percent": 20,
+        "description": "250-300 kelimelik akademik görüş (Opinion) kompozisyonu."
+      }
+    ],
+    "tips": [
+      "Marmara YDYO sınavında bağlaçlar (conjunctions) ve relative clause kısaltmaları sıkça sorgulanır.",
+      "Reading sorularında paragrafın ilk ve son cümlelerini dikkatle analiz edin."
+    ]
+  },
+  {
+    "id": "istanbul",
+    "name": "İstanbul Üniversitesi",
+    "short_name": "İstanbul Üni",
+    "exam_name": "İÜ Yabancı Diller Muafiyet Sınavı",
+    "passing_score": 60,
+    "duration_minutes": 150,
+    "total_questions": 60,
+    "badge_color": "emerald",
+    "description": "İstanbul Üniversitesi Yabancı Diller Yüksekokulu tarafından uygulanan; dilbilgisi, kelime, okuma-anlama, cümle tamamlama ve yazma bölümlerinden oluşan muafiyet sınavı.",
+    "sections": [
+      {
+        "name": "Grammar & Sentence Completion",
+        "questions_count": 20,
+        "weight_percent": 30,
+        "description": "Cümle tamamlama ve ileri düzey dilbilgisi yapıları."
+      },
+      {
+        "name": "Vocabulary & Restatement",
+        "questions_count": 15,
+        "weight_percent": 25,
+        "description": "Eş anlamlı cümle bulma ve akademik kelime bilgisi."
+      },
+      {
+        "name": "Reading Comprehension",
+        "questions_count": 25,
+        "weight_percent": 25,
+        "description": "Çoklu okuma metinleri ve referans soruları."
+      },
+      {
+        "name": "Academic Writing",
+        "questions_count": 1,
+        "weight_percent": 20,
+        "description": "Planlı akademik paragraf ve kompozisyon yazımı."
+      }
+    ],
+    "tips": [
+      "Cümle tamamlama sorularında zaman uyumuna (tense agreement) ve zıtlık bağlaçlarına odaklanın.",
+      "Restatement sorularında modal verb nüanslarını kaçırmayın."
+    ]
+  },
+  {
+    "id": "cerrahpasa",
+    "name": "İstanbul Üniversitesi-Cerrahpaşa",
+    "short_name": "Cerrahpaşa",
+    "exam_name": "İÜC YDYO İngilizce Yeterlik Sınavı",
+    "passing_score": 60,
+    "duration_minutes": 150,
+    "total_questions": 60,
+    "badge_color": "sky",
+    "description": "İstanbul Üniversitesi-Cerrahpaşa Yabancı Diller Yüksekokulu mühendislik ve tıp hazırlık programlarına yönelik akademik İngilizce yeterlik sınavı.",
+    "sections": [
+      {
+        "name": "Use of English & Cloze",
+        "questions_count": 20,
+        "weight_percent": 30,
+        "description": "Metin içi boşluk doldurma ve yapı bilgisi."
+      },
+      {
+        "name": "Academic Vocabulary",
+        "questions_count": 15,
+        "weight_percent": 20,
+        "description": "Bilimsel ve akademik terimler, phrasal verbs."
+      },
+      {
+        "name": "Reading Comprehension",
+        "questions_count": 25,
+        "weight_percent": 30,
+        "description": "Fen, sağlık ve mühendislik temalı okuma parçaları."
+      },
+      {
+        "name": "Essay Writing",
+        "questions_count": 1,
+        "weight_percent": 20,
+        "description": "Akademik argüman geliştirme kompozisyonu."
+      }
+    ],
+    "tips": [
+      "Bilimsel okuma parçalarında neden-sonuç (cause-effect) ilişkilerini hızlıca işaretleyin."
+    ]
+  },
+  {
+    "id": "dokuz_eylul",
+    "name": "Dokuz Eylül Üniversitesi",
+    "short_name": "DEÜ",
+    "exam_name": "DEÜ YDYO Hazırlık Muafiyet Sınavı",
+    "passing_score": 60,
+    "duration_minutes": 160,
+    "total_questions": 65,
+    "badge_color": "blue",
+    "description": "Dokuz Eylül Üniversitesi Yabancı Diller Yüksekokulu tarafından yapılan; çoktan seçmeli dil kullanımı, okuma, dinleme ve yazma aşamalarını içeren muafiyet sınavı.",
+    "sections": [
+      {
+        "name": "Language Use & Grammar",
+        "questions_count": 25,
+        "weight_percent": 30,
+        "description": "Dilbilgisi, cloze test ve cümle tamamlama."
+      },
+      {
+        "name": "Reading Comprehension",
+        "questions_count": 25,
+        "weight_percent": 30,
+        "description": "Akademik metin analizi ve kelime çıkarımı."
+      },
+      {
+        "name": "Listening",
+        "questions_count": 15,
+        "weight_percent": 20,
+        "description": "Diyalog ve ders anlatımı dinleme soruları."
+      },
+      {
+        "name": "Writing",
+        "questions_count": 1,
+        "weight_percent": 20,
+        "description": "Akademik essay yazımı."
+      }
+    ],
+    "tips": [
+      "DEÜ sınavında kur içi kelime listelerine ve phrasal verb yapılarına hakim olmak büyük avantaj sağlar."
+    ]
+  },
+  {
+    "id": "iyte",
+    "name": "İzmir Yüksek Teknoloji Enstitüsü",
+    "short_name": "İYTE",
+    "exam_name": "İYTE YDYO İngilizce Muafiyet Sınavı",
+    "passing_score": 65,
+    "duration_minutes": 180,
+    "total_questions": 60,
+    "badge_color": "red",
+    "description": "%100 İngilizce eğitim veren İYTE'nin Yabancı Diller Yüksekokulu tarafından uygulanan; akademik okuma, note-taking dinleme ve essay ağırlıklı yeterlik sınavı.",
+    "sections": [
+      {
+        "name": "Reading & Vocabulary",
+        "questions_count": 30,
+        "weight_percent": 35,
+        "description": "Bilimsel ve akademik makale okuma, kelime analizi."
+      },
+      {
+        "name": "Listening & Note-Taking",
+        "questions_count": 15,
+        "weight_percent": 25,
+        "description": "Akademik ders dinleme ve not alarak soru yanıtlama."
+      },
+      {
+        "name": "Use of English",
+        "questions_count": 15,
+        "weight_percent": 15,
+        "description": "Restatement ve metin tamamlama."
+      },
+      {
+        "name": "Academic Essay",
+        "questions_count": 1,
+        "weight_percent": 25,
+        "description": "300 kelimelik akademik argüman kompozisyonu."
+      }
+    ],
+    "tips": [
+      "İYTE sınavı ODTÜ ve Bilkent formatına yakındır; akademik okuma hızı ve note-taking pratiği çok önemlidir."
+    ]
+  },
+  {
+    "id": "anadolu",
+    "name": "Anadolu Üniversitesi",
+    "short_name": "Anadolu Üni",
+    "exam_name": "Anadolu YDYO İngilizce Yeterlik Sınavı",
+    "passing_score": 60,
+    "duration_minutes": 150,
+    "total_questions": 60,
+    "badge_color": "amber",
+    "description": "Anadolu Üniversitesi Yabancı Diller Yüksekokulu hazırlık muafiyet sınavı; okuma, dinleme, dil kullanımı, yazma ve konuşma bileşenlerinden oluşur.",
+    "sections": [
+      {
+        "name": "Use of English",
+        "questions_count": 20,
+        "weight_percent": 25,
+        "description": "Dilbilgisi ve kelime soruları."
+      },
+      {
+        "name": "Reading Comprehension",
+        "questions_count": 25,
+        "weight_percent": 30,
+        "description": "Akademik okuma ve paragraf tamamlama."
+      },
+      {
+        "name": "Listening",
+        "questions_count": 15,
+        "weight_percent": 25,
+        "description": "Akademik dinleme parçaları."
+      },
+      {
+        "name": "Writing & Speaking",
+        "questions_count": 2,
+        "weight_percent": 20,
+        "description": "Kompozisyon ve sözlü mülakat."
+      }
+    ],
+    "tips": [
+      "Paragraf tamamlama sorularında konu bütünlüğü ve geçiş ifadelerine dikkat edin."
+    ]
+  },
+  {
+    "id": "eskisehir_teknik",
+    "name": "Eskişehir Teknik Üniversitesi",
+    "short_name": "ESTÜ",
+    "exam_name": "ESTÜ YDYO Hazırlık Muafiyet Sınavı",
+    "passing_score": 60,
+    "duration_minutes": 150,
+    "total_questions": 60,
+    "badge_color": "red",
+    "description": "Eskişehir Teknik Üniversitesi Yabancı Diller Yüksekokulu mühendislik ve havacılık bölümleri için uygulanan İngilizce yeterlik sınavı.",
+    "sections": [
+      {
+        "name": "Grammar & Vocabulary",
+        "questions_count": 25,
+        "weight_percent": 30,
+        "description": "Dil kullanımı, teknik ve akademik kelime dağarcığı."
+      },
+      {
+        "name": "Reading Comprehension",
+        "questions_count": 20,
+        "weight_percent": 30,
+        "description": "Okuduğunu anlama ve çıkarım soruları."
+      },
+      {
+        "name": "Listening",
+        "questions_count": 15,
+        "weight_percent": 20,
+        "description": "Not alarak ve dinleyerek yanıtlama."
+      },
+      {
+        "name": "Writing",
+        "questions_count": 1,
+        "weight_percent": 20,
+        "description": "Akademik kompozisyon."
+      }
+    ],
+    "tips": [
+      "Teknik ve bilimsel içerikli okuma parçalarında bağlamdan kelime anlamı çıkarma pratiği yapın."
+    ]
+  },
+  {
+    "id": "gebze_teknik",
+    "name": "Gebze Teknik Üniversitesi",
+    "short_name": "GTÜ",
+    "exam_name": "GTÜ Yabancı Diller Muafiyet Sınavı",
+    "passing_score": 60,
+    "duration_minutes": 150,
+    "total_questions": 60,
+    "badge_color": "indigo",
+    "description": "Gebze Teknik Üniversitesi Yabancı Diller Bölümü tarafından düzenlenen; Use of English, Reading, Listening ve Writing aşamalarından oluşan yeterlik sınavı.",
+    "sections": [
+      {
+        "name": "Use of English & Restatement",
+        "questions_count": 25,
+        "weight_percent": 30,
+        "description": "Dilbilgisi, cloze test ve yeniden ifade etme."
+      },
+      {
+        "name": "Reading Comprehension",
+        "questions_count": 20,
+        "weight_percent": 30,
+        "description": "Akademik makale okuma ve analiz."
+      },
+      {
+        "name": "Listening",
+        "questions_count": 15,
+        "weight_percent": 20,
+        "description": "Akademik dinleme."
+      },
+      {
+        "name": "Essay Writing",
+        "questions_count": 1,
+        "weight_percent": 20,
+        "description": "Akademik essay."
+      }
+    ],
+    "tips": [
+      "GTÜ sınavında passive voice, relative clauses ve bağlaç soruları ağırlıktadır."
+    ]
+  },
+  {
+    "id": "akdeniz",
+    "name": "Akdeniz Üniversitesi",
+    "short_name": "Akdeniz Üni",
+    "exam_name": "Akdeniz YDYO Hazırlık Muafiyet Sınavı",
+    "passing_score": 60,
+    "duration_minutes": 140,
+    "total_questions": 60,
+    "badge_color": "sky",
+    "description": "Akdeniz Üniversitesi Yabancı Diller Yüksekokulu tarafından uygulanan; dilbilgisi, kelime, okuma ve yazma becerilerini ölçen muafiyet sınavı.",
+    "sections": [
+      {
+        "name": "Grammar & Use of English",
+        "questions_count": 25,
+        "weight_percent": 30,
+        "description": "Temel ve ileri dilbilgisi yapıları."
+      },
+      {
+        "name": "Vocabulary",
+        "questions_count": 15,
+        "weight_percent": 20,
+        "description": "Sözcük bilgisi ve deyimler."
+      },
+      {
+        "name": "Reading Comprehension",
+        "questions_count": 20,
+        "weight_percent": 30,
+        "description": "Okuma parçaları ve diyalog tamamlama."
+      },
+      {
+        "name": "Writing",
+        "questions_count": 1,
+        "weight_percent": 20,
+        "description": "Kompozisyon yazımı."
+      }
+    ],
+    "tips": [
+      "Diyalog ve durum sorularında günlük ve akademik ifade kalıplarına dikkat edin."
+    ]
+  },
+  {
+    "id": "cukurova",
+    "name": "Çukurova Üniversitesi",
+    "short_name": "Çukurova",
+    "exam_name": "ÇÜ YADYO İngilizce Muafiyet Sınavı",
+    "passing_score": 60,
+    "duration_minutes": 150,
+    "total_questions": 60,
+    "badge_color": "emerald",
+    "description": "Çukurova Üniversitesi Yabancı Diller Yüksekokulu (YADYO) hazırlık muafiyet sınavı; Listening, Reading, Use of English ve Writing bölümlerinden oluşur.",
+    "sections": [
+      {
+        "name": "Use of English",
+        "questions_count": 20,
+        "weight_percent": 25,
+        "description": "Dilbilgisi, cloze test ve cümle tamamlama."
+      },
+      {
+        "name": "Reading Comprehension",
+        "questions_count": 25,
+        "weight_percent": 35,
+        "description": "Akademik okuma parçaları."
+      },
+      {
+        "name": "Listening",
+        "questions_count": 15,
+        "weight_percent": 20,
+        "description": "Dinleme-anlama soruları."
+      },
+      {
+        "name": "Writing",
+        "questions_count": 1,
+        "weight_percent": 20,
+        "description": "Akademik paragraf/essay yazımı."
+      }
+    ],
+    "tips": [
+      "Okuma parçalarındaki zamir referans (it, they, this, which) sorularını kaçırmamaya özen gösterin."
+    ]
+  },
+  {
+    "id": "uludag",
+    "name": "Bursa Uludağ Üniversitesi",
+    "short_name": "Uludağ Üni",
+    "exam_name": "BUÜ YDYO İngilizce Yeterlik Sınavı",
+    "passing_score": 60,
+    "duration_minutes": 140,
+    "total_questions": 60,
+    "badge_color": "emerald",
+    "description": "Bursa Uludağ Üniversitesi Yabancı Diller Yüksekokulu hazırlık muafiyet sınavı; çoktan seçmeli dilbilgisi, kelime, okuma ve yazma bölümlerini içerir.",
+    "sections": [
+      {
+        "name": "Grammar & Structure",
+        "questions_count": 25,
+        "weight_percent": 30,
+        "description": "Zamanlar, modallar, koşul cümleleri ve bağlaçlar."
+      },
+      {
+        "name": "Vocabulary",
+        "questions_count": 15,
+        "weight_percent": 20,
+        "description": "Akademik kelime bilgisi."
+      },
+      {
+        "name": "Reading",
+        "questions_count": 20,
+        "weight_percent": 30,
+        "description": "Okuduğunu anlama."
+      },
+      {
+        "name": "Writing",
+        "questions_count": 1,
+        "weight_percent": 20,
+        "description": "Kompozisyon."
+      }
+    ],
+    "tips": [
+      "Koşul cümleleri (Conditionals) ve Wish Clauses yapılarını sınav öncesi mutlaka tekrar edin."
+    ]
+  },
+  {
+    "id": "ozyegin",
+    "name": "Özyeğin Üniversitesi",
+    "short_name": "Özyeğin",
+    "exam_name": "ÖzÜ TRACE (Test of Readiness for Academic English)",
+    "passing_score": 65,
+    "duration_minutes": 180,
+    "total_questions": 55,
+    "badge_color": "amber",
+    "description": "Özyeğin Üniversitesi Yabancı Diller Yüksekokulu tarafından uygulanan TRACE sınavı; akademik okuma, while-listening, note-taking ve essay bölümlerinden oluşur.",
+    "sections": [
+      {
+        "name": "Academic Reading",
+        "questions_count": 25,
+        "weight_percent": 35,
+        "description": "Uzun akademik metin analizi ve sentez."
+      },
+      {
+        "name": "Listening & Note-Taking",
+        "questions_count": 20,
+        "weight_percent": 35,
+        "description": "Ders anlatımı dinleme ve not alma."
+      },
+      {
+        "name": "Academic Writing",
+        "questions_count": 1,
+        "weight_percent": 30,
+        "description": "Akademik essay yazımı."
+      }
+    ],
+    "tips": [
+      "TRACE sınavında doğrudan dilbilgisi sorusu yerine akademik okuma, dinleme ve yazma bütünlüğü ölçülür."
+    ]
+  },
+  {
+    "id": "bahcesehir",
+    "name": "Bahçeşehir Üniversitesi",
+    "short_name": "BAU",
+    "exam_name": "BAU English Proficiency Exam",
+    "passing_score": 60,
+    "duration_minutes": 160,
+    "total_questions": 60,
+    "badge_color": "indigo",
+    "description": "Bahçeşehir Üniversitesi Yabancı Diller Yüksekokulu hazırlık muafiyet sınavı; Reading, Listening, Use of English, Writing ve Speaking aşamalarından oluşur.",
+    "sections": [
+      {
+        "name": "Use of English & Vocabulary",
+        "questions_count": 20,
+        "weight_percent": 25,
+        "description": "Cloze test, kelime ve yeniden ifade etme."
+      },
+      {
+        "name": "Reading Comprehension",
+        "questions_count": 25,
+        "weight_percent": 30,
+        "description": "Akademik okuma metinleri."
+      },
+      {
+        "name": "Listening",
+        "questions_count": 15,
+        "weight_percent": 25,
+        "description": "While-listening ve note-taking."
+      },
+      {
+        "name": "Writing",
+        "questions_count": 1,
+        "weight_percent": 20,
+        "description": "Akademik essay."
+      }
+    ],
+    "tips": [
+      "BAU Proficiency sınavında kelime eş anlamlıları ve bağlaç geçişleri yüksek ağırlığa sahiptir."
+    ]
+  },
+  {
+    "id": "yeditepe",
+    "name": "Yeditepe Üniversitesi",
+    "short_name": "Yeditepe",
+    "exam_name": "Yeditepe Hazırlık Atlama (Proficiency) Sınavı",
+    "passing_score": 60,
+    "duration_minutes": 160,
+    "total_questions": 65,
+    "badge_color": "blue",
+    "description": "Yeditepe Üniversitesi İngilizce Hazırlık Okulu tarafından düzenlenen; Grammar, Vocabulary, Restatement, Reading ve Essay aşamalarını içeren yeterlik sınavı.",
+    "sections": [
+      {
+        "name": "Grammar & Structure",
+        "questions_count": 20,
+        "weight_percent": 25,
+        "description": "İleri düzey dilbilgisi ve cümle tamamlama."
+      },
+      {
+        "name": "Vocabulary & Restatement",
+        "questions_count": 20,
+        "weight_percent": 25,
+        "description": "Akademik kelime ve anlamca en yakın cümle."
+      },
+      {
+        "name": "Reading Comprehension",
+        "questions_count": 25,
+        "weight_percent": 30,
+        "description": "Akademik makale soruları."
+      },
+      {
+        "name": "Essay Writing",
+        "questions_count": 1,
+        "weight_percent": 20,
+        "description": "300 kelimelik akademik kompozisyon."
+      }
+    ],
+    "tips": [
+      "Yeditepe sınavında cümle tamamlama ve restatement soruları toplam puanın önemli bir kısmını oluşturur."
+    ]
+  },
+  {
+    "id": "tobb",
+    "name": "TOBB Ekonomi ve Teknoloji Üniversitesi",
+    "short_name": "TOBB ETÜ",
+    "exam_name": "TOBB ETÜ İYS (İngilizce Yeterlik Sınavı)",
+    "passing_score": 65,
+    "duration_minutes": 170,
+    "total_questions": 60,
+    "badge_color": "red",
+    "description": "TOBB ETÜ Yabancı Diller Bölümü tarafından TOEFL ITP / IBT ve akademik yeterlik standartlarına paralel olarak uygulanan kapsamlı hazırlık muafiyet sınavı.",
+    "sections": [
+      {
+        "name": "Structure & Written Expression",
+        "questions_count": 20,
+        "weight_percent": 25,
+        "description": "Akademik cümle yapısı ve dilbilgisi doğruluğu."
+      },
+      {
+        "name": "Reading & Vocabulary",
+        "questions_count": 25,
+        "weight_percent": 35,
+        "description": "Akademik okuma ve bağlam içi kelime anlamı."
+      },
+      {
+        "name": "Listening Comprehension",
+        "questions_count": 15,
+        "weight_percent": 20,
+        "description": "Akademik ders ve diyalog dinleme."
+      },
+      {
+        "name": "Academic Writing",
+        "questions_count": 1,
+        "weight_percent": 20,
+        "description": "Akademik kompozisyon."
+      }
+    ],
+    "tips": [
+      "Structure & Written Expression bölümünde özne-yüklem uyumsuzluğu ve paralel yapı (parallelism) kurallarına dikkat edin."
+    ]
   }
 ]

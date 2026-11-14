@@ -145,7 +145,7 @@
 
         <div class="flex flex-wrap items-center gap-2.5">
           <select id="filter-university" onchange="loadAdminData()" class="px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-slate-200 font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500">
-            <option value="">Tüm Üniversiteler (11 Okul)</option>
+            <option value="">Tüm Üniversiteler (26 Okul)</option>
             <option value="itu">İTÜ (İstanbul Teknik)</option>
             <option value="boun">Boğaziçi Üniversitesi</option>
             <option value="metu">ODTÜ (Orta Doğu Teknik)</option>
@@ -157,6 +157,21 @@
             <option value="ege">Ege Üniversitesi</option>
             <option value="koc">Koç Üniversitesi</option>
             <option value="sabanci">Sabancı Üniversitesi</option>
+            <option value="marmara">Marmara Üniversitesi</option>
+            <option value="istanbul">İstanbul Üniversitesi</option>
+            <option value="cerrahpasa">İÜ-Cerrahpaşa</option>
+            <option value="dokuz_eylul">Dokuz Eylül Üniversitesi</option>
+            <option value="iyte">İYTE (İzmir Yüksek Teknoloji)</option>
+            <option value="anadolu">Anadolu Üniversitesi</option>
+            <option value="eskisehir_teknik">ESTÜ (Eskişehir Teknik)</option>
+            <option value="gebze_teknik">GTÜ (Gebze Teknik)</option>
+            <option value="akdeniz">Akdeniz Üniversitesi</option>
+            <option value="cukurova">Çukurova Üniversitesi</option>
+            <option value="uludag">Bursa Uludağ Üniversitesi</option>
+            <option value="ozyegin">Özyeğin Üniversitesi</option>
+            <option value="bahcesehir">Bahçeşehir Üniversitesi</option>
+            <option value="yeditepe">Yeditepe Üniversitesi</option>
+            <option value="tobb">TOBB ETÜ</option>
           </select>
 
           <select id="filter-verification" onchange="loadAdminData()" class="px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-slate-200 font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500">
@@ -236,6 +251,21 @@
             <option value="ege">Ege Üniversitesi</option>
             <option value="koc">Koç Üniversitesi</option>
             <option value="sabanci">Sabancı Üniversitesi</option>
+            <option value="marmara">Marmara Üniversitesi</option>
+            <option value="istanbul">İstanbul Üniversitesi</option>
+            <option value="cerrahpasa">İÜ-Cerrahpaşa</option>
+            <option value="dokuz_eylul">Dokuz Eylül Üniversitesi</option>
+            <option value="iyte">İYTE (İzmir Yüksek Teknoloji)</option>
+            <option value="anadolu">Anadolu Üniversitesi</option>
+            <option value="eskisehir_teknik">ESTÜ (Eskişehir Teknik)</option>
+            <option value="gebze_teknik">GTÜ (Gebze Teknik)</option>
+            <option value="akdeniz">Akdeniz Üniversitesi</option>
+            <option value="cukurova">Çukurova Üniversitesi</option>
+            <option value="uludag">Bursa Uludağ Üniversitesi</option>
+            <option value="ozyegin">Özyeğin Üniversitesi</option>
+            <option value="bahcesehir">Bahçeşehir Üniversitesi</option>
+            <option value="yeditepe">Yeditepe Üniversitesi</option>
+            <option value="tobb">TOBB ETÜ</option>
           </select>
         </div>
 
@@ -253,16 +283,16 @@
         </div>
       </div>
 
-      <!-- 2. Bölüm: 11 Üniversite Paket Erişim Yetkileri -->
+      <!-- 2. Bölüm: 26 Üniversite Paket Erişim Yetkileri -->
       <div class="space-y-3">
         <div class="flex flex-wrap items-center justify-between gap-2">
           <div>
-            <h4 class="text-xs font-extrabold text-white uppercase tracking-wider">Açık Üniversite Sınav Paketleri (11 Üniversite)</h4>
+            <h4 class="text-xs font-extrabold text-white uppercase tracking-wider">Açık Üniversite Sınav Paketleri (26 Üniversite)</h4>
             <p class="text-[11px] text-slate-400">İşaretlediğiniz tüm üniversitelerin hazırlık ve muafiyet sınavları bu öğrenciye ücretsiz açılır.</p>
           </div>
           <div class="flex items-center gap-1.5">
             <button type="button" onclick="selectAllUniversitiesInModal(true)" class="px-2.5 py-1.5 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 rounded-lg text-[11px] font-bold transition">
-              + Tümünü Aç (11 Okul)
+              + Tümünü Aç (26 Okul)
             </button>
             <button type="button" onclick="selectOnlyPrimaryUniInModal()" class="px-2.5 py-1.5 bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-500/30 rounded-lg text-[11px] font-bold transition">
               Sadece Ana Okulu
@@ -273,8 +303,8 @@
           </div>
         </div>
 
-        <div id="modal-universities-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-          <!-- JS ile 11 üniversite checkbox kartı oluşturulur -->
+        <div id="modal-universities-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-2 max-h-64 overflow-y-auto pr-1">
+          <!-- JS ile 26 üniversite checkbox kartı oluşturulur -->
         </div>
       </div>
 
@@ -333,7 +363,22 @@
       { id: "gazi", code: "GAZİ", name: "Gazi Üniversitesi" },
       { id: "ege", code: "EGE", name: "Ege Üniversitesi" },
       { id: "koc", code: "KOÇ", name: "Koç Üniversitesi" },
-      { id: "sabanci", code: "SABANCI", name: "Sabancı Üniversitesi" }
+      { id: "sabanci", code: "SABANCI", name: "Sabancı Üniversitesi" },
+      { id: "marmara", code: "MARMARA", name: "Marmara Üniversitesi" },
+      { id: "istanbul", code: "İÜ", name: "İstanbul Üniversitesi" },
+      { id: "cerrahpasa", code: "İÜ-C", name: "İÜ-Cerrahpaşa" },
+      { id: "dokuz_eylul", code: "DEÜ", name: "Dokuz Eylül Üniversitesi" },
+      { id: "iyte", code: "İYTE", name: "İzmir Yüksek Teknoloji Enstitüsü" },
+      { id: "anadolu", code: "ANADOLU", name: "Anadolu Üniversitesi" },
+      { id: "eskisehir_teknik", code: "ESTÜ", name: "Eskişehir Teknik Üniversitesi" },
+      { id: "gebze_teknik", code: "GTÜ", name: "Gebze Teknik Üniversitesi" },
+      { id: "akdeniz", code: "AKDENİZ", name: "Akdeniz Üniversitesi" },
+      { id: "cukurova", code: "ÇUKUROVA", name: "Çukurova Üniversitesi" },
+      { id: "uludag", code: "ULUDAĞ", name: "Bursa Uludağ Üniversitesi" },
+      { id: "ozyegin", code: "ÖZYEĞİN", name: "Özyeğin Üniversitesi" },
+      { id: "bahcesehir", code: "BAU", name: "Bahçeşehir Üniversitesi" },
+      { id: "yeditepe", code: "YEDİTEPE", name: "Yeditepe Üniversitesi" },
+      { id: "tobb", code: "TOBB ETÜ", name: "TOBB Ekonomi ve Teknoloji Üni." }
     ];
 
     let adminStudentsList = [];
@@ -533,8 +578,8 @@
                   <i data-lucide="key-round" class="w-3.5 h-3.5"></i>
                   <span>Üniversite Erişimi Tanımla</span>
                 </button>
-                <button onclick="quickGrantAllUniversities(${st.id})" title="Tek Tıkla 11 Üniversitenin Tamamını Aç" class="px-2.5 py-1.5 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 rounded-xl text-[11px] font-bold transition">
-                  +11 Okul
+                <button onclick="quickGrantAllUniversities(${st.id})" title="Tek Tıkla 26 Üniversitenin Tamamını Aç" class="px-2.5 py-1.5 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 rounded-xl text-[11px] font-bold transition">
+                  +26 Okul
                 </button>
                 <button onclick="openResetPassModal(${st.id})" title="Öğrenci Şifresini Değiştir" class="p-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl border border-slate-700 transition">
                   <i data-lucide="key" class="w-3.5 h-3.5"></i>
@@ -654,13 +699,13 @@
             primary_university_id: st.university_id || "itu",
             is_verified: true,
             student_number: st.student_number || "",
-            admin_note: "Yönetici tarafından 11 üniversitenin tamamına tam erişim verildi."
+            admin_note: "Yönetici tarafından 26 üniversitenin tamamına tam erişim verildi."
           })
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.detail || "İşlem başarısız.");
         await loadAdminData();
-        showAdminToast(`✓ ${st.full_name || st.username} için 11 üniversitenin tamamı açıldı!`);
+        showAdminToast(`✓ ${st.full_name || st.username} için 26 üniversitenin tamamı açıldı!`);
       } catch (err) {
         showAdminToast("Hata: " + err.message, "rose");
       }

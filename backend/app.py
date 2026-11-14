@@ -1317,6 +1317,36 @@ def resolve_mistake_endpoint(question_id: str, request: Request):
     resolve_mistake(_current_user_id(request), question_id)
     return {"status": "ok", "question_id": question_id}
 
+class PracticeAnswerRequest(BaseModel):
+    question_id: str = Field(..., max_length=100, pattern=r"^[a-zA-Z0-9_-]+$")
+    chosen_answer: str = Field(..., max_length=5, pattern=r"^[A-Ea-e]$")
+
+@app.post("/api/practice/answer")
+def practice_answer_endpoint(req: PracticeAnswerRequest, request: Request):
+    """
+    Kur alıştırmalarında verilen tekil cevabı işler:
+    Yanlışsa Hata Defterine (Mistake Vault) kaydeder, doğruysa kasadan çözer.
+    """
+    uid = _current_user_id(request)
+    q = _all_question_map().get(req.question_id)
+    if not q:
+        raise HTTPException(status_code=404, detail="Alıştırma sorusu bulunamadı.")
+    _record_study(request)
+    chosen = req.chosen_answer.upper()
+    is_correct = chosen == q["correct_answer"]
+    if is_correct:
+        resolve_mistake(uid, q["id"])
+    else:
+        record_mistake(
+            user_id=uid,
+            question_id=q["id"],
+            university_id=q.get("university_id", "general"),
+            level=q.get("level", "B2"),
+            category=q.get("category", "Grammar"),
+            wrong_answer=chosen,
+        )
+    return {"question_id": q["id"], "is_correct": is_correct, "correct_answer": q["correct_answer"]}
+
 @app.delete("/api/mistakes/{question_id}")
 def delete_mistake_endpoint(question_id: str, request: Request):
     delete_mistake(_current_user_id(request), question_id)

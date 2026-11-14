@@ -140,6 +140,158 @@ UNIVERSITY_MAPPINGS = [
             "sabanci university",
             "sabanciuniv.edu"
         ]
+    },
+    {
+        "id": "cerrahpasa",
+        "name": "İstanbul Üniversitesi-Cerrahpaşa",
+        "keywords": [
+            "istanbul üniversitesi-cerrahpaşa",
+            "istanbul universitesi-cerrahpasa",
+            "cerrahpaşa rektörlüğü",
+            "iüc yabancı diller",
+            "iuc.edu.tr"
+        ]
+    },
+    {
+        "id": "istanbul",
+        "name": "İstanbul Üniversitesi",
+        "keywords": [
+            "istanbul üniversitesi",
+            "istanbul universitesi",
+            "istanbul university",
+            "istanbul.edu.tr"
+        ]
+    },
+    {
+        "id": "marmara",
+        "name": "Marmara Üniversitesi",
+        "keywords": [
+            "marmara üniversitesi",
+            "marmara universitesi",
+            "marmara university",
+            "marmara.edu.tr"
+        ]
+    },
+    {
+        "id": "dokuz_eylul",
+        "name": "Dokuz Eylül Üniversitesi (DEÜ)",
+        "keywords": [
+            "dokuz eylül üniversitesi",
+            "dokuz eylul universitesi",
+            "dokuz eylul university",
+            "deu.edu.tr"
+        ]
+    },
+    {
+        "id": "iyte",
+        "name": "İzmir Yüksek Teknoloji Enstitüsü (İYTE)",
+        "keywords": [
+            "izmir yüksek teknoloji enstitüsü",
+            "izmir yuksek teknoloji enstitusu",
+            "iyte yabancı diller",
+            "iztech",
+            "iyte.edu.tr"
+        ]
+    },
+    {
+        "id": "eskisehir_teknik",
+        "name": "Eskişehir Teknik Üniversitesi (ESTÜ)",
+        "keywords": [
+            "eskişehir teknik üniversitesi",
+            "eskisehir teknik universitesi",
+            "estü yabancı diller",
+            "eskisehir.edu.tr"
+        ]
+    },
+    {
+        "id": "anadolu",
+        "name": "Anadolu Üniversitesi",
+        "keywords": [
+            "anadolu üniversitesi",
+            "anadolu universitesi",
+            "anadolu university",
+            "anadolu.edu.tr"
+        ]
+    },
+    {
+        "id": "gebze_teknik",
+        "name": "Gebze Teknik Üniversitesi (GTÜ)",
+        "keywords": [
+            "gebze teknik üniversitesi",
+            "gebze teknik universitesi",
+            "gebze technical university",
+            "gtu.edu.tr"
+        ]
+    },
+    {
+        "id": "akdeniz",
+        "name": "Akdeniz Üniversitesi",
+        "keywords": [
+            "akdeniz üniversitesi",
+            "akdeniz universitesi",
+            "akdeniz university",
+            "akdeniz.edu.tr"
+        ]
+    },
+    {
+        "id": "cukurova",
+        "name": "Çukurova Üniversitesi",
+        "keywords": [
+            "çukurova üniversitesi",
+            "cukurova universitesi",
+            "çukurova yadyo",
+            "cu.edu.tr"
+        ]
+    },
+    {
+        "id": "uludag",
+        "name": "Bursa Uludağ Üniversitesi",
+        "keywords": [
+            "uludağ üniversitesi",
+            "uludag universitesi",
+            "bursa uludağ üniversitesi",
+            "uludag.edu.tr"
+        ]
+    },
+    {
+        "id": "ozyegin",
+        "name": "Özyeğin Üniversitesi",
+        "keywords": [
+            "özyeğin üniversitesi",
+            "ozyegin universitesi",
+            "ozyegin university",
+            "ozyegin.edu.tr"
+        ]
+    },
+    {
+        "id": "bahcesehir",
+        "name": "Bahçeşehir Üniversitesi (BAU)",
+        "keywords": [
+            "bahçeşehir üniversitesi",
+            "bahcesehir universitesi",
+            "bahcesehir university",
+            "bau.edu.tr"
+        ]
+    },
+    {
+        "id": "yeditepe",
+        "name": "Yeditepe Üniversitesi",
+        "keywords": [
+            "yeditepe üniversitesi",
+            "yeditepe universitesi",
+            "yeditepe university",
+            "yeditepe.edu.tr"
+        ]
+    },
+    {
+        "id": "tobb",
+        "name": "TOBB Ekonomi ve Teknoloji Üniversitesi (TOBB ETÜ)",
+        "keywords": [
+            "tobb ekonomi ve teknoloji üniversitesi",
+            "tobb ekonomi ve teknoloji universitesi",
+            "tobb etü",
+            "etu.edu.tr"
+        ]
     }
 ]
 
@@ -296,6 +448,201 @@ Bölüm / Program: Temel Geliştirme Yılı (İngilizce Hazırlık)
 Adı Soyadı: Ece Korkmaz
 Öğrenci Numarası: 00031948
 Öğrencilik Durumu: Aktif Öğrenci
+""",
+    "marmara": """
+T.C. YÜKSEKÖĞRETİM KURULU BAŞKANLIĞI
+E-DEVLET KAPISI ÖĞRENCİ BELGESİ
+Barkod Numarası: YÖK-MAR849201345
+
+Üniversite: MARMARA ÜNİVERSİTESİ REKTÖRLÜĞÜ
+Fakülte / Yüksekokul: Yabancı Diller Yüksekokulu
+Bölüm / Program: İngilizce Hazırlık Programı
+
+Adı Soyadı: Kerem Çetin
+Öğrenci Numarası: 170424019
+Öğrencilik Durumu: Aktif Öğrenci
+""",
+    "istanbul": """
+T.C. YÜKSEKÖĞRETİM KURULU BAŞKANLIĞI
+E-DEVLET KAPISI ÖĞRENCİ BELGESİ
+Barkod Numarası: YÖK-IST392018475
+
+Üniversite: İSTANBUL ÜNİVERSİTESİ REKTÖRLÜĞÜ
+Fakülte / Yüksekokul: Yabancı Diller Yüksekokulu
+Bölüm / Program: İngilizce Hazırlık Sınıfı
+
+Adı Soyadı: Pelin Doğan
+Öğrenci Numarası: 0401240088
+Öğrencilik Durumu: Aktif Öğrenci
+""",
+    "cerrahpasa": """
+T.C. YÜKSEKÖĞRETİM KURULU BAŞKANLIĞI
+E-DEVLET KAPISI ÖĞRENCİ BELGESİ
+Barkod Numarası: YÖK-IUC593018274
+
+Üniversite: İSTANBUL ÜNİVERSİTESİ-CERRAHPAŞA REKTÖRLÜĞÜ
+Fakülte / Yüksekokul: Yabancı Diller Yüksekokulu
+Bölüm / Program: İngilizce Hazırlık Programı
+
+Adı Soyadı: Onur Kurt
+Öğrenci Numarası: 1306240042
+Öğrencilik Durumu: Aktif Öğrenci
+""",
+    "dokuz_eylul": """
+T.C. YÜKSEKÖĞRETİM KURULU BAŞKANLIĞI
+E-DEVLET KAPISI ÖĞRENCİ BELGESİ
+Barkod Numarası: YÖK-DEU694018233
+
+Üniversite: DOKUZ EYLÜL ÜNİVERSİTESİ REKTÖRLÜĞÜ
+Fakülte / Yüksekokul: Yabancı Diller Yüksekokulu
+Bölüm / Program: İngilizce Hazırlık Sınıfı
+
+Adı Soyadı: İrem Polat
+Öğrenci Numarası: 2024504019
+Öğrencilik Durumu: Aktif Öğrenci
+""",
+    "iyte": """
+T.C. YÜKSEKÖĞRETİM KURULU BAŞKANLIĞI
+E-DEVLET KAPISI ÖĞRENCİ BELGESİ
+Barkod Numarası: YÖK-IYT795018291
+
+Üniversite: İZMİR YÜKSEK TEKNOLOJİ ENSTİTÜSÜ REKTÖRLÜĞÜ
+Fakülte / Yüksekokul: Yabancı Diller Yüksekokulu
+Bölüm / Program: İngilizce Hazırlık Programı
+
+Adı Soyadı: Tolga Güler
+Öğrenci Numarası: 290201055
+Öğrencilik Durumu: Aktif Öğrenci
+""",
+    "anadolu": """
+T.C. YÜKSEKÖĞRETİM KURULU BAŞKANLIĞI
+E-DEVLET KAPISI ÖĞRENCİ BELGESİ
+Barkod Numarası: YÖK-ANA283910455
+
+Üniversite: ANADOLU ÜNİVERSİTESİ REKTÖRLÜĞÜ
+Fakülte / Yüksekokul: Yabancı Diller Yüksekokulu
+Bölüm / Program: İngilizce Hazırlık Programı
+
+Adı Soyadı: Ceren Aksoy
+Öğrenci Numarası: 3482910445
+Öğrencilik Durumu: Aktif Öğrenci
+""",
+    "eskisehir_teknik": """
+T.C. YÜKSEKÖĞRETİM KURULU BAŞKANLIĞI
+E-DEVLET KAPISI ÖĞRENCİ BELGESİ
+Barkod Numarası: YÖK-EST918273645
+
+Üniversite: ESKİŞEHİR TEKNİK ÜNİVERSİTESİ REKTÖRLÜĞÜ
+Fakülte / Yüksekokul: Yabancı Diller Yüksekokulu
+Bölüm / Program: İngilizce Hazırlık Programı
+
+Adı Soyadı: Kaan Özdemir
+Öğrenci Numarası: 2183940122
+Öğrencilik Durumu: Aktif Öğrenci
+""",
+    "gebze_teknik": """
+T.C. YÜKSEKÖĞRETİM KURULU BAŞKANLIĞI
+E-DEVLET KAPISI ÖĞRENCİ BELGESİ
+Barkod Numarası: YÖK-GTU482910374
+
+Üniversite: GEBZE TEKNİK ÜNİVERSİTESİ REKTÖRLÜĞÜ
+Fakülte / Yüksekokul: Yabancı Diller Bölümü
+Bölüm / Program: İngilizce Hazırlık Programı
+
+Adı Soyadı: Sude Karaca
+Öğrenci Numarası: 2201040089
+Öğrencilik Durumu: Aktif Öğrenci
+""",
+    "akdeniz": """
+T.C. YÜKSEKÖĞRETİM KURULU BAŞKANLIĞI
+E-DEVLET KAPISI ÖĞRENCİ BELGESİ
+Barkod Numarası: YÖK-AKD738291044
+
+Üniversite: AKDENİZ ÜNİVERSİTESİ REKTÖRLÜĞÜ
+Fakülte / Yüksekokul: Yabancı Diller Yüksekokulu
+Bölüm / Program: İngilizce Hazırlık Sınıfı
+
+Adı Soyadı: Umut Çakır
+Öğrenci Numarası: 2024080112
+Öğrencilik Durumu: Aktif Öğrenci
+""",
+    "cukurova": """
+T.C. YÜKSEKÖĞRETİM KURULU BAŞKANLIĞI
+E-DEVLET KAPISI ÖĞRENCİ BELGESİ
+Barkod Numarası: YÖK-CUK583920144
+
+Üniversite: ÇUKUROVA ÜNİVERSİTESİ REKTÖRLÜĞÜ
+Fakülte / Yüksekokul: Yabancı Diller Yüksekokulu (YADYO)
+Bölüm / Program: İngilizce Hazırlık Programı
+
+Adı Soyadı: Dilara Tekin
+Öğrenci Numarası: 2024556031
+Öğrencilik Durumu: Aktif Öğrenci
+""",
+    "uludag": """
+T.C. YÜKSEKÖĞRETİM KURULU BAŞKANLIĞI
+E-DEVLET KAPISI ÖĞRENCİ BELGESİ
+Barkod Numarası: YÖK-BUU394827165
+
+Üniversite: BURSA ULUDAĞ ÜNİVERSİTESİ REKTÖRLÜĞÜ
+Fakülte / Yüksekokul: Yabancı Diller Yüksekokulu
+Bölüm / Program: İngilizce Hazırlık Programı
+
+Adı Soyadı: Oğuzhan Erdem
+Öğrenci Numarası: 032490145
+Öğrencilik Durumu: Aktif Öğrenci
+""",
+    "ozyegin": """
+T.C. YÜKSEKÖĞRETİM KURULU BAŞKANLIĞI
+E-DEVLET KAPISI ÖĞRENCİ BELGESİ
+Barkod Numarası: YÖK-OZU647382910
+
+Üniversite: ÖZYEĞİN ÜNİVERSİTESİ REKTÖRLÜĞÜ
+Fakülte / Yüksekokul: Yabancı Diller Yüksekokulu
+Bölüm / Program: İngilizce Hazırlık (TRACE)
+
+Adı Soyadı: Melis Şen
+Öğrenci Numarası: 0284910
+Öğrencilik Durumu: Aktif Öğrenci
+""",
+    "bahcesehir": """
+T.C. YÜKSEKÖĞRETİM KURULU BAŞKANLIĞI
+E-DEVLET KAPISI ÖĞRENCİ BELGESİ
+Barkod Numarası: YÖK-BAU839201746
+
+Üniversite: BAHÇEŞEHİR ÜNİVERSİTESİ REKTÖRLÜĞÜ
+Fakülte / Yüksekokul: Yabancı Diller Yüksekokulu
+Bölüm / Program: İngilizce Hazırlık Programı
+
+Adı Soyadı: Berkay Yavuz
+Öğrenci Numarası: 2104928
+Öğrencilik Durumu: Aktif Öğrenci
+""",
+    "yeditepe": """
+T.C. YÜKSEKÖĞRETİM KURULU BAŞKANLIĞI
+E-DEVLET KAPISI ÖĞRENCİ BELGESİ
+Barkod Numarası: YÖK-YED594837261
+
+Üniversite: YEDİTEPE ÜNİVERSİTESİ REKTÖRLÜĞÜ
+Fakülte / Yüksekokul: Yabancı Diller Yüksekokulu
+Bölüm / Program: İngilizce Hazırlık Sınıfı
+
+Adı Soyadı: Nazlı Güneş
+Öğrenci Numarası: 202401089
+Öğrencilik Durumu: Aktif Öğrenci
+""",
+    "tobb": """
+T.C. YÜKSEKÖĞRETİM KURULU BAŞKANLIĞI
+E-DEVLET KAPISI ÖĞRENCİ BELGESİ
+Barkod Numarası: YÖK-TOB748392011
+
+Üniversite: TOBB EKONOMİ VE TEKNOLOJİ ÜNİVERSİTESİ REKTÖRLÜĞÜ
+Fakülte / Yüksekokul: Yabancı Diller Bölümü
+Bölüm / Program: İngilizce Hazırlık Programı
+
+Adı Soyadı: Alp Aslan
+Öğrenci Numarası: 241101045
+Öğrencilik Durumu: Aktif Öğrenci
 """
 }
 
@@ -392,9 +739,10 @@ def scan_student_document(raw_text: str, filename: str = "") -> Dict[str, Any]:
         return {
             "success": False,
             "error": (
-                "Belgede desteklenen üniversitelerden biri (İTÜ, BOÜN, ODTÜ, Bilkent, YTÜ, Hacettepe, "
-                "Ankara, Gazi, Ege, Koç, Sabancı) tespit edilemedi. Lütfen E-Devlet Öğrenci Belgenizi "
-                "veya okunabilir PDF/metin içeriğini yükleyin."
+                "Belgede desteklenen 26 üniversiteden biri (İTÜ, BOÜN, ODTÜ, Bilkent, YTÜ, Hacettepe, "
+                "Ankara, Gazi, Ege, Koç, Sabancı, Marmara, İÜ, İÜ-Cerrahpaşa, DEÜ, İYTE, Anadolu, ESTÜ, "
+                "GTÜ, Akdeniz, Çukurova, Uludağ, Özyeğin, BAU, Yeditepe, TOBB ETÜ) tespit edilemedi. "
+                "Lütfen E-Devlet Öğrenci Belgenizi veya okunabilir PDF/metin içeriğini yükleyin."
             )
         }
 

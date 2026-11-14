@@ -314,34 +314,110 @@ async function loadDashboardStats() {
   }
 }
 
-async function loadPracticeQuestions() {
+// ---------------- İNTERAKTİF KUR ALIŞTIRMALARI & SORU BANKASI ----------------
+const practiceState = {
+  category: "all",
+  pool: "all", // "all" (26 Üniversite) veya "school" (Seçili Okul + Genel)
+  answers: {}, // { [questionId]: selectedKey }
+  questionsById: {}
+};
+
+function updatePracticeScoreUI() {
+  const counterEl = document.getElementById("practice-score-counter");
+  if (!counterEl) return;
+  const entries = Object.entries(practiceState.answers);
+  const totalSolved = entries.length;
+  let correctCount = 0;
+  for (const [qid, selectedKey] of entries) {
+    const q = practiceState.questionsById[qid];
+    if (q && q.correct_answer === selectedKey) {
+      correctCount++;
+    }
+  }
+  counterEl.innerText = `${correctCount} / ${totalSolved} Doğru`;
+}
+
+function resetPracticeSession() {
+  practiceState.answers = {};
+  updatePracticeScoreUI();
+  loadPracticeQuestions();
+  showNotification("✓ Alıştırma yanıtları ve skor sayacı sıfırlandı.", "blue");
+}
+
+function setPracticeCategory(cat) {
+  practiceState.category = cat;
+  loadPracticeQuestions();
+}
+
+function setPracticePool(poolMode) {
+  practiceState.pool = poolMode;
+  loadPracticeQuestions();
+}
+
+async function selectPracticeOption(questionId, selectedKey) {
+  const q = practiceState.questionsById[questionId];
+  if (!q) return;
+
+  practiceState.answers[questionId] = selectedKey;
+  updatePracticeScoreUI();
+
+  // Sadece ilgili soru kartını veya listeyi anında güncelle
+  renderPracticeQuestionList(window._lastPracticeFiltered || []);
+
+  // Yanıtı sunucuya ilet (yanlışsa Hata Defterine ekler, doğruysa çözer)
+  try {
+    await fetch("/api/practice/answer", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question_id: String(q.id), chosen_answer: selectedKey })
+    });
+  } catch (_) {}
+}
+
+function renderPracticeQuestionList(filteredQuestions) {
   const container = document.getElementById("practice-questions-list");
   if (!container) return;
 
-  const lvl = window.appState.currentLevel;
-  const uni = window.appState.currentUniversity.id;
+  const badgeEl = document.getElementById("practice-count-badge");
+  if (badgeEl) badgeEl.innerText = `${filteredQuestions.length} Soru`;
 
-  try {
-    const res = await fetch(`/api/questions?level=${lvl}`);
-    const questions = await res.json();
+  if (filteredQuestions.length === 0) {
+    container.innerHTML = `
+      <div class="p-8 text-center bg-slate-50 rounded-2xl border border-slate-200/80">
+        <p class="text-sm font-bold text-slate-600 mb-2">Bu filtrede (${window.appState.currentLevel} • ${practiceState.category}) soru bulunamadı.</p>
+        <button onclick="setPracticeCategory('all'); setPracticePool('all');" class="px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-xl hover:bg-blue-700 transition">
+          Tüm Kategorileri Göster
+        </button>
+      </div>
+    `;
+    return;
+  }
 
-    if (questions.length === 0) {
-      container.innerHTML = `<p class="text-sm text-slate-500 py-6 text-center">Bu seviyede (${lvl}) henüz soru bulunamadı.</p>`;
-      return;
-    }
+  container.innerHTML = filteredQuestions.map((q, idx) => {
+    const chosen = practiceState.answers[q.id];
+    const isAnswered = Boolean(chosen);
+    const isCorrect = isAnswered && chosen === q.correct_answer;
 
-    container.innerHTML = questions.map((q, idx) => `
-      <div class="p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition">
-        <div class="flex items-center justify-between mb-3">
+    return `
+      <div class="p-6 bg-white rounded-2xl border ${isAnswered ? (isCorrect ? 'border-emerald-300 bg-emerald-50/10' : 'border-rose-300 bg-rose-50/10') : 'border-slate-200/80'} shadow-sm hover:shadow-md transition">
+        <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
           <div class="flex items-center gap-2">
+            <span class="px-2.5 py-0.5 text-xs font-extrabold bg-slate-900 text-white rounded-md">
+              #${idx + 1}
+            </span>
             <span class="px-2.5 py-0.5 text-xs font-bold bg-blue-100 text-blue-700 rounded-md">
               ${q.category}
             </span>
             <span class="px-2 py-0.5 text-xs font-semibold bg-slate-100 text-slate-600 rounded-md">
               ${q.level}
             </span>
+            ${isAnswered ? (
+              isCorrect
+                ? `<span class="px-2.5 py-0.5 text-xs font-black bg-emerald-100 text-emerald-700 rounded-full">✓ Doğru Çözüldü</span>`
+                : `<span class="px-2.5 py-0.5 text-xs font-black bg-rose-100 text-rose-700 rounded-full">✗ Yanlış (Hata Defterine Eklendi)</span>`
+            ) : ''}
           </div>
-          <span class="text-xs text-slate-400 uppercase font-bold tracking-wider">${q.university_id}</span>
+          <span class="text-xs text-indigo-600 bg-indigo-50 px-2.5 py-0.5 rounded-md uppercase font-extrabold tracking-wider border border-indigo-100">${q.university_id}</span>
         </div>
 
         ${q.passage ? `
@@ -352,32 +428,129 @@ async function loadPracticeQuestions() {
 
         <p class="text-sm font-semibold text-slate-800 mb-4 whitespace-pre-line">${q.question}</p>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
-          ${q.options.map(opt => `
-            <div class="p-3 text-xs bg-slate-50 hover:bg-blue-50 border border-slate-200 rounded-xl flex items-center gap-2 cursor-default">
-              <span class="font-bold text-slate-600">${opt.key})</span>
-              <span class="text-slate-700">${opt.text}</span>
-            </div>
-          `).join('')}
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-4">
+          ${q.options.map(opt => {
+            let btnClass = "bg-slate-50 hover:bg-blue-50/80 border-slate-200 hover:border-blue-300 text-slate-700";
+            let badgeHtml = "";
+            if (isAnswered) {
+              if (opt.key === q.correct_answer) {
+                btnClass = "bg-emerald-50 border-emerald-400 text-emerald-900 font-bold ring-1 ring-emerald-400";
+                badgeHtml = `<span class="ml-auto text-[11px] font-black text-emerald-700">✓ Doğru</span>`;
+              } else if (opt.key === chosen) {
+                btnClass = "bg-rose-50 border-rose-400 text-rose-900 font-bold ring-1 ring-rose-400";
+                badgeHtml = `<span class="ml-auto text-[11px] font-black text-rose-700">✗ Seçiminiz</span>`;
+              } else {
+                btnClass = "bg-slate-50/60 border-slate-200 text-slate-400 opacity-75";
+              }
+            }
+            return `
+              <button type="button" onclick="selectPracticeOption('${q.id}', '${opt.key}')" class="p-3 text-xs border rounded-xl flex items-center gap-2.5 text-left transition cursor-pointer ${btnClass}">
+                <span class="w-6 h-6 shrink-0 rounded-lg ${isAnswered && opt.key === q.correct_answer ? 'bg-emerald-600 text-white' : (isAnswered && opt.key === chosen ? 'bg-rose-600 text-white' : 'bg-white border border-slate-200 text-slate-700')} font-extrabold flex items-center justify-center text-[11px]">${opt.key}</span>
+                <span class="flex-1">${opt.text}</span>
+                ${badgeHtml}
+              </button>
+            `;
+          }).join('')}
         </div>
 
-        <details class="text-xs group">
+        <details class="text-xs group" ${isAnswered ? 'open' : ''}>
           <summary class="cursor-pointer font-bold text-blue-600 hover:text-blue-700 list-none flex items-center gap-1">
             <i data-lucide="help-circle" class="w-3.5 h-3.5"></i> Doğru Cevap ve Çözümü Gör
           </summary>
-          <div class="mt-3 p-3.5 bg-emerald-50 rounded-xl border border-emerald-100 text-slate-700 leading-relaxed">
-            <strong class="text-emerald-700 block mb-1">Doğru Cevap: ${q.correct_answer}</strong>
+          <div class="mt-3 p-3.5 bg-emerald-50 rounded-xl border border-emerald-200 text-slate-700 leading-relaxed">
+            <strong class="text-emerald-800 block mb-1">Doğru Cevap: ${q.correct_answer}</strong>
             ${q.explanation_tr}
           </div>
         </details>
       </div>
-    `).join('');
+    `;
+  }).join('');
 
-    if (window.lucide) window.lucide.createIcons();
+  if (window.lucide) window.lucide.createIcons();
+}
+
+async function loadPracticeQuestions() {
+  const container = document.getElementById("practice-questions-list");
+  if (!container) return;
+
+  const lvl = window.appState.currentLevel;
+  const uni = window.appState.currentUniversity?.id || "itu";
+
+  try {
+    const res = await fetch(`/api/questions?level=${lvl}`);
+    const allLevelQuestions = await res.json();
+
+    for (const q of allLevelQuestions) {
+      practiceState.questionsById[q.id] = q;
+    }
+
+    // Havuz filtresi ("all" veya "school")
+    const poolFiltered = practiceState.pool === "school"
+      ? allLevelQuestions.filter(q => q.university_id === uni || q.university_id === "general")
+      : allLevelQuestions;
+
+    // Kategori sayılarını hesapla
+    const catCounts = { all: poolFiltered.length };
+    for (const q of poolFiltered) {
+      catCounts[q.category] = (catCounts[q.category] || 0) + 1;
+    }
+
+    const categories = [
+      { key: "all", label: "Tümü" },
+      { key: "Grammar", label: "Grammar" },
+      { key: "Vocabulary", label: "Vocabulary" },
+      { key: "Reading", label: "Reading" },
+      { key: "Restatement", label: "Restatement" },
+      { key: "Cloze Test", label: "Cloze Test" },
+      { key: "Sentence Completion", label: "Sentence Comp." },
+      { key: "Paragraph Completion", label: "Paragraph Comp." },
+      { key: "Dialogue", label: "Dialogue" }
+    ];
+
+    const catBar = document.getElementById("practice-category-bar");
+    if (catBar) {
+      catBar.innerHTML = `
+        <div class="flex flex-wrap items-center gap-1.5">
+          ${categories.map(c => {
+            const count = catCounts[c.key] || 0;
+            if (c.key !== "all" && count === 0) return "";
+            const active = practiceState.category === c.key;
+            return `
+              <button type="button" onclick="setPracticeCategory('${c.key}')" class="px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${active ? 'bg-blue-600 text-white shadow-sm' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}">
+                <span>${c.label}</span>
+                <span class="text-[10px] px-1.5 py-0.2 rounded-full ${active ? 'bg-blue-500 text-white' : 'bg-slate-100 text-slate-500'} font-extrabold">${count}</span>
+              </button>
+            `;
+          }).join("")}
+        </div>
+
+        <div class="flex items-center gap-1 bg-white p-1 rounded-xl border border-slate-200 text-[11px] font-bold">
+          <button type="button" onclick="setPracticePool('all')" class="px-2.5 py-1 rounded-lg transition ${practiceState.pool === 'all' ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:bg-slate-100'}">
+            Tüm 26 Üniversite
+          </button>
+          <button type="button" onclick="setPracticePool('school')" class="px-2.5 py-1 rounded-lg transition ${practiceState.pool === 'school' ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:bg-slate-100'}">
+            Sadece ${uni.toUpperCase()} + Genel
+          </button>
+        </div>
+      `;
+    }
+
+    const finalFiltered = practiceState.category === "all"
+      ? poolFiltered
+      : poolFiltered.filter(q => q.category === practiceState.category);
+
+    window._lastPracticeFiltered = finalFiltered;
+    updatePracticeScoreUI();
+    renderPracticeQuestionList(finalFiltered);
   } catch (err) {
     console.error("Practice load error:", err);
   }
 }
+
+window.selectPracticeOption = selectPracticeOption;
+window.setPracticeCategory = setPracticeCategory;
+window.setPracticePool = setPracticePool;
+window.resetPracticeSession = resetPracticeSession;
 
 async function loadWritingGuides(targetLevel = null) {
   const container = document.getElementById("writing-guides-container");
@@ -1658,7 +1831,12 @@ function analyzeDocTextLive(rawText) {
   const uniKeywords = [
     "istanbul teknik", "itü", "boğaziçi", "bogazici", "orta doğu teknik", "odtü",
     "bilkent", "yıldız teknik", "hacettepe", "ankara üniversitesi", "gazi üniversitesi",
-    "ege üniversitesi", "koç üniversitesi", "sabancı üniversitesi"
+    "ege üniversitesi", "koç üniversitesi", "sabancı üniversitesi",
+    "marmara üniversitesi", "istanbul üniversitesi", "cerrahpaşa", "dokuz eylül",
+    "izmir yüksek teknoloji", "iyte", "anadolu üniversitesi", "eskişehir teknik",
+    "gebze teknik", "akdeniz üniversitesi", "çukurova üniversitesi", "uludağ üniversitesi",
+    "özyeğin üniversitesi", "bahçeşehir üniversitesi", "yeditepe üniversitesi",
+    "tobb ekonomi", "tobb etü"
   ];
   const hasUni = uniKeywords.some(k => t.includes(k));
   const hasBarcode = /(?:yök|yok|tr|edevlet|belge)[\-][a-z0-9\-]{5,24}|barkod\s*(?:no|kodu|numarası)?\s*[:\-]?\s*[a-z0-9\-]{6,25}/i.test(t);
