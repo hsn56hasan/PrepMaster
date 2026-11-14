@@ -56,21 +56,21 @@
 
   <!-- ================= TOP NAVBAR ================= -->
   <header id="app-top-navbar" class="hidden bg-white border-b border-slate-200/80 sticky top-0 z-30 shadow-sm">
-    <div class="max-w-[1760px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <div class="max-w-[1760px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
       
-      <!-- Logo & Okul Rozeti -->
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 bg-gradient-to-tr from-blue-700 to-indigo-600 rounded-xl flex items-center justify-center text-white shadow-md shadow-blue-500/20">
+      <!-- Logo & Okul -->
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="w-10 h-10 shrink-0 bg-gradient-to-tr from-blue-700 to-indigo-600 rounded-xl flex items-center justify-center text-white shadow-md shadow-blue-500/20">
           <i data-lucide="graduation-cap" class="w-6 h-6"></i>
         </div>
-        <div>
+        <div class="min-w-0">
           <div class="flex items-center gap-2">
             <span class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-blue-700 to-indigo-700 bg-clip-text text-transparent">PrepMaster</span>
-            <span class="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-full">Hazırlık & Muafiyet</span>
+            <span class="hidden xl:inline text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-full">Hazırlık & Muafiyet</span>
           </div>
-          <div class="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
-            <span id="header-uni-name">İstanbul Teknik Üniversitesi</span>
-            <button onclick="openUniversityModal()" class="text-blue-600 hover:text-blue-700 underline text-[11px] font-semibold">
+          <div class="flex items-center gap-1.5 text-xs text-slate-500 font-medium min-w-0">
+            <span id="header-uni-name" class="truncate max-w-[9rem] sm:max-w-[16rem]">İstanbul Teknik Üniversitesi</span>
+            <button onclick="openUniversityModal()" class="shrink-0 text-blue-600 hover:text-blue-700 underline text-[11px] font-semibold">
               (Değiştir)
             </button>
           </div>
@@ -78,56 +78,81 @@
       </div>
 
       <!-- Kur / Level Seçici (A1 - C2) -->
-      <div class="hidden sm:flex items-center gap-1 bg-slate-100 p-1 rounded-2xl border border-slate-200" id="level-selector-pills">
+      <div class="hidden md:flex items-center gap-1 bg-slate-100 p-1 rounded-2xl border border-slate-200" id="level-selector-pills">
         <!-- JS ile dolacak: A1, A2, B1, B2, C1, C2 -->
       </div>
 
-      <!-- Hızlı Aksiyon, Senkronizasyon & Okul Seçici Butonu -->
-      <div class="flex items-center gap-2">
-        <button onclick="toggleDarkMode()" id="header-theme-btn" title="Karanlık / Aydınlık Mod" class="flex items-center justify-center w-9 h-9 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition">
-          <i data-lucide="moon" class="w-4 h-4" id="theme-icon"></i>
-        </button>
-        <button onclick="openStudentVerifyModal()" id="header-verification-badge" class="hidden sm:flex items-center gap-1.5 px-3 py-2 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-xl text-xs font-bold transition hover:bg-emerald-100" title="Öğrenci Doğrulama Durumu">
-          <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
-          <span id="header-verification-text">Doğrulanmış Öğrenci</span>
-        </button>
-        <button onclick="openApkDownloadModal()" id="header-apk-btn" title="Android Mobil Uygulamayı İndir (.APK)" class="flex items-center gap-1.5 px-3 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 rounded-xl text-xs font-bold transition">
-          <i data-lucide="smartphone" class="w-4 h-4 text-emerald-600"></i>
-          <span class="hidden lg:inline">Mobil Uygulama (APK)</span>
-        </button>
-        <button onclick="openSupportKvkkModal('support')" id="header-support-btn" title="Öğrenci Destek Hattı & KVKK Belgeleri" class="flex items-center gap-1.5 px-3 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 rounded-xl text-xs font-bold transition">
-          <i data-lucide="headset" class="w-4 h-4 text-blue-600"></i>
-          <span class="hidden lg:inline">Destek & KVKK</span>
-        </button>
-        <button onclick="syncCloudData()" id="header-sync-btn" title="Web ve Mobil Verilerini Eşitle" class="flex items-center gap-1.5 px-3 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 rounded-xl text-xs font-bold transition">
-          <i data-lucide="cloud" class="w-4 h-4 text-indigo-600" id="sync-icon"></i>
-          <span class="hidden md:inline">Bulut Eşitle</span>
-        </button>
-        <button onclick="openUniversityModal()" class="flex items-center gap-1.5 px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition">
-          <i data-lucide="building-2" class="w-4 h-4 text-slate-500"></i>
-          <span class="hidden md:inline">Okul Seç</span>
-        </button>
-        <button onclick="openDocScanModal()" id="header-doc-scan-btn" class="flex items-center gap-1.5 px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-xl text-xs font-bold transition" title="Öğrenci Belgesi Tara (Okulunu Eşle)">
-          <i data-lucide="scan-text" class="w-4 h-4 text-indigo-600"></i>
-          <span class="hidden sm:inline">Belge Tara</span>
-        </button>
-        <button onclick="openAuthModal()" id="header-auth-btn" class="flex items-center gap-1.5 px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition" title="Kullanıcı Girişi / Kayıt">
-          <i data-lucide="user" class="w-4 h-4 text-blue-600"></i>
-          <span id="header-user-name" class="hidden sm:inline">Giriş Yap</span>
-        </button>
-        <button onclick="startExamSimulation()" class="flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow-md shadow-blue-500/20 transition">
+      <!-- Sağ: ana eylem, kullanıcı ve menü -->
+      <div class="flex items-center gap-2 shrink-0">
+        <button onclick="startExamSimulation()" title="Hızlı Deneme" class="flex items-center gap-1.5 px-3 sm:px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow-md shadow-blue-500/20 transition">
           <i data-lucide="play" class="w-3.5 h-3.5"></i>
-          <span>Hızlı Deneme</span>
+          <span class="hidden sm:inline">Hızlı Deneme</span>
         </button>
+        <button onclick="openAuthModal()" id="header-auth-btn" class="hidden sm:flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition max-w-[10rem]" title="Hesabım">
+          <i data-lucide="user" class="w-4 h-4 text-blue-600 shrink-0"></i>
+          <span id="header-user-name" class="truncate">Giriş Yap</span>
+        </button>
+
+        <!-- Hamburger menü -->
+        <div class="relative" id="header-menu-wrap">
+          <button type="button" id="header-menu-btn" onclick="toggleHeaderMenu()" aria-haspopup="true" aria-expanded="false" aria-controls="header-menu" title="Menü"
+                  class="flex items-center justify-center w-10 h-10 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+          </button>
+
+          <div id="header-menu" role="menu" class="hidden absolute right-0 top-12 w-72 max-h-[80vh] overflow-y-auto bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl p-2 z-50">
+            <!-- Hesap (telefonda kullanıcı butonu üstte gizli olduğu için burada) -->
+            <button role="menuitem" onclick="closeHeaderMenu(); openAuthModal()" class="sm:hidden w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700/60 transition text-left">
+              <i data-lucide="user" class="w-4 h-4 text-blue-600"></i>
+              <span id="header-menu-user-name">Hesabım</span>
+            </button>
+            <button role="menuitem" onclick="closeHeaderMenu(); openStudentVerifyModal()" id="header-verification-badge" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700/60 transition text-left" title="Öğrenci Doğrulama Durumu">
+              <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+              <span id="header-verification-text">Doğrulanmış Öğrenci</span>
+            </button>
+
+            <div class="my-1.5 border-t border-slate-100 dark:border-slate-700"></div>
+            <p class="px-3 pt-1 pb-1 text-[10px] font-bold uppercase tracking-wider text-slate-400">Okul</p>
+            <button role="menuitem" onclick="closeHeaderMenu(); openUniversityModal()" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700/60 transition text-left">
+              <i data-lucide="building-2" class="w-4 h-4 text-slate-500"></i>
+              <span>Okul Seç</span>
+            </button>
+            <button role="menuitem" onclick="closeHeaderMenu(); openDocScanModal()" id="header-doc-scan-btn" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700/60 transition text-left" title="Öğrenci Belgesi Tara (Okulunu Eşle)">
+              <i data-lucide="scan-text" class="w-4 h-4 text-indigo-600"></i>
+              <span>Belge Tara</span>
+            </button>
+
+            <div class="my-1.5 border-t border-slate-100 dark:border-slate-700"></div>
+            <p class="px-3 pt-1 pb-1 text-[10px] font-bold uppercase tracking-wider text-slate-400">Uygulama</p>
+            <button role="menuitem" onclick="closeHeaderMenu(); syncCloudData()" id="header-sync-btn" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700/60 transition text-left" title="Web ve Mobil Verilerini Eşitle">
+              <i data-lucide="cloud" class="w-4 h-4 text-indigo-600" id="sync-icon"></i>
+              <span>Bulut Eşitle</span>
+            </button>
+            <button role="menuitem" onclick="closeHeaderMenu(); openApkDownloadModal()" id="header-apk-btn" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700/60 transition text-left" title="Android Mobil Uygulamayı İndir (.APK)">
+              <i data-lucide="smartphone" class="w-4 h-4 text-emerald-600"></i>
+              <span>Mobil Uygulama (APK)</span>
+            </button>
+            <button role="menuitem" onclick="toggleDarkMode()" id="header-theme-btn" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700/60 transition text-left" title="Karanlık / Aydınlık Mod">
+              <i data-lucide="moon" class="w-4 h-4" id="theme-icon"></i>
+              <span id="theme-label">Karanlık Mod</span>
+            </button>
+
+            <div class="my-1.5 border-t border-slate-100 dark:border-slate-700"></div>
+            <button role="menuitem" onclick="closeHeaderMenu(); openSupportKvkkModal('support')" id="header-support-btn" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700/60 transition text-left" title="Öğrenci Destek Hattı & KVKK Belgeleri">
+              <i data-lucide="headset" class="w-4 h-4 text-blue-600"></i>
+              <span>Destek & KVKK</span>
+            </button>
+          </div>
+        </div>
       </div>
 
     </div>
 
-    <!-- Mobil Kur Seçici (Küçük ekranlar için bar) -->
-    <div class="sm:hidden px-4 py-2 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
-      <span class="text-xs font-bold text-slate-500">Çalışma Kuru:</span>
-      <div class="flex items-center gap-1" id="mobile-level-selector">
-        <!-- Rendered in JS if needed or uses the same event -->
+    <!-- Kur seçici (telefon ve dar tablet) -->
+    <div class="md:hidden px-4 py-2 bg-slate-50 border-t border-slate-200 flex items-center justify-between gap-2">
+      <span class="text-xs font-bold text-slate-500 shrink-0">Çalışma Kuru:</span>
+      <div class="flex items-center gap-1 overflow-x-auto" id="mobile-level-selector">
+        <!-- renderLevelSelector() doldurur -->
       </div>
     </div>
   </header>
@@ -2015,7 +2040,7 @@
   <script src="/static/js/listening.js?v=2.0"></script>
   <script src="/static/js/speaking.js?v=2.0"></script>
   <script src="/static/js/writing_ai.js?v=2.0"></script>
-  <script src="/static/js/app.js?v=2.0"></script>
+  <script src="/static/js/app.js?v=2.2"></script>
 
   <!-- 3D Secure ödeme Entegrasyonu -->
   <script>

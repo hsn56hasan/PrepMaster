@@ -168,10 +168,9 @@ function renderUniversityHeader() {
 
 function renderLevelSelector() {
   const levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
-  const container = document.getElementById("level-selector-pills");
-  if (!container) return;
-
-  container.innerHTML = levels.map(lvl => {
+  // Masaüstü (üst çubuk) ve telefon (alt çubuk) seçicileri aynı şekilde çizilir.
+  // Eskiden telefondaki "Çalışma Kuru" çubuğu hiç doldurulmuyordu.
+  const html = levels.map(lvl => {
     const isSelected = lvl === window.appState.currentLevel;
     return `
       <button onclick="changeCurrentLevel('${lvl}')" class="px-3 py-1.5 rounded-xl text-xs font-bold transition ${isSelected ? 'bg-blue-600 text-white shadow-md' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
@@ -179,6 +178,10 @@ function renderLevelSelector() {
       </button>
     `;
   }).join('');
+  ["level-selector-pills", "mobile-level-selector"].forEach(id => {
+    const container = document.getElementById(id);
+    if (container) container.innerHTML = html;
+  });
 }
 
 async function changeCurrentLevel(lvl) {
@@ -1328,10 +1331,10 @@ async function loadStudentStatus() {
     if (badgeText && badgeEl) {
       if (data.is_verified_student) {
         badgeText.innerText = "Doğrulanmış Öğrenci";
-        badgeEl.className = "hidden sm:flex items-center gap-1.5 px-3 py-2 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-xl text-xs font-bold transition";
+        badgeText.className = "text-emerald-700 dark:text-emerald-400";
       } else {
         badgeText.innerText = "Öğrenci Doğrula";
-        badgeEl.className = "hidden sm:flex items-center gap-1.5 px-3 py-2 bg-amber-50 text-amber-700 border border-amber-200 rounded-xl text-xs font-bold transition";
+        badgeText.className = "text-amber-700 dark:text-amber-400";
       }
     }
   } catch (e) {
@@ -1456,7 +1459,15 @@ function toggleDarkMode() {
 function updateThemeIcon(isDark) {
   const btn = document.getElementById("header-theme-btn");
   if (!btn) return;
-  btn.innerHTML = `<i data-lucide="${isDark ? 'sun' : 'moon'}" class="w-4 h-4 ${isDark ? 'text-amber-400' : 'text-slate-700'}" id="theme-icon"></i>`;
+  // Menüde ikon + yazı var: yalnızca ikonu ve yazıyı değiştir
+  const icon = btn.querySelector("#theme-icon, svg");
+  const fresh = document.createElement("i");
+  fresh.setAttribute("data-lucide", isDark ? "sun" : "moon");
+  fresh.id = "theme-icon";
+  fresh.className = `w-4 h-4 ${isDark ? 'text-amber-400' : 'text-slate-500'}`;
+  if (icon) icon.replaceWith(fresh); else btn.prepend(fresh);
+  const label = document.getElementById("theme-label");
+  if (label) label.innerText = isDark ? "Aydınlık Mod" : "Karanlık Mod";
   if (window.lucide) window.lucide.createIcons();
 }
 
@@ -2574,3 +2585,39 @@ window.closeSupportKvkkModal = closeSupportKvkkModal;
 window.switchSupportKvkkTab = switchSupportKvkkTab;
 window.copySupportText = copySupportText;
 window.submitSupportTicketForm = submitSupportTicketForm;
+
+// ---------------- ÜST MENÜ (hamburger) ----------------
+function setHeaderMenuOpen(open) {
+  const menu = document.getElementById("header-menu");
+  const btn = document.getElementById("header-menu-btn");
+  if (!menu || !btn) return;
+  menu.classList.toggle("hidden", !open);
+  btn.setAttribute("aria-expanded", open ? "true" : "false");
+  if (open) {
+    // Telefonda kullanıcı adı menüde gösterilir
+    const top = document.getElementById("header-user-name");
+    const inMenu = document.getElementById("header-menu-user-name");
+    if (top && inMenu) inMenu.innerText = top.innerText || "Hesabım";
+    if (window.lucide) window.lucide.createIcons();
+  }
+}
+function toggleHeaderMenu() {
+  const menu = document.getElementById("header-menu");
+  setHeaderMenuOpen(menu ? menu.classList.contains("hidden") : false);
+}
+function closeHeaderMenu() { setHeaderMenuOpen(false); }
+
+document.addEventListener("click", (ev) => {
+  const wrap = document.getElementById("header-menu-wrap");
+  if (!wrap) return;
+  // composedPath: tıklanan ikon (lucide <svg>) olay sırasında yenilense bile menü içi sayılır
+  const path = typeof ev.composedPath === "function" ? ev.composedPath() : [];
+  if (path.includes(wrap) || wrap.contains(ev.target)) return;
+  closeHeaderMenu();
+});
+document.addEventListener("keydown", (ev) => {
+  if (ev.key === "Escape") closeHeaderMenu();
+});
+
+window.toggleHeaderMenu = toggleHeaderMenu;
+window.closeHeaderMenu = closeHeaderMenu;
