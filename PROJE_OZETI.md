@@ -1,31 +1,50 @@
 # 🎓 PrepMaster — Üniversite Hazırlık Muafiyet (Proficiency) Platformu Proje Özeti
 
-**PrepMaster**, Türkiye'nin önde gelen üniversitelerinin İngilizce Hazırlık Muafiyet sınavlarına (**İTÜ, Boğaziçi BUEPT, ODTÜ EPE, Bilkent PAE, YTÜ, Hacettepe, Ankara, Gazi, Ege, Koç KUEPE, Sabancı ELAE**) ve **CEFR (A1–C2)** seviyelerine hazırlanan öğrenciler için geliştirilmiş, **Web ve Mobil (Flutter)** tabanlı tam kapsamlı bir eğitim, sınav simülasyonu ve yapay zeka değerlendirme platformudur.
+> **Durum (14.11.2026): Prototip / demo aşaması — canlıya çıkmaya hazır DEĞİL.**
+> İçerik havuzu ve arayüzler büyük ölçüde hazır. Ödeme, belge doğrulama, Google girişi
+> ve "yapay zeka" değerlendirmesi şu an **simülasyon** olarak çalışıyor. Ayrıca canlıya
+> çıkmadan kapatılması gereken **kritik güvenlik açıkları** var (bkz. Bölüm 6).
+
+**PrepMaster**, Türk üniversitelerinin İngilizce hazırlık muafiyet sınavlarına (İTÜ, Boğaziçi BUEPT,
+ODTÜ EPE, Bilkent PAE, YTÜ, Hacettepe, Ankara, Gazi, Ege, Koç, Sabancı) ve CEFR (A1–C2)
+seviyelerine hazırlanan öğrenciler için Web (FastAPI + Vanilla JS) ve Mobil (Flutter) tabanlı
+bir çalışma ve deneme sınavı platformudur.
 
 ---
 
-## 1. Misyon ve İş Modeli (Öğrenci Belgesi Doğrulama & 50 TL Paywall)
+## 1. İş Modeli (hedeflenen)
 
-1. **Zorunlu Kimlik Doğrulama & Google OAuth 2.0:**
-   - Kullanıcılar platforma e-posta/şifre veya **Google ile Giriş Yap** seçeneğiyle kaydolur; 6 haneli OTP ile şifre sıfırlama ve `.edu.tr` öğrenci e-postası doğrulaması desteklenir.
-2. **Akıllı Öğrenci Belgesi Tarama Algoritması (`document_scanner.py`):**
-   - Öğrenci, E-Devlet barkodlu öğrenci belgesini (PDF veya metin) yüklediğinde sistem belgeyi otomatik tarar; öğrencinin okuduğu üniversiteyi tespit edip hesabını **o üniversiteye ücretsiz olarak** atar.
-3. **50 TL Farklı Üniversite Üyelik Kilidi (Paywall & PayTR Sanal POS):**
-   - Öğrenci kendi okulu dışındaki bir üniversitenin hazırlık muafiyet testlerini çözmek istediğinde **50 TL**'lik paket kilidi devreye girer.
-   - **3D Secure SMS Onayı**, **GİB Uyumlu E-Arşiv Fişi (`EARSIV-2026-XXXX`)** ve resmi **PayTR iFrame / Webhook** altyapısı (`paytr_service.py`) entegredir.
+Öğrenci kendi üniversitesinin içeriğine ücretsiz erişir; başka bir üniversitenin muafiyet
+testleri için **50 TL**'lik paket açar.
 
----
-
-## 2. Zengin Akademik İçerik Havuzu (A1 – C2 Tüm Kurlar)
-
-| Modül | Kapsam / Adet | Öne Çıkan Özellikler |
+| Bileşen | Hedef | Bugünkü gerçek durum |
 | :--- | :--- | :--- |
-| **Üniversite & Kur Soruları** | **197 Özgün Soru** (12 Üniversite) | İTÜ, BUEPT, EPE, Bilkent, YTÜ, Hacettepe, Ankara, Gazi, Ege, Koç, Sabancı ve Genel CEFR; detaylı Türkçe çözüm açıklamaları (`explanation_tr`). |
-| **Akademik Kelime (Flashcards)** | **600 Kelime** (Her seviyede 100 kart) | `A1, A2, B1, B2, C1, C2` kurlarına göre ayrılmış, eş anlamlılar, sınav ipuçları, sesli telaffuz ve Spaced Repetition takibi. |
-| **Dinleme (Listening)** | **60 Akademik Parça** (Her seviyede 10 parça) | *Note-Taking* (sorular gizli not alma) ve *While-Listening* modları; gerçek MP3 + Web Speech Synthesis canlı saniye sayacı ve hız kontrolü (`0.75x–1.25x`). |
-| **Konuşma (Speaking)** | **60 Konuşma Görevi** (Her seviyede 10 görev) | Hazırlık ve konuşma süre sayaçları, mikrofon kaydı, canlı transkript ve AI Speaking puanlama motoru. |
-| **Yazma (Writing & AI Essay)** | **30+ Rehber & AI Değerlendirme** | Seviye bazlı örnek makaleler, akademik bağlaç/kalıp kütüphanesi ve anlık CEFR/kelime/tutarlılık analizi yapan AI Essay Evaluator. |
-| **Hata Kasası (Mistake Vault)** | **Kişiselleştirilmiş Tekrar** | Sınavlarda yanlış yapılan soruların otomatik kaydedilip çözülene kadar takip edildiği akıllı tekrar modülü. |
+| E-posta/şifre kaydı | Tam | ✅ Çalışıyor (PBKDF2 + JWT) |
+| Google ile giriş | OAuth 2.0 | ⚠️ **Simülasyon.** Buton `prompt()` ile e-posta soruyor, sahte token gönderiyor; backend token'ı doğrulamıyor. Gerçek Google SDK'sı web'de de mobilde de yok. |
+| Şifre sıfırlama / öğrenci OTP | E-posta ile 6 haneli kod | ⚠️ **E-posta gönderilmiyor.** Kod API yanıtında doğrudan istemciye dönüyor. |
+| `.edu.tr` doğrulaması | Öğrenci e-postası şartı | ⚠️ Öğrenci numarası 6+ haneliyse e-posta uzantısına bakılmadan geçiyor. |
+| Öğrenci belgesi tarama (`document_scanner.py`) | E-Devlet barkodlu belge doğrulama | ⚠️ Metinden regex ile üniversite/numara/barkod **okunuyor**, e-Devlet'te **sorgulanmıyor**. Barkod yoksa uydurma `EDV-…` numarası üretiliyor; elle yazılmış sahte belge kabul edilir. |
+| 50 TL ödeme (`paytr_service.py`) | PayTR iFrame + webhook | 🟡 PayTR token/hash/webhook kodu yazılmış, anahtar girilmediği için **sandbox modunda**. Gerçek bir ödeme hiç denenmedi. |
+| 3D Secure SMS | Banka onayı | ⚠️ **Simülasyon.** SMS kodunu sunucu kendisi üretip yanıtta geri veriyor. Gerçek PayTR iFrame akışında bu adım bankanın işidir ve kart numarası bizim sunucumuza hiç gelmemelidir — şu an geliyor. |
+| E-Arşiv fişi | GİB uyumlu | ⚠️ **Simülasyon.** Sıralı `EARSIV-2026-N` numarası; GİB/entegratör bağlantısı yok. |
+
+---
+
+## 2. İçerik Havuzu (doğrulandı)
+
+| Modül | Kapsam | Not |
+| :--- | :--- | :--- |
+| **Sorular** | **197 soru**, Türkçe çözümlü (`explanation_tr`) | Dağılım dengesiz: Genel 51, İTÜ 20, Boğaziçi 18, ODTÜ 16, Bilkent 13, YTÜ 7, diğerleri 12'şer. ODTÜ soruları iki farklı kimlikle kayıtlı (`metu` 14 + `odtu` 2) — birleştirilmeli. |
+| **Kelime kartları** | **600 kelime** (A1–C2, seviye başına 100) | Eş anlamlı, ipucu, sesli telaffuz var. Aralıklı tekrar (spaced repetition) algoritması koda yansımamış. |
+| **Dinleme** | **60 parça** (seviye başına 10) | Yalnızca **16 MP3** var; kalan parçalar tarayıcının seslendirmesiyle (Web Speech Synthesis) okunuyor. Not alma / dinlerken cevaplama modları ve hız kontrolü mevcut. |
+| **Konuşma** | **60 görev** | Süre sayaçları ve tarayıcı konuşma tanıma ile transkript var. |
+| **Yazma** | **13 rehber** (`writing_guides.json`) | Model makaleler ve kalıp kütüphanesi. |
+| **Hata Kasası** | Yanlış soruların tekrarı | Çalışıyor, ancak tablo kullanıcıya bağlı değil (`user_id` yok) — tüm kullanıcılar aynı kasayı paylaşıyor. |
+| **Deneme sınavı** | Üniversite formatında tam deneme | `/api/exam/mock/{university_id}` |
+
+**Yazma / konuşma puanlaması:** Özellik "AI" olarak sunuluyor ancak **yapay zeka modeli kullanılmıyor**.
+Puanlar kelime sayısı, dakikadaki kelime ve sabit akademik kelime listeleri üzerinden kural tabanlı
+hesaplanıyor. Gerçek bir dil modeli bağlanana kadar arayüzde "otomatik ön değerlendirme" denmesi önerilir.
 
 ---
 
@@ -33,66 +52,101 @@
 
 ```mermaid
 flowchart TB
-    subgraph Clients["İstemci Katmanı (%100 Çift Platform Eşitliği)"]
-        Web["🌐 Web Portalı (TailwindCSS + Vanilla JS SPA)"]
-        Mobile["📱 Flutter Mobil Uygulama (iOS & Android)"]
+    subgraph Clients["İstemciler"]
+        Web["🌐 Web (TailwindCSS + Vanilla JS)"]
+        Mobile["📱 Flutter (Android/iOS) — veri setleri cihazda gömülü"]
     end
 
-    subgraph Edge["Güvenlik & Ters Vekil Katmanı"]
-        CF["🛡️ Cloudflare WAF & DDoS Koruması"]
-        Nginx["🔒 Nginx Reverse Proxy (TLS 1.2/1.3, Rate Limit, HSTS)"]
-        F2B["🚫 Fail2ban Saldırı Önleme"]
+    subgraph Edge["Ters vekil (yapılandırma hazır, canlıda denenmedi)"]
+        CF["Cloudflare"]
+        Nginx["Nginx (TLS, rate limit)"]
+        F2B["Fail2ban"]
     end
 
-    subgraph Backend["Uygulama & Veri Katmanı (FastAPI)"]
-        API["⚡ FastAPI REST API (backend/app.py)"]
-        Sec["🔑 Güvenlik & JWT / PBKDF2 (backend/security.py)"]
-        Scan["📄 Öğrenci Belgesi Tarayıcı (backend/document_scanner.py)"]
-        Pay["💳 PayTR & 3D Secure POS (backend/paytr_service.py)"]
-        DB[("🗄️ SQLite Veritabanı (prepmaster.db)")]
+    subgraph Backend["FastAPI"]
+        API["backend/app.py"]
+        Sec["security.py — PBKDF2, JWT, rate limit"]
+        Scan["document_scanner.py — regex tabanlı"]
+        Pay["paytr_service.py — sandbox"]
+        DB[("SQLite — prepmaster.db")]
     end
 
     Clients --> CF --> Nginx --> API
     API --> Sec & Scan & Pay & DB
 ```
 
+Mobil uygulamanın sunucu adresi kodda sabit (`http://127.0.0.1:8050` / yerel ağ IP'si); canlı alan adı
+ve HTTPS henüz bağlanmadı. Veritabanı SQLite; çok kullanıcılı canlı ortam için PostgreSQL'e geçiş düşünülmeli.
+
 ---
 
-## 4. Proje Dizin Yapısı
+## 4. Dizin Yapısı
 
 ```text
 PrepMaster/
 ├── backend/
-│   ├── app.py                   # FastAPI ana sunucu ve tüm REST API uç noktaları
-│   ├── database.py              # SQLite şeması, kullanıcı, OTP, 3DS, E-Arşiv ve ilerleme yönetimi
-│   ├── document_scanner.py      # E-Devlet PDF/metin öğrenci belgesi tarama ve üniversite tespit motoru
-│   ├── paytr_service.py         # Resmi PayTR Sanal POS (iFrame Token & Webhook Callback) modülü
-│   ├── security.py              # PBKDF2 şifreleme, HS256 JWT, Rate Limiter ve XSS/SQLi koruma kalkanı
-│   └── generate_audio.py        # Dinleme parçaları için neural MP3 ses üretim betiği
-├── data/
-│   ├── universities.json        # 12 üniversite profili ve sınav formatları
-│   ├── questions.json           # 197 özgün akademik soru ve Türkçe çözümleri
-│   ├── vocabulary.json          # 600 akademik kelime (seviye bazlı 100'er adet)
-│   ├── listening.json           # 60 akademik dinleme parçası ve soruları
-│   ├── speaking.json            # 60 akademik konuşma görevi ve değerlendirme kriterleri
-│   └── writing.json             # Seviye bazlı yazma rehberleri ve model makaleler
-├── static/
-│   ├── index.html               # Web uygulaması ana arayüzü (Auth, Paywall, Belge Tarama, Modüller)
-│   ├── audio/                   # Akademik MP3 ses kayıtları
-│   └── js/                      # Modüler ön yüz motorları (app, auth, exam, flashcards, listening, speaking, writing_ai)
-├── mobile/
-│   ├── lib/                     # Flutter iOS & Android kaynak kodları (screens, models, services, theme)
-│   ├── assets/data/             # Çevrimdışı (offline-first) senkronize veri setleri
-│   └── test/                    # Flutter birim ve widget testleri (19/19 başarılı)
-├── nginx/ & fail2ban/           # Üretim ortamı güvenlik, SSL ve DDoS yapılandırmaları
-├── Dockerfile & docker-compose.yml # Konteyner orkestrasyonu
-└── deploy_check.py              # 65 maddelik üretim öncesi (pre-flight) doğrulama betiği
+│   ├── app.py                 # FastAPI uç noktaları
+│   ├── database.py            # SQLite şeması ve veri işlemleri
+│   ├── document_scanner.py    # Öğrenci belgesi metin ayrıştırıcı
+│   ├── paytr_service.py       # PayTR iFrame token + webhook (sandbox)
+│   ├── security.py            # PBKDF2, JWT, rate limit, girdi temizleme
+│   ├── generate_audio.py      # Dinleme MP3 üretim betiği
+│   └── test_*.py              # Python testleri
+├── data/                      # universities, questions, vocabulary, listening, speaking, writing_guides (.json)
+├── static/                    # Web arayüzü (index.html, js/, css/, audio/ — 16 MP3)
+├── mobile/                    # Flutter uygulaması (lib/, assets/data/, test/)
+├── nginx/, docker/fail2ban/   # Ters vekil ve saldırı önleme yapılandırmaları
+├── Dockerfile, docker-compose.yml
+└── deploy_check.py            # Canlı öncesi yapılandırma kontrol betiği
 ```
 
 ---
 
-## 5. Kalite, Güvenlik ve Test Durumu
+## 5. Testler — ne ölçüyor, ne ölçmüyor
 
-- **Python Backend Testleri:** `17/17` birim testi (`test_payment_3ds.py`, `test_auth_expansion.py`) ve PayTR webhook doğrulaması **%100 başarılı**.
-- **Flutter Mobil Testleri:** `19/19` widget & veri bütünlüğü testi **%100 başarılı**, `flutter analyze` **0 hata / 0 uyarı**.
-- **Üretim ve Siber Güvenlik Denetimi (`deploy_check.py`):** **65/65 kontrol başarılı** (Docker izolasyonu, Nginx TLS 1.3, Rate Limiting, Fail2ban, veri seti bütünlüğü).
+- **Python:** 5 dosyada 42 test fonksiyonu (OTP, 3DS, yetkilendirme, güvenlik).
+- **Flutter:** 4 dosyada 19 test (veri bütünlüğü, dinleme/yazma, paywall, widget).
+- **`deploy_check.py`:** Docker, Nginx, Fail2ban dosyalarının ve veri setlerinin varlığını/biçimini kontrol eder.
+
+Bu testler sistemin **kendi simülasyonu içinde tutarlı** olduğunu gösterir. Gerçek ödeme, gerçek
+e-posta gönderimi, gerçek Google doğrulaması ve aşağıdaki güvenlik açıkları test kapsamında değildir;
+"testler geçiyor" bilgisi "canlıya hazır" anlamına gelmez.
+
+---
+
+## 6. Canlıya Çıkmadan Önce Kapatılması Gereken Açıklar
+
+### ✅ Kapatılan kritik açıklar (14.11.2026)
+Her biri `backend/test_exploit_regressions.py` içinde istismar denemesiyle test ediliyor (21 test; eski kodda 20'si kırılıyordu).
+
+1. **Google girişi** — ID token artık Google'a doğrulatılıyor (`aud`, `iss`, `email_verified`); e-posta istemciden değil token'dan alınıyor. `GOOGLE_CLIENT_ID` tanımlı değilse Google girişi kapalı.
+2. **Şifre sıfırlama / OTP / SMS kodları** artık yanıtta dönmüyor. ⚠️ E-posta gönderimi olmadığı için bu akışlar canlıda **kodu kullanıcıya ulaştıramıyor** — e-posta servisi bağlanana kadar fiilen kapalı.
+3. **50 TL kilidi** — canlıda üyelik yalnızca PayTR'nin imzalı bildirimiyle açılıyor. Simüle 3DS akışı yalnızca `DEMO_MODE=1`'de çalışıyor; orada da oturum zorunlu ve ödeme oturumu aynı kullanıcıya + aynı üniversiteye ait olmalı. PayTR anahtarı girilmemişken sandbox anahtarıyla sahte bildirim üretilemiyor.
+4. **Kullanıcı kimliği** artık yalnızca imzalı oturum token'ından alınıyor; `user_id` parametresi yok sayılıyor. Web (`static/js/auth_fetch.js`) ve mobil (`mobile/lib/services/auth_http.dart`) her isteğe token ekliyor.
+5. **Gizli anahtarlar** — `ENVIRONMENT=production`'da `SECRET_KEY` yoksa, 32 karakterden kısaysa ya da depoda yayımlanmış bir değerse uygulama açılmıyor; `DEMO_MODE=1` ile de açılmıyor. Geliştirmede her açılışta rastgele anahtar üretiliyor.
+
+Ayrıca kapatılanlar: `?university_id=all` kilitli soruları da döndürüyordu; kayıtta seçilen üniversite belge doğrulaması olmadan ücretsiz açılıyordu; herkese açık örnek belgelerle "doğrulanmış öğrenci" olunabiliyordu; mobil uygulama çevrimdışıyken ödemeyi ve belge taramasını "başarılı" sayıyordu.
+
+### 🔴 Hâlâ açık
+- **Mobil uygulama tüm soruları APK içinde taşıyor** (`mobile/assets/data`). Paywall mobilde istemci tarafında; APK'yı açan biri tüm içeriğe erişir. Kilitli içerik sunucudan indirilmeli.
+- **Profil, Hata Kasası, sınav geçmişi, istatistik ve senkronizasyon uç noktaları tek kullanıcılı** (`/api/profile`, `/api/mistakes`, `/api/sync/*` …): kimlik sormuyor ve herkes aynı kaydı okuyup yazıyor. Kullanıcı bazlı tablolara geçiş gerekiyor.
+- Dinleme/konuşma içerikleri üniversite kilidine bağlı değil.
+- Mevcut veritabanındaki eski kullanıcılarda kayıtta seçtikleri üniversite hâlâ `unlocked_universities` içinde duruyor (yeni kural yalnızca yeni kayıtlara uygulanıyor).
+
+### 🟠 Önemli
+6. Kart numarası backend'e gönderiliyor — gerçek PayTR iFrame'e geçince kart bilgisi hiç alınmamalı (PCI-DSS).
+7. Öğrenci belgesi doğrulaması sahteciliğe açık; gerçek doğrulama için e-Devlet barkod sorgusu veya elle onay gerekli.
+8. Hata Kasası kullanıcıya bağlı değil.
+
+---
+
+## 7. Yol Haritası
+
+1. Bölüm 6'daki "hâlâ açık" maddeleri kapat (kullanıcı bazlı veri, mobil içerik paywall'u).
+2. Gerçek Google OAuth (ID token'ı Google'ın anahtarlarıyla doğrula).
+3. E-posta gönderimi (SMTP veya bir e-posta servisi) — kodlar yalnızca e-postaya gitsin.
+4. PayTR mağaza başvurusu → gerçek anahtarlar → test kartıyla uçtan uca ödeme → webhook ile üyelik açma.
+5. E-Arşiv için entegratör seçimi (ya da ilk aşamada fatura işini PayTR/muhasebeciye bırakma).
+6. Eksik 44 dinleme MP3'ünü üret, ODTÜ soru kimliklerini birleştir, YTÜ soru sayısını artır.
+7. Yazma/konuşma değerlendirmesine gerçek bir dil modeli bağla (ya da "AI" ifadesini kaldır).
+8. Canlı sunucu: alan adı, HTTPS, mobil uygulamanın adresini ortam ayarına taşı, SQLite → PostgreSQL.
