@@ -32,11 +32,11 @@ class ApiService {
     if (kIsWeb) return 'http://127.0.0.1:8050';
     try {
       if (Platform.isAndroid) {
-        // Default to Wi-Fi IP for real phones, fallback to 10.0.2.2 for emulator
-        return 'http://10.247.49.48:8050';
+        // Canlı Railway sunucusu (HTTPS)
+        return 'https://prepmaster-web-production.up.railway.app';
       }
     } catch (_) {}
-    return 'http://127.0.0.1:8050';
+    return 'https://prepmaster-web-production.up.railway.app';
   }
 
   void setBaseUrl(String url) {

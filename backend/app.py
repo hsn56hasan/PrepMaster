@@ -1676,6 +1676,62 @@ def payment_result_page():
     return FileResponse(STATIC_DIR / "odeme-sonuc.html", media_type="text/html")
 
 
+# --- Mobil Uygulama (Android APK) İndirme & Bilgi Uç Noktaları ---
+def _resolve_apk_path() -> Optional[Path]:
+    candidates = [
+        STATIC_DIR / "downloads" / "PrepMaster-Android.apk",
+        BASE_DIR / "mobile" / "build" / "app" / "outputs" / "flutter-apk" / "app-release.apk",
+        BASE_DIR / "mobile" / "build" / "app" / "outputs" / "flutter-apk" / "app-arm64-v8a-release.apk",
+        BASE_DIR / "mobile" / "build" / "app" / "outputs" / "flutter-apk" / "app-debug.apk",
+    ]
+    for path in candidates:
+        if path.exists() and path.is_file():
+            return path
+    return None
+
+
+@app.get("/api/mobile-app/info")
+def get_mobile_app_info():
+    apk_path = _resolve_apk_path()
+    size_bytes = apk_path.stat().st_size if apk_path else 0
+    size_mb = round(size_bytes / (1024 * 1024), 1) if size_bytes else 42.8
+    return {
+        "available": apk_path is not None,
+        "app_name": "PrepMaster Mobil (Android)",
+        "version": "1.3.0",
+        "build_type": "Release (ARM64)",
+        "filename": "PrepMaster-v1.3-Android.apk",
+        "size_mb": size_mb,
+        "min_android": "Android 8.0+ (API 26+)",
+        "download_url": "/api/download/apk",
+        "features": [
+            "Web hesabınızla anlık Bulut Senkronizasyon (Kaldığınız yerden devam)",
+            "İnternetsiz (Offline) Kelime Kartları ve Gramer Pratik Modu",
+            "11 Üniversite Muafiyet Deneme Sınavı & Akademik Dinleme (MP3)",
+            "E-Devlet Öğrenci Belgesi Tarama ve AI Writing / Speaking Değerlendirme"
+        ]
+    }
+
+
+@app.get("/api/download/apk")
+def download_android_apk():
+    apk_path = _resolve_apk_path()
+    if not apk_path:
+        raise HTTPException(
+            status_code=404,
+            detail="Android APK paketi şu an hazırlanıyor. Lütfen birkaç dakika sonra tekrar deneyin veya tarayıcıdan 'Ana Ekrana Ekle' (PWA) özelliğini kullanın."
+        )
+    return FileResponse(
+        path=apk_path,
+        media_type="application/vnd.android.package-archive",
+        filename="PrepMaster-v1.3-Android.apk",
+        headers={
+            "Content-Disposition": 'attachment; filename="PrepMaster-v1.3-Android.apk"',
+            "Cache-Control": "public, max-age=3600"
+        }
+    )
+
+
 # --- Static files ---
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 

@@ -2126,3 +2126,72 @@ window.closeForgotPassword = closeForgotPassword;
 window.submitForgotEmail = submitForgotEmail;
 window.submitForgotReset = submitForgotReset;
 window.showForgotStep = showForgotStep;
+
+// ---------------- MOBİL UYGULAMA (ANDROID APK & PWA) MERKEZİ ----------------
+let deferredPwaPrompt = null;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPwaPrompt = e;
+});
+
+async function openApkDownloadModal() {
+  const modal = document.getElementById("apk-download-modal");
+  if (!modal) return;
+  modal.classList.remove("hidden");
+
+  try {
+    const res = await fetch("/api/mobile-app/info");
+    if (res.ok) {
+      const info = await res.json();
+      const sizeEl = document.getElementById("apk-modal-size-badge");
+      const verEl = document.getElementById("apk-modal-version-badge");
+      if (sizeEl && info.size_mb) sizeEl.innerText = `${info.size_mb} MB`;
+      if (verEl && info.version) verEl.innerText = `v${info.version}`;
+    }
+  } catch (_) {}
+
+  if (window.lucide) window.lucide.createIcons();
+}
+
+function closeApkDownloadModal() {
+  const modal = document.getElementById("apk-download-modal");
+  if (modal) modal.classList.add("hidden");
+}
+
+function trackApkDownloadClick() {
+  showNotification("📱 PrepMaster Android APK (18.3 MB) indiriliyor...", "emerald");
+}
+
+async function copyApkDownloadLink() {
+  const fullUrl = `${window.location.origin}/api/download/apk`;
+  try {
+    await navigator.clipboard.writeText(fullUrl);
+    showNotification("✓ APK indirme bağlantısı panoya kopyalandı! Telefonunuza gönderebilirsiniz.", "emerald");
+  } catch (_) {
+    prompt("APK İndirme Bağlantısını Kopyalayın:", fullUrl);
+  }
+}
+
+async function installWebAppPWA() {
+  if (deferredPwaPrompt) {
+    deferredPwaPrompt.prompt();
+    const { outcome } = await deferredPwaPrompt.userChoice;
+    deferredPwaPrompt = null;
+    if (outcome === "accepted") {
+      showNotification("✓ PrepMaster ana ekranınıza eklendi!", "emerald");
+      closeApkDownloadModal();
+    }
+  } else {
+    showNotification(
+      "Tarayıcınızın sağ üst (Chrome: ⋮) veya alt (Safari: Paylaş ↑) menüsünden 'Ana Ekrana Ekle' seçeneğine dokunarak uygulama olarak kurabilirsiniz.",
+      "blue"
+    );
+  }
+}
+
+window.openApkDownloadModal = openApkDownloadModal;
+window.closeApkDownloadModal = closeApkDownloadModal;
+window.trackApkDownloadClick = trackApkDownloadClick;
+window.copyApkDownloadLink = copyApkDownloadLink;
+window.installWebAppPWA = installWebAppPWA;
