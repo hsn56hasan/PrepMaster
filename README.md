@@ -30,4 +30,4 @@ Türkiye'deki **26 üniversitenin** İngilizce hazırlık muafiyet (İTÜ Profic
   - Büyük gövde saldırılarına karşı `413 Payload Too Large` koruması (`2 MB` JSON / `10 MB` belge sınırı) ve Uvicorn `--limit-concurrency 300`.
 - **6698 Sayılı KVKK Yasal Belgeler & Öğrenci Destek Hattı:**
   - Aydınlatma Metni (`PM-KVKK-01`), Açık Rıza Beyanı (`PM-KVKK-02`), Gizlilik & Çerez Politikası (`PM-KVKK-03`), Kullanıcı Sözleşmesi (`PM-HUKUK-04`) ve KVKK Başvuru Formu (`PM-KVKK-05`).
-  - **Resmi Destek İletişim:** `toprakcihasan5@gmail.com` | Tel & WhatsApp: `0539 838 18 87`.
+  - **Resmi Destek İletişim:** `prepmasteryonetici@gmail.com` | Tel & WhatsApp: `0539 838 18 87`.

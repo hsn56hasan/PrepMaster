@@ -1960,7 +1960,7 @@ def serve_admin_panel():
 
 # --- Destek & KVKK Yasal Belgeler Uç Noktaları ---
 SUPPORT_CONTACT_INFO = {
-    "email": "toprakcihasan5@gmail.com",
+    "email": "prepmasteryonetici@gmail.com",
     "phone": "05398381887",
     "phone_display": "0539 838 18 87",
     "phone_intl": "+905398381887",
@@ -2048,7 +2048,7 @@ def admin_email_status_endpoint(request: Request):
 @app.post("/api/admin/email/test")
 def admin_test_email_endpoint(req: AdminTestEmailRequest, request: Request):
     _require_admin(request)
-    target = (req.to_email or "toprakcihasan5@gmail.com").strip()
+    target = (req.to_email or "prepmasteryonetici@gmail.com").strip()
     if "@" not in target:
         raise HTTPException(status_code=400, detail="Geçerli bir hedef e-posta adresi giriniz.")
     result = send_email_verbose(

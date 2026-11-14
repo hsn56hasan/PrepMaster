@@ -15,9 +15,9 @@ Desteklenen 3 altyapı (.env / Railway Variables ile seçilir):
        SMTP_PASSWORD=<Uygulama Şifresi>
 
 Ortak gönderici adresi:
-       EMAIL_FROM="PrepMaster <toprakcihasan5@gmail.com>"
+       EMAIL_FROM="PrepMaster <prepmasteryonetici@gmail.com>"
 Destek bildirim alıcısı:
-       SUPPORT_NOTIFY_EMAIL=toprakcihasan5@gmail.com
+       SUPPORT_NOTIFY_EMAIL=prepmasteryonetici@gmail.com
 """
 import html as _html
 import logging
@@ -48,7 +48,7 @@ def _cfg() -> Dict[str, Any]:
         "smtp_password": os.getenv("SMTP_PASSWORD", ""),
         "resend_key": os.getenv("RESEND_API_KEY", "").strip(),
         "brevo_key": os.getenv("BREVO_API_KEY", "").strip(),
-        "support_notify_email": os.getenv("SUPPORT_NOTIFY_EMAIL", "toprakcihasan5@gmail.com").strip() or "toprakcihasan5@gmail.com",
+        "support_notify_email": os.getenv("SUPPORT_NOTIFY_EMAIL", "prepmasteryonetici@gmail.com").strip() or "prepmasteryonetici@gmail.com",
     }
 
 
@@ -201,7 +201,7 @@ def _wrap(title: str, body_html: str) -> str:
 <h1 style="font-size:18px;color:#0f172a;margin:0 0 12px">{title}</h1>
 {body_html}
 <hr style="border:none;border-top:1px solid #e2e8f0;margin:24px 0 12px">
-<p style="font-size:12px;color:#64748b;margin:0">Öğrenci Destek & KVKK İletişim: <b>toprakcihasan5@gmail.com</b> • Tel: <b>0539 838 18 87</b></p>
+<p style="font-size:12px;color:#64748b;margin:0">Öğrenci Destek & KVKK İletişim: <b>prepmasteryonetici@gmail.com</b> • Tel: <b>0539 838 18 87</b></p>
 <p style="font-size:11px;color:#94a3b8;margin-top:8px">Bu e-postayı siz istemediyseniz yok sayabilirsiniz; hesabınızda bir değişiklik yapılmaz.</p>
 </div></body></html>"""
 
@@ -288,7 +288,7 @@ def send_support_ticket_receipt(to: str, ticket_id: int, category: str) -> bool:
     text = (
         f"Merhaba,\n\n"
         f"#{ticket_id} numaralı ({category}) destek/KVKK talebiniz PrepMaster ekibine ulaşmıştır.\n"
-        f"En kısa sürede toprakcihasan5@gmail.com veya 0539 838 18 87 üzerinden size dönüş yapılacaktır."
+        f"En kısa sürede prepmasteryonetici@gmail.com veya 0539 838 18 87 üzerinden size dönüş yapılacaktır."
     )
     html = _wrap(
         f"Destek Talebiniz Alındı (#{ticket_id})",

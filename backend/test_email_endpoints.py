@@ -81,13 +81,13 @@ class TestEmailEndpoints(unittest.TestCase):
             st = self.client.get("/api/admin/email/status", headers=admin_h)
             self.assertEqual(st.status_code, 200)
             self.assertFalse(st.json()["configured"])
-            fail_res = self.client.post("/api/admin/email/test", json={"to_email": "toprakcihasan5@gmail.com"}, headers=admin_h)
+            fail_res = self.client.post("/api/admin/email/test", json={"to_email": "prepmasteryonetici@gmail.com"}, headers=admin_h)
             self.assertEqual(fail_res.status_code, 503)
 
         env = {
-            "EMAIL_FROM": "PrepMaster <toprakcihasan5@gmail.com>",
+            "EMAIL_FROM": "PrepMaster <prepmasteryonetici@gmail.com>",
             "BREVO_API_KEY": "xkeysib-live-mock",
-            "SUPPORT_NOTIFY_EMAIL": "toprakcihasan5@gmail.com",
+            "SUPPORT_NOTIFY_EMAIL": "prepmasteryonetici@gmail.com",
         }
         with mock.patch.dict(os.environ, env, clear=True):
             import httpx
@@ -98,9 +98,9 @@ class TestEmailEndpoints(unittest.TestCase):
                 st = self.client.get("/api/admin/email/status", headers=admin_h).json()
                 self.assertTrue(st["configured"])
                 self.assertEqual(st["provider"], "brevo")
-                self.assertEqual(st["support_notify_email"], "toprakcihasan5@gmail.com")
+                self.assertEqual(st["support_notify_email"], "prepmasteryonetici@gmail.com")
 
-                test_res = self.client.post("/api/admin/email/test", json={"to_email": "toprakcihasan5@gmail.com"}, headers=admin_h)
+                test_res = self.client.post("/api/admin/email/test", json={"to_email": "prepmasteryonetici@gmail.com"}, headers=admin_h)
                 self.assertEqual(test_res.status_code, 200, test_res.text)
                 body = test_res.json()
                 self.assertTrue(body["success"])
@@ -110,9 +110,9 @@ class TestEmailEndpoints(unittest.TestCase):
     def test_register_support_and_access_grant_trigger_emails(self):
         admin_h = self._admin_headers()
         env = {
-            "EMAIL_FROM": "PrepMaster <toprakcihasan5@gmail.com>",
+            "EMAIL_FROM": "PrepMaster <prepmasteryonetici@gmail.com>",
             "BREVO_API_KEY": "xkeysib-bg-mock",
-            "SUPPORT_NOTIFY_EMAIL": "toprakcihasan5@gmail.com",
+            "SUPPORT_NOTIFY_EMAIL": "prepmasteryonetici@gmail.com",
         }
         with mock.patch.dict(os.environ, env, clear=True):
             import httpx
@@ -138,10 +138,10 @@ class TestEmailEndpoints(unittest.TestCase):
                     "message": "Erişim kontrolü istiyorum.",
                 })
                 self.assertEqual(ticket.status_code, 200, ticket.text)
-                # 1 bildirim (toprakcihasan5@gmail.com) + 1 alındı onayı (öğrenciye)
+                # 1 bildirim (prepmasteryonetici@gmail.com) + 1 alındı onayı (öğrenciye)
                 self.assertEqual(post.call_count, 2)
                 recipients = [c.kwargs["json"]["to"][0]["email"] for c in post.call_args_list]
-                self.assertIn("toprakcihasan5@gmail.com", recipients)
+                self.assertIn("prepmasteryonetici@gmail.com", recipients)
                 self.assertIn("mail_ogr@itu.edu.tr", recipients)
 
                 post.reset_mock()

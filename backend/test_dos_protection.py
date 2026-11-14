@@ -114,14 +114,14 @@ class TestDoSProtection(unittest.TestCase):
 
     def test_support_and_kvkk_endpoints(self):
         info = self.client.get("/api/support/info").json()
-        self.assertEqual(info["email"], "toprakcihasan5@gmail.com")
+        self.assertEqual(info["email"], "prepmasteryonetici@gmail.com")
         self.assertEqual(info["phone"], "05398381887")
         self.assertEqual(len(info["documents"]), 5)
 
         kvkk_page = self.client.get("/kvkk")
         self.assertEqual(kvkk_page.status_code, 200)
         self.assertIn("6698 Sayılı Kişisel Verilerin Korunması Kanunu", kvkk_page.text)
-        self.assertIn("toprakcihasan5@gmail.com", kvkk_page.text)
+        self.assertIn("prepmasteryonetici@gmail.com", kvkk_page.text)
         self.assertIn("0539 838 18 87", kvkk_page.text)
 
         t_res = self.client.post("/api/support/ticket", json={

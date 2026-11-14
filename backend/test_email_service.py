@@ -79,9 +79,9 @@ class TestEmailService(unittest.TestCase):
 
     def test_brevo_api_and_status(self):
         env = {
-            "EMAIL_FROM": "PrepMaster <toprakcihasan5@gmail.com>",
+            "EMAIL_FROM": "PrepMaster <prepmasteryonetici@gmail.com>",
             "BREVO_API_KEY": "xkeysib-test-123",
-            "SUPPORT_NOTIFY_EMAIL": "toprakcihasan5@gmail.com",
+            "SUPPORT_NOTIFY_EMAIL": "prepmasteryonetici@gmail.com",
         }
         with mock.patch.dict(os.environ, env, clear=True):
             import httpx
@@ -90,7 +90,7 @@ class TestEmailService(unittest.TestCase):
                 status = es.get_email_status()
                 self.assertTrue(status["configured"])
                 self.assertTrue(status["has_brevo_key"])
-                self.assertEqual(status["support_notify_email"], "toprakcihasan5@gmail.com")
+                self.assertEqual(status["support_notify_email"], "prepmasteryonetici@gmail.com")
                 self.assertNotIn("xkeysib-test-123", str(status))
 
                 ok = es.send_welcome_email("ogr@itu.edu.tr", "Ali Yılmaz", "ali123", "İTÜ")
@@ -98,16 +98,16 @@ class TestEmailService(unittest.TestCase):
                 self.assertEqual(post.call_args.args[0], "https://api.brevo.com/v3/smtp/email")
                 self.assertEqual(post.call_args.kwargs["headers"]["api-key"], "xkeysib-test-123")
                 body = post.call_args.kwargs["json"]
-                self.assertEqual(body["sender"], {"email": "toprakcihasan5@gmail.com", "name": "PrepMaster"})
+                self.assertEqual(body["sender"], {"email": "prepmasteryonetici@gmail.com", "name": "PrepMaster"})
                 self.assertEqual(body["to"], [{"email": "ogr@itu.edu.tr"}])
                 self.assertIn("ali123", body["textContent"])
                 self.assertIn("İTÜ", body["htmlContent"])
 
     def test_support_and_access_granted_emails(self):
         env = {
-            "EMAIL_FROM": "PrepMaster <toprakcihasan5@gmail.com>",
+            "EMAIL_FROM": "PrepMaster <prepmasteryonetici@gmail.com>",
             "BREVO_API_KEY": "xkeysib-test-456",
-            "SUPPORT_NOTIFY_EMAIL": "toprakcihasan5@gmail.com",
+            "SUPPORT_NOTIFY_EMAIL": "prepmasteryonetici@gmail.com",
         }
         with mock.patch.dict(os.environ, env, clear=True):
             import httpx
@@ -121,7 +121,7 @@ class TestEmailService(unittest.TestCase):
                     message="Veri silme talebi",
                 ))
                 notify_body = post.call_args.kwargs["json"]
-                self.assertEqual(notify_body["to"], [{"email": "toprakcihasan5@gmail.com"}])
+                self.assertEqual(notify_body["to"], [{"email": "prepmasteryonetici@gmail.com"}])
                 self.assertIn("#42", notify_body["subject"])
                 self.assertIn("Veri silme talebi", notify_body["textContent"])
 
@@ -131,7 +131,7 @@ class TestEmailService(unittest.TestCase):
                 self.assertIn("ITU, BOUN", access_body["textContent"])
 
     def test_verbose_error_on_http_failure(self):
-        env = {"EMAIL_FROM": "PrepMaster <toprakcihasan5@gmail.com>", "BREVO_API_KEY": "xkeysib-bad"}
+        env = {"EMAIL_FROM": "PrepMaster <prepmasteryonetici@gmail.com>", "BREVO_API_KEY": "xkeysib-bad"}
         with mock.patch.dict(os.environ, env, clear=True):
             import httpx
             with mock.patch.object(httpx, "post", return_value=mock.Mock(status_code=401, text="Unauthorized")) as _:

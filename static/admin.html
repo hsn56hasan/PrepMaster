@@ -217,7 +217,7 @@
         <div class="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
           <div>
             <h2 class="text-sm font-black text-white">Gelen Öğrenci Destek & KVKK Talepleri</h2>
-            <p class="text-[11px] text-slate-400">Sitedeki Destek & KVKK formundan gönderilen talepler (Resmi İletişim: toprakcihasan5@gmail.com • 0539 838 18 87)</p>
+            <p class="text-[11px] text-slate-400">Sitedeki Destek & KVKK formundan gönderilen talepler (Resmi İletişim: prepmasteryonetici@gmail.com • 0539 838 18 87)</p>
           </div>
           <span id="tickets-count-badge" class="text-xs font-extrabold px-3 py-1 bg-blue-500/20 text-blue-300 border border-blue-500/30 rounded-full">0 Talep</span>
         </div>
@@ -275,7 +275,7 @@
             <div class="p-4 rounded-xl bg-slate-950/70 border border-slate-800 space-y-3">
               <div class="text-xs font-bold text-slate-200">Canlı Test E-Postası Gönder</div>
               <div class="flex flex-col sm:flex-row gap-2">
-                <input id="admin-test-email-to" type="email" placeholder="toprakcihasan5@gmail.com"
+                <input id="admin-test-email-to" type="email" placeholder="prepmasteryonetici@gmail.com"
                   class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500" />
                 <button type="button" onclick="sendAdminTestEmail()" id="admin-test-email-btn"
                   class="px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold transition whitespace-nowrap">
@@ -289,7 +289,7 @@
               <div class="font-bold text-amber-300 flex items-center gap-1.5">
                 <i class="fa-solid fa-circle-info"></i> Railway Kurulum Notu
               </div>
-              <p>Railway Free/Trial/Hobby planlarında giden SMTP portları (465/587) kapalıdır. HTTPS API üzerinden çalışan <strong>Brevo</strong> (<code>BREVO_API_KEY</code> — ücretsiz günde 300 mail, özel domain gerekmeden <code>toprakcihasan5@gmail.com</code> doğrulamasıyla çalışır) veya <strong>Resend</strong> (<code>RESEND_API_KEY</code>) eklediğiniz anda gönderim otomatik başlar.</p>
+              <p>Railway Free/Trial/Hobby planlarında giden SMTP portları (465/587) kapalıdır. HTTPS API üzerinden çalışan <strong>Brevo</strong> (<code>BREVO_API_KEY</code> — ücretsiz günde 300 mail, özel domain gerekmeden <code>prepmasteryonetici@gmail.com</code> doğrulamasıyla çalışır) veya <strong>Resend</strong> (<code>RESEND_API_KEY</code>) eklediğiniz anda gönderim otomatik başlar.</p>
             </div>
           </div>
         </div>
@@ -645,7 +645,7 @@
       const input = document.getElementById("admin-test-email-to");
       const msgEl = document.getElementById("admin-test-email-msg");
       const btn = document.getElementById("admin-test-email-btn");
-      const toEmail = (input?.value || "").trim() || "toprakcihasan5@gmail.com";
+      const toEmail = (input?.value || "").trim() || "prepmasteryonetici@gmail.com";
       if (input && !input.value.trim()) input.value = toEmail;
 
       if (btn) {
