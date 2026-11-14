@@ -623,9 +623,14 @@ async def _process_scanned_document(doc_text: str, filename: str, target_user_id
         "matched_university_id": matched_uni,
         "matched_university_name": scan_res.get("matched_university_name", matched_uni),
         "university": uni_obj,
+        "student_name": scan_res.get("student_name", ""),
+        "faculty": scan_res.get("faculty", ""),
+        "department": scan_res.get("department", ""),
         "student_number": scan_res.get("student_number", ""),
         "document_barcode": scan_res.get("document_barcode", ""),
         "is_active_student": scan_res.get("is_active_student", True),
+        "confidence": scan_res.get("confidence", "high"),
+        "verification_checks": scan_res.get("verification_checks", {}),
         "unlocked_universities": db_res.get("unlocked_universities", [matched_uni, "general"]),
         "message": scan_res.get("message", "Belgeniz başarıyla tarandı ve onaylandı.")
     }

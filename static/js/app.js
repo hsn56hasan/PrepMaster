@@ -48,6 +48,22 @@ async function reloadUserData() {
   loadStudentStatus();
 }
 
+function setAppShellVisible(visible) {
+  const headerEl = document.getElementById("app-top-navbar");
+  const mainEl = document.getElementById("main-content-area");
+  const mobileNavEl = document.getElementById("mobile-bottom-nav");
+
+  if (visible) {
+    headerEl?.classList.remove("hidden");
+    mainEl?.classList.remove("hidden");
+    mobileNavEl?.classList.remove("hidden");
+  } else {
+    headerEl?.classList.add("hidden");
+    mainEl?.classList.add("hidden");
+    mobileNavEl?.classList.add("hidden");
+  }
+}
+
 async function initApp() {
   try {
     // 0. Initialize Theme & Auth
@@ -66,18 +82,26 @@ async function initApp() {
     renderUniversityHeader();
     renderLevelSelector();
     setupTabNavigation();
-    
-    // 4. Load initial tab & student status
-    switchTab('dashboard');
-    loadStudentStatus();
 
-    // Mandatory Auth Guard on initial visit:
+    // 4. Giriş ve Belge Doğrulama Kapısı (Arkada sistem gözükmesin)
     if (!window.appState.currentUser) {
+      setAppShellVisible(false);
       openAuthModal(true);
-    } else if (window.appState.currentUser.verification_status !== 'verified') {
-      setTimeout(() => openDocScanModal(true), 800);
+    } else if (
+      window.appState.currentUser.verification_status !== 'verified' &&
+      !window.appState.currentUser.is_verified_student
+    ) {
+      setAppShellVisible(false);
+      document.getElementById("auth-modal")?.classList.add("hidden");
+      openDocScanModal(true);
+    } else {
+      document.getElementById("auth-modal")?.classList.add("hidden");
+      setAppShellVisible(true);
+      switchTab('dashboard');
+      loadStudentStatus();
     }
 
+    initDocDropZone();
     if (window.lucide) window.lucide.createIcons();
   } catch (err) {
     console.error("Initialization error:", err);
@@ -1212,14 +1236,20 @@ function openAuthModal(isMandatory = false) {
   const user = window.appState.currentUser;
   const loggedInView = document.getElementById("auth-logged-in-view");
   const formsView = document.getElementById("auth-forms-view");
-  const closeBtn = modal.querySelector('button[onclick="closeAuthModal()"]');
+  const closeBtn = document.getElementById("btn-close-auth-modal") || modal.querySelector('button[onclick="closeAuthModal()"]');
+  const brandHeader = document.getElementById("auth-gate-brand-header");
 
-  if (isMandatory) {
+  if (isMandatory || !user) {
     modal.setAttribute("data-mandatory", "true");
+    setAppShellVisible(false);
+    modal.className = "fixed inset-0 z-50 bg-gradient-to-br from-slate-950 via-blue-950 to-indigo-950 p-4 overflow-y-auto flex flex-col items-center justify-center";
     if (closeBtn) closeBtn.classList.add("hidden");
+    if (brandHeader) brandHeader.classList.remove("hidden");
   } else {
     modal.removeAttribute("data-mandatory");
+    modal.className = "fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm p-4 overflow-y-auto flex flex-col items-center justify-center";
     if (closeBtn) closeBtn.classList.remove("hidden");
+    if (brandHeader) brandHeader.classList.add("hidden");
   }
 
   if (user && user.id) {
@@ -1250,7 +1280,7 @@ function openAuthModal(isMandatory = false) {
     if (loggedInView) loggedInView.classList.add("hidden");
     if (formsView) formsView.classList.remove("hidden");
     const titleEl = document.getElementById("auth-modal-title");
-    if (titleEl) titleEl.innerText = "Öğrenci Girişi & Kayıt";
+    if (titleEl) titleEl.innerText = "Öğrenci Giriş Kapısı";
     switchAuthTab("login");
   }
 
@@ -1278,19 +1308,19 @@ function switchAuthTab(tab) {
     if (formLogin) formLogin.classList.remove("hidden");
     if (formReg) formReg.classList.add("hidden");
     if (btnLogin) {
-      btnLogin.className = "flex-1 py-1.5 rounded-xl bg-white dark:bg-slate-700 text-blue-700 dark:text-blue-400 shadow-sm transition font-bold";
+      btnLogin.className = "flex-1 py-2 rounded-xl bg-white dark:bg-slate-700 text-blue-700 dark:text-blue-400 shadow-sm transition font-bold";
     }
     if (btnReg) {
-      btnReg.className = "flex-1 py-1.5 rounded-xl text-slate-500 hover:text-slate-800 transition font-bold";
+      btnReg.className = "flex-1 py-2 rounded-xl text-slate-500 hover:text-slate-800 transition font-bold";
     }
   } else {
     if (formLogin) formLogin.classList.add("hidden");
     if (formReg) formReg.classList.remove("hidden");
     if (btnLogin) {
-      btnLogin.className = "flex-1 py-1.5 rounded-xl text-slate-500 hover:text-slate-800 transition font-bold";
+      btnLogin.className = "flex-1 py-2 rounded-xl text-slate-500 hover:text-slate-800 transition font-bold";
     }
     if (btnReg) {
-      btnReg.className = "flex-1 py-1.5 rounded-xl bg-white dark:bg-slate-700 text-blue-700 dark:text-blue-400 shadow-sm transition font-bold";
+      btnReg.className = "flex-1 py-2 rounded-xl bg-white dark:bg-slate-700 text-blue-700 dark:text-blue-400 shadow-sm transition font-bold";
     }
   }
 }
@@ -1301,6 +1331,8 @@ async function submitLogin() {
   const errEl = document.getElementById("login-error-msg");
   const identifier = identInput ? identInput.value.trim() : "";
   const password = passInput ? passInput.value.trim() : "";
+
+  if (errEl) errEl.classList.add("hidden");
 
   if (!identifier || !password) {
     if (errEl) {
@@ -1324,7 +1356,6 @@ async function submitLogin() {
     window.appState.currentUser = data.user;
     localStorage.setItem("auth_user", JSON.stringify(data.user));
     if (data.token) localStorage.setItem("prepmaster_token", data.token);
-    await reloadUserData();
 
     const nameEl = document.getElementById("header-user-name");
     if (nameEl) nameEl.innerText = (data.user.full_name || data.user.username).split(" ")[0];
@@ -1337,10 +1368,17 @@ async function submitLogin() {
     const modal = document.getElementById("auth-modal");
     if (modal) modal.removeAttribute("data-mandatory");
     closeAuthModal();
-    showNotification(`✓ Başarıyla giriş yapıldı. Hoş geldin, ${data.user.full_name}!`, "emerald");
 
-    if (data.user.verification_status !== "verified") {
-      setTimeout(() => openDocScanModal(true), 600);
+    const isVerified = data.user.verification_status === "verified" || data.user.is_verified_student === 1;
+    if (!isVerified) {
+      // Önce belge doğrulama ekranı tam ekran olarak açılır (arkada sistem gözükmez)
+      setAppShellVisible(false);
+      openDocScanModal(true);
+      showNotification(`Hoş geldin, ${data.user.full_name}! Üniversiteni ücretsiz açmak için öğrenci belgeni doğrula.`, "blue");
+    } else {
+      setAppShellVisible(true);
+      await reloadUserData();
+      showNotification(`✓ Başarıyla giriş yapıldı. Hoş geldin, ${data.user.full_name}!`, "emerald");
     }
   } catch (err) {
     if (errEl) {
@@ -1358,6 +1396,8 @@ async function submitRegister() {
   const studentNumber = (document.getElementById("reg-student-num")?.value || "").trim();
   const password = (document.getElementById("reg-password")?.value || "").trim();
   const errEl = document.getElementById("register-error-msg");
+
+  if (errEl) errEl.classList.add("hidden");
 
   if (!fullName || !username || !email || !password) {
     if (errEl) {
@@ -1388,7 +1428,6 @@ async function submitRegister() {
     window.appState.currentUser = data.user;
     localStorage.setItem("auth_user", JSON.stringify(data.user));
     if (data.token) localStorage.setItem("prepmaster_token", data.token);
-    await reloadUserData();
 
     const nameEl = document.getElementById("header-user-name");
     if (nameEl) nameEl.innerText = (data.user.full_name || data.user.username).split(" ")[0];
@@ -1396,9 +1435,11 @@ async function submitRegister() {
     const modal = document.getElementById("auth-modal");
     if (modal) modal.removeAttribute("data-mandatory");
     closeAuthModal();
-    showNotification(`✓ Hesabınız oluşturuldu. Hoş geldin, ${data.user.full_name}!`, "emerald");
 
-    setTimeout(() => openDocScanModal(true), 600);
+    // Kayıt sonrası doğrudan tam ekran Belge Doğrulama Merkezine geç (arkada sistem gözükmez)
+    setAppShellVisible(false);
+    openDocScanModal(true);
+    showNotification(`✓ Hesabınız oluşturuldu! Şimdi öğrenci belgenizi doğrulayarak okulunuzu ücretsiz açın.`, "emerald");
   } catch (err) {
     if (errEl) {
       errEl.innerText = err.message;
@@ -1411,10 +1452,11 @@ function logoutUser() {
   window.appState.currentUser = null;
   localStorage.removeItem("auth_user");
   localStorage.removeItem("prepmaster_token");
-  // Sayfayı yenile: önceki öğrencinin istatistikleri ve listeleri ekranda kalmasın
+  setAppShellVisible(false);
   window.location.reload();
 }
 
+window.setAppShellVisible = setAppShellVisible;
 window.changeCurrentLevel = changeCurrentLevel;
 window.switchTab = switchTab;
 window.openUniversityModal = openUniversityModal;
@@ -1445,26 +1487,108 @@ window.resendStudentOtp = resendStudentOtp;
 window.submitStudentOtp = submitStudentOtp;
 
 
-
-
-
-
 // ================= ÖĞRENCİ BELGESİ TARAMA ALGORİTMASI & OTOMATİK EŞLEME =================
 let selectedDocFile = null;
+let cachedSampleDocs = null;
+
+function initDocDropZone() {
+  const dropZone = document.getElementById("doc-drop-zone");
+  if (!dropZone || dropZone.dataset.bound === "true") return;
+  dropZone.dataset.bound = "true";
+
+  dropZone.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    dropZone.classList.add("border-blue-500", "bg-blue-50/60");
+  });
+  dropZone.addEventListener("dragleave", () => {
+    dropZone.classList.remove("border-blue-500", "bg-blue-50/60");
+  });
+  dropZone.addEventListener("drop", (e) => {
+    e.preventDefault();
+    dropZone.classList.remove("border-blue-500", "bg-blue-50/60");
+    const file = e.dataTransfer?.files?.[0];
+    if (file) {
+      applySelectedDocFile(file);
+    }
+  });
+}
+
+function applySelectedDocFile(file) {
+  selectedDocFile = file;
+  const label = document.getElementById("doc-upload-label");
+  const card = document.getElementById("doc-selected-file-card");
+  const nameEl = document.getElementById("doc-selected-file-name");
+  const metaEl = document.getElementById("doc-selected-file-meta");
+
+  const sizeKb = Math.max(1, Math.round(file.size / 1024));
+  if (label) {
+    label.innerText = `Seçilen Belge: ${file.name} (${sizeKb} KB)`;
+  }
+  if (card) card.classList.remove("hidden");
+  if (nameEl) nameEl.innerText = file.name;
+  if (metaEl) metaEl.innerText = `${sizeKb} KB • YÖK / E-Devlet Belge Analizine Hazır`;
+}
 
 function openDocScanModal(isInitial = false) {
   const modal = document.getElementById("student-doc-scan-modal");
   if (!modal) return;
+
+  const closeBtn = document.getElementById("btn-close-doc-scan");
+  const skipFooter = document.getElementById("doc-scan-skip-footer");
+
+  if (isInitial) {
+    modal.setAttribute("data-initial-onboarding", "true");
+    setAppShellVisible(false);
+    modal.className = "fixed inset-0 z-50 bg-gradient-to-br from-slate-950 via-blue-950 to-indigo-950 p-4 overflow-y-auto flex items-center justify-center";
+    if (closeBtn) closeBtn.classList.add("hidden");
+    if (skipFooter) skipFooter.classList.remove("hidden");
+  } else {
+    modal.removeAttribute("data-initial-onboarding");
+    modal.className = "fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm p-4 overflow-y-auto flex items-center justify-center";
+    if (closeBtn) closeBtn.classList.remove("hidden");
+    if (skipFooter) skipFooter.classList.add("hidden");
+  }
+
   modal.classList.remove("hidden");
   switchDocScanTab("upload");
   const msgEl = document.getElementById("doc-scan-result-msg");
   if (msgEl) msgEl.classList.add("hidden");
+  initDocDropZone();
   if (window.lucide) window.lucide.createIcons();
 }
 
 function closeDocScanModal() {
   const modal = document.getElementById("student-doc-scan-modal");
-  if (modal) modal.classList.add("hidden");
+  if (!modal) return;
+  const wasInitial = modal.getAttribute("data-initial-onboarding") === "true";
+  modal.removeAttribute("data-initial-onboarding");
+  modal.classList.add("hidden");
+
+  if (wasInitial && window.appState.currentUser) {
+    setAppShellVisible(true);
+    reloadUserData();
+  }
+}
+
+function skipDocScanAndEnterPlatform() {
+  const modal = document.getElementById("student-doc-scan-modal");
+  if (modal) {
+    modal.removeAttribute("data-initial-onboarding");
+    modal.classList.add("hidden");
+  }
+  setAppShellVisible(true);
+  reloadUserData();
+  showNotification("Genel hazırlık havuzu açıldı. Öğrenci belgenizi istediğiniz zaman üst menüden doğrulayabilirsiniz.", "blue");
+}
+
+function enterPlatformAfterVerification() {
+  const modal = document.getElementById("student-doc-scan-modal");
+  if (modal) {
+    modal.removeAttribute("data-initial-onboarding");
+    modal.classList.add("hidden");
+  }
+  setAppShellVisible(true);
+  reloadUserData();
 }
 
 function switchDocScanTab(tab) {
@@ -1477,21 +1601,24 @@ function switchDocScanTab(tab) {
   const viewSmp = document.getElementById("doc-scan-view-samples");
 
   [viewUp, viewTxt, viewSmp].forEach(v => v?.classList.add("hidden"));
-  [btnUp, btnTxt, btnSmp].forEach(b => {
-    if (b) b.className = "flex-1 py-1.5 rounded-xl text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition font-bold";
-  });
+  const inactiveClass = "py-2 px-2 rounded-xl text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition flex items-center justify-center gap-1.5 font-bold";
+  const activeClass = "py-2 px-2 rounded-xl bg-white dark:bg-slate-800 text-blue-700 dark:text-blue-400 shadow-sm transition flex items-center justify-center gap-1.5 font-bold";
 
-  const activeBtnClass = "flex-1 py-1.5 rounded-xl bg-white dark:bg-slate-800 text-blue-700 dark:text-blue-400 shadow-sm transition font-bold";
+  [btnUp, btnTxt, btnSmp].forEach(b => {
+    if (b) b.className = inactiveClass;
+  });
 
   if (tab === "upload") {
     viewUp?.classList.remove("hidden");
-    if (btnUp) btnUp.className = activeBtnClass;
+    if (btnUp) btnUp.className = activeClass;
   } else if (tab === "text") {
     viewTxt?.classList.remove("hidden");
-    if (btnTxt) btnTxt.className = activeBtnClass;
+    if (btnTxt) btnTxt.className = activeClass;
+    const textInput = document.getElementById("doc-scan-text-input");
+    if (textInput) analyzeDocTextLive(textInput.value);
   } else if (tab === "samples") {
     viewSmp?.classList.remove("hidden");
-    if (btnSmp) btnSmp.className = activeBtnClass;
+    if (btnSmp) btnSmp.className = activeClass;
   }
   if (window.lucide) window.lucide.createIcons();
 }
@@ -1499,16 +1626,79 @@ function switchDocScanTab(tab) {
 function handleDocFileSelect(event) {
   const file = event.target.files?.[0];
   if (!file) return;
-  selectedDocFile = file;
-  const label = document.getElementById("doc-upload-label");
-  if (label) {
-    label.innerText = `Seçilen Dosya: ${file.name} (${Math.round(file.size / 1024)} KB)`;
+  applySelectedDocFile(file);
+}
+
+function _setLiveBadge(id, label, passed) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (passed) {
+    el.className = "px-2 py-1 rounded-lg bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold flex items-center gap-1";
+    el.innerHTML = `<span>✓</span> <span>${label}</span>`;
+  } else {
+    el.className = "px-2 py-1 rounded-lg bg-slate-200/70 text-slate-500 font-semibold flex items-center gap-1";
+    el.innerHTML = `<span>○</span> <span>${label}</span>`;
+  }
+}
+
+function analyzeDocTextLive(rawText) {
+  const t = (rawText || "")
+    .replace(/İ/g, "i")
+    .replace(/I/g, "ı")
+    .replace(/Ğ/g, "ğ")
+    .replace(/Ü/g, "ü")
+    .replace(/Ş/g, "ş")
+    .replace(/Ö/g, "ö")
+    .replace(/Ç/g, "ç")
+    .toLowerCase();
+
+  const uniKeywords = [
+    "istanbul teknik", "itü", "boğaziçi", "bogazici", "orta doğu teknik", "odtü",
+    "bilkent", "yıldız teknik", "hacettepe", "ankara üniversitesi", "gazi üniversitesi",
+    "ege üniversitesi", "koç üniversitesi", "sabancı üniversitesi"
+  ];
+  const hasUni = uniKeywords.some(k => t.includes(k));
+  const hasBarcode = /(?:yök|yok|tr|edevlet|belge)[\-][a-z0-9\-]{5,24}|barkod\s*(?:no|kodu|numarası)?\s*[:\-]?\s*[a-z0-9\-]{6,25}/i.test(t);
+  const hasStuNo = /\b[0-9]{7,11}\b/.test(t) || /öğrenci\s*(?:numarası|no)\s*[:\-]?\s*[0-9]{6,12}/i.test(t);
+  const hasOfficial = ["yükseköğretim", "e-devlet", "öğrenci belgesi", "rektörlüğü", "aktif öğrenci", "yabancı diller"].some(k => t.includes(k));
+
+  _setLiveBadge("live-check-uni", "Üniversite", hasUni);
+  _setLiveBadge("live-check-barcode", "YÖK Barkod", hasBarcode);
+  _setLiveBadge("live-check-stuno", "Öğrenci No", hasStuNo);
+  _setLiveBadge("live-check-official", "Resmi Başlık", hasOfficial);
+}
+
+async function _fetchSampleDocText(sampleKey) {
+  try {
+    if (!cachedSampleDocs) {
+      const res = await fetch("/api/student/sample-documents");
+      if (res.ok) {
+        cachedSampleDocs = await res.json();
+      }
+    }
+    if (cachedSampleDocs && cachedSampleDocs[sampleKey]?.content) {
+      return cachedSampleDocs[sampleKey].content;
+    }
+  } catch (e) {
+    console.warn("Sample doc fetch warning:", e);
+  }
+  return `T.C. YÜKSEKÖĞRETİM KURULU BAŞKANLIĞI\nE-DEVLET KAPISI ÖĞRENCİ BELGESİ\nBarkod: YÖK-${sampleKey.toUpperCase()}98451203\nÜniversite: İSTANBUL TEKNİK ÜNİVERSİTESİ\nÖğrenci Numarası: 150240789\nÖğrencilik Durumu: Aktif Öğrenci`;
+}
+
+async function fillSampleTextForCurrentUni() {
+  const uniId = window.appState.currentUser?.university_id || window.appState.currentUniversity?.id || "itu";
+  const key = (uniId && uniId !== "general") ? uniId : "itu";
+  const sampleText = await _fetchSampleDocText(key);
+  const textInput = document.getElementById("doc-scan-text-input");
+  if (textInput) {
+    textInput.value = sampleText;
+    analyzeDocTextLive(sampleText);
   }
 }
 
 async function submitDocFileUpload() {
   if (!selectedDocFile) {
-    alert("Lütfen önce taranacak bir PDF veya belge dosyası seçin.");
+    showNotification("Lütfen önce taranacak bir PDF veya belge dosyası seçin.", "amber");
     return;
   }
 
@@ -1538,8 +1728,8 @@ async function submitDocFileUpload() {
   } catch (err) {
     if (loadingEl) loadingEl.classList.add("hidden");
     if (msgEl) {
-      msgEl.className = "p-3.5 rounded-2xl text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200";
-      msgEl.innerText = "Hata: " + err.message;
+      msgEl.className = "p-4 rounded-2xl text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200";
+      msgEl.innerText = "Doğrulama Hatası: " + err.message;
       msgEl.classList.remove("hidden");
     }
   }
@@ -1549,7 +1739,7 @@ async function submitDocTextScan() {
   const textInput = document.getElementById("doc-scan-text-input");
   const text = (textInput?.value || "").trim();
   if (text.length < 15) {
-    alert("Lütfen E-Devlet belgenizden kopyaladığınız metni veya barkod bilgisini yapıştırın.");
+    showNotification("Lütfen E-Devlet belgenizden kopyaladığınız metni veya barkod bilgisini yapıştırın.", "amber");
     return;
   }
 
@@ -1576,8 +1766,8 @@ async function submitDocTextScan() {
   } catch (err) {
     if (loadingEl) loadingEl.classList.add("hidden");
     if (msgEl) {
-      msgEl.className = "p-3.5 rounded-2xl text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200";
-      msgEl.innerText = "Hata: " + err.message;
+      msgEl.className = "p-4 rounded-2xl text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200";
+      msgEl.innerText = "Doğrulama Hatası: " + err.message;
       msgEl.classList.remove("hidden");
     }
   }
@@ -1591,11 +1781,32 @@ async function scanSampleDoc(sampleKey) {
 
   try {
     const userId = window.appState.currentUser?.id || 1;
-    const res = await fetch("/api/student/scan-document", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ user_id: userId, sample_key: sampleKey })
-    });
+    const isDemo = window.appState.config?.demo_mode !== false;
+
+    let res;
+    if (isDemo) {
+      res = await fetch("/api/student/scan-document", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_id: userId, sample_key: sampleKey })
+      });
+    }
+
+    // Canlı ortamda (DEMO_MODE=false) örnek belge metnini çekip gerçek metin tarayıcıdan geçirir
+    if (!isDemo || (res && res.status === 503)) {
+      const sampleText = await _fetchSampleDocText(sampleKey);
+      const textInput = document.getElementById("doc-scan-text-input");
+      if (textInput) {
+        textInput.value = sampleText;
+        analyzeDocTextLive(sampleText);
+      }
+      res = await fetch("/api/student/scan-document", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_id: userId, document_text: sampleText })
+      });
+    }
+
     const data = await res.json();
     if (loadingEl) loadingEl.classList.add("hidden");
 
@@ -1607,8 +1818,8 @@ async function scanSampleDoc(sampleKey) {
   } catch (err) {
     if (loadingEl) loadingEl.classList.add("hidden");
     if (msgEl) {
-      msgEl.className = "p-3.5 rounded-2xl text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200";
-      msgEl.innerText = "Hata: " + err.message;
+      msgEl.className = "p-4 rounded-2xl text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200";
+      msgEl.innerText = "Doğrulama Hatası: " + err.message;
       msgEl.classList.remove("hidden");
     }
   }
@@ -1617,13 +1828,49 @@ async function scanSampleDoc(sampleKey) {
 function handleScanSuccess(data) {
   const msgEl = document.getElementById("doc-scan-result-msg");
   if (msgEl) {
-    msgEl.className = "p-3.5 rounded-2xl text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200";
+    msgEl.className = "p-4 rounded-2xl text-xs bg-emerald-50 text-emerald-900 border-2 border-emerald-300 space-y-3 shadow-sm";
     msgEl.innerHTML = `
-      <div class="font-extrabold text-sm mb-1">🎉 Belge Başarıyla Onaylandı!</div>
-      <div><strong>Tespit Edilen Okul:</strong> ${data.matched_university_name}</div>
-      <div><strong>Öğrenci No:</strong> ${data.student_number || "-"}</div>
-      <div><strong>E-Devlet Barkod:</strong> ${data.document_barcode || "-"}</div>
-      <div class="mt-2 text-emerald-700 font-bold">Hesabınız ${data.matched_university_name} hazırlık programına otomatik bağlandı ve sınavlar ÜCRETSİZ olarak tanımlandı!</div>
+      <div class="flex items-center justify-between border-b border-emerald-200 pb-2.5">
+        <div class="flex items-center gap-2">
+          <span class="w-7 h-7 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-black text-sm">✓</span>
+          <div>
+            <div class="font-black text-sm text-emerald-950">E-Devlet Öğrenci Belgesi Onaylandı!</div>
+            <div class="text-[11px] text-emerald-700">YÖK Barkod & Kurum Doğrulaması Başarılı</div>
+          </div>
+        </div>
+        <span class="text-[10px] font-black uppercase px-2.5 py-1 bg-emerald-200/80 text-emerald-900 rounded-full">Doğrulandı</span>
+      </div>
+
+      <div class="grid grid-cols-2 gap-2 bg-white/90 p-3 rounded-xl border border-emerald-200/80 text-[11px]">
+        <div>
+          <span class="text-slate-400 block font-bold">Üniversite:</span>
+          <span class="font-extrabold text-slate-800">${data.matched_university_name || "-"}</span>
+        </div>
+        <div>
+          <span class="text-slate-400 block font-bold">Öğrenci Adı:</span>
+          <span class="font-extrabold text-slate-800">${data.student_name || window.appState.currentUser?.full_name || "Aktif Öğrenci"}</span>
+        </div>
+        <div>
+          <span class="text-slate-400 block font-bold">Öğrenci Numarası:</span>
+          <span class="font-mono font-bold text-slate-800">${data.student_number || "-"}</span>
+        </div>
+        <div>
+          <span class="text-slate-400 block font-bold">E-Devlet Barkod:</span>
+          <span class="font-mono font-bold text-indigo-700">${data.document_barcode || "-"}</span>
+        </div>
+        <div class="col-span-2 pt-1 border-t border-slate-100">
+          <span class="text-slate-400 font-bold">Birim / Program: </span>
+          <span class="font-bold text-slate-700">${data.faculty || "Yabancı Diller Yüksekokulu"} • ${data.department || "İngilizce Hazırlık"}</span>
+        </div>
+      </div>
+
+      <div class="p-2.5 bg-emerald-100/80 rounded-xl text-emerald-900 font-bold text-[11px] flex items-center justify-between">
+        <span>🎁 ${data.matched_university_name} hazırlık paketi ÜCRETSİZ tanımlandı!</span>
+      </div>
+
+      <button type="button" onclick="enterPlatformAfterVerification()" class="w-full py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-black text-xs rounded-xl shadow-lg shadow-emerald-500/25 transition flex items-center justify-center gap-2">
+        <span>Hazırlık Platformuna Giriş Yap →</span>
+      </button>
     `;
     msgEl.classList.remove("hidden");
   }
@@ -1650,11 +1897,16 @@ function handleScanSuccess(data) {
   showNotification(`✓ ${data.matched_university_name} hesabınıza otomatik tanımlandı!`, "emerald");
 
   setTimeout(() => {
-    closeDocScanModal();
+    enterPlatformAfterVerification();
     if (window.appState.activeTab === "exams") renderExamsTab();
     else if (window.appState.activeTab === "dashboard") loadDashboardStats();
-  }, 2200);
+  }, 2600);
 }
+
+window.analyzeDocTextLive = analyzeDocTextLive;
+window.fillSampleTextForCurrentUni = fillSampleTextForCurrentUni;
+window.skipDocScanAndEnterPlatform = skipDocScanAndEnterPlatform;
+window.enterPlatformAfterVerification = enterPlatformAfterVerification;
 
 // ================= 50 TL ÜNİVERSİTE ÜYELİK & PAYWALL MODAL LOGIC =================
 let pendingUnlockCallback = null;
