@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/university.dart';
 import '../models/question.dart';
 import '../services/api_service.dart';
+import 'forgot_password_dialog.dart';
 import '../theme/app_theme.dart';
 import '../main.dart';
 import 'exam_runner_screen.dart';
@@ -731,7 +732,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                               ),
                             ),
-                            const SizedBox(height: 16),
+                            // Yalnızca sunucuda e-posta ayarlıysa görünür
+                            FutureBuilder<bool>(
+                              future: ApiService().isPasswordResetAvailable(),
+                              builder: (context, snap) => snap.data == true
+                                  ? Align(
+                                      alignment: Alignment.centerRight,
+                                      child: TextButton(
+                                        key: const Key('btn_forgot_password'),
+                                        onPressed: () => ForgotPasswordDialog.show(
+                                          context,
+                                          initialEmail: loginIdentCtrl.text.trim(),
+                                        ),
+                                        child: const Text('Şifremi unuttum?'),
+                                      ),
+                                    )
+                                  : const SizedBox(height: 16),
+                            ),
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(

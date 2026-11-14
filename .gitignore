@@ -25,3 +25,8 @@ mobile/.pub/
 
 # Yerel deneme hesabı bilgileri
 *.local.md
+
+# Gizli ayarlar (SECRET_KEY, e-posta şifresi, PayTR anahtarları) — ASLA commit etme
+.env
+.env.*
+!.env.example

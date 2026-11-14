@@ -872,6 +872,53 @@ class ApiService {
     }
   }
 
+  // --- Şifremi unuttum (kod yalnızca e-postayla gelir) ---
+  /// Sunucuda e-posta ayarlıysa true; "Şifremi unuttum" bağlantısı buna göre gösterilir.
+  Future<bool> isPasswordResetAvailable() async {
+    try {
+      final res = await AuthHttp.instance.get(Uri.parse('$baseUrl/api/config')).timeout(const Duration(seconds: 3));
+      if (res.statusCode == 200) {
+        final data = json.decode(utf8.decode(res.bodyBytes));
+        return data['password_reset_available'] == true;
+      }
+    } catch (_) {}
+    return false;
+  }
+
+  Future<Map<String, dynamic>> requestPasswordReset(String email) async {
+    try {
+      final res = await AuthHttp.instance.post(
+        Uri.parse('$baseUrl/api/auth/forgot-password'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'email': email}),
+      ).timeout(const Duration(seconds: 8));
+      final data = json.decode(utf8.decode(res.bodyBytes));
+      if (res.statusCode == 200) return {'success': true, 'message': data['message']};
+      return {'success': false, 'message': data['detail']?.toString() ?? 'Kod gönderilemedi.'};
+    } catch (_) {
+      return {'success': false, 'message': 'Şifre sıfırlama için internet bağlantısı gerekiyor.'};
+    }
+  }
+
+  Future<Map<String, dynamic>> confirmPasswordReset({
+    required String email,
+    required String code,
+    required String newPassword,
+  }) async {
+    try {
+      final res = await AuthHttp.instance.post(
+        Uri.parse('$baseUrl/api/auth/reset-password'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'email': email, 'reset_code': code, 'new_password': newPassword}),
+      ).timeout(const Duration(seconds: 8));
+      final data = json.decode(utf8.decode(res.bodyBytes));
+      if (res.statusCode == 200) return {'success': true, 'message': data['message']};
+      return {'success': false, 'message': data['detail']?.toString() ?? 'Şifre değiştirilemedi.'};
+    } catch (_) {
+      return {'success': false, 'message': 'Şifre sıfırlama için internet bağlantısı gerekiyor.'};
+    }
+  }
+
   Future<Map<String, dynamic>?> getCurrentUser({int userId = 1}) async {
     try {
       final res = await AuthHttp.instance.get(Uri.parse('$baseUrl/api/auth/me')).timeout(const Duration(seconds: 3));

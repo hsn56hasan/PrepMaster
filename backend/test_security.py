@@ -56,6 +56,8 @@ class TestSecuritySuite(unittest.TestCase):
     def test_rate_limit_request_otp(self):
         """Verify /api/student/request-otp blocks excessive requests with HTTP 429."""
         email = "dos_test@itu.edu.tr"
+        app_module.DEMO_MODE = True  # e-posta ayarlı olmadan kod üretimi yalnızca demoda açık
+        self.addCleanup(setattr, app_module, "DEMO_MODE", False)
         for i in range(3):
             res = self.client.post("/api/student/request-otp", json={"email": email, "student_number": "123456"})
             self.assertIn(res.status_code, [200, 400])

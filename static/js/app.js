@@ -53,6 +53,7 @@ async function initApp() {
     // 0. Initialize Theme & Auth
     initDarkMode();
     await checkCurrentUser();
+    loadPublicConfig();
 
     // 1. Fetch Universities
     const uniRes = await fetch('/api/universities');
@@ -1769,3 +1770,107 @@ window.scanSampleDoc = scanSampleDoc;
 window.openUniversityPaywallModal = openUniversityPaywallModal;
 window.closeUniversityPaywallModal = closeUniversityPaywallModal;
 window.submitUniversityUnlockPayment = submitUniversityUnlockPayment;
+
+// ---------------- ŞİFREMİ UNUTTUM ----------------
+// Kod yalnızca e-postayla gelir; sunucu, adres kayıtlı olsun olmasın aynı yanıtı verir.
+async function loadPublicConfig() {
+  try {
+    const res = await fetch('/api/config');
+    if (!res.ok) return;
+    const cfg = await res.json();
+    window.appState.config = cfg;
+    const btn = document.getElementById("btn-forgot-password");
+    if (btn) btn.classList.toggle("hidden", !cfg.password_reset_available);
+  } catch (_) {}
+}
+
+function setForgotMsg(text, ok) {
+  const el = document.getElementById("forgot-msg");
+  if (!el) return;
+  if (!text) { el.classList.add("hidden"); return; }
+  el.className = "p-2.5 rounded-xl text-xs font-semibold " +
+    (ok ? "bg-emerald-50 border border-emerald-200 text-emerald-800" : "bg-rose-50 border border-rose-200 text-rose-700");
+  el.innerText = text;
+}
+
+function showForgotStep(step) {
+  document.getElementById("forgot-step-email").classList.toggle("hidden", step !== "email");
+  document.getElementById("forgot-step-code").classList.toggle("hidden", step !== "code");
+  setForgotMsg("");
+}
+
+function openForgotPassword() {
+  const loginId = (document.getElementById("login-identifier")?.value || "").trim();
+  const emailEl = document.getElementById("forgot-email");
+  if (emailEl && loginId.includes("@")) emailEl.value = loginId;
+  showForgotStep("email");
+  document.getElementById("forgot-modal").classList.remove("hidden");
+  if (window.lucide) window.lucide.createIcons();
+  setTimeout(() => emailEl && emailEl.focus(), 50);
+}
+
+function closeForgotPassword() {
+  document.getElementById("forgot-modal").classList.add("hidden");
+}
+
+async function submitForgotEmail() {
+  const email = (document.getElementById("forgot-email").value || "").trim();
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+    setForgotMsg("Lütfen geçerli bir e-posta adresi girin.", false);
+    return;
+  }
+  const btn = document.getElementById("btn-forgot-send");
+  btn.disabled = true;
+  try {
+    const res = await fetch('/api/auth/forgot-password', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email })
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.detail || "Kod gönderilemedi.");
+    window.appState.forgotEmail = email;
+    showForgotStep("code");
+    document.getElementById("forgot-sent-msg").innerText = data.message ||
+      "Bu e-posta adresiyle kayıtlı bir hesap varsa 6 haneli bir kod gönderildi.";
+    setTimeout(() => document.getElementById("forgot-code").focus(), 50);
+  } catch (err) {
+    setForgotMsg(err.message, false);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+async function submitForgotReset() {
+  const email = window.appState.forgotEmail || (document.getElementById("forgot-email").value || "").trim();
+  const code = (document.getElementById("forgot-code").value || "").replace(/\D/g, "");
+  const p1 = document.getElementById("forgot-new-password").value || "";
+  const p2 = document.getElementById("forgot-new-password2").value || "";
+  if (code.length !== 6) return setForgotMsg("Kod 6 haneli olmalı.", false);
+  if (p1.length < 6) return setForgotMsg("Yeni şifre en az 6 karakter olmalı.", false);
+  if (p1 !== p2) return setForgotMsg("Şifreler aynı değil.", false);
+
+  const btn = document.getElementById("btn-forgot-reset");
+  btn.disabled = true;
+  try {
+    const res = await fetch('/api/auth/reset-password', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, reset_code: code, new_password: p1 })
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.detail || "Şifre değiştirilemedi.");
+    setForgotMsg("✓ Şifreniz değişti. Yeni şifrenizle giriş yapabilirsiniz.", true);
+    const idEl = document.getElementById("login-identifier");
+    if (idEl) idEl.value = email;
+    ["forgot-code", "forgot-new-password", "forgot-new-password2"].forEach(id => { document.getElementById(id).value = ""; });
+    setTimeout(closeForgotPassword, 1600);
+  } catch (err) {
+    setForgotMsg(err.message, false);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+window.openForgotPassword = openForgotPassword;
+window.closeForgotPassword = closeForgotPassword;
+window.submitForgotEmail = submitForgotEmail;
+window.submitForgotReset = submitForgotReset;
+window.showForgotStep = showForgotStep;

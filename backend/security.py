@@ -13,6 +13,12 @@ import os
 import re
 import json
 import time
+
+# .env dosyasını (varsa) diğer her şeyden önce yükle: SECRET_KEY, DEMO_MODE, e-posta ayarları
+try:
+    import env_loader  # noqa: F401
+except ImportError:  # "backend.security" olarak içe aktarıldığında
+    from backend import env_loader  # noqa: F401
 import base64
 import hmac
 import hashlib

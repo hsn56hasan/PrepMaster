@@ -911,7 +911,10 @@
           <div>
             <div class="flex items-center justify-between mb-1">
               <label class="block text-xs font-bold text-slate-600">Şifre:</label>
-              <!-- "Şifremi unuttum" e-posta gönderimi bağlanınca geri gelecek (yol haritası #13). -->
+              <!-- Yalnızca sunucuda e-posta ayarlıysa görünür (/api/config: password_reset_available) -->
+              <button type="button" id="btn-forgot-password" onclick="openForgotPassword()" class="hidden text-[11px] font-semibold text-blue-600 hover:text-blue-700 hover:underline">
+                Şifremi Unuttum?
+              </button>
             </div>
             <input type="password" id="login-password" placeholder="••••••••" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
           </div>
@@ -1322,6 +1325,37 @@
   </div>
 
   <!-- JavaScript Dosyaları -->
+  <!-- ================= ŞİFREMİ UNUTTUM ================= -->
+  <div id="forgot-modal" class="hidden fixed inset-0 z-[60] bg-slate-900/60 backdrop-blur-sm p-4 overflow-y-auto flex items-center justify-center">
+    <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-100 dark:border-slate-700 space-y-4 my-auto">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-700">
+        <h3 class="font-bold text-slate-800 dark:text-white text-sm">Şifremi Unuttum</h3>
+        <button type="button" onclick="closeForgotPassword()" class="p-1.5 text-slate-400 hover:text-slate-700 rounded-lg" aria-label="Kapat">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Adım 1: e-posta -->
+      <div id="forgot-step-email" class="space-y-3">
+        <p class="text-xs text-slate-500 dark:text-slate-300">Hesabınızın e-posta adresini girin. Kayıtlı bir hesap varsa 6 haneli bir kod göndereceğiz.</p>
+        <input type="email" id="forgot-email" autocomplete="email" placeholder="ornek@itu.edu.tr" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <button type="button" id="btn-forgot-send" onclick="submitForgotEmail()" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md transition">Kod Gönder</button>
+      </div>
+
+      <!-- Adım 2: kod + yeni şifre -->
+      <div id="forgot-step-code" class="hidden space-y-3">
+        <p id="forgot-sent-msg" class="text-xs text-slate-500 dark:text-slate-300"></p>
+        <input type="text" id="forgot-code" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="6 haneli kod" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-center tracking-[0.4em] font-mono text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <input type="password" id="forgot-new-password" autocomplete="new-password" placeholder="Yeni şifre (en az 6 karakter)" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <input type="password" id="forgot-new-password2" autocomplete="new-password" placeholder="Yeni şifre (tekrar)" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <button type="button" id="btn-forgot-reset" onclick="submitForgotReset()" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition">Şifreyi Değiştir</button>
+        <button type="button" onclick="showForgotStep('email')" class="w-full text-[11px] font-semibold text-blue-600 hover:underline">Kod gelmedi mi? Tekrar gönder</button>
+      </div>
+
+      <div id="forgot-msg" class="hidden p-2.5 rounded-xl text-xs font-semibold"></div>
+    </div>
+  </div>
+
   <script src="/static/js/auth_fetch.js?v=1.0"></script>
   <script src="/static/js/flashcards.js?v=1.2"></script>
   <script src="/static/js/exam.js?v=1.2"></script>

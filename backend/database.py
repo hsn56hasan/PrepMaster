@@ -1118,6 +1118,13 @@ def upsert_google_user(email: str, name: str = "", avatar_url: str = "") -> Dict
     return get_profile(new_user_id)
 
 
+def user_exists_with_email(email: str) -> bool:
+    conn = get_db()
+    row = conn.execute("SELECT 1 FROM users WHERE LOWER(email) = ?", (email.lower().strip(),)).fetchone()
+    conn.close()
+    return row is not None
+
+
 def request_password_reset(email: str) -> Dict[str, Any]:
     conn = get_db()
     cursor = conn.cursor()

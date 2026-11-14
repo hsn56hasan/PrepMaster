@@ -4,7 +4,7 @@ import re
 from datetime import datetime
 from pathlib import Path
 from typing import List, Optional, Dict, Any
-from fastapi import FastAPI, HTTPException, Query, Request, Depends, status, UploadFile, File, Form
+from fastapi import FastAPI, HTTPException, Query, Request, Depends, status, UploadFile, File, Form, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse, PlainTextResponse
@@ -27,12 +27,13 @@ from database import (
     create_student_otp, verify_student_otp,
     verify_student_by_document, unlock_university_membership, check_university_access,
     create_3ds_session, verify_3ds_code, generate_gib_receipt,
-    upsert_google_user, request_password_reset, confirm_password_reset,
+    upsert_google_user, request_password_reset, confirm_password_reset, user_exists_with_email,
     record_study_day
 )
 from document_scanner import (
     scan_student_document, extract_text_from_bytes, SAMPLE_DOCUMENTS
 )
+from email_service import email_configured, send_password_reset_email, send_student_otp_email
 from paytr_service import (
     generate_paytr_iframe_token, verify_paytr_callback_hash, parse_merchant_oid,
     is_paytr_live_configured
@@ -389,6 +390,8 @@ def public_config():
         "demo_mode": DEMO_MODE,
         "google_client_id": GOOGLE_CLIENT_ID or None,
         "paytr_configured": is_paytr_live_configured(),
+        # "Şifremi unuttum" yalnızca kod gerçekten e-postayla gidebiliyorsa gösterilir
+        "password_reset_available": email_configured() or DEMO_MODE,
         "membership_price_try": MEMBERSHIP_PRICE_TRY,
     }
 
@@ -475,14 +478,43 @@ def google_auth_endpoint(req: GoogleAuthRequest, request: Request):
     }
 
 @app.post("/api/auth/forgot-password")
-def forgot_password_endpoint(req: ForgotPasswordRequest, request: Request):
+def forgot_password_endpoint(req: ForgotPasswordRequest, request: Request, background_tasks: BackgroundTasks):
+    """
+    Kayıtlı bir hesap varsa 6 haneli kodu o hesabın e-postasına gönderir.
+    Yanıt, hesap olsa da olmasa da AYNIDIR (e-posta adresinin kayıtlı olup olmadığı sızmaz)
+    ve kod asla yanıtta dönmez (yalnızca DEMO_MODE hariç).
+    """
     enforce_rate_limit(request, scope="auth_forgot_password", max_requests=5, window_seconds=60, identifier=req.email)
+    if not email_configured() and not DEMO_MODE:
+        raise HTTPException(status_code=503, detail="Şifre sıfırlama şu an kullanılamıyor. Lütfen yöneticiyle iletişime geçin.")
+
+    # Her e-posta için 60 sn bekleme — hesap olsun olmasın aynı davranış
+    email_key = "forgot_cooldown:" + req.email.lower().strip()
+    allowed, _, retry_after = rate_limiter.is_allowed(email_key, 1, 60)
+    if not allowed:
+        raise HTTPException(status_code=429, detail=f"Lütfen yeni bir kod istemeden önce {retry_after} saniye bekleyin.",
+                            headers={"Retry-After": str(retry_after)})
+
+    generic = {
+        "status": "success",
+        "success": True,
+        "message": "Bu e-posta adresiyle kayıtlı bir hesap varsa 6 haneli bir kod gönderildi. "
+                   "Gelen kutunuzu ve gereksiz (spam) klasörünü kontrol edin.",
+        "cooldown_seconds": 60,
+        "expires_in_seconds": 900,
+    }
+    if not user_exists_with_email(req.email):
+        return generic
+
     res = request_password_reset(email=req.email)
     if not res.get("success"):
-        if res.get("cooldown"):
-            raise HTTPException(status_code=400, detail=res.get("detail", "Lütfen bekleyin."))
-        raise HTTPException(status_code=400, detail=res.get("detail", "Şifre sıfırlama kodu oluşturulamadı."))
-    return _hide_codes(res)
+        return generic
+    if email_configured():
+        # Arka planda gönder: yanıt süresi hesabın var olup olmadığını ele vermesin
+        background_tasks.add_task(send_password_reset_email, res["email"], res["reset_code"])
+    if DEMO_MODE:
+        generic.update({k: res[k] for k in ("reset_code", "reset_code_sandbox", "demo_code") if k in res})
+    return generic
 
 @app.post("/api/auth/reset-password")
 def reset_password_endpoint(req: ResetPasswordRequest, request: Request):
@@ -515,14 +547,22 @@ def student_verify_endpoint(req: StudentVerifyRequest, request: Request):
     return res
 
 @app.post("/api/student/request-otp")
-def student_request_otp_endpoint(req: StudentOtpRequest, request: Request, _=Depends(rate_limit_otp_request)):
+def student_request_otp_endpoint(req: StudentOtpRequest, request: Request, background_tasks: BackgroundTasks,
+                                 _=Depends(rate_limit_otp_request)):
     require_current_user(request)
     if not req.email or "@" not in req.email:
         raise HTTPException(status_code=400, detail="Geçerli bir e-posta adresi giriniz.")
     enforce_rate_limit(request, scope="otp_request_email", max_requests=3, window_seconds=60, identifier=req.email)
+    if not email_configured() and not DEMO_MODE:
+        raise HTTPException(status_code=503, detail="E-posta doğrulaması şu an kullanılamıyor.")
+    # Kod yalnızca üniversite adreslerine gönderilir (rastgele adreslere e-posta atılamasın)
+    if not DEMO_MODE and not req.email.lower().strip().endswith(".edu.tr"):
+        raise HTTPException(status_code=400, detail="Lütfen .edu.tr uzantılı üniversite e-postanızı girin.")
     res = create_student_otp(email=req.email, student_number=req.student_number or "")
     if not res.get("success"):
         raise HTTPException(status_code=400, detail=res.get("detail", "OTP kodu oluşturulamadı."))
+    if email_configured() and res.get("otp_code"):
+        background_tasks.add_task(send_student_otp_email, res["email"], res["otp_code"])
     return _hide_codes(res)
 
 @app.post("/api/student/verify-otp")
