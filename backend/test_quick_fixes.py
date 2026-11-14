@@ -186,6 +186,42 @@ class TestQuickFixes(unittest.TestCase):
         for name in re.findall(r"^window\.\w+ = (\w+);", app_js, re.M):
             self.assertRegex(src, rf"(function\s+{name}\b|(const|let|var)\s+{name}\s*=)", name)
 
+    # #8 Yönetici panelinden açılan üniversiteler giriş-çıkış sonrası kaybolmaz & tüm kayıtlar listelenir
+    def test_admin_university_grants_persist_after_logout_login(self):
+        uid, auth = self._register("kalici_ogrenci")
+        all_unis = ["general"] + [u["id"] for u in load("universities.json")]
+        # Modal üzerinde is_verified=False kalsa bile 26 okul açıldığında doğrulanmış ve kalıcı olmalı
+        upd = db.admin_update_student_access(
+            user_id=uid,
+            unlocked_universities=all_unis,
+            primary_university_id="boun",
+            is_verified=False,
+        )
+        self.assertTrue(upd["success"])
+        self.assertTrue(upd["is_verified"])
+        self.assertEqual(set(upd["unlocked_universities"]), set(all_unis))
+
+        # Çıkış yapıp tekrar giriş yaptığında (/api/auth/login + /api/profile) 26 okul açık kalmalı
+        login_res = self.client.post("/api/auth/login", json={
+            "identifier": "kalici_ogrenci",
+            "password": "Parola123!",
+        })
+        self.assertEqual(login_res.status_code, 200, login_res.text)
+        login_user = login_res.json()["user"]
+        self.assertEqual(login_user["is_verified_student"], 1)
+        self.assertEqual(login_user["verification_status"], "verified")
+        self.assertEqual(set(login_user["unlocked_universities"]), set(all_unis))
+
+        new_auth = {"Authorization": f"Bearer {login_res.json()['token']}"}
+        prof = self.client.get("/api/profile", headers=new_auth).json()
+        self.assertEqual(set(prof["unlocked_universities"]), set(all_unis))
+
+        # Tüm kayıtlı öğrenciler (aktif/çevrimdışı fark etmeksizin) admin listesinde görünmeli
+        admin_list = db.admin_list_students()["students"]
+        usernames = {s["username"] for s in admin_list}
+        self.assertIn("kalici_ogrenci", usernames)
+        self.assertIn("deneme", usernames)
+
 
 if __name__ == "__main__":
     unittest.main()

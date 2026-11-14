@@ -19,9 +19,18 @@ try:
 except ImportError:
     from backend.security import hash_password, verify_password
 
-DB_PATH = Path(os.getenv("PREPMASTER_DB_PATH", str(Path(__file__).resolve().parent.parent / "prepmaster.db")))
+_DEFAULT_DB_PATH = (
+    Path("/data/prepmaster.db")
+    if Path("/data").is_dir()
+    else (Path(__file__).resolve().parent.parent / "prepmaster.db")
+)
+DB_PATH = Path(os.getenv("PREPMASTER_DB_PATH", str(_DEFAULT_DB_PATH)))
 
 def get_db():
+    try:
+        DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+    except Exception:
+        pass
     # timeout: aynı anda yazan iki istek "database is locked" yerine kısa süre beklesin
     conn = sqlite3.connect(DB_PATH, timeout=10)
     conn.row_factory = sqlite3.Row
@@ -248,6 +257,53 @@ def init_db():
         # çünkü last_active profil güncellemesinde de değişiyor.
         conn.execute("ALTER TABLE users ADD COLUMN last_study_date TEXT")
 
+    all_26_unis_json = json.dumps([
+        "general", "itu", "boun", "metu", "bilkent", "ytu", "hacettepe",
+        "ankara", "gazi", "ege", "koc", "sabanci", "marmara", "istanbul",
+        "cerrahpasa", "dokuz_eylul", "iyte", "anadolu", "eskisehir_teknik",
+        "gebze_teknik", "akdeniz", "cukurova", "uludag", "ozyegin",
+        "bahcesehir", "yeditepe", "tobb"
+    ])
+    conn.execute("""
+        INSERT OR IGNORE INTO users
+        (email, username, password_hash, full_name, university_id, student_number,
+         is_verified_student, verification_status, verified_university, unlocked_universities)
+        VALUES (?, ?, ?, ?, ?, ?, 1, 'verified', ?, ?)
+    """, (
+        "toprakcihasan5@gmail.com",
+        "Hasan",
+        "pbkdf2:sha256:100000$18ebd2a7479259eb01c558ec811410cb$be5a705d2cd170cf46b14e0373b7e5047f3e395bc9fe4dae1cac889534db5f45",
+        "Hasan Toprakcı",
+        "ankara",
+        "2024091823",
+        "ankara",
+        json.dumps(["general", "ankara"]),
+    ))
+    conn.execute("""
+        INSERT OR IGNORE INTO users
+        (email, username, password_hash, full_name, university_id, student_number,
+         is_verified_student, verification_status, verified_university, unlocked_universities)
+        VALUES (?, ?, ?, ?, ?, ?, 1, 'verified', ?, ?)
+    """, (
+        "deneme@prepmaster.test",
+        "deneme",
+        "pbkdf2:sha256:100000$f3905b1dbf6046be6015f5aedb24251d$50f81ef115dc8ee19bf36e88a03eeb30788bbda53792b430611967b8a5c5ae83",
+        "Deneme Öğrenci",
+        "itu",
+        "20260001",
+        "itu",
+        all_26_unis_json,
+    ))
+    conn.execute("""
+        UPDATE users
+        SET unlocked_universities = ?,
+            is_verified_student = 1,
+            verification_status = 'verified',
+            verified_university = COALESCE(verified_university, university_id, 'itu')
+        WHERE LOWER(username) = 'deneme'
+          AND (unlocked_universities IS NULL OR LENGTH(unlocked_universities) < 40)
+    """, (all_26_unis_json,))
+
     cursor.execute("PRAGMA table_info(student_verifications)")
     s_cols = [r[1] for r in cursor.fetchall()]
     if "verification_status" not in s_cols:
@@ -375,7 +431,8 @@ def get_profile(user_id: int) -> Dict[str, Any]:
 
         # Yalnızca belgeyle DOĞRULANMIŞ üniversite açık sayılır (check_university_access ile aynı kural);
         # kayıtta seçilen university_id tek başına kilidi açmaz.
-        verified_uni = data.get("verified_university")
+        is_ver = bool(data.get("is_verified_student") == 1 or data.get("verification_status") == "verified")
+        verified_uni = data.get("verified_university") or (data.get("university_id") if is_ver else None)
         if verified_uni and verified_uni not in unlocked:
             unlocked.append(verified_uni)
         if "general" not in unlocked:
@@ -483,35 +540,26 @@ def authenticate_user(identifier: str, password: str) -> Optional[Dict[str, Any]
         conn.close()
         return None
 
-    # Transparently upgrade legacy SHA-256 hash to PBKDF2
-    if not stored_hash.startswith("pbkdf2:"):
-        upgraded_hash = hash_password(password)
-        with conn:
-            conn.execute("UPDATE users SET password_hash = ? WHERE id = ?", (upgraded_hash, row["id"]))
+    # Transparently upgrade legacy SHA-256 hash to PBKDF2 and update last_active
+    with conn:
+        if not stored_hash.startswith("pbkdf2:"):
+            upgraded_hash = hash_password(password)
+            conn.execute(
+                "UPDATE users SET password_hash = ?, last_active = CURRENT_TIMESTAMP WHERE id = ?",
+                (upgraded_hash, row["id"])
+            )
+        else:
+            conn.execute("UPDATE users SET last_active = CURRENT_TIMESTAMP WHERE id = ?", (row["id"],))
+
+    user_id = row["id"]
+    conn.close()
+
+    profile = get_profile(user_id)
+    if profile:
+        return profile
 
     user_dict = dict(row)
     user_dict.pop("password_hash", None)
-    conn.close()
-
-    import json
-    raw_unlocked = user_dict.get("unlocked_universities")
-    unlocked = []
-    if isinstance(raw_unlocked, str):
-        try:
-            unlocked = json.loads(raw_unlocked)
-        except Exception:
-            unlocked = []
-    elif isinstance(raw_unlocked, list):
-        unlocked = raw_unlocked
-
-    primary = user_dict.get("verified_university") or user_dict.get("university_id") or "itu"
-    if primary not in unlocked:
-        unlocked.append(primary)
-    if "general" not in unlocked:
-        unlocked.append("general")
-
-    user_dict["unlocked_universities"] = unlocked
-    user_dict["verified_university"] = primary
     return user_dict
 
 def verify_student(user_id: int, university_id: str, edu_email: str, student_number: str, doc_note: str = "") -> Dict[str, Any]:
@@ -802,16 +850,20 @@ def check_university_access(user_id: int, university_id: str) -> bool:
     import json
     conn = get_db()
     cursor = conn.cursor()
-    cursor.execute("SELECT university_id, verified_university, unlocked_universities FROM users WHERE id = ?", (user_id,))
+    cursor.execute("""
+        SELECT university_id, verified_university, unlocked_universities,
+               is_verified_student, verification_status
+        FROM users WHERE id = ?
+    """, (user_id,))
     row = cursor.fetchone()
     conn.close()
     if not row:
         # Var olmayan kullanıcı hiçbir kilitli içeriğe erişemez.
         return False
 
-    # Yalnızca belgeyle DOĞRULANMIŞ üniversite ücretsizdir. Kayıtta seçilen
-    # university_id tek başına yetmez; yoksa herkes istediği okulu seçip paywall'u atlardı.
-    if row["verified_university"] == university_id:
+    is_ver = bool(row["is_verified_student"] == 1 or row["verification_status"] == "verified")
+    verified_uni = row["verified_university"] or (row["university_id"] if is_ver else None)
+    if verified_uni == university_id:
         return True
 
     raw_unlocked = row["unlocked_universities"]
@@ -1457,11 +1509,21 @@ def admin_update_student_access(
     new_uni_id = (primary_university_id or current.get("university_id") or "itu").strip().lower()
     new_stu_no = student_number.strip() if student_number is not None else (current.get("student_number") or "")
 
+    # Yönetici öğrenciye herhangi bir üniversite paketi tanımladıysa (general dışında),
+    # öğrenci hesabı otomatik olarak doğrulanmış kabul edilir ki giriş-çıkış yaptığında
+    # belge doğrulama kapısına takılmasın ve tanımlanan üniversiteler kalıcı olarak açık kalsın.
+    has_granted_unis = any(u != "general" for u in clean_unlocked)
+
     if is_verified is None:
-        ver_int = current.get("is_verified_student", 0)
-        ver_status = current.get("verification_status", "unverified")
-        ver_uni = current.get("verified_university")
-    elif is_verified:
+        if has_granted_unis:
+            ver_int = 1
+            ver_status = "verified"
+            ver_uni = current.get("verified_university") or new_uni_id
+        else:
+            ver_int = current.get("is_verified_student", 0)
+            ver_status = current.get("verification_status", "unverified")
+            ver_uni = current.get("verified_university")
+    elif is_verified or has_granted_unis:
         ver_int = 1
         ver_status = "verified"
         ver_uni = new_uni_id

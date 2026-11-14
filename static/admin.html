@@ -186,8 +186,8 @@
       <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-xl">
         <div class="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
           <div>
-            <h2 class="text-sm font-black text-white">Kayıtlı Öğrenciler & Üniversite Erişim Yetkileri</h2>
-            <p class="text-[11px] text-slate-400">Herhangi bir öğrencinin yanındaki "Üniversite Erişimi Tanımla" butonuna tıklayarak istediğiniz üniversiteleri ücretsiz açabilirsiniz.</p>
+            <h2 class="text-sm font-black text-white">Tüm Kayıtlı Öğrenciler & Üniversite Erişim Yetkileri (Kalıcı Veritabanı)</h2>
+            <p class="text-[11px] text-slate-400">Sisteme kayıt olan tüm öğrenciler (şu an aktif veya çevrimdışı fark etmeksizin) kalıcı olarak listelenir. İstediğiniz öğrenciye tek tıkla 26 üniversite erişimi tanımlayabilirsiniz.</p>
           </div>
           <span id="table-count-badge" class="text-xs font-extrabold px-3 py-1 bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 rounded-full">0 Öğrenci</span>
         </div>
@@ -522,8 +522,11 @@
 
       tbody.innerHTML = students.map(st => {
         const unlocked = (st.unlocked_universities || []).filter(u => u !== "general");
+        const all26Header = unlocked.length >= 26
+          ? `<div class="mb-1"><span class="px-2.5 py-0.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 rounded-md font-extrabold text-[10px]">🌟 Tüm 26 Üniversite Açık (Tam Erişim)</span></div>`
+          : "";
         const unlockedBadges = unlocked.length > 0
-          ? unlocked.map(uid => `<span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 rounded-md font-bold text-[10px]">${getUniLabel(uid)}</span>`).join(" ")
+          ? all26Header + unlocked.map(uid => `<span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 rounded-md font-bold text-[10px]">${getUniLabel(uid)}</span>`).join(" ")
           : `<span class="text-slate-500 text-[11px]">Sadece Genel Havuz</span>`;
 
         const verifBadge = st.is_verified
@@ -534,7 +537,8 @@
           ? `<div class="text-[10px] text-slate-400 mt-1 max-w-[220px] truncate" title="${st.latest_verification.notes}">${st.latest_verification.notes}</div>`
           : "";
 
-        const createdDate = st.created_at ? new Date(st.created_at).toLocaleDateString("tr-TR") : "-";
+        const createdDate = st.created_at ? new Date(st.created_at).toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "short" }) : "-";
+        const lastActiveDate = st.last_active ? new Date(st.last_active).toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "short" }) : createdDate;
 
         return `
           <tr class="hover:bg-slate-800/40 transition">
@@ -569,7 +573,8 @@
 
             <td class="py-3.5 px-4">
               <div class="font-bold text-slate-200">${st.exam_count || 0} Deneme <span class="text-emerald-400">(%${st.avg_score || 0})</span></div>
-              <div class="text-[10px] text-slate-500">Kayıt: ${createdDate}</div>
+              <div class="text-[10px] text-slate-400">Kayıt: ${createdDate}</div>
+              <div class="text-[10px] text-slate-500">Son Giriş: ${lastActiveDate}</div>
             </td>
 
             <td class="py-3.5 px-4 text-right">
@@ -616,7 +621,7 @@
         const checked = unlockedSet.has(u.id) ? "checked" : "";
         return `
           <label class="flex items-center gap-2.5 p-3 rounded-2xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700 cursor-pointer select-none transition">
-            <input type="checkbox" name="uni-access-check" value="${u.id}" ${checked} class="w-4 h-4 rounded accent-indigo-500">
+            <input type="checkbox" name="uni-access-check" value="${u.id}" ${checked} onchange="onUniCheckboxChange()" class="w-4 h-4 rounded accent-indigo-500">
             <div class="truncate">
               <div class="text-xs font-extrabold text-white">${u.code}</div>
               <div class="text-[10px] text-slate-400 truncate">${u.name}</div>
@@ -629,6 +634,14 @@
       if (window.lucide) window.lucide.createIcons();
     }
 
+    function onUniCheckboxChange() {
+      const anyChecked = document.querySelectorAll('input[name="uni-access-check"]:checked').length > 0;
+      if (anyChecked) {
+        const verEl = document.getElementById("edit-verified-status");
+        if (verEl) verEl.value = "true";
+      }
+    }
+
     function closeStudentAccessModal() {
       document.getElementById("student-access-modal")?.classList.add("hidden");
       activeEditStudentId = null;
@@ -638,6 +651,10 @@
       document.querySelectorAll('input[name="uni-access-check"]').forEach(cb => {
         cb.checked = checked;
       });
+      if (checked) {
+        const verEl = document.getElementById("edit-verified-status");
+        if (verEl) verEl.value = "true";
+      }
     }
 
     function selectOnlyPrimaryUniInModal() {
@@ -645,6 +662,8 @@
       document.querySelectorAll('input[name="uni-access-check"]').forEach(cb => {
         cb.checked = (cb.value === primary);
       });
+      const verEl = document.getElementById("edit-verified-status");
+      if (verEl) verEl.value = "true";
     }
 
     async function saveStudentAccessChanges() {
@@ -763,7 +782,7 @@
       }
     }
 
-    // Başlangıç kontrolü
+    // Başlangıç kontrolü + 15 saniyede bir canlı liste yenileme
     window.addEventListener("DOMContentLoaded", () => {
       if (getAdminToken()) {
         showDashboardView();
@@ -771,6 +790,11 @@
       } else {
         showLoginView();
       }
+      setInterval(() => {
+        if (getAdminToken() && !activeEditStudentId && !activeResetStudentId) {
+          loadAdminData();
+        }
+      }, 15000);
     });
   </script>
 </body>

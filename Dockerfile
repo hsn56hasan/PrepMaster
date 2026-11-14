@@ -26,10 +26,7 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PORT=8050 \
-    PREPMASTER_DB_PATH=/app/data/prepmaster.db
-
-# Create non-root user for security
-RUN groupadd -r prepmaster && useradd -r -g prepmaster -d /app prepmaster
+    PREPMASTER_DB_PATH=/data/prepmaster.db
 
 # Copy installed Python packages from builder
 COPY --from=builder /install /usr/local
@@ -39,10 +36,8 @@ COPY backend /app/backend
 COPY data /app/data
 COPY static /app/static
 
-# Ensure persistent data directory and permissions
-RUN mkdir -p /app/data && chown -R prepmaster:prepmaster /app
-
-USER prepmaster
+# Ensure persistent volume mount directory (/data) and app data directory exist and are writable
+RUN mkdir -p /data /app/data && chmod 777 /data /app/data
 
 EXPOSE 8050
 

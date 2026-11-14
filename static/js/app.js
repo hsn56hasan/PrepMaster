@@ -11,10 +11,24 @@ document.addEventListener("DOMContentLoaded", async () => {
   await initApp();
 });
 
+function isUserVerifiedOrUnlocked(user) {
+  if (!user) return false;
+  if (
+    user.verification_status === 'verified' ||
+    user.is_verified_student === 1 ||
+    user.is_verified_student === true
+  ) {
+    return true;
+  }
+  const unlocked = Array.isArray(user.unlocked_universities) ? user.unlocked_universities : [];
+  return unlocked.some(u => u && u !== 'general');
+}
+
 // Sunucudaki profili uygular. Giriş yoksa varsayılanlarla devam eder.
 async function applyServerProfile() {
   let profile = null;
-  if (window.appState.currentUser) {
+  const hasToken = !!localStorage.getItem("prepmaster_token");
+  if (window.appState.currentUser || hasToken) {
     try {
       const profRes = await fetch('/api/profile');
       if (profRes.ok) profile = await profRes.json();
@@ -26,18 +40,29 @@ async function applyServerProfile() {
     window.appState.allUniversities.find(u => u.id === uniId) ||
     window.appState.currentUniversity ||
     window.appState.allUniversities[0];
-  if (profile && window.appState.currentUser) {
+  if (profile && profile.id) {
+    if (!window.appState.currentUser) {
+      window.appState.currentUser = {};
+    }
     // Kilit bilgisi (unlocked_universities, verified_university, verification_status) da güncel kalsın
     Object.assign(window.appState.currentUser, {
+      id: profile.id,
+      email: profile.email || window.appState.currentUser.email,
+      username: profile.username || window.appState.currentUser.username,
+      full_name: profile.full_name || window.appState.currentUser.full_name,
       university_id: profile.university_id || window.appState.currentUser.university_id,
       student_number: profile.student_number || window.appState.currentUser.student_number,
       is_verified_student: profile.is_verified_student,
-      unlocked_universities: profile.unlocked_universities,
+      unlocked_universities: Array.isArray(profile.unlocked_universities) ? profile.unlocked_universities : ['general'],
       verified_university: profile.verified_university,
       verification_status: profile.verification_status,
       streak_days: profile.streak_days,
     });
     localStorage.setItem("auth_user", JSON.stringify(window.appState.currentUser));
+    const nameEl = document.getElementById("header-user-name");
+    if (nameEl && (window.appState.currentUser.full_name || window.appState.currentUser.username)) {
+      nameEl.innerText = (window.appState.currentUser.full_name || window.appState.currentUser.username).split(" ")[0];
+    }
   }
 }
 
@@ -90,10 +115,7 @@ async function initApp() {
     if (!window.appState.currentUser) {
       setAppShellVisible(false);
       openAuthModal(true);
-    } else if (
-      window.appState.currentUser.verification_status !== 'verified' &&
-      !window.appState.currentUser.is_verified_student
-    ) {
+    } else if (!isUserVerifiedOrUnlocked(window.appState.currentUser)) {
       setAppShellVisible(false);
       document.getElementById("auth-modal")?.classList.add("hidden");
       openDocScanModal(true);
@@ -928,14 +950,16 @@ async function loadAnalytics() {
 }
 
 // University Switcher Modal
-function openUniversityModal() {
+async function openUniversityModal() {
   const modal = document.getElementById("university-picker-modal");
   const list = document.getElementById("university-picker-list");
   if (!modal || !list) return;
 
+  await applyServerProfile();
+
   const user = window.appState.currentUser;
-  const verifiedUni = user?.verified_university || null;  // yalnızca belgeyle doğrulanan okul ücretsiz
-  const unlocked = user?.unlocked_universities || ['general'];
+  const verifiedUni = user?.verified_university || (isUserVerifiedOrUnlocked(user) ? user?.university_id : null);
+  const unlocked = Array.isArray(user?.unlocked_universities) ? user.unlocked_universities : ['general'];
 
   list.innerHTML = window.appState.allUniversities.map(u => {
     const isCurrent = u.id === window.appState.currentUniversity.id;
@@ -947,7 +971,7 @@ function openUniversityModal() {
           <div class="flex items-center gap-2 flex-wrap">
             <h4 class="font-bold text-slate-800 dark:text-white text-sm">${u.name}</h4>
             <span class="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-bold rounded-md">${u.short_name}</span>
-            ${u.id === verifiedUni ? '<span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 text-[10px] font-extrabold rounded-md">Öğrenci Okulunuz (Ücretsiz)</span>' : ''}
+            ${u.id === verifiedUni ? '<span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 text-[10px] font-extrabold rounded-md">Öğrenci Okulunuz (Ücretsiz)</span>' : (isFreeOrUnlocked ? '<span class="px-2 py-0.5 bg-indigo-100 text-indigo-700 text-[10px] font-extrabold rounded-md">✓ Açık Paket</span>' : '')}
             ${!isFreeOrUnlocked ? '<span class="px-2 py-0.5 bg-amber-100 text-amber-800 text-[10px] font-extrabold rounded-md flex items-center gap-1">🔒 50 TL Üyelik</span>' : ''}
           </div>
           <p class="text-xs text-slate-500 mt-1">${u.exam_name} • Geçme Barajı: %${u.passing_score}</p>
@@ -974,9 +998,11 @@ async function selectUniversity(uniId) {
   const selected = window.appState.allUniversities.find(u => u.id === uniId);
   if (!selected) return;
 
+  await applyServerProfile();
+
   const user = window.appState.currentUser;
-  const verifiedUni = user?.verified_university || null;
-  const unlocked = user?.unlocked_universities || ['general'];
+  const verifiedUni = user?.verified_university || (isUserVerifiedOrUnlocked(user) ? user?.university_id : null);
+  const unlocked = Array.isArray(user?.unlocked_universities) ? user.unlocked_universities : ['general'];
   const hasAccess = uniId === 'general' || uniId === verifiedUni || unlocked.includes(uniId);
 
   if (!hasAccess) {
@@ -1584,8 +1610,10 @@ async function submitLogin() {
     localStorage.setItem("auth_user", JSON.stringify(data.user));
     if (data.token) localStorage.setItem("prepmaster_token", data.token);
 
+    await applyServerProfile();
+
     const nameEl = document.getElementById("header-user-name");
-    if (nameEl) nameEl.innerText = (data.user.full_name || data.user.username).split(" ")[0];
+    if (nameEl) nameEl.innerText = (window.appState.currentUser.full_name || window.appState.currentUser.username).split(" ")[0];
 
     if (data.user.university) {
       window.appState.currentUniversity = data.user.university;
@@ -1596,16 +1624,16 @@ async function submitLogin() {
     if (modal) modal.removeAttribute("data-mandatory");
     closeAuthModal();
 
-    const isVerified = data.user.verification_status === "verified" || data.user.is_verified_student === 1;
+    const isVerified = isUserVerifiedOrUnlocked(window.appState.currentUser);
     if (!isVerified) {
       // Önce belge doğrulama ekranı tam ekran olarak açılır (arkada sistem gözükmez)
       setAppShellVisible(false);
       openDocScanModal(true);
-      showNotification(`Hoş geldin, ${data.user.full_name}! Üniversiteni ücretsiz açmak için öğrenci belgeni doğrula.`, "blue");
+      showNotification(`Hoş geldin, ${window.appState.currentUser.full_name}! Üniversiteni ücretsiz açmak için öğrenci belgeni doğrula.`, "blue");
     } else {
       setAppShellVisible(true);
       await reloadUserData();
-      showNotification(`✓ Başarıyla giriş yapıldı. Hoş geldin, ${data.user.full_name}!`, "emerald");
+      showNotification(`✓ Başarıyla giriş yapıldı. Hoş geldin, ${window.appState.currentUser.full_name}!`, "emerald");
     }
   } catch (err) {
     if (errEl) {
