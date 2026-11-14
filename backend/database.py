@@ -22,8 +22,11 @@ except ImportError:
 DB_PATH = Path(os.getenv("PREPMASTER_DB_PATH", str(Path(__file__).resolve().parent.parent / "prepmaster.db")))
 
 def get_db():
-    conn = sqlite3.connect(DB_PATH)
+    # timeout: aynı anda yazan iki istek "database is locked" yerine kısa süre beklesin
+    conn = sqlite3.connect(DB_PATH, timeout=10)
     conn.row_factory = sqlite3.Row
+    conn.execute("PRAGMA busy_timeout = 10000")
+    conn.execute("PRAGMA foreign_keys = ON")
     return conn
 
 _PER_USER_TABLES = {
@@ -88,9 +91,12 @@ def _migrate_per_user_tables(conn) -> None:
 
     if DB_PATH.exists() and DB_PATH.stat().st_size > 0:
         backup = DB_PATH.with_name(DB_PATH.name + ".yedek-kullanici-gocu-" + datetime.now().strftime("%Y%m%d-%H%M%S"))
-        import shutil
+        # SQLite'ın kendi yedekleme API'si: WAL günlüğündeki veriler de yedeğe girer
         conn.commit()
-        shutil.copy2(DB_PATH, backup)
+        dst = sqlite3.connect(backup)
+        with dst:
+            conn.backup(dst)
+        dst.close()
 
     with conn:
         for table in pending:
@@ -110,6 +116,9 @@ def _migrate_per_user_tables(conn) -> None:
 
 def init_db():
     conn = get_db()
+    # WAL: okumalar yazmayı beklemez, eşzamanlı öğrencilerde kilitlenme azalır (dosyaya kalıcı yazılır)
+    conn.execute("PRAGMA journal_mode = WAL")
+    conn.execute("PRAGMA synchronous = NORMAL")
     _migrate_per_user_tables(conn)
     conn.executescript("""
         CREATE TABLE IF NOT EXISTS user_profile (

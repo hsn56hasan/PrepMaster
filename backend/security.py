@@ -145,27 +145,57 @@ class SlidingWindowRateLimiter:
 rate_limiter = SlidingWindowRateLimiter()
 
 
+# Gerçek istemci IP'sini taşıyan başlıklara YALNIZCA bu adreslerden gelen isteklerde güvenilir.
+# Varsayılan: aynı makinedeki aracı (Cloudflare Tunnel / nginx). Docker'da nginx konteynerinin
+# adresi/ağı eklenmeli, ör. TRUSTED_PROXY_IPS=127.0.0.1,::1,172.16.0.0/12
+import ipaddress as _ipaddress
+
+
+def _trusted_proxies():
+    raw = os.getenv("TRUSTED_PROXY_IPS", "127.0.0.1,::1")
+    nets, names = [], set()
+    for part in (p.strip() for p in raw.split(",")):
+        if not part:
+            continue
+        try:
+            nets.append(_ipaddress.ip_network(part, strict=False))
+        except ValueError:
+            names.add(part)  # IP olmayan değerler (ör. testlerdeki "testclient") birebir eşleşir
+    return nets, names
+
+
+def _is_trusted_proxy(host: str) -> bool:
+    nets, names = _trusted_proxies()
+    if host in names:
+        return True
+    try:
+        addr = _ipaddress.ip_address(host)
+    except ValueError:
+        return False
+    return any(addr in n for n in nets)
+
+
 def get_client_ip(request: Request) -> str:
     """
-    Extract the client's real IP address, handling proxies/load balancers safely.
+    İsteğin gerçek istemci IP'si (hız sınırı ve PayTR için).
+
+    - Doğrudan bağlanan adres güvenilir bir aracı DEĞİLSE o adres kullanılır; başlıklara
+      bakılmaz (X-Forwarded-For'u herkes uydurabilir, hız sınırını atlatmak için kullanılırdı).
+    - Güvenilir aracıdan geldiyse: Cloudflare'in yazdığı CF-Connecting-IP, yoksa nginx'in
+      yazdığı X-Real-IP kullanılır. (Eskiden tünel arkasında herkes 127.0.0.1 görünecek ve
+      bir öğrencinin yanlış şifreleri herkesi kilitleyecekti.)
     """
-    # Check X-Forwarded-For header
-    forwarded = request.headers.get("X-Forwarded-For")
-    if forwarded:
-        # Leftmost entry is the initial client
-        parts = [p.strip() for p in forwarded.split(",")]
-        if parts and parts[0]:
-            return parts[0]
-
-    # Check X-Real-IP
-    real_ip = request.headers.get("X-Real-IP")
-    if real_ip:
-        return real_ip.strip()
-
-    # Fall back to direct client host
-    if request.client and request.client.host:
-        return request.client.host
-    return "127.0.0.1"
+    peer = request.client.host if request.client and request.client.host else "127.0.0.1"
+    if not _is_trusted_proxy(peer):
+        return peer
+    for header in ("CF-Connecting-IP", "X-Real-IP"):
+        value = (request.headers.get(header) or "").strip()
+        if value:
+            try:
+                return str(_ipaddress.ip_address(value))
+            except ValueError:
+                continue
+    return peer
 
 
 def enforce_rate_limit(

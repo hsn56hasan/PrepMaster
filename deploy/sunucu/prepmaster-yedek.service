@@ -1,0 +1,10 @@
+[Unit]
+Description=PrepMaster veritabani yedegi
+
+[Service]
+Type=oneshot
+User=prepmaster
+Group=prepmaster
+ExecStart=/srv/prepmaster/prepmaster-yedek.sh
+Nice=10
+IOSchedulingClass=idle

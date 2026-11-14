@@ -53,6 +53,7 @@ from security import (
     rate_limit_ai_speaking,
     rate_limit_general,
     sanitize_text,
+    get_client_ip,
     create_session_token,
     verify_session_token,
     get_current_user_from_request,
@@ -734,14 +735,8 @@ class PayTRTokenRequest(BaseModel):
 
 
 def _payer_ip(request: Request) -> str:
-    """
-    PayTR gerçek müşteri IP'sini ister. X-Real-IP'yi nginx kendisi yazar ($remote_addr);
-    X-Forwarded-For'un en solundaki değer istemci tarafından uydurulabildiği için kullanılmaz.
-    """
-    real = (request.headers.get("X-Real-IP") or "").strip()
-    if real:
-        return real
-    return request.client.host if request.client else "127.0.0.1"
+    """PayTR gerçek müşteri IP'sini ister; güvenilir aracı kuralları get_client_ip'te."""
+    return get_client_ip(request)
 
 
 def _paytr_result_url(request: Request, outcome: str) -> str:

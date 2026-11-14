@@ -1,0 +1,35 @@
+[Unit]
+Description=PrepMaster web uygulamasi (FastAPI)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=prepmaster
+Group=prepmaster
+WorkingDirectory=/srv/prepmaster/app
+# Yalnızca sunucunun içinden dinler; dışarıya Cloudflare Tunnel ile açılır (modemde port yok).
+# Tek işçi: hız sınırlayıcı bellekte tutuluyor ve SQLite tek yazıcıyla en sağlıklı çalışıyor.
+ExecStart=/srv/prepmaster/venv/bin/uvicorn backend.app:app --host 127.0.0.1 --port 8050 --workers 1 --no-server-header
+Restart=always
+RestartSec=5
+
+# Harita servisleriyle (OSRM/Overpass) aynı makinede: kaynak sınırları
+MemoryMax=700M
+CPUWeight=80
+Nice=5
+
+# Sertleştirme: yalnızca veri ve log klasörlerine yazabilir
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/srv/prepmaster/data /srv/prepmaster/log
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+
+[Install]
+WantedBy=multi-user.target

@@ -27,6 +27,7 @@ os.environ["PAYTR_MERCHANT_ID"] = "123456"
 os.environ["PAYTR_MERCHANT_KEY"] = "test_merchant_key_abc"
 os.environ["PAYTR_MERCHANT_SALT"] = "test_merchant_salt_xyz"
 os.environ["PAYTR_TEST_MODE"] = "1"
+os.environ["TRUSTED_PROXY_IPS"] = "testclient"  # test istemcisi aracı (tünel) rolünde
 
 from fastapi.testclient import TestClient
 from backend.app import app
@@ -91,7 +92,7 @@ class TestPaytr(unittest.TestCase):
 
     def _start(self, auth, uni="boun", phone="0532 123 45 67"):
         return self.client.post("/api/payment/paytr/token", json={"university_id": uni, "user_phone": phone},
-                                headers={**auth, "X-Real-IP": "88.1.2.3"})
+                                headers={**auth, "CF-Connecting-IP": "88.1.2.3"})
 
     def _callback(self, oid, status="success", total="5000", sig=None):
         return self.client.post("/api/payment/paytr/callback", data={
