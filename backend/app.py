@@ -37,7 +37,17 @@ from database import (
 from document_scanner import (
     scan_student_document, extract_text_from_bytes, SAMPLE_DOCUMENTS
 )
-from email_service import email_configured, send_password_reset_email, send_student_otp_email
+from email_service import (
+    email_configured,
+    get_email_status,
+    send_email_verbose,
+    send_password_reset_email,
+    send_student_otp_email,
+    send_welcome_email,
+    send_support_ticket_notification,
+    send_support_ticket_receipt,
+    send_access_granted_email,
+)
 from paytr_service import (
     generate_paytr_iframe_token, verify_paytr_callback_hash, parse_merchant_oid,
     is_paytr_live_configured
@@ -400,6 +410,7 @@ def public_config():
         "demo_mode": DEMO_MODE,
         "google_client_id": GOOGLE_CLIENT_ID or None,
         "paytr_configured": is_paytr_live_configured(),
+        "email_configured": email_configured(),
         # "Şifremi unuttum" yalnızca kod gerçekten e-postayla gidebiliyorsa gösterilir
         "password_reset_available": email_configured() or DEMO_MODE,
         "membership_price_try": MEMBERSHIP_PRICE_TRY,
@@ -407,7 +418,7 @@ def public_config():
 
 # --- Authentication & Student Verification Endpoints ---
 @app.post("/api/auth/register")
-def register_endpoint(req: RegisterRequest, request: Request, _=Depends(rate_limit_register)):
+def register_endpoint(req: RegisterRequest, request: Request, background_tasks: BackgroundTasks, _=Depends(rate_limit_register)):
     try:
         user = create_user(
             email=req.email,
@@ -418,6 +429,15 @@ def register_endpoint(req: RegisterRequest, request: Request, _=Depends(rate_lim
             student_number=req.student_number or ""
         )
         token, expires_in = create_session_token(user["id"], user["username"], user["email"])
+        if email_configured() and user.get("email"):
+            uni = next((u for u in universities_data if u["id"] == user.get("university_id")), None)
+            background_tasks.add_task(
+                send_welcome_email,
+                user["email"],
+                user.get("full_name") or user["username"],
+                user["username"],
+                uni["name"] if uni else (user.get("university_id") or "").upper(),
+            )
         return {
             "status": "success",
             "user": user,
@@ -1885,7 +1905,8 @@ def admin_get_students_endpoint(
 def admin_update_student_access_endpoint(
     target_user_id: int,
     req: AdminStudentAccessRequest,
-    request: Request
+    request: Request,
+    background_tasks: BackgroundTasks,
 ):
     _require_admin(request)
     res = admin_update_student_access(
@@ -1898,6 +1919,15 @@ def admin_update_student_access_endpoint(
     )
     if not res.get("success"):
         raise HTTPException(status_code=404, detail=res.get("detail", "Öğrenci güncellenemedi."))
+    if email_configured() and res.get("is_verified"):
+        prof = get_profile(target_user_id)
+        if prof.get("email"):
+            background_tasks.add_task(
+                send_access_granted_email,
+                prof["email"],
+                prof.get("full_name") or prof.get("username") or "",
+                res.get("unlocked_universities", []),
+            )
     return res
 
 
@@ -1967,18 +1997,78 @@ def get_support_info_endpoint():
 
 
 @app.post("/api/support/ticket")
-def submit_support_ticket_endpoint(req: SupportTicketRequest, request: Request):
+def submit_support_ticket_endpoint(
+    req: SupportTicketRequest,
+    request: Request,
+    background_tasks: BackgroundTasks,
+):
     enforce_rate_limit(request, scope="support_ticket", max_requests=6, window_seconds=60)
     token_user = get_current_user_from_request(request)
     uid = token_user["user_id"] if token_user else None
-    return create_support_ticket(
+    sender_name = req.full_name or (token_user.get("username", "") if token_user else "")
+    sender_email = req.email or (token_user.get("email", "") if token_user else "")
+    res = create_support_ticket(
         message=req.message,
         category=req.category,
-        full_name=req.full_name or (token_user.get("username", "") if token_user else ""),
-        email=req.email or (token_user.get("email", "") if token_user else ""),
+        full_name=sender_name,
+        email=sender_email,
         phone=req.phone or "",
         user_id=uid,
     )
+    if email_configured() and res.get("ticket_id"):
+        background_tasks.add_task(
+            send_support_ticket_notification,
+            res["ticket_id"],
+            req.category,
+            sender_name,
+            sender_email,
+            req.phone or "",
+            req.message,
+        )
+        if sender_email and "@" in sender_email:
+            background_tasks.add_task(
+                send_support_ticket_receipt,
+                sender_email,
+                res["ticket_id"],
+                req.category,
+            )
+    return res
+
+
+class AdminTestEmailRequest(BaseModel):
+    to_email: Optional[str] = Field("", max_length=120)
+
+
+@app.get("/api/admin/email/status")
+def admin_email_status_endpoint(request: Request):
+    _require_admin(request)
+    return get_email_status()
+
+
+@app.post("/api/admin/email/test")
+def admin_test_email_endpoint(req: AdminTestEmailRequest, request: Request):
+    _require_admin(request)
+    target = (req.to_email or "toprakcihasan5@gmail.com").strip()
+    if "@" not in target:
+        raise HTTPException(status_code=400, detail="Geçerli bir hedef e-posta adresi giriniz.")
+    result = send_email_verbose(
+        to=target,
+        subject="PrepMaster E-Posta Altyapısı Canlı Testi",
+        text=(
+            "Merhaba Hasan,\n\n"
+            "PrepMaster e-posta gönderim altyapısı başarıyla çalışıyor!\n"
+            "Şifre sıfırlama, .edu.tr doğrulama kodları, hoş geldin mailleri ve destek bildirimleri aktif."
+        ),
+        html=(
+            '<p style="color:#334155;font-size:14px">Merhaba <b>Hasan</b>,</p>'
+            '<p style="color:#065f46;font-size:14px;background:#ecfdf5;border:1px solid #a7f3d0;padding:12px 16px;border-radius:12px">'
+            '✓ PrepMaster e-posta gönderim altyapısı canlı sunucuda başarıyla çalışıyor!</p>'
+            '<p style="color:#475569;font-size:13px">Şifre sıfırlama, .edu.tr OTP doğrulama, hoş geldin mailleri ve Destek/KVKK bildirimleri aktif durumdadır.</p>'
+        ),
+    )
+    if not result.get("success"):
+        raise HTTPException(status_code=503, detail=result.get("error") or "Test e-postası gönderilemedi.")
+    return result
 
 
 @app.get("/api/admin/support-tickets")
