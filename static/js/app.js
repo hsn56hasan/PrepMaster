@@ -115,6 +115,18 @@ async function initApp() {
     if (!window.appState.currentUser) {
       setAppShellVisible(false);
       openAuthModal(true);
+      try {
+        const qs = new URLSearchParams(window.location.search);
+        const reqUni = qs.get("uni");
+        const reqTab = qs.get("tab");
+        if (reqTab === "register") switchAuthTab("register");
+        if (reqUni) {
+          const sel = document.getElementById("reg-university");
+          if (sel && Array.from(sel.options).some(o => o.value === reqUni)) {
+            sel.value = reqUni;
+          }
+        }
+      } catch (_) {}
     } else if (!isUserVerifiedOrUnlocked(window.appState.currentUser)) {
       setAppShellVisible(false);
       document.getElementById("auth-modal")?.classList.add("hidden");

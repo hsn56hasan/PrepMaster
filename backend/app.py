@@ -7,7 +7,7 @@ from typing import List, Optional, Dict, Any
 from fastapi import FastAPI, HTTPException, Query, Request, Depends, status, UploadFile, File, Form, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse, JSONResponse, PlainTextResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, PlainTextResponse, Response
 from pydantic import BaseModel, Field, field_validator
 
 import sys
@@ -51,6 +51,16 @@ from email_service import (
 from paytr_service import (
     generate_paytr_iframe_token, verify_paytr_callback_hash, parse_merchant_oid,
     is_paytr_live_configured
+)
+from seo_pages import (
+    DEFAULT_PUBLIC_URL,
+    resolve_site_url,
+    get_google_verification_meta,
+    build_robots_txt,
+    build_sitemap_xml,
+    compute_counts_by_uni,
+    render_exams_hub_html,
+    render_university_seo_html,
 )
 
 from security import (
@@ -2083,11 +2093,53 @@ def serve_kvkk_page():
     return FileResponse(STATIC_DIR / "kvkk.html", media_type="text/html")
 
 
+@app.get("/robots.txt", response_class=PlainTextResponse)
+def serve_robots_txt(request: Request):
+    return PlainTextResponse(build_robots_txt(resolve_site_url(request)))
+
+
+@app.get("/sitemap.xml")
+def serve_sitemap_xml(request: Request):
+    xml = build_sitemap_xml(resolve_site_url(request), universities_data)
+    return Response(content=xml, media_type="application/xml")
+
+
+@app.get("/sinavlar", response_class=HTMLResponse)
+def serve_exams_hub(request: Request):
+    counts = compute_counts_by_uni(questions_data, listening_data, speaking_data)
+    html_str = render_exams_hub_html(resolve_site_url(request), universities_data, counts)
+    return HTMLResponse(content=html_str)
+
+
+@app.get("/universite/{uni_id}", response_class=HTMLResponse)
+def serve_university_seo_page(uni_id: str, request: Request):
+    uni = next((u for u in universities_data if u.get("id") == uni_id), None)
+    if not uni:
+        raise HTTPException(status_code=404, detail="Üniversite bulunamadı.")
+    counts = compute_counts_by_uni(questions_data, listening_data, speaking_data)
+    html_str = render_university_seo_html(
+        resolve_site_url(request),
+        uni,
+        universities_data,
+        counts.get(uni_id, {"questions": 0, "listening": 0, "speaking": 0}),
+    )
+    return HTMLResponse(content=html_str)
+
+
 # --- Static files ---
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
 @app.get("/")
-def serve_index():
+def serve_index(request: Request):
+    verif_meta = get_google_verification_meta()
+    env_site = os.getenv("SITE_URL", "").strip().rstrip("/")
+    if verif_meta or (env_site and env_site != DEFAULT_PUBLIC_URL):
+        html_str = (STATIC_DIR / "index.html").read_text(encoding="utf-8")
+        if env_site:
+            html_str = html_str.replace(DEFAULT_PUBLIC_URL, env_site)
+        if verif_meta:
+            html_str = html_str.replace("</head>", f"  {verif_meta}\n</head>", 1)
+        return HTMLResponse(content=html_str)
     return FileResponse(STATIC_DIR / "index.html")
 
 if __name__ == "__main__":
