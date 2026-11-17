@@ -19,8 +19,10 @@ def load_env(path: Path = _ENV_PATH) -> None:
         return
     _loaded = True
     # Testler gerçek .env'i (gerçek SMTP şifresi vb.) okumasın: test çalıştırılırken atla.
-    script = os.path.basename(sys.argv[0] if sys.argv else "")
-    if os.getenv("PREPMASTER_SKIP_DOTENV") or script.startswith("test_") or "pytest" in sys.modules:
+    argv0 = sys.argv[0] if sys.argv else ""
+    script = os.path.basename(argv0)
+    is_unittest_cli = argv0.endswith(" -m unittest")
+    if os.getenv("PREPMASTER_SKIP_DOTENV") or script.startswith("test_") or is_unittest_cli or "pytest" in sys.modules:
         return
     if not path.exists():
         return

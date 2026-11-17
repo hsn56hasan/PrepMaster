@@ -46,9 +46,9 @@ class TestOriginalQuestions(unittest.TestCase):
         template = re.compile(r"^q_[a-z_]+_(a1|a2|b1|b2|c1|c2)_\d+$|^q_general_prac_")
         self.assertFalse(any(template.search(q["id"]) for q in self.orj))
 
-    def test_mobile_copy_in_sync(self):
-        self.assertEqual((ROOT / "data" / "questions.json").read_bytes(),
-                         (ROOT / "mobile" / "assets" / "data" / "questions.json").read_bytes())
+    def test_original_questions_ship_in_mobile_app(self):
+        mobile = {q["id"] for q in load(ROOT / "mobile" / "assets" / "data" / "questions.json")}
+        self.assertTrue({q["id"] for q in self.orj} <= mobile)
 
 
 if __name__ == "__main__":

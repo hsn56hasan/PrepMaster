@@ -752,7 +752,9 @@ def main(write):
     print("Toplam soru:", len(data))
     if write:
         path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        shutil.copyfile(path, ROOT / "mobile" / "assets" / "data" / path.name)
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import sync_mobile_assets
+        sync_mobile_assets.sync()  # APK'ya yalnız ücretsiz genel içerik
         print("Yazıldı: data/questions.json ve mobile/assets/data/questions.json")
 
 

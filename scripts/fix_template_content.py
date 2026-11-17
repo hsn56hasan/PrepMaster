@@ -115,7 +115,9 @@ def main(write):
     if write:
         for n, p in paths.items():
             p.write_text(json.dumps(data[n], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-            shutil.copyfile(p, ROOT / "mobile" / "assets" / "data" / p.name)
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import sync_mobile_assets
+        sync_mobile_assets.sync()  # APK'ya yalnız ücretsiz genel içerik
         print("Yazıldı: data/ ve mobile/assets/data/")
 
 

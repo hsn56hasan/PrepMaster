@@ -164,6 +164,29 @@ def _has_access(token_user: Optional[Dict[str, Any]], university_id: str) -> boo
         return False
     return check_university_access(token_user["user_id"], university_id)
 
+def _filter_accessible(token_user: Optional[Dict[str, Any]], items: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """Kilitli üniversitelerin içeriğini listeden çıkarır (üniversite başına bir kez sorgular)."""
+    cache: Dict[str, bool] = {}
+    out = []
+    for item in items:
+        uni = item.get("university_id") or "general"
+        if uni not in cache:
+            cache[uni] = _has_access(token_user, uni)
+        if cache[uni]:
+            out.append(item)
+    return out
+
+
+def _require_item_access(request: Request, item: Dict[str, Any]) -> None:
+    uni = item.get("university_id") or "general"
+    if not _has_access(get_current_user_from_request(request), uni):
+        raise HTTPException(status_code=403, detail={
+            "error": "membership_required",
+            "message": f"{uni.upper()} içeriği için üyelik gereklidir.",
+            "university_id": uni,
+            "price_try": MEMBERSHIP_PRICE_TRY,
+        })
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
 STATIC_DIR = BASE_DIR / "static"
@@ -1023,6 +1046,7 @@ def get_writing_guides(level: Optional[str] = None):
 
 @app.get("/api/listening")
 def get_listening_list(
+    request: Request,
     university_id: Optional[str] = None,
     level: Optional[str] = None,
     type: Optional[str] = None,
@@ -1047,12 +1071,14 @@ def get_listening_list(
             a2_matches = [item for item in results if item.get("level", "").upper() == "A2"]
             if a2_matches:
                 results = a2_matches
-    return results
+    # Kilitli üniversitelerin dinleme sınavları yalnız erişimi olanlara (eskiden herkese açıktı)
+    return _filter_accessible(get_current_user_from_request(request), results)
 
 @app.get("/api/listening/{item_id}")
-def get_listening_detail(item_id: str):
+def get_listening_detail(item_id: str, request: Request):
     for item in listening_data:
         if item["id"] == item_id:
+            _require_item_access(request, item)
             return item
     raise HTTPException(status_code=404, detail="Listening item not found")
 
@@ -1448,6 +1474,7 @@ def get_overall_stats(request: Request):
 
 @app.get("/api/speaking")
 def get_speaking_tasks(
+    request: Request,
     university_id: Optional[str] = None,
     level: Optional[str] = None,
     strict_uni: bool = False,
@@ -1469,13 +1496,14 @@ def get_speaking_tasks(
             a2_matches = [t for t in results if t.get("level", "").upper() == "A2"]
             if a2_matches:
                 results = a2_matches
-    return results
+    return _filter_accessible(get_current_user_from_request(request), results)
 
 @app.get("/api/speaking/{task_id}")
-def get_speaking_task(task_id: str):
+def get_speaking_task(task_id: str, request: Request):
     task = next((t for t in speaking_data if t["id"] == task_id), None)
     if not task:
         raise HTTPException(status_code=404, detail="Speaking task not found")
+    _require_item_access(request, task)
     return task
 
 @app.post("/api/speaking/evaluate")
@@ -1801,9 +1829,9 @@ def get_mobile_app_info():
     return {
         "available": apk_path is not None,
         "app_name": "PrepMaster Mobil (Android)",
-        "version": "1.3.0",
+        "version": "1.4.0",
         "build_type": "Release (ARM64)",
-        "filename": "PrepMaster-v1.3-Android.apk",
+        "filename": "PrepMaster-v1.4-Android.apk",
         "size_mb": size_mb,
         "min_android": "Android 8.0+ (API 26+)",
         "download_url": "/api/download/apk",
@@ -1827,9 +1855,9 @@ def download_android_apk():
     return FileResponse(
         path=apk_path,
         media_type="application/vnd.android.package-archive",
-        filename="PrepMaster-v1.3-Android.apk",
+        filename="PrepMaster-v1.4-Android.apk",
         headers={
-            "Content-Disposition": 'attachment; filename="PrepMaster-v1.3-Android.apk"',
+            "Content-Disposition": 'attachment; filename="PrepMaster-v1.4-Android.apk"',
             "Cache-Control": "public, max-age=3600"
         }
     )

@@ -64,9 +64,14 @@ class TestVocabularyBank(unittest.TestCase):
     def test_question_ids_unique_and_mobile_in_sync(self):
         ids = [q["id"] for q in self.questions]
         self.assertEqual(len(ids), len(set(ids)))
-        for name in ("questions.json", "vocabulary.json"):
-            self.assertEqual((ROOT / "data" / name).read_bytes(),
-                             (ROOT / "mobile" / "assets" / "data" / name).read_bytes(), name)
+        mobile = ROOT / "mobile" / "assets" / "data"
+        self.assertEqual((ROOT / "data" / "vocabulary.json").read_bytes(), (mobile / "vocabulary.json").read_bytes())
+        # APK herkese açık bir dosyadır: ücretli (üniversiteye özel) içerik içine gömülmez
+        for name in ("questions.json", "listening.json", "speaking.json"):
+            shipped = json.loads((mobile / name).read_text(encoding="utf-8"))
+            self.assertEqual({x.get("university_id") for x in shipped}, {"general"}, name)
+            free = [x for x in load(name) if x.get("university_id") == "general"]
+            self.assertEqual(shipped, free, f"{name}: python scripts/sync_mobile_assets.py çalıştırın")
 
 
 if __name__ == "__main__":

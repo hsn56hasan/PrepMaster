@@ -1119,6 +1119,58 @@ class ApiService {
     return {'success': false, 'message': 'Ödeme için internet bağlantısı gerekiyor.'};
   }
 
+  // --- PayTR ile üniversite paketi satın alma (sitedeki akışın aynısı) ---
+  /// Ödemeyi başlatır: sunucu PayTR'den güvenli ödeme sayfası adresi alır. Kart bilgisi
+  /// uygulamaya ya da sunucuya gelmez; PayTR'nin sayfasında girilir. Kilit burada AÇILMAZ,
+  /// yalnızca PayTR'nin imzalı bildirimiyle sunucuda açılır.
+  Future<Map<String, dynamic>> startPaytrPayment({
+    required String universityId,
+    required String phone,
+  }) async {
+    try {
+      final res = await AuthHttp.instance.post(
+        Uri.parse('$baseUrl/api/payment/paytr/token'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'university_id': universityId,
+          'user_phone': phone,
+          'pre_info_accepted': true,
+        }),
+      ).timeout(const Duration(seconds: 15));
+      final data = json.decode(utf8.decode(res.bodyBytes));
+      if (res.statusCode == 200 && data['iframe_url'] != null) {
+        return {'success': true, 'merchant_oid': data['merchant_oid'], 'iframe_url': data['iframe_url']};
+      }
+      var detail = data is Map ? data['detail'] : null;
+      if (detail is List && detail.isNotEmpty) detail = 'Telefon numarasını kontrol edin (örn. 0532 123 45 67).';
+      if (res.statusCode == 401) detail = 'Oturumunuzun süresi dolmuş; çıkış yapıp yeniden giriş yapın.';
+      return {'success': false, 'message': detail?.toString() ?? 'Ödeme başlatılamadı.'};
+    } catch (_) {
+      return {'success': false, 'message': 'Ödeme için internet bağlantısı gerekiyor.'};
+    }
+  }
+
+  /// Siparişin sunucudaki durumu: pending / success / failed / amount_mismatch (null: ulaşılamadı).
+  Future<String?> getPaytrOrderStatus(String merchantOid) async {
+    try {
+      final res = await AuthHttp.instance
+          .get(Uri.parse('$baseUrl/api/payment/paytr/orders/$merchantOid'))
+          .timeout(const Duration(seconds: 6));
+      if (res.statusCode != 200) return null;
+      final data = json.decode(utf8.decode(res.bodyBytes));
+      if (data['status'] == 'success') {
+        final user = await loadSavedUser();
+        if (user != null && data['unlocked_universities'] is List) {
+          user['unlocked_universities'] = data['unlocked_universities'];
+          await saveCurrentUser(user);
+        }
+      }
+      return data['status']?.toString();
+    } catch (_) {
+      return null;
+    }
+  }
+
   Future<bool> checkUniversityAccess({
     required String universityId,
     int userId = 1,

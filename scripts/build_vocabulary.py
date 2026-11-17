@@ -309,8 +309,9 @@ def main(write):
             print("UYARI: sorunlu satırlar atlandı")
         vpath.write_text(json.dumps(vocab, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         qpath.write_text(json.dumps(questions, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        for p in (vpath, qpath):
-            shutil.copyfile(p, ROOT / "mobile" / "assets" / "data" / p.name)
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import sync_mobile_assets
+        sync_mobile_assets.sync()  # APK'ya yalnız ücretsiz genel içerik
         print("Yazıldı: data/ ve mobile/assets/data/ (vocabulary.json, questions.json)")
 
 

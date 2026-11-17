@@ -6,7 +6,7 @@ import 'package:prep_master/models/question.dart';
 import 'package:prep_master/models/vocabulary.dart';
 
 void main() {
-  group('Dataset Integrity Tests for Questions, 600 Vocab, 60 Listening Tracks', () {
+  group('Dataset Integrity Tests (APK içindeki ücretsiz içerik)', () {
     test('Questions JSON loads and parses all items with valid fields', () {
       final file = File('assets/data/questions.json');
       expect(file.existsSync(), isTrue);
@@ -29,14 +29,10 @@ void main() {
         universityCounts[question.universityId] = (universityCounts[question.universityId] ?? 0) + 1;
       }
 
-      const targetUniversities = ['hacettepe', 'ankara', 'gazi', 'ege', 'koc', 'sabanci'];
-      for (final uni in targetUniversities) {
-        expect(
-          universityCounts[uni] ?? 0,
-          greaterThanOrEqualTo(12),
-          reason: 'University $uni has fewer than 12 questions (${universityCounts[uni] ?? 0})',
-        );
-      }
+      // APK herkese açık bir dosyadır: ücretli üniversite soruları içine gömülmez,
+      // yalnız ücretsiz genel havuz gelir (üniversite içeriği sunucudan, erişim kontrolüyle).
+      expect(universityCounts.keys.toSet(), {'general'});
+      expect(universityCounts['general'], greaterThanOrEqualTo(5000));
     });
 
     test('Vocabulary JSON loads and parses all 600 items with valid fields', () {
@@ -58,14 +54,15 @@ void main() {
       }
     });
 
-    test('Listening JSON loads and parses all 60 tracks with questions', () {
+    test('Listening JSON: yalnız genel parçalar, hepsi geçerli', () {
       final file = File('assets/data/listening.json');
       expect(file.existsSync(), isTrue);
 
       final jsonStr = file.readAsStringSync();
       final List<dynamic> jsonList = jsonDecode(jsonStr);
 
-      expect(jsonList.length, greaterThanOrEqualTo(60));
+      expect(jsonList.length, greaterThanOrEqualTo(30));
+      expect(jsonList.map((e) => e['university_id']).toSet(), {'general'});
 
       for (var i = 0; i < jsonList.length; i++) {
         final item = jsonList[i];

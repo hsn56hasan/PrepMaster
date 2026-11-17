@@ -645,15 +645,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
             ElevatedButton.icon(
               onPressed: () async {
-                await ApiService().clearSavedUser();
                 if (ctx.mounted) Navigator.pop(ctx);
-                await _loadData();
-                if (mounted) {
-                  setState(() {});
-                  messenger.showSnackBar(
-                    const SnackBar(content: Text('Oturum kapatıldı.')),
-                  );
-                }
+                // Oturum kapanınca uygulama giriş ekranına döner (içerik girişsiz kullanılamaz)
+                if (mounted) await AuthGate.signOut(context);
               },
               icon: const Icon(Icons.logout, size: 16),
               label: const Text('Çıkış Yap'),

@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.db
+*.db-wal
+*.db-shm
 .venv/
 venv/
 
@@ -14,6 +16,7 @@ mobile/.flutter-plugins-dependencies
 mobile/.packages
 mobile/.pub-cache/
 mobile/.pub/
+.kotlin/
 
 # IDE
 .idea/

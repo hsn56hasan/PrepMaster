@@ -73,9 +73,12 @@ class TestQuickFixes(unittest.TestCase):
                 self.assertEqual(keys, sorted(keys), q["id"])
 
     def test_mobile_data_matches_backend_data(self):
+        # APK'ya yalnız ücretsiz genel içerik gömülür (scripts/sync_mobile_assets.py); genel kısım aynı olmalı
+        import json
         for name in ("questions.json", "listening.json", "speaking.json"):
-            self.assertEqual((DATA / name).read_bytes(),
-                             (BASE_DIR / "mobile" / "assets" / "data" / name).read_bytes(), name)
+            free = [x for x in json.loads((DATA / name).read_text(encoding="utf-8")) if x.get("university_id") == "general"]
+            shipped = json.loads((BASE_DIR / "mobile" / "assets" / "data" / name).read_text(encoding="utf-8"))
+            self.assertEqual(shipped, free, name)
 
     # #3 Sahte fatura bilgisi yok
     def test_payment_summary_is_not_a_fake_invoice(self):
