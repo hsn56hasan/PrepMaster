@@ -27,7 +27,7 @@ import ssl
 from datetime import datetime, timezone
 from email.message import EmailMessage
 from email.utils import formataddr, parseaddr
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 try:
     import env_loader  # noqa: F401  (.env'i yükler)
@@ -101,7 +101,73 @@ def _record_delivery(ok: bool, provider: str, to: str, subject: str, error: str 
     return result
 
 
-def send_email_verbose(to: str, subject: str, text: str, html: str = "") -> Dict[str, Any]:
+# ------------------------------------------------------------------ günlük bütçe
+# Brevo ücretsiz planı günde 300 e-posta. Kötüye kullanımda (ör. destek formuna seri
+# gönderim, başkası adına kayıt) bu kota dolarsa şifre sıfırlama ve doğrulama kodları da
+# gitmez. Bu yüzden e-postalar iki önceliğe ayrılır:
+#   - "kritik"  (şifre sıfırlama, doğrulama kodu, yönetici testi): EMAIL_DAILY_LIMIT'e kadar
+#   - "normal"  (hoş geldin, destek bildirimi/alındı, erişim bilgisi): EMAIL_DAILY_SOFT_LIMIT'e kadar
+# Ayrıca aynı alıcıya günde en fazla EMAIL_PER_RECIPIENT_DAILY "normal" e-posta gider.
+# Sayaçlar bellekte tutulur (tek işçi); yeniden başlatmada sıfırlanır — kota koruması için yeterli.
+import threading as _threading
+from datetime import datetime as _dt, timedelta as _td, timezone as _tz
+
+_BUDGET_LOCK = _threading.Lock()
+_BUDGET = {"day": None, "total": 0, "normal": 0, "per_recipient": {}}
+
+
+def _istanbul_day() -> str:
+    return (_dt.now(_tz.utc) + _td(hours=3)).strftime("%Y-%m-%d")
+
+
+def _limits() -> Dict[str, int]:
+    def _int(name, default):
+        try:
+            return max(0, int(os.getenv(name, str(default))))
+        except ValueError:
+            return default
+    return {
+        "hard": _int("EMAIL_DAILY_LIMIT", 290),
+        "soft": _int("EMAIL_DAILY_SOFT_LIMIT", 180),
+        "per_recipient": _int("EMAIL_PER_RECIPIENT_DAILY", 3),
+    }
+
+
+def _reserve_budget(to: str, priority: str) -> Optional[str]:
+    """Gönderim hakkı ayırır; hak yoksa nedenini döner (None = gönderilebilir)."""
+    lim = _limits()
+    rcpt = (to or "").strip().lower()
+    with _BUDGET_LOCK:
+        today = _istanbul_day()
+        if _BUDGET["day"] != today:
+            _BUDGET.update({"day": today, "total": 0, "normal": 0, "per_recipient": {}})
+        if _BUDGET["total"] >= lim["hard"]:
+            return "Günlük e-posta sınırına ulaşıldı."
+        if priority != "kritik":
+            if _BUDGET["normal"] >= lim["soft"]:
+                return "Günlük bilgilendirme e-postası sınırına ulaşıldı (kritik e-postalar için ayrıldı)."
+            if _BUDGET["per_recipient"].get(rcpt, 0) >= lim["per_recipient"]:
+                return "Bu alıcıya bugün yeterince e-posta gönderildi."
+            _BUDGET["normal"] += 1
+            _BUDGET["per_recipient"][rcpt] = _BUDGET["per_recipient"].get(rcpt, 0) + 1
+        _BUDGET["total"] += 1
+    return None
+
+
+def get_email_budget() -> Dict[str, Any]:
+    lim = _limits()
+    with _BUDGET_LOCK:
+        same_day = _BUDGET["day"] == _istanbul_day()
+        return {
+            "day": _istanbul_day(),
+            "sent_total": _BUDGET["total"] if same_day else 0,
+            "sent_normal": _BUDGET["normal"] if same_day else 0,
+            "daily_limit": lim["hard"],
+            "normal_limit": lim["soft"],
+        }
+
+
+def send_email_verbose(to: str, subject: str, text: str, html: str = "", priority: str = "normal") -> Dict[str, Any]:
     """E-postayı gönderir ve tanı sonucu döner; gizli bilgi içermez."""
     c = _cfg()
     provider = email_provider()
@@ -109,6 +175,11 @@ def send_email_verbose(to: str, subject: str, text: str, html: str = "") -> Dict
         msg = "E-posta sağlayıcısı ayarlı değil (EMAIL_FROM ve BREVO_API_KEY / RESEND_API_KEY / SMTP gerekli)."
         log.warning("E-posta ayarlı değil; gönderilmedi: %s", subject)
         return _record_delivery(False, "none", to, subject, msg)
+
+    blocked = _reserve_budget(to, priority)
+    if blocked:
+        log.warning("E-posta bütçe nedeniyle gönderilmedi (%s): %s", priority, subject)
+        return _record_delivery(False, provider, to, subject, blocked)
 
     try:
         if provider == "resend":
@@ -188,9 +259,9 @@ def send_email_verbose(to: str, subject: str, text: str, html: str = "") -> Dict
         return _record_delivery(False, provider, to, subject, err)
 
 
-def send_email(to: str, subject: str, text: str, html: str = "") -> bool:
+def send_email(to: str, subject: str, text: str, html: str = "", priority: str = "normal") -> bool:
     """Gönderir; başarıda True. Hata kullanıcıya sızdırılmaz, yalnızca loglanır."""
-    return bool(send_email_verbose(to, subject, text, html).get("success"))
+    return bool(send_email_verbose(to, subject, text, html, priority=priority).get("success"))
 
 
 # ------------------------------------------------------------------ şablonlar
@@ -217,7 +288,7 @@ def send_password_reset_email(to: str, code: str, minutes: int = 15) -> bool:
     html = _wrap("Şifre sıfırlama kodunuz",
                  f'<p style="color:#334155;font-size:14px">Uygulamadaki "Şifremi unuttum" ekranına bu kodu girin:</p>'
                  f'{_code_box(code)}<p style="color:#64748b;font-size:13px">Kod {minutes} dakika geçerlidir.</p>')
-    return send_email(to, f"PrepMaster şifre sıfırlama kodu: {code}", text, html)
+    return send_email(to, f"PrepMaster şifre sıfırlama kodu: {code}", text, html, priority="kritik")
 
 
 def send_student_otp_email(to: str, code: str, minutes: int = 5) -> bool:
@@ -225,7 +296,7 @@ def send_student_otp_email(to: str, code: str, minutes: int = 5) -> bool:
     html = _wrap("Öğrenci e-postası doğrulama",
                  f'<p style="color:#334155;font-size:14px">Öğrenci e-postanızı doğrulamak için bu kodu girin:</p>'
                  f'{_code_box(code)}<p style="color:#64748b;font-size:13px">Kod {minutes} dakika geçerlidir.</p>')
-    return send_email(to, f"PrepMaster doğrulama kodu: {code}", text, html)
+    return send_email(to, f"PrepMaster doğrulama kodu: {code}", text, html, priority="kritik")
 
 
 def send_welcome_email(to: str, full_name: str, username: str, university_name: str = "") -> bool:
@@ -279,7 +350,7 @@ def send_support_ticket_notification(
         f'<div><b>Telefon:</b> {_html.escape(student_phone or "-")}</div></div>'
         f'<p style="color:#0f172a;font-size:14px;background:#eff6ff;padding:14px;border-radius:12px;margin-top:14px;white-space:pre-wrap">{_html.escape(message)}</p>'
     )
-    return send_email(target, f"[PrepMaster Destek #{ticket_id}] {category}", text, html)
+    return send_email(target, f"[PrepMaster Destek #{ticket_id}] {(category or 'Genel')[:60]}", text, html)
 
 
 def send_support_ticket_receipt(to: str, ticket_id: int, category: str) -> bool:

@@ -346,7 +346,7 @@
     "topic": "Marine Robotics & Naval Architecture — Problem ve Çözüm Analizi (Problem-Solution)",
     "prep_time_seconds": 60,
     "speak_time_seconds": 120,
-    "instructions_tr": "İstanbul Teknik Üniversitesi (İTÜ Proficiency) B2 Kuru Sözlü Sınav Görevi (#14/24 — Problem ve Çözüm Analizi (Problem-Solution)): 60 saniye hazırlık süresinde deniz robotiği ve gemi inşaatı mühendisliği ve klinik çalışma随机 (rastgele) seçimi ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
+    "instructions_tr": "İstanbul Teknik Üniversitesi (İTÜ Proficiency) B2 Kuru Sözlü Sınav Görevi (#14/24 — Problem ve Çözüm Analizi (Problem-Solution)): 60 saniye hazırlık süresinde deniz robotiği ve gemi inşaatı mühendisliği ve klinik çalışmalarda rastgele seçim ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
     "prompt_en": "[İTÜ Proficiency • B2 Speaking #14] Within the context of marine robotics & naval architecture at İstanbul Teknik Üniversitesi (Maslak Kampüsü), to what extent should university departments prioritize clinical trial randomization and double-blind verification? Evaluate both the short-term implementation challenges and the long-term academic benefits.",
     "guiding_questions": [
       "How does investing in clinical trial randomization and double-blind verification strengthen marine robotics & naval architecture research at İTÜ?",
@@ -892,7 +892,7 @@
     "topic": "Aerospace Propulsion & Wind Tunnel Aerodynamics — Karşılaştırmalı Değerlendirme (Comparative Debate)",
     "prep_time_seconds": 60,
     "speak_time_seconds": 120,
-    "instructions_tr": "Orta Doğu Teknik Üniversitesi (ODTÜ EPE) B1 Kuru Sözlü Sınav Görevi (#11/24 — Karşılaştırmalı Değerlendirme (Comparative Debate)): 60 saniye hazırlık süresinde havacılık itki sistemleri ve rüzgar tüneli aerodinamiği ve klinik çalışma随机 (rastgele) seçimi ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
+    "instructions_tr": "Orta Doğu Teknik Üniversitesi (ODTÜ EPE) B1 Kuru Sözlü Sınav Görevi (#11/24 — Karşılaştırmalı Değerlendirme (Comparative Debate)): 60 saniye hazırlık süresinde havacılık itki sistemleri ve rüzgar tüneli aerodinamiği ve klinik çalışmalarda rastgele seçim ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
     "prompt_en": "[ODTÜ EPE • B1 Speaking #11] Within the context of aerospace propulsion & wind tunnel aerodynamics at Orta Doğu Teknik Üniversitesi (Orta Doğu Teknik Kampüsü), to what extent should university departments prioritize clinical trial randomization and double-blind verification? Evaluate both the short-term implementation challenges and the long-term academic benefits.",
     "guiding_questions": [
       "How does investing in clinical trial randomization and double-blind verification strengthen aerospace propulsion & wind tunnel aerodynamics research at ODTÜ?",
@@ -1438,7 +1438,7 @@
     "topic": "Cognitive Linguistics & Behavioral Epistemology — Vaka ve Politika Sunumu (Case Policy Briefing)",
     "prep_time_seconds": 60,
     "speak_time_seconds": 120,
-    "instructions_tr": "Boğaziçi Üniversitesi (Boğaziçi BUEPT) A2 Kuru Sözlü Sınav Görevi (#8/24 — Vaka ve Politika Sunumu (Case Policy Briefing)): 60 saniye hazırlık süresinde bilişsel dilbilim ve davranışsal epistemoloji ve klinik çalışma随机 (rastgele) seçimi ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
+    "instructions_tr": "Boğaziçi Üniversitesi (Boğaziçi BUEPT) A2 Kuru Sözlü Sınav Görevi (#8/24 — Vaka ve Politika Sunumu (Case Policy Briefing)): 60 saniye hazırlık süresinde bilişsel dilbilim ve davranışsal epistemoloji ve klinik çalışmalarda rastgele seçim ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
     "prompt_en": "[Boğaziçi BUEPT • A2 Speaking #8] Within the context of cognitive linguistics & behavioral epistemology at Boğaziçi Üniversitesi (Güney Kampüs), to what extent should university departments prioritize clinical trial randomization and double-blind verification? Evaluate both the short-term implementation challenges and the long-term academic benefits.",
     "guiding_questions": [
       "How does investing in clinical trial randomization and double-blind verification strengthen cognitive linguistics & behavioral epistemology research at BOÜN?",
@@ -1984,7 +1984,7 @@
     "topic": "Nanophotonics & Quantum Semiconductor Fabrication — Akademik Görüş Savunması (Opinion Defense)",
     "prep_time_seconds": 60,
     "speak_time_seconds": 120,
-    "instructions_tr": "Bilkent Üniversitesi (Bilkent PAE / COPE) A2 Kuru Sözlü Sınav Görevi (#5/24 — Akademik Görüş Savunması (Opinion Defense)): 60 saniye hazırlık süresinde nanofotonik ve kuantum yarı iletken üretimi ve klinik çalışma随机 (rastgele) seçimi ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
+    "instructions_tr": "Bilkent Üniversitesi (Bilkent PAE / COPE) A2 Kuru Sözlü Sınav Görevi (#5/24 — Akademik Görüş Savunması (Opinion Defense)): 60 saniye hazırlık süresinde nanofotonik ve kuantum yarı iletken üretimi ve klinik çalışmalarda rastgele seçim ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
     "prompt_en": "[Bilkent PAE / COPE • A2 Speaking #5] Within the context of nanophotonics & quantum semiconductor fabrication at Bilkent Üniversitesi (Bilkent Merkez Kampüs), to what extent should university departments prioritize clinical trial randomization and double-blind verification? Evaluate both the short-term implementation challenges and the long-term academic benefits.",
     "guiding_questions": [
       "How does investing in clinical trial randomization and double-blind verification strengthen nanophotonics & quantum semiconductor fabrication research at BİLKENT?",
@@ -2530,7 +2530,7 @@
     "topic": "Mechatronic Control Systems & Industrial Automation — Problem ve Çözüm Analizi (Problem-Solution)",
     "prep_time_seconds": 60,
     "speak_time_seconds": 120,
-    "instructions_tr": "Yıldız Teknik Üniversitesi (YTÜ İYS) A1 Kuru Sözlü Sınav Görevi (#2/24 — Problem ve Çözüm Analizi (Problem-Solution)): 60 saniye hazırlık süresinde mekatronik kontrol sistemleri ve endüstriyel otomasyon ve klinik çalışma随机 (rastgele) seçimi ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
+    "instructions_tr": "Yıldız Teknik Üniversitesi (YTÜ İYS) A1 Kuru Sözlü Sınav Görevi (#2/24 — Problem ve Çözüm Analizi (Problem-Solution)): 60 saniye hazırlık süresinde mekatronik kontrol sistemleri ve endüstriyel otomasyon ve klinik çalışmalarda rastgele seçim ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
     "prompt_en": "[YTÜ İYS • A1 Speaking #2] Within the context of mechatronic control systems & industrial automation at Yıldız Teknik Üniversitesi (Davutpaşa Kampüsü), to what extent should university departments prioritize clinical trial randomization and double-blind verification? Evaluate both the short-term implementation challenges and the long-term academic benefits.",
     "guiding_questions": [
       "How does investing in clinical trial randomization and double-blind verification strengthen mechatronic control systems & industrial automation research at YTÜ?",
@@ -4948,7 +4948,7 @@
     "topic": "Biomedical Immunology & Clinical Pharmacology — Karşılaştırmalı Değerlendirme (Comparative Debate)",
     "prep_time_seconds": 60,
     "speak_time_seconds": 120,
-    "instructions_tr": "Hacettepe Üniversitesi (Hacettepe İYS) C2 Kuru Sözlü Sınav Görevi (#23/24 — Karşılaştırmalı Değerlendirme (Comparative Debate)): 60 saniye hazırlık süresinde biyomedikal immünoloji ve klinik farmakoloji ve klinik çalışma随机 (rastgele) seçimi ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
+    "instructions_tr": "Hacettepe Üniversitesi (Hacettepe İYS) C2 Kuru Sözlü Sınav Görevi (#23/24 — Karşılaştırmalı Değerlendirme (Comparative Debate)): 60 saniye hazırlık süresinde biyomedikal immünoloji ve klinik farmakoloji ve klinik çalışmalarda rastgele seçim ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
     "prompt_en": "[Hacettepe İYS • C2 Speaking #23] Within the context of biomedical immunology & clinical pharmacology at Hacettepe Üniversitesi (Beytepe Kampüsü), to what extent should university departments prioritize clinical trial randomization and double-blind verification? Evaluate both the short-term implementation challenges and the long-term academic benefits.",
     "guiding_questions": [
       "How does investing in clinical trial randomization and double-blind verification strengthen biomedical immunology & clinical pharmacology research at HÜ?",
@@ -5494,7 +5494,7 @@
     "topic": "Pedagogical Curriculum Design & Educational Technology — Vaka ve Politika Sunumu (Case Policy Briefing)",
     "prep_time_seconds": 60,
     "speak_time_seconds": 120,
-    "instructions_tr": "Gazi Üniversitesi (Gazi Üni İYS) C1 Kuru Sözlü Sınav Görevi (#20/24 — Vaka ve Politika Sunumu (Case Policy Briefing)): 60 saniye hazırlık süresinde pedagojik müfredat tasarımı ve eğitim teknolojileri ve klinik çalışma随机 (rastgele) seçimi ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
+    "instructions_tr": "Gazi Üniversitesi (Gazi Üni İYS) C1 Kuru Sözlü Sınav Görevi (#20/24 — Vaka ve Politika Sunumu (Case Policy Briefing)): 60 saniye hazırlık süresinde pedagojik müfredat tasarımı ve eğitim teknolojileri ve klinik çalışmalarda rastgele seçim ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
     "prompt_en": "[Gazi Üni İYS • C1 Speaking #20] Within the context of pedagogical curriculum design & educational technology at Gazi Üniversitesi (Beşevler Kampüsü), to what extent should university departments prioritize clinical trial randomization and double-blind verification? Evaluate both the short-term implementation challenges and the long-term academic benefits.",
     "guiding_questions": [
       "How does investing in clinical trial randomization and double-blind verification strengthen pedagogical curriculum design & educational technology research at GAZİ?",
@@ -6040,7 +6040,7 @@
     "topic": "Agricultural Biotechnology & Mediterranean Agronomy — Akademik Görüş Savunması (Opinion Defense)",
     "prep_time_seconds": 60,
     "speak_time_seconds": 120,
-    "instructions_tr": "Ege Üniversitesi (Ege Üni İYS) C1 Kuru Sözlü Sınav Görevi (#17/24 — Akademik Görüş Savunması (Opinion Defense)): 60 saniye hazırlık süresinde tarımsal biyoteknoloji ve Akdeniz agronomisi ve klinik çalışma随机 (rastgele) seçimi ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
+    "instructions_tr": "Ege Üniversitesi (Ege Üni İYS) C1 Kuru Sözlü Sınav Görevi (#17/24 — Akademik Görüş Savunması (Opinion Defense)): 60 saniye hazırlık süresinde tarımsal biyoteknoloji ve Akdeniz agronomisi ve klinik çalışmalarda rastgele seçim ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
     "prompt_en": "[Ege Üni İYS • C1 Speaking #17] Within the context of agricultural biotechnology & mediterranean agronomy at Ege Üniversitesi (Bornova Kampüsü), to what extent should university departments prioritize clinical trial randomization and double-blind verification? Evaluate both the short-term implementation challenges and the long-term academic benefits.",
     "guiding_questions": [
       "How does investing in clinical trial randomization and double-blind verification strengthen agricultural biotechnology & mediterranean agronomy research at EGE?",
@@ -6586,7 +6586,7 @@
     "topic": "Macroeconomic Monetary Policy & Financial Econometrics — Problem ve Çözüm Analizi (Problem-Solution)",
     "prep_time_seconds": 60,
     "speak_time_seconds": 120,
-    "instructions_tr": "Koç Üniversitesi (Koç KUEPE) B2 Kuru Sözlü Sınav Görevi (#14/24 — Problem ve Çözüm Analizi (Problem-Solution)): 60 saniye hazırlık süresinde makroekonomik para politikası ve finansal ekonometri ve klinik çalışma随机 (rastgele) seçimi ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
+    "instructions_tr": "Koç Üniversitesi (Koç KUEPE) B2 Kuru Sözlü Sınav Görevi (#14/24 — Problem ve Çözüm Analizi (Problem-Solution)): 60 saniye hazırlık süresinde makroekonomik para politikası ve finansal ekonometri ve klinik çalışmalarda rastgele seçim ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
     "prompt_en": "[Koç KUEPE • B2 Speaking #14] Within the context of macroeconomic monetary policy & financial econometrics at Koç Üniversitesi (Rumelifeneri Kampüsü), to what extent should university departments prioritize clinical trial randomization and double-blind verification? Evaluate both the short-term implementation challenges and the long-term academic benefits.",
     "guiding_questions": [
       "How does investing in clinical trial randomization and double-blind verification strengthen macroeconomic monetary policy & financial econometrics research at KOÇ?",
@@ -7132,7 +7132,7 @@
     "topic": "Computational Materials Science & Polymer Composites — Karşılaştırmalı Değerlendirme (Comparative Debate)",
     "prep_time_seconds": 60,
     "speak_time_seconds": 120,
-    "instructions_tr": "Sabancı Üniversitesi (Sabancı ELAE) B1 Kuru Sözlü Sınav Görevi (#11/24 — Karşılaştırmalı Değerlendirme (Comparative Debate)): 60 saniye hazırlık süresinde hesaplamalı malzeme bilimi ve polimer kompozitler ve klinik çalışma随机 (rastgele) seçimi ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
+    "instructions_tr": "Sabancı Üniversitesi (Sabancı ELAE) B1 Kuru Sözlü Sınav Görevi (#11/24 — Karşılaştırmalı Değerlendirme (Comparative Debate)): 60 saniye hazırlık süresinde hesaplamalı malzeme bilimi ve polimer kompozitler ve klinik çalışmalarda rastgele seçim ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
     "prompt_en": "[Sabancı ELAE • B1 Speaking #11] Within the context of computational materials science & polymer composites at Sabancı Üniversitesi (Tuzla Kampüsü), to what extent should university departments prioritize clinical trial randomization and double-blind verification? Evaluate both the short-term implementation challenges and the long-term academic benefits.",
     "guiding_questions": [
       "How does investing in clinical trial randomization and double-blind verification strengthen computational materials science & polymer composites research at SU?",
@@ -7678,7 +7678,7 @@
     "topic": "International Banking Regulation & Digital Commerce — Vaka ve Politika Sunumu (Case Policy Briefing)",
     "prep_time_seconds": 60,
     "speak_time_seconds": 120,
-    "instructions_tr": "Marmara Üniversitesi (Marmara MÜYYES) A2 Kuru Sözlü Sınav Görevi (#8/24 — Vaka ve Politika Sunumu (Case Policy Briefing)): 60 saniye hazırlık süresinde uluslararası bankacılık regülasyonu ve dijital ticaret ve klinik çalışma随机 (rastgele) seçimi ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
+    "instructions_tr": "Marmara Üniversitesi (Marmara MÜYYES) A2 Kuru Sözlü Sınav Görevi (#8/24 — Vaka ve Politika Sunumu (Case Policy Briefing)): 60 saniye hazırlık süresinde uluslararası bankacılık regülasyonu ve dijital ticaret ve klinik çalışmalarda rastgele seçim ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
     "prompt_en": "[Marmara MÜYYES • A2 Speaking #8] Within the context of international banking regulation & digital commerce at Marmara Üniversitesi (Göztepe Kampüsü), to what extent should university departments prioritize clinical trial randomization and double-blind verification? Evaluate both the short-term implementation challenges and the long-term academic benefits.",
     "guiding_questions": [
       "How does investing in clinical trial randomization and double-blind verification strengthen international banking regulation & digital commerce research at MARMARA?",
@@ -8224,7 +8224,7 @@
     "topic": "Byzantine-Ottoman Archival Historiography & Philology — Akademik Görüş Savunması (Opinion Defense)",
     "prep_time_seconds": 60,
     "speak_time_seconds": 120,
-    "instructions_tr": "İstanbul Üniversitesi (İstanbul Üni YDY) A2 Kuru Sözlü Sınav Görevi (#5/24 — Akademik Görüş Savunması (Opinion Defense)): 60 saniye hazırlık süresinde Bizans-Osmanlı arşiv tarihçiliği ve filoloji ve klinik çalışma随机 (rastgele) seçimi ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
+    "instructions_tr": "İstanbul Üniversitesi (İstanbul Üni YDY) A2 Kuru Sözlü Sınav Görevi (#5/24 — Akademik Görüş Savunması (Opinion Defense)): 60 saniye hazırlık süresinde Bizans-Osmanlı arşiv tarihçiliği ve filoloji ve klinik çalışmalarda rastgele seçim ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
     "prompt_en": "[İstanbul Üni YDY • A2 Speaking #5] Within the context of byzantine-ottoman archival historiography & philology at İstanbul Üniversitesi (Beyazıt Kampüsü), to what extent should university departments prioritize clinical trial randomization and double-blind verification? Evaluate both the short-term implementation challenges and the long-term academic benefits.",
     "guiding_questions": [
       "How does investing in clinical trial randomization and double-blind verification strengthen byzantine-ottoman archival historiography & philology research at İÜ?",
@@ -8770,7 +8770,7 @@
     "topic": "Neurosurgical Diagnostics & Cardiovascular Pathology — Problem ve Çözüm Analizi (Problem-Solution)",
     "prep_time_seconds": 60,
     "speak_time_seconds": 120,
-    "instructions_tr": "İstanbul Üniversitesi-Cerrahpaşa (İÜ-Cerrahpaşa İYS) A1 Kuru Sözlü Sınav Görevi (#2/24 — Problem ve Çözüm Analizi (Problem-Solution)): 60 saniye hazırlık süresinde nöroşirürji tanı yöntemleri ve kardiyovasküler patoloji ve klinik çalışma随机 (rastgele) seçimi ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
+    "instructions_tr": "İstanbul Üniversitesi-Cerrahpaşa (İÜ-Cerrahpaşa İYS) A1 Kuru Sözlü Sınav Görevi (#2/24 — Problem ve Çözüm Analizi (Problem-Solution)): 60 saniye hazırlık süresinde nöroşirürji tanı yöntemleri ve kardiyovasküler patoloji ve klinik çalışmalarda rastgele seçim ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
     "prompt_en": "[İÜ-Cerrahpaşa İYS • A1 Speaking #2] Within the context of neurosurgical diagnostics & cardiovascular pathology at İstanbul Üniversitesi-Cerrahpaşa (Cerrahpaşa Yerleşkesi), to what extent should university departments prioritize clinical trial randomization and double-blind verification? Evaluate both the short-term implementation challenges and the long-term academic benefits.",
     "guiding_questions": [
       "How does investing in clinical trial randomization and double-blind verification strengthen neurosurgical diagnostics & cardiovascular pathology research at İÜ-C?",
@@ -11188,7 +11188,7 @@
     "topic": "Distance Learning Media & Audiovisual Communication — Karşılaştırmalı Değerlendirme (Comparative Debate)",
     "prep_time_seconds": 60,
     "speak_time_seconds": 120,
-    "instructions_tr": "Anadolu Üniversitesi (Anadolu Üni YDY) C2 Kuru Sözlü Sınav Görevi (#23/24 — Karşılaştırmalı Değerlendirme (Comparative Debate)): 60 saniye hazırlık süresinde uzaktan eğitim medyası ve görsel-işitsel iletişim ve klinik çalışma随机 (rastgele) seçimi ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
+    "instructions_tr": "Anadolu Üniversitesi (Anadolu Üni YDY) C2 Kuru Sözlü Sınav Görevi (#23/24 — Karşılaştırmalı Değerlendirme (Comparative Debate)): 60 saniye hazırlık süresinde uzaktan eğitim medyası ve görsel-işitsel iletişim ve klinik çalışmalarda rastgele seçim ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
     "prompt_en": "[Anadolu Üni YDY • C2 Speaking #23] Within the context of distance learning media & audiovisual communication at Anadolu Üniversitesi (Yunus Emre Kampüsü), to what extent should university departments prioritize clinical trial randomization and double-blind verification? Evaluate both the short-term implementation challenges and the long-term academic benefits.",
     "guiding_questions": [
       "How does investing in clinical trial randomization and double-blind verification strengthen distance learning media & audiovisual communication research at ANADOLU?",
@@ -11734,7 +11734,7 @@
     "topic": "Civil Aviation Traffic Management & Avionics Safety — Vaka ve Politika Sunumu (Case Policy Briefing)",
     "prep_time_seconds": 60,
     "speak_time_seconds": 120,
-    "instructions_tr": "Eskişehir Teknik Üniversitesi (ESTÜ İYS) C1 Kuru Sözlü Sınav Görevi (#20/24 — Vaka ve Politika Sunumu (Case Policy Briefing)): 60 saniye hazırlık süresinde sivil havacılık trafik yönetimi ve aviyonik güvenliği ve klinik çalışma随机 (rastgele) seçimi ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
+    "instructions_tr": "Eskişehir Teknik Üniversitesi (ESTÜ İYS) C1 Kuru Sözlü Sınav Görevi (#20/24 — Vaka ve Politika Sunumu (Case Policy Briefing)): 60 saniye hazırlık süresinde sivil havacılık trafik yönetimi ve aviyonik güvenliği ve klinik çalışmalarda rastgele seçim ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
     "prompt_en": "[ESTÜ İYS • C1 Speaking #20] Within the context of civil aviation traffic management & avionics safety at Eskişehir Teknik Üniversitesi (İki Eylül Kampüsü), to what extent should university departments prioritize clinical trial randomization and double-blind verification? Evaluate both the short-term implementation challenges and the long-term academic benefits.",
     "guiding_questions": [
       "How does investing in clinical trial randomization and double-blind verification strengthen civil aviation traffic management & avionics safety research at ESTÜ?",
@@ -12280,7 +12280,7 @@
     "topic": "Cybersecurity Cryptography & Distributed Cloud Networks — Akademik Görüş Savunması (Opinion Defense)",
     "prep_time_seconds": 60,
     "speak_time_seconds": 120,
-    "instructions_tr": "Gebze Teknik Üniversitesi (GTÜ İYS) C1 Kuru Sözlü Sınav Görevi (#17/24 — Akademik Görüş Savunması (Opinion Defense)): 60 saniye hazırlık süresinde siber güvenlik kriptografisi ve dağıtık bulut ağları ve klinik çalışma随机 (rastgele) seçimi ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
+    "instructions_tr": "Gebze Teknik Üniversitesi (GTÜ İYS) C1 Kuru Sözlü Sınav Görevi (#17/24 — Akademik Görüş Savunması (Opinion Defense)): 60 saniye hazırlık süresinde siber güvenlik kriptografisi ve dağıtık bulut ağları ve klinik çalışmalarda rastgele seçim ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
     "prompt_en": "[GTÜ İYS • C1 Speaking #17] Within the context of cybersecurity cryptography & distributed cloud networks at Gebze Teknik Üniversitesi (Çayırova Kampüsü), to what extent should university departments prioritize clinical trial randomization and double-blind verification? Evaluate both the short-term implementation challenges and the long-term academic benefits.",
     "guiding_questions": [
       "How does investing in clinical trial randomization and double-blind verification strengthen cybersecurity cryptography & distributed cloud networks research at GTÜ?",
@@ -12826,7 +12826,7 @@
     "topic": "Sustainable Coastal Tourism & Marine Coral Conservation — Problem ve Çözüm Analizi (Problem-Solution)",
     "prep_time_seconds": 60,
     "speak_time_seconds": 120,
-    "instructions_tr": "Akdeniz Üniversitesi (Akdeniz Üni İYS) B2 Kuru Sözlü Sınav Görevi (#14/24 — Problem ve Çözüm Analizi (Problem-Solution)): 60 saniye hazırlık süresinde sürdürülebilir kıyı turizmi ve deniz mercanlarının korunması ve klinik çalışma随机 (rastgele) seçimi ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
+    "instructions_tr": "Akdeniz Üniversitesi (Akdeniz Üni İYS) B2 Kuru Sözlü Sınav Görevi (#14/24 — Problem ve Çözüm Analizi (Problem-Solution)): 60 saniye hazırlık süresinde sürdürülebilir kıyı turizmi ve deniz mercanlarının korunması ve klinik çalışmalarda rastgele seçim ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
     "prompt_en": "[Akdeniz Üni İYS • B2 Speaking #14] Within the context of sustainable coastal tourism & marine coral conservation at Akdeniz Üniversitesi (Antalya Kampüsü), to what extent should university departments prioritize clinical trial randomization and double-blind verification? Evaluate both the short-term implementation challenges and the long-term academic benefits.",
     "guiding_questions": [
       "How does investing in clinical trial randomization and double-blind verification strengthen sustainable coastal tourism & marine coral conservation research at AKDENİZ?",
@@ -13372,7 +13372,7 @@
     "topic": "Subtropical Irrigation Engineering & Soil Salinity — Karşılaştırmalı Değerlendirme (Comparative Debate)",
     "prep_time_seconds": 60,
     "speak_time_seconds": 120,
-    "instructions_tr": "Çukurova Üniversitesi (Çukurova YADYO) B1 Kuru Sözlü Sınav Görevi (#11/24 — Karşılaştırmalı Değerlendirme (Comparative Debate)): 60 saniye hazırlık süresinde subtropikal sulama mühendisliği ve toprak tuzluluğu ve klinik çalışma随机 (rastgele) seçimi ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
+    "instructions_tr": "Çukurova Üniversitesi (Çukurova YADYO) B1 Kuru Sözlü Sınav Görevi (#11/24 — Karşılaştırmalı Değerlendirme (Comparative Debate)): 60 saniye hazırlık süresinde subtropikal sulama mühendisliği ve toprak tuzluluğu ve klinik çalışmalarda rastgele seçim ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
     "prompt_en": "[Çukurova YADYO • B1 Speaking #11] Within the context of subtropical irrigation engineering & soil salinity at Çukurova Üniversitesi (Balcalı Kampüsü), to what extent should university departments prioritize clinical trial randomization and double-blind verification? Evaluate both the short-term implementation challenges and the long-term academic benefits.",
     "guiding_questions": [
       "How does investing in clinical trial randomization and double-blind verification strengthen subtropical irrigation engineering & soil salinity research at ÇÜ?",
@@ -13918,7 +13918,7 @@
     "topic": "Automotive Powertrain Engineering & Electric Chassis Design — Vaka ve Politika Sunumu (Case Policy Briefing)",
     "prep_time_seconds": 60,
     "speak_time_seconds": 120,
-    "instructions_tr": "Bursa Uludağ Üniversitesi (Uludağ BUÜ İYS) A2 Kuru Sözlü Sınav Görevi (#8/24 — Vaka ve Politika Sunumu (Case Policy Briefing)): 60 saniye hazırlık süresinde otomotiv güç aktarma mühendisliği ve elektrikli şasi tasarımı ve klinik çalışma随机 (rastgele) seçimi ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
+    "instructions_tr": "Bursa Uludağ Üniversitesi (Uludağ BUÜ İYS) A2 Kuru Sözlü Sınav Görevi (#8/24 — Vaka ve Politika Sunumu (Case Policy Briefing)): 60 saniye hazırlık süresinde otomotiv güç aktarma mühendisliği ve elektrikli şasi tasarımı ve klinik çalışmalarda rastgele seçim ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
     "prompt_en": "[Uludağ BUÜ İYS • A2 Speaking #8] Within the context of automotive powertrain engineering & electric chassis design at Bursa Uludağ Üniversitesi (Görükle Kampüsü), to what extent should university departments prioritize clinical trial randomization and double-blind verification? Evaluate both the short-term implementation challenges and the long-term academic benefits.",
     "guiding_questions": [
       "How does investing in clinical trial randomization and double-blind verification strengthen automotive powertrain engineering & electric chassis design research at BUÜ?",
@@ -14464,7 +14464,7 @@
     "topic": "Entrepreneurial Venture Scaling & FinTech Innovation — Akademik Görüş Savunması (Opinion Defense)",
     "prep_time_seconds": 60,
     "speak_time_seconds": 120,
-    "instructions_tr": "Özyeğin Üniversitesi (Özyeğin TRACE) A2 Kuru Sözlü Sınav Görevi (#5/24 — Akademik Görüş Savunması (Opinion Defense)): 60 saniye hazırlık süresinde girişimcilik ölçeklendirme ve finansal teknoloji inovasyonu ve klinik çalışma随机 (rastgele) seçimi ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
+    "instructions_tr": "Özyeğin Üniversitesi (Özyeğin TRACE) A2 Kuru Sözlü Sınav Görevi (#5/24 — Akademik Görüş Savunması (Opinion Defense)): 60 saniye hazırlık süresinde girişimcilik ölçeklendirme ve finansal teknoloji inovasyonu ve klinik çalışmalarda rastgele seçim ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
     "prompt_en": "[Özyeğin TRACE • A2 Speaking #5] Within the context of entrepreneurial venture scaling & fintech innovation at Özyeğin Üniversitesi (Çekmeköy Kampüsü), to what extent should university departments prioritize clinical trial randomization and double-blind verification? Evaluate both the short-term implementation challenges and the long-term academic benefits.",
     "guiding_questions": [
       "How does investing in clinical trial randomization and double-blind verification strengthen entrepreneurial venture scaling & fintech innovation research at ÖZÜ?",
@@ -15010,7 +15010,7 @@
     "topic": "Artificial Intelligence Governance & Smart City Media — Problem ve Çözüm Analizi (Problem-Solution)",
     "prep_time_seconds": 60,
     "speak_time_seconds": 120,
-    "instructions_tr": "Bahçeşehir Üniversitesi (BAU Proficiency) A1 Kuru Sözlü Sınav Görevi (#2/24 — Problem ve Çözüm Analizi (Problem-Solution)): 60 saniye hazırlık süresinde yapay zeka yönetişimi ve akıllı şehir medyası ve klinik çalışma随机 (rastgele) seçimi ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
+    "instructions_tr": "Bahçeşehir Üniversitesi (BAU Proficiency) A1 Kuru Sözlü Sınav Görevi (#2/24 — Problem ve Çözüm Analizi (Problem-Solution)): 60 saniye hazırlık süresinde yapay zeka yönetişimi ve akıllı şehir medyası ve klinik çalışmalarda rastgele seçim ve çift kör doğrulama konusundaki argümanlarınızı planlayın, ardından 2 dakika boyunca akademik bir dille konuşun.",
     "prompt_en": "[BAU Proficiency • A1 Speaking #2] Within the context of artificial intelligence governance & smart city media at Bahçeşehir Üniversitesi (Beşiktaş Kampüsü), to what extent should university departments prioritize clinical trial randomization and double-blind verification? Evaluate both the short-term implementation challenges and the long-term academic benefits.",
     "guiding_questions": [
       "How does investing in clinical trial randomization and double-blind verification strengthen artificial intelligence governance & smart city media research at BAU?",

@@ -60,7 +60,7 @@ class TestEmailEndpoints(unittest.TestCase):
         self.assertEqual(self.client.get("/api/admin/email/status").status_code, 401)
         self.assertEqual(self.client.post("/api/admin/email/test", json={"to_email": "a@b.com"}).status_code, 401)
 
-        reg = self.client.post("/api/auth/register", json={
+        reg = self.client.post("/api/auth/register", json={"terms_accepted": True, 
             "email": "plain_student@example.com",
             "username": "plain_student_mail",
             "password": "Parola123!",
@@ -117,7 +117,7 @@ class TestEmailEndpoints(unittest.TestCase):
         with mock.patch.dict(os.environ, env, clear=True):
             import httpx
             with mock.patch.object(httpx, "post", return_value=mock.Mock(status_code=201, text="{}")) as post:
-                reg = self.client.post("/api/auth/register", json={
+                reg = self.client.post("/api/auth/register", json={"terms_accepted": True, 
                     "email": "mail_ogr@itu.edu.tr",
                     "username": "mail_ogr_test",
                     "password": "Parola123!",
@@ -126,23 +126,38 @@ class TestEmailEndpoints(unittest.TestCase):
                 })
                 self.assertEqual(reg.status_code, 200, reg.text)
                 uid = reg.json()["user"]["id"]
+                ogr_h = {"Authorization": "Bearer " + reg.json()["token"]}
                 subjects = [c.kwargs["json"]["subject"] for c in post.call_args_list]
                 self.assertTrue(any("Hoş Geldin" in s for s in subjects), subjects)
 
                 post.reset_mock()
                 ticket = self.client.post("/api/support/ticket", json={
-                    "category": "Ödeme / Erişim",
+                    "category": "Ödeme & Fatura İşlemleri",
                     "full_name": "Mail Ogrenci",
-                    "email": "mail_ogr@itu.edu.tr",
+                    "email": "baska-biri@example.com",
                     "phone": "05398381887",
                     "message": "Erişim kontrolü istiyorum.",
-                })
+                }, headers=ogr_h)
                 self.assertEqual(ticket.status_code, 200, ticket.text)
-                # 1 bildirim (prepmasteryonetici@gmail.com) + 1 alındı onayı (öğrenciye)
+                # 1 bildirim (yöneticiye) + 1 alındı onayı — formdaki adrese DEĞİL, hesabın adresine
                 self.assertEqual(post.call_count, 2)
                 recipients = [c.kwargs["json"]["to"][0]["email"] for c in post.call_args_list]
                 self.assertIn("prepmasteryonetici@gmail.com", recipients)
                 self.assertIn("mail_ogr@itu.edu.tr", recipients)
+                self.assertNotIn("baska-biri@example.com", recipients)
+
+                # Giriş yapmamış ziyaretçi: yalnız yöneticiye bildirim, yazdığı adrese e-posta gitmez
+                post.reset_mock()
+                anon = self.client.post("/api/support/ticket", json={
+                    "category": "<a href=x>tikla</a>",
+                    "full_name": "Ziyaretci",
+                    "email": "kurban@example.com",
+                    "message": "Spam denemesi metni.",
+                })
+                self.assertEqual(anon.status_code, 200, anon.text)
+                recipients = [c.kwargs["json"]["to"][0]["email"] for c in post.call_args_list]
+                self.assertEqual(recipients, ["prepmasteryonetici@gmail.com"])
+                self.assertTrue(post.call_args.kwargs["json"]["subject"].endswith("Genel Destek"))
 
                 post.reset_mock()
                 acc = self.client.post(f"/api/admin/students/{uid}/access", json={

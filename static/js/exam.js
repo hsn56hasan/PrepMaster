@@ -67,6 +67,15 @@ async function startExamSimulation(universityId = null, level = null, category =
       }
     }
 
+    // Genel havuz binlerce soru içerir: karma sınavda okulun soruları + rastgele genel sorularla en fazla 40 soru
+    if (!strictUni || uniId === 'general') {
+      const shuffle = (arr) => { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; };
+      let schoolQs = uniId === 'general' ? [] : questions.filter(q => q.university_id === uniId);
+      if (schoolQs.length > 30) schoolQs = shuffle(schoolQs).slice(0, 30);
+      const otherQs = shuffle(questions.filter(q => uniId === 'general' || q.university_id !== uniId));
+      questions = schoolQs.concat(otherQs.slice(0, 40 - schoolQs.length));
+    }
+
     const customTitle = `${uniId.toUpperCase()} • ${category && category !== 'all' ? category : 'Özel Sınav'} (${targetLevel === 'all' ? 'Tüm Kurlar' : targetLevel})`;
     launchExamWithQuestions(questions, uniId, targetLevel === 'all' ? (window.appState.currentLevel || 'B2') : targetLevel, false, null, customTitle);
 
@@ -255,7 +264,7 @@ function renderCurrentQuestion() {
     ${q.passage ? `
       <div class="mb-6 p-5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-700 text-sm leading-relaxed font-serif">
         <div class="text-xs font-bold tracking-wider uppercase text-slate-400 mb-2 font-sans">Okuma Parçası (Reading Passage)</div>
-        ${q.passage}
+        <div class="whitespace-pre-line">${q.passage}</div>
       </div>
     ` : ''}
 

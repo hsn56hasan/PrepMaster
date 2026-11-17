@@ -77,11 +77,19 @@ class ExamsScreen extends StatelessWidget {
       return;
     }
 
-    final questions = await ApiService().getQuestions(
+    final fetched = await ApiService().getQuestions(
       universityId: currentUniversity.id,
       level: level ?? currentLevel,
       category: category,
     );
+    // Genel havuz binlerce soru içerir: okulun soruları (en fazla 30) + rastgele genel sorularla en fazla 40 soru
+    var schoolQs = fetched.where((q) => q.universityId == currentUniversity.id).toList();
+    if (schoolQs.length > 30) {
+      schoolQs.shuffle();
+      schoolQs = schoolQs.take(30).toList();
+    }
+    final otherQs = fetched.where((q) => q.universityId != currentUniversity.id).toList()..shuffle();
+    final questions = [...schoolQs, ...otherQs.take(40 - schoolQs.length)];
 
     if (questions.isEmpty) {
       if (context.mounted) {

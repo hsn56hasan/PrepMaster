@@ -124,6 +124,10 @@
       setMsg("Lütfen cep telefonunuzu girin (05XX XXX XX XX).", false);
       return;
     }
+    if (!$("paytr-pre-info")?.checked) {
+      setMsg("Devam etmek için Ön Bilgilendirme Formu ve Mesafeli Satış Sözleşmesi'ni onaylayın.", false);
+      return;
+    }
     const btn = $("btn-paytr-start");
     btn.disabled = true;
     setMsg("");
@@ -131,7 +135,7 @@
       const res = await fetch("/api/payment/paytr/token", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ university_id: uniId, user_phone: phone }),
+        body: JSON.stringify({ university_id: uniId, user_phone: phone, pre_info_accepted: true }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {

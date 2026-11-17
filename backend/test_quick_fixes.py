@@ -52,7 +52,7 @@ class TestQuickFixes(unittest.TestCase):
         app_module.DEMO_MODE = False
 
     def _register(self, username):
-        res = self.client.post("/api/auth/register", json={
+        res = self.client.post("/api/auth/register", json={"terms_accepted": True, 
             "email": f"{username}@example.com", "username": username, "password": "Parola123!",
             "full_name": "Test Ogrenci", "university_id": "itu",
         })
@@ -221,6 +221,55 @@ class TestQuickFixes(unittest.TestCase):
         usernames = {s["username"] for s in admin_list}
         self.assertIn("kalici_ogrenci", usernames)
         self.assertIn("deneme", usernames)
+
+    # Kayıt onayları: sözleşme zorunlu, açık rıza isteğe bağlı; ikisi de zamanla kaydedilir
+    def test_register_requires_terms_and_records_consents(self):
+        base = {"username": "onaycu", "password": "Parola123!", "full_name": "Onay Test", "university_id": "itu"}
+        r = self.client.post("/api/auth/register", json={**base, "email": "onaycu@example.com"})
+        self.assertEqual(r.status_code, 400)
+        r = self.client.post("/api/auth/register", json={**base, "email": "onaycu@example.com", "terms_accepted": True})
+        self.assertEqual(r.status_code, 200, r.text)
+        conn = db.get_db()
+        row = conn.execute("SELECT terms_accepted_at, explicit_consent_at FROM users WHERE username='onaycu'").fetchone()
+        conn.close()
+        self.assertIsNotNone(row["terms_accepted_at"])
+        self.assertIsNone(row["explicit_consent_at"])
+        r = self.client.post("/api/auth/register", json={**base, "username": "onaycu2", "email": "onaycu2@example.com",
+                                                          "terms_accepted": True, "explicit_consent": True})
+        self.assertEqual(r.status_code, 200, r.text)
+        conn = db.get_db()
+        row = conn.execute("SELECT explicit_consent_at FROM users WHERE username='onaycu2'").fetchone()
+        conn.close()
+        self.assertIsNotNone(row["explicit_consent_at"])
+
+    def test_registration_checkboxes_start_unchecked(self):
+        html = (BASE_DIR / "static" / "index.html").read_text(encoding="utf-8")
+        import re
+        for cid in ("reg-kvkk-consent", "reg-explicit-consent", "paytr-pre-info"):
+            tag = re.search(r'<input[^>]*id="%s"[^>]*>' % cid, html)
+            self.assertIsNotNone(tag, cid)
+            self.assertNotIn("checked", tag.group(0), cid)
+
+    # İçerik denetimi (15.11): mekanik hatalar geri gelmesin
+    def test_content_mechanical_issues_fixed(self):
+        import re
+        for name in ("questions.json", "listening.json", "speaking.json"):
+            raw = (DATA / name).read_text(encoding="utf-8")
+            self.assertNotIn("随机", raw, name)
+            self.assertNotIn("proficiency proficiency", raw.lower(), name)
+        qs = load("questions.json")
+        for q in qs:
+            if "encountered severe" in q["question"]:
+                correct = next(o["text"] for o in q["options"] if o["key"] == q["correct_answer"])
+                self.assertEqual(correct, "nevertheless", q["id"])
+        # Şablon sorularda doğru şıkkın yeri soru numarasından tahmin edilemesin
+        by_slot = collections.defaultdict(collections.Counter)
+        for q in qs:
+            m = re.match(r"^q_[a-z_]+_(?:a1|a2|b1|b2|c1|c2)_(\d+)$", q["id"])
+            if m:
+                by_slot[m.group(1)][q["correct_answer"]] += 1
+        for slot, c in by_slot.items():
+            self.assertLess(max(c.values()) / sum(c.values()), 0.5, f"soru #{slot}: {dict(c)}")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,220 @@
+# Biçim: kelime|tür|okunuş|Türkçe anlam|İngilizce tanım|eş anlamlılar (;)|zıt anlamlılar (; ya da -)|örnek cümle (kelimenin yalın hâli geçmeli)|kalıp
+abide|verb|/əˈbaɪd/|Uymak (kurala)|To accept and obey a rule or decision.|obey;comply|disobey|All members must abide by the code of conduct.|abide by
+accentuate|verb|/əkˈsentʃueɪt/|Vurgulamak, belirginleştirmek|To make something more noticeable.|emphasize;highlight|minimize|The new lighting will accentuate the building's design.|accentuate the positive
+acclaim|noun|/əˈkleɪm/|Övgü, beğeni|Public praise.|praise;applause|criticism|Her first novel received international acclaim.|critical acclaim
+accrue|verb|/əˈkruː/|Birikmek, tahakkuk etmek|To increase gradually over time.|accumulate;build up|-|Interest will accrue on the unpaid amount.|accrue interest
+adept|adjective|/əˈdept/|Usta, becerikli|Very skilled at something.|skilful;proficient|inept|She is adept at explaining complex ideas.|adept at
+adhere|verb|/ədˈhɪə/|Bağlı kalmak, uymak|To follow a rule or belief closely.|follow;stick to|deviate|Researchers must adhere to ethical guidelines.|adhere to
+advent|noun|/ˈædvent/|Ortaya çıkış, geliş|The arrival of an important development.|arrival;emergence|departure|The advent of the internet changed education.|the advent of
+adverse|adjective|/ˈædvɜːs/|Olumsuz, ters|Harmful or unfavourable.|harmful;negative|favourable|The drug has few adverse effects.|adverse effect
+advocacy|noun|/ˈædvəkəsi/|Savunuculuk|Public support for a cause.|support;promotion|opposition|The group is known for its advocacy of free education.|advocacy group
+affluent|adjective|/ˈæfluənt/|Varlıklı|Having a lot of money.|wealthy;prosperous|poor|Students from affluent families have more resources.|affluent area
+aggregate|noun|/ˈæɡrɪɡət/|Toplam|A total formed by combining several amounts.|total;sum|-|The aggregate of the three scores determines your grade.|in aggregate
+alienate|verb|/ˈeɪliəneɪt/|Yabancılaştırmak|To make someone feel isolated or unfriendly.|estrange;isolate|unite|Harsh criticism may alienate students.|alienate from
+allegation|noun|/ˌæləˈɡeɪʃn/|İddia, suçlama|A claim that someone has done wrong, without proof.|claim;accusation|-|The minister denied every allegation of corruption.|make an allegation
+allude|verb|/əˈluːd/|İma etmek|To mention something indirectly.|hint;refer|-|The author seems to allude to her own childhood.|allude to
+amass|verb|/əˈmæs/|Biriktirmek, toplamak|To collect a large amount over time.|accumulate;gather|disperse|The professor managed to amass a huge library.|amass a fortune
+amenable|adjective|/əˈmiːnəbl/|Uysal, yatkın|Willing to accept or be influenced.|receptive;open|resistant|The committee seemed amenable to our suggestions.|amenable to
+amend|verb|/əˈmend/|Değiştirmek, düzeltmek (yasa/metin)|To make changes to a text or law.|revise;modify|-|Parliament voted to amend the education law.|amend a law
+analogous|adjective|/əˈnæləɡəs/|Benzer, örnekseyen|Similar in some way.|comparable;similar|dissimilar|The brain is sometimes said to be analogous to a computer.|analogous to
+anomaly|noun|/əˈnɒməli/|Anomali, aykırılık|Something unusual or unexpected.|irregularity;oddity|norm|The low score was an anomaly in her record.|statistical anomaly
+apprehensive|adjective|/ˌæprɪˈhensɪv/|Endişeli|Worried that something bad will happen.|anxious;uneasy|confident|Many students are apprehensive about the oral exam.|apprehensive about
+arbitrate|verb|/ˈɑːbɪtreɪt/|Hakemlik yapmak|To settle a dispute officially.|mediate;judge|-|An independent body will arbitrate the dispute.|arbitrate between
+archaic|adjective|/ɑːˈkeɪɪk/|Eskimiş, arkaik|Very old or old-fashioned.|outdated;obsolete|modern|Some of the vocabulary in the text is archaic.|archaic language
+assert|verb|/əˈsɜːt/|İleri sürmek|To state something firmly.|declare;claim|deny|The author tries to assert her independence.|assert that
+assimilate|verb|/əˈsɪmɪleɪt/|Özümsemek, uyum sağlamak|To absorb information; to become part of a group.|absorb;integrate|reject|It takes time to assimilate so much new information.|assimilate into
+attenuate|verb|/əˈtenjueɪt/|Zayıflatmak|To reduce the force or effect of something.|weaken;reduce|intensify|Thick walls attenuate the noise from the street.|attenuate the effect
+augment|verb|/ɔːɡˈment/|Artırmak|To make something larger by adding to it.|increase;supplement|reduce|Many lecturers augment their income by writing books.|augment income
+authentic|adjective|/ɔːˈθentɪk/|Özgün, gerçek|Real and not a copy.|genuine;original|fake|Use authentic texts such as newspaper articles.|authentic material
+benchmark|noun|/ˈbentʃmɑːk/|Ölçüt, kıyaslama noktası|A standard used to compare others.|standard;criterion|-|The exam serves as a benchmark for language ability.|set a benchmark
+bestow|verb|/bɪˈstəʊ/|Bahşetmek, vermek|To give an honour or gift.|grant;confer|withhold|The university will bestow an honorary degree on the writer.|bestow upon
+bleak|adjective|/bliːk/|Kasvetli, umutsuz|Without hope; cold and unwelcoming.|grim;dismal|hopeful|The economic outlook seems bleak.|bleak future
+blatant|adjective|/ˈbleɪtnt/|Bariz, açık|Very obvious and shameless.|obvious;flagrant|subtle|Copying the essay was a blatant example of plagiarism.|blatant lie
+buoyant|adjective|/ˈbɔɪənt/|Canlı, iyimser; yüzebilen|Cheerful and confident; able to float.|cheerful;thriving|depressed|The market remained buoyant despite the crisis.|buoyant economy
+burgeon|verb|/ˈbɜːdʒən/|Hızla gelişmek|To grow or develop quickly.|flourish;expand|shrink|Small tech companies burgeon in the city centre.|burgeon rapidly
+caveat|noun|/ˈkæviæt/|Çekince, uyarı|A warning or condition.|warning;proviso|-|The results are promising, with one caveat.|important caveat
+cede|verb|/siːd/|Bırakmak, devretmek|To give up power or land.|surrender;yield|retain|The state refused to cede control of the port.|cede control
+censure|noun|/ˈsenʃə/|Kınama|Strong official criticism.|condemnation;criticism|praise|The minister faced public censure.|vote of censure
+coalition|noun|/ˌkəʊəˈlɪʃn/|Koalisyon|A temporary alliance of groups.|alliance;union|-|A coalition of student groups organized the event.|coalition government
+cognitive|adjective|/ˈkɒɡnətɪv/|Bilişsel|Relating to thinking and understanding.|mental;intellectual|-|Sleep affects cognitive performance.|cognitive skills
+coherence|noun|/kəʊˈhɪərəns/|Tutarlılık|The quality of being logical and well organized.|consistency;unity|incoherence|Examiners check the coherence of your essay.|lack of coherence
+commence|verb|/kəˈmens/|Başlamak|To begin (formal).|begin;start|end|The exam will commence at nine o'clock.|commence with
+commodity|noun|/kəˈmɒdəti/|Emtia, mal|A product that can be bought and sold.|product;goods|-|Water is becoming a valuable commodity.|basic commodity
+complement|verb|/ˈkɒmplɪment/|Tamamlamak|To add to something in a way that improves it.|complete;enhance|-|Online exercises complement the classroom lessons.|complement each other
+comply|verb|/kəmˈplaɪ/|Uymak|To obey a rule or request.|obey;conform|defy|All laboratories must comply with safety rules.|comply with
+comprehend|verb|/ˌkɒmprɪˈhend/|Kavramak|To understand fully.|understand;grasp|misunderstand|It is hard to comprehend the size of the universe.|fully comprehend
+concise|adjective|/kənˈsaɪs/|Özlü, kısa ve öz|Giving information clearly in few words.|brief;succinct|wordy|Write a concise summary of the lecture.|concise answer
+condone|verb|/kənˈdəʊn/|Göz yummak|To accept behaviour that is morally wrong.|excuse;overlook|condemn|The university does not condone cheating.|condone violence
+confer|verb|/kənˈfɜː/|Vermek (unvan); görüşmek|To give an honour; to discuss with others.|grant;consult|-|The judges will confer before announcing the winner.|confer with
+conformity|noun|/kənˈfɔːməti/|Uygunluk, uyma|Behaviour that follows accepted rules.|compliance;obedience|nonconformity|The novel criticizes social conformity.|in conformity with
+consecutive|adjective|/kənˈsekjətɪv/|Ardışık|Following one after another.|successive;sequential|-|She won the prize for three consecutive years.|consecutive days
+consolidation|noun|/kənˌsɒlɪˈdeɪʃn/|Pekiştirme, birleştirme|The process of making something stronger or combining things.|strengthening;merger|-|The final week is for consolidation of grammar.|period of consolidation
+constituent|noun|/kənˈstɪtʃuənt/|Bileşen; seçmen|A part of a whole; a voter.|component;voter|-|Oxygen is a constituent of water.|main constituent
+constitute|verb|/ˈkɒnstɪtjuːt/|Oluşturmak|To form or make up something.|make up;comprise|-|Women constitute half of the workforce.|constitute a threat
+contemplation|noun|/ˌkɒntəmˈpleɪʃn/|Derin düşünce|Careful thought over a long time.|reflection;meditation|-|The garden is a place for quiet contemplation.|deep contemplation
+contend|verb|/kənˈtend/|İddia etmek; mücadele etmek|To argue that something is true; to compete.|argue;compete|-|Some critics contend that the test is unfair.|contend with
+convene|verb|/kənˈviːn/|Toplanmak, toplantıya çağırmak|To come together for a meeting.|assemble;gather|disperse|The committee will convene next Monday.|convene a meeting
+conversely|adverb|/ˈkɒnvɜːsli/|Tersine|In the opposite way.|on the other hand;inversely|similarly|Some students prefer mornings; conversely, others work best at night.|and conversely
+convey|verb|/kənˈveɪ/|İletmek, aktarmak|To communicate an idea or feeling.|communicate;express|-|Your essay should convey a clear message.|convey meaning
+credibility|noun|/ˌkredəˈbɪləti/|Güvenilirlik|The quality of being believed or trusted.|reliability;trustworthiness|doubt|Citing sources improves the credibility of your work.|lose credibility
+criterion|noun|/kraɪˈtɪəriən/|Ölçüt|A standard for judging something.|standard;measure|-|Originality is one criterion for the award.|main criterion
+culminate|verb|/ˈkʌlmɪneɪt/|Doruğa ulaşmak, sonuçlanmak|To reach a final point.|end;climax|begin|The course will culminate in a final presentation.|culminate in
+curtail|verb|/kɜːˈteɪl/|Kısıtlamak, kısaltmak|To reduce or limit something.|reduce;restrict|extend|Budget cuts may curtail research activities.|curtail spending
+debilitate|verb|/dɪˈbɪlɪteɪt/|Zayıflatmak, güçten düşürmek|To make someone or something weak.|weaken;enfeeble|strengthen|Long illness can debilitate even young people.|debilitate the body
+decipher|verb|/dɪˈsaɪfə/|Çözmek (şifre/yazı)|To discover the meaning of something difficult to read.|decode;interpret|encode|It was hard to decipher the professor's handwriting.|decipher a code
+decisive|adjective|/dɪˈsaɪsɪv/|Belirleyici; kararlı|Very important for the result; able to decide quickly.|crucial;resolute|indecisive|Funding was the decisive factor.|decisive role
+deem|verb|/diːm/|Saymak, addetmek|To consider something in a particular way.|consider;judge|-|The committee may deem the application incomplete.|deem necessary
+default|noun|/dɪˈfɔːlt/|Varsayılan; temerrüt|What happens if no other choice is made; failure to pay.|standard setting;non-payment|-|The default language of the app is English.|by default
+deficient|adjective|/dɪˈfɪʃnt/|Eksik, yetersiz|Not having enough of something.|lacking;inadequate|sufficient|The diet was deficient in vitamins.|deficient in
+deflect|verb|/dɪˈflekt/|Saptırmak|To make something change direction; to avoid criticism.|divert;avert|-|He tried to deflect attention from his mistake.|deflect criticism
+degrade|verb|/dɪˈɡreɪd/|Bozmak, değerini düşürmek|To make worse in quality; to break down.|deteriorate;demean|improve|Plastic takes centuries to degrade.|degrade the environment
+delegate|verb|/ˈdelɪɡeɪt/|Yetki devretmek|To give part of your work to someone else.|assign;entrust|-|Good leaders delegate tasks to their team.|delegate responsibility
+demographic|adjective|/ˌdeməˈɡræfɪk/|Demografik|Relating to the structure of populations.|population|-|Demographic changes affect university enrolment.|demographic data
+denote|verb|/dɪˈnəʊt/|Belirtmek, ifade etmek|To be a sign of something.|indicate;signify|-|The symbol is used to denote a correct answer.|denote a meaning
+depict|verb|/dɪˈpɪkt/|Tasvir etmek|To represent in words or pictures.|portray;describe|-|The novel tries to depict village life.|depict as
+deplete|verb|/dɪˈpliːt/|Tüketmek|To reduce the amount of something greatly.|exhaust;drain|replenish|Overfishing can deplete the oceans.|deplete resources
+deploy|verb|/dɪˈplɔɪ/|Konuşlandırmak, kullanmak|To use something effectively; to send to a place.|use;position|withdraw|Writers deploy many techniques to persuade.|deploy resources
+deter|verb|/dɪˈtɜː/|Caydırmak|To discourage someone from doing something.|discourage;prevent|encourage|High fees deter many students from applying.|deter from
+deviate|verb|/ˈdiːvieɪt/|Sapmak|To move away from what is normal or planned.|diverge;stray|conform|Do not deviate from the topic in your essay.|deviate from
+diligence|noun|/ˈdɪlɪdʒəns/|Özen, gayret|Careful and steady effort.|effort;care|laziness|Her diligence was rewarded with a scholarship.|due diligence
+dimension|noun|/daɪˈmenʃn/|Boyut|An aspect or feature of something.|aspect;feature|-|The problem has an ethical dimension.|new dimension
+disclose|verb|/dɪsˈkləʊz/|Açıklamak, ifşa etmek|To make information known.|reveal;expose|conceal|The company refused to disclose its profits.|disclose information
+discourse|noun|/ˈdɪskɔːs/|Söylem|Written or spoken communication on a subject.|communication;debate|-|Political discourse has become more polarized.|academic discourse
+discrete|adjective|/dɪˈskriːt/|Ayrı, ayrık|Separate and distinct.|separate;distinct|connected|The course is divided into discrete units.|discrete units
+disposal|noun|/dɪˈspəʊzl/|Elden çıkarma, kullanım|The act of getting rid of something.|removal;discarding|-|Safe disposal of chemical waste is essential.|at your disposal
+disproportionate|adjective|/ˌdɪsprəˈpɔːʃənət/|Orantısız|Too large or too small in comparison with something.|excessive;unequal|proportionate|Poor families pay a disproportionate share of their income on rent.|disproportionate effect
+distort|verb|/dɪˈstɔːt/|Çarpıtmak|To change something so that it is false.|twist;misrepresent|clarify|The headline may distort the findings.|distort the truth
+diversify|verb|/daɪˈvɜːsɪfaɪ/|Çeşitlendirmek|To increase the variety of something.|vary;broaden|narrow|Farmers diversify their crops to reduce risk.|diversify into
+doctrine|noun|/ˈdɒktrɪn/|Doktrin, öğreti|A set of beliefs.|principle;dogma|-|The doctrine shaped the country's foreign policy.|political doctrine
+dormant|adjective|/ˈdɔːmənt/|Uykuda, etkisiz|Not active for a time.|inactive;latent|active|The volcano has been dormant for centuries.|lie dormant
+drastic|adjective|/ˈdræstɪk/|Sert, köklü|Having a strong or extreme effect.|extreme;radical|mild|The university took drastic measures to cut costs.|drastic measures
+elicit|verb|/ɪˈlɪsɪt/|Ortaya çıkarmak, almak (tepki)|To get information or a reaction from someone.|draw out;evoke|-|The teacher tried to elicit answers from the students.|elicit a response
+eminent|adjective|/ˈemɪnənt/|Seçkin, ünlü|Famous and respected.|distinguished;renowned|unknown|An eminent historian gave the opening lecture.|eminent scientist
+empathy|noun|/ˈempəθi/|Empati|The ability to understand others' feelings.|understanding;compassion|indifference|Teachers need empathy for struggling learners.|show empathy
+encompass|verb|/ɪnˈkʌmpəs/|Kapsamak|To include many things.|include;cover|exclude|The course will encompass both theory and practice.|encompass a range
+endorse|verb|/ɪnˈdɔːs/|Desteklemek, onaylamak|To publicly support something.|support;approve|oppose|Several experts endorse the new method.|endorse a proposal
+endeavour|noun|/ɪnˈdevə/|Çaba, girişim|An attempt to do something difficult.|effort;attempt|-|Research is a collaborative endeavour.|human endeavour
+entail|verb|/ɪnˈteɪl/|Gerektirmek|To involve something as a necessary part.|involve;require|-|The job will entail a lot of travel.|entail risk
+entrench|verb|/ɪnˈtrentʃ/|Kökleştirmek|To establish something firmly so it is hard to change.|establish;embed|uproot|Old habits entrench inequality.|deeply entrench
+erratic|adjective|/ɪˈrætɪk/|Düzensiz, değişken|Not regular or predictable.|unpredictable;irregular|consistent|His attendance has been erratic this term.|erratic behaviour
+escalate|verb|/ˈeskəleɪt/|Tırmanmak, artmak|To become more serious or intense.|intensify;increase|decrease|The argument began to escalate quickly.|escalate into
+evoke|verb|/ɪˈvəʊk/|Uyandırmak, çağrıştırmak|To bring a feeling or memory to mind.|arouse;summon|suppress|The smell can evoke childhood memories.|evoke a memory
+exemplary|adjective|/ɪɡˈzempləri/|Örnek alınacak|Excellent and a good example to others.|model;ideal|deplorable|Her behaviour in class was exemplary.|exemplary conduct
+exempt|adjective|/ɪɡˈzempt/|Muaf|Not required to do something others must do.|excused;free|liable|Students with a high score are exempt from the prep year.|exempt from
+explicitly|adverb|/ɪkˈsplɪsɪtli/|Açıkça|In a clear and direct way.|clearly;directly|implicitly|The rules explicitly forbid phones in the exam.|explicitly state
+exponential|adjective|/ˌekspəˈnenʃl/|Üstel, katlanarak artan|Increasing more and more rapidly.|rapid;accelerating|-|The app saw exponential growth in users.|exponential growth
+fabricate|verb|/ˈfæbrɪkeɪt/|Uydurmak; üretmek|To invent false information; to make a product.|invent;manufacture|-|Researchers who fabricate data lose their jobs.|fabricate evidence
+facet|noun|/ˈfæsɪt/|Yön, boyut|One part or aspect of something.|aspect;side|-|Each facet of the problem needs attention.|every facet
+fallacy|noun|/ˈfæləsi/|Safsata, yanılgı|A false idea or wrong reasoning.|misconception;error|truth|It is a fallacy that rich people are always happy.|common fallacy
+feasible|adjective|/ˈfiːzəbl/|Yapılabilir|Possible and practical.|possible;practicable|impossible|Is it feasible to finish the project by May?|economically feasible
+foresee|verb|/fɔːˈsiː/|Öngörmek|To know something will happen before it does.|predict;anticipate|-|Nobody could foresee such a fast change.|foresee problems
+forge|verb|/fɔːdʒ/|Kurmak (ilişki); sahtesini yapmak|To create a strong relationship; to copy illegally.|build;counterfeit|-|The universities hope to forge closer links.|forge a relationship
+fragment|noun|/ˈfræɡmənt/|Parça|A small broken piece.|piece;part|whole|Archaeologists found a fragment of an ancient pot.|small fragment
+fragile|adjective|/ˈfrædʒaɪl/|Kırılgan|Easily broken or damaged.|delicate;weak|sturdy|The peace between the two groups is fragile.|fragile ecosystem
+futile|adjective|/ˈfjuːtaɪl/|Boşuna, nafile|Having no chance of success.|useless;pointless|effective|It is futile to argue with the referee.|futile attempt
+gauge|verb|/ɡeɪdʒ/|Ölçmek, kestirmek|To measure or judge something.|measure;assess|-|The survey will gauge student satisfaction.|gauge opinion
+generic|adjective|/dʒəˈnerɪk/|Genel, jenerik|Not specific; shared by a group.|general;common|specific|Avoid generic statements in your conclusion.|generic term
+grievance|noun|/ˈɡriːvns/|Şikâyet, yakınma|A complaint about unfair treatment.|complaint;grudge|-|Students can submit a grievance to the ombudsman.|file a grievance
+hamper|verb|/ˈhæmpə/|Engellemek|To make progress difficult.|hinder;obstruct|help|Bad weather may hamper the rescue work.|hamper progress
+hinder|verb|/ˈhɪndə/|Engel olmak|To make it difficult for something to happen.|obstruct;impede|assist|Noise can hinder concentration.|hinder progress
+holistic|adjective|/həʊˈlɪstɪk/|Bütüncül|Dealing with the whole rather than parts.|comprehensive;integrated|partial|The school takes a holistic approach to education.|holistic approach
+homogeneous|adjective|/ˌhɒməˈdʒiːniəs/|Homojen, türdeş|Made of parts that are all the same.|uniform;similar|heterogeneous|The class is far from homogeneous.|homogeneous group
+hypothetical|adjective|/ˌhaɪpəˈθetɪkl/|Varsayımsal|Based on possible ideas, not facts.|theoretical;imagined|actual|Consider this hypothetical situation.|hypothetical question
+impair|verb|/ɪmˈpeə/|Bozmak, zayıflatmak|To damage or weaken something.|damage;weaken|improve|Lack of sleep can impair memory.|impair judgement
+impartial|adjective|/ɪmˈpɑːʃl/|Tarafsız|Not supporting one side.|neutral;unbiased|biased|Judges must remain impartial.|impartial judge
+impede|verb|/ɪmˈpiːd/|Engellemek|To slow down or block.|hinder;hamper|facilitate|Heavy traffic can impede emergency services.|impede progress
+imperative|adjective|/ɪmˈperətɪv/|Zorunlu, elzem|Extremely important and urgent.|essential;vital|unimportant|It is imperative that you arrive on time.|it is imperative
+implicit|adjective|/ɪmˈplɪsɪt/|Örtük, dolaylı|Suggested but not directly expressed.|implied;unspoken|explicit|There was implicit criticism in his comment.|implicit in
+incentivize|verb|/ɪnˈsentɪvaɪz/|Teşvik etmek|To encourage by offering a reward.|motivate;encourage|discourage|The bonus is meant to incentivize good attendance.|incentivize people
+incessant|adjective|/ɪnˈsesnt/|Durmaksızın süren|Continuing without stopping.|constant;unceasing|occasional|The incessant noise made studying impossible.|incessant rain
+incidental|adjective|/ˌɪnsɪˈdentl/|Tali, rastlantısal|Less important; happening as a minor part.|secondary;minor|essential|The incidental costs of studying abroad add up.|incidental expenses
+inclusive|adjective|/ɪnˈkluːsɪv/|Kapsayıcı|Including everyone.|comprehensive;open|exclusive|The school aims to be an inclusive community.|inclusive education
+incorporate|verb|/ɪnˈkɔːpəreɪt/|Dahil etmek|To include something as part of a whole.|include;integrate|exclude|Incorporate feedback into your second draft.|incorporate into
+indigenous|adjective|/ɪnˈdɪdʒənəs/|Yerli|Originating naturally in a place.|native;local|foreign|The museum displays indigenous art.|indigenous people
+induce|verb|/ɪnˈdjuːs/|Neden olmak; ikna etmek|To cause something to happen; to persuade.|cause;persuade|prevent|Some medicines induce sleep.|induce someone to
+inertia|noun|/ɪˈnɜːʃə/|Atalet, eylemsizlik|Lack of desire to change or act.|inactivity;apathy|energy|Bureaucratic inertia slowed the reform.|institutional inertia
+infer|verb|/ɪnˈfɜː/|Çıkarım yapmak|To reach a conclusion from evidence.|deduce;conclude|-|What can you infer from the writer's tone?|infer from
+influx|noun|/ˈɪnflʌks/|Akın, giriş|The arrival of many people or things.|inflow;arrival|exodus|The city saw an influx of students in September.|influx of
+inherent|adjective|/ɪnˈherənt/|Doğal, içkin|Existing as a natural part of something.|intrinsic;built-in|external|There are risks inherent in any experiment.|inherent in
+inhibit|verb|/ɪnˈhɪbɪt/|Engellemek, bastırmak|To prevent or slow down.|restrain;suppress|encourage|Fear of mistakes can inhibit speaking.|inhibit growth
+insight|noun|/ˈɪnsaɪt/|İçgörü|A clear understanding of something.|understanding;perception|-|The study offers insight into learner behaviour.|gain insight
+intact|adjective|/ɪnˈtækt/|Sağlam, bozulmamış|Not damaged.|undamaged;whole|damaged|The ancient walls remain intact.|remain intact
+integrity|noun|/ɪnˈteɡrəti/|Dürüstlük, bütünlük|Honesty and strong moral principles.|honesty;honour|dishonesty|Academic integrity means never copying others' work.|academic integrity
+interim|adjective|/ˈɪntərɪm/|Geçici, ara|Temporary, until something final is decided.|temporary;provisional|permanent|An interim report will be published in June.|interim measure
+intricate|adjective|/ˈɪntrɪkət/|Karmaşık, girift|Having many small parts.|complex;elaborate|simple|The building has an intricate design.|intricate pattern
+intuitive|adjective|/ɪnˈtjuːɪtɪv/|Sezgisel|Easy to understand or use without explanation.|instinctive;user-friendly|counterintuitive|The app has an intuitive interface.|intuitive design
+invoke|verb|/ɪnˈvəʊk/|Başvurmak (yasa/ilke), anmak|To use a law or principle to support an argument.|cite;appeal to|-|The lawyer will invoke the right to privacy.|invoke a principle
+jeopardize|verb|/ˈdʒepədaɪz/|Tehlikeye atmak|To put something at risk.|endanger;threaten|protect|Cheating could jeopardize your entire degree.|jeopardize the future
+justification|noun|/ˌdʒʌstɪfɪˈkeɪʃn/|Gerekçe|A good reason for something.|reason;grounds|-|There is no justification for such behaviour.|without justification
+lucrative|adjective|/ˈluːkrətɪv/|Kârlı, kazançlı|Producing a lot of money.|profitable;well-paid|unprofitable|Translation can be a lucrative job.|lucrative business
+mainstream|noun|/ˈmeɪnstriːm/|Ana akım|The ideas and methods most people accept.|convention;norm|fringe|Online learning has entered the mainstream.|enter the mainstream
+manifest|verb|/ˈmænɪfest/|Göstermek, belirmek|To show something clearly.|show;display|hide|Symptoms usually manifest within two days.|manifest itself
+manipulate|verb|/məˈnɪpjuleɪt/|Manipüle etmek|To control someone or something unfairly.|influence;exploit|-|Advertisers manipulate our emotions.|manipulate data
+mediocre|adjective|/ˌmiːdiˈəʊkə/|Vasat|Of average or low quality.|average;ordinary|excellent|The film received mediocre reviews.|mediocre performance
+mitigate|verb|/ˈmɪtɪɡeɪt/|Hafifletmek|To make something less harmful.|reduce;lessen|worsen|Trees help mitigate the effects of heat.|mitigate risk
+momentum|noun|/məˈmentəm/|İvme|The force that keeps something moving or developing.|impetus;drive|-|The campaign gained momentum online.|gain momentum
+narrative|noun|/ˈnærətɪv/|Anlatı|A story or description of events.|story;account|-|The novel's narrative moves between two countries.|personal narrative
+negligible|adjective|/ˈneɡlɪdʒəbl/|İhmal edilebilir|So small that it is not important.|insignificant;trivial|significant|The difference between the groups was negligible.|negligible effect
+notable|adjective|/ˈnəʊtəbl/|Kayda değer|Important or interesting.|remarkable;noteworthy|ordinary|There was a notable rise in attendance.|notable exception
+novel|adjective|/ˈnɒvl/|Yeni, özgün|New and original.|new;innovative|familiar|The team proposed a novel solution.|novel approach
+nuance|noun|/ˈnjuːɑːns/|Nüans, ince fark|A very small difference in meaning.|subtlety;shade|-|Translators must notice every nuance of meaning.|subtle nuance
+offset|verb|/ˈɒfset/|Dengelemek, telafi etmek|To balance the effect of something.|compensate;counterbalance|-|Higher prices offset the fall in sales.|offset costs
+omit|verb|/əˈmɪt/|Atlamak, çıkarmak|To leave out.|exclude;skip|include|Do not omit any part of the question.|omit details
+ongoing|adjective|/ˈɒnɡəʊɪŋ/|Süregelen|Continuing.|continuing;current|finished|Assessment is ongoing throughout the year.|ongoing research
+outweigh|verb|/ˌaʊtˈweɪ/|Ağır basmak|To be greater or more important than something.|exceed;override|-|The benefits outweigh the costs.|outweigh the risks
+overt|adjective|/əʊˈvɜːt/|Açık, aleni|Done openly.|open;obvious|covert|There was no overt criticism in the report.|overt hostility
+paradox|noun|/ˈpærədɒks/|Paradoks|A situation that seems impossible because it has two opposite features.|contradiction;puzzle|-|It is a paradox that more choice can make us less happy.|apparent paradox
+paramount|adjective|/ˈpærəmaʊnt/|En önemli|More important than anything else.|supreme;primary|minor|Safety is of paramount importance.|of paramount importance
+peripheral|adjective|/pəˈrɪfərəl/|Çevresel, ikincil|Not central or important.|marginal;secondary|central|These are peripheral issues.|peripheral role
+perpetuate|verb|/pəˈpetʃueɪt/|Sürdürmek|To make something continue, usually something bad.|maintain;prolong|end|Stereotypes perpetuate inequality.|perpetuate a myth
+pivotal|adjective|/ˈpɪvətl/|Kilit, çok önemli|Of central importance.|crucial;key|minor|The first year plays a pivotal role in success.|pivotal role
+plausibility|noun|/ˌplɔːzəˈbɪləti/|Akla yatkınlık|How likely something is to be true.|credibility;likelihood|implausibility|The study tested the plausibility of the theory.|lack plausibility
+postulate|verb|/ˈpɒstjuleɪt/|Varsaymak, ileri sürmek|To suggest a theory as a basis for reasoning.|propose;hypothesize|-|Scientists postulate that the virus came from bats.|postulate that
+preclude|verb|/prɪˈkluːd/|Engellemek, olanaksız kılmak|To prevent something from happening.|prevent;rule out|allow|A full schedule may preclude part-time work.|preclude from
+predecessor|noun|/ˈpriːdɪsesə/|Selef|A person who held a job before another.|forerunner|successor|The new rector reversed her predecessor's policy.|immediate predecessor
+premise|noun|/ˈpremɪs/|Öncül|An idea on which reasoning is based.|assumption;basis|conclusion|The argument rests on a weak premise.|basic premise
+presume|verb|/prɪˈzjuːm/|Varsaymak|To believe something is true without proof.|assume;suppose|-|I presume you have read the instructions.|presume that
+prevail|verb|/prɪˈveɪl/|Galip gelmek; hâkim olmak|To win; to be common.|triumph;predominate|lose|Common sense will prevail in the end.|prevail over
+proliferation|noun|/prəˌlɪfəˈreɪʃn/|Hızlı çoğalma|A rapid increase in number.|spread;increase|decline|The proliferation of smartphones changed communication.|nuclear proliferation
+prone|adjective|/prəʊn/|Eğilimli, yatkın|Likely to suffer from or do something.|inclined;susceptible|resistant|Tired drivers are prone to accidents.|prone to
+provision|noun|/prəˈvɪʒn/|Sağlama, hüküm|The act of supplying something; a condition in a law.|supply;clause|-|The provision of free meals helps poor students.|make provision for
+proximity|noun|/prɒkˈsɪməti/|Yakınlık|Nearness in space or time.|closeness;nearness|distance|The dormitory's proximity to campus is an advantage.|in close proximity
+quantify|verb|/ˈkwɒntɪfaɪ/|Sayısallaştırmak, ölçmek|To measure an amount.|measure;calculate|-|It is difficult to quantify happiness.|quantify the impact
+rationale|noun|/ˌræʃəˈnɑːl/|Gerekçe, mantık|The reasons for a decision.|reasoning;basis|-|Explain the rationale behind your research design.|rationale for
+reciprocal|adjective|/rɪˈsɪprəkl/|Karşılıklı|Done or given in return.|mutual;shared|one-sided|The two universities have a reciprocal exchange agreement.|reciprocal arrangement
+reconcile|verb|/ˈrekənsaɪl/|Uzlaştırmak|To find a way to make two ideas agree.|harmonize;resolve|-|It is hard to reconcile work and study.|reconcile with
+reconstruct|verb|/ˌriːkənˈstrʌkt/|Yeniden yapılandırmak|To build again; to work out what happened.|rebuild;recreate|destroy|Historians try to reconstruct past events.|reconstruct the past
+redundancy|noun|/rɪˈdʌndənsi/|Gereksiz tekrar; işten çıkarma|Unnecessary repetition; losing a job because it is no longer needed.|repetition;dismissal|-|Avoid redundancy in academic writing.|voluntary redundancy
+relentless|adjective|/rɪˈlentləs/|Amansız, durmaksızın|Continuing strongly without stopping.|persistent;unrelenting|occasional|The relentless pressure caused stress.|relentless pursuit
+replicate|verb|/ˈreplɪkeɪt/|Tekrarlamak (deney)|To repeat an experiment to get the same result.|reproduce;duplicate|-|Other scientists failed to replicate the results.|replicate a study
+repercussion|noun|/ˌriːpəˈkʌʃn/|Yankı, beklenmedik sonuç|An unexpected result of an action.|consequence;effect|-|The decision had serious repercussion for students.|serious repercussion
+resilience|noun|/rɪˈzɪliəns/|Dayanıklılık, toparlanma gücü|The ability to recover quickly from difficulties.|toughness;adaptability|fragility|Learning a language builds resilience.|emotional resilience
+resolve|verb|/rɪˈzɒlv/|Çözmek|To find a solution to a problem.|solve;settle|-|The two sides managed to resolve their differences.|resolve a conflict
+retrieve|verb|/rɪˈtriːv/|Geri almak, erişmek|To get something back.|recover;regain|lose|Practice helps you retrieve words quickly.|retrieve information
+retrospect|noun|/ˈretrəspekt/|Geçmişe bakış|Thinking about past events.|hindsight|prospect|In retrospect, I should have started earlier.|in retrospect
+saturate|verb|/ˈsætʃəreɪt/|Doyurmak|To fill completely so no more can be added.|flood;soak|-|Cheap phones saturate the market.|saturate the market
+scope|noun|/skəʊp/|Kapsam|The range of a subject.|extent;range|-|This question is beyond the scope of the study.|scope of
+skeptical|adjective|/ˈskeptɪkl/|Şüpheci|Doubting that something is true.|doubtful;questioning|convinced|Many teachers are skeptical about the new method.|skeptical about
+solidarity|noun|/ˌsɒlɪˈdærəti/|Dayanışma|Support among people with shared interests.|unity;support|division|Students showed solidarity with the workers.|in solidarity
+speculate|verb|/ˈspekjuleɪt/|Spekülasyon yapmak, tahmin yürütmek|To guess without enough information.|guess;conjecture|-|It is too early to speculate about the results.|speculate about
+spontaneous|adjective|/spɒnˈteɪniəs/|Kendiliğinden|Happening naturally without planning.|unplanned;natural|planned|The audience gave a spontaneous round of applause.|spontaneous reaction
+stagnant|adjective|/ˈstæɡnənt/|Durgun|Not changing or developing.|inactive;still|dynamic|Wages have remained stagnant for years.|stagnant economy
+stipulate|verb|/ˈstɪpjuleɪt/|Şart koşmak|To state clearly as a condition.|specify;require|-|The rules stipulate a minimum word count.|stipulate that
+streamline|verb|/ˈstriːmlaɪn/|Basitleştirmek, verimli hâle getirmek|To make a system simpler and more efficient.|simplify;rationalize|complicate|The university wants to streamline registration.|streamline a process
+subordinate|adjective|/səˈbɔːdɪnət/|İkincil, bağımlı|Less important; lower in rank.|secondary;junior|superior|A subordinate clause cannot stand alone.|subordinate to
+subsidy|noun|/ˈsʌbsədi/|Sübvansiyon|Money paid by the government to reduce costs.|grant;support|-|The government pays a subsidy for student housing.|government subsidy
+succinct|adjective|/səkˈsɪŋkt/|Özlü|Clear and short.|concise;brief|wordy|Give a succinct answer to each question.|succinct summary
+supersede|verb|/ˌsuːpəˈsiːd/|Yerini almak|To replace something older.|replace;supplant|-|The new rules supersede the old ones.|supersede the previous
+surge|noun|/sɜːdʒ/|Ani artış|A sudden large increase.|rise;increase|drop|There was a surge in applications this year.|sudden surge
+sustain|verb|/səˈsteɪn/|Sürdürmek|To keep something going.|maintain;support|abandon|It is hard to sustain motivation for months.|sustain growth
+tentative|adjective|/ˈtentətɪv/|Geçici, kesin olmayan|Not certain or final.|provisional;uncertain|definite|We reached a tentative agreement.|tentative conclusion
+threshold|noun|/ˈθreʃhəʊld/|Eşik|The level at which something starts to happen.|limit;starting point|-|The pass threshold is sixty points.|pass threshold
+transcend|verb|/trænˈsend/|Aşmak, ötesine geçmek|To go beyond normal limits.|surpass;exceed|-|Great music can transcend cultural differences.|transcend boundaries
+transparent|adjective|/trænsˈpærənt/|Şeffaf|Easy to see through; open and honest.|clear;open|opaque|The grading process should be transparent.|transparent process
+underlying|adjective|/ˌʌndəˈlaɪɪŋ/|Altta yatan|Real but not obvious.|basic;fundamental|surface|We must address the underlying causes.|underlying cause
+underpin|verb|/ˌʌndəˈpɪn/|Temel oluşturmak, desteklemek|To support or form the basis of.|support;strengthen|undermine|Strong evidence should underpin your claims.|underpin an argument
+unify|verb|/ˈjuːnɪfaɪ/|Birleştirmek|To bring together into one.|unite;combine|divide|The project aims to unify the two systems.|unify the country
+uphold|verb|/ʌpˈhəʊld/|Korumak, desteklemek|To support a decision or principle.|maintain;support|overturn|The court decided to uphold the decision.|uphold the law
+validity|noun|/vəˈlɪdəti/|Geçerlilik|The quality of being reasonable or legally acceptable.|soundness;legitimacy|invalidity|Critics questioned the validity of the test.|validity of
+volatile|adjective|/ˈvɒlətaɪl/|Değişken, oynak|Likely to change suddenly.|unstable;unpredictable|stable|The price of oil is very volatile.|volatile market
+warrant|verb|/ˈwɒrənt/|Gerektirmek, haklı kılmak|To make an action necessary or reasonable.|justify;merit|-|The results warrant further research.|warrant attention

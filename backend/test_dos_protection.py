@@ -134,6 +134,29 @@ class TestDoSProtection(unittest.TestCase):
         self.assertEqual(t_res.status_code, 200, t_res.text)
         self.assertTrue(t_res.json()["success"])
 
+    # Aynı IP'yi paylaşan öğrenciler (yurt/kampüs/CGNAT) birbirini kilitlememeli
+    def test_logged_in_students_behind_same_ip_have_separate_budgets(self):
+        self.mw.burst_count = 5
+        ta = {"Authorization": "Bearer " + sec.create_session_token(901, "ogr_a", "a@x.com")[0]}
+        tb = {"Authorization": "Bearer " + sec.create_session_token(902, "ogr_b", "b@x.com")[0]}
+        for _ in range(5):
+            self.assertNotEqual(self.client.get("/api/config", headers=ta).status_code, 429)
+        self.assertEqual(self.client.get("/api/config", headers=ta).status_code, 429)  # A kotasını bitirdi
+        self.assertNotEqual(self.client.get("/api/config", headers=tb).status_code, 429)  # B etkilenmez
+        self.assertNotEqual(self.client.get("/api/config").status_code, 429)  # girişsiz ziyaretçi de
+
+    def test_forged_token_falls_back_to_ip_budget(self):
+        self.mw.burst_count = 3
+        for i in range(3):
+            self.client.get("/api/config", headers={"Authorization": f"Bearer sahte.{i}.token"})
+        self.assertEqual(self.client.get("/api/config", headers={"Authorization": "Bearer sahte.9.token"}).status_code, 429)
+
+    def test_static_files_do_not_consume_budget(self):
+        self.mw.burst_count = 3
+        for _ in range(10):
+            self.assertNotEqual(self.client.get("/robots.txt").status_code, 429)
+        self.assertNotEqual(self.client.get("/api/config").status_code, 429)
+
 
 if __name__ == "__main__":
     unittest.main()

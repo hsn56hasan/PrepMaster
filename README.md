@@ -15,7 +15,9 @@ Türkiye'deki **26 üniversitenin** İngilizce hazırlık muafiyet (İTÜ Profic
 
 ## 📊 İçerik ve Soru Bankası Kapasitesi
 - **26 Üniversite + Genel Havuz:** Her üniversitenin kendi sınav formatına göre ayrılmış özgün soru ve simülasyon havuzu.
-- **4.926 Çoktan Seçmeli Sınav Sorusu:** Her üniversite için **180 soru** (A1, A2, B1, B2, C1, C2 kurlarının her birinde **30'ar soruluk** tam kur sınavı).
+- **10.901 Çoktan Seçmeli Sınav Sorusu:** Her üniversite için **180 soru** (A1, A2, B1, B2, C1, C2 kurlarının her birinde **30'ar soruluk** tam kur sınavı).
+  Genel havuzda ayrıca 120 özgün sınav tipi soru (`scripts/add_original_questions.py`) ve 2.019 kelimeden üretilen 5.855 kelime sorusu (`scripts/build_vocabulary.py`) bulunur.
+- **2.019 Kelimelik Sözlük:** A1–C2, Türkçe anlam, İngilizce tanım, eş/zıt anlam, örnek cümle ve kalıp (`scripts/kelime_kaynak/`).
 - **656 Akademik Listening Sınavı:** Her üniversite için **24 adet** (kur başına 4'er adet) Note-Taking ve While-Listening sesli ders simülasyonu.
 - **657 Akademik Speaking Görevi:** Her üniversite için **24 adet** (kur başına 4'er adet) hazırlık/konuşma süreli mülakat simülasyonu.
 - **190+ Akademik Kelime Kartı (Flashcards) & AI Writing Değerlendirici.**

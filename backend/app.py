@@ -41,6 +41,7 @@ from email_service import (
     email_configured,
     get_email_status,
     send_email_verbose,
+    get_email_budget,
     send_password_reset_email,
     send_student_otp_email,
     send_welcome_email,
@@ -210,6 +211,12 @@ def startup_event():
     listening_data = load_json("listening.json")
     speaking_data = load_json("speaking.json")
     init_db()
+    # Günde bir otomatik veritabanı yedeği (veritabanının yanındaki backups/ klasörüne)
+    try:
+        from backup import start_backup_scheduler
+    except ImportError:
+        from backend.backup import start_backup_scheduler
+    start_backup_scheduler()
 
 # --- Models ---
 class ProfileUpdateRequest(BaseModel):
@@ -284,6 +291,9 @@ class RegisterRequest(BaseModel):
     full_name: str = Field(..., min_length=2, max_length=100)
     university_id: Optional[str] = Field("itu", max_length=50, pattern=r"^[a-zA-Z0-9_-]+$")
     student_number: Optional[str] = Field("", max_length=30, pattern=r"^[a-zA-Z0-9_-]*$")
+    # Kullanıcı Sözleşmesi + Aydınlatma Metni onayı ZORUNLU; açık rıza ayrı ve isteğe bağlı
+    terms_accepted: bool = False
+    explicit_consent: bool = False
 
     @field_validator("full_name", "username", "student_number", mode="before")
     @classmethod
@@ -429,6 +439,8 @@ def public_config():
 # --- Authentication & Student Verification Endpoints ---
 @app.post("/api/auth/register")
 def register_endpoint(req: RegisterRequest, request: Request, background_tasks: BackgroundTasks, _=Depends(rate_limit_register)):
+    if not req.terms_accepted:
+        raise HTTPException(status_code=400, detail="Kayıt için Kullanıcı Sözleşmesi'ni kabul etmeniz ve KVKK Aydınlatma Metni'ni okumanız gerekir.")
     try:
         user = create_user(
             email=req.email,
@@ -436,7 +448,9 @@ def register_endpoint(req: RegisterRequest, request: Request, background_tasks: 
             password=req.password,
             full_name=req.full_name,
             university_id=req.university_id or "itu",
-            student_number=req.student_number or ""
+            student_number=req.student_number or "",
+            terms_accepted=True,
+            explicit_consent=bool(req.explicit_consent),
         )
         token, expires_in = create_session_token(user["id"], user["username"], user["email"])
         if email_configured() and user.get("email"):
@@ -763,6 +777,8 @@ class PayTRTokenRequest(BaseModel):
     university_id: str = Field(..., max_length=50, pattern=r"^[a-zA-Z0-9_-]+$")
     # PayTR müşteri telefonu zorunlu tutuyor (dolandırıcılık kontrolü)
     user_phone: str = Field(..., min_length=10, max_length=20)
+    # Ön Bilgilendirme + Mesafeli Satış Sözleşmesi + cayma hakkı istisnası onayı (Yönetmelik md. 7, 15/ğ)
+    pre_info_accepted: bool = False
 
     @field_validator("user_phone")
     @classmethod
@@ -798,6 +814,8 @@ def create_paytr_token_endpoint(req: PayTRTokenRequest, request: Request):
     Kilit burada AÇILMAZ — yalnızca PayTR'nin imzalı bildirimi (/callback) açar.
     """
     target_id = _current_user_id(request)
+    if not req.pre_info_accepted:
+        raise HTTPException(status_code=400, detail="Ödemeden önce Ön Bilgilendirme Formu ve Mesafeli Satış Sözleşmesi'ni onaylamanız gerekir.")
     if not is_paytr_live_configured():
         raise HTTPException(status_code=503, detail="Ödeme altyapısı henüz yapılandırılmadı.")
     if not any(u["id"] == req.university_id for u in universities_data) or req.university_id == "general":
@@ -1988,6 +2006,16 @@ SUPPORT_CONTACT_INFO = {
 }
 
 
+SUPPORT_CATEGORIES = {
+    "Üniversite Erişim & Paket Tanımlama",
+    "E-Devlet Öğrenci Belgesi Doğrulama",
+    "Ödeme & Fatura İşlemleri",
+    "Teknik Destek / Şifre İşlemleri",
+    "KVKK Veri Sahibi / Hesap Silme Başvurusu",
+    "Genel Destek",
+}
+
+
 class SupportTicketRequest(BaseModel):
     category: str = Field("general", max_length=60)
     full_name: Optional[str] = Field("", max_length=100)
@@ -2013,13 +2041,21 @@ def submit_support_ticket_endpoint(
     background_tasks: BackgroundTasks,
 ):
     enforce_rate_limit(request, scope="support_ticket", max_requests=6, window_seconds=60)
+    # Günlük tavan: bir IP günde en fazla 20 talep açabilir (seri gönderimle e-posta kotası tükenmesin)
+    enforce_rate_limit(request, scope="support_ticket_daily", max_requests=20, window_seconds=86400)
     token_user = get_current_user_from_request(request)
     uid = token_user["user_id"] if token_user else None
+    # Kategori serbest metin değil: e-posta konusuna/şablonuna yabancı metin (ör. bağlantı) girmesin
+    category = req.category if req.category in SUPPORT_CATEGORIES else "Genel Destek"
+    account_email = ""
+    if token_user:
+        profile = get_profile(uid) or {}
+        account_email = (profile.get("email") or "").strip()
     sender_name = req.full_name or (token_user.get("username", "") if token_user else "")
-    sender_email = req.email or (token_user.get("email", "") if token_user else "")
+    sender_email = req.email or account_email
     res = create_support_ticket(
         message=req.message,
-        category=req.category,
+        category=category,
         full_name=sender_name,
         email=sender_email,
         phone=req.phone or "",
@@ -2029,18 +2065,21 @@ def submit_support_ticket_endpoint(
         background_tasks.add_task(
             send_support_ticket_notification,
             res["ticket_id"],
-            req.category,
+            category,
             sender_name,
             sender_email,
             req.phone or "",
             req.message,
         )
-        if sender_email and "@" in sender_email:
+        # "Alındı" e-postası YALNIZCA giriş yapmış öğrencinin kendi hesap adresine gider.
+        # Eskiden formda yazılan her adrese gidiyordu: herkes formu başkalarına e-posta
+        # göndermek (spam) ve günlük kotayı bitirmek için kullanabiliyordu.
+        if account_email and "@" in account_email:
             background_tasks.add_task(
                 send_support_ticket_receipt,
-                sender_email,
+                account_email,
                 res["ticket_id"],
-                req.category,
+                category,
             )
     return res
 
@@ -2049,10 +2088,30 @@ class AdminTestEmailRequest(BaseModel):
     to_email: Optional[str] = Field("", max_length=120)
 
 
+@app.get("/api/admin/backup")
+def admin_backup_download_endpoint(request: Request, background_tasks: BackgroundTasks):
+    """
+    Yönetici için anlık, tutarlı veritabanı yedeği indirir (gzip). Railway diski kaybolursa
+    sunucudaki otomatik yedekler de gider; bu yüzden düzenli olarak bilgisayara indirilmelidir.
+    """
+    _require_admin(request)
+    enforce_rate_limit(request, scope="admin_backup", max_requests=6, window_seconds=3600)
+    import tempfile as _tempfile
+    try:
+        from backup import create_backup
+    except ImportError:
+        from backend.backup import create_backup
+    tmp_dir = Path(_tempfile.mkdtemp(prefix="pm-yedek-"))
+    stamp = datetime.utcnow().strftime("%Y%m%d-%H%M")
+    out = create_backup(target_dir=tmp_dir, name=f"prepmaster-yedek-{stamp}.db")
+    background_tasks.add_task(lambda: __import__("shutil").rmtree(tmp_dir, ignore_errors=True))
+    return FileResponse(out, media_type="application/gzip", filename=out.name)
+
+
 @app.get("/api/admin/email/status")
 def admin_email_status_endpoint(request: Request):
     _require_admin(request)
-    return get_email_status()
+    return {**get_email_status(), "budget": get_email_budget()}
 
 
 @app.post("/api/admin/email/test")
@@ -2063,6 +2122,7 @@ def admin_test_email_endpoint(req: AdminTestEmailRequest, request: Request):
         raise HTTPException(status_code=400, detail="Geçerli bir hedef e-posta adresi giriniz.")
     result = send_email_verbose(
         to=target,
+        priority="kritik",
         subject="PrepMaster E-Posta Altyapısı Canlı Testi",
         text=(
             "Merhaba Hasan,\n\n"

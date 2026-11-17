@@ -357,7 +357,8 @@ const practiceState = {
   pool: "school_only", // "school_only" (Sadece Seçili Okulun 180 Sorusu), "school_plus_general", "all_unlocked"
   levelScope: "current", // "current" (Seçili Kur - 30 Soru) veya "all_levels" (Okulun Tüm 180 Sorusu)
   answers: {}, // { [questionId]: selectedKey }
-  questionsById: {}
+  questionsById: {},
+  visible: 50 // Genel havuz binlerce soru içerdiği için liste 50'şer gösterilir
 };
 
 function updatePracticeScoreUI() {
@@ -384,16 +385,19 @@ function resetPracticeSession() {
 
 function setPracticeCategory(cat) {
   practiceState.category = cat;
+  practiceState.visible = 50;
   loadPracticeQuestions();
 }
 
 function setPracticePool(poolMode) {
   practiceState.pool = poolMode;
+  practiceState.visible = 50;
   loadPracticeQuestions();
 }
 
 function setPracticeLevelScope(scopeMode) {
   practiceState.levelScope = scopeMode;
+  practiceState.visible = 50;
   loadPracticeQuestions();
 }
 
@@ -436,7 +440,8 @@ function renderPracticeQuestionList(filteredQuestions) {
     return;
   }
 
-  container.innerHTML = filteredQuestions.map((q, idx) => {
+  const shown = filteredQuestions.slice(0, practiceState.visible);
+  container.innerHTML = shown.map((q, idx) => {
     const chosen = practiceState.answers[q.id];
     const isAnswered = Boolean(chosen);
     const isCorrect = isAnswered && chosen === q.correct_answer;
@@ -465,7 +470,7 @@ function renderPracticeQuestionList(filteredQuestions) {
 
         ${q.passage ? `
           <div class="p-4 bg-slate-50 rounded-xl text-xs text-slate-600 leading-relaxed mb-4 border border-slate-100 font-serif">
-            ${q.passage}
+            <div class="whitespace-pre-line">${q.passage}</div>
           </div>
         ` : ''}
 
@@ -507,10 +512,21 @@ function renderPracticeQuestionList(filteredQuestions) {
         </details>
       </div>
     `;
-  }).join('');
+  }).join('') + (filteredQuestions.length > shown.length ? `
+      <div class="text-center pt-2">
+        <button type="button" onclick="showMorePracticeQuestions()" class="px-5 py-2.5 bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 text-xs font-bold rounded-xl shadow-sm transition">
+          Daha fazla göster (${shown.length} / ${filteredQuestions.length})
+        </button>
+      </div>` : '');
 
   if (window.lucide) window.lucide.createIcons();
 }
+
+function showMorePracticeQuestions() {
+  practiceState.visible += 50;
+  renderPracticeQuestionList(window._lastPracticeFiltered || []);
+}
+window.showMorePracticeQuestions = showMorePracticeQuestions;
 
 async function loadPracticeQuestions() {
   const container = document.getElementById("practice-questions-list");
@@ -1103,7 +1119,7 @@ async function loadMistakeVault() {
 
           ${q.passage ? `
             <div class="p-4 bg-slate-50 rounded-2xl text-xs text-slate-600 leading-relaxed mb-4 border border-slate-100 font-serif">
-              ${q.passage}
+              <div class="whitespace-pre-line">${q.passage}</div>
             </div>
           ` : ''}
 
@@ -1688,7 +1704,7 @@ async function submitRegister() {
   const kvkkBox = document.getElementById("reg-kvkk-consent");
   if (kvkkBox && !kvkkBox.checked) {
     if (errEl) {
-      errEl.innerText = "Kayıt olabilmek için KVKK Aydınlatma Metni, Açık Rıza Beyanı ve Kullanıcı Sözleşmesi'ni onaylamanız gerekmektedir.";
+      errEl.innerText = "Kayıt olabilmek için Kullanıcı Sözleşmesi'ni kabul etmeniz ve KVKK Aydınlatma Metni'ni okumanız gerekir.";
       errEl.classList.remove("hidden");
     }
     return;
@@ -1704,7 +1720,9 @@ async function submitRegister() {
         email: email,
         university_id: universityId,
         student_number: studentNumber,
-        password: password
+        password: password,
+        terms_accepted: true,
+        explicit_consent: !!document.getElementById("reg-explicit-consent")?.checked
       })
     });
     const data = await res.json();

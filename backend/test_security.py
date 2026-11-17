@@ -185,7 +185,7 @@ class TestSecuritySuite(unittest.TestCase):
     def test_pydantic_validation_bounds(self):
         """Verify oversized or malformed inputs trigger 422 Unprocessable Entity."""
         # 1. Invalid email regex
-        res1 = self.client.post("/api/auth/register", json={
+        res1 = self.client.post("/api/auth/register", json={"terms_accepted": True, 
             "email": "not-an-email",
             "username": "validuser",
             "password": "validpassword",
@@ -194,7 +194,7 @@ class TestSecuritySuite(unittest.TestCase):
         self.assertEqual(res1.status_code, 422)
 
         # 2. Password too short (<6 characters)
-        res2 = self.client.post("/api/auth/register", json={
+        res2 = self.client.post("/api/auth/register", json={"terms_accepted": True, 
             "email": "valid@itu.edu.tr",
             "username": "validuser",
             "password": "123",

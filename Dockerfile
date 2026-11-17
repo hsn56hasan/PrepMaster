@@ -42,8 +42,9 @@ RUN mkdir -p /data /app/data && chmod 777 /data /app/data
 EXPOSE 8050
 
 # Automated container healthcheck
+# (/api/config oturum istemez; eskiden 401 dönen /api/student/status'a bakıp servisi hep "sağlıksız" sayıyordu)
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-  CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8050/api/student/status')" || exit 1
+  CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8050/api/config')" || exit 1
 
 # --limit-concurrency: aynı anda en fazla 300 bağlantı/istek işlenir, fazlası anında 503 alır
 #   (sunucu belleği/CPU'su tükenmeden ayakta kalır)

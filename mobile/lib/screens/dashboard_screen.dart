@@ -673,6 +673,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
       final regEmailCtrl = TextEditingController();
       final regPassCtrl = TextEditingController();
       final regNumCtrl = TextEditingController();
+      // Onaylar: sözleşme zorunlu, açık rıza isteğe bağlı; ikisi de boş başlar
+      bool termsAccepted = false;
+      bool explicitConsent = false;
       final regUniId = widget.currentUniversity.id;
 
       showDialog(
@@ -835,7 +838,28 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                               ),
                             ),
-                            const SizedBox(height: 14),
+                            CheckboxListTile(
+                              key: const Key('reg_terms'),
+                              value: termsAccepted,
+                              onChanged: (v) => setDialogState(() => termsAccepted = v ?? false),
+                              controlAffinity: ListTileControlAffinity.leading,
+                              contentPadding: EdgeInsets.zero,
+                              dense: true,
+                              title: const Text(
+                                "Kullanıcı Sözleşmesi'ni kabul ediyorum ve KVKK Aydınlatma Metni'ni okudum (zorunlu). Metinler: sitede /kvkk",
+                                style: TextStyle(fontSize: 12),
+                              ),
+                            ),
+                            CheckboxListTile(
+                              key: const Key('reg_explicit'),
+                              value: explicitConsent,
+                              onChanged: (v) => setDialogState(() => explicitConsent = v ?? false),
+                              controlAffinity: ListTileControlAffinity.leading,
+                              contentPadding: EdgeInsets.zero,
+                              dense: true,
+                              title: const Text("Açık Rıza Beyanı'nı kabul ediyorum (isteğe bağlı)", style: TextStyle(fontSize: 12)),
+                            ),
+                            const SizedBox(height: 8),
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
@@ -852,8 +876,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     );
                                     return;
                                   }
+                                  if (!termsAccepted) {
+                                    messenger.showSnackBar(
+                                      const SnackBar(content: Text("Kayıt için Kullanıcı Sözleşmesi'ni kabul etmelisiniz.")),
+                                    );
+                                    return;
+                                  }
 
                                   final res = await ApiService().register(
+                                    termsAccepted: termsAccepted,
+                                    explicitConsent: explicitConsent,
                                     email: email,
                                     username: user,
                                     password: pass,

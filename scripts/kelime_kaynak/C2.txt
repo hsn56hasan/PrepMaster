@@ -1,0 +1,280 @@
+# Biçim: kelime|tür|okunuş|Türkçe anlam|İngilizce tanım|eş anlamlılar (;)|zıt anlamlılar (; ya da -)|örnek cümle (kelimenin yalın hâli geçmeli)|kalıp
+abate|verb|/əˈbeɪt/|Dinmek, azalmak|To become less strong.|subside;diminish|intensify|We waited for the storm to abate.|abate gradually
+aberrant|adjective|/æˈberənt/|Sapkın, anormal|Departing from what is normal.|deviant;abnormal|normal|The researchers excluded one aberrant result.|aberrant behaviour
+abhor|verb|/əbˈhɔː/|Nefret etmek, tiksinmek|To hate something very strongly.|detest;loathe|adore|Most scholars abhor plagiarism.|abhor violence
+abject|adjective|/ˈæbdʒekt/|Sefil, berbat|Extremely bad or unpleasant.|wretched;miserable|-|Millions still live in abject poverty.|abject poverty
+abrasive|adjective|/əˈbreɪsɪv/|Kaba, sert; aşındırıcı|Rude and unfriendly; rough.|harsh;caustic|gentle|His abrasive manner upset his colleagues.|abrasive personality
+abrogate|verb|/ˈæbrəɡeɪt/|Yürürlükten kaldırmak|To formally end a law or agreement.|revoke;repeal|enact|The new government tried to abrogate the treaty.|abrogate an agreement
+abstruse|adjective|/əbˈstruːs/|Anlaşılması güç|Difficult to understand.|obscure;recondite|clear|The lecture was too abstruse for first-year students.|abstruse theory
+accolade|noun|/ˈækəleɪd/|Övgü, ödül|Praise or an award for an achievement.|honour;award|criticism|The novel won every major literary accolade.|highest accolade
+acerbic|adjective|/əˈsɜːbɪk/|İğneleyici|Sharp and critical in a clever way.|caustic;biting|mild|The critic is famous for his acerbic reviews.|acerbic wit
+acrimonious|adjective|/ˌækrɪˈməʊniəs/|Sert, kin dolu|Angry and bitter.|bitter;hostile|amicable|The meeting ended in an acrimonious debate.|acrimonious dispute
+adroit|adjective|/əˈdrɔɪt/|Becerikli|Clever and skilful.|skilful;deft|clumsy|She is an adroit negotiator.|adroit handling
+adulation|noun|/ˌædjuˈleɪʃn/|Aşırı övgü|Excessive admiration.|worship;flattery|contempt|The singer enjoyed the adulation of her fans.|public adulation
+affable|adjective|/ˈæfəbl/|Sıcakkanlı|Friendly and easy to talk to.|amiable;genial|unfriendly|Our affable host welcomed us warmly.|affable manner
+alacrity|noun|/əˈlækrəti/|Hevesle çabukluk|Eager and quick readiness.|eagerness;willingness|reluctance|She accepted the invitation with alacrity.|with alacrity
+amalgamate|verb|/əˈmælɡəmeɪt/|Birleştirmek|To combine into one.|merge;unite|separate|The two faculties will amalgamate next year.|amalgamate with
+ameliorative|adjective|/əˈmiːliərətɪv/|İyileştirici|Intended to make something better.|remedial;corrective|harmful|The government proposed ameliorative measures.|ameliorative action
+amorphous|adjective|/əˈmɔːfəs/|Biçimsiz, belirsiz|Without a clear shape or structure.|shapeless;vague|defined|The plan remained amorphous and vague.|amorphous mass
+anathema|noun|/əˈnæθəmə/|Nefret edilen şey|Something that is strongly disliked.|abomination;taboo|-|Censorship is anathema to most writers.|anathema to
+antagonistic|adjective|/ænˌtæɡəˈnɪstɪk/|Düşmanca, karşıt|Showing active opposition.|hostile;opposed|friendly|The two groups remained antagonistic.|antagonistic towards
+antipathy|noun|/ænˈtɪpəθi/|Hoşlanmama, antipati|A strong dislike.|hostility;aversion|sympathy|He made no secret of his antipathy towards the plan.|antipathy towards
+apposite|adjective|/ˈæpəzɪt/|Yerinde, uygun|Very suitable in the circumstances.|appropriate;fitting|inappropriate|She opened with an apposite quotation.|apposite remark
+approbation|noun|/ˌæprəˈbeɪʃn/|Onay, beğeni|Approval or praise.|approval;praise|disapproval|The plan won the approbation of the committee.|general approbation
+arcane|adjective|/ɑːˈkeɪn/|Gizemli, az bilinen|Understood by few people.|obscure;esoteric|common|The rules of the game seem arcane to outsiders.|arcane knowledge
+ardent|adjective|/ˈɑːdnt/|Ateşli, hararetli|Very enthusiastic.|passionate;fervent|apathetic|He is an ardent supporter of free education.|ardent supporter
+ascetic|adjective|/əˈsetɪk/|Çileci|Avoiding physical pleasures.|austere;self-denying|indulgent|The monk lived an ascetic life.|ascetic lifestyle
+assuage|verb|/əˈsweɪdʒ/|Yatıştırmak|To make an unpleasant feeling less intense.|relieve;soothe|aggravate|The minister tried to assuage public fears.|assuage guilt
+astute|adjective|/əˈstjuːt/|Zeki, kurnaz|Clever at understanding situations.|shrewd;perceptive|naive|She made an astute observation about the data.|astute observer
+atrophy|verb|/ˈætrəfi/|Körelmek|To become weaker through lack of use.|waste away;wither|strengthen|Skills atrophy if you never practise them.|begin to atrophy
+audacious|adjective|/ɔːˈdeɪʃəs/|Cüretkâr|Willing to take bold risks.|bold;daring|timid|It was an audacious plan to rebuild the city.|audacious plan
+austere|adjective|/ɔːˈstɪə/|Sade, sert|Simple and without comfort; strict.|severe;plain|luxurious|The dormitory rooms were austere but clean.|austere conditions
+avarice|noun|/ˈævərɪs/|Açgözlülük|Extreme desire for wealth.|greed;cupidity|generosity|The novel is a study of human avarice.|sheer avarice
+banal|adjective|/bəˈnɑːl/|Sıradan, bayağı|So ordinary that it is boring.|trite;commonplace|original|The essay ended with a banal conclusion.|banal remark
+beguile|verb|/bɪˈɡaɪl/|Büyülemek, kandırmak|To charm or trick someone.|charm;deceive|repel|The story will beguile young readers.|beguile someone
+belligerent|adjective|/bəˈlɪdʒərənt/|Kavgacı|Hostile and aggressive.|aggressive;hostile|peaceful|The speaker's belligerent tone shocked the audience.|belligerent attitude
+bombastic|adjective|/bɒmˈbæstɪk/|Tumturaklı|Using long words to impress.|pompous;grandiloquent|plain|Avoid bombastic language in academic essays.|bombastic style
+burgeoning|adjective|/ˈbɜːdʒənɪŋ/|Hızla büyüyen|Growing rapidly.|flourishing;expanding|declining|The city has a burgeoning tech sector.|burgeoning industry
+cajole|verb|/kəˈdʒəʊl/|Dil dökmek, kandırmak|To persuade by gentle flattery.|coax;wheedle|force|She managed to cajole her friend into joining.|cajole into
+callous|adjective|/ˈkæləs/|Duygusuz, katı yürekli|Showing no concern for others.|heartless;cruel|caring|The decision seemed callous and unfair.|callous disregard
+candour|noun|/ˈkændə/|Açık sözlülük|Honesty in speech.|frankness;openness|deceit|I appreciate your candour about the problem.|with candour
+castigate|verb|/ˈkæstɪɡeɪt/|Sertçe eleştirmek|To criticize someone severely.|reprimand;rebuke|praise|The report will castigate the management.|castigate for
+caustic|adjective|/ˈkɔːstɪk/|Yakıcı, iğneleyici|Sarcastic in a hurtful way; able to burn.|biting;corrosive|kind|She made a caustic comment about the plan.|caustic remark
+censorious|adjective|/senˈsɔːriəs/|Kusur bulan|Severely critical.|critical;judgemental|approving|The reviewer was censorious about every detail.|censorious tone
+chimera|noun|/kaɪˈmɪərə/|Hayal, kuruntu|An impossible hope or idea.|illusion;fantasy|reality|Perfect equality may be a chimera.|mere chimera
+circumvent|verb|/ˌsɜːkəmˈvent/|Atlatmak, etrafından dolaşmak|To find a way around a rule or obstacle.|bypass;evade|confront|Some firms circumvent the law through loopholes.|circumvent the rules
+clandestine|adjective|/klænˈdestɪn/|Gizli|Kept secret.|secret;covert|open|They held clandestine meetings at night.|clandestine operation
+coalesce|verb|/ˌkəʊəˈles/|Birleşmek|To come together to form one whole.|merge;unite|separate|Several small groups began to coalesce into a movement.|coalesce into
+cogitate|verb|/ˈkɒdʒɪteɪt/|Derin düşünmek|To think deeply.|ponder;reflect|-|He sat for hours to cogitate on the problem.|cogitate on
+commiserate|verb|/kəˈmɪzəreɪt/|Teselli etmek, dert ortağı olmak|To express sympathy.|sympathize;console|-|Friends gathered to commiserate after the exam.|commiserate with
+complicit|adjective|/kəmˈplɪsɪt/|Suç ortağı|Involved in wrongdoing with others.|involved;implicated|innocent|Silence made them complicit in the injustice.|complicit in
+conciliatory|adjective|/kənˈsɪliətəri/|Uzlaştırıcı|Intended to make peace.|placatory;peacemaking|hostile|The president adopted a conciliatory tone.|conciliatory gesture
+confluence|noun|/ˈkɒnfluəns/|Birleşme noktası|The joining of two rivers or things.|junction;convergence|divergence|The city stands at the confluence of two rivers.|confluence of
+conflagration|noun|/ˌkɒnfləˈɡreɪʃn/|Büyük yangın|A large destructive fire.|inferno;blaze|-|The conflagration destroyed half the old town.|massive conflagration
+connoisseur|noun|/ˌkɒnəˈsɜː/|Uzman, ehil|An expert judge in matters of taste.|expert;aficionado|amateur|He is a connoisseur of classical music.|wine connoisseur
+consummate|adjective|/kənˈsʌmət/|Mükemmel, kusursuz|Showing great skill.|perfect;accomplished|incompetent|She is a consummate professional.|consummate skill
+contentious|adjective|/kənˈtenʃəs/|Tartışmalı|Likely to cause disagreement.|controversial;disputed|uncontroversial|Immigration remains a contentious issue.|contentious issue
+contrite|adjective|/kənˈtraɪt/|Pişman|Feeling sorry for doing wrong.|remorseful;penitent|unrepentant|He was contrite after missing the deadline.|contrite apology
+convoluted|adjective|/ˈkɒnvəluːtɪd/|Karmaşık, dolambaçlı|Extremely complex and hard to follow.|complicated;tortuous|straightforward|The instructions were convoluted and confusing.|convoluted argument
+copious|adjective|/ˈkəʊpiəs/|Bol|Abundant in supply.|plentiful;abundant|scarce|She took copious notes during the lecture.|copious notes
+cornucopia|noun|/ˌkɔːnjuˈkəʊpiə/|Bolluk|An abundant supply of good things.|abundance;wealth|scarcity|The market offers a cornucopia of fresh fruit.|cornucopia of
+corollary|noun|/kəˈrɒləri/|Doğal sonuç|A result that follows naturally.|consequence;result|cause|Higher fees are a corollary of reduced funding.|natural corollary
+cosmopolitan|adjective|/ˌkɒzməˈpɒlɪtən/|Kozmopolit|Including people from many countries.|international;multicultural|provincial|İstanbul is a truly cosmopolitan city.|cosmopolitan city
+covet|verb|/ˈkʌvɪt/|Gıpta etmek, göz dikmek|To strongly want something that belongs to someone else.|desire;crave|-|Many students covet a place at a top university.|covet a prize
+credulous|adjective|/ˈkredjələs/|Saf, her şeye inanan|Too ready to believe things.|gullible;naive|skeptical|Credulous readers believe every headline.|credulous public
+cryptic|adjective|/ˈkrɪptɪk/|Gizemli, şifreli|Having a hidden or unclear meaning.|enigmatic;obscure|clear|She left a cryptic message on the board.|cryptic message
+cumbersome|adjective|/ˈkʌmbəsəm/|Hantal|Large or complicated and difficult to use.|unwieldy;awkward|convenient|The old registration system was cumbersome.|cumbersome process
+dearth|noun|/dɜːθ/|Kıtlık|A lack of something.|scarcity;shortage|abundance|There is a dearth of reliable data.|dearth of
+debacle|noun|/deɪˈbɑːkl/|Fiyasko|A sudden and complete failure.|fiasco;disaster|success|The launch was a complete debacle.|total debacle
+debunk|verb|/ˌdiːˈbʌŋk/|Çürütmek|To show that an idea is false.|disprove;expose|confirm|Scientists debunk popular myths about the brain.|debunk a myth
+decorum|noun|/dɪˈkɔːrəm/|Görgü, edep|Polite and proper behaviour.|propriety;etiquette|impropriety|Please maintain decorum during the ceremony.|sense of decorum
+deft|adjective|/deft/|Becerikli, eli çabuk|Quick and skilful.|skilful;nimble|clumsy|With a deft move, she fixed the projector.|deft touch
+defunct|adjective|/dɪˈfʌŋkt/|Artık var olmayan|No longer existing or working.|obsolete;extinct|active|The magazine has been defunct since 2010.|now defunct
+delineation|noun|/dɪˌlɪniˈeɪʃn/|Tanımlama, çizme|The act of describing something precisely.|description;outline|-|The essay lacks a clear delineation of terms.|clear delineation
+demagogue|noun|/ˈdeməɡɒɡ/|Halk avcısı|A leader who uses people's emotions to gain power.|rabble-rouser;agitator|-|The novel describes the rise of a demagogue.|populist demagogue
+denigrate|verb|/ˈdenɪɡreɪt/|Kötülemek|To criticize unfairly.|belittle;disparage|praise|Do not denigrate the work of other researchers.|denigrate someone
+deplore|verb|/dɪˈplɔː/|Kınamak|To strongly disapprove of something.|condemn;lament|approve|We deplore all forms of discrimination.|deplore the violence
+derelict|adjective|/ˈderəlɪkt/|Harap, terk edilmiş|In very poor condition after being abandoned.|abandoned;dilapidated|maintained|The derelict factory will become a museum.|derelict building
+desultory|adjective|/ˈdesəltri/|Gelişigüzel, isteksiz|Lacking a plan or enthusiasm.|half-hearted;aimless|focused|They had a desultory conversation about the weather.|desultory attempt
+diatribe|noun|/ˈdaɪətraɪb/|Ağır eleştiri|A bitter verbal attack.|tirade;harangue|praise|The article was a diatribe against modern art.|launch into a diatribe
+dichotomy|noun|/daɪˈkɒtəmi/|İkilik, ayrım|A division into two opposed parts.|division;split|unity|The essay questions the dichotomy between nature and nurture.|false dichotomy
+diffident|adjective|/ˈdɪfɪdənt/|Çekingen|Lacking self-confidence.|shy;timid|confident|The diffident student rarely spoke in class.|diffident manner
+dilatory|adjective|/ˈdɪlətəri/|Ağırdan alan, oyalanan|Slow to act.|slow;tardy|prompt|The council was dilatory in responding.|dilatory tactics
+disparage|verb|/dɪˈspærɪdʒ/|Küçümsemek|To speak about something as unimportant.|belittle;denigrate|praise|Some critics disparage popular fiction.|disparage someone
+disquiet|noun|/dɪsˈkwaɪət/|Huzursuzluk|A feeling of worry.|unease;anxiety|calm|The report caused disquiet among parents.|growing disquiet
+dissemble|verb|/dɪˈsembl/|Gizlemek, maskelemek|To hide your real feelings or motives.|pretend;feign|reveal|He tried to dissemble his disappointment.|dissemble feelings
+dissipate|verb|/ˈdɪsɪpeɪt/|Dağılmak, yok olmak|To disappear gradually.|disperse;vanish|accumulate|The fog began to dissipate by noon.|dissipate quickly
+dissonance|noun|/ˈdɪsənəns/|Uyumsuzluk|A lack of agreement or harmony.|discord;conflict|harmony|There is dissonance between what he says and does.|cognitive dissonance
+dogged|adjective|/ˈdɒɡɪd/|İnatçı, azimli|Determined and persistent.|persistent;tenacious|half-hearted|Her dogged effort finally paid off.|dogged determination
+duress|noun|/djuˈres/|Zorlama, baskı|Threats used to force someone to do something.|coercion;pressure|freedom|The confession was made under duress.|under duress
+edifice|noun|/ˈedɪfɪs/|Büyük yapı|A large impressive building; a complex system of ideas.|structure;building|-|The whole edifice of his theory began to collapse.|imposing edifice
+efficacious|adjective|/ˌefɪˈkeɪʃəs/|Etkili|Effective in producing a result.|effective;potent|ineffective|The treatment proved efficacious in trials.|efficacious remedy
+effrontery|noun|/ɪˈfrʌntəri/|Küstahlık|Bold rude behaviour.|impudence;nerve|politeness|She had the effrontery to blame her teacher.|have the effrontery
+elegiac|adjective|/ˌelɪˈdʒaɪək/|Ağıt gibi, hüzünlü|Sad and expressing loss.|mournful;sorrowful|joyful|The poem has an elegiac tone.|elegiac mood
+elusive|adjective|/ɪˈluːsɪv/|Yakalanması güç|Difficult to find, catch or achieve.|evasive;hard to find|attainable|A cure for the disease remains elusive.|elusive goal
+emanate|verb|/ˈeməneɪt/|Yayılmak, çıkmak|To come from a source.|issue;originate|-|A strange smell seemed to emanate from the lab.|emanate from
+embellish|verb|/ɪmˈbelɪʃ/|Süslemek, abartmak|To add details to make something more attractive.|decorate;exaggerate|simplify|Writers often embellish their memories.|embellish a story
+emollient|adjective|/ɪˈmɒliənt/|Yumuşatıcı|Trying to calm a situation.|soothing;conciliatory|abrasive|The minister gave an emollient reply.|emollient tone
+encroach|verb|/ɪnˈkrəʊtʃ/|Tecavüz etmek (sınıra), sokulmak|To gradually take more than is right.|intrude;invade|retreat|New buildings encroach on the forest.|encroach on
+endemic|adjective|/enˈdemɪk/|Yerel, bölgeye özgü|Regularly found in a particular place.|native;widespread|foreign|Malaria is endemic in some tropical regions.|endemic to
+enmity|noun|/ˈenməti/|Düşmanlık|A feeling of being an enemy.|hostility;animosity|friendship|The enmity between the families lasted for decades.|deep enmity
+ennui|noun|/ɒnˈwiː/|Can sıkıntısı|A feeling of boredom and dissatisfaction.|boredom;tedium|excitement|The novel captures the ennui of city life.|sense of ennui
+epitome|noun|/ɪˈpɪtəmi/|Simge, en iyi örnek|A perfect example of something.|embodiment;essence|-|She is the epitome of a dedicated teacher.|the epitome of
+equanimous|adjective|/ɪˈkwænɪməs/|Soğukkanlı|Calm and balanced.|composed;serene|agitated|She remained equanimous under pressure.|equanimous response
+erudite|adjective|/ˈerudaɪt/|Bilgili, âlim|Having great knowledge.|learned;scholarly|ignorant|The professor gave an erudite lecture on Ottoman history.|erudite scholar
+euphemism|noun|/ˈjuːfəmɪzəm/|Örtmece|A mild word used instead of an unpleasant one.|understatement|dysphemism|Passed away is a euphemism for died.|use a euphemism
+exacting|adjective|/ɪɡˈzæktɪŋ/|Titiz, zahmetli|Requiring great care and effort.|demanding;rigorous|easy|The lab has exacting standards.|exacting standards
+exasperate|verb|/ɪɡˈzæspəreɪt/|Çileden çıkarmak|To make someone very annoyed.|infuriate;irritate|soothe|Constant delays exasperate passengers.|exasperate someone
+exculpate|verb|/ˈekskʌlpeɪt/|Aklamak|To show that someone is not guilty.|clear;absolve|incriminate|New evidence may exculpate the suspect.|exculpate from
+exigent|adjective|/ˈeksɪdʒənt/|Acil, zorlu|Urgent and demanding.|urgent;pressing|minor|The situation called for exigent measures.|exigent circumstances
+exorbitant|adjective|/ɪɡˈzɔːbɪtənt/|Fahiş|Much too expensive.|excessive;extortionate|reasonable|Students complain about exorbitant rents.|exorbitant price
+expedite|verb|/ˈekspədaɪt/|Hızlandırmak|To make a process happen faster.|accelerate;hasten|delay|The office will expedite your application.|expedite the process
+expunge|verb|/ɪkˈspʌndʒ/|Silmek|To remove completely.|erase;delete|add|The court ordered them to expunge the record.|expunge from
+extol|verb|/ɪkˈstəʊl/|Göklere çıkarmak|To praise enthusiastically.|praise;acclaim|criticize|Advertisements extol the benefits of the product.|extol the virtues
+extraneous|adjective|/ɪkˈstreɪniəs/|İlgisiz, gereksiz|Not relevant.|irrelevant;unnecessary|relevant|Remove extraneous details from your summary.|extraneous information
+facetious|adjective|/fəˈsiːʃəs/|Yersiz şakacı|Treating serious issues with inappropriate humour.|flippant;joking|serious|His facetious remarks annoyed the panel.|facetious comment
+fallow|adjective|/ˈfæləʊ/|Nadasa bırakılmış; durgun|Left unused for a time.|unused;dormant|active|Farmers leave a field fallow to restore it.|lie fallow
+fatuous|adjective|/ˈfætʃuəs/|Ahmakça|Silly and pointless.|foolish;inane|sensible|The film was full of fatuous jokes.|fatuous remark
+fecund|adjective|/ˈfekənd/|Verimli|Producing many new ideas or offspring.|fertile;productive|barren|The period was fecund for literature.|fecund imagination
+fervour|noun|/ˈfɜːvə/|Coşku|Intense and passionate feeling.|passion;zeal|apathy|They spoke with religious fervour.|with fervour
+fetter|verb|/ˈfetə/|Zincirlemek, kısıtlamak|To restrict someone's freedom.|restrain;shackle|free|Old traditions should not fetter creativity.|fetter by
+flagrant|adjective|/ˈfleɪɡrənt/|Açık, utanmazca|Shockingly obvious.|blatant;glaring|subtle|It was a flagrant breach of the rules.|flagrant violation
+flippant|adjective|/ˈflɪpənt/|Ciddiyetsiz|Not showing the right seriousness.|frivolous;glib|serious|Don't be flippant about such a serious issue.|flippant attitude
+florid|adjective|/ˈflɒrɪd/|Süslü, şatafatlı|Too elaborate in style.|ornate;flowery|plain|His florid prose was hard to read.|florid style
+foment|verb|/fəʊˈment/|Kışkırtmak|To stir up trouble.|incite;provoke|quell|They were accused of trying to foment unrest.|foment rebellion
+forbearance|noun|/fɔːˈbeərəns/|Sabır, hoşgörü|Patient self-control.|patience;tolerance|impatience|The teacher showed great forbearance.|show forbearance
+furtive|adjective|/ˈfɜːtɪv/|Sinsi, gizlice|Secretive, trying not to be noticed.|secretive;stealthy|open|He gave a furtive glance at his phone.|furtive glance
+gainsay|verb|/ˌɡeɪnˈseɪ/|İnkâr etmek|To deny or contradict.|deny;dispute|confirm|No one can gainsay the importance of education.|gainsay the fact
+gauche|adjective|/ɡəʊʃ/|Beceriksiz, sakar|Socially awkward.|awkward;clumsy|graceful|He felt gauche at the formal dinner.|gauche behaviour
+glib|adjective|/ɡlɪb/|Yüzeysel, kolaycı|Speaking easily but without thought.|superficial;slick|thoughtful|The politician gave glib answers.|glib answer
+grandiloquent|adjective|/ɡrænˈdɪləkwənt/|Tumturaklı|Using pompous language.|pompous;bombastic|simple|The speech was grandiloquent but empty.|grandiloquent style
+grievous|adjective|/ˈɡriːvəs/|Ağır, vahim|Very serious.|severe;grave|minor|It was a grievous error of judgement.|grievous harm
+guile|noun|/ɡaɪl/|Kurnazlık|Clever but dishonest behaviour.|cunning;deceit|honesty|He used guile rather than force.|without guile
+hackneyed|adjective|/ˈhæknid/|Basmakalıp|Used too often to be interesting.|clichéd;trite|original|Avoid hackneyed phrases in your essays.|hackneyed phrase
+harangue|verb|/həˈræŋ/|Nutuk atmak|To lecture someone in a long angry way.|lecture;berate|-|The manager began to harangue the staff.|harangue someone
+hegemony|noun|/hɪˈɡeməni/|Hegemonya|Dominance of one group over others.|dominance;supremacy|subordination|The book analyses cultural hegemony.|cultural hegemony
+heterogeneous|adjective|/ˌhetərəˈdʒiːniəs/|Heterojen|Made of different parts.|diverse;varied|homogeneous|The sample was highly heterogeneous.|heterogeneous group
+hubris|noun|/ˈhjuːbrɪs/|Kibir|Excessive pride.|arrogance;conceit|humility|The tragedy shows the danger of hubris.|act of hubris
+iconoclast|noun|/aɪˈkɒnəklæst/|Geleneklere karşı çıkan|A person who attacks accepted beliefs.|rebel;dissenter|conformist|The young architect was an iconoclast.|cultural iconoclast
+idyllic|adjective|/ɪˈdɪlɪk/|Pastoral, cennet gibi|Extremely peaceful and beautiful.|peaceful;perfect|unpleasant|They spent an idyllic summer by the sea.|idyllic setting
+ignominious|adjective|/ˌɪɡnəˈmɪniəs/|Utanç verici|Deserving public shame.|shameful;humiliating|honourable|The team suffered an ignominious defeat.|ignominious defeat
+imbue|verb|/ɪmˈbjuː/|Aşılamak|To fill with a feeling or quality.|instil;infuse|-|Good teachers imbue students with curiosity.|imbue with
+impassive|adjective|/ɪmˈpæsɪv/|Duygusuz görünen|Showing no emotion.|expressionless;stoic|emotional|The judge's face remained impassive.|impassive expression
+impervious|adjective|/ɪmˈpɜːviəs/|Etkilenmez, geçirmez|Not affected by something; not letting water through.|resistant;immune|susceptible|He seemed impervious to criticism.|impervious to
+impetuous|adjective|/ɪmˈpetʃuəs/|Aceleci, düşüncesiz|Acting quickly without thinking.|rash;hasty|cautious|It was an impetuous decision.|impetuous youth
+implacable|adjective|/ɪmˈplækəbl/|Yatıştırılamaz|Unable to be calmed.|relentless;unforgiving|forgiving|She was an implacable opponent of the plan.|implacable enemy
+importune|verb|/ˌɪmpɔːˈtjuːn/|Israrla rica etmek|To ask persistently.|pester;beg|-|Fans importune the actor for photos.|importune someone
+inane|adjective|/ɪˈneɪn/|Boş, anlamsız|Silly and meaningless.|silly;fatuous|sensible|The show was full of inane chatter.|inane comment
+incendiary|adjective|/ɪnˈsendiəri/|Kışkırtıcı; yangın çıkaran|Likely to cause anger or violence; causing fires.|inflammatory;provocative|calming|The speech contained incendiary language.|incendiary remarks
+incisive|adjective|/ɪnˈsaɪsɪv/|Keskin, zekice|Clear and sharp in thinking.|sharp;penetrating|vague|She wrote an incisive analysis of the policy.|incisive analysis
+inculcate|verb|/ˈɪnkʌlkeɪt/|Zihnine yerleştirmek|To fix ideas in someone's mind by repetition.|instil;teach|-|Schools try to inculcate good study habits.|inculcate values
+indelible|adjective|/ɪnˈdeləbl/|Silinmez|Impossible to remove or forget.|permanent;lasting|temporary|The visit left an indelible impression.|indelible mark
+indolent|adjective|/ˈɪndələnt/|Tembel|Lazy.|lazy;idle|industrious|He was too indolent to finish the project.|indolent lifestyle
+ineffable|adjective|/ɪnˈefəbl/|Tarifsiz|Too great to be described in words.|indescribable;inexpressible|describable|They felt an ineffable joy.|ineffable beauty
+inexorable|adjective|/ɪnˈeksərəbl/|Durdurulamaz|Impossible to stop.|relentless;unstoppable|avoidable|The inexorable rise of technology continues.|inexorable rise
+ingenuous|adjective|/ɪnˈdʒenjuəs/|Saf, masum|Innocent and trusting.|naive;innocent|cunning|Her ingenuous question made everyone smile.|ingenuous remark
+innocuous|adjective|/ɪˈnɒkjuəs/|Zararsız|Not harmful or offensive.|harmless;inoffensive|harmful|The question seemed innocuous at first.|innocuous remark
+insidious|adjective|/ɪnˈsɪdiəs/|Sinsi|Spreading gradually in a harmful way.|stealthy;subtle|obvious|Stress can have insidious effects on health.|insidious effect
+insipid|adjective|/ɪnˈsɪpɪd/|Tatsız, yavan|Lacking flavour or interest.|bland;dull|exciting|The soup was insipid.|insipid taste
+intrepid|adjective|/ɪnˈtrepɪd/|Yılmaz, gözü pek|Fearless and adventurous.|fearless;bold|timid|The intrepid explorers crossed the desert.|intrepid explorer
+inveterate|adjective|/ɪnˈvetərət/|Müzmin, iflah olmaz|Having a long-established habit.|confirmed;habitual|occasional|He is an inveterate liar.|inveterate gambler
+irascible|adjective|/ɪˈræsəbl/|Çabuk öfkelenen|Easily made angry.|irritable;touchy|calm|The irascible professor shouted at latecomers.|irascible temper
+itinerant|adjective|/aɪˈtɪnərənt/|Gezici|Travelling from place to place.|nomadic;wandering|settled|Itinerant workers move with the harvest.|itinerant worker
+jettison|verb|/ˈdʒetɪsn/|Atmak, vazgeçmek|To abandon something no longer wanted.|discard;abandon|keep|The government had to jettison the plan.|jettison a plan
+judicious|adjective|/dʒuˈdɪʃəs/|Sağduyulu|Showing good judgement.|wise;prudent|unwise|A judicious use of examples strengthens an essay.|judicious choice
+lambast|verb|/læmˈbæst/|Yerden yere vurmak|To criticize harshly.|criticize;berate|praise|Critics lambast the film for its weak plot.|lambast for
+languid|adjective|/ˈlæŋɡwɪd/|Halsiz, gevşek|Slow and relaxed.|relaxed;listless|energetic|They spent a languid afternoon by the pool.|languid pace
+largesse|noun|/lɑːˈʒes/|Cömertlik|Generosity in giving money.|generosity;bounty|meanness|The library was built through the largesse of a donor.|government largesse
+latent|adjective|/ˈleɪtnt/|Gizli, örtük|Existing but not yet active.|dormant;hidden|active|The course helps students discover latent talents.|latent ability
+laudable|adjective|/ˈlɔːdəbl/|Övgüye değer|Deserving praise.|commendable;admirable|blameworthy|Their aims are laudable but unrealistic.|laudable goal
+lethargic|adjective|/ləˈθɑːdʒɪk/|Uyuşuk|Lacking energy.|sluggish;tired|energetic|Hot weather makes students lethargic.|feel lethargic
+lucid|adjective|/ˈluːsɪd/|Açık, anlaşılır|Clear and easy to understand.|clear;coherent|confusing|She gave a lucid explanation of the theory.|lucid explanation
+magnanimity|noun|/ˌmæɡnəˈnɪməti/|Yüce gönüllülük|Generosity towards a rival.|generosity;nobility|pettiness|The winner showed magnanimity towards her opponent.|show magnanimity
+malevolent|adjective|/məˈlevələnt/|Kötü niyetli|Wanting to harm others.|malicious;evil|benevolent|The story's villain is a malevolent king.|malevolent force
+malleable|adjective|/ˈmæliəbl/|Şekillendirilebilir|Easily shaped or influenced.|pliable;flexible|rigid|Young minds are malleable.|malleable metal
+maverick|noun|/ˈmævərɪk/|Bağımsız düşünen kişi|An independent-minded person.|nonconformist;rebel|conformist|The scientist was considered a maverick.|political maverick
+mawkish|adjective|/ˈmɔːkɪʃ/|Aşırı duygusal|Sentimental in a false way.|sentimental;soppy|unsentimental|The film's ending was mawkish.|mawkish sentimentality
+mendicant|noun|/ˈmendɪkənt/|Dilenci|A person who lives by begging.|beggar|-|A mendicant sat outside the mosque.|mendicant monk
+meretricious|adjective|/ˌmerəˈtrɪʃəs/|Gösterişli ama değersiz|Attractive on the surface but of little value.|showy;tawdry|genuine|The campaign relied on meretricious slogans.|meretricious charm
+minutiae|noun|/maɪˈnjuːʃiaɪ/|Ufak ayrıntılar|Small and precise details.|details;trivia|-|He got lost in the minutiae of the rules.|minutiae of
+misanthrope|noun|/ˈmɪsənθrəʊp/|İnsan düşmanı|A person who dislikes humankind.|cynic;loner|philanthropist|The main character is a bitter misanthrope.|confirmed misanthrope
+modicum|noun|/ˈmɒdɪkəm/|Az miktar|A small amount.|little;bit|abundance|Show a modicum of respect for your colleagues.|a modicum of
+morose|adjective|/məˈrəʊs/|Somurtkan|Sullen and gloomy.|gloomy;sullen|cheerful|He became morose after the defeat.|morose mood
+myopic|adjective|/maɪˈɒpɪk/|Dar görüşlü|Lacking long-term vision.|short-sighted;narrow-minded|far-sighted|The policy was myopic and harmful.|myopic view
+nascent|adjective|/ˈnæsnt/|Yeni doğan, gelişmekte olan|Just beginning to develop.|emerging;budding|mature|The nascent industry needs support.|nascent democracy
+nebulous|adjective|/ˈnebjələs/|Belirsiz|Unclear or vague.|vague;hazy|clear|The concept remains nebulous.|nebulous idea
+neophyte|noun|/ˈniːəfaɪt/|Acemi|A beginner.|novice;beginner|expert|The guide is written for the neophyte.|complete neophyte
+noxious|adjective|/ˈnɒkʃəs/|Zehirli, zararlı|Harmful or poisonous.|toxic;harmful|harmless|The factory released noxious fumes.|noxious gas
+obsolete|adjective|/ˈɒbsəliːt/|Eskimiş, kullanılmayan|No longer used.|outdated;outmoded|current|Typewriters are now obsolete.|become obsolete
+obstreperous|adjective|/əbˈstrepərəs/|Gürültücü, asi|Noisy and difficult to control.|unruly;rowdy|quiet|The obstreperous crowd shouted at the speaker.|obstreperous behaviour
+officious|adjective|/əˈfɪʃəs/|İşgüzar|Too eager to give orders.|bossy;interfering|unobtrusive|An officious guard checked every bag.|officious manner
+opprobrium|noun|/əˈprəʊbriəm/|Ayıplanma|Harsh public criticism.|disgrace;censure|praise|The decision attracted international opprobrium.|public opprobrium
+ostracize|verb|/ˈɒstrəsaɪz/|Dışlamak|To exclude from a group.|exclude;shun|welcome|Children may ostracize classmates who are different.|ostracize someone
+panache|noun|/pəˈnæʃ/|Şıklık, özgüven|Confident style.|flair;style|dullness|She delivered the speech with panache.|with panache
+paragon|noun|/ˈpærəɡən/|Mükemmel örnek|A perfect example of a quality.|model;epitome|-|He was a paragon of patience.|paragon of virtue
+pariah|noun|/pəˈraɪə/|Dışlanmış kişi|An outcast.|outcast;exile|-|After the scandal he became a pariah.|social pariah
+partisan|adjective|/ˌpɑːtɪˈzæn/|Taraflı|Strongly supporting one side.|biased;one-sided|impartial|The debate was deeply partisan.|partisan politics
+penchant|noun|/ˈpɒ̃ʃɒ̃/|Düşkünlük|A strong liking.|liking;fondness|dislike|She has a penchant for detective novels.|penchant for
+penury|noun|/ˈpenjəri/|Yoksulluk|Extreme poverty.|poverty;destitution|wealth|The artist died in penury.|live in penury
+peremptory|adjective|/pəˈremptəri/|Buyurgan|Insisting on immediate obedience.|commanding;imperious|polite|She gave a peremptory order to leave.|peremptory tone
+perfidious|adjective|/pəˈfɪdiəs/|Hain|Deceitful and untrustworthy.|treacherous;disloyal|loyal|The perfidious ally broke the treaty.|perfidious friend
+perfunctory|adjective|/pəˈfʌŋktəri/|Baştan savma|Done without care or interest.|cursory;superficial|thorough|He gave the essay a perfunctory reading.|perfunctory check
+pernickety|adjective|/pəˈnɪkəti/|Kılı kırk yaran|Paying too much attention to small details.|fussy;finicky|easy-going|The editor is pernickety about commas.|pernickety about
+perspicuous|adjective|/pəˈspɪkjuəs/|Açık ve anlaşılır|Clearly expressed.|lucid;clear|obscure|The report is written in perspicuous prose.|perspicuous style
+pithy|adjective|/ˈpɪθi/|Özlü|Brief and full of meaning.|concise;succinct|verbose|She made a pithy comment.|pithy remark
+placate|verb|/pləˈkeɪt/|Yatıştırmak|To make someone less angry.|appease;pacify|provoke|The manager tried to placate the customers.|placate critics
+plaudit|noun|/ˈplɔːdɪt/|Övgü|Praise.|praise;acclaim|criticism|The project won plaudit after plaudit.|win plaudits
+polemic|noun|/pəˈlemɪk/|Polemik|A strong written attack on an idea.|diatribe;argument|-|The book is a polemic against consumerism.|political polemic
+portent|noun|/ˈpɔːtent/|Alamet, işaret|A sign that something important will happen.|omen;sign|-|The dark clouds were a portent of the storm.|portent of
+precarious|adjective|/prɪˈkeəriəs/|Güvensiz, tehlikeli|Not secure; likely to change for the worse.|unstable;uncertain|secure|Many young workers have precarious jobs.|precarious position
+precocious|adjective|/prɪˈkəʊʃəs/|Erken gelişmiş|Showing abilities earlier than usual.|advanced;gifted|backward|The precocious child read at the age of three.|precocious talent
+presage|verb|/ˈpresɪdʒ/|Haber vermek, işaret etmek|To be a sign that something will happen.|foreshadow;herald|-|The protests may presage wider unrest.|presage change
+prevaricate|verb|/prɪˈværɪkeɪt/|Lafı dolandırmak|To avoid giving a direct answer.|equivocate;hedge|-|Don't prevaricate; tell us what happened.|prevaricate about
+pristine|adjective|/ˈprɪstiːn/|Bozulmamış, tertemiz|In original condition; very clean.|immaculate;untouched|dirty|The beach remains pristine.|pristine condition
+probity|noun|/ˈprəʊbəti/|Dürüstlük|Strong moral principles.|integrity;honesty|dishonesty|Public officials must show probity.|financial probity
+profligate|adjective|/ˈprɒflɪɡət/|Savurgan|Wasteful with money.|wasteful;extravagant|thrifty|The government was accused of profligate spending.|profligate spending
+promulgate|verb|/ˈprɒmlɡeɪt/|Yaymak, ilan etmek|To make an idea widely known; to announce a law.|announce;spread|suppress|The ministry will promulgate the new regulations.|promulgate a law
+propitious|adjective|/prəˈpɪʃəs/|Uygun, elverişli|Giving a good chance of success.|favourable;auspicious|unfavourable|It is not a propitious time to invest.|propitious moment
+prosaic|adjective|/prəˈzeɪɪk/|Sıradan, yavan|Ordinary and unimaginative.|dull;mundane|imaginative|The explanation was disappointingly prosaic.|prosaic reality
+provincial|adjective|/prəˈvɪnʃl/|Taşralı, dar görüşlü|Narrow in outlook.|parochial;narrow-minded|cosmopolitan|His views seemed provincial to his classmates.|provincial attitude
+prudent|adjective|/ˈpruːdnt/|Tedbirli|Careful and sensible.|wise;cautious|reckless|It is prudent to save some money.|prudent decision
+puerile|adjective|/ˈpjʊəraɪl/|Çocukça|Childishly silly.|childish;immature|mature|The jokes were puerile.|puerile humour
+punctilious|adjective|/pʌŋkˈtɪliəs/|Titiz, kurallara düşkün|Showing great attention to detail.|meticulous;scrupulous|careless|She is punctilious about deadlines.|punctilious about
+quandary|noun|/ˈkwɒndəri/|İkilem|A state of uncertainty about what to do.|dilemma;predicament|-|I'm in a quandary about which offer to accept.|in a quandary
+querulous|adjective|/ˈkwerələs/|Mızmız|Complaining in an annoyed way.|peevish;whining|contented|The querulous passenger complained all journey.|querulous tone
+quiescent|adjective|/kwiˈesnt/|Sakin, durgun|Inactive for a time.|dormant;inactive|active|The volcano has been quiescent for years.|remain quiescent
+quotidian|adjective|/kwəʊˈtɪdiən/|Gündelik|Ordinary or everyday.|daily;mundane|extraordinary|The poems describe quotidian life.|quotidian routine
+raconteur|noun|/ˌrækɒnˈtɜː/|Usta hikâye anlatıcısı|A person who tells stories well.|storyteller;narrator|-|My grandfather was a wonderful raconteur.|gifted raconteur
+rapacious|adjective|/rəˈpeɪʃəs/|Açgözlü, yağmacı|Aggressively greedy.|greedy;predatory|generous|Rapacious companies destroyed the forest.|rapacious greed
+recondite|adjective|/ˈrekəndaɪt/|Derin, az bilinen|Little known; obscure.|obscure;abstruse|simple|The article deals with a recondite topic.|recondite subject
+rectitude|noun|/ˈrektɪtjuːd/|Doğruluk|Moral correctness.|righteousness;integrity|dishonesty|He was a man of great rectitude.|moral rectitude
+refute|verb|/rɪˈfjuːt/|Çürütmek|To prove a statement wrong.|disprove;rebut|confirm|The data clearly refute the hypothesis.|refute a claim
+relegate|verb|/ˈrelɪɡeɪt/|Alt sıraya itmek|To move to a lower position.|demote;downgrade|promote|Do not relegate this issue to the end of the meeting.|relegate to
+remiss|adjective|/rɪˈmɪs/|İhmalkâr|Careless in doing one's duty.|negligent;careless|careful|It would be remiss of me not to thank you.|remiss in
+renege|verb|/rɪˈneɪɡ/|Sözünden dönmek|To fail to keep a promise.|default;back out|honour|The company may renege on the agreement.|renege on
+replete|adjective|/rɪˈpliːt/|Dolu|Filled with something.|full;packed|empty|The report is replete with errors.|replete with
+reprehensible|adjective|/ˌreprɪˈhensəbl/|Kınanacak|Deserving strong criticism.|shameful;deplorable|praiseworthy|Such behaviour is reprehensible.|morally reprehensible
+repudiate|verb|/rɪˈpjuːdieɪt/|Reddetmek|To refuse to accept.|reject;disown|accept|The party will repudiate the extremist views.|repudiate a claim
+rescind|verb|/rɪˈsɪnd/|İptal etmek|To cancel a law or decision.|revoke;cancel|enact|The university decided to rescind the new fee.|rescind a decision
+reticent|adjective|/ˈretɪsnt/|Ketum|Not revealing thoughts readily.|reserved;restrained|open|She is reticent about her private life.|reticent about
+reverent|adjective|/ˈrevərənt/|Saygılı|Showing deep respect.|respectful;devout|irreverent|A reverent silence filled the hall.|reverent tone
+sagacious|adjective|/səˈɡeɪʃəs/|Bilge|Wise.|wise;shrewd|foolish|The sagacious leader avoided war.|sagacious advice
+sanguine|adjective|/ˈsæŋɡwɪn/|İyimser|Optimistic.|optimistic;hopeful|pessimistic|The minister was sanguine about the economy.|sanguine about
+sardonic|adjective|/sɑːˈdɒnɪk/|Alaycı|Grimly mocking.|mocking;sarcastic|sincere|He gave a sardonic smile.|sardonic humour
+scrupulous|adjective|/ˈskruːpjələs/|Titiz, vicdanlı|Very careful and honest.|meticulous;honest|careless|Researchers must keep scrupulous records.|scrupulous attention
+soporific|adjective|/ˌsɒpəˈrɪfɪk/|Uyutucu|Causing sleep.|sleep-inducing;boring|stimulating|The lecture had a soporific effect.|soporific effect
+sporadic|adjective|/spəˈrædɪk/|Ara sıra olan|Occurring at irregular intervals.|occasional;irregular|constant|There was sporadic rain all day.|sporadic fighting
+spurn|verb|/spɜːn/|Hor görüp reddetmek|To reject with contempt.|reject;rebuff|accept|She chose to spurn the offer.|spurn an offer
+squander|verb|/ˈskwɒndə/|Çarçur etmek|To waste money or opportunities.|waste;fritter|save|Don't squander your time on social media.|squander money
+staid|adjective|/steɪd/|Ağırbaşlı, sıkıcı|Serious and unadventurous.|sedate;conservative|lively|The staid museum tried to attract young visitors.|staid image
+stoic|adjective|/ˈstəʊɪk/|Metin, sabırlı|Enduring pain without complaint.|patient;impassive|emotional|She remained stoic despite the bad news.|stoic acceptance
+strident|adjective|/ˈstraɪdnt/|Sert, tiz|Loud and harsh; forceful.|harsh;vociferous|soft|The plan faced strident opposition.|strident criticism
+stringent|adjective|/ˈstrɪndʒənt/|Sıkı|Strict and precise.|strict;rigorous|lenient|The lab follows stringent safety rules.|stringent rules
+superfluous|adjective|/suːˈpɜːfluəs/|Gereksiz|More than is needed.|unnecessary;excessive|essential|Delete any superfluous words.|superfluous detail
+surfeit|noun|/ˈsɜːfɪt/|Aşırı bolluk|An excessive amount.|excess;glut|lack|There is a surfeit of information online.|surfeit of
+tacit|adjective|/ˈtæsɪt/|Örtülü, zımni|Understood without being stated.|implicit;unspoken|explicit|There was tacit agreement among the group.|tacit approval
+temerity|noun|/təˈmerəti/|Cüret|Excessive boldness.|audacity;nerve|caution|He had the temerity to question the judge.|have the temerity
+tenacious|adjective|/təˈneɪʃəs/|Azimli|Holding firmly to something; persistent.|persistent;determined|irresolute|She is a tenacious researcher.|tenacious grip
+torpid|adjective|/ˈtɔːpɪd/|Uyuşuk|Mentally or physically inactive.|sluggish;lethargic|active|The torpid economy needs a stimulus.|torpid state
+tractable|adjective|/ˈtræktəbl/|Uysal, kolay yönetilen|Easy to control or deal with.|manageable;docile|unruly|The problem proved more tractable than expected.|tractable problem
+transient|adjective|/ˈtrænziənt/|Geçici|Lasting only a short time.|temporary;fleeting|permanent|Fame can be transient.|transient population
+trenchant|adjective|/ˈtrentʃənt/|Keskin, sert|Vigorous and incisive.|incisive;sharp|vague|She is a trenchant critic of the system.|trenchant criticism
+trepidation|noun|/ˌtrepɪˈdeɪʃn/|Kaygı, ürperti|A feeling of fear about something.|fear;anxiety|calm|He entered the exam room with trepidation.|with trepidation
+trite|adjective|/traɪt/|Basmakalıp|Overused and unoriginal.|banal;hackneyed|original|The ending of the story was trite.|trite phrase
+truculent|adjective|/ˈtrʌkjələnt/|Kavgacı|Eager to argue or fight.|aggressive;belligerent|amiable|The truculent player was sent off.|truculent mood
+umbrage|noun|/ˈʌmbrɪdʒ/|Gücenme|Offence or annoyance.|offence;resentment|pleasure|She took umbrage at his comment.|take umbrage
+unctuous|adjective|/ˈʌŋktʃuəs/|Yağcı|Excessively flattering.|sycophantic;oily|sincere|The salesman's unctuous manner annoyed us.|unctuous charm
+untenable|adjective|/ʌnˈtenəbl/|Savunulamaz|Not able to be defended.|indefensible;weak|defensible|The theory is now untenable.|untenable position
+usurp|verb|/juˈzɜːp/|Gasp etmek|To take power illegally.|seize;take over|-|The general tried to usurp the throne.|usurp power
+vacuous|adjective|/ˈvækjuəs/|Boş, anlamsız|Showing a lack of thought.|empty;inane|thoughtful|The speech was vacuous and repetitive.|vacuous remark
+vehement|adjective|/ˈviːəmənt/|Şiddetli, ateşli|Showing strong feeling.|passionate;forceful|mild|There was vehement opposition to the plan.|vehement denial
+verbose|adjective|/vɜːˈbəʊs/|Laf kalabalığı yapan|Using more words than needed.|wordy;long-winded|concise|Your writing is too verbose.|verbose style
+vestige|noun|/ˈvestɪdʒ/|Kalıntı, iz|A small remaining trace.|trace;remnant|-|Not a vestige of the old wall remains.|last vestige
+vex|verb|/veks/|Can sıkmak|To annoy or worry.|annoy;irritate|please|The problem continues to vex researchers.|vex someone
+vilify|verb|/ˈvɪlɪfaɪ/|Karalamak|To speak badly about someone unfairly.|defame;denigrate|praise|The press tried to vilify the scientist.|vilify someone
+vindictive|adjective|/vɪnˈdɪktɪv/|Kinci|Wanting revenge.|vengeful;spiteful|forgiving|A vindictive colleague reported him.|vindictive behaviour
+volition|noun|/vəˈlɪʃn/|İrade|The power to make your own choices.|will;choice|compulsion|She left the job of her own volition.|of one's own volition
+voracious|adjective|/vəˈreɪʃəs/|Doymak bilmez|Wanting a lot of something.|insatiable;avid|indifferent|She is a voracious reader.|voracious appetite
+wary|adjective|/ˈweəri/|Temkinli|Cautious about possible dangers.|cautious;careful|careless|Be wary of websites that promise quick results.|wary of
+whimsical|adjective|/ˈwɪmzɪkl/|Hayalperest, kaprisli|Playfully unusual.|fanciful;quirky|serious|The book has a whimsical style.|whimsical humour
+zenith|noun|/ˈzenɪθ/|Doruk|The highest point.|peak;pinnacle|nadir|The empire reached its zenith in the sixteenth century.|at its zenith

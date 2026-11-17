@@ -165,5 +165,40 @@ class TestEnvLoader(unittest.TestCase):
             self.assertNotIn("TEST_SKIP_KEY", os.environ)
 
 
+class TestEmailBudget(unittest.TestCase):
+    """Günlük kota: kötüye kullanımda şifre sıfırlama / doğrulama e-postaları yine gidebilmeli."""
+
+    def setUp(self):
+        es._BUDGET.update({"day": None, "total": 0, "normal": 0, "per_recipient": {}})
+
+    def _env(self, **extra):
+        env = {"EMAIL_FROM": "PrepMaster <noreply@x.com>", "BREVO_API_KEY": "xkeysib-test-sahte",
+               "EMAIL_DAILY_LIMIT": "5", "EMAIL_DAILY_SOFT_LIMIT": "3", "EMAIL_PER_RECIPIENT_DAILY": "2"}
+        env.update(extra)
+        return mock.patch.dict(os.environ, env, clear=True)
+
+    def test_normal_mail_stops_at_soft_limit_but_critical_still_goes(self):
+        import httpx
+        ok = mock.Mock(status_code=201, text="{}")
+        with self._env(), mock.patch.object(httpx, "post", return_value=ok) as post:
+            for i in range(3):
+                self.assertTrue(es.send_email(f"k{i}@x.com", "hosgeldin", "t"))
+            self.assertFalse(es.send_email("k9@x.com", "hosgeldin", "t"))  # bilgilendirme kotası doldu
+            self.assertTrue(es.send_password_reset_email("ogr@x.com", "123456"))  # kritik yine gider
+            self.assertTrue(es.send_student_otp_email("ogr@itu.edu.tr", "654321"))
+            self.assertFalse(es.send_password_reset_email("ogr2@x.com", "111111"))  # günlük üst sınır (5)
+            self.assertEqual(post.call_count, 5)
+
+    def test_same_recipient_capped(self):
+        import httpx
+        ok = mock.Mock(status_code=201, text="{}")
+        with self._env(EMAIL_DAILY_SOFT_LIMIT="50", EMAIL_DAILY_LIMIT="50"),                 mock.patch.object(httpx, "post", return_value=ok) as post:
+            self.assertTrue(es.send_email("kurban@x.com", "a", "t"))
+            self.assertTrue(es.send_email("KURBAN@x.com", "b", "t"))
+            self.assertFalse(es.send_email("kurban@x.com", "c", "t"))
+            self.assertEqual(post.call_count, 2)
+            self.assertEqual(es.get_email_budget()["sent_normal"], 2)
+
+
 if __name__ == "__main__":
     unittest.main()

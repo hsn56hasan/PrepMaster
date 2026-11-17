@@ -286,6 +286,16 @@
               <p id="admin-test-email-msg" class="text-xs hidden"></p>
             </div>
 
+            <div class="p-4 rounded-xl bg-slate-950/70 border border-slate-800 space-y-2">
+              <div class="text-xs font-bold text-slate-200">Veritabanı Yedeği</div>
+              <p class="text-[11px] text-slate-400 leading-relaxed">Sunucu her gün kendi diskine otomatik yedek alır (son 7 gün). Disk kaybolursa onlar da gider; bu yüzden <strong class="text-slate-200">haftada en az bir kez</strong> buradan indirip bilgisayarınızda saklayın.</p>
+              <button type="button" onclick="downloadAdminBackup()" id="admin-backup-btn"
+                class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition">
+                <i class="fa-solid fa-download mr-1"></i> Yedeği İndir
+              </button>
+              <p id="admin-backup-msg" class="text-xs hidden"></p>
+            </div>
+
             <div class="p-4 rounded-xl bg-amber-950/20 border border-amber-800/40 text-xs text-amber-200/90 space-y-1.5 leading-relaxed">
               <div class="font-bold text-amber-300 flex items-center gap-1.5">
                 <i class="fa-solid fa-circle-info"></i> Railway Kurulum Notu
@@ -436,6 +446,12 @@
   <div id="admin-toast" class="hidden fixed bottom-5 right-5 z-[90] px-4 py-3 rounded-2xl shadow-2xl text-xs font-extrabold border"></div>
 
   <script>
+    // Kullanıcıdan gelen her metin sayfaya basılmadan önce buradan geçer (XSS'e karşı).
+    function esc(v) {
+      return String(v == null ? "" : v)
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    }
     const ALL_UNIVERSITIES = [
       { id: "itu", code: "İTÜ", name: "İstanbul Teknik Üniversitesi" },
       { id: "boun", code: "BOÜN", name: "Boğaziçi Üniversitesi" },
@@ -470,7 +486,7 @@
     let activeResetStudentId = null;
 
     function getAdminToken() {
-      return localStorage.getItem("prepmaster_admin_token") || "";
+      return sessionStorage.getItem("prepmaster_admin_token") || "";
     }
 
     function showAdminToast(msg, type = "emerald") {
@@ -493,7 +509,7 @@
       }
       const res = await fetch(url, { ...options, headers });
       if (res.status === 401 || res.status === 403) {
-        localStorage.removeItem("prepmaster_admin_token");
+        sessionStorage.removeItem("prepmaster_admin_token");
         showLoginView();
       }
       return res;
@@ -535,7 +551,7 @@
         if (!res.ok) {
           throw new Error(data.detail || "Giriş başarısız.");
         }
-        localStorage.setItem("prepmaster_admin_token", data.token);
+        sessionStorage.setItem("prepmaster_admin_token", data.token);
         showDashboardView();
         await loadAdminData();
         showAdminToast("✓ Yönetim paneline giriş yapıldı.");
@@ -548,7 +564,7 @@
     }
 
     function logoutAdmin() {
-      localStorage.removeItem("prepmaster_admin_token");
+      sessionStorage.removeItem("prepmaster_admin_token");
       showLoginView();
     }
 
@@ -634,8 +650,8 @@
       if (lastEl) {
         if (data.last_delivery) {
           const d = data.last_delivery;
-          const okText = d.success ? "Başarılı" : `Hata: ${d.error || "Bilinmeyen"}`;
-          lastEl.innerHTML = `<span class="text-slate-300 font-semibold">Son gönderim:</span> ${d.to || "-"} (${d.provider || "-"}) — <span class="${d.success ? "text-emerald-400" : "text-rose-400"}">${okText}</span>`;
+          const okText = d.success ? "Başarılı" : `Hata: ${esc(d.error || "Bilinmeyen")}`;
+          lastEl.innerHTML = `<span class="text-slate-300 font-semibold">Son gönderim:</span> ${esc(d.to || "-")} (${esc(d.provider || "-")}) — <span class="${d.success ? "text-emerald-400" : "text-rose-400"}">${okText}</span>`;
         } else {
           lastEl.innerText = "Henüz bu oturumda gönderim kaydı yok.";
         }
@@ -692,6 +708,35 @@
       }
     }
 
+    async function downloadAdminBackup() {
+      const btn = document.getElementById("admin-backup-btn");
+      const msg = document.getElementById("admin-backup-msg");
+      btn.disabled = true;
+      msg.className = "text-xs text-slate-400";
+      msg.innerText = "Yedek hazırlanıyor...";
+      try {
+        const res = await adminFetch("/api/admin/backup");
+        if (!res.ok) throw new Error((await res.json().catch(() => ({}))).detail || "Yedek alınamadı.");
+        const blob = await res.blob();
+        const cd = res.headers.get("content-disposition") || "";
+        const m = cd.match(/filename="?([^";]+)"?/);
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = m ? m[1] : "prepmaster-yedek.db.gz";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+        msg.className = "text-xs text-emerald-400 font-medium";
+        msg.innerText = "Yedek indirildi (" + Math.round(blob.size / 1024) + " KB). Güvenli bir yerde saklayın.";
+      } catch (err) {
+        msg.className = "text-xs text-rose-400 font-medium";
+        msg.innerText = err.message;
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
     function renderSupportTicketsTable(tickets) {
       const tbody = document.getElementById("admin-tickets-tbody");
       if (!tbody) return;
@@ -703,13 +748,13 @@
         const dt = t.created_at ? new Date(t.created_at).toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "short" }) : "-";
         return `
           <tr class="hover:bg-slate-800/40 transition">
-            <td class="py-3 px-4 font-mono text-[11px] text-slate-400">#${t.id}<br><span class="text-[10px] text-slate-500">${dt}</span></td>
+            <td class="py-3 px-4 font-mono text-[11px] text-slate-400">#${esc(t.id)}<br><span class="text-[10px] text-slate-500">${esc(dt)}</span></td>
             <td class="py-3 px-4">
-              <div class="font-bold text-white">${t.full_name || "Ziyaretçi"}</div>
-              <div class="text-[11px] text-slate-400">${t.email || "-"} ${t.phone ? "• " + t.phone : ""}</div>
+              <div class="font-bold text-white">${esc(t.full_name || "Ziyaretçi")}</div>
+              <div class="text-[11px] text-slate-400">${esc(t.email || "-")} ${t.phone ? "• " + esc(t.phone) : ""}</div>
             </td>
-            <td class="py-3 px-4"><span class="px-2.5 py-1 bg-blue-500/15 text-blue-300 border border-blue-500/30 rounded-lg font-bold text-[11px]">${t.category || "Genel"}</span></td>
-            <td class="py-3 px-4 text-slate-200 max-w-md">${t.message || ""}</td>
+            <td class="py-3 px-4"><span class="px-2.5 py-1 bg-blue-500/15 text-blue-300 border border-blue-500/30 rounded-lg font-bold text-[11px]">${esc(t.category || "Genel")}</span></td>
+            <td class="py-3 px-4 text-slate-200 max-w-md whitespace-pre-wrap break-words">${esc(t.message || "")}</td>
           </tr>
         `;
       }).join("");
@@ -736,7 +781,7 @@
           ? `<div class="mb-1"><span class="px-2.5 py-0.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 rounded-md font-extrabold text-[10px]">🌟 Tüm 26 Üniversite Açık (Tam Erişim)</span></div>`
           : "";
         const unlockedBadges = unlocked.length > 0
-          ? all26Header + unlocked.map(uid => `<span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 rounded-md font-bold text-[10px]">${getUniLabel(uid)}</span>`).join(" ")
+          ? all26Header + unlocked.map(uid => `<span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 rounded-md font-bold text-[10px]">${esc(getUniLabel(uid))}</span>`).join(" ")
           : `<span class="text-slate-500 text-[11px]">Sadece Genel Havuz</span>`;
 
         const verifBadge = st.is_verified
@@ -744,7 +789,7 @@
           : `<span class="inline-flex items-center gap-1 px-2.5 py-1 bg-amber-500/15 text-amber-300 border border-amber-500/30 rounded-full text-[11px] font-bold">⏳ Doğrulanmadı</span>`;
 
         const verifNote = st.latest_verification?.notes
-          ? `<div class="text-[10px] text-slate-400 mt-1 max-w-[220px] truncate" title="${st.latest_verification.notes}">${st.latest_verification.notes}</div>`
+          ? `<div class="text-[10px] text-slate-400 mt-1 max-w-[220px] truncate" title="${esc(st.latest_verification.notes)}">${esc(st.latest_verification.notes)}</div>`
           : "";
 
         const createdDate = st.created_at ? new Date(st.created_at).toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "short" }) : "-";
@@ -754,22 +799,22 @@
           <tr class="hover:bg-slate-800/40 transition">
             <td class="py-3.5 px-4">
               <div class="flex items-center gap-2.5">
-                <span class="w-8 h-8 rounded-xl bg-slate-800 border border-slate-700 text-slate-300 font-mono font-bold text-[11px] flex items-center justify-center">#${st.id}</span>
+                <span class="w-8 h-8 rounded-xl bg-slate-800 border border-slate-700 text-slate-300 font-mono font-bold text-[11px] flex items-center justify-center">#${esc(st.id)}</span>
                 <div>
-                  <div class="font-extrabold text-white text-xs">${st.full_name || "-"}</div>
-                  <div class="text-[11px] text-slate-400 font-mono">@${st.username || "-"}</div>
+                  <div class="font-extrabold text-white text-xs">${esc(st.full_name || "-")}</div>
+                  <div class="text-[11px] text-slate-400 font-mono">@${esc(st.username || "-")}</div>
                 </div>
               </div>
             </td>
 
             <td class="py-3.5 px-4">
-              <div class="font-semibold text-slate-200">${st.email || "-"}</div>
-              <div class="text-[11px] text-slate-400 font-mono">Öğrenci No: <strong class="text-slate-300">${st.student_number || "-"}</strong></div>
+              <div class="font-semibold text-slate-200">${esc(st.email || "-")}</div>
+              <div class="text-[11px] text-slate-400 font-mono">Öğrenci No: <strong class="text-slate-300">${esc(st.student_number || "-")}</strong></div>
             </td>
 
             <td class="py-3.5 px-4">
-              <span class="px-2.5 py-1 bg-blue-500/15 text-blue-300 border border-blue-500/30 rounded-lg font-extrabold text-[11px]">${getUniLabel(st.university_id)}</span>
-              <span class="ml-1 px-2 py-0.5 bg-slate-800 text-slate-300 rounded-md font-bold text-[10px]">${st.current_level || "B2"}</span>
+              <span class="px-2.5 py-1 bg-blue-500/15 text-blue-300 border border-blue-500/30 rounded-lg font-extrabold text-[11px]">${esc(getUniLabel(st.university_id))}</span>
+              <span class="ml-1 px-2 py-0.5 bg-slate-800 text-slate-300 rounded-md font-bold text-[10px]">${esc(st.current_level || "B2")}</span>
             </td>
 
             <td class="py-3.5 px-4">
@@ -782,25 +827,25 @@
             </td>
 
             <td class="py-3.5 px-4">
-              <div class="font-bold text-slate-200">${st.exam_count || 0} Deneme <span class="text-emerald-400">(%${st.avg_score || 0})</span></div>
-              <div class="text-[10px] text-slate-400">Kayıt: ${createdDate}</div>
-              <div class="text-[10px] text-slate-500">Son Giriş: ${lastActiveDate}</div>
+              <div class="font-bold text-slate-200">${esc(st.exam_count || 0)} Deneme <span class="text-emerald-400">(%${esc(st.avg_score || 0)})</span></div>
+              <div class="text-[10px] text-slate-400">Kayıt: ${esc(createdDate)}</div>
+              <div class="text-[10px] text-slate-500">Son Giriş: ${esc(lastActiveDate)}</div>
             </td>
 
             <td class="py-3.5 px-4 text-right">
               <div class="inline-flex items-center gap-1.5">
-                <button onclick="openStudentAccessModal(${st.id})" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-[11px] font-extrabold shadow transition flex items-center gap-1">
+                <button onclick="openStudentAccessModal(${Number(st.id)})" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-[11px] font-extrabold shadow transition flex items-center gap-1">
                   <i data-lucide="key-round" class="w-3.5 h-3.5"></i>
                   <span>Üniversite Erişimi Tanımla</span>
                 </button>
-                <button onclick="quickGrantAllUniversities(${st.id})" title="Tek Tıkla 26 Üniversitenin Tamamını Aç" class="px-2.5 py-1.5 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 rounded-xl text-[11px] font-bold transition">
+                <button onclick="quickGrantAllUniversities(${Number(st.id)})" title="Tek Tıkla 26 Üniversitenin Tamamını Aç" class="px-2.5 py-1.5 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 rounded-xl text-[11px] font-bold transition">
                   +26 Okul
                 </button>
-                <button onclick="openResetPassModal(${st.id})" title="Öğrenci Şifresini Değiştir" class="p-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl border border-slate-700 transition">
+                <button onclick="openResetPassModal(${Number(st.id)})" title="Öğrenci Şifresini Değiştir" class="p-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl border border-slate-700 transition">
                   <i data-lucide="key" class="w-3.5 h-3.5"></i>
                 </button>
                 ${st.id !== 1 ? `
-                <button onclick="deleteStudentAccount(${st.id})" title="Öğrenci Kaydını Sil" class="p-1.5 bg-rose-950/60 hover:bg-rose-900/80 text-rose-300 rounded-xl border border-rose-800/60 transition">
+                <button onclick="deleteStudentAccount(${Number(st.id)})" title="Öğrenci Kaydını Sil" class="p-1.5 bg-rose-950/60 hover:bg-rose-900/80 text-rose-300 rounded-xl border border-rose-800/60 transition">
                   <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
                 </button>` : ""}
               </div>
@@ -831,10 +876,10 @@
         const checked = unlockedSet.has(u.id) ? "checked" : "";
         return `
           <label class="flex items-center gap-2.5 p-3 rounded-2xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700 cursor-pointer select-none transition">
-            <input type="checkbox" name="uni-access-check" value="${u.id}" ${checked} onchange="onUniCheckboxChange()" class="w-4 h-4 rounded accent-indigo-500">
+            <input type="checkbox" name="uni-access-check" value="${esc(u.id)}" ${checked} onchange="onUniCheckboxChange()" class="w-4 h-4 rounded accent-indigo-500">
             <div class="truncate">
-              <div class="text-xs font-extrabold text-white">${u.code}</div>
-              <div class="text-[10px] text-slate-400 truncate">${u.name}</div>
+              <div class="text-xs font-extrabold text-white">${esc(u.code)}</div>
+              <div class="text-[10px] text-slate-400 truncate">${esc(u.name)}</div>
             </div>
           </label>
         `;

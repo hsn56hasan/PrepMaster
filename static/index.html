@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>PrepMaster | Üniversite İngilizce Hazırlık Muafiyet (Proficiency, BUEPT, EPE, PAE, İYS) Platformu</title>
-  <meta name="description" content="Türkiye'deki 26 üniversitenin İngilizce hazırlık muafiyet (İTÜ Proficiency, Boğaziçi BUEPT, ODTÜ EPE, Bilkent PAE/COPE, YTÜ İYS, Koç KUEPE, Sabancı ELAE) ve A1–C2 kur sınavlarına özel 4.926 soru, 656 listening ve 657 speaking denemesi. E-Devlet ile kendi üniversiteni ücretsiz aç!">
+  <meta name="description" content="Türkiye'deki 26 üniversitenin İngilizce hazırlık muafiyet (İTÜ Proficiency, Boğaziçi BUEPT, ODTÜ EPE, Bilkent PAE/COPE, YTÜ İYS, Koç KUEPE, Sabancı ELAE) ve A1–C2 kur sınavları için 10.901 soru, 2.019 kelimelik sözlük, 656 listening ve 657 speaking denemesi. E-Devlet ile kendi üniversiteni ücretsiz aç!">
   <meta name="keywords" content="PrepMaster, İngilizce hazırlık muafiyet sınavı, İTÜ Proficiency, Boğaziçi BUEPT, ODTÜ EPE, Bilkent PAE, Bilkent COPE, YTÜ İYS, Koç KUEPE, Sabancı ELAE, ÖzÜ TRACE, üniversite hazırlık atlama deneme sınavı, listening, speaking, A1 B1 B2 C1 C2">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <link rel="canonical" href="https://prepmaster-web-production.up.railway.app/">
@@ -14,7 +14,7 @@
   <meta property="og:locale" content="tr_TR">
   <meta property="og:site_name" content="PrepMaster">
   <meta property="og:title" content="PrepMaster | 26 Üniversite İngilizce Hazırlık & Muafiyet Sınav Platformu">
-  <meta property="og:description" content="İTÜ Proficiency, Boğaziçi BUEPT, ODTÜ EPE, Bilkent PAE/COPE, YTÜ İYS, Koç KUEPE ve Sabancı ELAE dâhil 26 üniversiteye özel 4.926 soru, 656 listening ve 657 speaking denemesi.">
+  <meta property="og:description" content="İTÜ Proficiency, Boğaziçi BUEPT, ODTÜ EPE, Bilkent PAE/COPE, YTÜ İYS, Koç KUEPE ve Sabancı ELAE dâhil 26 üniversite için 10.901 soru, 2.019 kelime, 656 listening ve 657 speaking denemesi.">
   <meta property="og:url" content="https://prepmaster-web-production.up.railway.app/">
   <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/2997/2997295.png">
   <meta name="twitter:card" content="summary">
@@ -1138,14 +1138,19 @@
               <input type="password" id="reg-password" placeholder="En az 6 karakter" onkeydown="if(event.key==='Enter') submitRegister()" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
           </div>
-          <!-- KVKK Aydınlatma & Açık Rıza Onay Kutusu -->
-          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">
+          <!-- Onaylar: sözleşme ZORUNLU, açık rıza AYRI ve İSTEĞE BAĞLI; ikisi de boş başlar -->
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
             <label class="flex items-start gap-2.5 cursor-pointer select-none">
-              <input type="checkbox" id="reg-kvkk-consent" checked class="mt-0.5 w-4 h-4 rounded accent-emerald-600 shrink-0">
+              <input type="checkbox" id="reg-kvkk-consent" class="mt-0.5 w-4 h-4 rounded accent-emerald-600 shrink-0">
               <span class="text-[11px] text-slate-600 leading-relaxed">
-                <button type="button" onclick="openSupportKvkkModal('kvkk')" class="font-extrabold text-blue-700 underline">6698 Sayılı KVKK Aydınlatma Metni</button>'ni okudum; kişisel verilerimin işlenmesine ilişkin
-                <button type="button" onclick="openSupportKvkkModal('riza')" class="font-extrabold text-blue-700 underline">Açık Rıza Beyanı</button>'nı ve
-                <button type="button" onclick="openSupportKvkkModal('sozlesme')" class="font-extrabold text-blue-700 underline">Kullanıcı Sözleşmesi</button>'ni kabul ediyorum.
+                <button type="button" onclick="openSupportKvkkModal('sozlesme')" class="font-extrabold text-blue-700 underline">Kullanıcı Sözleşmesi</button>'ni kabul ediyorum ve
+                <button type="button" onclick="openSupportKvkkModal('kvkk')" class="font-extrabold text-blue-700 underline">KVKK Aydınlatma Metni</button>'ni okudum. <span class="text-rose-600 font-bold">(zorunlu)</span>
+              </span>
+            </label>
+            <label class="flex items-start gap-2.5 cursor-pointer select-none">
+              <input type="checkbox" id="reg-explicit-consent" class="mt-0.5 w-4 h-4 rounded accent-emerald-600 shrink-0">
+              <span class="text-[11px] text-slate-600 leading-relaxed">
+                <button type="button" onclick="openSupportKvkkModal('riza')" class="font-extrabold text-blue-700 underline">Açık Rıza Beyanı</button>'nı kabul ediyorum. <span class="text-slate-400">(isteğe bağlı)</span>
               </span>
             </label>
           </div>
@@ -1199,7 +1204,7 @@
     <!-- Google & Ziyaretçiler İçin 26 Üniversite Sınav Rehberi Özeti -->
     <div class="max-w-md w-full mt-4 p-4 rounded-2xl bg-slate-900/60 border border-white/10 text-slate-200 space-y-2.5 text-center">
       <div class="flex items-center justify-between text-[11px] font-bold">
-        <span class="text-blue-300">26 Üniversite • 4.926 Soru • A1–C2</span>
+        <span class="text-blue-300">26 Üniversite • 10.901 Soru • 2.019 Kelime</span>
         <a href="/sinavlar" class="text-emerald-300 hover:text-emerald-200 underline">Tüm Sınav Rehberleri →</a>
       </div>
       <div class="flex flex-wrap items-center justify-center gap-1.5 text-[10px] font-bold">
@@ -1597,6 +1602,14 @@
           <input type="tel" id="paytr-phone" inputmode="tel" autocomplete="tel" placeholder="05XX XXX XX XX"
                  class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500">
           <p class="text-[11px] text-slate-400">Ödeme altyapısı (PayTR) güvenlik kontrolü için istiyor. Kart bilgileriniz PrepMaster'a gelmez, doğrudan PayTR'nin güvenli sayfasında girilir.</p>
+          <label class="flex items-start gap-2.5 p-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl cursor-pointer select-none">
+            <input type="checkbox" id="paytr-pre-info" class="mt-0.5 w-4 h-4 rounded accent-amber-600 shrink-0">
+            <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+              <a href="/kvkk#on-bilgilendirme" target="_blank" rel="noopener" class="font-extrabold text-blue-700 dark:text-blue-400 underline">Ön Bilgilendirme Formu</a>'nu ve
+              <a href="/kvkk#mesafeli-satis" target="_blank" rel="noopener" class="font-extrabold text-blue-700 dark:text-blue-400 underline">Mesafeli Satış Sözleşmesi</a>'ni okudum, kabul ediyorum.
+              Dijital içeriğin hemen ifasına onay veriyorum; bu nedenle <a href="/kvkk#iade-cayma" target="_blank" rel="noopener" class="font-bold underline">cayma hakkım</a> bulunmadığını biliyorum.
+            </span>
+          </label>
           <button type="button" id="btn-paytr-start" onclick="startPaytrPayment()"
                   class="w-full py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-black text-xs rounded-xl shadow-lg shadow-amber-500/25 transition flex items-center justify-center gap-2">
             <i data-lucide="shield-check" class="w-4 h-4"></i> PayTR ile Güvenli Öde (50 TL)
@@ -2088,11 +2101,11 @@
 
   <script src="/static/js/auth_fetch.js?v=2.0"></script>
   <script src="/static/js/flashcards.js?v=2.0"></script>
-  <script src="/static/js/exam.js?v=2.0"></script>
+  <script src="/static/js/exam.js?v=2.2"></script>
   <script src="/static/js/listening.js?v=2.0"></script>
   <script src="/static/js/speaking.js?v=2.0"></script>
   <script src="/static/js/writing_ai.js?v=2.0"></script>
-  <script src="/static/js/app.js?v=2.3"></script>
+  <script src="/static/js/app.js?v=2.5"></script>
 
   <!-- 3D Secure ödeme Entegrasyonu -->
   <script>
@@ -2386,6 +2399,6 @@
       window.submitUniversityUnlockPayment = window.init3DSecurePayment;
     })();
   </script>
-  <script src="/static/js/paytr.js?v=1.0"></script>
+  <script src="/static/js/paytr.js?v=1.1"></script>
 </body>
 </html>

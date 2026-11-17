@@ -82,7 +82,7 @@ class TestPaytr(unittest.TestCase):
         self.addCleanup(p.stop)
 
     def _register(self, username):
-        res = self.client.post("/api/auth/register", json={
+        res = self.client.post("/api/auth/register", json={"terms_accepted": True, 
             "email": f"{username}@example.com", "username": username, "password": "Parola123!",
             "full_name": "Test Öğrenci", "university_id": "itu",
         })
@@ -91,7 +91,7 @@ class TestPaytr(unittest.TestCase):
         return d["user"]["id"], {"Authorization": f"Bearer {d['token']}"}
 
     def _start(self, auth, uni="boun", phone="0532 123 45 67"):
-        return self.client.post("/api/payment/paytr/token", json={"university_id": uni, "user_phone": phone},
+        return self.client.post("/api/payment/paytr/token", json={"university_id": uni, "user_phone": phone, "pre_info_accepted": True},
                                 headers={**auth, "CF-Connecting-IP": "88.1.2.3"})
 
     def _callback(self, oid, status="success", total="5000", sig=None):
@@ -223,6 +223,16 @@ class TestPaytr(unittest.TestCase):
         self.assertIn("frame-ancestors 'none'", main.headers["Content-Security-Policy"])
         self.assertIn("frame-src https://www.paytr.com", main.headers["Content-Security-Policy"])
         self.assertEqual(main.headers["X-Frame-Options"], "DENY")
+
+    # ------------------------------------------------------------------ ödeme öncesi onay
+    def test_payment_requires_pre_information_consent_and_records_it(self):
+        _, auth = self._register("onaysiz")
+        res = self.client.post("/api/payment/paytr/token",
+                               json={"university_id": "boun", "user_phone": "05321234567"}, headers=auth)
+        self.assertEqual(res.status_code, 400)
+        self.assertEqual(self.fake.forms, [], "Onay olmadan PayTR'ye gidilmemeli")
+        oid = self._start(auth).json()["merchant_oid"]
+        self.assertIsNotNone(db.get_paytr_order(oid)["pre_info_accepted_at"])
 
 
 if __name__ == "__main__":

@@ -33,3 +33,7 @@ mobile/.pub/
 
 # Veritabanı göç yedekleri (öğrenci verisi içerir)
 *.db.yedek-*
+
+# Otomatik veritabanı yedekleri (öğrenci verisi içerir)
+backups/
+*.db.gz

@@ -1,0 +1,233 @@
+# Biçim: kelime|tür|okunuş|Türkçe anlam|İngilizce tanım|eş anlamlılar (;)|zıt anlamlılar (; ya da -)|örnek cümle (kelimenin yalın hâli geçmeli)|kalıp
+abandon|verb|/əˈbændən/|Terk etmek, vazgeçmek|To leave something or someone completely; to stop doing something.|desert;give up|keep;continue|The team had to abandon the project because of a lack of money.|abandon a plan
+absorb|verb|/əbˈzɔːb/|Emmek; özümsemek|To take in a liquid; to learn and understand information.|soak up;take in|release|Plants absorb water through their roots.|absorb information
+academic|adjective|/ˌækəˈdemɪk/|Akademik|Relating to education and scholarship.|scholarly;educational|practical|Academic writing must be clear and formal.|academic year
+access|noun|/ˈækses/|Erişim|The right or opportunity to use or reach something.|entry;admission|-|All students have access to the online library.|have access to
+accurately|adverb|/ˈækjərətli/|Doğru bir şekilde|In a correct and exact way.|precisely;correctly|inaccurately|Copy the data accurately into the table.|measure accurately
+admire|verb|/ədˈmaɪə/|Hayran olmak, takdir etmek|To respect and approve of someone or something.|respect;praise|despise|I admire people who speak several languages.|admire someone for
+admit|verb|/ədˈmɪt/|Kabul etmek, itiraf etmek|To agree that something is true, often unwillingly.|confess;acknowledge|deny|He had to admit that he had not read the book.|admit a mistake
+adopt|verb|/əˈdɒpt/|Benimsemek; evlat edinmek|To start using a new method or idea; to take a child into your family.|embrace;take up|reject|Many schools adopt online teaching tools.|adopt a policy
+afford|verb|/əˈfɔːd/|Gücü yetmek (parasal)|To have enough money or time for something.|manage;pay for|-|Many students cannot afford to live alone.|afford to
+aggressive|adjective|/əˈɡresɪv/|Saldırgan|Behaving in an angry, threatening way.|hostile;violent|peaceful;gentle|Aggressive drivers cause many accidents.|aggressive behaviour
+aim|noun|/eɪm/|Amaç, hedef|Something you hope to achieve.|goal;purpose|-|The aim of the course is to improve academic writing.|main aim
+alter|verb|/ˈɔːltə/|Değiştirmek|To change something slightly.|change;modify|preserve|We had to alter our plans because of the weather.|alter a plan
+ambition|noun|/æmˈbɪʃn/|Hırs, tutku, hedef|A strong wish to achieve something.|aspiration;goal|-|Her ambition is to become a surgeon.|lifelong ambition
+amazing|adjective|/əˈmeɪzɪŋ/|İnanılmaz, harika|Very surprising and good.|astonishing;wonderful|ordinary|The view from the top of the tower is amazing.|amazing experience
+announcement|noun|/əˈnaʊnsmənt/|Duyuru|A public statement giving information.|notice;statement|-|There is an important announcement on the school website.|make an announcement
+annual|adjective|/ˈænjuəl/|Yıllık|Happening once every year.|yearly|-|The annual science fair takes place in May.|annual report
+anxiety|noun|/æŋˈzaɪəti/|Kaygı|A feeling of worry and fear.|worry;nervousness|calm|Exam anxiety can lower your performance.|exam anxiety
+apologize|verb|/əˈpɒlədʒaɪz/|Özür dilemek|To say sorry.|say sorry|-|You should apologize for arriving late.|apologize for
+appearance|noun|/əˈpɪərəns/|Görünüş; ortaya çıkış|The way someone or something looks; the act of appearing.|look;arrival|disappearance|Don't judge people by their appearance.|physical appearance
+application|noun|/ˌæplɪˈkeɪʃn/|Başvuru; uygulama|A formal request; a computer program.|request;program|-|The application deadline is the end of the month.|application form
+approve|verb|/əˈpruːv/|Onaylamak|To officially accept a plan or request.|accept;authorize|reject|The committee will approve the new timetable.|approve of
+attempt|noun|/əˈtempt/|Girişim, deneme|An act of trying to do something.|try;effort|-|She passed the exam on her first attempt.|make an attempt
+attention|noun|/əˈtenʃn/|Dikkat|The act of watching or listening carefully.|focus;concentration|neglect|Please pay attention to the instructions.|pay attention
+audience|noun|/ˈɔːdiəns/|Dinleyici, seyirci|The people who watch or listen to an event.|spectators;listeners|-|The audience clapped at the end of the talk.|large audience
+authority|noun|/ɔːˈθɒrəti/|Yetki; otorite|The power to give orders; an organization with power.|power;control|-|The local authority closed the school for repairs.|local authority
+available|adjective|/əˈveɪləbl/|Mevcut, müsait|Able to be used or obtained.|accessible;free|unavailable|The results will be available online next week.|available to
+award|noun|/əˈwɔːd/|Ödül|A prize given for an achievement.|prize;honour|-|The film won an award for best script.|win an award
+awareness|noun|/əˈweənəs/|Farkındalık|Knowledge that something exists or is important.|consciousness;understanding|ignorance|The campaign raised awareness of recycling.|raise awareness
+beneficial|adjective|/ˌbenɪˈfɪʃl/|Yararlı|Having a good effect.|helpful;useful|harmful|Regular sleep is beneficial for memory.|beneficial to
+blame|verb|/bleɪm/|Suçlamak|To say that someone is responsible for something bad.|accuse;criticize|praise|Don't blame others for your own mistakes.|blame for
+calculate|verb|/ˈkælkjuleɪt/|Hesaplamak|To find an amount using numbers.|compute;work out|guess|Calculate the average score of the class.|calculate the cost
+campaign|noun|/kæmˈpeɪn/|Kampanya|A planned series of activities to achieve a goal.|drive;movement|-|The student union started a campaign against plastic.|launch a campaign
+candidate|noun|/ˈkændɪdət/|Aday|A person who applies for a job or takes an exam.|applicant;nominee|-|Each candidate must bring a photo ID.|suitable candidate
+capable|adjective|/ˈkeɪpəbl/|Yetenekli, muktedir|Having the ability to do something.|able;competent|incapable|She is capable of finishing the project alone.|capable of
+celebrity|noun|/səˈlebrəti/|Ünlü kişi|A famous person.|star;personality|-|A celebrity visited our campus for a charity event.|famous celebrity
+charity|noun|/ˈtʃærəti/|Hayır kurumu|An organization that helps people in need.|foundation;aid|-|The club raised money for a children's charity.|charity event
+citizen|noun|/ˈsɪtɪzn/|Vatandaş|A person who legally belongs to a country.|national;resident|foreigner|Every citizen has the right to education.|citizen of
+claim|verb|/kleɪm/|İddia etmek; talep etmek|To say that something is true; to ask for something you have a right to.|assert;demand|deny|Some websites claim that you can learn English in a week.|claim that
+climate|noun|/ˈklaɪmət/|İklim|The usual weather conditions in an area.|weather|-|The climate of the Aegean region is mild.|climate change
+colleague|noun|/ˈkɒliːɡ/|Meslektaş, iş arkadaşı|A person you work with.|co-worker;associate|-|My colleague helped me prepare the lesson.|former colleague
+combine|verb|/kəmˈbaɪn/|Birleştirmek|To join two or more things together.|merge;mix|separate|You can combine work and study if you plan well.|combine with
+comment|noun|/ˈkɒment/|Yorum|A remark that expresses an opinion.|remark;observation|-|The teacher wrote a comment on my essay.|make a comment
+commercial|adjective|/kəˈmɜːʃl/|Ticari|Relating to buying and selling.|business;trade|non-profit|The city centre is a busy commercial area.|commercial activity
+communicate|verb|/kəˈmjuːnɪkeɪt/|İletişim kurmak|To share information with others.|talk;convey|-|It is important to communicate clearly in a team.|communicate with
+competition|noun|/ˌkɒmpəˈtɪʃn/|Yarışma; rekabet|An event in which people try to win; rivalry.|contest;rivalry|cooperation|There is strong competition for places at top universities.|win a competition
+concentrate|verb|/ˈkɒnsntreɪt/|Odaklanmak, konsantre olmak|To give all your attention to something.|focus|-|I can't concentrate when my phone is next to me.|concentrate on
+concern|noun|/kənˈsɜːn/|Endişe; ilgi alanı|A feeling of worry; something important to you.|worry;anxiety|indifference|There is growing concern about air quality.|express concern
+confirm|verb|/kənˈfɜːm/|Onaylamak, teyit etmek|To say that something is definitely true or arranged.|verify;approve|cancel|Please confirm your attendance by email.|confirm a booking
+conservation|noun|/ˌkɒnsəˈveɪʃn/|Koruma (doğal kaynak)|The protection of nature and the environment.|protection;preservation|destruction|Water conservation is important in dry regions.|wildlife conservation
+contain|verb|/kənˈteɪn/|İçermek|To have something inside.|include;hold|exclude|These boxes contain old exam papers.|contain information
+convince|verb|/kənˈvɪns/|İkna etmek|To make someone believe something.|persuade;assure|discourage|Your essay should convince the reader with evidence.|convince someone
+cooperate|verb|/kəʊˈɒpəreɪt/|İş birliği yapmak|To work together to achieve something.|collaborate;work together|compete|Students must cooperate in group projects.|cooperate with
+creative|adjective|/kriˈeɪtɪv/|Yaratıcı|Able to produce new and original ideas.|imaginative;inventive|unimaginative|Write a creative story using the new words.|creative thinking
+crime|noun|/kraɪm/|Suç|An illegal action.|offence;wrongdoing|-|The crime rate in the area has fallen.|commit a crime
+criticize|verb|/ˈkrɪtɪsaɪz/|Eleştirmek|To say what is wrong with someone or something.|condemn;find fault|praise|Some experts criticize the new exam system.|criticize for
+crowd|noun|/kraʊd/|Kalabalık|A large group of people together.|mass;throng|-|A large crowd gathered to watch the concert.|in the crowd
+damage|noun|/ˈdæmɪdʒ/|Hasar, zarar|Harm that makes something less valuable or useful.|harm;destruction|repair|The storm caused damage to the school roof.|cause damage
+decrease|verb|/dɪˈkriːs/|Azalmak, azaltmak|To become smaller in number or amount.|reduce;decline|increase|The number of smokers continues to decrease.|decrease by
+defend|verb|/dɪˈfend/|Savunmak|To protect from attack or criticism.|protect;support|attack|You must defend your opinion with clear reasons.|defend against
+demand|noun|/dɪˈmɑːnd/|Talep|A strong request; the need for goods or services.|request;need|supply|There is a high demand for English teachers.|in demand
+deserve|verb|/dɪˈzɜːv/|Hak etmek|To have earned something because of your actions.|merit;earn|-|After so much work, you deserve a holiday.|deserve to
+destroy|verb|/dɪˈstrɔɪ/|Yok etmek|To damage something so badly that it no longer exists.|ruin;wreck|build;create|The earthquake did not destroy the old library.|completely destroy
+determined|adjective|/dɪˈtɜːmɪnd/|Kararlı|Having made a firm decision.|resolute;persistent|hesitant|She was determined to pass the exam.|determined to
+disadvantage|noun|/ˌdɪsədˈvɑːntɪdʒ/|Dezavantaj|Something that makes a situation worse.|drawback;downside|advantage|One disadvantage of online classes is the lack of contact.|at a disadvantage
+disaster|noun|/dɪˈzɑːstə/|Felaket|A sudden event that causes great damage.|catastrophe;tragedy|success|The flood was a disaster for the region.|natural disaster
+disease|noun|/dɪˈziːz/|Hastalık|An illness affecting people, animals or plants.|illness;sickness|health|Heart disease is common in older people.|infectious disease
+distract|verb|/dɪˈstrækt/|Dikkatini dağıtmak|To take someone's attention away.|divert;disturb|focus|Social media can distract you from studying.|distract from
+disturb|verb|/dɪˈstɜːb/|Rahatsız etmek|To interrupt or annoy someone.|bother;interrupt|-|Please don't disturb students who are studying.|do not disturb
+donate|verb|/dəʊˈneɪt/|Bağışlamak|To give money or goods to help others.|give;contribute|-|Students donate books to village schools.|donate money
+earthquake|noun|/ˈɜːθkweɪk/|Deprem|A sudden shaking of the ground.|tremor;quake|-|Türkiye has strict rules for earthquake safety.|earthquake zone
+efficiently|adverb|/ɪˈfɪʃntli/|Verimli bir şekilde|In a way that uses time and energy well.|effectively;productively|wastefully|Learn to use your study time efficiently.|work efficiently
+emotion|noun|/ɪˈməʊʃn/|Duygu|A strong feeling such as love or anger.|feeling;sentiment|-|Music can express every emotion.|show emotion
+employer|noun|/ɪmˈplɔɪə/|İşveren|A person or company that employs people.|boss;company|employee|Every employer looks for good communication skills.|future employer
+encouragement|noun|/ɪnˈkʌrɪdʒmənt/|Cesaretlendirme|Support that makes someone more confident.|support;motivation|discouragement|Her teacher's encouragement helped her a lot.|words of encouragement
+energy|noun|/ˈenədʒi/|Enerji|The power to do work; power from fuel or electricity.|power;vitality|-|Solar energy is becoming cheaper.|renewable energy
+enormous|adjective|/ɪˈnɔːməs/|Devasa, kocaman|Extremely large.|huge;vast|tiny|The new library is enormous.|enormous amount
+entertainment|noun|/ˌentəˈteɪnmənt/|Eğlence|Things that people enjoy watching or doing.|amusement;fun|-|The festival offers entertainment for all ages.|form of entertainment
+environmental|adjective|/ɪnˌvaɪrənˈmentl/|Çevresel|Relating to the natural world.|ecological|-|Plastic waste is a serious environmental problem.|environmental protection
+equality|noun|/iˈkwɒləti/|Eşitlik|The state of being equal.|fairness;parity|inequality|The law supports equality between men and women.|gender equality
+escape|verb|/ɪˈskeɪp/|Kaçmak|To get away from a place or danger.|flee;get away|-|They tried to escape from the burning building.|escape from
+estimate|noun|/ˈestɪmət/|Tahmin|A guess of a number or amount.|approximation;guess|-|The builder gave us an estimate of the cost.|rough estimate
+exaggerate|verb|/ɪɡˈzædʒəreɪt/|Abartmak|To describe something as bigger or worse than it is.|overstate|understate|Don't exaggerate; the test wasn't that difficult.|exaggerate the problem
+excellent|adjective|/ˈeksələnt/|Mükemmel|Extremely good.|outstanding;superb|poor|Your presentation was excellent.|excellent results
+exception|noun|/ɪkˈsepʃn/|İstisna|Something that does not follow a rule.|anomaly;special case|rule|Every student must attend, without exception.|with the exception of
+exhausted|adjective|/ɪɡˈzɔːstɪd/|Bitkin, çok yorgun|Extremely tired.|worn out;drained|energetic|After the exam I felt exhausted.|feel exhausted
+expert|noun|/ˈekspɜːt/|Uzman|A person with special knowledge or skill.|specialist;authority|beginner|An expert in climate science gave a talk.|expert in
+extend|verb|/ɪkˈstend/|Uzatmak, genişletmek|To make something longer or larger.|lengthen;expand|shorten|The library will extend its opening hours.|extend a deadline
+extremely|adverb|/ɪkˈstriːmli/|Son derece|To a very great degree.|very;highly|slightly|The final exam was extremely difficult.|extremely important
+fault|noun|/fɔːlt/|Kusur; suç|A mistake or weakness; responsibility for something bad.|mistake;flaw|-|It was not your fault that the computer crashed.|my fault
+financial|adjective|/faɪˈnænʃl/|Mali, finansal|Relating to money.|economic;monetary|-|Many students need financial support.|financial aid
+flexible|adjective|/ˈfleksəbl/|Esnek|Able to change easily.|adaptable;adjustable|rigid|The course has a flexible timetable.|flexible hours
+former|adjective|/ˈfɔːmə/|Eski, önceki|Happening or existing in the past.|previous;earlier|current|A former student came to talk about her career.|former president
+fortunately|adverb|/ˈfɔːtʃənətli/|Neyse ki|By good luck.|luckily|unfortunately|Fortunately, nobody was hurt.|fortunately for
+frequently|adverb|/ˈfriːkwəntli/|Sık sık|Often.|often;regularly|rarely|Students frequently confuse these two words.|frequently asked
+frustrated|adjective|/frʌˈstreɪtɪd/|Hüsrana uğramış|Annoyed because you cannot do what you want.|annoyed;discouraged|satisfied|She felt frustrated when the website crashed.|feel frustrated
+generation|noun|/ˌdʒenəˈreɪʃn/|Nesil|All the people born at about the same time.|age group|-|The younger generation uses technology every day.|future generation
+genuine|adjective|/ˈdʒenjuɪn/|Gerçek, samimi|Real and not fake; sincere.|real;authentic|fake|She showed genuine interest in the topic.|genuine interest
+global|adjective|/ˈɡləʊbl/|Küresel|Relating to the whole world.|worldwide;international|local|Climate change is a global problem.|global warming
+government|noun|/ˈɡʌvənmənt/|Hükümet|The group of people who control a country.|administration;state|-|The government will build new dormitories.|local government
+gradually|adverb|/ˈɡrædʒuəli/|Yavaş yavaş, giderek|Slowly over a period of time.|slowly;steadily|suddenly|Her English improved gradually.|gradually increase
+guarantee|verb|/ˌɡærənˈtiː/|Garanti etmek|To promise that something will happen.|ensure;promise|-|Hard work does not guarantee success, but it helps.|guarantee that
+harm|noun|/hɑːm/|Zarar|Damage or injury.|damage;injury|benefit|Too much screen time can do harm to your eyes.|do harm
+hesitate|verb|/ˈhezɪteɪt/|Tereddüt etmek|To pause before doing something because you are unsure.|pause;waver|-|Don't hesitate to ask questions in class.|hesitate to
+ideal|adjective|/aɪˈdiːəl/|İdeal|Perfect for a purpose.|perfect;suitable|unsuitable|The quiet room is ideal for studying.|ideal place
+ignore|verb|/ɪɡˈnɔː/|Görmezden gelmek|To pay no attention to something.|disregard;overlook|notice|Don't ignore the warning signs.|ignore advice
+illegal|adjective|/ɪˈliːɡl/|Yasa dışı|Not allowed by law.|unlawful;forbidden|legal|It is illegal to copy software without permission.|illegal activity
+impress|verb|/ɪmˈpres/|Etkilemek|To make someone admire you.|amaze;affect|disappoint|Try to impress the examiner with a wide vocabulary.|impress someone
+income|noun|/ˈɪnkʌm/|Gelir|Money received from work or investments.|earnings;salary|expense|Students with a low income can get a grant.|monthly income
+independent|adjective|/ˌɪndɪˈpendənt/|Bağımsız|Not controlled by or depending on others.|self-reliant;autonomous|dependent|Living abroad made me more independent.|independent study
+inform|verb|/ɪnˈfɔːm/|Bilgilendirmek|To tell someone about something officially.|notify;tell|-|Please inform the office if you change your address.|inform about
+inspire|verb|/ɪnˈspaɪə/|İlham vermek|To give someone the desire to do something.|motivate;encourage|discourage|Good teachers inspire their students.|inspire someone to
+instead|adverb|/ɪnˈsted/|Onun yerine|In place of something else.|alternatively|-|Let's walk instead of taking the bus.|instead of
+intelligent|adjective|/ɪnˈtelɪdʒənt/|Zeki|Able to learn and understand quickly.|clever;smart|stupid|Dolphins are very intelligent animals.|intelligent person
+intend|verb|/ɪnˈtend/|Niyet etmek|To plan to do something.|plan;mean|-|I intend to apply for a master's degree.|intend to
+invest|verb|/ɪnˈvest/|Yatırım yapmak|To put money or time into something to get a benefit.|fund;spend|-|The university will invest in new laboratories.|invest in
+investment|noun|/ɪnˈvestmənt/|Yatırım|Money or effort put into something to get a benefit.|funding;stake|-|Education is the best investment for the future.|good investment
+labour|noun|/ˈleɪbə/|Emek, işgücü|Work, especially physical work.|work;effort|rest|The factory needs skilled labour.|cheap labour
+launch|verb|/lɔːntʃ/|Başlatmak, piyasaya sürmek|To start something new or put a product on sale.|start;introduce|end|The company will launch a new app next month.|launch a campaign
+leisure|noun|/ˈleʒə/|Boş zaman|Time when you are not working.|free time;relaxation|work|Reading is my favourite leisure activity.|leisure time
+limit|noun|/ˈlɪmɪt/|Sınır|The greatest amount allowed or possible.|maximum;boundary|-|There is a word limit of 300 for the essay.|time limit
+literature|noun|/ˈlɪtrətʃə/|Edebiyat; kaynakça|Written works such as novels and poems; published writing on a subject.|writing;texts|-|She is studying English literature.|review the literature
+logical|adjective|/ˈlɒdʒɪkl/|Mantıklı|Following clear reasoning.|reasonable;rational|illogical|Organize your essay in a logical order.|logical conclusion
+luxury|noun|/ˈlʌkʃəri/|Lüks|Something expensive that is not necessary.|extravagance|necessity|A private room is a luxury for most students.|luxury hotel
+majority|noun|/məˈdʒɒrəti/|Çoğunluk|The larger part of a group.|most;bulk|minority|The majority of students live in dormitories.|vast majority
+manufacture|verb|/ˌmænjuˈfæktʃə/|Üretmek, imal etmek|To make goods in large numbers in a factory.|produce;make|-|The factory will manufacture electric cars.|manufacture goods
+memorize|verb|/ˈmeməraɪz/|Ezberlemek|To learn something so that you remember it exactly.|learn by heart|forget|Don't just memorize words; use them in sentences.|memorize a list
+mental|adjective|/ˈmentl/|Zihinsel|Relating to the mind.|psychological;intellectual|physical|Sleep is important for mental health.|mental health
+minority|noun|/maɪˈnɒrəti/|Azınlık|The smaller part of a group.|few|majority|Only a minority of students failed the test.|small minority
+mobile|adjective|/ˈməʊbaɪl/|Mobil, taşınabilir|Able to move or be moved easily.|portable;movable|fixed|The library has a mobile app.|mobile phone
+motivate|verb|/ˈməʊtɪveɪt/|Motive etmek|To make someone want to do something.|encourage;inspire|discourage|Good feedback can motivate students.|motivate to
+negative|adjective|/ˈneɡətɪv/|Olumsuz|Bad or harmful; saying no.|harmful;pessimistic|positive|Stress can have a negative effect on health.|negative impact
+negotiate|verb|/nɪˈɡəʊʃieɪt/|Müzakere etmek|To discuss something to reach an agreement.|bargain;discuss|-|The union will negotiate with the management.|negotiate a deal
+nevertheless|adverb|/ˌnevəðəˈles/|Yine de, buna rağmen|Despite what has just been said.|however;nonetheless|-|The task was hard; nevertheless, we finished it.|but nevertheless
+obey|verb|/əˈbeɪ/|İtaat etmek, uymak|To do what a person or rule tells you.|follow;comply with|disobey|All drivers must obey the speed limit.|obey the rules
+obtain|verb|/əbˈteɪn/|Elde etmek|To get something, especially with effort.|get;acquire|lose|You must obtain a visa before you travel.|obtain permission
+occasionally|adverb|/əˈkeɪʒnəli/|Ara sıra|Sometimes but not often.|sometimes|often|I occasionally study at the café.|only occasionally
+offend|verb|/əˈfend/|Gücendirmek|To make someone upset or angry.|insult;upset|please|I didn't mean to offend you.|offend someone
+operate|verb|/ˈɒpəreɪt/|Çalıştırmak; ameliyat etmek|To make a machine work; to do a medical operation.|run;work|-|Only trained staff can operate this machine.|operate a machine
+option|noun|/ˈɒpʃn/|Seçenek|A choice you can make.|choice;alternative|-|Online study is a good option for working people.|have the option
+originally|adverb|/əˈrɪdʒənəli/|Aslen, başlangıçta|At first; before changes.|initially;at first|finally|The building was originally a hospital.|originally from
+outdoor|adjective|/ˈaʊtdɔː/|Açık hava|Happening outside.|open-air|indoor|We have an outdoor concert in June.|outdoor activities
+overcome|verb|/ˌəʊvəˈkʌm/|Üstesinden gelmek|To succeed in dealing with a problem.|defeat;conquer|surrender|She worked hard to overcome her fear of speaking.|overcome a problem
+participate|verb|/pɑːˈtɪsɪpeɪt/|Katılmak|To take part in an activity.|take part;join|-|All students should participate in class discussions.|participate in
+persuade|verb|/pəˈsweɪd/|İkna etmek|To make someone agree to do something.|convince;coax|discourage|I tried to persuade my friend to join the club.|persuade someone to
+phenomenon|noun|/fəˈnɒmɪnən/|Olgu, fenomen|A fact or event that can be observed.|occurrence;event|-|Global warming is a worrying phenomenon.|natural phenomenon
+positive|adjective|/ˈpɒzətɪv/|Olumlu|Good or helpful; hopeful.|optimistic;beneficial|negative|Try to keep a positive attitude.|positive effect
+possess|verb|/pəˈzes/|Sahip olmak|To have or own something.|own;have|lack|Few people possess such a rare skill.|possess knowledge
+precise|adjective|/prɪˈsaɪs/|Kesin, net|Exact and accurate.|exact;accurate|vague|Give a precise answer to the question.|precise details
+predict|verb|/prɪˈdɪkt/|Tahmin etmek, öngörmek|To say what will happen in the future.|forecast;foresee|-|It is hard to predict exam questions.|predict the future
+pressure|noun|/ˈpreʃə/|Baskı|A feeling of stress caused by demands.|stress;strain|-|Many students feel pressure from their families.|under pressure
+prevent|verb|/prɪˈvent/|Önlemek|To stop something from happening.|stop;avoid|allow|Washing your hands can prevent illness.|prevent from
+previous|adjective|/ˈpriːviəs/|Önceki|Happening before.|earlier;prior|next|I lost the notes from the previous lesson.|previous year
+principle|noun|/ˈprɪnsəpl/|İlke|A basic rule or belief.|rule;value|-|Honesty is an important principle in research.|basic principle
+priority|noun|/praɪˈɒrəti/|Öncelik|Something more important than other things.|preference;precedence|-|Passing the exam is my top priority.|top priority
+procedure|noun|/prəˈsiːdʒə/|Prosedür, işlem|An official way of doing something.|process;method|-|Follow the correct procedure to register.|standard procedure
+profit|noun|/ˈprɒfɪt/|Kâr|Money made in business after costs are paid.|gain;earnings|loss|The café made a small profit last year.|make a profit
+progress|noun|/ˈprəʊɡres/|İlerleme|Improvement or development.|advance;development|decline|You have made great progress this term.|make progress
+prohibit|verb|/prəˈhɪbɪt/|Yasaklamak|To officially forbid something.|ban;forbid|allow|The rules prohibit smoking on campus.|prohibit from
+proof|noun|/pruːf/|Kanıt|Facts that show something is true.|evidence;confirmation|-|You need proof of address to open an account.|proof of
+property|noun|/ˈprɒpəti/|Mülk; özellik|Things that someone owns; a quality of a substance.|possessions;feature|-|Students must respect school property.|private property
+protest|noun|/ˈprəʊtest/|Protesto|A public show of disagreement.|demonstration;objection|-|Students held a peaceful protest against the fee increase.|peaceful protest
+provide|verb|/prəˈvaɪd/|Sağlamak|To give something that is needed.|supply;offer|withhold|The school will provide all the materials.|provide with
+qualification|noun|/ˌkwɒlɪfɪˈkeɪʃn/|Nitelik; yeterlilik belgesi|An official record of passing an exam or course.|certificate;degree|-|An English qualification is needed for this job.|academic qualification
+range|noun|/reɪndʒ/|Yelpaze, aralık|A number of different things of the same type.|variety;selection|-|The library has a wide range of books.|wide range
+rapidly|adverb|/ˈræpɪdli/|Hızla|Very quickly.|quickly;swiftly|slowly|Technology is changing rapidly.|grow rapidly
+rarely|adverb|/ˈreəli/|Nadiren|Not often.|seldom|often|I rarely miss a lesson.|very rarely
+realistic|adjective|/ˌriːəˈlɪstɪk/|Gerçekçi|Sensible and practical.|practical;sensible|unrealistic|Set realistic goals for each week.|realistic goal
+recognize|verb|/ˈrekəɡnaɪz/|Tanımak; kabul etmek|To know who or what someone or something is; to accept officially.|identify;acknowledge|ignore|Many countries recognize this certificate.|recognize as
+recover|verb|/rɪˈkʌvə/|İyileşmek|To become healthy again.|get better;heal|worsen|It took him two weeks to recover from the flu.|recover from
+reduction|noun|/rɪˈdʌkʃn/|Azaltma, indirim|A decrease in size or amount.|decrease;cut|increase|Students get a reduction on bus tickets.|price reduction
+reflect|verb|/rɪˈflekt/|Yansıtmak; düşünmek|To show an image of something; to think carefully.|mirror;consider|-|Your grades reflect your effort.|reflect on
+regret|verb|/rɪˈɡret/|Pişman olmak|To feel sorry about something you did.|be sorry|-|I regret not studying harder last year.|regret doing
+regularly|adverb|/ˈreɡjələli/|Düzenli olarak|At the same time each day, week, etc.; often.|frequently;routinely|irregularly|Review your notes regularly.|exercise regularly
+reject|verb|/rɪˈdʒekt/|Reddetmek|To refuse to accept something.|refuse;decline|accept|The journal may reject your article.|reject an offer
+relationship|noun|/rɪˈleɪʃnʃɪp/|İlişki|The way people or things are connected.|connection;link|-|There is a relationship between sleep and memory.|close relationship
+release|verb|/rɪˈliːs/|Serbest bırakmak; yayınlamak|To let someone go free; to make something available.|free;publish|hold|The school will release the results on Monday.|release a report
+relevant|adjective|/ˈreləvənt/|İlgili|Connected with the subject.|related;pertinent|irrelevant|Include only relevant information in your answer.|relevant to
+religion|noun|/rɪˈlɪdʒən/|Din|A system of belief in a god or gods.|faith;belief|-|The course compares religion and culture in Anatolia.|world religion
+remarkable|adjective|/rɪˈmɑːkəbl/|Dikkat çekici, olağanüstü|Unusual and surprising in a good way.|extraordinary;notable|ordinary|She made remarkable progress in a short time.|remarkable achievement
+remind|verb|/rɪˈmaɪnd/|Hatırlatmak|To make someone remember something.|prompt|-|Please remind me to bring the book.|remind someone to
+remove|verb|/rɪˈmuːv/|Kaldırmak, çıkarmak|To take something away.|take away;eliminate|add|Remove your bag from the desk.|remove from
+replace|verb|/rɪˈpleɪs/|Yerine koymak, değiştirmek|To put something new in place of something old.|substitute;change|keep|We need to replace the broken projector.|replace with
+represent|verb|/ˌreprɪˈzent/|Temsil etmek|To speak or act officially for someone; to be a sign of something.|stand for;act for|-|Two students will represent our school at the conference.|represent a country
+reputation|noun|/ˌrepjuˈteɪʃn/|İtibar, ün|The opinion people have about someone or something.|name;standing|-|The university has an excellent reputation.|good reputation
+request|noun|/rɪˈkwest/|Talep, rica|An act of asking for something politely.|appeal;demand|-|Send a request to the office for a transcript.|make a request
+research|noun|/rɪˈsɜːtʃ/|Araştırma|Careful study to discover new facts.|investigation;study|-|Our research focuses on renewable energy.|carry out research
+resource|noun|/rɪˈzɔːs/|Kaynak|Something useful, such as money, materials or information.|supply;material|-|The internet is a useful resource for learners.|natural resource
+responsible|adjective|/rɪˈspɒnsəbl/|Sorumlu|Having a duty to deal with something.|accountable;in charge|irresponsible|Who is responsible for the lab equipment?|responsible for
+reveal|verb|/rɪˈviːl/|Ortaya çıkarmak|To make something known that was secret.|disclose;show|hide|The survey will reveal what students really think.|reveal the truth
+revise|verb|/rɪˈvaɪz/|Tekrar etmek; düzeltmek|To study again before an exam; to change and improve.|review;edit|-|I revise my notes every evening.|revise for an exam
+risk|noun|/rɪsk/|Risk|The possibility of something bad happening.|danger;chance|safety|Smoking increases the risk of disease.|take a risk
+rural|adjective|/ˈrʊərəl/|Kırsal|Relating to the countryside.|country;rustic|urban|Many students come from rural areas.|rural area
+satisfy|verb|/ˈsætɪsfaɪ/|Tatmin etmek|To give someone what they want or need.|please;fulfil|disappoint|The answer did not satisfy the teacher.|satisfy a need
+security|noun|/sɪˈkjʊərəti/|Güvenlik|Protection from danger or crime.|safety;protection|danger|Security staff check IDs at the entrance.|security guard
+select|verb|/sɪˈlekt/|Seçmek|To choose from a group.|choose;pick|reject|Select the best answer from the options.|select from
+sensible|adjective|/ˈsensəbl/|Mantıklı, akıllıca|Showing good judgement.|reasonable;wise|foolish|It would be sensible to start early.|sensible decision
+sensitive|adjective|/ˈsensətɪv/|Hassas, duyarlı|Easily affected or upset; aware of others' feelings.|delicate;aware|insensitive|Be sensitive to other people's cultures.|sensitive to
+shortage|noun|/ˈʃɔːtɪdʒ/|Eksiklik, kıtlık|A situation where there is not enough of something.|lack;scarcity|surplus|There is a shortage of teachers in rural schools.|water shortage
+significance|noun|/sɪɡˈnɪfɪkəns/|Önem|The importance of something.|importance;meaning|insignificance|The teacher explained the significance of the poem.|historical significance
+solution|noun|/səˈluːʃn/|Çözüm|A way of solving a problem.|answer;remedy|problem|We need a solution to the parking problem.|find a solution
+specific|adjective|/spəˈsɪfɪk/|Belirli, özel|Clearly defined; particular.|particular;exact|general|Give a specific example in your essay.|specific purpose
+statistics|noun|/stəˈtɪstɪks/|İstatistik|Numbers that show facts; the science of collecting such numbers.|figures;data|-|The statistics show a rise in unemployment.|official statistics
+status|noun|/ˈsteɪtəs/|Durum, statü|Position or condition in relation to others.|position;rank|-|Check the status of your application online.|social status
+strategy|noun|/ˈstrætədʒi/|Strateji|A plan to achieve a goal.|plan;approach|-|Skimming is a useful reading strategy.|learning strategy
+stress|noun|/stres/|Stres|Mental worry caused by problems.|pressure;tension|relaxation|Exercise helps reduce stress.|under stress
+struggle|verb|/ˈstrʌɡl/|Mücadele etmek, zorlanmak|To try very hard to do something difficult.|strive;fight|-|Many students struggle with academic writing.|struggle with
+submit|verb|/səbˈmɪt/|Teslim etmek, sunmak|To give a document to someone for a decision.|hand in;present|withdraw|Submit your essay through the online system.|submit an assignment
+suitable|adjective|/ˈsuːtəbl/|Uygun|Right for a purpose.|appropriate;fitting|unsuitable|This book is suitable for beginners.|suitable for
+summary|noun|/ˈsʌməri/|Özet|A short statement of the main points.|outline;overview|-|Write a summary of the article in 100 words.|brief summary
+supply|noun|/səˈplaɪ/|Tedarik, arz|An amount of something available to use.|stock;provision|demand|The city has a reliable water supply.|supply and demand
+survey|noun|/ˈsɜːveɪ/|Anket|A set of questions asked to many people.|poll;questionnaire|-|We carried out a survey of student habits.|conduct a survey
+survive|verb|/səˈvaɪv/|Hayatta kalmak|To continue to live after a dangerous event.|live through;endure|die|Few plants can survive in the desert.|survive a crisis
+suspect|verb|/səˈspekt/|Şüphelenmek|To think something is probably true, especially something bad.|suppose;doubt|trust|I suspect that he didn't read the book.|suspect that
+technique|noun|/tekˈniːk/|Teknik|A particular way of doing something.|method;approach|-|Learn a new technique for remembering words.|learning technique
+temporary|adjective|/ˈtemprəri/|Geçici|Lasting for a short time.|short-term;provisional|permanent|This is only a temporary classroom.|temporary job
+tend|verb|/tend/|Eğiliminde olmak|To usually do or be something.|be inclined;be likely|-|Students tend to study more before exams.|tend to
+theory|noun|/ˈθɪəri/|Teori, kuram|An idea that explains something.|hypothesis;idea|practice|Darwin's theory changed biology.|in theory
+threat|noun|/θret/|Tehdit|Something that may cause harm.|danger;risk|-|Pollution is a threat to marine life.|serious threat
+tradition|noun|/trəˈdɪʃn/|Gelenek|A custom that has existed for a long time.|custom;practice|innovation|Drinking tea with guests is a Turkish tradition.|long tradition
+transport|noun|/ˈtrænspɔːt/|Ulaşım|A system for carrying people or goods.|transportation;travel|-|Public transport in the city is cheap.|public transport
+trend|noun|/trend/|Eğilim, trend|A general change or development.|tendency;pattern|-|There is a trend towards online learning.|current trend
+unemployment|noun|/ˌʌnɪmˈplɔɪmənt/|İşsizlik|The state of not having a job.|joblessness|employment|Youth unemployment is a serious problem.|unemployment rate
+unique|adjective|/juˈniːk/|Eşsiz, benzersiz|Being the only one of its kind.|one of a kind;distinctive|common|Each student has a unique learning style.|unique opportunity
+urban|adjective|/ˈɜːbən/|Kentsel|Relating to towns and cities.|city;metropolitan|rural|Urban areas have more job opportunities.|urban life
+variety|noun|/vəˈraɪəti/|Çeşitlilik|A number of different things.|range;diversity|uniformity|The cafeteria offers a variety of dishes.|wide variety
+version|noun|/ˈvɜːʃn/|Versiyon, sürüm|A form of something that is different from other forms.|edition;form|-|Download the latest version of the app.|new version
+violence|noun|/ˈvaɪələns/|Şiddet|Behaviour that hurts people.|aggression;brutality|peace|The film contains scenes of violence.|act of violence
+visible|adjective|/ˈvɪzəbl/|Görünür|Able to be seen.|noticeable;apparent|invisible|The mountain is visible on a clear day.|clearly visible
+waste|noun|/weɪst/|Atık; israf|Things that are thrown away; bad use of something.|rubbish;misuse|-|Watching TV all day is a waste of time.|waste of time
+wealth|noun|/welθ/|Servet, zenginlik|A large amount of money or valuable things.|riches;fortune|poverty|Education creates wealth for a country.|create wealth
+welfare|noun|/ˈwelfeə/|Refah|Health and happiness; help given by the state.|well-being;comfort|-|The school cares about student welfare.|social welfare
+witness|noun|/ˈwɪtnəs/|Tanık|A person who sees an event happen.|observer;onlooker|-|The police spoke to a witness of the accident.|key witness

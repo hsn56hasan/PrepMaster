@@ -56,7 +56,7 @@ class TestPerUserSync(unittest.TestCase):
         app_module.DEMO_MODE = False
 
     def _register(self, username):
-        res = self.client.post("/api/auth/register", json={
+        res = self.client.post("/api/auth/register", json={"terms_accepted": True, 
             "email": f"{username}@example.com", "username": username, "password": "Parola123!",
             "full_name": "Test Ogrenci", "university_id": "itu",
         })

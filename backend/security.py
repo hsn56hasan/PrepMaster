@@ -425,13 +425,20 @@ class DoSProtectionMiddleware:
         path = scope.get("path", "")
         peer = scope.get("client")[0] if scope.get("client") else ""
         ip = get_client_ip(request)
+        # Sayaç anahtarı: giriş yapmış öğrenci İMZALI token'daki kimliğiyle, diğerleri IP ile sayılır.
+        # Eskiden herkes IP ile sayılıyordu; aynı yurt/kampüs/mobil operatör IP'sini paylaşan
+        # öğrenciler ortak kotayı tüketip birlikte 10 dakika yasaklanabiliyordu.
+        token_user = get_current_user_from_request(request)
+        ip = f"u{token_user.get('user_id')}" if token_user and token_user.get("user_id") is not None else ip
 
         # Konteynerin kendi sağlık kontrolü (127.0.0.1, vekil başlığı yok) sınırlanmaz
         is_local_healthcheck = peer in ("127.0.0.1", "::1") and not (
             CLIENT_IP_HEADER and request.headers.get(CLIENT_IP_HEADER)
         )
+        # Statik dosyalar sayılmaz: tek sayfa açılışı 15-20 dosya çeker ve kotayı boşa tüketirdi
+        is_static = path.startswith("/static/") or path in ("/favicon.ico", "/robots.txt", "/sitemap.xml")
 
-        if not is_local_healthcheck:
+        if not is_local_healthcheck and not is_static:
             # 1) Yasaklı IP: hiçbir işlem yapmadan reddet
             banned_for = rate_limiter.ban_remaining(f"dos:ban:{ip}")
             if banned_for:
@@ -520,29 +527,34 @@ def sanitize_text(value: Optional[str], strip_tags: bool = False, max_length: Op
     # Remove null bytes
     val = str(value).replace("\x00", "")
 
-    # 1. Remove complete executable blocks (including inner script body)
-    val = re.sub(
-        r"<\s*(script|iframe|object|embed|style|meta|link|svg|applet)[^>]*>.*?</\s*\1\s*>",
-        "",
-        val,
-        flags=re.IGNORECASE | re.DOTALL
-    )
-
-    # 2. Remove any remaining or unclosed dangerous tags
-    val = re.sub(
-        r"<\s*/?\s*(script|iframe|object|embed|style|meta|link|svg|applet)[^>]*>",
-        "",
-        val,
-        flags=re.IGNORECASE
-    )
-
-    # 3. Neutralize inline event handlers and pseudo protocols
-    val = re.sub(r"\bon\w+\s*=", "data-blocked=", val, flags=re.IGNORECASE)
-    val = re.sub(r"javascript\s*:", "blocked:", val, flags=re.IGNORECASE)
-
-    # 4. Strip all remaining HTML tags if requested
-    if strip_tags:
-        val = re.sub(r"<[^>]*>", "", val)
+    # Temizlik adımları DEĞİŞMEZ hâle gelene kadar tekrarlanır. Eskiden etiket silme olay
+    # yakalayıcı kontrolünden SONRA yapıldığı için "o<>nerror=" girdisi "onerror=" hâline
+    # gelip kontrolden kaçıyordu (yönetici panelinde kayıtlı XSS'e yol açıyordu).
+    # Not: Asıl savunma, çıktıyı sayfaya basarken HTML kaçışı yapmaktır; bu yalnızca ek katman.
+    for _ in range(10):
+        before = val
+        # 1. Tehlikeli blokları içerikleriyle birlikte sil
+        val = re.sub(
+            r"<\s*(script|iframe|object|embed|style|meta|link|svg|applet)[^>]*>.*?</\s*\1\s*>",
+            "",
+            val,
+            flags=re.IGNORECASE | re.DOTALL
+        )
+        # 2. Kalan ya da kapanmamış tehlikeli etiketleri sil
+        val = re.sub(
+            r"<\s*/?\s*(script|iframe|object|embed|style|meta|link|svg|applet)[^>]*>",
+            "",
+            val,
+            flags=re.IGNORECASE
+        )
+        # 3. İstenirse tüm etiketleri sil (olay yakalayıcı kontrolünden ÖNCE)
+        if strip_tags:
+            val = re.sub(r"<[^>]*>", "", val)
+        # 4. Olay yakalayıcıları ve sahte protokolleri etkisizleştir
+        val = re.sub(r"\bon\w+\s*=", "data-blocked=", val, flags=re.IGNORECASE)
+        val = re.sub(r"javascript\s*:", "blocked:", val, flags=re.IGNORECASE)
+        if val == before:
+            break
 
     val = val.strip()
     if max_length and len(val) > max_length:

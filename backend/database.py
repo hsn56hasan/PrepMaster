@@ -252,6 +252,11 @@ def init_db():
         conn.execute("ALTER TABLE users ADD COLUMN unlocked_universities TEXT DEFAULT '[\"general\"]'")
     if "verified_university" not in cols:
         conn.execute("ALTER TABLE users ADD COLUMN verified_university TEXT")
+    # Onay kayıtları: kullanıcı sözleşmesi (zorunlu) ve açık rıza (isteğe bağlı) ne zaman verildi
+    if "terms_accepted_at" not in cols:
+        conn.execute("ALTER TABLE users ADD COLUMN terms_accepted_at TEXT")
+    if "explicit_consent_at" not in cols:
+        conn.execute("ALTER TABLE users ADD COLUMN explicit_consent_at TEXT")
     if "last_study_date" not in cols:
         # Seri için İstanbul takvim günü (YYYY-MM-DD); last_active'ten ayrı tutulur
         # çünkü last_active profil güncellemesinde de değişiyor.
@@ -326,7 +331,8 @@ def init_db():
             total_amount_kurus INTEGER,
             failed_reason TEXT,
             created_at TEXT DEFAULT CURRENT_TIMESTAMP,
-            updated_at TEXT
+            updated_at TEXT,
+            pre_info_accepted_at TEXT
         );
         CREATE INDEX IF NOT EXISTS idx_paytr_orders_user ON paytr_orders(user_id);
 
@@ -523,7 +529,8 @@ def update_profile(user_id: int, university_id: str, current_level: str, target_
     conn.close()
     return get_profile(user_id)
 
-def create_user(email: str, username: str, password: str, full_name: str, university_id: str = "itu", student_number: str = "") -> Dict[str, Any]:
+def create_user(email: str, username: str, password: str, full_name: str, university_id: str = "itu", student_number: str = "",
+                terms_accepted: bool = False, explicit_consent: bool = False) -> Dict[str, Any]:
     import json
     conn = get_db()
     pw_hash = hash_password(password)
@@ -535,6 +542,12 @@ def create_user(email: str, username: str, password: str, full_name: str, univer
             VALUES (?, ?, ?, ?, ?, ?, 0, 'pending', ?, ?)
         """, (email.lower().strip(), username.strip(), pw_hash, full_name.strip(), university_id, student_number.strip(), initial_unlocked, None))
         user_id = cursor.lastrowid
+        conn.execute("""
+            UPDATE users SET
+                terms_accepted_at = CASE WHEN ? THEN CURRENT_TIMESTAMP END,
+                explicit_consent_at = CASE WHEN ? THEN CURRENT_TIMESTAMP END
+            WHERE id = ?
+        """, (1 if terms_accepted else 0, 1 if explicit_consent else 0, user_id))
     conn.close()
     return get_profile(user_id)
 
@@ -1218,11 +1231,15 @@ def upsert_google_user(email: str, name: str = "", avatar_url: str = "") -> Dict
 
 
 def create_paytr_order(merchant_oid: str, user_id: int, university_id: str, amount_kurus: int) -> None:
+    """Sipariş, ödeme öncesi onay (ön bilgilendirme + cayma istisnası) alındıktan sonra açılır; onay zamanı saklanır."""
     conn = get_db()
+    cols = {r[1] for r in conn.execute("PRAGMA table_info(paytr_orders)").fetchall()}
+    if "pre_info_accepted_at" not in cols:
+        conn.execute("ALTER TABLE paytr_orders ADD COLUMN pre_info_accepted_at TEXT")
     with conn:
         conn.execute("""
-            INSERT INTO paytr_orders (merchant_oid, user_id, university_id, amount_kurus, status)
-            VALUES (?, ?, ?, ?, 'pending')
+            INSERT INTO paytr_orders (merchant_oid, user_id, university_id, amount_kurus, status, pre_info_accepted_at)
+            VALUES (?, ?, ?, ?, 'pending', CURRENT_TIMESTAMP)
         """, (merchant_oid, user_id, university_id, amount_kurus))
     conn.close()
 

@@ -1,0 +1,365 @@
+# Biçim: kelime|tür|okunuş|Türkçe anlam|İngilizce tanım|eş anlamlılar (;)|zıt anlamlılar (; ya da -)|örnek cümle (kelimenin yalın hâli geçmeli)|kalıp
+abroad|adverb|/əˈbrɔːd/|Yurt dışında, yurt dışına|In or to a foreign country.|overseas;away|at home|Many students want to study abroad for a year.|study abroad
+accident|noun|/ˈæksɪdənt/|Kaza|An unexpected event that causes damage or injury.|crash;collision|-|Nobody was hurt in the accident near the campus gate.|have an accident
+address|noun|/əˈdres/|Adres|The details of where someone lives or where a building is.|location;residence|-|Please write your home address on the registration form.|email address
+adult|noun|/ˈædʌlt/|Yetişkin|A person who is fully grown.|grown-up|child|Every adult needs a valid ID card to enter the building.|young adult
+afraid|adjective|/əˈfreɪd/|Korkmuş, korkan|Feeling fear or worry.|scared;frightened|brave;confident|Some students are afraid of speaking in front of the class.|be afraid of
+afternoon|noun|/ˌɑːftəˈnuːn/|Öğleden sonra|The time between midday and evening.|-|morning|The library is very busy in the afternoon.|this afternoon
+alone|adverb|/əˈləʊn/|Yalnız, tek başına|Without other people.|by oneself;solo|together|I prefer to study alone when I have an exam.|live alone
+angry|adjective|/ˈæŋɡri/|Kızgın, öfkeli|Having a strong feeling of annoyance.|annoyed;furious|calm;pleased|The teacher was angry because nobody did the homework.|get angry
+animal|noun|/ˈænɪml/|Hayvan|A living creature that is not a plant or a human.|creature;beast|-|The biology students observed every animal in the lab.|wild animal
+apartment|noun|/əˈpɑːtmənt/|Daire, apartman dairesi|A set of rooms for living in, usually on one floor of a building.|flat|-|She shares an apartment with two classmates.|rent an apartment
+arm|noun|/ɑːm/|Kol|The part of the body between the shoulder and the hand.|limb|-|He broke his arm while playing football.|break an arm
+ask|verb|/ɑːsk/|Sormak, istemek|To say something in order to get an answer or information.|enquire;question|answer;reply|Don't be shy to ask the teacher for help.|ask a question
+bag|noun|/bæɡ/|Çanta|A container made of cloth, leather or plastic for carrying things.|sack;case|-|Put your phone in your bag before the exam starts.|school bag
+bake|verb|/beɪk/|Fırında pişirmek|To cook food in an oven.|cook;roast|-|My roommate likes to bake bread at the weekend.|bake a cake
+bank|noun|/bæŋk/|Banka|An organization that keeps and lends money.|-|-|There is a bank next to the student centre.|bank account
+bathroom|noun|/ˈbɑːθruːm/|Banyo|A room with a toilet, a washbasin and a bath or shower.|toilet;washroom|-|Each dormitory room has its own bathroom.|share a bathroom
+beach|noun|/biːtʃ/|Plaj, kumsal|An area of sand or stones next to the sea.|shore;coast|-|We walked along the beach after the lesson.|sandy beach
+beautiful|adjective|/ˈbjuːtɪfl/|Güzel|Very attractive to look at.|lovely;attractive|ugly|The old campus has a beautiful garden.|beautiful view
+bed|noun|/bed/|Yatak|A piece of furniture for sleeping on.|-|-|I always make my bed before I leave the room.|go to bed
+bicycle|noun|/ˈbaɪsɪkl/|Bisiklet|A vehicle with two wheels that you ride by pushing pedals.|bike;cycle|-|He rides his bicycle to class every day.|ride a bicycle
+bird|noun|/bɜːd/|Kuş|An animal with feathers and wings that can usually fly.|-|-|A small bird was sitting on the classroom window.|bird nest
+birthday|noun|/ˈbɜːθdeɪ/|Doğum günü|The day each year when someone was born.|-|-|We had a small party for Ayşe's birthday.|happy birthday
+blue|adjective|/bluː/|Mavi|Having the colour of a clear sky.|-|-|Please use a blue pen on the answer sheet.|dark blue
+body|noun|/ˈbɒdi/|Vücut, beden|The whole physical structure of a person or animal.|physique;frame|mind|Exercise is good for your body and your mind.|human body
+book|verb|/bʊk/|Rezervasyon yapmak, ayırtmak|To arrange to have a place or ticket at a later time.|reserve|cancel|You can book a study room online.|book a room
+bored|adjective|/bɔːd/|Sıkılmış|Tired and unhappy because something is not interesting.|uninterested;fed up|interested;excited|The children got bored during the long speech.|get bored
+bottle|noun|/ˈbɒtl/|Şişe|A container with a narrow neck for liquids.|flask|-|Bring a bottle of water to the exam room.|plastic bottle
+box|noun|/bɒks/|Kutu|A container with flat sides and usually a lid.|case;carton|-|Put the old papers in the recycling box.|cardboard box
+bread|noun|/bred/|Ekmek|A food made from flour, water and yeast and baked.|loaf|-|The cafeteria serves fresh bread every morning.|a slice of bread
+break|noun|/breɪk/|Mola, ara|A short period of rest from work or study.|rest;pause|-|We have a ten-minute break between the lessons.|take a break
+breakfast|noun|/ˈbrekfəst/|Kahvaltı|The first meal of the day.|-|dinner|I never skip breakfast before an exam.|have breakfast
+bridge|noun|/brɪdʒ/|Köprü|A structure built over a river or road so people can cross it.|-|-|The new bridge connects the two parts of the city.|cross a bridge
+bright|adjective|/braɪt/|Parlak, aydınlık; zeki|Full of light; also clever.|shining;clever|dark;dull|The classroom is bright and has big windows.|bright light
+brother|noun|/ˈbrʌðə/|Erkek kardeş, ağabey|A boy or man who has the same parents as you.|sibling|sister|My brother studies engineering at another university.|older brother
+building|noun|/ˈbɪldɪŋ/|Bina|A structure with walls and a roof, such as a house or school.|structure;edifice|-|The language school is in the tallest building on campus.|office building
+bus|noun|/bʌs/|Otobüs|A large vehicle that carries passengers along a fixed route.|coach|-|The last bus to the city leaves at eleven.|catch the bus
+busy|adjective|/ˈbɪzi/|Meşgul, yoğun|Having a lot to do; full of people or activity.|occupied;hectic|free;quiet|The teacher is busy, so please wait outside.|busy schedule
+buy|verb|/baɪ/|Satın almak|To get something by paying money for it.|purchase|sell|You need to buy the coursebook before the first lesson.|buy a ticket
+cake|noun|/keɪk/|Pasta, kek|A sweet food made from flour, eggs, sugar and butter.|-|-|We shared a chocolate cake after the exam.|birthday cake
+call|verb|/kɔːl/|Aramak (telefonla); seslenmek|To telephone someone; to shout to someone.|phone;ring|-|Please call me if you can't come to the meeting.|call back
+camera|noun|/ˈkæmrə/|Kamera, fotoğraf makinesi|A device for taking photographs or recording video.|-|-|Turn on your camera during the online lesson.|digital camera
+campus|noun|/ˈkæmpəs/|Kampüs, yerleşke|The land and buildings of a university.|grounds|-|There are three cafés on the campus.|on campus
+car|noun|/kɑː/|Araba|A road vehicle with an engine and four wheels.|automobile;vehicle|-|Students can't park their car near the library.|drive a car
+card|noun|/kɑːd/|Kart|A small piece of stiff paper or plastic with information on it.|-|-|Show your student card at the entrance.|credit card
+carry|verb|/ˈkæri/|Taşımak|To hold something and take it somewhere.|bring;transport|drop|Can you help me carry these books to the car?|carry a bag
+cat|noun|/kæt/|Kedi|A small animal with soft fur that people often keep as a pet.|-|-|A friendly cat lives in the faculty garden.|pet cat
+chair|noun|/tʃeə/|Sandalye|A seat with a back, for one person.|seat|-|Please take a chair and sit near the front.|pull up a chair
+cheap|adjective|/tʃiːp/|Ucuz|Not costing much money.|inexpensive;affordable|expensive|Food in the student cafeteria is quite cheap.|cheap ticket
+check|verb|/tʃek/|Kontrol etmek|To look at something to make sure it is correct or safe.|examine;verify|ignore|Always check your answers before you finish.|check your work
+cheese|noun|/tʃiːz/|Peynir|A solid food made from milk.|-|-|I had bread and cheese for breakfast.|white cheese
+child|noun|/tʃaɪld/|Çocuk|A young person who is not yet an adult.|kid;youngster|adult|Every child in the village goes to the same school.|young child
+city|noun|/ˈsɪti/|Şehir|A large and important town.|town;metropolis|village;countryside|İstanbul is the largest city in Türkiye.|city centre
+class|noun|/klɑːs/|Sınıf; ders|A group of students taught together; a lesson.|lesson;course|-|Our English class starts at nine.|attend a class
+classmate|noun|/ˈklɑːsmeɪt/|Sınıf arkadaşı|A person in the same class as you at school.|fellow student|-|My classmate lent me her notes.|former classmate
+clean|adjective|/kliːn/|Temiz|Not dirty.|tidy;spotless|dirty|Keep the lab clean after you use it.|keep clean
+clock|noun|/klɒk/|Saat (duvar/masa)|A device that shows the time.|-|-|Look at the clock: we have ten minutes left.|wall clock
+close|verb|/kləʊz/|Kapatmak|To move something so that it is no longer open.|shut|open|Please close the door when you leave.|close a window
+clothes|noun|/kləʊðz/|Giysiler, kıyafetler|Things you wear, such as shirts and trousers.|clothing;garments|-|Wear comfortable clothes for the sports lesson.|new clothes
+cloud|noun|/klaʊd/|Bulut|A white or grey mass of water drops in the sky.|-|-|A dark cloud covered the sun.|rain cloud
+coat|noun|/kəʊt/|Palto, ceket|A piece of clothing with sleeves worn over other clothes outside.|jacket|-|Take your coat because it is cold outside.|winter coat
+coffee|noun|/ˈkɒfi/|Kahve|A hot brown drink made from roasted beans.|-|-|Many students drink coffee while they study.|a cup of coffee
+cold|adjective|/kəʊld/|Soğuk|Having a low temperature.|chilly;cool|hot;warm|The classroom is cold in the morning.|cold weather
+colour|noun|/ˈkʌlə/|Renk|The appearance of something, such as red or blue.|shade;hue|-|What colour is your new notebook?|bright colour
+come|verb|/kʌm/|Gelmek|To move towards the speaker or a place.|arrive;approach|go;leave|Can you come to the study group tonight?|come back
+computer|noun|/kəmˈpjuːtə/|Bilgisayar|An electronic machine for storing and processing information.|PC|-|You can use a computer in the library for free.|laptop computer
+cook|verb|/kʊk/|Yemek pişirmek|To prepare food by heating it.|prepare;make|-|I learned to cook when I moved into my own flat.|cook dinner
+cool|adjective|/kuːl/|Serin|Slightly cold, in a pleasant way.|chilly;fresh|warm|It is cool in the evenings in spring.|cool breeze
+copy|verb|/ˈkɒpi/|Kopyalamak|To make something exactly like something else.|duplicate;reproduce|create|Do not copy your friend's homework.|copy and paste
+cost|verb|/kɒst/|Mal olmak, tutmak|To have a particular price.|-|-|How much does the dictionary cost?|cost a lot
+country|noun|/ˈkʌntri/|Ülke; kırsal|A nation with its own government; land away from towns.|nation;state|city|Türkiye is a large country with many universities.|home country
+cousin|noun|/ˈkʌzn/|Kuzen|The child of your uncle or aunt.|relative|-|My cousin is also preparing for the proficiency exam.|first cousin
+cry|verb|/kraɪ/|Ağlamak|To produce tears from your eyes because you are sad or hurt.|weep;sob|laugh|The little boy began to cry when he lost his toy.|cry for help
+cup|noun|/kʌp/|Fincan, bardak|A small container with a handle for hot drinks.|mug|-|Would you like a cup of tea?|cup of tea
+dance|verb|/dɑːns/|Dans etmek|To move your body to music.|-|-|They like to dance at the end-of-year party.|dance to music
+dangerous|adjective|/ˈdeɪndʒərəs/|Tehlikeli|Likely to cause harm or injury.|risky;unsafe|safe|It is dangerous to use your phone while driving.|dangerous situation
+dark|adjective|/dɑːk/|Karanlık; koyu|With little or no light; not light in colour.|dim;gloomy|bright;light|It gets dark very early in winter.|get dark
+date|noun|/deɪt/|Tarih (gün)|A particular day of the month or year.|day|-|Write the date at the top of the page.|exam date
+daughter|noun|/ˈdɔːtə/|Kız evlat|A person's female child.|-|son|Their daughter is a medical student.|eldest daughter
+day|noun|/deɪ/|Gün|A period of twenty-four hours.|-|night|I study English for two hours every day.|every day
+dear|adjective|/dɪə/|Sevgili, değerli|Loved or valued; used at the start of a letter.|beloved;precious|-|Dear Professor, I am writing to ask about the exam.|dear friend
+delicious|adjective|/dɪˈlɪʃəs/|Lezzetli|Having a very pleasant taste.|tasty|disgusting|The soup in the cafeteria is delicious today.|delicious meal
+dentist|noun|/ˈdentɪst/|Diş hekimi|A person whose job is to treat people's teeth.|-|-|I have an appointment with the dentist on Monday.|go to the dentist
+desk|noun|/desk/|Sıra, çalışma masası|A table that you sit at to write or work.|table|-|Leave only a pen and your ID on the desk.|study desk
+dictionary|noun|/ˈdɪkʃənri/|Sözlük|A book or website that lists words and explains their meanings.|lexicon;glossary|-|Use a dictionary to check the meaning of new words.|online dictionary
+dinner|noun|/ˈdɪnə/|Akşam yemeği|The main meal of the day, usually eaten in the evening.|supper|breakfast|We have dinner together in the dormitory.|have dinner
+dirty|adjective|/ˈdɜːti/|Kirli|Not clean.|unclean;filthy|clean|Your shoes are dirty after the rain.|dirty clothes
+doctor|noun|/ˈdɒktə/|Doktor|A person trained to treat sick or injured people.|physician|patient|You should see a doctor about your headache.|see a doctor
+dog|noun|/dɒɡ/|Köpek|An animal often kept as a pet or for guarding.|-|-|The security guard walks around the campus with a dog.|walk the dog
+door|noun|/dɔː/|Kapı|A piece of wood or glass that opens and closes an entrance.|entrance|-|Someone is knocking at the door.|open the door
+drink|verb|/drɪŋk/|İçmek|To take liquid into your mouth and swallow it.|sip;swallow|-|Remember to drink water during long study sessions.|drink water
+drive|verb|/draɪv/|Araba sürmek|To control a car or other vehicle.|steer|-|My father taught me to drive last summer.|drive to work
+dry|adjective|/draɪ/|Kuru|Without water or liquid.|arid;parched|wet|Keep the paper dry or the ink will run.|dry weather
+ear|noun|/ɪə/|Kulak|One of the two parts of the body that you hear with.|-|-|She wore one earphone in each ear during the listening test.|ear infection
+eat|verb|/iːt/|Yemek|To put food into your mouth and swallow it.|consume|-|Don't eat in the computer lab.|eat lunch
+egg|noun|/eɡ/|Yumurta|An oval object produced by a bird, often eaten as food.|-|-|I had a boiled egg for breakfast.|boiled egg
+email|noun|/ˈiːmeɪl/|E-posta|A message sent electronically over the internet.|message|-|The teacher sent us an email with the homework.|send an email
+empty|adjective|/ˈempti/|Boş|Containing nothing or nobody.|vacant;bare|full|The classroom was empty when I arrived.|empty room
+end|noun|/end/|Son, bitiş|The final part of something.|finish;conclusion|beginning;start|Read the text to the end before you answer.|at the end
+evening|noun|/ˈiːvnɪŋ/|Akşam|The part of the day between the afternoon and night.|night|morning|There is a film club meeting this evening.|in the evening
+everyone|pronoun|/ˈevriwʌn/|Herkes|Every person.|everybody;all|no one|Everyone must be in the exam hall by nine.|everyone else
+expensive|adjective|/ɪkˈspensɪv/|Pahalı|Costing a lot of money.|costly;dear|cheap|Rent near the university is very expensive.|expensive hobby
+eye|noun|/aɪ/|Göz|One of the two parts of the face that you see with.|-|-|I have something in my eye.|eye contact
+face|noun|/feɪs/|Yüz|The front part of the head.|-|-|Her face was red after running to class.|smiling face
+family|noun|/ˈfæməli/|Aile|A group of people related to each other.|relatives;household|-|My family lives in a small town near Konya.|family member
+farm|noun|/fɑːm/|Çiftlik|An area of land for growing crops or keeping animals.|ranch|-|The university has a farm for agricultural research.|farm animal
+fast|adjective|/fɑːst/|Hızlı|Moving or happening quickly.|quick;rapid|slow|The internet in the dormitory is very fast.|fast food
+father|noun|/ˈfɑːðə/|Baba|A male parent.|dad|mother|My father works as an engineer.|father and son
+favourite|adjective|/ˈfeɪvərɪt/|En sevilen, gözde|Liked more than others of the same kind.|preferred|-|My favourite subject is history.|favourite food
+feel|verb|/fiːl/|Hissetmek|To experience an emotion or physical sensation.|sense;experience|-|I feel nervous before every speaking exam.|feel tired
+film|noun|/fɪlm/|Film|A story shown as moving pictures in a cinema or on TV.|movie|-|We watched a film in English with subtitles.|watch a film
+fish|noun|/fɪʃ/|Balık|An animal that lives in water and breathes through gills.|-|-|The cafeteria serves fish on Fridays.|fresh fish
+floor|noun|/flɔː/|Kat; zemin|A level of a building; the surface you walk on.|storey;ground|ceiling|The library is on the third floor.|ground floor
+flower|noun|/ˈflaʊə/|Çiçek|The coloured part of a plant.|blossom;bloom|-|She gave her teacher a flower on the last day.|flower garden
+fly|verb|/flaɪ/|Uçmak|To move through the air.|soar|land|We will fly to London for the conference.|fly abroad
+food|noun|/fuːd/|Yiyecek, yemek|Things that people and animals eat.|meal;nutrition|-|The food at the student restaurant is cheap.|healthy food
+foot|noun|/fʊt/|Ayak|The part of the body at the end of the leg.|-|-|I hurt my foot during the football match.|on foot
+forget|verb|/fəˈɡet/|Unutmak|To fail to remember something.|overlook|remember|Don't forget to bring your ID card.|forget about
+free|adjective|/friː/|Ücretsiz; boş, serbest|Costing nothing; not busy.|complimentary;available|busy;paid|The library offers free English workshops.|free time
+fresh|adjective|/freʃ/|Taze|Recently made, picked or prepared.|new;raw|stale|The market sells fresh fruit every morning.|fresh air
+friend|noun|/frend/|Arkadaş|A person you know well and like.|companion;mate|enemy|My best friend is in the same class.|close friend
+friendly|adjective|/ˈfrendli/|Arkadaş canlısı, samimi|Kind and pleasant.|kind;welcoming|unfriendly;hostile|The staff in the international office are very friendly.|friendly atmosphere
+fruit|noun|/fruːt/|Meyve|The part of a plant that contains seeds and can be eaten.|-|-|Eat some fruit instead of chocolate.|fresh fruit
+full|adjective|/fʊl/|Dolu; tok|Containing as much as possible; having eaten enough.|filled;packed|empty|The bus was full, so I walked.|full of
+fun|noun|/fʌn/|Eğlence|Enjoyment or pleasure.|enjoyment;amusement|boredom|Learning a language can be fun.|have fun
+funny|adjective|/ˈfʌni/|Komik|Making you laugh.|amusing;humorous|serious|Our teacher told a funny story about her first lesson.|funny joke
+game|noun|/ɡeɪm/|Oyun; maç|An activity with rules that people play for fun.|match;contest|-|We played a vocabulary game in class.|play a game
+garden|noun|/ˈɡɑːdn/|Bahçe|An area of land next to a house where plants are grown.|yard|-|Students often have lunch in the garden.|botanical garden
+gift|noun|/ɡɪft/|Hediye|Something you give to someone.|present|-|She bought a small gift for her host family.|birthday gift
+girl|noun|/ɡɜːl/|Kız|A female child or young woman.|-|boy|The girl next to me is from Ankara.|little girl
+give|verb|/ɡɪv/|Vermek|To put something in someone's hand or let them have it.|hand;provide|take;receive|Please give your paper to the teacher.|give back
+glass|noun|/ɡlɑːs/|Bardak; cam|A container for drinking; a hard clear material.|tumbler|-|Can I have a glass of water, please?|glass of water
+go|verb|/ɡəʊ/|Gitmek|To move or travel to a place.|travel;leave|come|I go to the gym three times a week.|go home
+good|adjective|/ɡʊd/|İyi|Of a high quality or standard.|fine;excellent|bad|She is a good student and always does her homework.|good idea
+grandmother|noun|/ˈɡrænmʌðə/|Büyükanne, nine|The mother of your father or mother.|grandma|grandfather|My grandmother tells wonderful stories.|visit grandmother
+green|adjective|/ɡriːn/|Yeşil|Having the colour of grass.|-|-|The campus is very green in spring.|green tea
+guest|noun|/ɡest/|Misafir, konuk|A person who is invited to a place or event.|visitor|host|The guest speaker talked about climate change.|guest speaker
+hair|noun|/heə/|Saç|The thin threads that grow on your head.|-|-|She has long black hair.|cut hair
+half|noun|/hɑːf/|Yarım, yarı|One of two equal parts of something.|-|whole|Half of the class passed the test.|half an hour
+hand|noun|/hænd/|El|The part of the body at the end of the arm.|-|-|Raise your hand if you have a question.|raise a hand
+happy|adjective|/ˈhæpi/|Mutlu|Feeling pleased.|glad;cheerful|sad;unhappy|I was happy with my exam result.|happy ending
+hat|noun|/hæt/|Şapka|A covering for the head.|cap|-|Wear a hat because the sun is very strong.|wear a hat
+head|noun|/hed/|Baş, kafa|The part of the body above the neck.|-|-|I have a pain in my head.|head of department
+healthy|adjective|/ˈhelθi/|Sağlıklı|Physically strong and not ill; good for your health.|fit;well|unhealthy;ill|A healthy breakfast helps you concentrate.|healthy lifestyle
+heart|noun|/hɑːt/|Kalp|The organ in your chest that pumps blood.|-|-|My heart was beating fast before the presentation.|heart attack
+heavy|adjective|/ˈhevi/|Ağır|Weighing a lot.|weighty|light|This dictionary is too heavy to carry every day.|heavy rain
+holiday|noun|/ˈhɒlədeɪ/|Tatil|A period of time when you do not work or go to school.|vacation;break|-|We have a two-week holiday in February.|summer holiday
+home|noun|/həʊm/|Ev, yuva|The place where you live.|house;residence|-|I usually call my parents when I get home.|at home
+homework|noun|/ˈhəʊmwɜːk/|Ev ödevi|Work that a teacher gives students to do at home.|assignment|-|We have a lot of homework this weekend.|do homework
+horse|noun|/hɔːs/|At|A large animal that people ride.|-|-|He learned to ride a horse in the village.|ride a horse
+hospital|noun|/ˈhɒspɪtl/|Hastane|A place where sick or injured people are treated.|clinic|-|The university hospital is next to the medical faculty.|in hospital
+hot|adjective|/hɒt/|Sıcak|Having a high temperature.|warm;boiling|cold|It is too hot to study outside in July.|hot weather
+hotel|noun|/həʊˈtel/|Otel|A building where people pay to stay for a short time.|inn|-|The conference guests stayed at a hotel near the campus.|book a hotel
+hour|noun|/ˈaʊə/|Saat (süre)|A period of sixty minutes.|-|-|The reading exam lasts one hour.|an hour
+house|noun|/haʊs/|Ev|A building where a family lives.|home;residence|-|They live in a small house with a garden.|move house
+hungry|adjective|/ˈhʌŋɡri/|Aç|Wanting or needing food.|starving|full|I am always hungry after the morning lessons.|feel hungry
+husband|noun|/ˈhʌzbənd/|Koca, eş|The man that a woman is married to.|spouse|wife|Her husband is also a teacher.|husband and wife
+ice|noun|/aɪs/|Buz|Water that has frozen and become solid.|-|-|Be careful, there is ice on the steps.|ice cream
+idea|noun|/aɪˈdɪə/|Fikir|A thought or suggestion about what to do.|thought;suggestion|-|That is a great idea for your presentation.|good idea
+ill|adjective|/ɪl/|Hasta|Not well; sick.|sick;unwell|healthy;well|She stayed at home because she was ill.|feel ill
+job|noun|/dʒɒb/|İş|The regular work that a person does to earn money.|work;occupation|-|He has a part-time job in a café.|part-time job
+juice|noun|/dʒuːs/|Meyve suyu|The liquid from fruit or vegetables.|-|-|I'd like an orange juice, please.|orange juice
+key|noun|/kiː/|Anahtar|A piece of metal used to open a lock.|-|-|I lost the key to my locker.|door key
+kind|adjective|/kaɪnd/|Nazik, iyi kalpli|Caring and helpful towards others.|nice;generous|unkind;cruel|It was kind of you to help me with my essay.|kind to
+kitchen|noun|/ˈkɪtʃɪn/|Mutfak|A room where food is prepared and cooked.|-|-|The dormitory kitchen is on the ground floor.|shared kitchen
+knee|noun|/niː/|Diz|The joint in the middle of your leg.|-|-|He hurt his knee during the basketball game.|knee injury
+lake|noun|/leɪk/|Göl|A large area of water surrounded by land.|pond|-|There is a lake in the middle of the campus.|by the lake
+lamp|noun|/læmp/|Lamba|A device that gives light.|light|-|Turn on the lamp on your desk.|desk lamp
+large|adjective|/lɑːdʒ/|Büyük, geniş|Big in size or amount.|big;huge|small|The lecture takes place in a large hall.|large number
+late|adjective|/leɪt/|Geç|After the expected or usual time.|delayed|early|Sorry I'm late, the bus didn't come.|be late
+laugh|verb|/lɑːf/|Gülmek|To make sounds that show you think something is funny.|giggle;chuckle|cry|Everyone began to laugh at his joke.|laugh at
+leave|verb|/liːv/|Ayrılmak; bırakmak|To go away from a place; to let something stay.|depart;exit|arrive;stay|You can leave the exam room after thirty minutes.|leave early
+leg|noun|/leɡ/|Bacak|One of the long parts of the body that you walk on.|limb|-|My leg hurts after the long walk.|broken leg
+lesson|noun|/ˈlesn/|Ders|A period of time in which someone is taught something.|class;lecture|-|The first lesson starts at half past eight.|English lesson
+letter|noun|/ˈletə/|Mektup; harf|A written message; a symbol in the alphabet.|message;note|-|I wrote a letter to my old teacher.|write a letter
+library|noun|/ˈlaɪbrəri/|Kütüphane|A building where books are kept for people to read or borrow.|-|-|The library is open until midnight during exams.|public library
+light|adjective|/laɪt/|Hafif; açık renk|Not heavy; pale in colour.|lightweight;pale|heavy;dark|Take a light jacket with you.|light blue
+like|verb|/laɪk/|Sevmek, hoşlanmak|To enjoy something or think it is nice.|enjoy;love|dislike;hate|I like reading short stories in English.|like doing
+little|adjective|/ˈlɪtl/|Küçük|Small in size.|small;tiny|big;large|There is a little café behind the library.|a little
+live|verb|/lɪv/|Yaşamak, oturmak|To have your home in a particular place.|reside;dwell|-|I live in a dormitory near the campus.|live in
+long|adjective|/lɒŋ/|Uzun|Measuring a great length or lasting a great time.|lengthy|short|The reading text is long but easy.|long time
+look|verb|/lʊk/|Bakmak|To turn your eyes towards something.|watch;glance|ignore|Look at the picture and describe it.|look at
+lose|verb|/luːz/|Kaybetmek|To be unable to find something; not to win.|misplace|find;win|Don't lose your exam ticket.|lose weight
+loud|adjective|/laʊd/|Gürültülü, yüksek sesli|Making a lot of noise.|noisy|quiet|The music in the café is too loud.|loud voice
+love|verb|/lʌv/|Sevmek|To like someone or something very much.|adore|hate|I love learning new words.|love doing
+lucky|adjective|/ˈlʌki/|Şanslı|Having good things happen to you by chance.|fortunate|unlucky|I was lucky to get a seat on the bus.|lucky day
+lunch|noun|/lʌntʃ/|Öğle yemeği|A meal eaten in the middle of the day.|-|-|We have lunch at the cafeteria at noon.|have lunch
+map|noun|/mæp/|Harita|A drawing of an area showing roads, cities, rivers, etc.|plan;chart|-|Use the campus map to find the lecture hall.|campus map
+market|noun|/ˈmɑːkɪt/|Pazar, market|A place where people buy and sell things.|bazaar|-|There is a fruit market every Saturday.|local market
+married|adjective|/ˈmærid/|Evli|Having a husband or wife.|wed|single|My English teacher is married with two children.|get married
+meal|noun|/miːl/|Öğün, yemek|The food eaten at one time, such as breakfast or dinner.|dish;food|-|Breakfast is the most important meal of the day.|main meal
+meat|noun|/miːt/|Et|The flesh of animals eaten as food.|-|-|I don't eat meat, so I choose the vegetable dish.|red meat
+milk|noun|/mɪlk/|Süt|The white liquid produced by cows and other animals.|-|-|Do you want milk in your tea?|glass of milk
+minute|noun|/ˈmɪnɪt/|Dakika|A period of sixty seconds.|-|-|You have one minute to answer each question.|wait a minute
+mirror|noun|/ˈmɪrə/|Ayna|A piece of glass in which you can see yourself.|-|-|She checked her hair in the mirror.|look in the mirror
+money|noun|/ˈmʌni/|Para|Coins or notes used to buy things.|cash;funds|-|I need to save money for the summer course.|save money
+month|noun|/mʌnθ/|Ay|One of the twelve periods into which a year is divided.|-|-|The proficiency exam is next month.|next month
+morning|noun|/ˈmɔːnɪŋ/|Sabah|The early part of the day.|-|evening|I study best in the morning.|this morning
+mother|noun|/ˈmʌðə/|Anne|A female parent.|mum|father|My mother calls me every evening.|mother tongue
+mountain|noun|/ˈmaʊntən/|Dağ|A very high hill.|peak|valley|We can see the mountain from our classroom.|climb a mountain
+mouth|noun|/maʊθ/|Ağız|The part of the face used for eating and speaking.|-|-|Open your mouth wide when you practise the sound.|open your mouth
+music|noun|/ˈmjuːzɪk/|Müzik|Sounds arranged in a pleasant way.|melody|silence|I listen to music while I walk to class.|listen to music
+name|noun|/neɪm/|İsim, ad|The word that someone or something is called.|title|-|Write your name and student number on the paper.|first name
+near|preposition|/nɪə/|Yakınında|At a short distance from.|close to;beside|far from|The bus stop is near the main gate.|near here
+neck|noun|/nek/|Boyun|The part of the body between the head and shoulders.|-|-|Sitting at a computer all day can hurt your neck.|neck pain
+neighbour|noun|/ˈneɪbə/|Komşu|A person who lives near you.|-|-|Our neighbour is a professor at the university.|next-door neighbour
+new|adjective|/njuː/|Yeni|Recently made or bought; not used before.|modern;recent|old|We are moving to a new building next year.|new student
+newspaper|noun|/ˈnjuːzpeɪpə/|Gazete|Large printed sheets containing news and articles.|paper;daily|-|Reading an English newspaper improves your vocabulary.|read a newspaper
+nice|adjective|/naɪs/|Hoş, güzel|Pleasant or attractive.|pleasant;lovely|nasty|We had a nice time on the school trip.|nice weather
+night|noun|/naɪt/|Gece|The time when it is dark and people sleep.|-|day|Don't study all night before an exam.|at night
+noisy|adjective|/ˈnɔɪzi/|Gürültülü|Making a lot of noise.|loud|quiet|The dormitory is noisy at the weekend.|noisy neighbours
+nose|noun|/nəʊz/|Burun|The part of the face you breathe and smell through.|-|-|He has a cold and a red nose.|blow your nose
+notebook|noun|/ˈnəʊtbʊk/|Defter|A book of plain paper for writing notes in.|exercise book;pad|-|Write new words in your vocabulary notebook.|vocabulary notebook
+office|noun|/ˈɒfɪs/|Ofis, büro|A room or building where people work at desks.|bureau|-|The teacher's office is on the second floor.|office hours
+old|adjective|/əʊld/|Eski; yaşlı|Having existed for a long time; not young.|ancient;elderly|new;young|The old library is now a museum.|old friend
+orange|noun|/ˈɒrɪndʒ/|Portakal|A round fruit with a thick orange skin.|-|-|I eat an orange every morning.|orange juice
+page|noun|/peɪdʒ/|Sayfa|One side of a sheet of paper in a book.|sheet|-|Open your books at page twenty.|front page
+pain|noun|/peɪn/|Ağrı, acı|The feeling you have when part of your body hurts.|ache;hurt|comfort|I have a pain in my back.|back pain
+paint|verb|/peɪnt/|Boyamak; resim yapmak|To cover a surface with paint or make a picture with paint.|colour|-|The students will paint the wall in the art room.|paint a picture
+paper|noun|/ˈpeɪpə/|Kâğıt|Thin material used for writing or printing.|sheet|-|Write your answers on a separate piece of paper.|piece of paper
+parent|noun|/ˈpeərənt/|Ebeveyn|A mother or father.|-|child|Each parent received a letter from the school.|single parent
+park|noun|/pɑːk/|Park|A public area with grass and trees.|garden|-|We often study in the park on sunny days.|city park
+party|noun|/ˈpɑːti/|Parti|A social event where people meet to eat, drink and have fun.|celebration|-|There is a welcome party for new students on Friday.|birthday party
+passport|noun|/ˈpɑːspɔːt/|Pasaport|An official document you need to travel abroad.|-|-|You need a passport for the exchange programme.|valid passport
+pen|noun|/pen/|Kalem (tükenmez)|A tool for writing with ink.|ballpoint|-|Can I borrow your pen for a minute?|blue pen
+pencil|noun|/ˈpensl/|Kurşun kalem|A thin wooden tool with a grey centre used for writing.|-|-|Use a pencil to mark your answers on the optical form.|sharp pencil
+people|noun|/ˈpiːpl/|İnsanlar|Men, women and children.|persons;public|-|Many people visit the campus during the open day.|young people
+phone|noun|/fəʊn/|Telefon|A device for talking to someone in another place.|mobile;telephone|-|Turn off your phone before the exam.|mobile phone
+photo|noun|/ˈfəʊtəʊ/|Fotoğraf|A picture taken with a camera.|picture;photograph|-|Attach a recent photo to your application.|take a photo
+picture|noun|/ˈpɪktʃə/|Resim|A drawing, painting or photograph.|image;photo|-|Describe the picture in five sentences.|draw a picture
+plane|noun|/pleɪn/|Uçak|A vehicle with wings that flies.|aircraft;aeroplane|-|The plane to Amsterdam was two hours late.|catch a plane
+plant|noun|/plɑːnt/|Bitki|A living thing that grows in the ground.|-|-|Water the plant on the windowsill twice a week.|house plant
+play|verb|/pleɪ/|Oynamak; çalmak|To take part in a game; to make music on an instrument.|-|-|We play basketball after class.|play football
+please|adverb|/pliːz/|Lütfen|Used to make a request polite.|kindly|-|Please be quiet in the library.|yes, please
+police|noun|/pəˈliːs/|Polis|The official organization that makes people obey the law.|-|-|The police closed the road near the campus.|call the police
+poor|adjective|/pɔː/|Fakir; zayıf (kalitesi düşük)|Having little money; of low quality.|needy;weak|rich;good|His English was poor at first, but he worked hard.|poor quality
+popular|adjective|/ˈpɒpjələ/|Popüler, sevilen|Liked by many people.|well-liked;favoured|unpopular|Football is the most popular club on campus.|popular with
+post|verb|/pəʊst/|Postalamak; paylaşmak|To send a letter; to put information online.|send;publish|-|The teacher will post the results on the website.|post online
+potato|noun|/pəˈteɪtəʊ/|Patates|A round vegetable that grows under the ground.|-|-|I'd like a baked potato with salad.|baked potato
+practise|verb|/ˈpræktɪs/|Pratik yapmak, alıştırma yapmak|To do something regularly to improve your skill.|rehearse;train|-|You should practise speaking every day.|practise English
+present|noun|/ˈpreznt/|Hediye; şimdiki zaman|A gift; the time now.|gift|past;future|We bought a present for our teacher.|birthday present
+pretty|adjective|/ˈprɪti/|Hoş, sevimli|Attractive in a pleasant way.|lovely;attractive|ugly|She lives in a pretty village by the sea.|pretty dress
+price|noun|/praɪs/|Fiyat|The amount of money you pay for something.|cost;fee|-|The price of the coursebook is very high.|low price
+problem|noun|/ˈprɒbləm/|Sorun, problem|Something that causes difficulty.|difficulty;issue|solution|If you have a problem, talk to your advisor.|solve a problem
+question|noun|/ˈkwestʃən/|Soru|A sentence that asks for information.|query|answer|Answer every question in the reading section.|ask a question
+quick|adjective|/kwɪk/|Hızlı, çabuk|Done in a short time.|fast;rapid|slow|Can I ask you a quick question?|quick look
+quiet|adjective|/ˈkwaɪət/|Sessiz, sakin|Making little noise.|silent;calm|loud;noisy|The library has a quiet room for individual study.|keep quiet
+rain|noun|/reɪn/|Yağmur|Water that falls from clouds.|shower;drizzle|-|The football match was cancelled because of the rain.|heavy rain
+read|verb|/riːd/|Okumak|To look at and understand written words.|study|-|Read the text and answer the questions.|read aloud
+ready|adjective|/ˈredi/|Hazır|Prepared for something.|prepared;set|unprepared|Are you ready for tomorrow's exam?|get ready
+red|adjective|/red/|Kırmızı|Having the colour of blood.|-|-|The teacher marks mistakes with a red pen.|red light
+remember|verb|/rɪˈmembə/|Hatırlamak|To keep something in your mind or bring it back to your mind.|recall|forget|I can't remember the meaning of this word.|remember to
+rent|noun|/rent/|Kira|Money paid regularly to use a house or room.|-|-|The rent for my flat is paid at the start of the month.|pay rent
+repeat|verb|/rɪˈpiːt/|Tekrarlamak|To say or do something again.|redo;restate|-|Listen and repeat the new words.|repeat after me
+rest|verb|/rest/|Dinlenmek|To stop working and relax.|relax;pause|work|Rest for a few minutes between the exam sections.|rest a while
+restaurant|noun|/ˈrestrɒnt/|Restoran, lokanta|A place where people pay to eat meals.|café;eatery|-|We had dinner at a fish restaurant.|restaurant menu
+rich|adjective|/rɪtʃ/|Zengin|Having a lot of money.|wealthy;affluent|poor|He comes from a rich family.|rich in
+river|noun|/ˈrɪvə/|Nehir, ırmak|A natural flow of water that goes to the sea.|stream|-|The city is built along a wide river.|river bank
+road|noun|/rəʊd/|Yol|A hard surface for vehicles to travel on.|street;route|-|The road to the campus is closed today.|main road
+room|noun|/ruːm/|Oda|A part of a building with walls, a floor and a ceiling.|chamber|-|The exam will be in room B-104.|meeting room
+run|verb|/rʌn/|Koşmak|To move fast on your feet.|sprint;race|walk|I run in the park every morning.|run fast
+sad|adjective|/sæd/|Üzgün|Unhappy.|unhappy;upset|happy|She was sad when her friend moved away.|feel sad
+safe|adjective|/seɪf/|Güvenli|Not in danger.|secure;protected|dangerous|Keep your passport in a safe place.|safe place
+salad|noun|/ˈsæləd/|Salata|A mixture of raw vegetables.|-|-|I usually have a salad for lunch.|green salad
+salt|noun|/sɔːlt/|Tuz|A white substance used to give flavour to food.|-|sugar|This soup needs more salt.|a pinch of salt
+sea|noun|/siː/|Deniz|The salt water that covers most of the earth.|ocean|land|The campus is close to the sea.|by the sea
+season|noun|/ˈsiːzn/|Mevsim|One of the four periods of the year.|-|-|Spring is my favourite season.|rainy season
+seat|noun|/siːt/|Koltuk, oturacak yer|A place to sit.|chair;place|-|Please find your seat number before the exam begins.|take a seat
+see|verb|/siː/|Görmek|To notice something using your eyes.|notice;observe|-|I can't see the board from the back.|see clearly
+sell|verb|/sel/|Satmak|To give something to someone for money.|-|buy|Senior students sell their old books cheaply.|sell out
+send|verb|/send/|Göndermek|To make something go to another place or person.|post;mail|receive|Send your essay to the teacher by Friday.|send a message
+shirt|noun|/ʃɜːt/|Gömlek|A piece of clothing with sleeves and buttons, worn on the upper body.|blouse;top|-|He wore a white shirt to the interview.|white shirt
+shoe|noun|/ʃuː/|Ayakkabı|A covering for the foot.|-|-|I lost one shoe at the swimming pool.|pair of shoes
+shop|noun|/ʃɒp/|Dükkan, mağaza|A building where you can buy things.|store|-|There is a small shop in the student centre.|book shop
+short|adjective|/ʃɔːt/|Kısa|Small in length, height or time.|brief|long;tall|Write a short paragraph about your hometown.|short break
+shower|noun|/ˈʃaʊə/|Duş; sağanak|A device that sprays water to wash; a short period of rain.|-|-|I take a shower after the gym.|take a shower
+sick|adjective|/sɪk/|Hasta|Ill.|ill;unwell|healthy|He called the office to say he was sick.|sick leave
+sing|verb|/sɪŋ/|Şarkı söylemek|To make music with your voice.|-|-|The choir will sing at the graduation ceremony.|sing a song
+sister|noun|/ˈsɪstə/|Kız kardeş, abla|A girl or woman with the same parents as you.|sibling|brother|My sister is two years older than me.|younger sister
+sit|verb|/sɪt/|Oturmak|To rest on your bottom on a chair or the ground.|-|stand|Please sit at the desk with your name on it.|sit down
+sleep|verb|/sliːp/|Uyumak|To rest with your eyes closed and your mind unconscious.|doze;rest|wake|Try to sleep eight hours before the exam.|sleep well
+slow|adjective|/sləʊ/|Yavaş|Not fast.|unhurried|fast;quick|The computer in the lab is very slow.|slow down
+small|adjective|/smɔːl/|Küçük|Little in size.|little;tiny|large;big|Our classroom is small but comfortable.|small group
+smile|verb|/smaɪl/|Gülümsemek|To make a happy expression with your mouth.|grin;beam|frown|Smile and look at the examiner when you speak.|smile at
+snow|noun|/snəʊ/|Kar|Soft white pieces of frozen water that fall from the sky.|-|-|Classes were cancelled because of the snow.|heavy snow
+soap|noun|/səʊp/|Sabun|A substance used for washing.|-|-|Wash your hands with soap and water.|bar of soap
+sock|noun|/sɒk/|Çorap|A piece of clothing worn on the foot inside a shoe.|-|-|I found one sock under the bed.|pair of socks
+son|noun|/sʌn/|Oğul|A person's male child.|-|daughter|Their son is studying medicine.|eldest son
+song|noun|/sɒŋ/|Şarkı|A short piece of music with words.|tune|-|We learned new words from an English song.|sing a song
+sorry|adjective|/ˈsɒri/|Üzgün, pişman|Feeling sad or regret about something.|regretful;apologetic|-|I'm sorry I forgot your book.|feel sorry
+soup|noun|/suːp/|Çorba|A liquid food made by boiling vegetables or meat in water.|broth|-|Lentil soup is served every day in the cafeteria.|bowl of soup
+speak|verb|/spiːk/|Konuşmak|To say words.|talk;say|-|Can you speak more slowly, please?|speak English
+sport|noun|/spɔːt/|Spor|A game or activity that needs physical effort and skill.|game;exercise|-|Basketball is a popular sport at our school.|play sport
+spring|noun|/sprɪŋ/|İlkbahar|The season between winter and summer.|-|autumn|The flowers on campus open in spring.|in spring
+stairs|noun|/steəz/|Merdiven|A set of steps inside a building.|steps;staircase|-|Take the stairs to the fourth floor.|go up the stairs
+star|noun|/stɑː/|Yıldız|A bright point of light in the night sky.|-|-|You can see every star clearly in the village.|bright star
+station|noun|/ˈsteɪʃn/|İstasyon|A place where trains or buses stop.|stop;terminal|-|The metro station is five minutes from the campus.|train station
+stay|verb|/steɪ/|Kalmak|To remain in a place.|remain;wait|leave;go|I will stay in the dormitory during the holiday.|stay at home
+street|noun|/striːt/|Sokak, cadde|A road in a town with buildings along it.|road;avenue|-|There are many cafés on this street.|main street
+strong|adjective|/strɒŋ/|Güçlü|Having a lot of physical power.|powerful;tough|weak|You need strong arms to row a boat.|strong coffee
+student|noun|/ˈstjuːdnt/|Öğrenci|A person who is studying at a school or university.|learner;pupil|teacher|Every student must take the placement test.|international student
+study|verb|/ˈstʌdi/|Ders çalışmak; okumak (öğrenim)|To spend time learning about a subject.|learn;revise|-|I study in the library after class.|study hard
+sugar|noun|/ˈʃʊɡə/|Şeker|A sweet substance added to food and drinks.|-|salt|Do you take sugar in your coffee?|no sugar
+summer|noun|/ˈsʌmə/|Yaz|The warmest season of the year.|-|winter|Many students take a language course in summer.|summer school
+sun|noun|/sʌn/|Güneş|The star that gives the earth light and heat.|-|moon|The sun is very hot at midday.|in the sun
+supermarket|noun|/ˈsuːpəmɑːkɪt/|Süpermarket|A large shop that sells food and household goods.|grocery store|-|There is a supermarket opposite the dormitory.|go to the supermarket
+sweet|adjective|/swiːt/|Tatlı|Tasting of sugar.|sugary|bitter;sour|This tea is too sweet for me.|sweet food
+swim|verb|/swɪm/|Yüzmek|To move through water using your arms and legs.|-|sink|I swim in the university pool twice a week.|swim in the sea
+table|noun|/ˈteɪbl/|Masa; tablo|A piece of furniture with a flat top; a set of facts in rows and columns.|desk;chart|-|Look at the table and answer the questions.|kitchen table
+talk|verb|/tɔːk/|Konuşmak|To say things to someone.|speak;chat|-|Talk to your partner about your weekend.|talk about
+tall|adjective|/tɔːl/|Uzun boylu, yüksek|Having a greater height than usual.|high|short|The new library is a tall glass building.|tall building
+taxi|noun|/ˈtæksi/|Taksi|A car with a driver that you pay to take you somewhere.|cab|-|We took a taxi to the airport.|take a taxi
+tea|noun|/tiː/|Çay|A hot drink made by pouring water onto dried leaves.|-|-|Students drink a lot of tea between lessons.|cup of tea
+teacher|noun|/ˈtiːtʃə/|Öğretmen|A person whose job is to teach.|instructor;tutor|student|Our teacher speaks only English in class.|English teacher
+team|noun|/tiːm/|Takım, ekip|A group of people who work or play together.|group;squad|-|Our team won the debate competition.|team member
+test|noun|/test/|Sınav, test|A set of questions to measure knowledge or skill.|exam;quiz|-|We have a vocabulary test every Friday.|pass a test
+thank|verb|/θæŋk/|Teşekkür etmek|To tell someone you are grateful.|-|-|I want to thank you for your help.|thank you
+thirsty|adjective|/ˈθɜːsti/|Susamış|Needing to drink something.|parched|-|I'm thirsty, let's buy some water.|feel thirsty
+ticket|noun|/ˈtɪkɪt/|Bilet|A piece of paper that shows you have paid to travel or enter.|pass;voucher|-|Buy your ticket before you get on the train.|bus ticket
+tired|adjective|/ˈtaɪəd/|Yorgun|Needing rest or sleep.|exhausted;sleepy|energetic;rested|I'm too tired to study tonight.|feel tired
+today|adverb|/təˈdeɪ/|Bugün|On this day.|-|tomorrow;yesterday|We have three lessons today.|until today
+together|adverb|/təˈɡeðə/|Birlikte|With each other.|jointly|alone;apart|Let's study together for the final exam.|work together
+tomorrow|adverb|/təˈmɒrəʊ/|Yarın|On the day after today.|-|yesterday|The results will be announced tomorrow.|see you tomorrow
+tooth|noun|/tuːθ/|Diş|One of the hard white things in your mouth used for biting.|-|-|I have a broken tooth.|wisdom tooth
+town|noun|/taʊn/|Kasaba, şehir|A place with many houses and shops, smaller than a city.|village;city|-|My hometown is a small town near the coast.|town centre
+toy|noun|/tɔɪ/|Oyuncak|An object for children to play with.|plaything|-|The child dropped his toy on the bus.|toy car
+train|noun|/treɪn/|Tren|A vehicle that travels on rails.|-|-|I go home by train at the weekends.|take the train
+travel|verb|/ˈtrævl/|Seyahat etmek|To go from one place to another, often far away.|journey;tour|stay|I want to travel around Europe after graduation.|travel abroad
+tree|noun|/triː/|Ağaç|A tall plant with a wooden trunk and branches.|-|-|We sat under a tree to read.|plant a tree
+trousers|noun|/ˈtraʊzəz/|Pantolon|A piece of clothing that covers each leg separately.|pants|-|He bought new trousers for the ceremony.|pair of trousers
+true|adjective|/truː/|Doğru, gerçek|Based on facts; not false.|correct;accurate|false|Decide if the sentence is true or false.|come true
+try|verb|/traɪ/|Denemek, çalışmak|To attempt to do something.|attempt|-|Try to answer every question.|try hard
+umbrella|noun|/ʌmˈbrelə/|Şemsiye|An object used to protect you from rain.|-|-|Take an umbrella; it might rain.|open an umbrella
+uncle|noun|/ˈʌŋkl/|Amca, dayı|The brother of your mother or father.|-|aunt|My uncle lives in Germany.|favourite uncle
+understand|verb|/ˌʌndəˈstænd/|Anlamak|To know the meaning of something.|comprehend;grasp|misunderstand|I don't understand this question.|fully understand
+village|noun|/ˈvɪlɪdʒ/|Köy|A very small town in the countryside.|hamlet|city|My grandparents live in a quiet village.|small village
+visit|verb|/ˈvɪzɪt/|Ziyaret etmek|To go to see a person or place.|see;call on|-|We will visit the museum on Saturday.|visit a friend
+wait|verb|/weɪt/|Beklemek|To stay somewhere until something happens.|-|leave|Wait outside until the teacher calls your name.|wait for
+wake|verb|/weɪk/|Uyanmak, uyandırmak|To stop sleeping.|awaken|sleep|I wake at six on exam days.|wake up
+walk|verb|/wɔːk/|Yürümek|To move on foot at a normal speed.|stroll;step|run|I walk to the campus every morning.|go for a walk
+wall|noun|/wɔːl/|Duvar|A side of a room or building.|-|-|The timetable is on the wall next to the door.|on the wall
+wallet|noun|/ˈwɒlɪt/|Cüzdan|A small case for money and cards.|purse|-|I left my wallet in the library.|lose a wallet
+want|verb|/wɒnt/|İstemek|To wish to have or do something.|wish;desire|-|I want to pass the exam in June.|want to
+warm|adjective|/wɔːm/|Ilık, sıcak|Pleasantly hot.|mild|cool;cold|The classroom is warm and comfortable.|warm weather
+wash|verb|/wɒʃ/|Yıkamak|To clean something with water.|clean;rinse|-|Wash your hands before lunch.|wash the dishes
+watch|verb|/wɒtʃ/|İzlemek|To look at something for a period of time.|view;observe|-|We watch a short video at the start of each lesson.|watch TV
+water|noun|/ˈwɔːtə/|Su|The clear liquid that falls as rain and is in seas and rivers.|-|-|Drink plenty of water during the day.|drinking water
+weather|noun|/ˈweðə/|Hava (durumu)|The conditions in the air, such as rain, wind or sun.|climate|-|The weather is lovely today.|bad weather
+week|noun|/wiːk/|Hafta|A period of seven days.|-|-|We have twenty hours of English a week.|next week
+weekend|noun|/ˌwiːkˈend/|Hafta sonu|Saturday and Sunday.|-|weekday|What did you do at the weekend?|at the weekend
+wet|adjective|/wet/|Islak|Covered with water.|damp;soaked|dry|My shoes are wet from the rain.|get wet
+white|adjective|/waɪt/|Beyaz|Having the colour of snow.|-|black|Write on the white board with a marker.|white paper
+wife|noun|/waɪf/|Karı, eş|The woman that a man is married to.|spouse|husband|His wife works at the same university.|husband and wife
+win|verb|/wɪn/|Kazanmak|To be the best in a competition.|triumph|lose|Our class wants to win the quiz.|win a prize
+window|noun|/ˈwɪndəʊ/|Pencere|An opening in a wall with glass in it.|-|-|Can I open the window? It's hot.|open the window
+winter|noun|/ˈwɪntə/|Kış|The coldest season of the year.|-|summer|Erzurum is very cold in winter.|in winter
+woman|noun|/ˈwʊmən/|Kadın|An adult female person.|lady|man|The woman at the desk will give you a form.|young woman
+word|noun|/wɜːd/|Kelime, sözcük|A single unit of language.|term|-|Learn ten new word cards every day.|new word
+work|verb|/wɜːk/|Çalışmak|To do a job or activity that needs effort.|labour;operate|rest|My parents work in a hospital.|work hard
+world|noun|/wɜːld/|Dünya|The earth and all the people and things on it.|earth;globe|-|English is spoken all over the world.|around the world
+write|verb|/raɪt/|Yazmak|To make letters or words on a surface.|record;note|-|Write an email to your friend about your holiday.|write down
+wrong|adjective|/rɒŋ/|Yanlış|Not correct.|incorrect;mistaken|right;correct|Two of your answers are wrong.|go wrong
+year|noun|/jɪə/|Yıl|A period of twelve months.|-|-|The preparatory year lasts eight months.|next year
+yesterday|adverb|/ˈjestədeɪ/|Dün|On the day before today.|-|tomorrow|I was ill yesterday, so I missed the lesson.|yesterday morning
+young|adjective|/jʌŋ/|Genç|Having lived for a short time.|youthful|old|The young teacher was very energetic.|young people
