@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../models/mistake_item.dart';
 import '../models/university.dart';
 import '../services/api_service.dart';
@@ -45,7 +46,9 @@ class _MistakeVaultScreenState extends State<MistakeVaultScreen> {
     _loadMistakes();
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Soru çözüldü olarak işaretlendi ve arşivlendi.')),
+        const SnackBar(
+          content: Text('Soru çözüldü olarak işaretlendi ve arşivlendi.'),
+        ),
       );
     }
   }
@@ -72,10 +75,7 @@ class _MistakeVaultScreenState extends State<MistakeVaultScreen> {
       appBar: AppBar(
         title: const Text('Hata Defterim'),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: _loadMistakes,
-          ),
+          IconButton(icon: const Icon(Icons.refresh), onPressed: _loadMistakes),
         ],
       ),
       body: _isLoading
@@ -109,33 +109,62 @@ class _MistakeVaultScreenState extends State<MistakeVaultScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          Wrap(
+                            alignment: WrapAlignment.spaceBetween,
+                            spacing: 8,
+                            runSpacing: 6,
                             children: [
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 4,
+                                ),
                                 decoration: BoxDecoration(
                                   color: Colors.white24,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: const Row(
+                                  mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Icon(Icons.shield_outlined, size: 14, color: Colors.white),
+                                    Icon(
+                                      Icons.shield_outlined,
+                                      size: 14,
+                                      color: Colors.white,
+                                    ),
                                     SizedBox(width: 4),
-                                    Text('Kişisel Hata Havuzu', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: Colors.white)),
+                                    Text(
+                                      'Kişisel Hata Havuzu',
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w800,
+                                        color: Colors.white,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 4,
+                                ),
                                 decoration: BoxDecoration(
-                                  color: Colors.redAccent.withValues(alpha: 0.3),
+                                  color: Colors.redAccent.withValues(
+                                    alpha: 0.3,
+                                  ),
                                   borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(color: Colors.redAccent.shade100, width: 1),
+                                  border: Border.all(
+                                    color: Colors.redAccent.shade100,
+                                    width: 1,
+                                  ),
                                 ),
                                 child: Text(
                                   '${_mistakes.length} Yanlış Soru',
-                                  style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: Colors.white),
+                                  style: const TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w800,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ],
@@ -143,19 +172,32 @@ class _MistakeVaultScreenState extends State<MistakeVaultScreen> {
                           const SizedBox(height: 12),
                           const Text(
                             'Smart Mistake Vault',
-                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white),
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white,
+                            ),
                           ),
                           const SizedBox(height: 4),
                           const Text(
                             'Yanlış yaptığınız tüm sorular burada birikir. Eksiklerinizi tekrar çözerek sınav barajını garantileyin.',
-                            style: TextStyle(fontSize: 12, color: Colors.white70, height: 1.4),
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.white70,
+                              height: 1.4,
+                            ),
                           ),
                           const SizedBox(height: 18),
                           if (_mistakes.isNotEmpty)
                             ElevatedButton.icon(
                               onPressed: _startMistakeExam,
-                              icon: const Icon(Icons.play_arrow_rounded, size: 18),
-                              label: const Text('Yanlışlarımı Sınav Olarak Tekrar Çöz'),
+                              icon: const Icon(
+                                Icons.play_arrow_rounded,
+                                size: 18,
+                              ),
+                              label: const Text(
+                                'Yanlışlarımı Sınav Olarak Tekrar Çöz',
+                              ),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppTheme.accentRose,
                                 foregroundColor: Colors.white,
@@ -176,17 +218,29 @@ class _MistakeVaultScreenState extends State<MistakeVaultScreen> {
                         ),
                         child: Column(
                           children: const [
-                            Icon(Icons.check_circle_outline_rounded, size: 48, color: AppTheme.accentEmerald),
+                            Icon(
+                              Icons.check_circle_outline_rounded,
+                              size: 48,
+                              color: AppTheme.accentEmerald,
+                            ),
                             SizedBox(height: 12),
                             Text(
                               'Harika! Hata Defteriniz Boş',
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: AppTheme.textMain),
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w800,
+                                color: AppTheme.textMain,
+                              ),
                             ),
                             SizedBox(height: 4),
                             Text(
                               'Henüz çözülmemiş yanlış sorunuz bulunmuyor. Yeni bir deneme sınavı çözerek kendinizi test edebilirsiniz!',
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 12, color: AppTheme.textMuted, height: 1.4),
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: AppTheme.textMuted,
+                                height: 1.4,
+                              ),
                             ),
                           ],
                         ),
@@ -201,61 +255,96 @@ class _MistakeVaultScreenState extends State<MistakeVaultScreen> {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(22),
-                              border: Border.all(color: Colors.red.shade100, width: 1.5),
+                              border: Border.all(
+                                color: Colors.red.shade100,
+                                width: 1.5,
+                              ),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
                                       children: [
                                         Container(
-                                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 8,
+                                            vertical: 3,
+                                          ),
                                           decoration: BoxDecoration(
                                             color: Colors.red.shade50,
-                                            borderRadius: BorderRadius.circular(8),
+                                            borderRadius: BorderRadius.circular(
+                                              8,
+                                            ),
                                           ),
                                           child: Text(
                                             '${q.category} • ${q.level}',
-                                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: AppTheme.accentRose),
+                                            style: const TextStyle(
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.w800,
+                                              color: AppTheme.accentRose,
+                                            ),
                                           ),
                                         ),
                                         const SizedBox(width: 6),
                                         Container(
-                                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 8,
+                                            vertical: 3,
+                                          ),
                                           decoration: BoxDecoration(
                                             color: Colors.amber.shade50,
-                                            borderRadius: BorderRadius.circular(8),
-                                            border: Border.all(color: Colors.amber.shade200),
+                                            borderRadius: BorderRadius.circular(
+                                              8,
+                                            ),
+                                            border: Border.all(
+                                              color: Colors.amber.shade200,
+                                            ),
                                           ),
                                           child: Text(
                                             '${m.wrongCount} kez yanlış',
-                                            style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: AppTheme.accentAmber),
+                                            style: const TextStyle(
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w700,
+                                              color: AppTheme.accentAmber,
+                                            ),
                                           ),
                                         ),
                                       ],
                                     ),
                                     Text(
                                       q.universityId.toUpperCase(),
-                                      style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w800, color: AppTheme.textMuted),
+                                      style: const TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w800,
+                                        color: AppTheme.textMuted,
+                                      ),
                                     ),
                                   ],
                                 ),
                                 const SizedBox(height: 12),
 
-                                if (q.passage != null && q.passage!.isNotEmpty) ...[
+                                if (q.passage != null &&
+                                    q.passage!.isNotEmpty) ...[
                                   Container(
                                     padding: const EdgeInsets.all(12),
                                     decoration: BoxDecoration(
                                       color: Colors.grey.shade50,
                                       borderRadius: BorderRadius.circular(12),
-                                      border: Border.all(color: Colors.grey.shade200),
+                                      border: Border.all(
+                                        color: Colors.grey.shade200,
+                                      ),
                                     ),
                                     child: Text(
                                       q.passage!,
-                                      style: const TextStyle(fontSize: 12, height: 1.5, color: Color(0xFF475569)),
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        height: 1.5,
+                                        color: Color(0xFF475569),
+                                      ),
                                     ),
                                   ),
                                   const SizedBox(height: 12),
@@ -263,7 +352,11 @@ class _MistakeVaultScreenState extends State<MistakeVaultScreen> {
 
                                 Text(
                                   q.question,
-                                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AppTheme.textMain),
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppTheme.textMain,
+                                  ),
                                 ),
                                 const SizedBox(height: 12),
 
@@ -276,29 +369,68 @@ class _MistakeVaultScreenState extends State<MistakeVaultScreen> {
                                   Color bgCol = Colors.grey.shade50;
                                   if (isCorrect) {
                                     borderCol = AppTheme.accentEmerald;
-                                    bgCol = Colors.green.shade50.withValues(alpha: 0.5);
+                                    bgCol = Colors.green.shade50.withValues(
+                                      alpha: 0.5,
+                                    );
                                   } else if (isWrong) {
                                     borderCol = AppTheme.accentRose;
-                                    bgCol = Colors.red.shade50.withValues(alpha: 0.5);
+                                    bgCol = Colors.red.shade50.withValues(
+                                      alpha: 0.5,
+                                    );
                                   }
 
                                   return Padding(
                                     padding: const EdgeInsets.only(bottom: 6),
                                     child: Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 12,
+                                        vertical: 8,
+                                      ),
                                       decoration: BoxDecoration(
                                         color: bgCol,
                                         borderRadius: BorderRadius.circular(12),
-                                        border: Border.all(color: borderCol, width: (isCorrect || isWrong) ? 1.5 : 1),
+                                        border: Border.all(
+                                          color: borderCol,
+                                          width: (isCorrect || isWrong)
+                                              ? 1.5
+                                              : 1,
+                                        ),
                                       ),
                                       child: Row(
                                         children: [
-                                          Text('${opt.key}) ', style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12)),
-                                          Expanded(child: Text(opt.text, style: const TextStyle(fontSize: 12))),
+                                          Text(
+                                            '${opt.key}) ',
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.w800,
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              opt.text,
+                                              style: const TextStyle(
+                                                fontSize: 12,
+                                              ),
+                                            ),
+                                          ),
                                           if (isCorrect)
-                                            const Text('✓ Doğru', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: AppTheme.accentEmerald)),
+                                            const Text(
+                                              '✓ Doğru',
+                                              style: TextStyle(
+                                                fontSize: 11,
+                                                fontWeight: FontWeight.w800,
+                                                color: AppTheme.accentEmerald,
+                                              ),
+                                            ),
                                           if (isWrong)
-                                            const Text('✗ Yanıtın', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: AppTheme.accentRose)),
+                                            const Text(
+                                              '✗ Yanıtın',
+                                              style: TextStyle(
+                                                fontSize: 11,
+                                                fontWeight: FontWeight.w800,
+                                                color: AppTheme.accentRose,
+                                              ),
+                                            ),
                                         ],
                                       ),
                                     ),
@@ -314,16 +446,25 @@ class _MistakeVaultScreenState extends State<MistakeVaultScreen> {
                                     borderRadius: BorderRadius.circular(14),
                                   ),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       const Text(
                                         'Neden Yanıldınız? (Çözüm Analizi)',
-                                        style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: AppTheme.brandBlue),
+                                        style: TextStyle(
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w800,
+                                          color: AppTheme.brandBlue,
+                                        ),
                                       ),
                                       const SizedBox(height: 4),
                                       Text(
                                         q.explanationTr,
-                                        style: const TextStyle(fontSize: 12, height: 1.4, color: AppTheme.brandNavy),
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                          height: 1.4,
+                                          color: AppTheme.brandNavy,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -338,8 +479,14 @@ class _MistakeVaultScreenState extends State<MistakeVaultScreen> {
                                     label: const Text('Çözdüm (Arşivle)'),
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: AppTheme.accentEmerald,
-                                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                                      textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 16,
+                                        vertical: 8,
+                                      ),
+                                      textStyle: const TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w700,
+                                      ),
                                     ),
                                   ),
                                 ),

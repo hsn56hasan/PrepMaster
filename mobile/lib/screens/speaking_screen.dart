@@ -1,9 +1,12 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
+
 import '../models/speaking_task.dart';
 import '../models/speaking_evaluation_result.dart';
 import '../services/api_service.dart';
 import '../theme/app_theme.dart';
+import '../widgets/level_selector.dart';
 
 class SpeakingScreen extends StatefulWidget {
   final String currentLevel;
@@ -41,9 +44,7 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.surfaceBg,
-      appBar: AppBar(
-        title: const Text('Speaking & Sözlü Mülakat'),
-      ),
+      appBar: AppBar(title: const Text('Speaking & Sözlü Mülakat')),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : RefreshIndicator(
@@ -56,14 +57,19 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
                     padding: const EdgeInsets.all(22),
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
-                        colors: [Color(0xFF312E81), Color(0xFF4C1D95), Color(0xFF0F172A)],
+                        colors: [
+                          Color(0xFF312E81),
+                          Color(0xFF4C1D95),
+                          Color(0xFF0F172A),
+                        ],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
                       borderRadius: BorderRadius.circular(24),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF4338CA).withValues(alpha: 0.25),
+                          color: const Color(0xFF4338CA)
+                              .withValues(alpha: 0.25),
                           blurRadius: 16,
                           offset: const Offset(0, 8),
                         ),
@@ -73,7 +79,10 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 4,
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.white.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(12),
@@ -81,11 +90,19 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
                           child: const Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(Icons.mic, size: 14, color: Colors.amberAccent),
+                              Icon(
+                                Icons.mic,
+                                size: 14,
+                                color: Colors.amberAccent,
+                              ),
                               SizedBox(width: 6),
                               Text(
                                 'Sözlü Sınav Simülatörü',
-                                style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ],
                           ),
@@ -93,12 +110,20 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
                         const SizedBox(height: 12),
                         const Text(
                           'Speaking & Mülakat Atölyesi',
-                          style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w800),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w800,
+                          ),
                         ),
                         const SizedBox(height: 6),
                         Text(
                           'Boğaziçi BUEPT, ODTÜ EPE, Bilkent COPE ve İTÜ mülakatlarına uygun konuşma görevleri. Hazırlanın, konuşun ve anlık yapay zeka geri bildirimi alın.',
-                          style: TextStyle(color: Colors.white.withValues(alpha: 0.85), fontSize: 12, height: 1.4),
+                          style: TextStyle(
+                            color: Colors.white.withValues(alpha: 0.85),
+                            fontSize: 12,
+                            height: 1.4,
+                          ),
                         ),
                       ],
                     ),
@@ -107,35 +132,15 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
                   const SizedBox(height: 16),
 
                   // CEFR Level Filter Chips
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'all'].map((lvl) {
-                        final isSel = _selectedLevel == lvl;
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: ChoiceChip(
-                            label: Text(
-                              lvl == 'all' ? 'Tüm Kurlar' : '$lvl ${lvl == widget.currentLevel ? "★" : ""}',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: isSel ? Colors.white : AppTheme.textMain,
-                              ),
-                            ),
-                            selected: isSel,
-                            selectedColor: const Color(0xFF4F46E5),
-                            backgroundColor: Colors.white,
-                            onSelected: (val) {
-                              if (val) {
-                                setState(() => _selectedLevel = lvl);
-                                _loadTasks(level: lvl);
-                              }
-                            },
-                          ),
-                        );
-                      }).toList(),
-                    ),
+                  LevelSelector(
+                    selected: _selectedLevel,
+                    highlight: widget.currentLevel,
+                    selectedColor: const Color(0xFF4F46E5),
+                    padding: EdgeInsets.zero,
+                    onSelected: (lvl) {
+                      setState(() => _selectedLevel = lvl);
+                      _loadTasks(level: lvl);
+                    },
                   ),
 
                   const SizedBox(height: 16),
@@ -144,17 +149,28 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
                     children: [
                       const Text(
                         'Mevcut Mülakat Görevleri',
-                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: AppTheme.brandNavy),
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w800,
+                          color: AppTheme.brandNavy,
+                        ),
                       ),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
                           color: const Color(0xFFEEF2FF),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
                           '${_tasks.length} Görev',
-                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Color(0xFF4F46E5)),
+                          style: const TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF4F46E5),
+                          ),
                         ),
                       ),
                     ],
@@ -174,7 +190,11 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
                           children: [
                             const Text(
                               'Bu seviyede mülakat görevi bulunamadı.',
-                              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.textMuted),
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w600,
+                                color: AppTheme.textMuted,
+                              ),
                             ),
                             const SizedBox(height: 8),
                             TextButton(
@@ -219,17 +239,29 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFEEF2FF),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Text(
-                  task.targetUniversity,
-                  style: const TextStyle(color: Color(0xFF4338CA), fontSize: 11, fontWeight: FontWeight.bold),
+              Flexible(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFEEF2FF),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    task.targetUniversity,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: Color(0xFF4338CA),
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
+              const SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
@@ -238,7 +270,11 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
                 ),
                 child: Text(
                   task.level,
-                  style: TextStyle(color: Colors.grey.shade700, fontSize: 11, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    color: Colors.grey.shade700,
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
@@ -246,12 +282,20 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
           const SizedBox(height: 12),
           Text(
             task.title,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF1E293B)),
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF1E293B),
+            ),
           ),
           const SizedBox(height: 6),
           Text(
             task.instructionsTr,
-            style: TextStyle(fontSize: 12, color: Colors.grey.shade600, height: 1.4),
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.grey.shade600,
+              height: 1.4,
+            ),
           ),
           const SizedBox(height: 12),
           Container(
@@ -263,34 +307,53 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
             ),
             child: Text(
               '"${task.promptEn}"',
-              style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic, color: Colors.blueGrey.shade800, height: 1.3),
+              style: TextStyle(
+                fontSize: 12,
+                fontStyle: FontStyle.italic,
+                color: Colors.blueGrey.shade800,
+                height: 1.3,
+              ),
             ),
           ),
           const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Hazırlık: ${task.prepTimeSeconds}s • Konuşma: ${task.speakTimeSeconds}s',
-                style: TextStyle(fontSize: 11, color: Colors.grey.shade500, fontWeight: FontWeight.w500),
+          // Süre bilgisi üstte, düğme altta tam genişlikte (dar ekranda çakışmaz)
+          Text(
+            'Hazırlık: ${task.prepTimeSeconds}s • Konuşma: ${task.speakTimeSeconds}s',
+            style: TextStyle(
+              fontSize: 11,
+              color: Colors.grey.shade500,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const SizedBox(height: 10),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => SpeakingRunnerScreen(task: task),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.mic, size: 16),
+              label: const Text(
+                'Mülakata Başla',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
               ),
-              ElevatedButton.icon(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => SpeakingRunnerScreen(task: task)),
-                  );
-                },
-                icon: const Icon(Icons.mic, size: 16),
-                label: const Text('Mülakata Başla', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF4F46E5),
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF4F46E5),
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 10,
                 ),
               ),
-            ],
+            ),
           ),
         ],
       ),
@@ -400,7 +463,9 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
               margin: const EdgeInsets.only(right: 16),
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               decoration: BoxDecoration(
-                color: _phase == SpeakingPhase.prep ? Colors.amber.shade100 : Colors.red.shade100,
+                color: _phase == SpeakingPhase.prep
+                    ? Colors.amber.shade100
+                    : Colors.red.shade100,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Row(
@@ -408,7 +473,9 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
                   Icon(
                     _phase == SpeakingPhase.prep ? Icons.timer : Icons.mic,
                     size: 14,
-                    color: _phase == SpeakingPhase.prep ? Colors.amber.shade900 : Colors.red.shade900,
+                    color: _phase == SpeakingPhase.prep
+                        ? Colors.amber.shade900
+                        : Colors.red.shade900,
                   ),
                   const SizedBox(width: 4),
                   Text(
@@ -416,7 +483,9 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
-                      color: _phase == SpeakingPhase.prep ? Colors.amber.shade900 : Colors.red.shade900,
+                      color: _phase == SpeakingPhase.prep
+                          ? Colors.amber.shade900
+                          : Colors.red.shade900,
                     ),
                   ),
                 ],
@@ -442,15 +511,31 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
                 children: [
                   Text(
                     widget.task.title,
-                    style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 16, color: Color(0xFF1E293B)),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 16,
+                      color: Color(0xFF1E293B),
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     widget.task.promptEn,
-                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Color(0xFF334155), height: 1.4),
+                    style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF334155),
+                      height: 1.4,
+                    ),
                   ),
                   const Divider(height: 24),
-                  const Text('Değinilmesi Önerilen Noktalar:', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.grey)),
+                  const Text(
+                    'Değinilmesi Önerilen Noktalar:',
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey,
+                    ),
+                  ),
                   const SizedBox(height: 6),
                   ...widget.task.guidingQuestions.map(
                     (q) => Padding(
@@ -458,8 +543,20 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Icon(Icons.arrow_right, size: 16, color: Color(0xFF4F46E5)),
-                          Expanded(child: Text(q, style: TextStyle(fontSize: 11, color: Colors.grey.shade700))),
+                          const Icon(
+                            Icons.arrow_right,
+                            size: 16,
+                            color: Color(0xFF4F46E5),
+                          ),
+                          Expanded(
+                            child: Text(
+                              q,
+                              style: TextStyle(
+                                fontSize: 11,
+                                color: Colors.grey.shade700,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -474,7 +571,8 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
             if (_phase == SpeakingPhase.prep) _buildPrepSection(),
             if (_phase == SpeakingPhase.speaking) _buildSpeakingSection(),
             if (_phase == SpeakingPhase.evaluating) _buildEvaluatingSection(),
-            if (_phase == SpeakingPhase.result && _evalResult != null) _buildResultSection(),
+            if (_phase == SpeakingPhase.result && _evalResult != null)
+              _buildResultSection(),
           ],
         ),
       ),
@@ -493,7 +591,10 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
         children: [
           const Icon(Icons.alarm, size: 48, color: Colors.amber),
           const SizedBox(height: 10),
-          const Text('Hazırlık Süresi', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          const Text(
+            'Hazırlık Süresi',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
           const SizedBox(height: 4),
           Text(
             'Notlarınızı zihninizde toparlayın. Süre bitince kayıt otomatik başlayacak.',
@@ -504,11 +605,16 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
           ElevatedButton.icon(
             onPressed: _startSpeaking,
             icon: const Icon(Icons.mic, size: 16),
-            label: const Text('Hazırım, Şimdi Konuş', style: TextStyle(fontWeight: FontWeight.bold)),
+            label: const Text(
+              'Hazırım, Şimdi Konuş',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF4F46E5),
               foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
             ),
           ),
         ],
@@ -549,10 +655,20 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
               Container(
                 width: 8,
                 height: 8,
-                decoration: const BoxDecoration(color: Colors.red, shape: BoxShape.circle),
+                decoration: const BoxDecoration(
+                  color: Colors.red,
+                  shape: BoxShape.circle,
+                ),
               ),
               const SizedBox(width: 6),
-              const Text('Mikrofon Canlı Kayıtta • Konuşun veya Metin Girin', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.red)),
+              const Text(
+                'Mikrofon Canlı Kayıtta • Konuşun veya Metin Girin',
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 10),
@@ -563,7 +679,10 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
               hintText: 'Konuşmanızı mikrofonla söyleyin veya metin olarak buraya girin...',
               filled: true,
               fillColor: Colors.white,
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide(color: Colors.grey.shade300)),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(14),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
             ),
           ),
           const SizedBox(height: 8),
@@ -572,12 +691,14 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
             children: [
               TextButton.icon(
                 onPressed: () {
-                  _transcriptController.text =
-                      'In my perspective, this academic question requires a comprehensive approach. Sustainable infrastructure and educational investments stimulate socioeconomic mobility and foster scientific advancement.';
+                  _transcriptController.text = 'In my perspective, this academic question requires a comprehensive approach. Sustainable infrastructure and educational investments stimulate socioeconomic mobility and foster scientific advancement.';
                   setState(() {});
                 },
                 icon: const Icon(Icons.auto_fix_high, size: 14),
-                label: const Text('Akademik Örnek Dikte Et', style: TextStyle(fontSize: 11)),
+                label: const Text(
+                  'Akademik Örnek Dikte Et',
+                  style: TextStyle(fontSize: 11),
+                ),
               ),
             ],
           ),
@@ -585,15 +706,19 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
           ElevatedButton.icon(
             onPressed: _finishAndEvaluate,
             icon: const Icon(Icons.check, size: 18),
-            label: const Text('Konuşmayı Bitir ve Analiz Et', style: TextStyle(fontWeight: FontWeight.bold)),
+            label: const Text(
+              'Konuşmayı Bitir ve Analiz Et',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red.shade700,
               foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             ),
           ),
-
         ],
       ),
     );
@@ -612,9 +737,15 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
           children: [
             CircularProgressIndicator(),
             SizedBox(height: 16),
-            Text('Yapay Zeka Mülakatı Analiz Ediyor...', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+            Text(
+              'Yapay Zeka Mülakatı Analiz Ediyor...',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+            ),
             SizedBox(height: 4),
-            Text('Akıcılık, gramer ve akademik kelimeler puanlanıyor.', style: TextStyle(fontSize: 11, color: Colors.grey)),
+            Text(
+              'Akıcılık, gramer ve akademik kelimeler puanlanıyor.',
+              style: TextStyle(fontSize: 11, color: Colors.grey),
+            ),
           ],
         ),
       ),
@@ -629,7 +760,12 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: Colors.grey.shade200),
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 10)],
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.04),
+            blurRadius: 10,
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -640,26 +776,48 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Mülakat Sonucu', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey)),
+                  const Text(
+                    'Mülakat Sonucu',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey,
+                    ),
+                  ),
                   Text(
                     res.cefrLevel,
-                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Color(0xFF4338CA)),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w800,
+                      color: Color(0xFF4338CA),
+                    ),
                   ),
                 ],
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
-                  color: res.isPassing ? Colors.green.shade50 : Colors.amber.shade50,
+                  color: res.isPassing
+                      ? Colors.green.shade50
+                      : Colors.amber.shade50,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: res.isPassing ? Colors.green.shade200 : Colors.amber.shade200),
+                  border: Border.all(
+                    color: res.isPassing
+                        ? Colors.green.shade200
+                        : Colors.amber.shade200,
+                  ),
                 ),
                 child: Text(
                   '%${res.overallScore}',
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.w900,
-                    color: res.isPassing ? Colors.green.shade700 : Colors.amber.shade800,
+                    color: res.isPassing
+                        ? Colors.green.shade700
+                        : Colors.amber.shade800,
                   ),
                 ),
               ),
@@ -676,11 +834,31 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
             ],
           ),
           const SizedBox(height: 16),
-          const Text('Güçlü Yönleriniz:', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.green)),
-          ...res.strengthsTr.map((s) => Text('• $s', style: const TextStyle(fontSize: 11, height: 1.4))),
+          const Text(
+            'Güçlü Yönleriniz:',
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: Colors.green,
+            ),
+          ),
+          ...res.strengthsTr.map(
+            (s) =>
+                Text('• $s', style: const TextStyle(fontSize: 11, height: 1.4)),
+          ),
           const SizedBox(height: 10),
-          const Text('Geliştirilmesi Gerekenler:', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.amber)),
-          ...res.improvementsTr.map((i) => Text('• $i', style: const TextStyle(fontSize: 11, height: 1.4))),
+          const Text(
+            'Geliştirilmesi Gerekenler:',
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: Colors.amber,
+            ),
+          ),
+          ...res.improvementsTr.map(
+            (i) =>
+                Text('• $i', style: const TextStyle(fontSize: 11, height: 1.4)),
+          ),
           const SizedBox(height: 20),
           SizedBox(
             width: double.infinity,
@@ -689,9 +867,14 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF4F46E5),
                 foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
-              child: const Text('Mülakatı Tamamla', style: TextStyle(fontWeight: FontWeight.bold)),
+              child: const Text(
+                'Mülakatı Tamamla',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
           ),
         ],
@@ -702,9 +885,23 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
   Widget _buildScoreColumn(String label, int score) {
     return Column(
       children: [
-        Text(label, style: const TextStyle(fontSize: 10, color: Colors.grey, fontWeight: FontWeight.bold)),
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 10,
+            color: Colors.grey,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         const SizedBox(height: 2),
-        Text('$score/25', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: Color(0xFF1E293B))),
+        Text(
+          '$score/25',
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w800,
+            color: Color(0xFF1E293B),
+          ),
+        ),
       ],
     );
   }

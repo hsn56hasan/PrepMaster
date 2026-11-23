@@ -1,5 +1,7 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
+
 import '../models/question.dart';
 import '../models/university.dart';
 import '../services/api_service.dart';
@@ -63,7 +65,10 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
   void _trackTimeLeave() {
     final currentQ = widget.questions[_currentIndex];
     final now = DateTime.now().millisecondsSinceEpoch;
-    final elapsed = ((now - _lastQuestionEnterTime) / 1000).round().clamp(1, 1000);
+    final elapsed = ((now - _lastQuestionEnterTime) / 1000).round().clamp(
+      1,
+      1000,
+    );
     _questionTimes[currentQ.id] = (_questionTimes[currentQ.id] ?? 0) + elapsed;
   }
 
@@ -122,7 +127,10 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
       final confirm = await showDialog<bool>(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: const Text('Sınavı Tamamla', style: TextStyle(fontWeight: FontWeight.w800)),
+          title: const Text(
+            'Sınavı Tamamla',
+            style: TextStyle(fontWeight: FontWeight.w800),
+          ),
           content: Text(
             'Toplam ${widget.questions.length} sorudan ${_userAnswers.length} tanesini yanıtladınız. Sınavı bitirip sonuçları görmek istiyor musunuz?',
           ),
@@ -133,7 +141,9 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
             ),
             ElevatedButton(
               onPressed: () => Navigator.pop(ctx, true),
-              style: ElevatedButton.styleFrom(backgroundColor: AppTheme.accentEmerald),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppTheme.accentEmerald,
+              ),
               child: const Text('Sınavı Bitir'),
             ),
           ],
@@ -165,18 +175,15 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (_) => ExamResultScreen(
-            result: result,
-            university: widget.university,
-          ),
+          builder: (_) =>
+              ExamResultScreen(result: result, university: widget.university),
         ),
       );
     } catch (e) {
       if (!mounted) return;
       setState(() => _isSubmitting = false);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Hata oluştu: $e')),
-      );
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Hata oluştu: $e')));
     }
   }
 
@@ -202,7 +209,10 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
                   ),
                   Text(
                     '${_userAnswers.length}/${widget.questions.length} Yanıtlandı',
-                    style: const TextStyle(fontSize: 12, color: AppTheme.textMuted),
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: AppTheme.textMuted,
+                    ),
                   ),
                 ],
               ),
@@ -232,10 +242,16 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
                       border = null;
                     }
                     if (isFlag) {
-                      border = Border.all(color: AppTheme.accentAmber, width: 2);
+                      border = Border.all(
+                        color: AppTheme.accentAmber,
+                        width: 2,
+                      );
                     }
                     if (isCur) {
-                      border = Border.all(color: AppTheme.brandNavy, width: 2.5);
+                      border = Border.all(
+                        color: AppTheme.brandNavy,
+                        width: 2.5,
+                      );
                     }
 
                     return InkWell(
@@ -281,9 +297,16 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
   Widget _legendItem(Color color, String label) {
     return Row(
       children: [
-        Container(width: 10, height: 10, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
+        Container(
+          width: 10,
+          height: 10,
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+        ),
         const SizedBox(width: 6),
-        Text(label, style: const TextStyle(fontSize: 11, color: AppTheme.textMuted)),
+        Text(
+          label,
+          style: const TextStyle(fontSize: 11, color: AppTheme.textMuted),
+        ),
       ],
     );
   }
@@ -309,7 +332,8 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
 
     final mins = _secondsRemaining ~/ 60;
     final secs = _secondsRemaining % 60;
-    final timeStr = '${mins.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}';
+    final timeStr =
+        '${mins.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}';
     final isUrgent = _secondsRemaining < 180;
 
     return PopScope(
@@ -320,10 +344,18 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
           context: context,
           builder: (ctx) => AlertDialog(
             title: const Text('Sınavdan Çıkılsın mı?'),
-            content: const Text('Sınavdan çıkarsanız ilerlemeniz kaydedilmeyecektir.'),
+            content: const Text(
+              'Sınavdan çıkarsanız ilerlemeniz kaydedilmeyecektir.',
+            ),
             actions: [
-              TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('İptal')),
-              TextButton(onPressed: () => Navigator.pop(ctx, true), child: const Text('Çık')),
+              TextButton(
+                onPressed: () => Navigator.pop(ctx, false),
+                child: const Text('İptal'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(ctx, true),
+                child: const Text('Çık'),
+              ),
             ],
           ),
         );
@@ -339,8 +371,14 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                widget.isMistakeExam ? 'Hata Defteri Sınavı' : widget.university.examName,
-                style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: Colors.white),
+                widget.isMistakeExam
+                    ? 'Hata Defteri Sınavı'
+                    : widget.university.examName,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w800,
+                  color: Colors.white,
+                ),
               ),
               Text(
                 'Soru ${_currentIndex + 1} / ${widget.questions.length}',
@@ -354,7 +392,9 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
               margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               decoration: BoxDecoration(
-                color: isUrgent ? AppTheme.accentRose.withValues(alpha: 0.3) : Colors.black26,
+                color: isUrgent
+                    ? AppTheme.accentRose.withValues(alpha: 0.3)
+                    : Colors.black26,
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
                   color: isUrgent ? AppTheme.accentRose : Colors.white24,
@@ -366,7 +406,9 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
                   Icon(
                     Icons.timer,
                     size: 15,
-                    color: isUrgent ? AppTheme.accentRose : AppTheme.accentAmber,
+                    color: isUrgent
+                        ? AppTheme.accentRose
+                        : AppTheme.accentAmber,
                   ),
                   const SizedBox(width: 4),
                   Text(
@@ -375,7 +417,9 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
                       fontFamily: 'monospace',
                       fontWeight: FontWeight.w800,
                       fontSize: 13,
-                      color: isUrgent ? Colors.redAccent : Colors.amber.shade200,
+                      color: isUrgent
+                          ? Colors.redAccent
+                          : Colors.amber.shade200,
                     ),
                   ),
                 ],
@@ -394,7 +438,10 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
                   children: [
                     CircularProgressIndicator(),
                     SizedBox(height: 16),
-                    Text('Sonuçlar hesaplanıyor ve karne hazırlanıyor...', style: TextStyle(fontWeight: FontWeight.w700)),
+                    Text(
+                      'Sonuçlar hesaplanıyor ve karne hazırlanıyor...',
+                      style: TextStyle(fontWeight: FontWeight.w700),
+                    ),
                   ],
                 ),
               )
@@ -410,26 +457,40 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
                         Row(
                           children: [
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 4,
+                              ),
                               decoration: BoxDecoration(
                                 color: AppTheme.brandLightBlue,
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Text(
                                 q.category,
-                                style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: AppTheme.brandBlue),
+                                style: const TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w800,
+                                  color: AppTheme.brandBlue,
+                                ),
                               ),
                             ),
                             const SizedBox(width: 6),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
                               decoration: BoxDecoration(
                                 color: Colors.grey.shade100,
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Text(
                                 q.level,
-                                style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: AppTheme.textMuted),
+                                style: const TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w800,
+                                  color: AppTheme.textMuted,
+                                ),
                               ),
                             ),
                           ],
@@ -438,20 +499,31 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
                           onTap: _toggleFlag,
                           borderRadius: BorderRadius.circular(8),
                           child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 5,
+                            ),
                             decoration: BoxDecoration(
-                              color: isFlagged ? AppTheme.accentAmber.withValues(alpha: 0.15) : Colors.white,
+                              color: isFlagged
+                                  ? AppTheme.accentAmber.withValues(alpha: 0.15)
+                                  : Colors.white,
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
-                                color: isFlagged ? AppTheme.accentAmber : AppTheme.borderSubtle,
+                                color: isFlagged
+                                    ? AppTheme.accentAmber
+                                    : AppTheme.borderSubtle,
                               ),
                             ),
                             child: Row(
                               children: [
                                 Icon(
-                                  isFlagged ? Icons.bookmark : Icons.bookmark_border,
+                                  isFlagged
+                                      ? Icons.bookmark
+                                      : Icons.bookmark_border,
                                   size: 16,
-                                  color: isFlagged ? AppTheme.accentAmber : AppTheme.textMuted,
+                                  color: isFlagged
+                                      ? AppTheme.accentAmber
+                                      : AppTheme.textMuted,
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
@@ -459,7 +531,9 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
                                   style: TextStyle(
                                     fontSize: 11,
                                     fontWeight: FontWeight.w700,
-                                    color: isFlagged ? AppTheme.accentAmber : AppTheme.textMuted,
+                                    color: isFlagged
+                                        ? AppTheme.accentAmber
+                                        : AppTheme.textMuted,
                                   ),
                                 ),
                               ],
@@ -484,12 +558,21 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
                           children: [
                             const Text(
                               'READING PASSAGE',
-                              style: TextStyle(fontSize: 10, fontWeight: FontWeight.w800, letterSpacing: 1.2, color: AppTheme.textMuted),
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w800,
+                                letterSpacing: 1.2,
+                                color: AppTheme.textMuted,
+                              ),
                             ),
                             const SizedBox(height: 8),
                             Text(
                               q.passage!,
-                              style: const TextStyle(fontSize: 13, height: 1.6, color: Color(0xFF334155)),
+                              style: const TextStyle(
+                                fontSize: 13,
+                                height: 1.6,
+                                color: Color(0xFF334155),
+                              ),
                             ),
                           ],
                         ),
@@ -528,10 +611,14 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
                           child: Container(
                             padding: const EdgeInsets.all(14),
                             decoration: BoxDecoration(
-                              color: isSelected ? AppTheme.brandLightBlue : Colors.white,
+                              color: isSelected
+                                  ? AppTheme.brandLightBlue
+                                  : Colors.white,
                               borderRadius: BorderRadius.circular(16),
                               border: Border.all(
-                                color: isSelected ? AppTheme.brandBlue : AppTheme.borderSubtle,
+                                color: isSelected
+                                    ? AppTheme.brandBlue
+                                    : AppTheme.borderSubtle,
                                 width: isSelected ? 2 : 1,
                               ),
                             ),
@@ -542,7 +629,9 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
                                   width: 28,
                                   height: 28,
                                   decoration: BoxDecoration(
-                                    color: isSelected ? AppTheme.brandBlue : Colors.grey.shade100,
+                                    color: isSelected
+                                        ? AppTheme.brandBlue
+                                        : Colors.grey.shade100,
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   child: Center(
@@ -551,7 +640,9 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
                                       style: TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w800,
-                                        color: isSelected ? Colors.white : AppTheme.textMain,
+                                        color: isSelected
+                                            ? Colors.white
+                                            : AppTheme.textMain,
                                       ),
                                     ),
                                   ),
@@ -565,8 +656,12 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
                                       style: TextStyle(
                                         fontSize: 13.5,
                                         height: 1.4,
-                                        fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
-                                        color: isSelected ? AppTheme.brandNavy : AppTheme.textMain,
+                                        fontWeight: isSelected
+                                            ? FontWeight.w700
+                                            : FontWeight.w500,
+                                        color: isSelected
+                                            ? AppTheme.brandNavy
+                                            : AppTheme.textMain,
                                       ),
                                     ),
                                   ),
@@ -586,38 +681,77 @@ class _ExamRunnerScreenState extends State<ExamRunnerScreen> {
             color: Colors.white,
             border: Border(top: BorderSide(color: AppTheme.borderSubtle)),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              OutlinedButton.icon(
-                onPressed: _currentIndex > 0 ? _prevQuestion : null,
-                icon: const Icon(Icons.chevron_left, size: 18),
-                label: const Text('Önceki'),
-                style: OutlinedButton.styleFrom(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+          child: SafeArea(
+            top: false,
+            child: Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: _currentIndex > 0 ? _prevQuestion : null,
+                    icon: const Icon(Icons.chevron_left, size: 18),
+                    label: const Text(
+                      'Önceki',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    style: OutlinedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 12,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-              ElevatedButton.icon(
-                onPressed: () => _finishExam(),
-                icon: const Icon(Icons.check_circle_outline, size: 18),
-                label: const Text('Tamamla'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppTheme.accentEmerald,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: () => _finishExam(),
+                    icon: const Icon(Icons.check_circle_outline, size: 18),
+                    label: const Text(
+                      'Tamamla',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppTheme.accentEmerald,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 12,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-              OutlinedButton.icon(
-                onPressed: _currentIndex < widget.questions.length - 1 ? _nextQuestion : null,
-                icon: const Icon(Icons.chevron_right, size: 18),
-                label: const Text('Sonraki'),
-                style: OutlinedButton.styleFrom(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: _currentIndex < widget.questions.length - 1
+                        ? _nextQuestion
+                        : null,
+                    icon: const Icon(Icons.chevron_right, size: 18),
+                    label: const Text(
+                      'Sonraki',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    style: OutlinedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 12,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

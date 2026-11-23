@@ -32,7 +32,9 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
   @override
   void initState() {
     super.initState();
-    _emailCtrl = TextEditingController(text: widget.initialEmail.contains('@') ? widget.initialEmail : '');
+    _emailCtrl = TextEditingController(
+      text: widget.initialEmail.contains('@') ? widget.initialEmail : '',
+    );
   }
 
   @override
@@ -45,9 +47,9 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
   }
 
   void _show(String msg, {bool ok = false}) => setState(() {
-        _message = msg;
-        _messageOk = ok;
-      });
+    _message = msg;
+    _messageOk = ok;
+  });
 
   Future<void> _sendCode() async {
     final email = _emailCtrl.text.trim();
@@ -74,7 +76,9 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
   Future<void> _reset() async {
     final code = _codeCtrl.text.replaceAll(RegExp(r'\D'), '');
     if (code.length != 6) return _show('Kod 6 haneli olmalı.');
-    if (_passCtrl.text.length < 6) return _show('Yeni şifre en az 6 karakter olmalı.');
+    if (_passCtrl.text.length < 6) {
+      return _show('Yeni şifre en az 6 karakter olmalı.');
+    }
     if (_passCtrl.text != _pass2Ctrl.text) return _show('Şifreler aynı değil.');
     setState(() => _busy = true);
     final res = await ApiService().confirmPasswordReset(
@@ -85,7 +89,10 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
     if (!mounted) return;
     setState(() => _busy = false);
     if (res['success'] == true) {
-      _show('✓ Şifreniz değişti. Yeni şifrenizle giriş yapabilirsiniz.', ok: true);
+      _show(
+        '✓ Şifreniz değişti. Yeni şifrenizle giriş yapabilirsiniz.',
+        ok: true,
+      );
       await Future.delayed(const Duration(milliseconds: 1400));
       if (mounted) Navigator.of(context).pop();
     } else {
@@ -94,9 +101,9 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
   }
 
   InputDecoration _dec(String label) => InputDecoration(
-        labelText: label,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-      );
+    labelText: label,
+    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +114,9 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (!_codeStep) ...[
-              const Text('Hesabınızın e-posta adresini girin. Kayıtlı bir hesap varsa 6 haneli bir kod göndereceğiz.'),
+              const Text(
+                'Hesabınızın e-posta adresini girin. Kayıtlı bir hesap varsa 6 haneli bir kod göndereceğiz.',
+              ),
               const SizedBox(height: 12),
               TextField(
                 key: const Key('forgot_email'),
@@ -137,7 +146,9 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
                 decoration: _dec('Yeni şifre (tekrar)'),
               ),
               TextButton(
-                onPressed: _busy ? null : () => setState(() => _codeStep = false),
+                onPressed: _busy
+                    ? null
+                    : () => setState(() => _codeStep = false),
                 child: const Text('Kod gelmedi mi? Tekrar gönder'),
               ),
             ],
@@ -146,14 +157,22 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
               Text(
                 _message!,
                 key: const Key('forgot_message'),
-                style: TextStyle(color: _messageOk ? Colors.green.shade700 : Colors.red.shade700, fontSize: 13),
+                style: TextStyle(
+                  color: _messageOk
+                      ? Colors.green.shade700
+                      : Colors.red.shade700,
+                  fontSize: 13,
+                ),
               ),
             ],
           ],
         ),
       ),
       actions: [
-        TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Kapat')),
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Kapat'),
+        ),
         ElevatedButton(
           key: const Key('forgot_submit'),
           onPressed: _busy ? null : (_codeStep ? _reset : _sendCode),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../models/university.dart';
 import '../theme/app_theme.dart';
 
@@ -28,23 +29,29 @@ class UniversityPickerDialog extends StatelessWidget {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      'Üniversitenizi Seçin',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w800,
-                        color: AppTheme.textMain,
+                const Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Üniversitenizi Seçin',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w800,
+                          color: AppTheme.textMain,
+                        ),
                       ),
-                    ),
-                    Text(
-                      'Sınav formatı seçiminize göre optimize edilir',
-                      style: TextStyle(fontSize: 12, color: AppTheme.textMuted),
-                    ),
-                  ],
+                      Text(
+                        'Sınav formatı seçiminize göre optimize edilir',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: AppTheme.textMuted,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 IconButton(
                   onPressed: () => Navigator.pop(context),
@@ -70,10 +77,14 @@ class UniversityPickerDialog extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
-                        color: isCurrent ? AppTheme.brandLightBlue : Colors.white,
+                        color: isCurrent
+                            ? AppTheme.brandLightBlue
+                            : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(
-                          color: isCurrent ? AppTheme.brandBlue : AppTheme.borderSubtle,
+                          color: isCurrent
+                              ? AppTheme.brandBlue
+                              : AppTheme.borderSubtle,
                           width: isCurrent ? 2 : 1,
                         ),
                       ),
@@ -84,20 +95,30 @@ class UniversityPickerDialog extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      uni.name,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w700,
-                                        color: isCurrent ? AppTheme.brandNavy : AppTheme.textMain,
+                                    Flexible(
+                                      child: Text(
+                                        uni.name,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w700,
+                                          color: isCurrent
+                                              ? AppTheme.brandNavy
+                                              : AppTheme.textMain,
+                                        ),
                                       ),
                                     ),
                                     const SizedBox(width: 6),
                                     Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 6,
+                                        vertical: 2,
+                                      ),
                                       decoration: BoxDecoration(
-                                        color: isCurrent ? AppTheme.brandBlue : Colors.grey.shade100,
+                                        color: isCurrent
+                                            ? AppTheme.brandBlue
+                                            : Colors.grey.shade100,
                                         borderRadius: BorderRadius.circular(6),
                                       ),
                                       child: Text(
@@ -105,7 +126,9 @@ class UniversityPickerDialog extends StatelessWidget {
                                         style: TextStyle(
                                           fontSize: 10,
                                           fontWeight: FontWeight.w800,
-                                          color: isCurrent ? Colors.white : AppTheme.textMuted,
+                                          color: isCurrent
+                                              ? Colors.white
+                                              : AppTheme.textMuted,
                                         ),
                                       ),
                                     ),
@@ -114,7 +137,10 @@ class UniversityPickerDialog extends StatelessWidget {
                                 const SizedBox(height: 4),
                                 Text(
                                   '${uni.examName} • Baraj: %${uni.passingScore}',
-                                  style: const TextStyle(fontSize: 11, color: AppTheme.textMuted),
+                                  style: const TextStyle(
+                                    fontSize: 11,
+                                    color: AppTheme.textMuted,
+                                  ),
                                 ),
                               ],
                             ),
@@ -124,11 +150,19 @@ class UniversityPickerDialog extends StatelessWidget {
                             height: 22,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: isCurrent ? AppTheme.brandBlue : Colors.transparent,
-                              border: isCurrent ? null : Border.all(color: Colors.grey.shade300),
+                              color: isCurrent
+                                  ? AppTheme.brandBlue
+                                  : Colors.transparent,
+                              border: isCurrent
+                                  ? null
+                                  : Border.all(color: Colors.grey.shade300),
                             ),
                             child: isCurrent
-                                ? const Icon(Icons.check, size: 14, color: Colors.white)
+                                ? const Icon(
+                                    Icons.check,
+                                    size: 14,
+                                    color: Colors.white,
+                                  )
                                 : null,
                           ),
                         ],

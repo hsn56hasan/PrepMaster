@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../models/exam_result.dart';
 import '../models/university.dart';
 import '../theme/app_theme.dart';
@@ -47,7 +48,11 @@ class ExamResultScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: [
                   BoxShadow(
-                    color: (isPassed ? AppTheme.accentEmerald : AppTheme.accentRose).withValues(alpha: 0.3),
+                    color:
+                        (isPassed
+                                ? AppTheme.accentEmerald
+                                : AppTheme.accentRose)
+                            .withValues(alpha: 0.3),
                     blurRadius: 16,
                     offset: const Offset(0, 8),
                   ),
@@ -63,15 +68,23 @@ class ExamResultScreen extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
-                      isPassed ? Icons.emoji_events_rounded : Icons.info_outline_rounded,
+                      isPassed
+                          ? Icons.emoji_events_rounded
+                          : Icons.info_outline_rounded,
                       color: Colors.white,
                       size: 32,
                     ),
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    isPassed ? 'Tebrikler, Barajı Geçtiniz!' : 'Sınav Tamamlandı',
-                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white),
+                    isPassed
+                        ? 'Tebrikler, Barajı Geçtiniz!'
+                        : 'Sınav Tamamlandı',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                    ),
                   ),
                   const SizedBox(height: 4),
                   Text(
@@ -82,9 +95,21 @@ class ExamResultScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      _metricBadge('%${result.score.toInt()}', 'Başarı Oranı', Colors.white),
-                      _metricBadge('${result.correctCount}', 'Doğru', Colors.greenAccent),
-                      _metricBadge('${result.wrongCount}', 'Yanlış/Boş', Colors.amberAccent),
+                      _metricBadge(
+                        '%${result.score.toInt()}',
+                        'Başarı Oranı',
+                        Colors.white,
+                      ),
+                      _metricBadge(
+                        '${result.correctCount}',
+                        'Doğru',
+                        Colors.greenAccent,
+                      ),
+                      _metricBadge(
+                        '${result.wrongCount}',
+                        'Yanlış/Boş',
+                        Colors.amberAccent,
+                      ),
                     ],
                   ),
                 ],
@@ -103,22 +128,38 @@ class ExamResultScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Wrap(
+                    alignment: WrapAlignment.spaceBetween,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    spacing: 8,
+                    runSpacing: 4,
                     children: [
-                      Row(
-                        children: const [
-                          Icon(Icons.speed, size: 20, color: AppTheme.accentAmber),
+                      const Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.speed,
+                            size: 20,
+                            color: AppTheme.accentAmber,
+                          ),
                           SizedBox(width: 8),
                           Text(
                             'Zaman Yönetimi Analizi',
-                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: AppTheme.textMain),
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w800,
+                              color: AppTheme.textMain,
+                            ),
                           ),
                         ],
                       ),
                       Text(
                         'Toplam: ${result.durationSeconds ~/ 60} dk ${result.durationSeconds % 60} sn',
-                        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppTheme.textMuted),
+                        style: const TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                          color: AppTheme.textMuted,
+                        ),
                       ),
                     ],
                   ),
@@ -136,11 +177,21 @@ class ExamResultScreen extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Ort. Soru Süresi', style: TextStyle(fontSize: 10, color: AppTheme.textMuted)),
+                              const Text(
+                                'Ort. Soru Süresi',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: AppTheme.textMuted,
+                                ),
+                              ),
                               const SizedBox(height: 2),
                               Text(
                                 '${avgTime}s / soru',
-                                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: AppTheme.accentAmber),
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w800,
+                                  color: AppTheme.accentAmber,
+                                ),
                               ),
                             ],
                           ),
@@ -151,23 +202,35 @@ class ExamResultScreen extends StatelessWidget {
                         child: Container(
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: (timeTraps > 0 ? Colors.red.shade50 : Colors.green.shade50),
+                            color: (timeTraps > 0
+                                ? Colors.red.shade50
+                                : Colors.green.shade50),
                             borderRadius: BorderRadius.circular(14),
                             border: Border.all(
-                              color: (timeTraps > 0 ? Colors.red.shade200 : Colors.green.shade200),
+                              color: (timeTraps > 0
+                                  ? Colors.red.shade200
+                                  : Colors.green.shade200),
                             ),
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Zaman Tuzağı (>90s)', style: TextStyle(fontSize: 10, color: AppTheme.textMuted)),
+                              const Text(
+                                'Zaman Tuzağı (>90s)',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: AppTheme.textMuted,
+                                ),
+                              ),
                               const SizedBox(height: 2),
                               Text(
                                 '$timeTraps Soru',
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w800,
-                                  color: (timeTraps > 0 ? AppTheme.accentRose : AppTheme.accentEmerald),
+                                  color: (timeTraps > 0
+                                      ? AppTheme.accentRose
+                                      : AppTheme.accentEmerald),
                                 ),
                               ),
                             ],
@@ -185,13 +248,23 @@ class ExamResultScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  'Detaylı Çözüm Açıklamaları',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: AppTheme.textMain),
+                const Expanded(
+                  child: Text(
+                    'Detaylı Çözüm Açıklamaları',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w800,
+                      color: AppTheme.textMain,
+                    ),
+                  ),
                 ),
+                const SizedBox(width: 8),
                 if (result.wrongCount > 0)
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 3,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.red.shade50,
                       borderRadius: BorderRadius.circular(8),
@@ -199,7 +272,11 @@ class ExamResultScreen extends StatelessWidget {
                     ),
                     child: Text(
                       '${result.wrongCount} Hata Kaydedildi',
-                      style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w800, color: AppTheme.accentRose),
+                      style: const TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w800,
+                        color: AppTheme.accentRose,
+                      ),
                     ),
                   ),
               ],
@@ -219,22 +296,34 @@ class ExamResultScreen extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(18),
                     border: Border.all(
-                      color: d.isCorrect ? Colors.green.shade200 : Colors.red.shade200,
+                      color: d.isCorrect
+                          ? Colors.green.shade200
+                          : Colors.red.shade200,
                       width: 1.2,
                     ),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      Wrap(
+                        alignment: WrapAlignment.spaceBetween,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        spacing: 8,
+                        runSpacing: 6,
                         children: [
-                          Row(
+                          Wrap(
+                            spacing: 6,
+                            runSpacing: 4,
                             children: [
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 3,
+                                ),
                                 decoration: BoxDecoration(
-                                  color: d.isCorrect ? Colors.green.shade50 : Colors.red.shade50,
+                                  color: d.isCorrect
+                                      ? Colors.green.shade50
+                                      : Colors.red.shade50,
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                                 child: Text(
@@ -242,15 +331,22 @@ class ExamResultScreen extends StatelessWidget {
                                   style: TextStyle(
                                     fontSize: 11,
                                     fontWeight: FontWeight.w800,
-                                    color: d.isCorrect ? AppTheme.accentEmerald : AppTheme.accentRose,
+                                    color: d.isCorrect
+                                        ? AppTheme.accentEmerald
+                                        : AppTheme.accentRose,
                                   ),
                                 ),
                               ),
                               const SizedBox(width: 6),
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 6,
+                                  vertical: 2,
+                                ),
                                 decoration: BoxDecoration(
-                                  color: isTimeTrap ? Colors.amber.shade100 : Colors.grey.shade100,
+                                  color: isTimeTrap
+                                      ? Colors.amber.shade100
+                                      : Colors.grey.shade100,
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                                 child: Text(
@@ -258,7 +354,9 @@ class ExamResultScreen extends StatelessWidget {
                                   style: TextStyle(
                                     fontSize: 10,
                                     fontWeight: FontWeight.w700,
-                                    color: isTimeTrap ? AppTheme.accentAmber : AppTheme.textMuted,
+                                    color: isTimeTrap
+                                        ? AppTheme.accentAmber
+                                        : AppTheme.textMuted,
                                   ),
                                 ),
                               ),
@@ -266,14 +364,22 @@ class ExamResultScreen extends StatelessWidget {
                           ),
                           Text(
                             'Yanıt: ${d.chosenAnswer.isEmpty ? "Boş" : d.chosenAnswer} | Doğru: ${d.correctAnswer}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppTheme.textMuted),
+                            style: const TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w700,
+                              color: AppTheme.textMuted,
+                            ),
                           ),
                         ],
                       ),
                       const SizedBox(height: 10),
                       Text(
                         d.questionText,
-                        style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.textMain),
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: AppTheme.textMain,
+                        ),
                       ),
                       const SizedBox(height: 12),
                       Container(
@@ -287,18 +393,30 @@ class ExamResultScreen extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                const Icon(Icons.lightbulb_outline, size: 16, color: AppTheme.brandBlue),
+                                const Icon(
+                                  Icons.lightbulb_outline,
+                                  size: 16,
+                                  color: AppTheme.brandBlue,
+                                ),
                                 const SizedBox(width: 4),
                                 Text(
                                   'Neden ${d.correctAnswer}? (Çözüm Analizi)',
-                                  style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: AppTheme.brandBlue),
+                                  style: const TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w800,
+                                    color: AppTheme.brandBlue,
+                                  ),
                                 ),
                               ],
                             ),
                             const SizedBox(height: 6),
                             Text(
                               d.explanationTr,
-                              style: const TextStyle(fontSize: 12, height: 1.4, color: AppTheme.brandNavy),
+                              style: const TextStyle(
+                                fontSize: 12,
+                                height: 1.4,
+                                color: AppTheme.brandNavy,
+                              ),
                             ),
                           ],
                         ),
@@ -323,9 +441,19 @@ class ExamResultScreen extends StatelessWidget {
   Widget _metricBadge(String value, String label, Color color) {
     return Column(
       children: [
-        Text(value, style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: color)),
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w800,
+            color: color,
+          ),
+        ),
         const SizedBox(height: 2),
-        Text(label, style: const TextStyle(fontSize: 11, color: Colors.white70)),
+        Text(
+          label,
+          style: const TextStyle(fontSize: 11, color: Colors.white70),
+        ),
       ],
     );
   }

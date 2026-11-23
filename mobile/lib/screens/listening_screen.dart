@@ -1,8 +1,11 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
+
 import '../models/listening_track.dart';
 import '../services/api_service.dart';
 import '../theme/app_theme.dart';
+import '../widgets/level_selector.dart';
 
 class ListeningScreen extends StatefulWidget {
   final String currentLevel;
@@ -40,9 +43,7 @@ class _ListeningScreenState extends State<ListeningScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.surfaceBg,
-      appBar: AppBar(
-        title: const Text('Dinleme (Listening) & Not Alma'),
-      ),
+      appBar: AppBar(title: const Text('Dinleme (Listening) & Not Alma')),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : RefreshIndicator(
@@ -74,19 +75,34 @@ class _ListeningScreenState extends State<ListeningScreen> {
                         Row(
                           children: [
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 4,
+                              ),
                               decoration: BoxDecoration(
                                 color: Colors.blue.withValues(alpha: 0.3),
                                 borderRadius: BorderRadius.circular(8),
-                                border: Border.all(color: Colors.blueAccent.withValues(alpha: 0.4)),
+                                border: Border.all(
+                                  color: Colors.blueAccent.withValues(
+                                    alpha: 0.4,
+                                  ),
+                                ),
                               ),
                               child: const Row(
                                 children: [
-                                  Icon(Icons.headphones, size: 14, color: Colors.white),
+                                  Icon(
+                                    Icons.headphones,
+                                    size: 14,
+                                    color: Colors.white,
+                                  ),
                                   SizedBox(width: 4),
                                   Text(
                                     'Sesli Akademik Simülasyon',
-                                    style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: Colors.white),
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w800,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -96,12 +112,20 @@ class _ListeningScreenState extends State<ListeningScreen> {
                         const SizedBox(height: 12),
                         const Text(
                           'Listening & Note-Taking Sınavları',
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: Colors.white),
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.white,
+                          ),
                         ),
                         const SizedBox(height: 6),
                         const Text(
                           'Boğaziçi BUEPT, İTÜ ve ODTÜ EPE sınav formatlarına uygun sesli dersleri dinleyin; notlarınızı alarak soruları yanıtlayın.',
-                          style: TextStyle(fontSize: 12, color: Colors.white70, height: 1.4),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white70,
+                            height: 1.4,
+                          ),
                         ),
                       ],
                     ),
@@ -110,35 +134,14 @@ class _ListeningScreenState extends State<ListeningScreen> {
                   const SizedBox(height: 16),
 
                   // CEFR Level Filter Chips
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'all'].map((lvl) {
-                        final isSel = _selectedLevel == lvl;
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: ChoiceChip(
-                            label: Text(
-                              lvl == 'all' ? 'Tüm Kurlar' : '$lvl ${lvl == widget.currentLevel ? "★" : ""}',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: isSel ? Colors.white : AppTheme.textMain,
-                              ),
-                            ),
-                            selected: isSel,
-                            selectedColor: AppTheme.brandBlue,
-                            backgroundColor: Colors.white,
-                            onSelected: (val) {
-                              if (val) {
-                                setState(() => _selectedLevel = lvl);
-                                _loadTracks(level: lvl);
-                              }
-                            },
-                          ),
-                        );
-                      }).toList(),
-                    ),
+                  LevelSelector(
+                    selected: _selectedLevel,
+                    highlight: widget.currentLevel,
+                    padding: EdgeInsets.zero,
+                    onSelected: (lvl) {
+                      setState(() => _selectedLevel = lvl);
+                      _loadTracks(level: lvl);
+                    },
                   ),
 
                   const SizedBox(height: 16),
@@ -147,17 +150,28 @@ class _ListeningScreenState extends State<ListeningScreen> {
                     children: [
                       const Text(
                         'Mevcut Dinleme Sınavları',
-                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: AppTheme.brandNavy),
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w800,
+                          color: AppTheme.brandNavy,
+                        ),
                       ),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
                           color: AppTheme.brandLightBlue,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
                           '${_tracks.length} Parça',
-                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: AppTheme.brandBlue),
+                          style: const TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold,
+                            color: AppTheme.brandBlue,
+                          ),
                         ),
                       ),
                     ],
@@ -177,7 +191,11 @@ class _ListeningScreenState extends State<ListeningScreen> {
                           children: [
                             const Text(
                               'Bu seviyede dinleme parçası bulunamadı.',
-                              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.textMuted),
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w600,
+                                color: AppTheme.textMuted,
+                              ),
                             ),
                             const SizedBox(height: 8),
                             TextButton(
@@ -185,7 +203,9 @@ class _ListeningScreenState extends State<ListeningScreen> {
                                 setState(() => _selectedLevel = 'all');
                                 _loadTracks(level: 'all');
                               },
-                              child: const Text('Tüm Dinleme Sınavlarını Göster'),
+                              child: const Text(
+                                'Tüm Dinleme Sınavlarını Göster',
+                              ),
                             ),
                           ],
                         ),
@@ -216,32 +236,50 @@ class _ListeningScreenState extends State<ListeningScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 4,
+                                ),
                                 decoration: BoxDecoration(
-                                  color: isNoteTaking ? Colors.amber.shade50 : Colors.blue.shade50,
+                                  color: isNoteTaking
+                                      ? Colors.amber.shade50
+                                      : Colors.blue.shade50,
                                   borderRadius: BorderRadius.circular(8),
                                   border: Border.all(
-                                    color: isNoteTaking ? Colors.amber.shade300 : Colors.blue.shade200,
+                                    color: isNoteTaking
+                                        ? Colors.amber.shade300
+                                        : Colors.blue.shade200,
                                   ),
                                 ),
                                 child: Text(
-                                  isNoteTaking ? '📝 Note-Taking' : '🎧 While-Listening',
+                                  isNoteTaking
+                                      ? '📝 Note-Taking'
+                                      : '🎧 While-Listening',
                                   style: TextStyle(
                                     fontSize: 11,
                                     fontWeight: FontWeight.w800,
-                                    color: isNoteTaking ? Colors.amber.shade900 : AppTheme.brandBlue,
+                                    color: isNoteTaking
+                                        ? Colors.amber.shade900
+                                        : AppTheme.brandBlue,
                                   ),
                                 ),
                               ),
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 2,
+                                ),
                                 decoration: BoxDecoration(
                                   color: Colors.grey.shade100,
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                                 child: Text(
                                   track.level,
-                                  style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: AppTheme.textMuted),
+                                  style: const TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w800,
+                                    color: AppTheme.textMuted,
+                                  ),
                                 ),
                               ),
                             ],
@@ -249,40 +287,66 @@ class _ListeningScreenState extends State<ListeningScreen> {
                           const SizedBox(height: 10),
                           Text(
                             track.title,
-                            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: AppTheme.brandNavy),
+                            style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w800,
+                              color: AppTheme.brandNavy,
+                            ),
                           ),
                           const SizedBox(height: 2),
                           Text(
                             track.subtitle,
-                            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: AppTheme.brandBlue),
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                              color: AppTheme.brandBlue,
+                            ),
                           ),
                           const SizedBox(height: 8),
                           Text(
                             track.instructionsTr,
-                            style: const TextStyle(fontSize: 12, color: AppTheme.textMuted, height: 1.3),
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: AppTheme.textMuted,
+                              height: 1.3,
+                            ),
                           ),
                           const SizedBox(height: 14),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                '${track.questions.length} Soru • ${track.targetUniversity}',
-                                style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: AppTheme.textMuted),
+                              Expanded(
+                                child: Text(
+                                  '${track.questions.length} Soru • ${track.targetUniversity}',
+                                  style: const TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppTheme.textMuted,
+                                  ),
+                                ),
                               ),
+                              const SizedBox(width: 8),
                               ElevatedButton.icon(
                                 onPressed: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => ListeningRunnerScreen(track: track),
+                                      builder: (context) =>
+                                          ListeningRunnerScreen(track: track),
                                     ),
                                   );
                                 },
                                 icon: const Icon(Icons.play_arrow, size: 16),
                                 label: const Text('Başlat'),
                                 style: ElevatedButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                                  textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w800),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                    vertical: 8,
+                                  ),
+                                  textStyle: const TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w800,
+                                  ),
                                 ),
                               ),
                             ],
@@ -393,8 +457,12 @@ class _ListeningRunnerScreenState extends State<ListeningRunnerScreen> {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Dinleme Sınavı Tamamlandı! Skor: $_score% ($correctCount / ${widget.track.questions.length})'),
-        backgroundColor: _score >= 65 ? AppTheme.accentEmerald : AppTheme.accentRose,
+        content: Text(
+          'Dinleme Sınavı Tamamlandı! Skor: $_score% ($correctCount / ${widget.track.questions.length})',
+        ),
+        backgroundColor: _score >= 65
+            ? AppTheme.accentEmerald
+            : AppTheme.accentRose,
       ),
     );
   }
@@ -406,9 +474,7 @@ class _ListeningRunnerScreenState extends State<ListeningRunnerScreen> {
 
     return Scaffold(
       backgroundColor: AppTheme.surfaceBg,
-      appBar: AppBar(
-        title: Text(t.title),
-      ),
+      appBar: AppBar(title: Text(t.title)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -442,7 +508,9 @@ class _ListeningRunnerScreenState extends State<ListeningRunnerScreen> {
                         width: 52,
                         height: 52,
                         decoration: BoxDecoration(
-                          color: _isPlaying ? AppTheme.accentAmber : AppTheme.brandBlue,
+                          color: _isPlaying
+                              ? AppTheme.accentAmber
+                              : AppTheme.brandBlue,
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Icon(
@@ -459,19 +527,36 @@ class _ListeningRunnerScreenState extends State<ListeningRunnerScreen> {
                         children: [
                           const Text(
                             'Akademik Dinleme Kaydı',
-                            style: TextStyle(fontSize: 10, fontWeight: FontWeight.w800, color: Colors.blueAccent),
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.blueAccent,
+                            ),
                           ),
                           const SizedBox(height: 2),
                           Text(
                             t.subtitle,
-                            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w800, color: Colors.white),
+                            style: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white,
+                            ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            _isPlaying ? '▶ Dinleniyor... Notlarınızı alın' : (_playbackProgress >= 1.0 ? '✓ Dinleme Bitti' : 'Oynatmak için dokunun'),
-                            style: TextStyle(fontSize: 11, color: _isPlaying ? Colors.amberAccent : Colors.white60),
+                            _isPlaying
+                                ? '▶ Dinleniyor... Notlarınızı alın'
+                                : (_playbackProgress >= 1.0
+                                      ? '✓ Dinleme Bitti'
+                                      : 'Oynatmak için dokunun'),
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: _isPlaying
+                                  ? Colors.amberAccent
+                                  : Colors.white60,
+                            ),
                           ),
                         ],
                       ),
@@ -483,9 +568,13 @@ class _ListeningRunnerScreenState extends State<ListeningRunnerScreen> {
                 // Progress Seek Bar Slider
                 SliderTheme(
                   data: SliderTheme.of(context).copyWith(
-                    thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6),
+                    thumbShape: const RoundSliderThumbShape(
+                      enabledThumbRadius: 6,
+                    ),
                     trackHeight: 4,
-                    activeTrackColor: _isPlaying ? AppTheme.accentAmber : AppTheme.brandBlue,
+                    activeTrackColor: _isPlaying
+                        ? AppTheme.accentAmber
+                        : AppTheme.brandBlue,
                     inactiveTrackColor: Colors.white12,
                     thumbColor: Colors.white,
                   ),
@@ -504,11 +593,17 @@ class _ListeningRunnerScreenState extends State<ListeningRunnerScreen> {
                   children: [
                     Text(
                       '${(t.lectureDurationSeconds * _playbackProgress).round()}s / ${t.lectureDurationSeconds}s',
-                      style: const TextStyle(fontSize: 11, color: Colors.white60),
+                      style: const TextStyle(
+                        fontSize: 11,
+                        color: Colors.white60,
+                      ),
                     ),
                     Row(
                       children: [
-                        const Text('Hız: ', style: TextStyle(fontSize: 11, color: Colors.white60)),
+                        const Text(
+                          'Hız: ',
+                          style: TextStyle(fontSize: 11, color: Colors.white60),
+                        ),
                         _speedChip(0.75),
                         const SizedBox(width: 4),
                         _speedChip(1.0),
@@ -521,7 +616,6 @@ class _ListeningRunnerScreenState extends State<ListeningRunnerScreen> {
               ],
             ),
           ),
-
 
           const SizedBox(height: 16),
 
@@ -537,22 +631,38 @@ class _ListeningRunnerScreenState extends State<ListeningRunnerScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Wrap(
+                    alignment: WrapAlignment.spaceBetween,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    spacing: 8,
+                    runSpacing: 4,
                     children: [
                       Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.edit_note, size: 18, color: Colors.amber.shade900),
+                          Icon(
+                            Icons.edit_note,
+                            size: 18,
+                            color: Colors.amber.shade900,
+                          ),
                           const SizedBox(width: 6),
                           Text(
                             'Dijital Not Defteriniz',
-                            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800, color: Colors.amber.shade900),
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.amber.shade900,
+                            ),
                           ),
                         ],
                       ),
                       const Text(
                         '💡 Kısaltmalar kullanın',
-                        style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: AppTheme.textMuted),
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w700,
+                          color: AppTheme.textMuted,
+                        ),
                       ),
                     ],
                   ),
@@ -563,7 +673,10 @@ class _ListeningRunnerScreenState extends State<ListeningRunnerScreen> {
                     style: const TextStyle(fontSize: 12, height: 1.4),
                     decoration: InputDecoration(
                       hintText: 'Örn:\n- Confirmation bias: Peter Wason 1960\n- Framing effect: Kahneman & Tversky (%90 survival vs %10 mortality)...',
-                      hintStyle: TextStyle(fontSize: 11, color: Colors.grey.shade400),
+                      hintStyle: TextStyle(
+                        fontSize: 11,
+                        color: Colors.grey.shade400,
+                      ),
                       filled: true,
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
@@ -591,7 +704,11 @@ class _ListeningRunnerScreenState extends State<ListeningRunnerScreen> {
                     const SizedBox(height: 8),
                     const Text(
                       'Sorular Şu Anda Gizli',
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: AppTheme.brandNavy),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w800,
+                        color: AppTheme.brandNavy,
+                      ),
                     ),
                     const SizedBox(height: 4),
                     const Text(
@@ -607,7 +724,10 @@ class _ListeningRunnerScreenState extends State<ListeningRunnerScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.amber.shade800,
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 10,
+                        ),
                       ),
                     ),
                   ],
@@ -623,7 +743,11 @@ class _ListeningRunnerScreenState extends State<ListeningRunnerScreen> {
               children: [
                 Text(
                   'Sorular (${t.questions.length})',
-                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: AppTheme.brandNavy),
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w800,
+                    color: AppTheme.brandNavy,
+                  ),
                 ),
                 if (_isSubmitted)
                   Text(
@@ -631,7 +755,9 @@ class _ListeningRunnerScreenState extends State<ListeningRunnerScreen> {
                     style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w900,
-                      color: _score >= 65 ? AppTheme.accentEmerald : AppTheme.accentRose,
+                      color: _score >= 65
+                          ? AppTheme.accentEmerald
+                          : AppTheme.accentRose,
                     ),
                   ),
               ],
@@ -667,7 +793,11 @@ class _ListeningRunnerScreenState extends State<ListeningRunnerScreen> {
                           child: Center(
                             child: Text(
                               '${idx + 1}',
-                              style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w800),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 11,
+                                fontWeight: FontWeight.w800,
+                              ),
                             ),
                           ),
                         ),
@@ -675,7 +805,11 @@ class _ListeningRunnerScreenState extends State<ListeningRunnerScreen> {
                         Expanded(
                           child: Text(
                             q.question,
-                            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: AppTheme.brandNavy),
+                            style: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w700,
+                              color: AppTheme.brandNavy,
+                            ),
                           ),
                         ),
                       ],
@@ -716,16 +850,36 @@ class _ListeningRunnerScreenState extends State<ListeningRunnerScreen> {
                                 },
                           borderRadius: BorderRadius.circular(10),
                           child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
                             decoration: BoxDecoration(
                               color: bg,
                               borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: border, width: isSelected ? 1.5 : 1),
+                              border: Border.all(
+                                color: border,
+                                width: isSelected ? 1.5 : 1,
+                              ),
                             ),
                             child: Row(
                               children: [
-                                Text('${opt.key}) ', style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12)),
-                                Expanded(child: Text(opt.text, style: TextStyle(fontSize: 12, color: textCol))),
+                                Text(
+                                  '${opt.key}) ',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    opt.text,
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: textCol,
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -746,12 +900,20 @@ class _ListeningRunnerScreenState extends State<ListeningRunnerScreen> {
                           children: [
                             Text(
                               '✓ Doğru Cevap: ${q.correctAnswer}',
-                              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: AppTheme.accentEmerald),
+                              style: const TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w800,
+                                color: AppTheme.accentEmerald,
+                              ),
                             ),
                             const SizedBox(height: 2),
                             Text(
                               q.explanationTr,
-                              style: const TextStyle(fontSize: 11, color: AppTheme.brandNavy, height: 1.3),
+                              style: const TextStyle(
+                                fontSize: 11,
+                                color: AppTheme.brandNavy,
+                                height: 1.3,
+                              ),
                             ),
                           ],
                         ),
@@ -795,7 +957,11 @@ class _ListeningRunnerScreenState extends State<ListeningRunnerScreen> {
         ),
         child: Text(
           '${rate}x',
-          style: TextStyle(fontSize: 10, fontWeight: FontWeight.w800, color: isSel ? Colors.white : Colors.white70),
+          style: TextStyle(
+            fontSize: 10,
+            fontWeight: FontWeight.w800,
+            color: isSel ? Colors.white : Colors.white70,
+          ),
         ),
       ),
     );

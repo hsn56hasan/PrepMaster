@@ -1850,9 +1850,9 @@ def get_mobile_app_info():
     return {
         "available": apk_path is not None,
         "app_name": "PrepKampüs Mobil (Android)",
-        "version": "1.4.0",
+        "version": "1.5.0",
         "build_type": "Release (ARM64)",
-        "filename": "PrepKampus-v1.4-Android.apk",
+        "filename": "PrepKampus-v1.5-Android.apk",
         "size_mb": size_mb,
         "min_android": "Android 8.0+ (API 26+)",
         "download_url": "/api/download/apk",
@@ -1876,9 +1876,9 @@ def download_android_apk():
     return FileResponse(
         path=apk_path,
         media_type="application/vnd.android.package-archive",
-        filename="PrepKampus-v1.4-Android.apk",
+        filename="PrepKampus-v1.5-Android.apk",
         headers={
-            "Content-Disposition": 'attachment; filename="PrepKampus-v1.4-Android.apk"',
+            "Content-Disposition": 'attachment; filename="PrepKampus-v1.5-Android.apk"',
             "Cache-Control": "public, max-age=3600"
         }
     )
