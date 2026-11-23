@@ -1,4 +1,4 @@
-// PrepMaster — oturum başlığı katmanı
+// PrepKampüs — oturum başlığı katmanı
 // Sunucu kullanıcı kimliğini artık YALNIZCA "Authorization: Bearer <token>" başlığından alır;
 // istek gövdesindeki/sorgudaki user_id yok sayılır. Bu dosya, aynı kökene giden her /api/
 // isteğine kayıtlı oturum token'ını ekler. Diğer betiklerden ÖNCE yüklenmelidir.

@@ -1,5 +1,5 @@
 """
-PrepMaster Comprehensive Security & Defense Suite
+PrepKampüs Comprehensive Security & Defense Suite
 Includes:
 - Thread-safe sliding window rate limiter (Brute Force & DoS defense)
 - Security Headers Middleware (CSP, HSTS, X-Content-Type-Options, etc.)

@@ -1,4 +1,4 @@
-// Exam & Practice Simulation Engine for PrepMaster (with Time Management & Mistake Vault integration)
+// Exam & Practice Simulation Engine for PrepKampüs (with Time Management & Mistake Vault integration)
 
 let activeExamState = {
   questions: [],

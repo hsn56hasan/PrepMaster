@@ -1,7 +1,7 @@
-﻿# PrepMaster başlatıcı (masaüstü kısayolu bunu çalıştırır)
+﻿# PrepKampüs başlatıcı (masaüstü kısayolu bunu çalıştırır)
 # - Sunucu zaten açıksa yalnızca tarayıcıyı açar.
 # - Kapalıysa sunucuyu küçültülmüş bir pencerede başlatır, hazır olunca tarayıcıyı açar.
-# Sunucuyu kapatmak için görev çubuğundaki "PrepMaster Sunucu" penceresini kapatın.
+# Sunucuyu kapatmak için görev çubuğundaki "PrepKampüs Sunucu" penceresini kapatın.
 
 $port = 8050
 $url  = "http://localhost:$port"
@@ -22,7 +22,7 @@ function Test-Server {
 
 if (-not (Test-Server)) {
     # 0.0.0.0: aynı Wi-Fi'daki telefondan da açılabilsin (run.bat ile aynı davranış).
-    $cmd = "title PrepMaster Sunucu && cd /d `"$root`" && python -m uvicorn backend.app:app --host 0.0.0.0 --port $port"
+    $cmd = "title PrepKampüs Sunucu && cd /d `"$root`" && python -m uvicorn backend.app:app --host 0.0.0.0 --port $port"
     Start-Process -FilePath "cmd.exe" -ArgumentList "/k", $cmd -WindowStyle Minimized
 
     $ready = $false
@@ -33,8 +33,8 @@ if (-not (Test-Server)) {
     if (-not $ready) {
         Add-Type -AssemblyName PresentationFramework
         [System.Windows.MessageBox]::Show(
-            "PrepMaster sunucusu 20 saniyede başlamadı.`nGörev çubuğundaki 'PrepMaster Sunucu' penceresindeki hata mesajına bakın.",
-            "PrepMaster") | Out-Null
+            "PrepKampüs sunucusu 20 saniyede başlamadı.`nGörev çubuğundaki 'PrepKampüs Sunucu' penceresindeki hata mesajına bakın.",
+            "PrepKampüs") | Out-Null
         exit 1
     }
 }

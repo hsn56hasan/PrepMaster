@@ -1,5 +1,5 @@
 """
-PrepMaster SEO & Google Dizinleme Modülü:
+PrepKampüs SEO & Google Dizinleme Modülü:
 - /robots.txt
 - /sitemap.xml
 - /sinavlar (26 üniversite İngilizce hazırlık & muafiyet sınav rehberi)
@@ -230,7 +230,7 @@ def render_exams_hub_html(
             f'</article>'
         )
 
-    title = "26 Üniversite İngilizce Hazırlık & Muafiyet (Proficiency) Sınav Rehberi | PrepMaster"
+    title = "26 Üniversite İngilizce Hazırlık & Muafiyet (Proficiency) Sınav Rehberi | PrepKampüs"
     description = (
         f"İTÜ Proficiency, Boğaziçi BUEPT, ODTÜ EPE, Bilkent PAE/COPE, YTÜ İYS, Koç KUEPE, Sabancı ELAE ve "
         f"26 üniversite hazırlık muafiyet sınavları için {total_q} soru, {total_l} listening ve {total_s} speaking denemesi."
@@ -249,7 +249,7 @@ def render_exams_hub_html(
   <link rel="canonical" href="{_html.escape(canonical)}" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="tr_TR" />
-  <meta property="og:site_name" content="PrepMaster" />
+  <meta property="og:site_name" content="PrepKampüs" />
   <meta property="og:title" content="{_html.escape(title)}" />
   <meta property="og:description" content="{_html.escape(description)}" />
   <meta property="og:url" content="{_html.escape(canonical)}" />
@@ -261,7 +261,7 @@ def render_exams_hub_html(
 <body>
   <header class="topbar">
     <div class="container nav">
-      <a class="brand" href="/">PrepMaster — İngilizce Hazırlık &amp; Muafiyet</a>
+      <a class="brand" href="/">PrepKampüs — İngilizce Hazırlık &amp; Muafiyet</a>
       <nav class="navlinks">
         <a href="/">Ana Platform</a>
         <a href="/sinavlar">26 Üniversite Rehberi</a>
@@ -292,7 +292,7 @@ def render_exams_hub_html(
     </section>
 
     <footer class="footer">
-      <strong>PrepMaster</strong> • Resmi İletişim: prepmasteryonetici@gmail.com • Tel: 0539 838 18 87 •
+      <strong>PrepKampüs</strong> • Resmi İletişim: prepmasteryonetici@gmail.com • Tel: 0539 838 18 87 •
       <a href="/kvkk">KVKK &amp; Hukuki Belgeler</a> • <a href="/">Giriş Yap / Kayıt Ol</a>
     </footer>
   </main>
@@ -321,10 +321,10 @@ def render_university_seo_html(
     s_cnt = uni_counts.get("speaking", 0)
     extra_kw = _EXTRA_SEARCH_TERMS.get(uid, f"{short} {exam}, {name} hazırlık muafiyet")
 
-    title = f"{short} {exam} Hazırlık, Geçme Notu & Denemeler | PrepMaster"
+    title = f"{short} {exam} Hazırlık, Geçme Notu & Denemeler | PrepKampüs"
     meta_desc = (
         f"{name} ({short}) {exam}: geçme notu {passing}, sınav süresi {duration} dk. "
-        f"PrepMaster'da {q_cnt} soru, {l_cnt} listening ve {s_cnt} speaking denemesiyle ücretsiz hazırlan."
+        f"PrepKampüs'te {q_cnt} soru, {l_cnt} listening ve {s_cnt} speaking denemesiyle ücretsiz hazırlan."
     )
 
     sections = uni.get("sections", [])
@@ -349,8 +349,8 @@ def render_university_seo_html(
             f"{name} {exam} için hedef geçme puanı 100 üzerinden {passing} olarak belirtilmiştir; toplam süre yaklaşık {duration} dakikadır.",
         ),
         (
-            f"PrepMaster'da {short} için kaç adet deneme içeriği var?",
-            f"PrepMaster üzerinde {name} formatına özel {q_cnt} çoktan seçmeli kur sorusu (A1–C2), {l_cnt} akademik listening ve {s_cnt} speaking simülasyonu yer alır.",
+            f"PrepKampüs'te {short} için kaç adet deneme içeriği var?",
+            f"PrepKampüs üzerinde {name} formatına özel {q_cnt} çoktan seçmeli kur sorusu (A1–C2), {l_cnt} akademik listening ve {s_cnt} speaking simülasyonu yer alır.",
         ),
         (
             f"{short} hazırlık paketini ücretsiz açabilir miyim?",
@@ -378,7 +378,7 @@ def render_university_seo_html(
                     "description": meta_desc,
                     "provider": {
                         "@type": "EducationalOrganization",
-                        "name": "PrepMaster",
+                        "name": "PrepKampüs",
                         "url": base,
                     },
                     "inLanguage": ["tr", "en"],
@@ -414,7 +414,7 @@ def render_university_seo_html(
   <link rel="canonical" href="{_html.escape(canonical)}" />
   <meta property="og:type" content="article" />
   <meta property="og:locale" content="tr_TR" />
-  <meta property="og:site_name" content="PrepMaster" />
+  <meta property="og:site_name" content="PrepKampüs" />
   <meta property="og:title" content="{_html.escape(title)}" />
   <meta property="og:description" content="{_html.escape(meta_desc)}" />
   <meta property="og:url" content="{_html.escape(canonical)}" />
@@ -426,7 +426,7 @@ def render_university_seo_html(
 <body>
   <header class="topbar">
     <div class="container nav">
-      <a class="brand" href="/">PrepMaster — İngilizce Hazırlık &amp; Muafiyet</a>
+      <a class="brand" href="/">PrepKampüs — İngilizce Hazırlık &amp; Muafiyet</a>
       <nav class="navlinks">
         <a href="/">Ana Platform</a>
         <a href="/sinavlar">Tüm 26 Üniversite</a>
@@ -453,7 +453,7 @@ def render_university_seo_html(
         <div class="stat"><div class="lbl">Geçme Notu</div><div class="val">{passing} / 100</div></div>
         <div class="stat"><div class="lbl">Sınav Süresi</div><div class="val">{duration} Dk</div></div>
         <div class="stat"><div class="lbl">Resmi Sınav Yapısı</div><div class="val">{official_q} Soru</div></div>
-        <div class="stat"><div class="lbl">PrepMaster Havuzu</div><div class="val">{q_cnt} Soru • {l_cnt}L • {s_cnt}S</div></div>
+        <div class="stat"><div class="lbl">PrepKampüs Havuzu</div><div class="val">{q_cnt} Soru • {l_cnt}L • {s_cnt}S</div></div>
       </div>
     </section>
 
@@ -476,7 +476,7 @@ def render_university_seo_html(
     <p style="font-size:13px;line-height:1.9;color:#334155">{other_links}</p>
 
     <footer class="footer">
-      <strong>PrepMaster</strong> • İlgili aramalar: {_html.escape(extra_kw)} •
+      <strong>PrepKampüs</strong> • İlgili aramalar: {_html.escape(extra_kw)} •
       Resmi Destek: prepmasteryonetici@gmail.com • 0539 838 18 87 • <a href="/kvkk">KVKK</a>
     </footer>
   </main>

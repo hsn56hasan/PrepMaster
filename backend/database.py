@@ -706,7 +706,7 @@ def generate_gib_receipt(card_last_four: str = "4242", card_holder: str = "Öğr
         "payment_method": "3D Secure Sanal POS (Mastercard/Visa)",
         "university_id": university_id,
         "document_type": "Ödeme özeti (fatura değildir)",
-        "description": f"PrepMaster Hazırlık Sınav Paketi - {university_id.upper()}"
+        "description": f"PrepKampüs Hazırlık Sınav Paketi - {university_id.upper()}"
     }
 
 def create_3ds_session(user_id: int, university_id: str, card_holder: str = "", card_number: str = "", amount_try: float = 50.0) -> Dict[str, Any]:

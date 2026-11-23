@@ -253,7 +253,7 @@ class _AuthScreenState extends State<AuthScreen> {
               const SizedBox(height: 28),
               const Icon(Icons.school_rounded, size: 48, color: AppTheme.brandBlue),
               const SizedBox(height: 8),
-              const Text('PrepMaster', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900)),
+              const Text('PrepKampüs', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900)),
               const SizedBox(height: 4),
               Text(
                 'Devam etmek için giriş yapın veya hesap oluşturun',

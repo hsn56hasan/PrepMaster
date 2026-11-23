@@ -1,6 +1,6 @@
 {
-  "name": "PrepMaster - Üniversite Hazırlık & Muafiyet Platformu",
-  "short_name": "PrepMaster",
+  "name": "PrepKampüs - Üniversite Hazırlık & Muafiyet Platformu",
+  "short_name": "PrepKampüs",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

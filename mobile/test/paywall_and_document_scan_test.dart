@@ -108,7 +108,7 @@ class _TestUniversityPaywallSheetState extends State<TestUniversityPaywallSheet>
               child: const Text('50 TL ile 3D Secure Ödemeye Geç'),
             ),
           ] else if (currentStep == 2) ...[
-            const Text('PrepMaster 3D Secure Doğrulama',
+            const Text('PrepKampüs 3D Secure Doğrulama',
                 style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue)),
             const Text('Telefonunuza gönderilen 6 haneli kodu giriniz (+90 5** *** ** 84)'),
             TextField(
@@ -378,7 +378,7 @@ void main() {
 
       // 3. Step 2 State: 3D Secure SMS modal is visible
       expect(find.byKey(const Key('input_sms_code')), findsOneWidget);
-      expect(find.textContaining('PrepMaster 3D Secure Doğrulama'), findsOneWidget);
+      expect(find.textContaining('PrepKampüs 3D Secure Doğrulama'), findsOneWidget);
       expect(find.textContaining('+90 5** *** ** 84'), findsOneWidget);
 
       // 4. Enter 6-digit SMS Code

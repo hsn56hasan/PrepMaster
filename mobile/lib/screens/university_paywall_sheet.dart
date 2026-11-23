@@ -391,7 +391,7 @@ class _UniversityPaywallSheetState extends State<UniversityPaywallSheet> {
                     const Icon(Icons.security_rounded, color: Colors.blue, size: 36),
                     const SizedBox(height: 6),
                     const Text(
-                      'PrepMaster 3D Secure Doğrulama',
+                      'PrepKampüs 3D Secure Doğrulama',
                       style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue, fontSize: 15),
                     ),
                     const SizedBox(height: 4),

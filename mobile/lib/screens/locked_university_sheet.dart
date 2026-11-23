@@ -287,7 +287,7 @@ class _LockedUniversitySheetState extends State<LockedUniversitySheet> {
         ),
         const SizedBox(height: 4),
         Text(
-          'Kart bilgileriniz PayTR\'nin güvenli sayfasında girilir; PrepMaster kart bilgisi görmez.',
+          'Kart bilgileriniz PayTR\'nin güvenli sayfasında girilir; PrepKampüs kart bilgisi görmez.',
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
         ),

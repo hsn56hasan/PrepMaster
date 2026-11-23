@@ -1,5 +1,5 @@
 """
-PrepMaster — PayTR Sanal POS (iFrame API & Webhook Callback) Entegrasyon Modülü
+PrepKampüs — PayTR Sanal POS (iFrame API & Webhook Callback) Entegrasyon Modülü
 
 Resmi PayTR Dokümantasyonuna (%100 HMAC-SHA256 uyumlu) göre hazırlanmıştır.
 - PAYTR_MERCHANT_ID, PAYTR_MERCHANT_KEY ve PAYTR_MERCHANT_SALT ortam değişkenleri (.env)
@@ -46,7 +46,7 @@ def is_paytr_live_configured() -> bool:
 def generate_paytr_basket(university_id: str, price_try: float = 50.0) -> str:
     """PayTR formatında Base64 kodlanmış sepet (user_basket) oluşturur."""
     basket_items = [
-        [f"PrepMaster {university_id.upper()} Hazirlik Paketi", f"{price_try:.2f}", 1]
+        [f"PrepKampus {university_id.upper()} Hazirlik Paketi", f"{price_try:.2f}", 1]
     ]
     return base64.b64encode(json.dumps(basket_items).encode("utf-8")).decode("utf-8")
 
@@ -55,7 +55,7 @@ def generate_paytr_iframe_token(
     user_id: int,
     university_id: str,
     email: str,
-    user_name: str = "PrepMaster Ogrenci",
+    user_name: str = "PrepKampus Ogrenci",
     user_ip: str = "127.0.0.1",
     price_try: float = 50.0,
     user_phone: str = "",

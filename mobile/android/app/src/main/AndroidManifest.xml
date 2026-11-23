@@ -2,7 +2,7 @@
     <!-- Yayın (release) derlemesi de sunucuya bağlanabilsin; Flutter bu izni yalnız debug/profile için ekler. -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="prep_master"
+        android:label="PrepKampüs"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

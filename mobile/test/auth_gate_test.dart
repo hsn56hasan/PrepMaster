@@ -8,7 +8,7 @@ import 'package:prep_master/screens/home_navigation.dart';
 void main() {
   testWidgets('Oturum yoksa uygulama giriş ekranıyla açılır, içerik görünmez', (tester) async {
     SharedPreferences.setMockInitialValues({});
-    await tester.pumpWidget(const PrepMasterApp());
+    await tester.pumpWidget(const PrepKampusApp());
     await tester.pumpAndSettle();
     expect(find.byType(AuthScreen), findsOneWidget);
     expect(find.byType(HomeNavigation), findsNothing);
@@ -18,14 +18,14 @@ void main() {
   testWidgets('Sunucu reddederse eski yerel kullanıcı kopyasıyla içeri girilmez', (tester) async {
     // Token var ama sunucu doğrulamıyor ve kayıtlı kullanıcı yok -> giriş ekranı
     SharedPreferences.setMockInitialValues({'auth_token': 'gecersiz'});
-    await tester.pumpWidget(const PrepMasterApp());
+    await tester.pumpWidget(const PrepKampusApp());
     await tester.pumpAndSettle();
     expect(find.byType(AuthScreen), findsOneWidget);
   });
 
   testWidgets('Boş bilgilerle giriş denenince hata gösterilir', (tester) async {
     SharedPreferences.setMockInitialValues({});
-    await tester.pumpWidget(const PrepMasterApp());
+    await tester.pumpWidget(const PrepKampusApp());
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('auth_login_submit')));
     await tester.pump();
@@ -34,7 +34,7 @@ void main() {
 
   testWidgets('Kayıtta sözleşme onayı olmadan hesap açılmaz', (tester) async {
     SharedPreferences.setMockInitialValues({});
-    await tester.pumpWidget(const PrepMasterApp());
+    await tester.pumpWidget(const PrepKampusApp());
     await tester.pumpAndSettle();
     await tester.tap(find.text('Kayıt Ol').first);
     await tester.pumpAndSettle();

@@ -1,4 +1,4 @@
-// PrepMaster AI Writing & Essay Evaluator
+// PrepKampüs AI Writing & Essay Evaluator
 
 const AI_ESSAY_PROMPTS = [
   {

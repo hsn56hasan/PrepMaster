@@ -1,5 +1,5 @@
 """
-PrepMaster Google OAuth 2.0 & Password Reset Flow Test Suite
+PrepKampüs Google OAuth 2.0 & Password Reset Flow Test Suite
 Authoritative specifications: ORIGINAL_REQUEST.md (R3) & PROJECT.md (Interface Contract 3)
 
 Tests:

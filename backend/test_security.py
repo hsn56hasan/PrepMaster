@@ -1,5 +1,5 @@
 """
-PrepMaster Comprehensive Security Test Suite
+PrepKampüs Comprehensive Security Test Suite
 Tests:
 1. Brute Force & DoS Defense (Sliding Window Rate Limiter for OTP, Auth, and AI endpoints)
 2. Security Headers Middleware (CSP, HSTS, X-Content-Type-Options, X-Frame-Options, etc.)

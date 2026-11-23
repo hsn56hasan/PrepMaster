@@ -1,4 +1,4 @@
-// PrepMaster Main Application Logic
+// PrepKampüs Main Application Logic
 
 window.appState = {
   currentUniversity: null,
@@ -1388,7 +1388,7 @@ async function openPrintableReportModal() {
         <div class="flex items-center justify-between pb-4 border-b-2 border-slate-900">
           <div>
             <div class="flex items-center gap-2">
-              <span class="font-extrabold text-xl text-blue-900">PrepMaster</span>
+              <span class="font-extrabold text-xl text-blue-900">PrepKampüs</span>
               <span class="text-xs uppercase font-bold px-2 py-0.5 bg-blue-50 text-blue-800 rounded">Akademik Karne</span>
             </div>
             <h2 class="text-base font-bold text-slate-700 mt-1">${data.target_university.name} Hazırlık Muafiyet Karnesi</h2>
@@ -2470,7 +2470,7 @@ function closeApkDownloadModal() {
 }
 
 function trackApkDownloadClick() {
-  showNotification("📱 PrepMaster Android APK (18.3 MB) indiriliyor...", "emerald");
+  showNotification("📱 PrepKampüs Android APK (19.2 MB) indiriliyor...", "emerald");
 }
 
 async function copyApkDownloadLink() {
@@ -2489,7 +2489,7 @@ async function installWebAppPWA() {
     const { outcome } = await deferredPwaPrompt.userChoice;
     deferredPwaPrompt = null;
     if (outcome === "accepted") {
-      showNotification("✓ PrepMaster ana ekranınıza eklendi!", "emerald");
+      showNotification("✓ PrepKampüs ana ekranınıza eklendi!", "emerald");
       closeApkDownloadModal();
     }
   } else {

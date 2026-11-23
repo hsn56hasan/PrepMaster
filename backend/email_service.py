@@ -15,7 +15,7 @@ Desteklenen 3 altyapı (.env / Railway Variables ile seçilir):
        SMTP_PASSWORD=<Uygulama Şifresi>
 
 Ortak gönderici adresi:
-       EMAIL_FROM="PrepMaster <prepmasteryonetici@gmail.com>"
+       EMAIL_FROM="PrepKampüs <prepmasteryonetici@gmail.com>"
 Destek bildirim alıcısı:
        SUPPORT_NOTIFY_EMAIL=prepmasteryonetici@gmail.com
 """
@@ -268,7 +268,7 @@ def send_email(to: str, subject: str, text: str, html: str = "", priority: str =
 def _wrap(title: str, body_html: str) -> str:
     return f"""<!doctype html><html lang="tr"><body style="margin:0;background:#f1f5f9;font-family:Segoe UI,Arial,sans-serif">
 <div style="max-width:520px;margin:24px auto;background:#fff;border-radius:16px;padding:28px;border:1px solid #e2e8f0">
-<div style="font-weight:800;font-size:18px;color:#1e3a8a;margin-bottom:12px">PrepMaster — Üniversite Hazırlık & Muafiyet Platformu</div>
+<div style="font-weight:800;font-size:18px;color:#1e3a8a;margin-bottom:12px">PrepKampüs — Üniversite Hazırlık & Muafiyet Platformu</div>
 <h1 style="font-size:18px;color:#0f172a;margin:0 0 12px">{title}</h1>
 {body_html}
 <hr style="border:none;border-top:1px solid #e2e8f0;margin:24px 0 12px">
@@ -283,20 +283,20 @@ def _code_box(code: str) -> str:
 
 
 def send_password_reset_email(to: str, code: str, minutes: int = 15) -> bool:
-    text = (f"PrepMaster şifre sıfırlama kodunuz: {code}\n\n"
+    text = (f"PrepKampüs şifre sıfırlama kodunuz: {code}\n\n"
             f"Kod {minutes} dakika geçerlidir. Bu isteği siz yapmadıysanız bu e-postayı yok sayın.")
     html = _wrap("Şifre sıfırlama kodunuz",
                  f'<p style="color:#334155;font-size:14px">Uygulamadaki "Şifremi unuttum" ekranına bu kodu girin:</p>'
                  f'{_code_box(code)}<p style="color:#64748b;font-size:13px">Kod {minutes} dakika geçerlidir.</p>')
-    return send_email(to, f"PrepMaster şifre sıfırlama kodu: {code}", text, html, priority="kritik")
+    return send_email(to, f"PrepKampüs şifre sıfırlama kodu: {code}", text, html, priority="kritik")
 
 
 def send_student_otp_email(to: str, code: str, minutes: int = 5) -> bool:
-    text = (f"PrepMaster öğrenci e-postası doğrulama kodunuz: {code}\n\nKod {minutes} dakika geçerlidir.")
+    text = (f"PrepKampüs öğrenci e-postası doğrulama kodunuz: {code}\n\nKod {minutes} dakika geçerlidir.")
     html = _wrap("Öğrenci e-postası doğrulama",
                  f'<p style="color:#334155;font-size:14px">Öğrenci e-postanızı doğrulamak için bu kodu girin:</p>'
                  f'{_code_box(code)}<p style="color:#64748b;font-size:13px">Kod {minutes} dakika geçerlidir.</p>')
-    return send_email(to, f"PrepMaster doğrulama kodu: {code}", text, html, priority="kritik")
+    return send_email(to, f"PrepKampüs doğrulama kodu: {code}", text, html, priority="kritik")
 
 
 def send_welcome_email(to: str, full_name: str, username: str, university_name: str = "") -> bool:
@@ -305,20 +305,20 @@ def send_welcome_email(to: str, full_name: str, username: str, university_name: 
     safe_uni = _html.escape(university_name or "Seçili Üniversite")
     text = (
         f"Merhaba {full_name or username},\n\n"
-        f"PrepMaster Üniversite Hazırlık & Muafiyet Platformuna hoş geldin!\n"
+        f"PrepKampüs Üniversite Hazırlık & Muafiyet Platformuna hoş geldin!\n"
         f"Kullanıcı adın: @{username}\nHedef üniversiten: {university_name or 'Seçili Üniversite'}\n\n"
         f"E-Devlet öğrenci belgeni doğrulayarak kendi üniversitenin tüm hazırlık sorularını ücretsiz açabilirsin."
     )
     html = _wrap(
-        "PrepMaster'a Hoş Geldin!",
+        "PrepKampüs'e Hoş Geldin!",
         f'<p style="color:#334155;font-size:14px">Merhaba <b>{safe_name}</b>,</p>'
-        f'<p style="color:#334155;font-size:14px">PrepMaster öğrenci hesabın başarıyla oluşturuldu. '
+        f'<p style="color:#334155;font-size:14px">PrepKampüs öğrenci hesabın başarıyla oluşturuldu. '
         f'E-Devlet öğrenci belgeni doğrulayarak kendi üniversitenin tüm deneme sınavlarını ücretsiz açabilirsin.</p>'
         f'<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px 16px;font-size:13px;color:#334155">'
         f'<div><b>Kullanıcı Adı:</b> @{safe_user}</div>'
         f'<div style="margin-top:4px"><b>Hedef Üniversite:</b> {safe_uni}</div></div>'
     )
-    return send_email(to, "PrepMaster'a Hoş Geldin — Öğrenci Hesabın Hazır", text, html)
+    return send_email(to, "PrepKampüs'e Hoş Geldin — Öğrenci Hesabın Hazır", text, html)
 
 
 def send_support_ticket_notification(
@@ -334,7 +334,7 @@ def send_support_ticket_notification(
     if not target:
         return False
     text = (
-        f"Yeni PrepMaster Destek / KVKK Talebi (#{ticket_id})\n"
+        f"Yeni PrepKampüs Destek / KVKK Talebi (#{ticket_id})\n"
         f"Kategori: {category}\n"
         f"Ad Soyad: {student_name or '-'}\n"
         f"E-Posta: {student_email or '-'}\n"
@@ -350,7 +350,7 @@ def send_support_ticket_notification(
         f'<div><b>Telefon:</b> {_html.escape(student_phone or "-")}</div></div>'
         f'<p style="color:#0f172a;font-size:14px;background:#eff6ff;padding:14px;border-radius:12px;margin-top:14px;white-space:pre-wrap">{_html.escape(message)}</p>'
     )
-    return send_email(target, f"[PrepMaster Destek #{ticket_id}] {(category or 'Genel')[:60]}", text, html)
+    return send_email(target, f"[PrepKampüs Destek #{ticket_id}] {(category or 'Genel')[:60]}", text, html)
 
 
 def send_support_ticket_receipt(to: str, ticket_id: int, category: str) -> bool:
@@ -358,7 +358,7 @@ def send_support_ticket_receipt(to: str, ticket_id: int, category: str) -> bool:
         return False
     text = (
         f"Merhaba,\n\n"
-        f"#{ticket_id} numaralı ({category}) destek/KVKK talebiniz PrepMaster ekibine ulaşmıştır.\n"
+        f"#{ticket_id} numaralı ({category}) destek/KVKK talebiniz PrepKampüs ekibine ulaşmıştır.\n"
         f"En kısa sürede prepmasteryonetici@gmail.com veya 0539 838 18 87 üzerinden size dönüş yapılacaktır."
     )
     html = _wrap(
@@ -366,7 +366,7 @@ def send_support_ticket_receipt(to: str, ticket_id: int, category: str) -> bool:
         f'<p style="color:#334155;font-size:14px"><b>#{ticket_id}</b> numaralı (<b>{_html.escape(category or "Genel")}</b>) talebiniz başarıyla kaydedildi.</p>'
         f'<p style="color:#334155;font-size:14px">Ekibimiz en kısa sürede dönüş yapacaktır. Acil durumlar için destek hattımızdan ulaşabilirsiniz.</p>'
     )
-    return send_email(to, f"PrepMaster Destek Talebiniz Alındı (#{ticket_id})", text, html)
+    return send_email(to, f"PrepKampüs Destek Talebiniz Alındı (#{ticket_id})", text, html)
 
 
 def send_access_granted_email(to: str, full_name: str, unlocked_universities: List[str]) -> bool:
@@ -376,7 +376,7 @@ def send_access_granted_email(to: str, full_name: str, unlocked_universities: Li
     summary = "Tüm 26 Üniversite (Tam Erişim)" if len(unis) >= 26 else (", ".join(unis) or "Genel Havuz")
     text = (
         f"Merhaba {full_name or 'Öğrenci'},\n\n"
-        f"PrepMaster hesabınıza üniversite erişim yetkisi tanımlandı: {summary}\n"
+        f"PrepKampüs hesabınıza üniversite erişim yetkisi tanımlandı: {summary}\n"
         f"Platforma giriş yaparak tüm deneme sınavlarına hemen başlayabilirsiniz."
     )
     html = _wrap(
@@ -385,4 +385,4 @@ def send_access_granted_email(to: str, full_name: str, unlocked_universities: Li
         f'<p style="color:#334155;font-size:14px">Yönetici onayıyla hesabınıza aşağıdaki üniversite erişimleri tanımlandı:</p>'
         f'<div style="background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;border-radius:12px;padding:12px 16px;font-weight:700;font-size:13px">{_html.escape(summary)}</div>'
     )
-    return send_email(to, "PrepMaster Üniversite Erişiminiz Aktif Edildi", text, html)
+    return send_email(to, "PrepKampüs Üniversite Erişiminiz Aktif Edildi", text, html)

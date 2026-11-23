@@ -1,4 +1,4 @@
-// PrepMaster Listening Simulator (HTML5 Audio Engine & Web Speech API Fallback)
+// PrepKampüs Listening Simulator (HTML5 Audio Engine & Web Speech API Fallback)
 
 window.listeningState = {
   tracks: [],

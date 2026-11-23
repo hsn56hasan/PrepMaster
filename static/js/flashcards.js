@@ -1,4 +1,4 @@
-// Flashcards Module for PrepMaster
+// Flashcards Module for PrepKampüs
 let currentVocabList = [];
 let currentVocabIndex = 0;
 let isFlipped = false;

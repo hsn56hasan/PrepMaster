@@ -1,5 +1,5 @@
 """
-PrepMaster 3D Secure Sandbox Payment & GİB E-Arşiv Receipt Test Suite
+PrepKampüs 3D Secure Sandbox Payment & GİB E-Arşiv Receipt Test Suite
 Authoritative specifications: ORIGINAL_REQUEST.md (R2) & PROJECT.md (Interface Contract 2)
 
 Tests:

@@ -682,7 +682,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
                 title: Column(
                   children: [
-                    const Text('PrepMaster Hesabı', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+                    const Text('PrepKampüs Hesabı', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 8),
                     Container(
                       decoration: BoxDecoration(
@@ -977,7 +977,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               children: [
                 Row(
                   children: [
-                    const Text('PrepMaster', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900)),
+                    const Text('PrepKampüs', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900)),
                     const SizedBox(width: 6),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1.5),

@@ -1,5 +1,5 @@
 /**
- * PrepMaster Authentication Module (static/js/auth.js)
+ * PrepKampüs Authentication Module (static/js/auth.js)
  * Implements Google OAuth 2.0 Client & Forgot/Reset Password Flow
  * Compatible with backend /api/auth/google, /api/auth/forgot-password, /api/auth/reset-password
  */

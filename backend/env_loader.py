@@ -1,5 +1,5 @@
 """
-PrepMaster/.env dosyasını ortam değişkenlerine yükler (ek paket gerektirmez).
+PrepKampüs/.env dosyasını ortam değişkenlerine yükler (ek paket gerektirmez).
 
 - Ortamda zaten tanımlı bir değişkenin üzerine YAZMAZ (Docker/sistem ayarı önceliklidir).
 - Satır biçimi: ANAHTAR=deger  (# ile başlayan satırlar yorum; tırnaklar soyulur)

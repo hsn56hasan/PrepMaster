@@ -1,11 +1,11 @@
-# 🎓 PrepMaster — Üniversite Hazırlık Muafiyet (Proficiency) Platformu Proje Özeti
+# 🎓 PrepKampüs — Üniversite Hazırlık Muafiyet (Proficiency) Platformu Proje Özeti
 
 > **Durum (14.11.2026): Prototip / demo aşaması — canlıya çıkmaya hazır DEĞİL.**
 > İçerik havuzu ve arayüzler büyük ölçüde hazır. Ödeme, belge doğrulama, Google girişi
 > ve "yapay zeka" değerlendirmesi şu an **simülasyon** olarak çalışıyor. Ayrıca canlıya
 > çıkmadan kapatılması gereken **kritik güvenlik açıkları** var (bkz. Bölüm 6).
 
-**PrepMaster**, Türk üniversitelerinin İngilizce hazırlık muafiyet sınavlarına (İTÜ, Boğaziçi BUEPT,
+**PrepKampüs**, Türk üniversitelerinin İngilizce hazırlık muafiyet sınavlarına (İTÜ, Boğaziçi BUEPT,
 ODTÜ EPE, Bilkent PAE, YTÜ, Hacettepe, Ankara, Gazi, Ege, Koç, Sabancı) ve CEFR (A1–C2)
 seviyelerine hazırlanan öğrenciler için Web (FastAPI + Vanilla JS) ve Mobil (Flutter) tabanlı
 bir çalışma ve deneme sınavı platformudur.
@@ -83,7 +83,7 @@ ve HTTPS henüz bağlanmadı. Veritabanı SQLite; çok kullanıcılı canlı ort
 ## 4. Dizin Yapısı
 
 ```text
-PrepMaster/
+PrepKampüs/
 ├── backend/
 │   ├── app.py                 # FastAPI uç noktaları
 │   ├── database.py            # SQLite şeması ve veri işlemleri

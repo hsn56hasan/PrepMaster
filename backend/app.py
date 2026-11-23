@@ -191,7 +191,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
 STATIC_DIR = BASE_DIR / "static"
 
-app = FastAPI(title="PrepMaster API", version="1.2.0")
+app = FastAPI(title="PrepKampüs API", version="1.2.0")
 
 # Security Headers (CSP, HSTS, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, etc.)
 app.add_middleware(SecurityHeadersMiddleware)
@@ -855,7 +855,7 @@ def create_paytr_token_endpoint(req: PayTRTokenRequest, request: Request):
         user_id=target_id,
         university_id=req.university_id,
         email=email,
-        user_name=(profile.get("full_name") or profile.get("username") or "PrepMaster Ogrencisi")[:60],
+        user_name=(profile.get("full_name") or profile.get("username") or "PrepKampus Ogrencisi")[:60],
         user_ip=_payer_ip(request),
         price_try=MEMBERSHIP_PRICE_TRY,
         user_phone=req.user_phone,
@@ -1810,7 +1810,7 @@ def payment_result_page():
 # --- Mobil Uygulama (Android APK) İndirme & Bilgi Uç Noktaları ---
 def _resolve_apk_path() -> Optional[Path]:
     candidates = [
-        STATIC_DIR / "downloads" / "PrepMaster-Android.apk",
+        STATIC_DIR / "downloads" / "PrepKampus-Android.apk",
         BASE_DIR / "mobile" / "build" / "app" / "outputs" / "flutter-apk" / "app-release.apk",
         BASE_DIR / "mobile" / "build" / "app" / "outputs" / "flutter-apk" / "app-arm64-v8a-release.apk",
         BASE_DIR / "mobile" / "build" / "app" / "outputs" / "flutter-apk" / "app-debug.apk",
@@ -1828,10 +1828,10 @@ def get_mobile_app_info():
     size_mb = round(size_bytes / (1024 * 1024), 1) if size_bytes else 42.8
     return {
         "available": apk_path is not None,
-        "app_name": "PrepMaster Mobil (Android)",
+        "app_name": "PrepKampüs Mobil (Android)",
         "version": "1.4.0",
         "build_type": "Release (ARM64)",
-        "filename": "PrepMaster-v1.4-Android.apk",
+        "filename": "PrepKampus-v1.4-Android.apk",
         "size_mb": size_mb,
         "min_android": "Android 8.0+ (API 26+)",
         "download_url": "/api/download/apk",
@@ -1855,9 +1855,9 @@ def download_android_apk():
     return FileResponse(
         path=apk_path,
         media_type="application/vnd.android.package-archive",
-        filename="PrepMaster-v1.4-Android.apk",
+        filename="PrepKampus-v1.4-Android.apk",
         headers={
-            "Content-Disposition": 'attachment; filename="PrepMaster-v1.4-Android.apk"',
+            "Content-Disposition": 'attachment; filename="PrepKampus-v1.4-Android.apk"',
             "Cache-Control": "public, max-age=3600"
         }
     )
@@ -2022,7 +2022,7 @@ SUPPORT_CONTACT_INFO = {
     "phone_intl": "+905398381887",
     "whatsapp_url": "https://wa.me/905398381887",
     "data_controller": "Hasan Toprakcı",
-    "platform": "PrepMaster - Üniversite Hazırlık & Muafiyet Platformu",
+    "platform": "PrepKampüs - Üniversite Hazırlık & Muafiyet Platformu",
     "kvkk_url": "/kvkk",
     "documents": [
         {"id": "kvkk-aydinlatma", "code": "PM-KVKK-01", "title": "6698 Sayılı KVKK Aydınlatma Metni"},
@@ -2151,16 +2151,16 @@ def admin_test_email_endpoint(req: AdminTestEmailRequest, request: Request):
     result = send_email_verbose(
         to=target,
         priority="kritik",
-        subject="PrepMaster E-Posta Altyapısı Canlı Testi",
+        subject="PrepKampüs E-Posta Altyapısı Canlı Testi",
         text=(
             "Merhaba Hasan,\n\n"
-            "PrepMaster e-posta gönderim altyapısı başarıyla çalışıyor!\n"
+            "PrepKampüs e-posta gönderim altyapısı başarıyla çalışıyor!\n"
             "Şifre sıfırlama, .edu.tr doğrulama kodları, hoş geldin mailleri ve destek bildirimleri aktif."
         ),
         html=(
             '<p style="color:#334155;font-size:14px">Merhaba <b>Hasan</b>,</p>'
             '<p style="color:#065f46;font-size:14px;background:#ecfdf5;border:1px solid #a7f3d0;padding:12px 16px;border-radius:12px">'
-            '✓ PrepMaster e-posta gönderim altyapısı canlı sunucuda başarıyla çalışıyor!</p>'
+            '✓ PrepKampüs e-posta gönderim altyapısı canlı sunucuda başarıyla çalışıyor!</p>'
             '<p style="color:#475569;font-size:13px">Şifre sıfırlama, .edu.tr OTP doğrulama, hoş geldin mailleri ve Destek/KVKK bildirimleri aktif durumdadır.</p>'
         ),
     )

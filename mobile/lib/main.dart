@@ -18,11 +18,11 @@ void main() async {
       themeModeNotifier.value = ThemeMode.dark;
     }
   } catch (_) {}
-  runApp(const PrepMasterApp());
+  runApp(const PrepKampusApp());
 }
 
-class PrepMasterApp extends StatelessWidget {
-  const PrepMasterApp({super.key});
+class PrepKampusApp extends StatelessWidget {
+  const PrepKampusApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class PrepMasterApp extends StatelessWidget {
       valueListenable: themeModeNotifier,
       builder: (context, currentMode, _) {
         return MaterialApp(
-          title: 'PrepMaster',
+          title: 'PrepKampüs',
           debugShowCheckedModeBanner: false,
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,

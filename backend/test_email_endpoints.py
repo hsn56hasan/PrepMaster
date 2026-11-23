@@ -85,7 +85,7 @@ class TestEmailEndpoints(unittest.TestCase):
             self.assertEqual(fail_res.status_code, 503)
 
         env = {
-            "EMAIL_FROM": "PrepMaster <prepmasteryonetici@gmail.com>",
+            "EMAIL_FROM": "PrepKampüs <prepmasteryonetici@gmail.com>",
             "BREVO_API_KEY": "xkeysib-live-mock",
             "SUPPORT_NOTIFY_EMAIL": "prepmasteryonetici@gmail.com",
         }
@@ -110,7 +110,7 @@ class TestEmailEndpoints(unittest.TestCase):
     def test_register_support_and_access_grant_trigger_emails(self):
         admin_h = self._admin_headers()
         env = {
-            "EMAIL_FROM": "PrepMaster <prepmasteryonetici@gmail.com>",
+            "EMAIL_FROM": "PrepKampüs <prepmasteryonetici@gmail.com>",
             "BREVO_API_KEY": "xkeysib-bg-mock",
             "SUPPORT_NOTIFY_EMAIL": "prepmasteryonetici@gmail.com",
         }

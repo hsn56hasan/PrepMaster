@@ -1,4 +1,4 @@
-# PrepMaster - Üniversite Hazırlık & Muafiyet Platformu
+# PrepKampüs - Üniversite Hazırlık & Muafiyet Platformu
 > **Çift Platformlu Mimari (Dual-Platform):** Web Platformu (FastAPI + Modern Web + PWA) & Native Mobil Uygulama (Flutter Android APK / iOS)
 
 Türkiye'deki **26 üniversitenin** İngilizce hazırlık muafiyet (İTÜ Proficiency, Boğaziçi BUEPT, ODTÜ EPE, Bilkent PAE, YTÜ İYS, Koç KUEPE, Sabancı ELAE, Hacettepe, Ankara, Gazi, Ege, Marmara, İstanbul, Cerrahpaşa, Dokuz Eylül, İYTE, Anadolu, ESTÜ, GTÜ, Akdeniz, Çukurova, Uludağ, Özyeğin TRACE, Bahçeşehir, Yeditepe, TOBB ETÜ) ve kur bitirme (**CEFR A1–C2**) sınavlarına eksiksiz hazırlanabilmesi için tasarlanmış kapsamlı çalışma platformudur.

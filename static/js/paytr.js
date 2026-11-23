@@ -1,7 +1,7 @@
-// PrepMaster — PayTR iFrame ödemesi
+// PrepKampüs — PayTR iFrame ödemesi
 //
 // Akış: telefon -> /api/payment/paytr/token (sunucu 'pending' sipariş açar) -> PayTR'nin
-// güvenli sayfası bu pencerede açılır (kart bilgisi PrepMaster'a hiç gelmez) -> sunucuya
+// güvenli sayfası bu pencerede açılır (kart bilgisi PrepKampüs'e hiç gelmez) -> sunucuya
 // sipariş durumu sorulur. Kilit YALNIZCA PayTR'nin sunucuya gönderdiği imzalı bildirimle
 // açılır; tarayıcıdaki "başarılı" sayfası tek başına hiçbir şeyi açmaz.
 (function () {

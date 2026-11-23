@@ -1,4 +1,4 @@
-// PrepMaster Speaking & Interview Simulator
+// PrepKampüs Speaking & Interview Simulator
 
 window.speakingState = {
   tasks: [],
