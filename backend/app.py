@@ -2037,7 +2037,7 @@ def serve_admin_panel():
 
 # --- Destek & KVKK Yasal Belgeler Uç Noktaları ---
 SUPPORT_CONTACT_INFO = {
-    "email": "prepmasteryonetici@gmail.com",
+    "email": "destek@prepkampus.com",
     "phone": "05398381887",
     "phone_display": "0539 838 18 87",
     "phone_intl": "+905398381887",

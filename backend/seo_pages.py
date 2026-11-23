@@ -292,7 +292,7 @@ def render_exams_hub_html(
     </section>
 
     <footer class="footer">
-      <strong>PrepKampüs</strong> • Resmi İletişim: prepmasteryonetici@gmail.com • Tel: 0539 838 18 87 •
+      <strong>PrepKampüs</strong> • Resmi İletişim: destek@prepkampus.com • Tel: 0539 838 18 87 •
       <a href="/kvkk">KVKK &amp; Hukuki Belgeler</a> • <a href="/">Giriş Yap / Kayıt Ol</a>
     </footer>
   </main>
@@ -477,7 +477,7 @@ def render_university_seo_html(
 
     <footer class="footer">
       <strong>PrepKampüs</strong> • İlgili aramalar: {_html.escape(extra_kw)} •
-      Resmi Destek: prepmasteryonetici@gmail.com • 0539 838 18 87 • <a href="/kvkk">KVKK</a>
+      Resmi Destek: destek@prepkampus.com • 0539 838 18 87 • <a href="/kvkk">KVKK</a>
     </footer>
   </main>
 </body>

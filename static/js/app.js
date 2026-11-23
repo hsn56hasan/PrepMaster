@@ -2593,7 +2593,7 @@ async function submitSupportTicketForm() {
     }
     if (statusEl) {
       statusEl.className = "p-2.5 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200";
-      statusEl.innerText = `✓ Talebiniz (#${data.ticket_id}) kaydedildi! Ayrıca acil durumlar için 0539 838 18 87 veya prepmasteryonetici@gmail.com üzerinden ulaşabilirsiniz.`;
+      statusEl.innerText = `✓ Talebiniz (#${data.ticket_id}) kaydedildi! Ayrıca acil durumlar için 0539 838 18 87 veya destek@prepkampus.com üzerinden ulaşabilirsiniz.`;
       statusEl.classList.remove("hidden");
     }
     const msgInput = document.getElementById("support-form-message");
