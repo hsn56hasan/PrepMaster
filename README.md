@@ -6,10 +6,10 @@ Türkiye'deki **26 üniversitenin** İngilizce hazırlık muafiyet (İTÜ Profic
 ---
 
 ## 🌐 Canlı Erişim Adresleri (Railway Production)
-- **Öğrenci Platformu:** https://prepmaster-web-production.up.railway.app
-- **Bağımsız Yönetici Paneli (`/admin`):** https://prepmaster-web-production.up.railway.app/admin
-- **6698 S. KVKK & Yasal Belgeler (`/kvkk`):** https://prepmaster-web-production.up.railway.app/kvkk
-- **Android APK Doğrudan İndirme:** https://prepmaster-web-production.up.railway.app/api/download/apk
+- **Öğrenci Platformu:** https://prepkampus.com
+- **Bağımsız Yönetici Paneli (`/admin`):** https://prepkampus.com/admin
+- **6698 S. KVKK & Yasal Belgeler (`/kvkk`):** https://prepkampus.com/kvkk
+- **Android APK Doğrudan İndirme:** https://prepkampus.com/api/download/apk
 
 ---
 

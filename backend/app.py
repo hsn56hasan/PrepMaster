@@ -7,7 +7,7 @@ from typing import List, Optional, Dict, Any
 from fastapi import FastAPI, HTTPException, Query, Request, Depends, status, UploadFile, File, Form, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, PlainTextResponse, Response
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, PlainTextResponse, RedirectResponse, Response
 from pydantic import BaseModel, Field, field_validator
 
 import sys
@@ -205,6 +205,27 @@ app.add_middleware(
     allow_headers=["Content-Type", "Authorization", "X-Requested-With", "Accept", "Origin"],
     expose_headers=["Retry-After"]
 )
+
+# Asıl alan adına yönlendirme (CANONICAL_HOST=prepkampus.com verilince açılır).
+# Eski Railway adresi, www ve diğer alan adlarından gelen SAYFA isteklerini kalıcı olarak asıl
+# adrese taşır; arama motoru aynı sitenin iki kopyasını görmez. /api/ istekleri (eski APK'lar,
+# PayTR bildirimi) ve APK indirmesi YÖNLENDİRİLMEZ; yerel ve sağlık kontrolü istekleri etkilenmez.
+CANONICAL_HOST = os.getenv("CANONICAL_HOST", "").strip().lower().removeprefix("https://").rstrip("/")
+
+
+@app.middleware("http")
+async def canonical_host_redirect(request: Request, call_next):
+    if CANONICAL_HOST and request.method in ("GET", "HEAD"):
+        host = (request.headers.get("x-forwarded-host") or request.headers.get("host") or "")
+        host = host.split(",")[0].strip().lower().split(":")[0]
+        path = request.url.path
+        local = host in ("", "localhost", "127.0.0.1", "testserver") or host.startswith("192.168.")
+        if (not local and host != CANONICAL_HOST and not path.startswith(("/api/", "/static/downloads/"))):
+            query = request.url.query
+            target = f"https://{CANONICAL_HOST}{path}" + (f"?{query}" if query else "")
+            return RedirectResponse(target, status_code=301)
+    return await call_next(request)
+
 
 # DoS / flood koruması: en dışta çalışır, kötüye kullanan istek uygulamaya hiç ulaşmaz
 app.add_middleware(DoSProtectionMiddleware)

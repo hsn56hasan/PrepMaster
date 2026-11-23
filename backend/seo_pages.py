@@ -12,7 +12,7 @@ import os
 from typing import Any, Dict, List
 from fastapi import Request
 
-DEFAULT_PUBLIC_URL = "https://prepmaster-web-production.up.railway.app"
+DEFAULT_PUBLIC_URL = "https://prepkampus.com"
 
 # Öğrencilerin üniversite kısaltması yanında sık aradığı alternatif sınav adları
 _EXTRA_SEARCH_TERMS: Dict[str, str] = {
