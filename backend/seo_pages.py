@@ -295,7 +295,7 @@ def render_exams_hub_html(
     </section>
 
     <footer class="footer">
-      <strong>PrepKampüs</strong> • Resmi İletişim: destek@prepkampus.com • Tel: 0539 838 18 87 •
+      <strong>PrepKampüs (PrepKampus • prepkampus.com)</strong> • Resmi İletişim: destek@prepkampus.com • Tel: 0539 838 18 87 •
       <a href="/kvkk">KVKK &amp; Hukuki Belgeler</a> • <a href="/">Giriş Yap / Kayıt Ol</a>
     </footer>
   </main>
@@ -382,6 +382,7 @@ def render_university_seo_html(
                     "provider": {
                         "@type": "EducationalOrganization",
                         "name": "PrepKampüs",
+                        "alternateName": ["PrepKampus", "prepkampus", "Prep Kampüs", "Prep Kampus", "PerpKampus", "prepkampus.com"],
                         "url": base,
                     },
                     "inLanguage": ["tr", "en"],
@@ -482,7 +483,7 @@ def render_university_seo_html(
     <p style="font-size:13px;line-height:1.9;color:#334155">{other_links}</p>
 
     <footer class="footer">
-      <strong>PrepKampüs</strong> • İlgili aramalar: {_html.escape(extra_kw)} •
+      <strong>PrepKampüs (PrepKampus • prepkampus.com)</strong> • İlgili aramalar: {_html.escape(extra_kw)} •
       Resmi Destek: destek@prepkampus.com • 0539 838 18 87 • <a href="/kvkk">KVKK</a>
     </footer>
   </main>
