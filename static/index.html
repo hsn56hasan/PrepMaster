@@ -16,10 +16,11 @@
   <meta property="og:title" content="PrepKampüs | 26 Üniversite İngilizce Hazırlık & Muafiyet Sınav Platformu">
   <meta property="og:description" content="İTÜ Proficiency, Boğaziçi BUEPT, ODTÜ EPE, Bilkent PAE/COPE, YTÜ İYS, Koç KUEPE ve Sabancı ELAE dâhil 26 üniversite için 10.901 soru, 2.019 kelime, 656 listening ve 657 speaking denemesi.">
   <meta property="og:url" content="https://prepkampus.com/">
-  <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/2997/2997295.png">
+  <meta property="og:image" content="https://prepkampus.com/static/img/logo-512.png">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PrepKampüs | Üniversite İngilizce Hazırlık & Muafiyet Platformu">
   <meta name="twitter:description" content="26 üniversitenin İngilizce hazırlık muafiyet ve A1–C2 kur sınavları. E-Devlet öğrenci belgenle kendi okulunu ücretsiz aç!">
+  <meta name="twitter:image" content="https://prepkampus.com/static/img/logo-512.png">
 
   <!-- Structured Data (Schema.org JSON-LD) -->
   <script type="application/ld+json">
@@ -30,6 +31,7 @@
         "@type": "EducationalOrganization",
         "name": "PrepKampüs",
         "url": "https://prepkampus.com/",
+        "logo": "https://prepkampus.com/static/img/logo-512.png",
         "description": "Türkiye'deki 26 üniversitenin İngilizce hazırlık muafiyet (Proficiency) ve A1–C2 kur sınavlarına yönelik çevrimiçi çalışma ve deneme platformu.",
         "email": "destek@prepkampus.com"
       },
@@ -65,13 +67,16 @@
   </script>
   
   <!-- Mobile & PWA Metas -->
+  <link rel="icon" type="image/svg+xml" href="/static/img/logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon-32x32.png">
+  <link rel="shortcut icon" href="/static/favicon.ico">
   <link rel="manifest" href="/static/manifest.json">
   <meta name="theme-color" content="#1e3a8a">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="PrepKampüs">
-  <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2997/2997295.png">
+  <link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png">
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -119,9 +124,7 @@
       
       <!-- Logo & Okul -->
       <div class="flex items-center gap-3 min-w-0">
-        <div class="w-10 h-10 shrink-0 bg-gradient-to-tr from-blue-700 to-indigo-600 rounded-xl flex items-center justify-center text-white shadow-md shadow-blue-500/20">
-          <i data-lucide="graduation-cap" class="w-6 h-6"></i>
-        </div>
+        <img src="/static/img/logo.png" alt="PrepKampüs Logo" class="w-10 h-10 shrink-0 rounded-xl shadow-md shadow-blue-500/20 object-cover">
         <div class="min-w-0">
           <div class="flex items-center gap-2">
             <span class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-blue-700 to-indigo-700 bg-clip-text text-transparent">PrepKampüs</span>
@@ -955,8 +958,8 @@
   <div id="auth-modal" data-mandatory="true" class="fixed inset-0 z-50 bg-gradient-to-br from-slate-950 via-blue-950 to-indigo-950 p-4 overflow-y-auto flex flex-col items-center justify-center">
     <!-- Tam Ekran Karşılama Başlığı (Giriş Yapılmadığında Gözükür) -->
     <div id="auth-gate-brand-header" class="text-center mb-5 max-w-md w-full px-2">
-      <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 text-white shadow-xl shadow-blue-500/30 mb-3 border border-white/15">
-        <i data-lucide="graduation-cap" class="w-8 h-8"></i>
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl shadow-xl shadow-blue-500/30 mb-3 border border-white/15 overflow-hidden">
+        <img src="/static/img/logo.png" alt="PrepKampüs Logo" class="w-full h-full object-cover">
       </div>
       <div class="flex items-center justify-center gap-2 mb-1">
         <h1 class="text-2xl font-black text-white tracking-tight">PrepKampüs</h1>

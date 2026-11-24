@@ -250,9 +250,22 @@ class _AuthScreenState extends State<AuthScreen> {
         body: SafeArea(
           child: Column(
             children: [
-              const SizedBox(height: 28),
-              const Icon(Icons.school_rounded, size: 48, color: AppTheme.brandBlue),
-              const SizedBox(height: 8),
+              const SizedBox(height: 24),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(18),
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  width: 64,
+                  height: 64,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, _, _) => const Icon(
+                    Icons.school_rounded,
+                    size: 48,
+                    color: AppTheme.brandBlue,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
               const Text('PrepKampüs', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900)),
               const SizedBox(height: 4),
               Text(

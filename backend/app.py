@@ -2035,6 +2035,14 @@ def serve_admin_panel():
     return FileResponse(STATIC_DIR / "admin.html", media_type="text/html")
 
 
+@app.get("/favicon.ico", include_in_schema=False)
+def serve_favicon_ico():
+    fav_path = STATIC_DIR / "favicon.ico"
+    if fav_path.exists():
+        return FileResponse(fav_path, media_type="image/x-icon")
+    raise HTTPException(status_code=404)
+
+
 # --- Destek & KVKK Yasal Belgeler Uç Noktaları ---
 SUPPORT_CONTACT_INFO = {
     "email": "destek@prepkampus.com",

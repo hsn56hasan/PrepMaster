@@ -1259,16 +1259,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
           maxScaleFactor: 1.15,
           child: Row(
             children: [
-              Container(
-                width: 32,
-                height: 32,
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [AppTheme.brandBlue, AppTheme.brandNavy],
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  width: 32,
+                  height: 32,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, _, _) => Container(
+                    width: 32,
+                    height: 32,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [AppTheme.brandBlue, AppTheme.brandNavy],
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Icon(Icons.school, size: 18, color: Colors.white),
                   ),
-                  borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Icon(Icons.school, size: 18, color: Colors.white),
               ),
               const SizedBox(width: 10),
               Expanded(

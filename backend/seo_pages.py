@@ -253,7 +253,10 @@ def render_exams_hub_html(
   <meta property="og:title" content="{_html.escape(title)}" />
   <meta property="og:description" content="{_html.escape(description)}" />
   <meta property="og:url" content="{_html.escape(canonical)}" />
-  <link rel="icon" type="image/x-icon" href="/static/prepmaster.ico" />
+  <meta property="og:image" content="{base}/static/img/logo-512.png" />
+  <link rel="icon" type="image/svg+xml" href="/static/img/logo.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon-32x32.png" />
+  <link rel="shortcut icon" href="/static/favicon.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>{_PAGE_CSS}</style>
   <script type="application/ld+json">{json_ld}</script>
@@ -261,7 +264,7 @@ def render_exams_hub_html(
 <body>
   <header class="topbar">
     <div class="container nav">
-      <a class="brand" href="/">PrepKampüs — İngilizce Hazırlık &amp; Muafiyet</a>
+      <a class="brand" href="/" style="display:inline-flex;align-items:center;gap:10px"><img src="/static/img/logo.png" alt="PrepKampüs" width="32" height="32" style="border-radius:8px;vertical-align:middle" />PrepKampüs — İngilizce Hazırlık &amp; Muafiyet</a>
       <nav class="navlinks">
         <a href="/">Ana Platform</a>
         <a href="/sinavlar">26 Üniversite Rehberi</a>
@@ -418,7 +421,10 @@ def render_university_seo_html(
   <meta property="og:title" content="{_html.escape(title)}" />
   <meta property="og:description" content="{_html.escape(meta_desc)}" />
   <meta property="og:url" content="{_html.escape(canonical)}" />
-  <link rel="icon" type="image/x-icon" href="/static/prepmaster.ico" />
+  <meta property="og:image" content="{base}/static/img/logo-512.png" />
+  <link rel="icon" type="image/svg+xml" href="/static/img/logo.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon-32x32.png" />
+  <link rel="shortcut icon" href="/static/favicon.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>{_PAGE_CSS}</style>
   <script type="application/ld+json">{ld_graph}</script>
@@ -426,7 +432,7 @@ def render_university_seo_html(
 <body>
   <header class="topbar">
     <div class="container nav">
-      <a class="brand" href="/">PrepKampüs — İngilizce Hazırlık &amp; Muafiyet</a>
+      <a class="brand" href="/" style="display:inline-flex;align-items:center;gap:10px"><img src="/static/img/logo.png" alt="PrepKampüs" width="32" height="32" style="border-radius:8px;vertical-align:middle" />PrepKampüs — İngilizce Hazırlık &amp; Muafiyet</a>
       <nav class="navlinks">
         <a href="/">Ana Platform</a>
         <a href="/sinavlar">Tüm 26 Üniversite</a>
