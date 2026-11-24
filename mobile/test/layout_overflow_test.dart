@@ -22,10 +22,12 @@ import 'package:prep_master/screens/exam_runner_screen.dart';
 import 'package:prep_master/screens/home_navigation.dart';
 import 'package:prep_master/screens/listening_screen.dart';
 import 'package:prep_master/screens/locked_university_sheet.dart';
+import 'package:prep_master/screens/placement_test_screen.dart';
 import 'package:prep_master/screens/speaking_screen.dart';
 import 'package:prep_master/screens/student_document_scan_sheet.dart';
 import 'package:prep_master/screens/university_picker_dialog.dart';
 import 'package:prep_master/screens/writing_screen.dart';
+import 'package:prep_master/services/placement_test.dart';
 import 'package:prep_master/theme/app_theme.dart';
 
 const sizes = [Size(320, 568), Size(360, 640), Size(412, 915)];
@@ -107,6 +109,19 @@ Future<void> loadRealFonts() async {
   await icons.load();
 }
 
+/// Seviye tespitinde kullanılan gerçek havuz (uygulamayla gelen parçasız özgün sorular).
+Map<String, List<Question>> _placementPool() {
+  final list = jsonDecode(File('assets/data/questions.json').readAsStringSync()) as List;
+  final pool = <String, List<Question>>{for (final l in placementLevels) l: []};
+  for (final q in list) {
+    final passage = q['passage'] as String?;
+    if ((q['id'] as String).startsWith('q-orj-') && (passage == null || passage.isEmpty)) {
+      pool[q['level']]!.add(Question.fromJson(q as Map<String, dynamic>));
+    }
+  }
+  return pool;
+}
+
 ListeningTrack _track() {
   final list = jsonDecode(File('assets/data/listening.json').readAsStringSync()) as List;
   return ListeningTrack.fromJson(list.first as Map<String, dynamic>);
@@ -145,18 +160,18 @@ void main() {
 
   setUpAll(loadRealFonts);
 
-  setUp(() {
-    SharedPreferences.setMockInitialValues({
-      'auth_token': 'test',
-      'auth_user_data': jsonEncode({
-        'id': 1, 'username': 'deneme', 'full_name': 'Deneme Öğrencisi Uzun Adlı',
-        'email': 'deneme@example.com', 'university_id': 'itu',
-        'unlocked_universities': ['itu', 'general'],
-      }),
-      'current_uni_id': 'itu',
-      'current_level': 'B2',
-    });
-  });
+  Map<String, Object> basePrefs() => {
+        'auth_token': 'test',
+        'auth_user_data': jsonEncode({
+          'id': 1, 'username': 'deneme', 'full_name': 'Deneme Öğrencisi Uzun Adlı',
+          'email': 'deneme@example.com', 'university_id': 'itu',
+          'unlocked_universities': ['itu', 'general'],
+        }),
+        'current_uni_id': 'itu',
+        'current_level': 'B2',
+      };
+
+  setUp(() => SharedPreferences.setMockInitialValues(basePrefs()));
 
   Future<void> scan(WidgetTester tester, String name, Widget Function() build,
       {Future<void> Function(WidgetTester)? interact}) async {
@@ -173,8 +188,17 @@ void main() {
 
   final tabs = ['Deneme', 'Hatalar', 'Kelime', 'Pratik'];
 
+  Future<void> waitForNav(WidgetTester t) async {
+    for (var i = 0; i < 30 && find.byType(NavigationBar).evaluate().isEmpty; i++) {
+      await settle(t);
+    }
+  }
+
   testWidgets('Ana sekmeler', (t) async {
-    await scan(t, 'Özet', () => const HomeNavigation());
+    await scan(t, 'Özet', () => const HomeNavigation(), interact: (t) async {
+      await waitForNav(t);
+      expect(find.byKey(const Key('placement_offer')), findsOneWidget);
+    });
     for (final tab in tabs) {
       await scan(t, tab, () => const HomeNavigation(), interact: (t) async {
         for (var i = 0; i < 30 && find.byType(NavigationBar).evaluate().isEmpty; i++) {
@@ -184,6 +208,47 @@ void main() {
         await settle(t);
       });
     }
+    // Seviye tespiti çözülmüşse dashboard'da teklif yerine kısa özet görünür
+    SharedPreferences.setMockInitialValues(
+        {...basePrefs(), PlacementTestScreen.prefLevel: 'C1', PlacementTestScreen.prefMastered: 'B2'});
+    await scan(t, 'Özet+SeviyeTespiti', () => const HomeNavigation(), interact: (t) async {
+      await waitForNav(t);
+      expect(find.byKey(const Key('placement_summary')), findsOneWidget);
+      expect(find.byKey(const Key('placement_offer')), findsNothing);
+    });
+  });
+  testWidgets('Seviye tespiti', (t) async {
+    final pool = _placementPool();
+    final correct = {for (final qs in pool.values) for (final q in qs) q.question: q.correctAnswer};
+    Widget build() => PlacementTestScreen(currentLevel: 'A1', onApplyLevel: (_) {}, pool: pool);
+    Future<void> begin(WidgetTester t) async {
+      await t.ensureVisible(find.byKey(const Key('placement_begin')));
+      await t.pump();
+      await t.tap(find.byKey(const Key('placement_begin')));
+      await settle(t);
+    }
+
+    await scan(t, 'SeviyeGiriş', build);
+    await scan(t, 'SeviyeSoru', build, interact: begin);
+    await scan(t, 'SeviyeSonuç', build, interact: (t) async {
+      await begin(t);
+      // İlk iki kurda doğru, sonra yanlış: B1 önerilir, satırların hepsi dolu olur
+      for (var n = 0; n < 30 && find.byKey(const Key('placement_recommended')).evaluate().isEmpty; n++) {
+        final text = t.widget<Text>(find.byKey(const Key('placement_question'))).data!;
+        final level = t.widget<Text>(find.byKey(const Key('placement_level_badge'))).data!;
+        final right = correct[text]!;
+        final key = level.endsWith('A1') || level.endsWith('A2')
+            ? right
+            : ['A', 'B', 'C', 'D'].firstWhere((k) => k != right);
+        final option = find.byKey(Key('placement_opt_$key'));
+        await t.ensureVisible(option);
+        await t.pump();
+        await t.tap(option);
+        await t.pump();
+      }
+      await settle(t);
+      expect(t.widget<Text>(find.byKey(const Key('placement_recommended'))).data, 'B1');
+    });
   });
   testWidgets('Giriş ekranı', (t) async => scan(t, 'Giriş', () => AuthScreen(onAuthenticated: () {})));
   testWidgets('Giriş ekranı - Kayıt', (t) async => scan(t, 'Kayıt', () => AuthScreen(onAuthenticated: () {}),

@@ -301,6 +301,7 @@ function switchTab(tabName) {
 }
 
 async function loadDashboardStats() {
+  if (window.renderPlacementCard) window.renderPlacementCard();
   try {
     const res = await fetch('/api/stats');
     if (!res.ok) return;  // giriş yok: kartlar varsayılan hâlinde kalır
@@ -354,8 +355,8 @@ async function loadDashboardStats() {
 // ---------------- İNTERAKTİF KUR ALIŞTIRMALARI & SORU BANKASI ----------------
 const practiceState = {
   category: "all",
-  pool: "school_only", // "school_only" (Sadece Seçili Okulun 180 Sorusu), "school_plus_general", "all_unlocked"
-  levelScope: "current", // "current" (Seçili Kur - 30 Soru) veya "all_levels" (Okulun Tüm 180 Sorusu)
+  pool: "school_only", // "school_only" (Sadece Seçili Okulun 204 Sorusu), "school_plus_general", "all_unlocked"
+  levelScope: "current", // "current" (Seçili Kur - 34 Soru) veya "all_levels" (Okulun Tüm 204 Sorusu)
   answers: {}, // { [questionId]: selectedKey }
   questionsById: {},
   visible: 50 // Genel havuz binlerce soru içerdiği için liste 50'şer gösterilir
@@ -601,10 +602,10 @@ async function loadPracticeQuestions() {
         <div class="flex flex-wrap items-center gap-1.5">
           <div class="flex items-center gap-1 bg-white p-1 rounded-xl border border-slate-200 text-[11px] font-bold">
             <button type="button" onclick="setPracticePool('school_only'); setPracticeLevelScope('current');" class="px-2.5 py-1 rounded-lg transition ${practiceState.pool === 'school_only' && practiceState.levelScope === 'current' ? 'bg-indigo-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100'}">
-              Sadece ${shortName} (${lvl} • 30 Soru)
+              Sadece ${shortName} (${lvl} • 34 Soru)
             </button>
             <button type="button" onclick="setPracticePool('school_only'); setPracticeLevelScope('all_levels');" class="px-2.5 py-1 rounded-lg transition ${practiceState.pool === 'school_only' && practiceState.levelScope === 'all_levels' ? 'bg-indigo-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100'}">
-              ${shortName} Tüm Kurlar (180 Soru)
+              ${shortName} Tüm Kurlar (204 Soru)
             </button>
             <button type="button" onclick="setPracticePool('school_plus_general'); setPracticeLevelScope('current');" class="px-2.5 py-1 rounded-lg transition ${practiceState.pool === 'school_plus_general' ? 'bg-indigo-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100'}">
               ${shortName} + Genel Havuz
@@ -820,7 +821,7 @@ function renderExamsTab(targetLevel = null) {
 
         <div class="grid grid-cols-3 gap-2 shrink-0 text-center">
           <div class="p-2.5 bg-white/10 rounded-2xl border border-white/10">
-            <div class="text-base font-black text-emerald-400">180</div>
+            <div class="text-base font-black text-emerald-400">204</div>
             <div class="text-[10px] text-slate-300 font-bold">Özgün Soru</div>
           </div>
           <div class="p-2.5 bg-white/10 rounded-2xl border border-white/10">
@@ -859,88 +860,88 @@ function renderExamsTab(targetLevel = null) {
       </button>
     </div>
 
-    <!-- 2. Okulun Tüm 180 Özgün Sorusunu Kapsayan Büyük Maraton -->
+    <!-- 2. Okulun Tüm 204 Özgün Sorusunu Kapsayan Büyük Maraton -->
     <div class="p-5 rounded-2xl border-2 border-indigo-600 bg-indigo-50/20 flex flex-col justify-between shadow-sm">
       <div>
         <div class="flex items-center justify-between mb-2">
           <span class="px-2.5 py-0.5 bg-indigo-600 text-white text-[11px] font-bold rounded-lg uppercase">Tam Paket Maratonu</span>
-          <span class="px-2.5 py-0.5 bg-indigo-100 text-indigo-800 text-xs font-black rounded-lg">180 Özgün Soru</span>
+          <span class="px-2.5 py-0.5 bg-indigo-100 text-indigo-800 text-xs font-black rounded-lg">204 Özgün Soru</span>
         </div>
         <h4 class="font-extrabold text-slate-800 text-base mb-1">${u.short_name} Özel Soru Bankası Tam Maraton (A1–C2)</h4>
         <p class="text-xs text-slate-600 leading-relaxed mb-4">
-          ${u.name} için özel hazırlanmış 180 özgün sorunun tamamını (her kurda 30 soru: Grammar, Vocab, Reading, Restatement, Cloze, Sentence Comp.) çözün.
+          ${u.name} için özel hazırlanmış 204 özgün sorunun tamamını (her kurda 34 soru: Grammar, Vocab, Reading, Restatement, Cloze, Sentence Comp.) çözün.
         </p>
       </div>
       <button onclick="startExamSimulation('${u.id}', 'all', 'all', true)" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center justify-center gap-1.5">
-        <i data-lucide="award" class="w-3.5 h-3.5"></i> ${u.short_name} 180 Soruluk Tam Maratonu Başlat
+        <i data-lucide="award" class="w-3.5 h-3.5"></i> ${u.short_name} 204 Soruluk Tam Maratonu Başlat
       </button>
     </div>
 
-    <!-- 3. Seçili Kur (${lvl}) 30 Soruluk Kur Bitirme Sınavı -->
+    <!-- 3. Seçili Kur (${lvl}) 34 Soruluk Kur Bitirme Sınavı -->
     <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-blue-300 transition flex flex-col justify-between">
       <div>
         <div class="flex items-center justify-between mb-2">
           <span class="px-2.5 py-0.5 bg-emerald-100 text-emerald-800 text-[11px] font-bold rounded-lg uppercase">${u.short_name} • ${lvl} Kuru</span>
-          <span class="text-xs text-slate-500 font-semibold">30 Özgün Soru</span>
+          <span class="text-xs text-slate-500 font-semibold">34 Özgün Soru</span>
         </div>
-        <h4 class="font-extrabold text-slate-800 text-base mb-1">${u.short_name} ${lvl} Kur Bitirme Sınavı (30 Soru)</h4>
+        <h4 class="font-extrabold text-slate-800 text-base mb-1">${u.short_name} ${lvl} Kur Bitirme Sınavı (34 Soru)</h4>
         <p class="text-xs text-slate-600 leading-relaxed mb-4">
-          Sadece ${u.name} ${lvl} kuru için hazırlanmış 30 özgün soruyu (5 Grammar, 5 Vocab, 5 Reading, 5 Restatement, 5 Cloze, 5 Sentence Comp.) içerir.
+          Sadece ${u.name} ${lvl} kuru için hazırlanmış 34 özgün soruyu (Grammar, Vocab, Reading, Restatement, Cloze, Sentence Completion ve okula özel bölümler) içerir.
         </p>
       </div>
       <button onclick="startExamSimulation('${u.id}', '${lvl}', 'all', true)" class="w-full py-2.5 bg-slate-100 hover:bg-emerald-600 hover:text-white text-slate-800 font-bold text-xs rounded-xl transition">
-        ${u.short_name} ${lvl} Kur Sınavını Çöz (30 Soru)
+        ${u.short_name} ${lvl} Kur Sınavını Çöz (34 Soru)
       </button>
     </div>
 
-    <!-- 4. Reading & Makale Analizi Modülü (30 Soru) -->
+    <!-- 4. Reading & Makale Analizi Modülü (30+ Soru) -->
     <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-blue-300 transition flex flex-col justify-between">
       <div>
         <div class="flex items-center justify-between mb-2">
           <span class="px-2.5 py-0.5 bg-amber-100 text-amber-800 text-[11px] font-bold rounded-lg uppercase">${u.short_name} • Reading</span>
-          <span class="text-xs text-slate-500 font-semibold">30 Özgün Soru</span>
+          <span class="text-xs text-slate-500 font-semibold">30+ Özgün Soru</span>
         </div>
-        <h4 class="font-extrabold text-slate-800 text-base mb-1">${u.short_name} Akademik Reading Sınavı (30 Soru)</h4>
+        <h4 class="font-extrabold text-slate-800 text-base mb-1">${u.short_name} Akademik Reading Sınavı (30+ Soru)</h4>
         <p class="text-xs text-slate-600 leading-relaxed mb-4">
-          ${u.name} (${u.exam_name}) akademik araştırma bültenleri ve makale parçaları üzerinden 30 özgün okuma-anlama sorusu.
+          ${u.name} (${u.exam_name}) akademik araştırma bültenleri ve makale parçaları üzerinden 30+ özgün okuma-anlama sorusu.
         </p>
       </div>
       <button onclick="startExamSimulation('${u.id}', 'all', 'Reading', true)" class="w-full py-2.5 bg-slate-100 hover:bg-amber-600 hover:text-white text-slate-800 font-bold text-xs rounded-xl transition">
-        ${u.short_name} 30 Reading Sorusunu Çöz
+        ${u.short_name} Reading Sorularını Çöz
       </button>
     </div>
 
-    <!-- 5. Restatement (Yakın Anlam) Sınavı (30 Soru) -->
+    <!-- 5. Restatement (Yakın Anlam) Sınavı (30+ Soru) -->
     <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-blue-300 transition flex flex-col justify-between">
       <div>
         <div class="flex items-center justify-between mb-2">
           <span class="px-2.5 py-0.5 bg-purple-100 text-purple-800 text-[11px] font-bold rounded-lg uppercase">${u.short_name} • Restatement</span>
-          <span class="text-xs text-slate-500 font-semibold">30 Özgün Soru</span>
+          <span class="text-xs text-slate-500 font-semibold">30+ Özgün Soru</span>
         </div>
-        <h4 class="font-extrabold text-slate-800 text-base mb-1">${u.short_name} Restatement Sınavı (30 Soru)</h4>
+        <h4 class="font-extrabold text-slate-800 text-base mb-1">${u.short_name} Restatement Sınavı (30+ Soru)</h4>
         <p class="text-xs text-slate-600 leading-relaxed mb-4">
-          ${u.exam_name} sınavında en çok puan getiren 30 özgün paraphrase ve cümle yeniden ifade etme sorusu.
+          ${u.exam_name} sınavında en çok puan getiren 30+ özgün paraphrase ve cümle yeniden ifade etme sorusu.
         </p>
       </div>
       <button onclick="startExamSimulation('${u.id}', 'all', 'Restatement', true)" class="w-full py-2.5 bg-slate-100 hover:bg-purple-600 hover:text-white text-slate-800 font-bold text-xs rounded-xl transition">
-        ${u.short_name} 30 Restatement Sorusunu Çöz
+        ${u.short_name} Restatement Sorularını Çöz
       </button>
     </div>
 
-    <!-- 6. Use of English (Grammar) Sınavı (30 Soru) -->
+    <!-- 6. Use of English (Grammar) Sınavı (30+ Soru) -->
     <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-blue-300 transition flex flex-col justify-between">
       <div>
         <div class="flex items-center justify-between mb-2">
           <span class="px-2.5 py-0.5 bg-rose-100 text-rose-800 text-[11px] font-bold rounded-lg uppercase">${u.short_name} • Grammar</span>
-          <span class="text-xs text-slate-500 font-semibold">30 Özgün Soru</span>
+          <span class="text-xs text-slate-500 font-semibold">30+ Özgün Soru</span>
         </div>
-        <h4 class="font-extrabold text-slate-800 text-base mb-1">${u.short_name} Akademik Grammar Sınavı (30 Soru)</h4>
+        <h4 class="font-extrabold text-slate-800 text-base mb-1">${u.short_name} Akademik Grammar Sınavı (30+ Soru)</h4>
         <p class="text-xs text-slate-600 leading-relaxed mb-4">
-          ${u.name} hazırlık müfredatına özel 30 özgün akademik dilbilgisi ve yapı sorusu.
+          ${u.name} hazırlık müfredatına özel 30+ özgün akademik dilbilgisi ve yapı sorusu.
         </p>
       </div>
       <button onclick="startExamSimulation('${u.id}', 'all', 'Grammar', true)" class="w-full py-2.5 bg-slate-100 hover:bg-rose-600 hover:text-white text-slate-800 font-bold text-xs rounded-xl transition">
-        ${u.short_name} 30 Grammar Sorusunu Çöz
+        ${u.short_name} Grammar Sorularını Çöz
       </button>
     </div>
   `;

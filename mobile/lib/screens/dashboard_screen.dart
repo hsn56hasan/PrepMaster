@@ -14,6 +14,7 @@ import 'writing_screen.dart';
 import 'speaking_screen.dart';
 import 'university_paywall_sheet.dart';
 import 'student_document_scan_sheet.dart';
+import 'placement_test_screen.dart';
 import '../services/sync_service.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -39,6 +40,8 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   List<University> _universities = [];
   Map<String, dynamic>? _stats;
+  String? _placementLevel;
+  String? _placementMastered;
 
   @override
   void initState() {
@@ -49,12 +52,123 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Future<void> _loadData() async {
     final unis = await ApiService().getUniversities();
     final stats = await ApiService().getStats();
+    final prefs = await SharedPreferences.getInstance();
     if (mounted) {
       setState(() {
         _universities = unis;
         _stats = stats;
+        _placementLevel = prefs.getString(PlacementTestScreen.prefLevel);
+        _placementMastered = prefs.getString(PlacementTestScreen.prefMastered);
       });
     }
+  }
+
+  Future<void> _openPlacementTest() async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => PlacementTestScreen(
+          currentLevel: widget.currentLevel,
+          onApplyLevel: widget.onLevelChange,
+        ),
+      ),
+    );
+    final prefs = await SharedPreferences.getInstance();
+    if (!mounted) return;
+    setState(() {
+      _placementLevel = prefs.getString(PlacementTestScreen.prefLevel);
+      _placementMastered = prefs.getString(PlacementTestScreen.prefMastered);
+    });
+  }
+
+  /// Seviye tespit sınavı: çözülmediyse belirgin kart, çözüldüyse kısa özet.
+  Widget _placementCard() {
+    final done = _placementLevel != null;
+    if (done) {
+      final mastered = _placementMastered;
+      return Container(
+        key: const Key('placement_summary'),
+        padding: const EdgeInsets.fromLTRB(12, 4, 4, 4),
+        decoration: BoxDecoration(
+          color: AppTheme.brandLightBlue,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Row(
+          children: [
+            const Icon(
+              Icons.insights_rounded,
+              size: 18,
+              color: AppTheme.brandBlue,
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                mastered == null || mastered == 'none'
+                    ? 'Seviye tespiti: önerilen kur $_placementLevel'
+                    : 'Seviye tespiti: $mastered geçildi • önerilen $_placementLevel',
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: AppTheme.brandNavy,
+                ),
+              ),
+            ),
+            TextButton(
+              key: const Key('placement_start'),
+              onPressed: _openPlacementTest,
+              child: const Text('Tekrar çöz', style: TextStyle(fontSize: 12)),
+            ),
+          ],
+        ),
+      );
+    }
+    return Container(
+      key: const Key('placement_offer'),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppTheme.brandBlue.withValues(alpha: 0.35)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Row(
+            children: [
+              Icon(Icons.insights_rounded, color: AppTheme.brandBlue),
+              SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  'Seviyeni bilmiyor musun?',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w800,
+                    color: AppTheme.textMain,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          const Text(
+            "Seviye tespit sınavı A1'den C2'ye uyarlamalı ilerler (en fazla 24 soru, "
+            'yaklaşık 5 dakika) ve sana uygun çalışma kurunu önerir.',
+            style: TextStyle(
+              fontSize: 12.5,
+              height: 1.4,
+              color: AppTheme.textMuted,
+            ),
+          ),
+          const SizedBox(height: 10),
+          FilledButton.icon(
+            key: const Key('placement_start'),
+            onPressed: _openPlacementTest,
+            icon: const Icon(Icons.play_arrow_rounded, size: 18),
+            label: const Text('Seviye tespit sınavına başla'),
+          ),
+        ],
+      ),
+    );
   }
 
   void _openUniPicker() {
@@ -1275,7 +1389,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const Icon(Icons.school, size: 18, color: Colors.white),
+                    child: const Icon(
+                      Icons.school,
+                      size: 18,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
@@ -1458,6 +1576,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   );
                 }).toList(),
               ),
+              const SizedBox(height: 12),
+              _placementCard(),
               const SizedBox(height: 16),
 
               // Hero Card

@@ -43,5 +43,9 @@
             <action android:name="android.intent.action.PROCESS_TEXT"/>
             <data android:mimeType="text/plain"/>
         </intent>
+        <!-- Kelime kartlarındaki sesli okuma: Android 11+ telefondaki metin okuma motorunu ancak bu bildirimle bulur -->
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE"/>
+        </intent>
     </queries>
 </manifest>

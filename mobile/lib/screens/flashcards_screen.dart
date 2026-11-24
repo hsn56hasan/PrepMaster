@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../models/vocabulary.dart';
 import '../services/api_service.dart';
+import '../services/speech_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/level_selector.dart';
 
@@ -70,6 +71,7 @@ class _FlashcardsScreenState extends State<FlashcardsScreen>
 
   void _nextCard() {
     if (_vocabList.isEmpty) return;
+    SpeechService.instance.stop();
     setState(() {
       _currentIndex = (_currentIndex + 1) % _vocabList.length;
       _isFlipped = false;
@@ -79,6 +81,7 @@ class _FlashcardsScreenState extends State<FlashcardsScreen>
 
   void _prevCard() {
     if (_vocabList.isEmpty) return;
+    SpeechService.instance.stop();
     setState(() {
       _currentIndex =
           (_currentIndex - 1 + _vocabList.length) % _vocabList.length;
@@ -99,8 +102,73 @@ class _FlashcardsScreenState extends State<FlashcardsScreen>
 
   @override
   void dispose() {
+    SpeechService.instance.stop();
     _flipController.dispose();
     super.dispose();
+  }
+
+  /// Sesli okuma; telefonda İngilizce ses yoksa nasıl kurulacağını söyler.
+  Future<void> _say(String text, {bool slow = false}) async {
+    final ok = await SpeechService.instance.speak(text, slow: slow);
+    if (!ok && mounted) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          const SnackBar(
+            key: Key('tts_unavailable'),
+            content: Text(
+              'Sesli okuma için telefonda İngilizce ses gerekli: Ayarlar > Genel yönetim > '
+              'Metin okuma çıkışı bölümünden İngilizce ses verisini indirin.',
+            ),
+            duration: Duration(seconds: 6),
+          ),
+        );
+    }
+  }
+
+  /// Hoparlör düğmesi: okurken simgesi dalgaya döner.
+  Widget _speakButton({
+    required Key key,
+    required String text,
+    required String label,
+    required IconData icon,
+    bool slow = false,
+    bool onDark = false,
+  }) {
+    return ValueListenableBuilder<String?>(
+      valueListenable: SpeechService.instance.speaking,
+      builder: (context, current, _) {
+        final active = current == text.trim();
+        final fg = onDark ? Colors.white : AppTheme.brandBlue;
+        return TextButton.icon(
+          key: key,
+          onPressed: () => _say(text, slow: slow),
+          icon: Icon(
+            active ? Icons.graphic_eq_rounded : icon,
+            size: 18,
+            color: fg,
+          ),
+          label: Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w800,
+              color: fg,
+            ),
+          ),
+          style: TextButton.styleFrom(
+            backgroundColor: onDark
+                ? Colors.white.withValues(alpha: 0.15)
+                : AppTheme.brandLightBlue,
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            minimumSize: const Size(0, 36),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18),
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -144,6 +212,7 @@ class _FlashcardsScreenState extends State<FlashcardsScreen>
                 LevelSelector(
                   selected: _selectedLevel,
                   onSelected: (lvl) {
+                    SpeechService.instance.stop();
                     setState(() => _selectedLevel = lvl);
                     _loadVocab();
                   },
@@ -353,7 +422,28 @@ class _FlashcardsScreenState extends State<FlashcardsScreen>
                           ),
                         ),
                       ],
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 12),
+                      Wrap(
+                        alignment: WrapAlignment.center,
+                        spacing: 8,
+                        runSpacing: 6,
+                        children: [
+                          _speakButton(
+                            key: const Key('tts_word'),
+                            text: word.word,
+                            label: 'Dinle',
+                            icon: Icons.volume_up_rounded,
+                          ),
+                          _speakButton(
+                            key: const Key('tts_word_slow'),
+                            text: word.word,
+                            label: 'Yavaş',
+                            icon: Icons.slow_motion_video_rounded,
+                            slow: true,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 14),
                       Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 14,
@@ -510,13 +600,26 @@ class _FlashcardsScreenState extends State<FlashcardsScreen>
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Örnek Cümle:',
-                            style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w800,
-                              color: Colors.amberAccent,
-                            ),
+                          Row(
+                            children: [
+                              const Expanded(
+                                child: Text(
+                                  'Örnek Cümle:',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w800,
+                                    color: Colors.amberAccent,
+                                  ),
+                                ),
+                              ),
+                              _speakButton(
+                                key: const Key('tts_sentence'),
+                                text: word.exampleSentence,
+                                label: 'Dinle',
+                                icon: Icons.volume_up_rounded,
+                                onDark: true,
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 4),
                           Text(

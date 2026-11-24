@@ -7,6 +7,14 @@ import 'package:prep_master/theme/app_theme.dart';
 import 'package:prep_master/services/api_service.dart';
 
 void main() {
+  // Bu testler uygulamanın ÇEVRİMDIŞI değerlendiricilerini ölçer. Test altyapısı başlatılmadan
+  // ApiService gerçek ağa çıkıyor ve canlı sunucuya istek atıp onun puanını ölçüyordu
+  // (testi hem internete bağımlı hem canlı siteye yük yapıyordu). Ağ kapatılır, adres kapalı porta çevrilir.
+  setUpAll(() {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    ApiService().setBaseUrl('http://127.0.0.1:1');
+  });
+
   group('Listening & Writing Evaluation Tests', () {
     test('ListeningTrack fromJson parses correctly', () {
       final jsonMap = {

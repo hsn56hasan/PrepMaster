@@ -1021,6 +1021,25 @@ def get_questions(
         filtered = [q for q in filtered if q.get("category", "").lower() == category.lower()]
     return filtered
 
+PLACEMENT_LEVELS = ["A1", "A2", "B1", "B2", "C1", "C2"]
+PLACEMENT_PER_LEVEL = 4
+
+
+@app.get("/api/placement/questions")
+def get_placement_questions():
+    """Seviye tespit sınavı: her kurdan rastgele 4 özgün (q-orj), okuma parçası gerektirmeyen soru.
+    Genel havuzdandır; giriş ve üyelik gerektirmez. Uyarlamalı akış istemcide yürür."""
+    result = {}
+    for lvl in PLACEMENT_LEVELS:
+        pool = [
+            q for q in questions_data
+            if q["id"].startswith("q-orj-") and q.get("level", "").upper() == lvl
+            and not q.get("passage") and len(q.get("options", [])) == 4
+        ]
+        result[lvl] = random.sample(pool, min(PLACEMENT_PER_LEVEL, len(pool)))
+    return {"levels": PLACEMENT_LEVELS, "per_level": PLACEMENT_PER_LEVEL, "pass_mark": 3, "questions": result}
+
+
 @app.get("/api/vocabulary")
 def get_vocabulary(
     request: Request,
@@ -1720,7 +1739,7 @@ def generate_mock_exam(university_id: str, request: Request, level: Optional[str
     uni = next((u for u in universities_data if u["id"] == university_id), universities_data[0])
     target_level = (level or "B2").upper()
 
-    # 1. Select questions strictly from THIS university's 180-question pool (30 per level)
+    # 1. Select questions strictly from THIS university's 204-question pool (34 per level)
     uni_all_questions = [q for q in questions_data if q.get("university_id") == university_id]
     uni_exact_level = [q for q in uni_all_questions if q.get("level", "").upper() == target_level]
 
@@ -1850,15 +1869,16 @@ def get_mobile_app_info():
     return {
         "available": apk_path is not None,
         "app_name": "PrepKampüs Mobil (Android)",
-        "version": "1.5.0",
+        "version": "1.7.0",
         "build_type": "Release (ARM64)",
-        "filename": "PrepKampus-v1.5-Android.apk",
+        "filename": "PrepKampus-v1.7-Android.apk",
         "size_mb": size_mb,
         "min_android": "Android 8.0+ (API 26+)",
         "download_url": "/api/download/apk",
         "features": [
             "Web hesabınızla anlık Bulut Senkronizasyon (Kaldığınız yerden devam)",
-            "İnternetsiz (Offline) Kelime Kartları ve Gramer Pratik Modu",
+            "İnternetsiz (Offline) Kelime Kartları, Sesli Telaffuz ve Gramer Pratik Modu",
+            "Uyarlamalı Seviye Tespit Sınavı (A1–C2, internetsiz, en fazla 24 soru)",
             "26 Üniversite Muafiyet Deneme Sınavı (30 Soru/Kur) & 24 Akademik Dinleme (MP3)",
             "E-Devlet Öğrenci Belgesi Tarama ve AI Writing / Speaking Değerlendirme"
         ]
@@ -1876,9 +1896,9 @@ def download_android_apk():
     return FileResponse(
         path=apk_path,
         media_type="application/vnd.android.package-archive",
-        filename="PrepKampus-v1.5-Android.apk",
+        filename="PrepKampus-v1.7-Android.apk",
         headers={
-            "Content-Disposition": 'attachment; filename="PrepKampus-v1.5-Android.apk"',
+            "Content-Disposition": 'attachment; filename="PrepKampus-v1.7-Android.apk"',
             "Cache-Control": "public, max-age=3600"
         }
     )
