@@ -508,11 +508,14 @@ Barkod No: EDEVLET-KOC-2026-X94B
         ),
       ));
 
-      expect(find.text('Hacettepe Üniversitesi Formatı'), findsOneWidget);
-      expect(find.text('TAM DENEME'), findsOneWidget);
-      expect(find.text('Restatement (En Yakın Anlam) Atölyesi'), findsOneWidget);
-      expect(find.text('Akademik Reading & Çıkarım Testi'), findsOneWidget);
-      expect(find.text('Grammar & Cloze Test Serisi'), findsOneWidget);
+      expect(find.text('Hacettepe Muafiyet denemeleri'), findsOneWidget);
+      expect(find.text('B2 muafiyet denemesi'), findsOneWidget);
+      expect(find.text('Önerilen'), findsOneWidget);
+      expect(find.text('B2 kur bitirme sınavı'), findsOneWidget);
+      expect(find.text('Restatement sınavı'), findsOneWidget);
+      expect(find.text('Reading sınavı'), findsOneWidget);
+      expect(find.text('Grammar sınavı'), findsOneWidget);
+      expect(find.text('Zamanı verimli kullanın'), findsOneWidget);
     });
   });
 }

@@ -29,6 +29,8 @@ import 'package:prep_master/screens/university_picker_dialog.dart';
 import 'package:prep_master/screens/writing_screen.dart';
 import 'package:prep_master/services/placement_test.dart';
 import 'package:prep_master/theme/app_theme.dart';
+import 'package:prep_master/widgets/panel_widgets.dart';
+import 'package:prep_master/screens/exams_screen.dart';
 
 const sizes = [Size(320, 568), Size(360, 640), Size(412, 915)];
 const scales = [1.0, 1.3];
@@ -216,6 +218,55 @@ void main() {
       expect(find.byKey(const Key('placement_summary')), findsOneWidget);
       expect(find.byKey(const Key('placement_offer')), findsNothing);
     });
+  });
+  testWidgets('Panel parçaları ve okul denemeleri', (t) async {
+    final overview = <String, dynamic>{
+      'level': 'B2',
+      'pool': 'school',
+      'sections': [
+        for (final c in ['Grammar', 'Vocabulary', 'Reading', 'Restatement', 'Cloze Test', 'Sentence Completion',
+                         'Paragraph Completion', 'Dialogue'])
+          {'category': c, 'total': 34, 'answered': 12, 'correct': 9},
+      ],
+      'levels': [
+        for (final l in ['A1', 'A2', 'B1', 'B2', 'C1', 'C2']) {'level': l, 'total': 204, 'answered': 100, 'correct': 88},
+      ],
+      'mistakes_by_category': {'Sentence Completion': 12, 'Paragraph Completion': 3},
+      'plan': [
+        {'id': 'vocab', 'title': '20 kelime tekrarı', 'done': 20, 'target': 20, 'action': {'type': 'tab', 'tab': 'flashcards'}},
+        {'id': 'weakest', 'title': 'B2 Sentence Completion · 10 soru', 'done': 3, 'target': 10,
+         'action': {'type': 'practice', 'category': 'Sentence Completion', 'level': 'B2'}},
+        {'id': 'mistakes', 'title': "Hata Kasası'ndan 5 soru", 'done': 1, 'target': 5, 'action': {'type': 'tab', 'tab': 'mistakes'}},
+      ],
+    };
+    Widget panel() => Scaffold(
+          body: SingleChildScrollView(padding: const EdgeInsets.all(20), child: Column(children: [
+            KpiGrid(tiles: const [
+              KpiTile(icon: Icons.local_fire_department, iconColor: Colors.amber, label: 'Seri', value: '128 gün'),
+              KpiTile(icon: Icons.assignment_turned_in_outlined, iconColor: Colors.blue, label: 'Deneme', value: '1250'),
+              KpiTile(icon: Icons.trending_up, iconColor: Colors.green, label: 'Ortalama', value: '%87.5'),
+              KpiTile(icon: Icons.menu_book_outlined, iconColor: Colors.indigo, label: 'Öğrenilen kelime', value: '2078/2078'),
+            ]),
+            AlertRow(icon: Icons.warning_amber_rounded, text: 'Hata Kasanda 125 çözülmemiş soru var',
+                actionLabel: 'Çöz', onTap: () {}),
+            AlertRow(tone: AlertTone.info, icon: Icons.lock_outline,
+                text: 'Eskişehir Teknik soruları kilitli; ilerlemen genel havuzdan hesaplanıyor',
+                actionLabel: 'Kilidi aç', onTap: () {}),
+            TodayPlanCard(plan: (overview['plan'] as List).cast<Map<String, dynamic>>(), onAction: (_) {}),
+            ProgressTabsCard(overview: overview, poolLabel: 'Eskişehir Teknik havuzu', onPractice: (_) {},
+                onLevel: (_) {}, onMistakes: () {}),
+          ])),
+        );
+    await scan(t, 'PanelBölümler', panel);
+    for (final tab in [1, 2]) {
+      await scan(t, 'PanelSekme$tab', panel, interact: (t) async {
+        await t.ensureVisible(find.byKey(Key('progress_tab_$tab')));
+        await t.pump();
+        await t.tap(find.byKey(Key('progress_tab_$tab')));
+        await t.pump();
+      });
+    }
+    await scan(t, 'OkulDenemeleri', () => ExamsScreen(currentUniversity: _uni(), currentLevel: 'B2'));
   });
   testWidgets('Seviye tespiti', (t) async {
     final pool = _placementPool();

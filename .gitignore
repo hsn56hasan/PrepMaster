@@ -40,3 +40,6 @@ mobile/.pub/
 # Otomatik veritabanı yedekleri (öğrenci verisi içerir)
 backups/
 *.db.gz
+
+# Günlük üretilen yerel Reels videoları (siteye eklenene kadar git'e girmez)
+static/videos/

@@ -15,6 +15,7 @@ import 'speaking_screen.dart';
 import 'university_paywall_sheet.dart';
 import 'student_document_scan_sheet.dart';
 import 'placement_test_screen.dart';
+import '../widgets/panel_widgets.dart';
 import '../services/sync_service.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -40,6 +41,7 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   List<University> _universities = [];
   Map<String, dynamic>? _stats;
+  Map<String, dynamic>? _overview;
   String? _placementLevel;
   String? _placementMastered;
 
@@ -49,14 +51,92 @@ class _DashboardScreenState extends State<DashboardScreen> {
     _loadData();
   }
 
+  @override
+  void didUpdateWidget(covariant DashboardScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Kur ya da okul değişince bölüm ilerlemesi yeniden hesaplanır
+    if (oldWidget.currentLevel != widget.currentLevel ||
+        oldWidget.currentUniversity.id != widget.currentUniversity.id) {
+      _loadOverview();
+    }
+  }
+
+  Future<void> _loadOverview() async {
+    final overview = await ApiService().getDashboardOverview(
+      level: widget.currentLevel,
+    );
+    if (mounted) setState(() => _overview = overview);
+  }
+
+  /// Günün planındaki bir göreve dokununca ilgili yere gider.
+  void _runPlanAction(Map<String, dynamic> item) {
+    final action = (item['action'] as Map?) ?? {};
+    if (action['type'] == 'practice') {
+      _practiceCategory('${action['category']}', level: '${action['level']}');
+    } else if (action['tab'] == 'flashcards') {
+      widget.onTabSwitch(3);
+    } else if (action['tab'] == 'mistakes') {
+      widget.onTabSwitch(2);
+    }
+  }
+
+  /// Bir bölümden kısa pratik: okul havuzu açıksa okulun, değilse genel havuzun soruları.
+  Future<void> _practiceCategory(String category, {String? level}) async {
+    final uni = widget.currentUniversity;
+    final lvl = level ?? widget.currentLevel;
+    final school = _overview?['pool'] == 'school';
+    final fetched = await ApiService().getQuestions(
+      universityId: school ? uni.id : 'general',
+      level: lvl,
+      category: category,
+    );
+    final pool =
+        fetched
+            .where((q) => q.universityId == (school ? uni.id : 'general'))
+            .toList()
+          ..shuffle();
+    final questions = pool.take(10).toList();
+    if (!mounted) return;
+    if (questions.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Bu bölümde soru bulunamadı.')),
+      );
+      return;
+    }
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) =>
+            ExamRunnerScreen(questions: questions, university: uni, level: lvl),
+      ),
+    );
+    _loadData();
+  }
+
+  Widget _chip(String text, Color bg, Color fg) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+    decoration: BoxDecoration(
+      color: bg,
+      borderRadius: BorderRadius.circular(6),
+    ),
+    child: Text(
+      text,
+      style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: fg),
+    ),
+  );
+
   Future<void> _loadData() async {
     final unis = await ApiService().getUniversities();
     final stats = await ApiService().getStats();
+    final overview = await ApiService().getDashboardOverview(
+      level: widget.currentLevel,
+    );
     final prefs = await SharedPreferences.getInstance();
     if (mounted) {
       setState(() {
         _universities = unis;
         _stats = stats;
+        _overview = overview;
         _placementLevel = prefs.getString(PlacementTestScreen.prefLevel);
         _placementMastered = prefs.getString(PlacementTestScreen.prefMastered);
       });
@@ -1580,101 +1660,135 @@ class _DashboardScreenState extends State<DashboardScreen> {
               _placementCard(),
               const SizedBox(height: 16),
 
-              // Hero Card
-              Container(
-                padding: const EdgeInsets.all(22),
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFF1E3A8A), Color(0xFF1E1B4B)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+              // Özet kutucukları (web paneliyle aynı dil)
+              KpiGrid(
+                tiles: [
+                  KpiTile(
+                    icon: Icons.local_fire_department,
+                    iconColor: AppTheme.accentAmber,
+                    label: 'Seri',
+                    value: '$streak gün',
                   ),
-                  borderRadius: BorderRadius.circular(24),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppTheme.brandNavy.withValues(alpha: 0.3),
-                      blurRadius: 16,
-                      offset: const Offset(0, 8),
-                    ),
-                  ],
+                  KpiTile(
+                    icon: Icons.assignment_turned_in_outlined,
+                    iconColor: AppTheme.brandBlue,
+                    label: 'Deneme',
+                    value: '$totalExams',
+                  ),
+                  KpiTile(
+                    icon: Icons.trending_up,
+                    iconColor: AppTheme.accentEmerald,
+                    label: 'Ortalama',
+                    value: '%$avgScore',
+                  ),
+                  KpiTile(
+                    icon: Icons.menu_book_outlined,
+                    iconColor: Colors.indigo,
+                    label: 'Öğrenilen kelime',
+                    value: '$masteredVocab/$totalVocab',
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              if (mistakeCount > 0) ...[
+                AlertRow(
+                  key: const Key('alert_mistakes'),
+                  icon: Icons.warning_amber_rounded,
+                  text: 'Hata Kasanda $mistakeCount çözülmemiş soru var',
+                  actionLabel: 'Çöz',
+                  onTap: () => widget.onTabSwitch(2),
                 ),
+                const SizedBox(height: 8),
+              ],
+              if (_overview != null &&
+                  _overview!['pool'] == 'general' &&
+                  uni.id != 'general') ...[
+                AlertRow(
+                  key: const Key('alert_locked'),
+                  tone: AlertTone.info,
+                  icon: Icons.lock_outline,
+                  text:
+                      '${uni.shortName} soruları kilitli; ilerlemen genel havuzdan hesaplanıyor',
+                  actionLabel: 'Kilidi aç',
+                  onTap: () => UniversityPaywallSheet.show(
+                    context,
+                    universityId: uni.id,
+                    universityName: uni.name,
+                    onUnlockSuccess: _loadData,
+                  ),
+                ),
+                const SizedBox(height: 8),
+              ],
+              if (_overview != null) ...[
+                TodayPlanCard(
+                  plan: ((_overview!['plan'] as List<dynamic>?) ?? [])
+                      .cast<Map<String, dynamic>>(),
+                  onAction: _runPlanAction,
+                ),
+                const SizedBox(height: 12),
+                ProgressTabsCard(
+                  overview: _overview!,
+                  poolLabel: _overview!['pool'] == 'school'
+                      ? '${uni.shortName} havuzu'
+                      : 'Genel havuz',
+                  onPractice: (cat) => _practiceCategory(cat),
+                  onLevel: widget.onLevelChange,
+                  onMistakes: () => widget.onTabSwitch(2),
+                ),
+                const SizedBox(height: 12),
+              ],
+
+              // Okul ve sınav kartı (sade)
+              PanelCard(
+                key: const Key('school_card'),
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Wrap(
-                      spacing: 8,
+                      spacing: 6,
                       runSpacing: 6,
                       children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.white24,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Text(
-                            '${uni.shortName} Hazırlık',
-                            style: const TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w800,
-                              color: Colors.white,
-                            ),
-                          ),
+                        _chip(
+                          '${uni.shortName} Hazırlık',
+                          AppTheme.brandLightBlue,
+                          AppTheme.brandBlue,
                         ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.green.withValues(alpha: 0.3),
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                              color: Colors.greenAccent.withValues(alpha: 0.4),
-                            ),
-                          ),
-                          child: Text(
-                            '%${uni.passingScore} Baraj Puanı',
-                            style: const TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w800,
-                              color: Colors.greenAccent,
-                            ),
-                          ),
+                        _chip(
+                          '%${uni.passingScore} Baraj Puanı',
+                          const Color(0xFFECFDF5),
+                          AppTheme.accentEmerald,
                         ),
                       ],
                     ),
-                    const SizedBox(height: 14),
+                    const SizedBox(height: 10),
                     Text(
                       uni.examName,
-                      style: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.white,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w800,
+                        color: PanelColors.text(context),
                       ),
                     ),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 4),
                     Text(
                       uni.description,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 12,
-                        color: Colors.white70,
+                        color: PanelColors.muted(context),
                         height: 1.4,
                       ),
                     ),
-                    const SizedBox(height: 18),
+                    const SizedBox(height: 14),
                     SizedBox(
                       width: double.infinity,
-                      child: ElevatedButton.icon(
+                      child: FilledButton.icon(
                         onPressed: _startFullMockExam,
                         icon: const Icon(Icons.play_arrow_rounded, size: 20),
                         label: const Text('Resmi Deneme Başlat'),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          foregroundColor: AppTheme.brandNavy,
-                          padding: const EdgeInsets.symmetric(vertical: 14),
+                        style: FilledButton.styleFrom(
+                          backgroundColor: AppTheme.brandBlue,
+                          padding: const EdgeInsets.symmetric(vertical: 13),
                         ),
                       ),
                     ),
@@ -1684,90 +1798,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       child: OutlinedButton.icon(
                         onPressed: _showReportSummaryDialog,
                         icon: const Icon(Icons.description_outlined, size: 18),
-                        label: const Text(
-                          'Muafiyet Karnesi (PDF)',
-                          style: TextStyle(fontWeight: FontWeight.w700),
-                        ),
+                        label: const Text('Muafiyet Karnesi (PDF)'),
                         style: OutlinedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          side: const BorderSide(color: Colors.white38),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(14),
-                          ),
                           padding: const EdgeInsets.symmetric(vertical: 12),
                         ),
                       ),
                     ),
                   ],
                 ),
-              ),
-              const SizedBox(height: 20),
-
-              // İstatistik kartları: ikişer sütun, yükseklik içeriğe göre (büyük yazıda taşmaz)
-              LayoutBuilder(
-                builder: (context, box) {
-                  final w = (box.maxWidth - 10) / 2;
-                  Widget sized(Widget c) => SizedBox(width: w, child: c);
-                  return Wrap(
-                    spacing: 10,
-                    runSpacing: 10,
-                    children: [
-                      sized(
-                        _statCard(
-                          icon: Icons.local_fire_department,
-                          iconColor: AppTheme.accentAmber,
-                          title: 'Seri',
-                          value: '$streak Gün',
-                          subtitle: 'Her gün pratik',
-                        ),
-                      ),
-                      sized(
-                        _statCard(
-                          icon: Icons.assignment_turned_in,
-                          iconColor: AppTheme.brandBlue,
-                          title: 'Denemeler',
-                          value: '$totalExams',
-                          subtitle: 'Tamamlanan',
-                        ),
-                      ),
-                      sized(
-                        _statCard(
-                          icon: Icons.trending_up,
-                          iconColor: AppTheme.accentEmerald,
-                          title: 'Ortalama',
-                          value: '%$avgScore',
-                          subtitle: 'Başarı notu',
-                        ),
-                      ),
-                      sized(
-                        _statCard(
-                          icon: Icons.menu_book,
-                          iconColor: Colors.indigo,
-                          title: 'Kelimeler',
-                          value: '$masteredVocab/$totalVocab',
-                          subtitle: 'Öğrenilen',
-                        ),
-                      ),
-                      SizedBox(
-                        width: box.maxWidth,
-                        child: InkWell(
-                          onTap: () =>
-                              widget.onTabSwitch(2), // Hata defteri sekmesi
-                          borderRadius: BorderRadius.circular(20),
-                          child: _statCard(
-                            icon: Icons.shield_outlined,
-                            iconColor: AppTheme.accentRose,
-                            title: 'Hata Defterim',
-                            value: '$mistakeCount',
-                            subtitle: 'Yanlışları Çöz →',
-                            borderColor: Colors.red.shade200,
-                            isHighlighted: true,
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                },
               ),
               const SizedBox(height: 24),
 
@@ -2072,72 +2110,4 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ],
         ),
       );
-
-  Widget _statCard({
-    required IconData icon,
-    required Color iconColor,
-    required String title,
-    required String value,
-    required String subtitle,
-    Color? borderColor,
-    bool isHighlighted = false,
-  }) {
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: isHighlighted
-            ? Colors.red.shade50.withValues(alpha: 0.4)
-            : Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: borderColor ?? AppTheme.borderSubtle),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  title,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w700,
-                    color: AppTheme.textMuted,
-                  ),
-                ),
-              ),
-              Icon(icon, size: 16, color: iconColor),
-            ],
-          ),
-          const SizedBox(height: 6),
-          FittedBox(
-            fit: BoxFit.scaleDown,
-            alignment: Alignment.centerLeft,
-            child: Text(
-              value,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w900,
-                color: AppTheme.textMain,
-              ),
-            ),
-          ),
-          const SizedBox(height: 2),
-          Text(
-            subtitle,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.w600,
-              color: iconColor,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }

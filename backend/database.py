@@ -222,6 +222,21 @@ def init_db():
             PRIMARY KEY (user_id, question_id)
         );
 
+        -- Soru bazlı ilerleme: panelde bölüm/kur ilerlemesi ve günlük plan için.
+        -- Deneme ve pratik cevaplarının son durumu (doğru/yanlış) tutulur.
+        CREATE TABLE IF NOT EXISTS question_progress (
+            user_id INTEGER NOT NULL,
+            question_id TEXT NOT NULL,
+            university_id TEXT,
+            level TEXT,
+            category TEXT,
+            attempts INTEGER DEFAULT 0,
+            correct_count INTEGER DEFAULT 0,
+            last_correct INTEGER DEFAULT 0,
+            updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (user_id, question_id)
+        );
+
         -- 6-Digit Email OTP Verification Table --
         CREATE TABLE IF NOT EXISTS student_otps (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -981,7 +996,7 @@ def resolve_mistake(user_id: int, question_id: str) -> None:
         conn.execute("""
             UPDATE mistake_vault
             SET is_resolved = 1, resolved_at = CURRENT_TIMESTAMP
-            WHERE user_id = ? AND question_id = ?
+            WHERE user_id = ? AND question_id = ? AND is_resolved = 0
         """, (user_id, question_id))
     conn.close()
 
@@ -1004,6 +1019,60 @@ def get_mistakes(user_id: int, is_resolved: bool = False) -> List[Dict[str, Any]
     """, (user_id, 1 if is_resolved else 0)).fetchall()
     conn.close()
     return [dict(r) for r in rows]
+
+
+def record_question_answers(user_id: int, answers: List[Dict[str, Any]]) -> None:
+    """Deneme/pratikte cevaplanan soruların son durumunu yazar.
+    answers: [{question_id, university_id, level, category, is_correct}]"""
+    if not answers:
+        return
+    conn = get_db()
+    with conn:
+        for a in answers:
+            qid = str(a.get("question_id") or "")[:100]
+            if not qid:
+                continue
+            ok = 1 if a.get("is_correct") else 0
+            conn.execute("""
+                INSERT INTO question_progress
+                    (user_id, question_id, university_id, level, category, attempts, correct_count, last_correct, updated_at)
+                VALUES (?, ?, ?, ?, ?, 1, ?, ?, CURRENT_TIMESTAMP)
+                ON CONFLICT(user_id, question_id) DO UPDATE SET
+                    attempts = attempts + 1,
+                    correct_count = correct_count + excluded.correct_count,
+                    last_correct = excluded.last_correct,
+                    updated_at = CURRENT_TIMESTAMP
+            """, (user_id, qid, a.get("university_id"), a.get("level"), a.get("category"), ok, ok))
+    conn.close()
+
+
+def get_question_progress(user_id: int) -> Dict[str, Dict[str, Any]]:
+    """{question_id: {last_correct, attempts, today}} — today: Türkiye saatine göre bugün cevaplandı mı."""
+    conn = get_db()
+    rows = conn.execute("""
+        SELECT question_id, last_correct, attempts,
+               date(updated_at, '+3 hours') = date('now', '+3 hours') AS today
+        FROM question_progress WHERE user_id = ?
+    """, (user_id,)).fetchall()
+    conn.close()
+    return {r["question_id"]: {"last_correct": bool(r["last_correct"]), "attempts": r["attempts"], "today": bool(r["today"])}
+            for r in rows}
+
+
+def get_today_activity(user_id: int) -> Dict[str, int]:
+    """Bugün (Türkiye saati) tekrar edilen kelime ve çözülen hata sayısı."""
+    conn = get_db()
+    vocab = conn.execute("""
+        SELECT COUNT(*) AS c FROM vocab_progress
+        WHERE user_id = ? AND date(last_reviewed, '+3 hours') = date('now', '+3 hours')
+    """, (user_id,)).fetchone()["c"]
+    resolved = conn.execute("""
+        SELECT COUNT(*) AS c FROM mistake_vault
+        WHERE user_id = ? AND is_resolved = 1 AND resolved_at IS NOT NULL
+          AND date(resolved_at, '+3 hours') = date('now', '+3 hours')
+    """, (user_id,)).fetchone()["c"]
+    conn.close()
+    return {"vocab_reviewed": vocab, "mistakes_resolved": resolved}
 
 
 def get_mistake_count(user_id: int) -> int:

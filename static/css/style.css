@@ -165,3 +165,69 @@ html.dark ::-webkit-scrollbar-thumb:hover {
   background: #475569;
 }
 
+
+/* ================= ÜST MENÜ, AÇILIR MENÜLER, ARAÇ ÇUBUĞU (Nihai Rota tarzı sade düzen) ================= */
+.top-nav-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 0 12px; font-size: 13px; font-weight: 600; color: #475569;
+  border-bottom: 2px solid transparent; transition: color .15s, border-color .15s;
+}
+.top-nav-link:hover { color: #0f172a; }
+.top-nav-link.is-active { color: #1d4ed8; border-bottom-color: #2563eb; }
+.nav-dropdown {
+  position: absolute; top: 100%; left: 0; min-width: 210px; z-index: 50;
+  background: #fff; border: 1px solid #e2e8f0; border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, .12); padding: 6px;
+}
+.nav-menu-item {
+  width: 100%; display: flex; align-items: center; gap: 10px; text-align: left;
+  padding: 8px 10px; border-radius: 8px; font-size: 13px; font-weight: 600; color: #334155;
+}
+.nav-menu-item:hover { background: #f1f5f9; }
+.nav-menu-item.is-active { background: #eff6ff; color: #1d4ed8; }
+.level-segment { display: inline-flex; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; background: #fff; }
+.level-segment button { padding: 5px 11px; font-size: 12px; font-weight: 700; color: #64748b; border-right: 1px solid #f1f5f9; }
+.level-segment button:last-child { border-right: 0; }
+.level-segment button:hover { background: #f8fafc; color: #0f172a; }
+.level-segment button.is-active { background: #2563eb; color: #fff; }
+.toolbar-chip {
+  display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px;
+  border: 1px solid #e2e8f0; border-radius: 8px; background: #fff;
+  font-size: 12px; font-weight: 600; color: #334155; white-space: nowrap; transition: background .15s;
+}
+.toolbar-chip:hover { background: #f8fafc; }
+.toolbar-chip-primary { background: #2563eb; border-color: #2563eb; color: #fff; }
+.toolbar-chip-primary:hover { background: #1d4ed8; }
+
+/* Panel: kutucuklar, satır listeleri, ilerleme çubukları */
+.kpi-tile { background: #f1f5f9; border-radius: 10px; padding: 12px 14px; }
+.panel-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; }
+.panel-row { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 11px 0; border-bottom: 1px solid #f1f5f9; }
+.panel-row:last-child { border-bottom: 0; }
+.panel-dot { width: 26px; height: 26px; border-radius: 999px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; font-weight: 700; }
+.progress-track { height: 5px; border-radius: 999px; background: #eef2f7; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 999px; }
+.seg-tabs { display: flex; gap: 4px; background: #f1f5f9; border-radius: 10px; padding: 3px; }
+.seg-tabs button { flex: 1; padding: 6px 8px; font-size: 12px; font-weight: 600; color: #64748b; border-radius: 8px; }
+.seg-tabs button.is-active { background: #fff; color: #0f172a; box-shadow: 0 1px 2px rgba(15, 23, 42, .08); }
+.alert-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; font-size: 13px; font-weight: 600; }
+
+html.dark .top-nav-link { color: #94a3b8; }
+html.dark .top-nav-link:hover { color: #f1f5f9; }
+html.dark .top-nav-link.is-active { color: #93c5fd; border-bottom-color: #60a5fa; }
+html.dark .nav-dropdown, html.dark .level-segment, html.dark .toolbar-chip, html.dark .panel-card { background: #1e293b; border-color: #334155; }
+html.dark .nav-menu-item { color: #e2e8f0; }
+html.dark .nav-menu-item:hover, html.dark .level-segment button:hover, html.dark .toolbar-chip:hover { background: #334155; }
+html.dark .nav-menu-item.is-active { background: #1e3a8a; color: #dbeafe; }
+html.dark .level-segment button { color: #94a3b8; border-color: #334155; }
+html.dark .level-segment button.is-active, html.dark .toolbar-chip-primary { background: #2563eb; border-color: #2563eb; color: #fff; }
+html.dark .toolbar-chip { color: #e2e8f0; }
+html.dark .kpi-tile { background: #1e293b; }
+html.dark .seg-tabs { background: #0f172a; }
+html.dark .seg-tabs button.is-active { background: #334155; color: #f1f5f9; }
+html.dark .panel-row { border-color: #334155; }
+html.dark .progress-track { background: #334155; }
+@media (max-width: 639px) {
+  .level-segment button { padding: 5px 8px; }
+  .toolbar-chip { padding: 0 9px; }
+}

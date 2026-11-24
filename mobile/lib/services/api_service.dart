@@ -388,6 +388,21 @@ class ApiService {
     }
   }
 
+  // --- Panel özeti (web ile aynı veri: bölüm/kur ilerlemesi, günün planı) ---
+  /// Bağlantı yoksa ya da oturum yoksa null döner; ekran o zaman yalnız yerel istatistikleri gösterir.
+  Future<Map<String, dynamic>?> getDashboardOverview({String? level}) async {
+    try {
+      final uri = Uri.parse('$baseUrl/api/dashboard/overview').replace(queryParameters: {
+        if (level != null && level.isNotEmpty) 'level': level,
+      });
+      final res = await AuthHttp.instance.get(uri).timeout(const Duration(seconds: 4));
+      if (res.statusCode == 200) {
+        return json.decode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>;
+      }
+    } catch (_) {}
+    return null;
+  }
+
   // --- Dashboard Stats ---
   Future<Map<String, dynamic>> getStats() async {
     try {

@@ -161,18 +161,18 @@ function renderUniversityHeader() {
   if (examNameEl) examNameEl.innerText = uni.exam_name;
   if (passScoreEl) passScoreEl.innerText = `%${uni.passing_score} Baraj Puanı`;
   if (descEl) descEl.innerText = uni.description;
+  updateProfileSubtitle();
 
   // Render sections
   if (sectionsEl && uni.sections) {
     sectionsEl.innerHTML = uni.sections.map(sec => `
-      <div class="p-4 bg-slate-50/80 rounded-2xl border border-slate-100 hover:border-slate-200 transition">
-        <div class="flex items-center justify-between mb-1.5">
-          <span class="text-sm font-bold text-slate-800">${sec.name}</span>
-          <span class="text-xs font-semibold px-2 py-0.5 bg-blue-100 text-blue-700 rounded-md">
-            Ağırlık: %${sec.weight_percent}
-          </span>
+      <div class="py-2.5 border-b border-slate-100 last:border-b-0">
+        <div class="flex items-center justify-between gap-3 text-[13px]">
+          <span class="font-bold text-slate-800">${sec.name}</span>
+          <span class="text-xs font-semibold text-slate-500 shrink-0">%${sec.weight_percent}</span>
         </div>
-        <p class="text-xs text-slate-500 leading-relaxed">${sec.description}</p>
+        <div class="progress-track mt-1.5"><div class="progress-fill" style="width:${Math.min(100, sec.weight_percent)}%;background:#2563eb"></div></div>
+        <p class="text-[11px] text-slate-500 leading-relaxed mt-1">${sec.description}</p>
       </div>
     `).join('');
   }
@@ -184,16 +184,19 @@ function renderLevelSelector() {
   // Eskiden telefondaki "Çalışma Kuru" çubuğu hiç doldurulmuyordu.
   const html = levels.map(lvl => {
     const isSelected = lvl === window.appState.currentLevel;
-    return `
-      <button onclick="changeCurrentLevel('${lvl}')" class="px-3 py-1.5 rounded-xl text-xs font-bold transition ${isSelected ? 'bg-blue-600 text-white shadow-md' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
-        ${lvl}
-      </button>
-    `;
+    return `<button type="button" onclick="changeCurrentLevel('${lvl}')" aria-pressed="${isSelected}" class="${isSelected ? 'is-active' : ''}">${lvl}</button>`;
   }).join('');
-  ["level-selector-pills", "mobile-level-selector"].forEach(id => {
-    const container = document.getElementById(id);
-    if (container) container.innerHTML = html;
-  });
+  const container = document.getElementById("level-selector-pills");
+  if (container) container.innerHTML = html;
+  updateProfileSubtitle();
+}
+
+// Hesap kutusunun alt satırı: "İTÜ · B2"
+function updateProfileSubtitle() {
+  const el = document.getElementById("header-profile-sub");
+  if (!el) return;
+  const uni = window.appState.currentUniversity;
+  el.innerText = `${uni ? (uni.short_name || uni.name) : "Genel"} · ${window.appState.currentLevel || "B2"}`;
 }
 
 async function changeCurrentLevel(lvl) {
@@ -263,9 +266,23 @@ function switchTab(tabName) {
     }
   });
 
+  // Üst menü: bağlantılar ve açılır menü öğeleri sade "is-active" ile, gruplar alt sekmesine göre işaretlenir
+  document.querySelectorAll("[data-nav-group]").forEach(group => {
+    const tabsInGroup = (group.getAttribute("data-nav-group") || "").split(" ");
+    const btn = group.querySelector("[data-nav-group-btn]");
+    if (btn) btn.classList.toggle("is-active", tabsInGroup.includes(tabName));
+  });
+  closeNavDropdowns();
+
   // Update nav button active styles
   document.querySelectorAll("[data-nav-tab]").forEach(btn => {
     const tab = btn.getAttribute("data-nav-tab");
+    const navStyle = btn.getAttribute("data-nav-style");
+    if (navStyle === "top" || navStyle === "menu") {
+      btn.classList.toggle("is-active", tab === tabName);
+      return;
+    }
+    if (navStyle === "brand") return;
     if (tab === tabName) {
       btn.classList.add("bg-blue-600", "text-white");
       btn.classList.remove("text-slate-600", "hover:bg-slate-100");
@@ -300,57 +317,230 @@ function switchTab(tabName) {
   if (window.lucide) window.lucide.createIcons();
 }
 
+// ---------------- PANEL (özet kutucukları, uyarılar, günün planı, sekmeli ilerleme listesi) ----------------
+const CATEGORY_COLORS = {
+  "Grammar": "#534AB7",
+  "Vocabulary": "#1D9E75",
+  "Reading": "#D85A30",
+  "Restatement": "#BA7517",
+  "Cloze Test": "#D4537E",
+  "Sentence Completion": "#185FA5",
+  "Paragraph Completion": "#0F6E56",
+  "Dialogue": "#993556",
+};
+const LEVEL_COLOR = "#2563eb";
+const dashboardState = { tab: "sections", data: null };
+
+function escHtml(s) {
+  return String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+function progressBar(pct, color) {
+  const w = Math.max(0, Math.min(100, Math.round(pct)));
+  return `<div class="progress-track mt-1.5"><div class="progress-fill" style="width:${w}%;background:${color}"></div></div>`;
+}
+
+function startCategoryPractice(category, level) {
+  const d = dashboardState.data;
+  const uniId = d && d.pool === "school" ? d.university_id : "general";
+  startExamSimulation(uniId, level || window.appState.currentLevel, category, true);
+}
+
+function runPlanAction(index) {
+  const item = dashboardState.data?.plan?.[index];
+  if (!item) return;
+  if (item.action.type === "tab") switchTab(item.action.tab);
+  else if (item.action.type === "practice") startCategoryPractice(item.action.category, item.action.level);
+}
+
+function renderDashboardSide() {
+  const d = dashboardState.data;
+  const listEl = document.getElementById("dashboard-side-list");
+  const noteEl = document.getElementById("dashboard-pool-note");
+  document.querySelectorAll("#dashboard-side-tabs [data-side-tab]").forEach(b =>
+    b.classList.toggle("is-active", b.getAttribute("data-side-tab") === dashboardState.tab));
+  if (!listEl) return;
+  if (!d) {
+    listEl.innerHTML = `<p class="text-xs text-slate-400 py-3">İlerlemeni görmek için giriş yap.</p>`;
+    if (noteEl) noteEl.innerText = "";
+    return;
+  }
+  const uni = window.appState.currentUniversity;
+  const poolName = d.pool === "school" ? `${uni ? (uni.short_name || uni.name) : "Okul"} havuzu` : "Genel havuz";
+  const chevron = `<i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>`;
+
+  if (dashboardState.tab === "sections") {
+    if (noteEl) noteEl.innerText = `${poolName} · ${d.level} · doğru çözülen / toplam soru`;
+    listEl.innerHTML = d.sections.length ? d.sections.map((s, i) => {
+      const color = CATEGORY_COLORS[s.category] || "#64748b";
+      const pct = s.total ? (s.correct / s.total) * 100 : 0;
+      return `
+        <div class="panel-row">
+          <span class="panel-dot" style="background:${color}">${i + 1}</span>
+          <div class="min-w-0">
+            <div class="flex items-center justify-between gap-2 text-[13px]">
+              <span class="font-bold text-slate-800 truncate">${escHtml(s.category)}</span>
+              <span class="text-xs font-semibold text-slate-500 shrink-0">${s.correct}/${s.total}</span>
+            </div>
+            ${progressBar(pct, color)}
+          </div>
+          <button type="button" data-category="${escHtml(s.category)}" onclick="startCategoryPractice(this.dataset.category)" class="p-1.5 rounded-lg hover:bg-slate-100 text-slate-500" title="${escHtml(s.category)} sorularını çöz" aria-label="${escHtml(s.category)} sorularını çöz">
+            <i data-lucide="play" class="w-4 h-4"></i>
+          </button>
+        </div>`;
+    }).join("") : `<p class="text-xs text-slate-400 py-3">Bu kurda soru bulunamadı.</p>`;
+  } else if (dashboardState.tab === "levels") {
+    if (noteEl) noteEl.innerText = `${poolName} · kur seçmek için satıra tıkla`;
+    listEl.innerHTML = d.levels.map((l, i) => {
+      const pct = l.total ? (l.correct / l.total) * 100 : 0;
+      const current = l.level === d.level;
+      return `
+        <button type="button" onclick="changeCurrentLevel('${l.level}')" class="panel-row w-full text-left">
+          <span class="panel-dot" style="background:${current ? LEVEL_COLOR : "#94a3b8"}">${i + 1}</span>
+          <div class="min-w-0">
+            <div class="flex items-center justify-between gap-2 text-[13px]">
+              <span class="font-bold text-slate-800">${l.level}${current ? ` <span class="ml-1 text-[11px] font-semibold text-blue-600">seçili</span>` : ""}</span>
+              <span class="text-xs font-semibold text-slate-500">${l.correct}/${l.total}</span>
+            </div>
+            ${progressBar(pct, current ? LEVEL_COLOR : "#94a3b8")}
+          </div>
+          ${chevron}
+        </button>`;
+    }).join("");
+  } else {
+    const entries = Object.entries(d.mistakes_by_category || {});
+    if (noteEl) noteEl.innerText = entries.length ? "Hata Kasası'nda çözülmeyi bekleyen sorular" : "";
+    const max = Math.max(1, ...entries.map(([, n]) => n));
+    listEl.innerHTML = entries.length ? entries.map(([cat, n], i) => {
+      const color = CATEGORY_COLORS[cat] || "#64748b";
+      return `
+        <button type="button" onclick="switchTab('mistakes')" class="panel-row w-full text-left">
+          <span class="panel-dot" style="background:${color}">${i + 1}</span>
+          <div class="min-w-0">
+            <div class="flex items-center justify-between gap-2 text-[13px]">
+              <span class="font-bold text-slate-800 truncate">${escHtml(cat)}</span>
+              <span class="text-xs font-semibold text-rose-600 shrink-0">${n} hata</span>
+            </div>
+            ${progressBar((n / max) * 100, color)}
+          </div>
+          ${chevron}
+        </button>`;
+    }).join("") : `<p class="text-xs text-slate-500 py-3">Hata Kasası boş. Yanlış yaptığın sorular burada toplanır.</p>`;
+  }
+  if (window.lucide) window.lucide.createIcons();
+}
+
+function renderDashboardPlan() {
+  const d = dashboardState.data;
+  const el = document.getElementById("dashboard-plan");
+  const progEl = document.getElementById("dashboard-plan-progress");
+  if (!el) return;
+  if (!d) { el.innerHTML = ""; if (progEl) progEl.innerText = ""; return; }
+  const doneCount = d.plan.filter(p => p.done >= p.target).length;
+  if (progEl) progEl.innerText = `${doneCount}/${d.plan.length} tamam`;
+  el.innerHTML = d.plan.map((p, i) => {
+    const complete = p.done >= p.target;
+    return `
+      <button type="button" onclick="runPlanAction(${i})" class="w-full flex items-center gap-3 py-2.5 border-b border-slate-100 last:border-b-0 text-left group">
+        <i data-lucide="${complete ? "circle-check" : "circle"}" class="w-5 h-5 shrink-0 ${complete ? "text-emerald-500" : "text-slate-300"}"></i>
+        <span class="flex-1 min-w-0">
+          <span class="block text-[13px] font-semibold ${complete ? "text-slate-400 line-through" : "text-slate-800"}">${escHtml(p.title)}</span>
+          ${progressBar(p.target ? (p.done / p.target) * 100 : 0, complete ? "#10b981" : "#2563eb")}
+        </span>
+        <span class="text-xs font-semibold text-slate-500 shrink-0">${p.done}/${p.target}</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300 group-hover:text-slate-500"></i>
+      </button>`;
+  }).join("");
+}
+
+function renderDashboardAlerts() {
+  const d = dashboardState.data;
+  const el = document.getElementById("dashboard-alerts");
+  if (!el) return;
+  const rows = [];
+  if (d && d.kpis.unresolved_mistakes > 0) {
+    rows.push(`
+      <button type="button" onclick="switchTab('mistakes')" class="alert-row w-full text-left bg-amber-50 text-amber-800 dark:bg-amber-950 dark:text-amber-200">
+        <i data-lucide="triangle-alert" class="w-4 h-4 shrink-0"></i>
+        <span class="flex-1">Hata Kasanda ${d.kpis.unresolved_mistakes} çözülmemiş soru var</span>
+        <span class="flex items-center gap-1 text-xs">Çöz <i data-lucide="chevron-right" class="w-4 h-4"></i></span>
+      </button>`);
+  }
+  const uni = window.appState.currentUniversity;
+  if (d && d.pool === "general" && uni && uni.id !== "general") {
+    rows.push(`
+      <button type="button" onclick="window.openUniversityPaywallModal && openUniversityPaywallModal('${escHtml(uni.id)}', () => loadDashboardStats())" class="alert-row w-full text-left bg-blue-50 text-blue-800 dark:bg-blue-950 dark:text-blue-200">
+        <i data-lucide="lock" class="w-4 h-4 shrink-0"></i>
+        <span class="flex-1">${escHtml(uni.short_name || uni.name)} soruları kilitli; ilerlemen şimdilik genel havuzdan hesaplanıyor</span>
+        <span class="flex items-center gap-1 text-xs">Kilidi aç <i data-lucide="chevron-right" class="w-4 h-4"></i></span>
+      </button>`);
+  }
+  el.innerHTML = rows.join("");
+}
+
+function renderRecentExams(list) {
+  const el = document.getElementById("dashboard-recent-exams");
+  if (!el) return;
+  if (!list || !list.length) {
+    el.innerHTML = `<p class="text-xs text-slate-400 py-3">Henüz tamamlanan deneme yok.</p>`;
+    return;
+  }
+  el.innerHTML = list.map(e => {
+    const pass = e.score >= 60;
+    return `
+      <div class="panel-row" style="grid-template-columns: 10px minmax(0,1fr) auto">
+        <span class="w-2 h-2 rounded-full ${pass ? "bg-emerald-500" : "bg-rose-500"}"></span>
+        <div class="min-w-0">
+          <div class="text-[13px] font-bold text-slate-800 uppercase">${escHtml(e.university_id)} <span class="font-semibold text-slate-400 normal-case">· ${escHtml(e.level)}</span></div>
+          <div class="text-[11px] text-slate-400">${new Date(e.created_at).toLocaleDateString("tr-TR")}</div>
+        </div>
+        <span class="text-sm font-extrabold ${pass ? "text-emerald-600" : "text-slate-700"}">%${e.score}</span>
+      </div>`;
+  }).join("");
+}
+
 async function loadDashboardStats() {
   if (window.renderPlacementCard) window.renderPlacementCard();
+  const lvl = window.appState.currentLevel || "B2";
+  let data = null;
   try {
-    const res = await fetch('/api/stats');
-    if (!res.ok) return;  // giriş yok: kartlar varsayılan hâlinde kalır
-    const data = await res.json();
-
-    const streakEl = document.getElementById("stat-streak");
-    const examsCountEl = document.getElementById("stat-exams-count");
-    const avgScoreEl = document.getElementById("stat-avg-score");
-    const vocabCountEl = document.getElementById("stat-vocab-count");
-    const mistakesCountEl = document.getElementById("stat-mistakes-count");
-    const mistakeNavBadge = document.getElementById("nav-mistakes-badge");
-    const recentListEl = document.getElementById("dashboard-recent-exams");
-
-    if (streakEl) streakEl.innerText = `${data.profile.streak_days ?? 0} Gün`;
-    if (examsCountEl) examsCountEl.innerText = data.total_exams_taken;
-    if (avgScoreEl) avgScoreEl.innerText = `%${data.average_exam_score}`;
-    if (vocabCountEl) vocabCountEl.innerText = `${data.mastered_vocab} / ${data.total_vocab}`;
-    
-    const mCount = data.unresolved_mistakes || 0;
-    if (mistakesCountEl) mistakesCountEl.innerText = mCount;
-    if (mistakeNavBadge) {
-      mistakeNavBadge.innerText = mCount;
-      if (mCount > 0) mistakeNavBadge.classList.remove("hidden");
-      else mistakeNavBadge.classList.add("hidden");
-    }
-
-    if (recentListEl) {
-      if (!data.recent_exams || data.recent_exams.length === 0) {
-        recentListEl.innerHTML = `<p class="text-xs text-slate-400 py-3">Henüz tamamlanan sınav denemesi bulunmuyor.</p>`;
-      } else {
-        recentListEl.innerHTML = data.recent_exams.map(e => `
-          <div class="flex items-center justify-between p-3 bg-white rounded-xl border border-slate-100 text-xs">
-            <div class="flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full ${e.score >= 60 ? 'bg-emerald-500' : 'bg-rose-500'}"></span>
-              <span class="font-bold text-slate-700 uppercase">${e.university_id}</span>
-              <span class="text-slate-400">• ${e.level}</span>
-            </div>
-            <div class="flex items-center gap-3">
-              <span class="font-extrabold ${e.score >= 60 ? 'text-emerald-600' : 'text-slate-700'}">%${e.score}</span>
-              <span class="text-slate-400">${new Date(e.created_at).toLocaleDateString('tr-TR')}</span>
-            </div>
-          </div>
-        `).join('');
-      }
-    }
+    const res = await fetch(`/api/dashboard/overview?level=${encodeURIComponent(lvl)}`);
+    if (res.ok) data = await res.json();
   } catch (err) {
-    console.error("Dashboard stats error:", err);
+    console.error("Dashboard overview error:", err);
   }
+  dashboardState.data = data;
+
+  const set = (id, text) => { const el = document.getElementById(id); if (el) el.innerText = text; };
+  if (data) {
+    const k = data.kpis;
+    set("stat-streak", `${k.streak_days ?? 0} gün`);
+    set("stat-exams-count", String(k.exams_taken));
+    set("stat-avg-score", `%${k.average_score}`);
+    set("stat-vocab-count", `${k.mastered_vocab} / ${k.total_vocab}`);
+    const badge = document.getElementById("nav-mistakes-badge");
+    if (badge) {
+      badge.innerText = k.unresolved_mistakes;
+      badge.classList.toggle("hidden", !(k.unresolved_mistakes > 0));
+      badge.classList.toggle("inline-flex", k.unresolved_mistakes > 0);
+    }
+  }
+  renderDashboardAlerts();
+  renderDashboardPlan();
+  renderDashboardSide();
+  renderRecentExams(data ? data.recent_exams : []);
+  if (window.lucide) window.lucide.createIcons();
 }
+
+document.addEventListener("click", (ev) => {
+  const tabBtn = ev.target.closest && ev.target.closest("#dashboard-side-tabs [data-side-tab]");
+  if (!tabBtn) return;
+  dashboardState.tab = tabBtn.getAttribute("data-side-tab");
+  renderDashboardSide();
+});
+
+window.startCategoryPractice = startCategoryPractice;
+window.runPlanAction = runPlanAction;
 
 // ---------------- İNTERAKTİF KUR ALIŞTIRMALARI & SORU BANKASI ----------------
 const practiceState = {
@@ -778,173 +968,151 @@ async function loadWritingGuides(targetLevel = null) {
   }
 }
 
-function renderExamsTab(targetLevel = null) {
+// ---------------- OKUL DENEMELERİ (satır listesi + sınav formatı + ipuçları) ----------------
+function examDurationText(questionCount) {
+  const minutes = Math.max(3, Math.round((questionCount * 90) / 60));
+  return minutes >= 60 ? `~${Math.floor(minutes / 60)} sa ${minutes % 60 ? `${minutes % 60} dk` : ""}`.trim() : `~${minutes} dk`;
+}
+
+async function renderExamsTab(targetLevel = null) {
   const container = document.getElementById("exams-cards-container");
-  const badgeEl = document.getElementById("exams-active-level-badge");
   if (!container) return;
 
   const lvl = (targetLevel || window.appState.currentLevel || "B2").toUpperCase();
   const u = window.appState.currentUniversity || {
-    id: "itu",
-    name: "İstanbul Teknik Üniversitesi",
-    short_name: "İTÜ",
-    exam_name: "İTÜ Proficiency",
-    passing_score: 60,
-    duration_minutes: 150,
-    sections: []
+    id: "itu", name: "İstanbul Teknik Üniversitesi", short_name: "İTÜ", exam_name: "İTÜ Proficiency",
+    passing_score: 60, duration_minutes: 150, sections: [], tips: [],
   };
+  const shortName = escHtml(u.short_name || u.id.toUpperCase());
+  const uid = escHtml(u.id);
 
-  if (badgeEl) badgeEl.innerText = `${u.short_name || u.id.toUpperCase()} • ${lvl} Kuru`;
+  // Kur ilerlemesi ve erişim bilgisi panel verisinden (aynı uç nokta) gelir
+  let overview = dashboardState.data && dashboardState.data.level === lvl ? dashboardState.data : null;
+  if (!overview) {
+    try {
+      const res = await fetch(`/api/dashboard/overview?level=${encodeURIComponent(lvl)}`);
+      if (res.ok) overview = await res.json();
+    } catch (_) {}
+  }
+  const locked = overview ? overview.pool !== "school" : false;
+  const levelProgress = overview && !locked ? overview.levels.find(l => l.level === lvl) : null;
 
-  const sectionBadgesHtml = (u.sections || []).map(sec => `
-    <span class="px-2.5 py-1 bg-white/10 border border-white/15 rounded-xl text-[11px] font-bold text-slate-100">
-      ${sec.title} (%${sec.weight})
-    </span>
-  `).join('');
+  const rows = [
+    {
+      color: "#2563eb", icon: "graduation-cap", badge: "Önerilen",
+      title: `${lvl} muafiyet denemesi`,
+      meta: `30 soru · dinleme · yazma ve konuşma görevi · ${u.duration_minutes || 120} dk`,
+      action: `startFullMockExam('${uid}', '${lvl}')`, primary: true,
+    },
+    {
+      color: "#0F6E56", icon: "flag",
+      title: `${lvl} kur bitirme sınavı`,
+      meta: `34 soru · ${examDurationText(34)}`,
+      progress: levelProgress,
+      action: `startExamSimulation('${uid}', '${lvl}', 'all', true)`,
+    },
+    {
+      color: "#534AB7", icon: "trophy",
+      title: "Tam maraton (A1–C2)",
+      meta: `204 soru · ${examDurationText(204)}`,
+      action: `startExamSimulation('${uid}', 'all', 'all', true)`,
+    },
+    {
+      color: "#D85A30", icon: "book-open",
+      title: "Reading sınavı",
+      meta: `Tüm kurlardan okuma soruları · 30+ soru`,
+      action: `startExamSimulation('${uid}', 'all', 'Reading', true)`,
+    },
+    {
+      color: "#BA7517", icon: "repeat",
+      title: "Restatement sınavı",
+      meta: `Yakın anlamlı cümle soruları · 30+ soru`,
+      action: `startExamSimulation('${uid}', 'all', 'Restatement', true)`,
+    },
+    {
+      color: "#D4537E", icon: "spell-check",
+      title: "Grammar sınavı",
+      meta: `Dilbilgisi ve yapı soruları · 30+ soru`,
+      action: `startExamSimulation('${uid}', 'all', 'Grammar', true)`,
+    },
+  ];
+
+  const rowsHtml = rows.map((r, i) => {
+    const pct = r.progress && r.progress.total ? Math.round((r.progress.correct / r.progress.total) * 100) : null;
+    return `
+      <div class="panel-row" style="grid-template-columns: 36px minmax(0,1fr) auto">
+        <span class="w-9 h-9 rounded-xl flex items-center justify-center text-white" style="background:${r.color}">
+          <i data-lucide="${r.icon}" class="w-[18px] h-[18px]"></i>
+        </span>
+        <div class="min-w-0">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-sm font-extrabold text-slate-900">${escHtml(r.title)}</span>
+            ${r.badge ? `<span class="px-1.5 py-0.5 rounded-md bg-blue-50 text-blue-700 text-[10px] font-bold">${r.badge}</span>` : ""}
+            ${locked ? `<i data-lucide="lock" class="w-3.5 h-3.5 text-slate-400" aria-label="Kilitli"></i>` : ""}
+          </div>
+          <div class="text-xs text-slate-500 mt-0.5">${escHtml(r.meta)}</div>
+          ${pct !== null ? `
+            <div class="flex items-center gap-2 mt-1.5 max-w-xs">
+              <div class="progress-track flex-1"><div class="progress-fill" style="width:${pct}%;background:${r.color}"></div></div>
+              <span class="text-[11px] font-semibold text-slate-500">${r.progress.correct}/${r.progress.total} doğru</span>
+            </div>` : ""}
+        </div>
+        <button type="button" data-exam-row="${i}" onclick="${r.action}" class="toolbar-chip ${r.primary ? "toolbar-chip-primary" : ""}">
+          <i data-lucide="play" class="w-4 h-4"></i><span class="hidden sm:inline">Başlat</span>
+        </button>
+      </div>`;
+  }).join("");
+
+  const sections = (u.sections || []).map(sec => `
+    <div class="py-2.5 border-b border-slate-100 last:border-b-0">
+      <div class="flex items-center justify-between gap-3 text-[13px]">
+        <span class="font-bold text-slate-800">${escHtml(sec.name)}</span>
+        <span class="text-xs font-semibold text-slate-500 shrink-0">${sec.questions_count ? `${sec.questions_count} soru · ` : ""}%${sec.weight_percent}</span>
+      </div>
+      <div class="progress-track mt-1.5"><div class="progress-fill" style="width:${Math.min(100, sec.weight_percent || 0)}%;background:#2563eb"></div></div>
+    </div>`).join("");
+
+  const tips = (u.tips || []).map(t => `
+    <li class="flex gap-2 py-2 border-b border-slate-100 last:border-b-0 text-xs text-slate-600 leading-relaxed">
+      <i data-lucide="lightbulb" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i><span>${escHtml(t)}</span>
+    </li>`).join("");
 
   container.innerHTML = `
-    <!-- Seçili Üniversite Özel Paket Özeti Banner -->
-    <div class="col-span-full p-6 rounded-3xl bg-gradient-to-r from-slate-900 via-blue-950 to-indigo-950 text-white shadow-lg border border-blue-500/20 space-y-4">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
-        <div>
-          <div class="flex items-center gap-2 mb-1.5 flex-wrap">
-            <span class="px-2.5 py-0.5 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 rounded-full text-[11px] font-black uppercase">
-              ${u.short_name} Özel Sınav Havuzu
-            </span>
-            <span class="px-2.5 py-0.5 bg-blue-500/20 text-blue-200 border border-blue-400/30 rounded-full text-[11px] font-bold">
-              Geçme Barajı: %${u.passing_score || 60} • Süre: ${u.duration_minutes || 120} dk
-            </span>
+    <div class="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_380px] gap-5 items-start">
+      <div class="space-y-4 min-w-0">
+        <div class="panel-card p-4 sm:p-5">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <span class="px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 text-[11px] font-bold">${shortName} · ${lvl}</span>
+            <span class="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 text-[11px] font-bold">Baraj %${u.passing_score || 60}</span>
+            <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[11px] font-bold">${u.duration_minutes || 120} dk</span>
           </div>
-          <h3 class="text-lg sm:text-xl font-black text-white">${u.name} — ${u.exam_name} Paketi</h3>
-          <p class="text-xs text-slate-300 mt-1">${u.description || `${u.name} hazırlık muafiyet sınav formatına birebir uyumlu özgün soru ve deneme paketi.`}</p>
+          <h2 class="text-lg font-extrabold text-slate-900">${escHtml(u.exam_name || "Muafiyet sınavı")} denemeleri</h2>
+          <p class="text-xs text-slate-500 mt-1">Okulunun sınav formatına göre hazırlanmış denemeler. Kur değiştirmek için üstteki seçiciyi kullan.</p>
         </div>
 
-        <div class="grid grid-cols-3 gap-2 shrink-0 text-center">
-          <div class="p-2.5 bg-white/10 rounded-2xl border border-white/10">
-            <div class="text-base font-black text-emerald-400">204</div>
-            <div class="text-[10px] text-slate-300 font-bold">Özgün Soru</div>
-          </div>
-          <div class="p-2.5 bg-white/10 rounded-2xl border border-white/10">
-            <div class="text-base font-black text-blue-300">24</div>
-            <div class="text-[10px] text-slate-300 font-bold">Listening Ders</div>
-          </div>
-          <div class="p-2.5 bg-white/10 rounded-2xl border border-white/10">
-            <div class="text-base font-black text-purple-300">24</div>
-            <div class="text-[10px] text-slate-300 font-bold">Speaking Görev</div>
-          </div>
-        </div>
+        ${locked ? `
+          <button type="button" onclick="window.openUniversityPaywallModal && openUniversityPaywallModal('${uid}', () => { loadDashboardStats(); renderExamsTab(); })" class="alert-row w-full text-left bg-blue-50 text-blue-800 dark:bg-blue-950 dark:text-blue-200">
+            <i data-lucide="lock" class="w-4 h-4 shrink-0"></i>
+            <span class="flex-1">${shortName} denemeleri kilitli. Kilidi açınca 204 özgün soru ve tüm denemeler açılır.</span>
+            <span class="flex items-center gap-1 text-xs">Kilidi aç <i data-lucide="chevron-right" class="w-4 h-4"></i></span>
+          </button>` : ""}
+
+        <div class="panel-card px-4 sm:px-5 py-1" id="exams-rows">${rowsHtml}</div>
       </div>
 
-      ${sectionBadgesHtml ? `
-        <div class="pt-3 border-t border-white/10 flex items-center gap-2 flex-wrap">
-          <span class="text-[11px] font-bold text-slate-400">Resmi Sınav Bölümleri:</span>
-          ${sectionBadgesHtml}
-        </div>
-      ` : ''}
-    </div>
-
-    <!-- 1. Tam Muafiyet / Kur Sınavı (${lvl} • 30 Soru) -->
-    <div class="p-5 rounded-2xl border-2 border-blue-600 bg-blue-50/20 flex flex-col justify-between shadow-sm">
-      <div>
-        <div class="flex items-center justify-between mb-2">
-          <span class="px-2.5 py-0.5 bg-blue-600 text-white text-[11px] font-bold rounded-lg uppercase">${u.short_name} Tam Kur Sınavı</span>
-          <span class="px-2.5 py-0.5 bg-blue-100 text-blue-800 text-xs font-black rounded-lg">${lvl} • 30 Soru</span>
-        </div>
-        <h4 class="font-extrabold text-slate-800 text-base mb-1">${u.short_name} (${u.exam_name}) • ${lvl} Kur & Muafiyet Sınavı (30 Soru)</h4>
-        <p class="text-xs text-slate-600 leading-relaxed mb-4">
-          Tamamı ${u.name} ${lvl} kuru özel havuzundan seçilen <strong>30 özgün soru</strong>, ${u.short_name} akademik dinleme dersi ve konuşma/yazma simülasyonu.
-        </p>
+      <div class="space-y-4 min-w-0">
+        ${sections ? `
+          <div class="panel-card p-4">
+            <h3 class="text-sm font-extrabold text-slate-900 mb-1">Sınav formatı</h3>
+            ${sections}
+          </div>` : ""}
+        ${tips ? `
+          <div class="panel-card p-4">
+            <h3 class="text-sm font-extrabold text-slate-900 mb-1">Sınav ipuçları</h3>
+            <ul>${tips}</ul>
+          </div>` : ""}
       </div>
-      <button onclick="startFullMockExam('${u.id}', '${lvl}')" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center justify-center gap-1.5">
-        <i data-lucide="play" class="w-3.5 h-3.5"></i> ${u.short_name} ${lvl} 30 Soruluk Sınavı Başlat
-      </button>
-    </div>
-
-    <!-- 2. Okulun Tüm 204 Özgün Sorusunu Kapsayan Büyük Maraton -->
-    <div class="p-5 rounded-2xl border-2 border-indigo-600 bg-indigo-50/20 flex flex-col justify-between shadow-sm">
-      <div>
-        <div class="flex items-center justify-between mb-2">
-          <span class="px-2.5 py-0.5 bg-indigo-600 text-white text-[11px] font-bold rounded-lg uppercase">Tam Paket Maratonu</span>
-          <span class="px-2.5 py-0.5 bg-indigo-100 text-indigo-800 text-xs font-black rounded-lg">204 Özgün Soru</span>
-        </div>
-        <h4 class="font-extrabold text-slate-800 text-base mb-1">${u.short_name} Özel Soru Bankası Tam Maraton (A1–C2)</h4>
-        <p class="text-xs text-slate-600 leading-relaxed mb-4">
-          ${u.name} için özel hazırlanmış 204 özgün sorunun tamamını (her kurda 34 soru: Grammar, Vocab, Reading, Restatement, Cloze, Sentence Comp.) çözün.
-        </p>
-      </div>
-      <button onclick="startExamSimulation('${u.id}', 'all', 'all', true)" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center justify-center gap-1.5">
-        <i data-lucide="award" class="w-3.5 h-3.5"></i> ${u.short_name} 204 Soruluk Tam Maratonu Başlat
-      </button>
-    </div>
-
-    <!-- 3. Seçili Kur (${lvl}) 34 Soruluk Kur Bitirme Sınavı -->
-    <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-blue-300 transition flex flex-col justify-between">
-      <div>
-        <div class="flex items-center justify-between mb-2">
-          <span class="px-2.5 py-0.5 bg-emerald-100 text-emerald-800 text-[11px] font-bold rounded-lg uppercase">${u.short_name} • ${lvl} Kuru</span>
-          <span class="text-xs text-slate-500 font-semibold">34 Özgün Soru</span>
-        </div>
-        <h4 class="font-extrabold text-slate-800 text-base mb-1">${u.short_name} ${lvl} Kur Bitirme Sınavı (34 Soru)</h4>
-        <p class="text-xs text-slate-600 leading-relaxed mb-4">
-          Sadece ${u.name} ${lvl} kuru için hazırlanmış 34 özgün soruyu (Grammar, Vocab, Reading, Restatement, Cloze, Sentence Completion ve okula özel bölümler) içerir.
-        </p>
-      </div>
-      <button onclick="startExamSimulation('${u.id}', '${lvl}', 'all', true)" class="w-full py-2.5 bg-slate-100 hover:bg-emerald-600 hover:text-white text-slate-800 font-bold text-xs rounded-xl transition">
-        ${u.short_name} ${lvl} Kur Sınavını Çöz (34 Soru)
-      </button>
-    </div>
-
-    <!-- 4. Reading & Makale Analizi Modülü (30+ Soru) -->
-    <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-blue-300 transition flex flex-col justify-between">
-      <div>
-        <div class="flex items-center justify-between mb-2">
-          <span class="px-2.5 py-0.5 bg-amber-100 text-amber-800 text-[11px] font-bold rounded-lg uppercase">${u.short_name} • Reading</span>
-          <span class="text-xs text-slate-500 font-semibold">30+ Özgün Soru</span>
-        </div>
-        <h4 class="font-extrabold text-slate-800 text-base mb-1">${u.short_name} Akademik Reading Sınavı (30+ Soru)</h4>
-        <p class="text-xs text-slate-600 leading-relaxed mb-4">
-          ${u.name} (${u.exam_name}) akademik araştırma bültenleri ve makale parçaları üzerinden 30+ özgün okuma-anlama sorusu.
-        </p>
-      </div>
-      <button onclick="startExamSimulation('${u.id}', 'all', 'Reading', true)" class="w-full py-2.5 bg-slate-100 hover:bg-amber-600 hover:text-white text-slate-800 font-bold text-xs rounded-xl transition">
-        ${u.short_name} Reading Sorularını Çöz
-      </button>
-    </div>
-
-    <!-- 5. Restatement (Yakın Anlam) Sınavı (30+ Soru) -->
-    <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-blue-300 transition flex flex-col justify-between">
-      <div>
-        <div class="flex items-center justify-between mb-2">
-          <span class="px-2.5 py-0.5 bg-purple-100 text-purple-800 text-[11px] font-bold rounded-lg uppercase">${u.short_name} • Restatement</span>
-          <span class="text-xs text-slate-500 font-semibold">30+ Özgün Soru</span>
-        </div>
-        <h4 class="font-extrabold text-slate-800 text-base mb-1">${u.short_name} Restatement Sınavı (30+ Soru)</h4>
-        <p class="text-xs text-slate-600 leading-relaxed mb-4">
-          ${u.exam_name} sınavında en çok puan getiren 30+ özgün paraphrase ve cümle yeniden ifade etme sorusu.
-        </p>
-      </div>
-      <button onclick="startExamSimulation('${u.id}', 'all', 'Restatement', true)" class="w-full py-2.5 bg-slate-100 hover:bg-purple-600 hover:text-white text-slate-800 font-bold text-xs rounded-xl transition">
-        ${u.short_name} Restatement Sorularını Çöz
-      </button>
-    </div>
-
-    <!-- 6. Use of English (Grammar) Sınavı (30+ Soru) -->
-    <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-blue-300 transition flex flex-col justify-between">
-      <div>
-        <div class="flex items-center justify-between mb-2">
-          <span class="px-2.5 py-0.5 bg-rose-100 text-rose-800 text-[11px] font-bold rounded-lg uppercase">${u.short_name} • Grammar</span>
-          <span class="text-xs text-slate-500 font-semibold">30+ Özgün Soru</span>
-        </div>
-        <h4 class="font-extrabold text-slate-800 text-base mb-1">${u.short_name} Akademik Grammar Sınavı (30+ Soru)</h4>
-        <p class="text-xs text-slate-600 leading-relaxed mb-4">
-          ${u.name} hazırlık müfredatına özel 30+ özgün akademik dilbilgisi ve yapı sorusu.
-        </p>
-      </div>
-      <button onclick="startExamSimulation('${u.id}', 'all', 'Grammar', true)" class="w-full py-2.5 bg-slate-100 hover:bg-rose-600 hover:text-white text-slate-800 font-bold text-xs rounded-xl transition">
-        ${u.short_name} Grammar Sorularını Çöz
-      </button>
-    </div>
-  `;
+    </div>`;
 
   if (window.lucide) window.lucide.createIcons();
 }
@@ -2668,3 +2836,31 @@ document.addEventListener("keydown", (ev) => {
 
 window.toggleHeaderMenu = toggleHeaderMenu;
 window.closeHeaderMenu = closeHeaderMenu;
+
+// ---------------- ÜST MENÜ AÇILIR GRUPLARI (Sınavlar, Beceriler, Kelime) ----------------
+function closeNavDropdowns(except) {
+  document.querySelectorAll("[data-nav-group]").forEach(group => {
+    if (group === except) return;
+    const menu = group.querySelector(".nav-dropdown");
+    const btn = group.querySelector("[data-nav-group-btn]");
+    if (menu) menu.classList.add("hidden");
+    if (btn) btn.setAttribute("aria-expanded", "false");
+  });
+}
+document.addEventListener("click", (ev) => {
+  const btn = ev.target.closest && ev.target.closest("[data-nav-group-btn]");
+  if (btn) {
+    const group = btn.closest("[data-nav-group]");
+    const menu = group.querySelector(".nav-dropdown");
+    const open = menu.classList.contains("hidden");
+    closeNavDropdowns(group);
+    menu.classList.toggle("hidden", !open);
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+    return;
+  }
+  if (!(ev.target.closest && ev.target.closest(".nav-dropdown"))) closeNavDropdowns();
+});
+document.addEventListener("keydown", (ev) => {
+  if (ev.key === "Escape") closeNavDropdowns();
+});
+window.closeNavDropdowns = closeNavDropdowns;

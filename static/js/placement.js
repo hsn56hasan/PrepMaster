@@ -284,7 +284,7 @@
     const saved = loadSaved();
     if (saved && saved.level) {
       el.innerHTML = `
-        <div id="placement-summary" class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-blue-50 dark:bg-slate-800 border border-blue-100 dark:border-slate-700">
+        <div id="placement-summary" class="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-blue-50 dark:bg-slate-800 border border-blue-100 dark:border-slate-700">
           <i data-lucide="gauge" class="w-5 h-5 text-blue-600 shrink-0"></i>
           <span class="flex-1 text-xs sm:text-sm font-bold text-blue-900 dark:text-slate-100">
             Seviye tespiti: ${saved.mastered ? `${esc(saved.mastered)} geçildi • ` : ""}önerilen kur ${esc(saved.level)}
@@ -293,7 +293,7 @@
         </div>`;
     } else {
       el.innerHTML = `
-        <div id="placement-offer" class="flex flex-col sm:flex-row sm:items-center gap-3 p-4 sm:p-5 rounded-3xl bg-white dark:bg-slate-900 border-2 border-blue-200 dark:border-blue-900 shadow-sm">
+        <div id="placement-offer" class="panel-card flex flex-col sm:flex-row sm:items-center gap-3 p-4 sm:p-5">
           <div class="w-11 h-11 rounded-2xl bg-blue-50 dark:bg-blue-950 flex items-center justify-center shrink-0">
             <i data-lucide="gauge" class="w-6 h-6 text-blue-600"></i>
           </div>
@@ -303,7 +303,7 @@
               Seviye tespit sınavı A1'den C2'ye uyarlamalı ilerler (en fazla 24 soru, yaklaşık 5 dakika) ve sana uygun çalışma kurunu önerir.
             </p>
           </div>
-          <button type="button" onclick="openPlacementTest()" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs rounded-xl shadow transition flex items-center justify-center gap-1.5 shrink-0">
+          <button type="button" onclick="openPlacementTest()" class="toolbar-chip toolbar-chip-primary justify-center shrink-0">
             <i data-lucide="play" class="w-3.5 h-3.5"></i><span>Seviye tespit sınavına başla</span>
           </button>
         </div>`;

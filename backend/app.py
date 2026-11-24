@@ -22,6 +22,7 @@ from database import (
     set_vocab_status, get_vocab_progress,
     record_mistake, resolve_mistake, delete_mistake,
     get_mistakes, get_mistake_count,
+    record_question_answers, get_question_progress, get_today_activity,
     bulk_upsert_mistakes, bulk_upsert_vocab_progress, bulk_resolve_mistakes,
     create_user, authenticate_user, verify_student, get_verification_status,
     create_student_otp, verify_student_otp,
@@ -1340,11 +1341,15 @@ def submit_exam(req: ExamSubmitRequest, request: Request):
         # Tanınan soru yoksa (ör. dinleme soruları) sahte bir %0 deneme kaydı açma.
         raise HTTPException(status_code=400, detail="Gönderilen cevaplar tanınan bir soruya ait değil.")
 
+    progress_rows = []
     for q_id in presented:
         q = q_map[q_id]
         chosen_key = answers.get(q_id)
 
         is_correct = (chosen_key == q["correct_answer"])
+        if chosen_key:
+            progress_rows.append({"question_id": q_id, "university_id": q.get("university_id"), "level": q.get("level"),
+                                  "category": q.get("category"), "is_correct": is_correct})
         time_spent = question_times.get(q_id, 0)
         category = q.get("category", "General")
         
@@ -1381,6 +1386,7 @@ def submit_exam(req: ExamSubmitRequest, request: Request):
             "options": q["options"]
         })
     
+    record_question_answers(uid, progress_rows)
     total_answered = len(presented)
     score_percentage = round((correct_count / max(total_answered, 1)) * 100, 1)
     avg_time = round(req.duration_seconds / max(total_answered, 1), 1) if total_answered > 0 else 0
@@ -1466,6 +1472,8 @@ def practice_answer_endpoint(req: PracticeAnswerRequest, request: Request):
     _record_study(request)
     chosen = req.chosen_answer.upper()
     is_correct = chosen == q["correct_answer"]
+    record_question_answers(uid, [{"question_id": q["id"], "university_id": q.get("university_id"), "level": q.get("level"),
+                                   "category": q.get("category"), "is_correct": is_correct}])
     if is_correct:
         resolve_mistake(uid, q["id"])
     else:
@@ -1511,6 +1519,99 @@ def get_overall_stats(request: Request):
         "average_exam_score": avg_score,
         "recent_exams": history[:5]
     }
+
+DASHBOARD_LEVELS = ["A1", "A2", "B1", "B2", "C1", "C2"]
+
+
+@app.get("/api/dashboard/overview")
+def get_dashboard_overview(request: Request, level: Optional[str] = None):
+    """Panel: özet kutucukları, bölüm/kur ilerlemesi, kategoriye göre hatalar ve günün planı.
+
+    Havuz: seçili üniversitenin soruları (erişim varsa), yoksa genel havuzun özgün (q-orj) soruları.
+    İlerleme = havuzdaki sorulardan en son doğru cevaplananların sayısı."""
+    uid = _current_user_id(request)
+    profile = get_profile(uid)
+    token_user = get_current_user_from_request(request)
+    uni_id = profile.get("university_id") or "itu"
+    lvl = (level or profile.get("current_level") or "B2").upper()
+    if lvl not in DASHBOARD_LEVELS:
+        lvl = "B2"
+    has_uni = uni_id != "general" and _has_access(token_user, uni_id)
+    if has_uni:
+        pool_all = [q for q in questions_data if q.get("university_id") == uni_id]
+        pool_kind = "school"
+    else:
+        pool_all = [q for q in questions_data if q.get("university_id") == "general" and q["id"].startswith("q-orj-")]
+        pool_kind = "general"
+
+    progress = get_question_progress(uid)
+
+    def tally(qs):
+        return {
+            "total": len(qs),
+            "answered": sum(1 for q in qs if q["id"] in progress),
+            "correct": sum(1 for q in qs if progress.get(q["id"], {}).get("last_correct")),
+        }
+
+    pool_level = [q for q in pool_all if q.get("level", "").upper() == lvl]
+    by_cat = {}
+    for q in pool_level:
+        by_cat.setdefault(q.get("category", "General"), []).append(q)
+    sections = sorted(({"category": c, **tally(qs)} for c, qs in by_cat.items()), key=lambda x: (-x["total"], x["category"]))
+    levels = [{"level": L, **tally([q for q in pool_all if q.get("level", "").upper() == L])} for L in DASHBOARD_LEVELS]
+
+    mistakes = get_mistakes(uid, is_resolved=False)
+    mistakes_by_cat = {}
+    for m in mistakes:
+        cat = m.get("category") or "General"
+        mistakes_by_cat[cat] = mistakes_by_cat.get(cat, 0) + 1
+
+    history = get_exam_history(uid, limit=50)
+    total_exams = len(history)
+    avg_score = round(sum(h["score"] for h in history) / total_exams, 1) if total_exams else 0
+    vocab_progress = get_vocab_progress(uid)
+    today = get_today_activity(uid)
+
+    # Günün planı: kelime tekrarı, en zayıf bölüm, Hata Kasası
+    plan = [{
+        "id": "vocab", "title": "20 kelime tekrarı", "done": min(today["vocab_reviewed"], 20), "target": 20,
+        "action": {"type": "tab", "tab": "flashcards"},
+    }]
+    if sections:
+        weakest = min(sections, key=lambda x: (x["correct"] / x["total"] if x["total"] else 1, -x["total"]))
+        cat_ids = {q["id"] for q in by_cat[weakest["category"]]}
+        done_today = sum(1 for qid in cat_ids if progress.get(qid, {}).get("today"))
+        target = min(10, weakest["total"])
+        plan.append({
+            "id": "weakest", "title": f"{lvl} {weakest['category']} · {target} soru", "done": min(done_today, target),
+            "target": target, "action": {"type": "practice", "category": weakest["category"], "level": lvl},
+        })
+    if mistakes or today["mistakes_resolved"]:
+        target = min(5, len(mistakes) + today["mistakes_resolved"])
+        plan.append({
+            "id": "mistakes", "title": f"Hata Kasası'ndan {target} soru", "done": min(today["mistakes_resolved"], target),
+            "target": target, "action": {"type": "tab", "tab": "mistakes"},
+        })
+
+    return {
+        "university_id": uni_id,
+        "level": lvl,
+        "pool": pool_kind,
+        "kpis": {
+            "streak_days": profile.get("streak_days") or 0,
+            "exams_taken": total_exams,
+            "average_score": avg_score,
+            "mastered_vocab": sum(1 for v in vocab_progress.values() if v == "mastered"),
+            "total_vocab": len(vocabulary_data),
+            "unresolved_mistakes": len(mistakes),
+        },
+        "sections": sections,
+        "levels": levels,
+        "mistakes_by_category": dict(sorted(mistakes_by_cat.items(), key=lambda kv: -kv[1])),
+        "plan": plan,
+        "recent_exams": history[:5],
+    }
+
 
 @app.get("/api/speaking")
 def get_speaking_tasks(
@@ -1869,9 +1970,9 @@ def get_mobile_app_info():
     return {
         "available": apk_path is not None,
         "app_name": "PrepKampüs Mobil (Android)",
-        "version": "1.7.0",
+        "version": "1.8.0",
         "build_type": "Release (ARM64)",
-        "filename": "PrepKampus-v1.7-Android.apk",
+        "filename": "PrepKampus-v1.8-Android.apk",
         "size_mb": size_mb,
         "min_android": "Android 8.0+ (API 26+)",
         "download_url": "/api/download/apk",
@@ -1896,9 +1997,9 @@ def download_android_apk():
     return FileResponse(
         path=apk_path,
         media_type="application/vnd.android.package-archive",
-        filename="PrepKampus-v1.7-Android.apk",
+        filename="PrepKampus-v1.8-Android.apk",
         headers={
-            "Content-Disposition": 'attachment; filename="PrepKampus-v1.7-Android.apk"',
+            "Content-Disposition": 'attachment; filename="PrepKampus-v1.8-Android.apk"',
             "Cache-Control": "public, max-age=3600"
         }
     )
