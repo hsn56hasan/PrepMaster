@@ -1635,6 +1635,22 @@ async function submitLogin() {
   }
 
   try {
+    if (identifier.toLowerCase() === "admin") {
+      const adminRes = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: identifier, password })
+      });
+      if (adminRes.ok) {
+        const adminData = await adminRes.json();
+        if (adminData.token) {
+          sessionStorage.setItem("prepmaster_admin_token", adminData.token);
+        }
+        window.location.href = "/admin";
+        return;
+      }
+    }
+
     const res = await fetch("/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
