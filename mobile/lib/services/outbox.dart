@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// Sunucu öğrencinin verisinin tek gerçek kaynağıdır; web ve mobil aynı veriyi görür.
 /// Telefon internetsizken yapılan değişiklikler (kelime durumu, yeni yanlış, çözülen
 /// hata, sınav sonucu, seviye/üniversite seçimi) burada birikir. Bağlantı gelince
-/// [SyncService.syncNow] önce bunları sunucuya gönderir, sonra sunucudaki güncel hâli
+/// [SyncService.syncNow] önce bunları sunucuya gönderir, sonra sunucudaki güncel hali
 /// çeker. Böylece web'de çözülen bir hata telefonda "geri dirilmez": telefon yalnızca
 /// KENDİ yaptığı değişiklikleri gönderir, eski önbelleğini değil.
 class Outbox {

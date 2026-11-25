@@ -148,7 +148,7 @@ def _all_question_map() -> Dict[str, Dict[str, Any]]:
 
 
 def _current_user_id(request: Request) -> int:
-    """Oturumu zorunlu kılar ve kullanıcının hâlâ var olduğunu doğrular."""
+    """Oturumu zorunlu kılar ve kullanıcının hala var olduğunu doğrular."""
     uid = require_current_user(request)["user_id"]
     if not get_profile(uid):
         raise HTTPException(status_code=401, detail="Hesap bulunamadı. Lütfen tekrar giriş yapın.")
@@ -2015,7 +2015,7 @@ def evaluate_speaking(req: SpeakingEvaluateRequest, request: Request, _=Depends(
 # --- Cloud Sync Endpoints (Web-Mobile Two-Way Sync) ---
 @app.get("/api/sync/pull")
 def sync_pull(request: Request):
-    """Öğrencinin sunucudaki güncel hâli; web ve mobil aynı veriyi buradan alır."""
+    """Öğrencinin sunucudaki güncel hali; web ve mobil aynı veriyi buradan alır."""
     uid = _current_user_id(request)
     profile = get_profile(uid)
     mistakes = get_mistakes(uid)

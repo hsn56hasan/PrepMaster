@@ -19,7 +19,7 @@ class SyncService {
   Future<Map<String, dynamic>?> pullSync() => syncNow();
 
   /// Web ile eşitleme: önce çevrimdışı giden kutusunu sunucuya gönderir, sonra
-  /// sunucudaki güncel hâli telefona yazar. Giriş yoksa ya da bağlantı yoksa null döner
+  /// sunucudaki güncel hali telefona yazar. Giriş yoksa ya da bağlantı yoksa null döner
   /// ve giden kutusu korunur (bir sonraki denemede gönderilir).
   Future<Map<String, dynamic>?> syncNow() async {
     if (_running) return null;
@@ -40,7 +40,7 @@ class SyncService {
         await Outbox.clear();
       }
 
-      // 2) Sunucudaki güncel hâl
+      // 2) Sunucudaki güncel hal
       final res = await AuthHttp.instance.get(
         Uri.parse('${_api.baseUrl}/api/sync/pull'),
       ).timeout(const Duration(seconds: 6));

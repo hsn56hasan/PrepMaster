@@ -162,7 +162,7 @@ class SlidingWindowRateLimiter:
         for k in expired_keys:
             del self._history[k]
         if len(self._history) > self._max_keys:
-            # Hâlâ fazlaysa en eski yarısını at (saldırı altında bellek sınırlı kalsın)
+            # Hala fazlaysa en eski yarısını at (saldırı altında bellek sınırlı kalsın)
             ordered = sorted(self._history.items(), key=lambda kv: kv[1][-1] if kv[1] else 0)
             for k, _ in ordered[: len(ordered) // 2]:
                 del self._history[k]
@@ -527,8 +527,8 @@ def sanitize_text(value: Optional[str], strip_tags: bool = False, max_length: Op
     # Remove null bytes
     val = str(value).replace("\x00", "")
 
-    # Temizlik adımları DEĞİŞMEZ hâle gelene kadar tekrarlanır. Eskiden etiket silme olay
-    # yakalayıcı kontrolünden SONRA yapıldığı için "o<>nerror=" girdisi "onerror=" hâline
+    # Temizlik adımları DEĞİŞMEZ hale gelene kadar tekrarlanır. Eskiden etiket silme olay
+    # yakalayıcı kontrolünden SONRA yapıldığı için "o<>nerror=" girdisi "onerror=" haline
     # gelip kontrolden kaçıyordu (yönetici panelinde kayıtlı XSS'e yol açıyordu).
     # Not: Asıl savunma, çıktıyı sayfaya basarken HTML kaçışı yapmaktır; bu yalnızca ek katman.
     for _ in range(10):

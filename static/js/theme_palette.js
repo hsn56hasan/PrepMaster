@@ -11,8 +11,8 @@
     50: "#f1f6f3", 100: "#dde9e2", 200: "#bdd4c7", 300: "#9cbfad", 400: "#6FA287",
     500: "#5b8c72", 600: "#4a775f", 700: "#3d624e", 800: "#2f4c3d", 900: "#23392e", 950: "#14221b",
   };
-  // Premium "Orman & Kâğıt": soğuk gri (slate) yerine hafif yeşil kırıklı sıcak nötrler.
-  // Aydınlıkta kâğıt zemin ve mürekkep metin; karanlıkta orman gecesi yüzeyleri.
+  // Premium "Orman & Kağıt": soğuk gri (slate) yerine hafif yeşil kırıklı sıcak nötrler.
+  // Aydınlıkta kağıt zemin ve mürekkep metin; karanlıkta orman gecesi yüzeyleri.
   var ink = {
     50: "#fbfaf6", 100: "#f5f3ec", 200: "#ece9df", 300: "#dad6c9", 400: "#8e9993",
     500: "#5f6e67", 600: "#46554e", 700: "#2b3a34", 800: "#13261f", 900: "#0b1a15", 950: "#06110d",

@@ -871,7 +871,7 @@
        "title_en": "My home and rooms",
        "icon": "home",
        "intro_tr": "Bu derste evdeki odaları, eşyaları ve 'there is / there are' yapısını öğreneceksin.",
-       "tip_tr": "Tekil şeyler için 'there is', çoğul şeyler için 'there are' kullanılır: There is a sofa. There are two beds. Soru hâli: Is there a garden?",
+       "tip_tr": "Tekil şeyler için 'there is', çoğul şeyler için 'there are' kullanılır: There is a sofa. There are two beds. Soru hali: Is there a garden?",
        "tip_example": {
         "en": "There are three rooms in my flat.",
         "tr": "Dairemde üç oda var."
@@ -1265,7 +1265,7 @@
         },
         {
          "en": "The shop opens at nine.",
-         "tr": "Dükkân dokuzda açılıyor."
+         "tr": "Dükkan dokuzda açılıyor."
         },
         {
          "en": "I'm free on Sunday.",
@@ -1401,7 +1401,7 @@
         },
         {
          "en": "windy",
-         "tr": "rüzgârlı"
+         "tr": "rüzgarlı"
         },
         {
          "en": "snowy",
@@ -1513,7 +1513,7 @@
          {
           "who": "A",
           "en": "Is it windy in Antalya too?",
-          "tr": "Antalya'da rüzgâr da var mı?"
+          "tr": "Antalya'da rüzgar da var mı?"
          },
          {
           "who": "B",
@@ -1551,7 +1551,7 @@
        "title_en": "In the classroom",
        "icon": "school",
        "intro_tr": "Bu derste sınıftaki eşyaları ve öğretmenin kullandığı temel komutları öğreneceksin.",
-       "tip_tr": "Emir cümleleri fiilin yalın hâliyle başlar: Open your books. Olumsuz emir için başa 'Don't' eklenir: Don't talk. Kibar olmak için 'please' eklenebilir.",
+       "tip_tr": "Emir cümleleri fiilin yalın haliyle başlar: Open your books. Olumsuz emir için başa 'Don't' eklenir: Don't talk. Kibar olmak için 'please' eklenebilir.",
        "tip_example": {
         "en": "Please close the door.",
         "tr": "Lütfen kapıyı kapat."
@@ -1622,7 +1622,7 @@
           "To open"
          ],
          "answer": 2,
-         "explain_tr": "Emir cümlesi fiilin yalın hâliyle başlar: Open."
+         "explain_tr": "Emir cümlesi fiilin yalın haliyle başlar: Open."
         },
         {
          "q": "___ talk during the exam!",
@@ -1921,7 +1921,7 @@
         },
         {
          "en": "shop",
-         "tr": "dükkân"
+         "tr": "dükkan"
         },
         {
          "en": "buy",
@@ -2040,7 +2040,7 @@
         "prompts": [
          {
           "q_en": "Ask the price of two things in a shop.",
-          "q_tr": "Bir dükkânda iki ürünün fiyatını sor.",
+          "q_tr": "Bir dükkanda iki ürünün fiyatını sor.",
           "model": "Excuse me, how much is this T-shirt? And how much are these socks?",
           "useful": [
            "How much is this ...?",
@@ -2390,7 +2390,7 @@
          },
          {
           "q_en": "A friend is sick. Ask about him or her and give advice.",
-          "q_tr": "Bir arkadaşın hasta. Hâlini sor ve tavsiye ver.",
+          "q_tr": "Bir arkadaşın hasta. Halini sor ve tavsiye ver.",
           "model": "Are you OK? Do you have a fever? You should see a doctor.",
           "useful": [
            "Are you OK?",
@@ -2583,7 +2583,7 @@
        "title_en": "Pets",
        "icon": "dog",
        "intro_tr": "Bu derste evcil hayvan adlarını ve onlara sahip olmayı 'have got' ile anlatmayı öğreneceksin.",
-       "tip_tr": "Sahip olmayı 'have got' ile de anlatabilirsin: I've got a cat. He ve she ile 'has got' kullanılır: She's got two dogs. Soru hâli: Have you got a pet?",
+       "tip_tr": "Sahip olmayı 'have got' ile de anlatabilirsin: I've got a cat. He ve she ile 'has got' kullanılır: She's got two dogs. Soru hali: Have you got a pet?",
        "tip_example": {
         "en": "We've got a small white rabbit.",
         "tr": "Küçük beyaz bir tavşanımız var."
@@ -4569,7 +4569,7 @@
           "tree"
          ],
          "answer": 1,
-         "explain_tr": "Rüzgârlı havada uçurtma uçurulur: kite."
+         "explain_tr": "Rüzgarlı havada uçurtma uçurulur: kite."
         }
        ],
        "speaking": {
@@ -4634,7 +4634,7 @@
        "title_tr": "Pazarda meyve ve sebze",
        "title_en": "Fruit and vegetables at the market",
        "icon": "shopping-cart",
-       "intro_tr": "Bu derste pazarda meyve ve sebze istemeyi ve isimlerin çoğul hâllerini öğreneceksin.",
+       "intro_tr": "Bu derste pazarda meyve ve sebze istemeyi ve isimlerin çoğul hallerini öğreneceksin.",
        "tip_tr": "Çoğu isme çoğul için -s eklenir: carrots. -o ile bitenlerin çoğuna -es gelir: tomatoes, potatoes. Sessiz harf + y ile bitenlerde y düşer, -ies gelir: strawberries.",
        "tip_example": {
         "en": "A kilo of tomatoes, please.",
@@ -4851,7 +4851,7 @@
         },
         {
          "en": "Is the bread still warm?",
-         "tr": "Ekmek hâlâ sıcak mı?"
+         "tr": "Ekmek hala sıcak mı?"
         },
         {
          "en": "I need a packet of biscuits.",
@@ -4922,7 +4922,7 @@
          {
           "who": "B",
           "en": "Yes, it's still warm. How many loaves?",
-          "tr": "Evet, hâlâ sıcak. Kaç somun?"
+          "tr": "Evet, hala sıcak. Kaç somun?"
          },
          {
           "who": "A",
@@ -5255,7 +5255,7 @@
           "glue"
          ],
          "answer": 1,
-         "explain_tr": "Kâğıt makasla kesilir: scissors."
+         "explain_tr": "Kağıt makasla kesilir: scissors."
         }
        ],
        "speaking": {
@@ -5392,7 +5392,7 @@
           "to start"
          ],
          "answer": 0,
-         "explain_tr": "'Does' ile kurulan soruda fiil yalın hâlde kalır: start."
+         "explain_tr": "'Does' ile kurulan soruda fiil yalın halde kalır: start."
         },
         {
          "q": "___ your sister have science today?",
@@ -5831,7 +5831,7 @@
        "title_en": "Computers and the internet",
        "icon": "laptop",
        "intro_tr": "Bu derste bilgisayar ve internet kelimelerini, 'can / can't' ile neler yapabildiğini söylemeyi öğreneceksin.",
-       "tip_tr": "Yetenek ve imkân 'can + yalın fiil' ile anlatılır, fiil -s ya da to almaz: She can type fast. Olumsuzu 'can't' olur: I can't open this file. Soru: Can you help me?",
+       "tip_tr": "Yetenek ve imkan 'can + yalın fiil' ile anlatılır, fiil -s ya da to almaz: She can type fast. Olumsuzu 'can't' olur: I can't open this file. Soru: Can you help me?",
        "tip_example": {
         "en": "My grandma can send emails now.",
         "tr": "Büyükannem artık e-posta gönderebiliyor."
@@ -6780,7 +6780,7 @@
           "take"
          ],
          "answer": 3,
-         "explain_tr": "'Should' sonrasında fiil yalın hâlde gelir: should take."
+         "explain_tr": "'Should' sonrasında fiil yalın halde gelir: should take."
         },
         {
          "q": "I'm cold. Can you give me a ___?",
@@ -7548,8 +7548,8 @@
        "title_tr": "Doktor randevusu",
        "title_en": "A doctor's appointment",
        "icon": "stethoscope",
-       "intro_tr": "Bu derste doktordan randevu almayı ve şikâyetlerini geçmiş zamanla anlatmayı öğreneceksin.",
-       "tip_tr": "Şikâyetin ne zaman başladığını past simple ile anlatırsın: It started two days ago. Doktor tavsiyesi 'should' ile verilir: You should rest.",
+       "intro_tr": "Bu derste doktordan randevu almayı ve şikayetlerini geçmiş zamanla anlatmayı öğreneceksin.",
+       "tip_tr": "Şikayetin ne zaman başladığını past simple ile anlatırsın: It started two days ago. Doktor tavsiyesi 'should' ile verilir: You should rest.",
        "tip_example": {
         "en": "I hurt my back yesterday.",
         "tr": "Dün sırtımı incittim."
@@ -8306,7 +8306,7 @@
           "gone"
          ],
          "answer": 1,
-         "explain_tr": "'Go' düzensiz fiildir; past simple hâli 'went' olur."
+         "explain_tr": "'Go' düzensiz fiildir; past simple hali 'went' olur."
         },
         {
          "q": "___ you see the match yesterday?",
@@ -8328,7 +8328,7 @@
           "goes"
          ],
          "answer": 0,
-         "explain_tr": "'Didn't' sonrasında fiil yalın hâlde kalır: go."
+         "explain_tr": "'Didn't' sonrasında fiil yalın halde kalır: go."
         },
         {
          "q": "I met my old school friends two days ___.",
@@ -9090,7 +9090,7 @@
        "title_tr": "Mevsimler ve hava",
        "title_en": "Seasons and weather",
        "icon": "leaf",
-       "intro_tr": "Bu derste mevsimleri öğrenecek, havayı sıfatların karşılaştırma hâliyle karşılaştırmayı öğreneceksin.",
+       "intro_tr": "Bu derste mevsimleri öğrenecek, havayı sıfatların karşılaştırma haliyle karşılaştırmayı öğreneceksin.",
        "tip_tr": "Kısa sıfatlara -er eklenir: cold → colder. Uzun sıfatlarda 'more' kullanılır: more beautiful. Karşılaştırmada 'than' gelir: Winter is colder than autumn.",
        "tip_example": {
         "en": "Summer in Antalya is hotter than in Istanbul.",
@@ -9947,7 +9947,7 @@
        "title_en": "Phones and apps",
        "icon": "smartphone",
        "intro_tr": "Bu derste telefon ve uygulama kelimelerini, teknoloji sorunlarını anlatmayı öğreneceksin.",
-       "tip_tr": "'Can' yetenek ve olasılık bildirir; geçmişteki hâli 'could'dur: I can't open this app. Yesterday I couldn't connect to the Wi-Fi.",
+       "tip_tr": "'Can' yetenek ve olasılık bildirir; geçmişteki hali 'could'dur: I can't open this app. Yesterday I couldn't connect to the Wi-Fi.",
        "tip_example": {
         "en": "I couldn't send the photo because the internet was slow.",
         "tr": "İnternet yavaş olduğu için fotoğrafı gönderemedim."
@@ -10386,7 +10386,7 @@
           "well"
          ],
          "answer": 1,
-         "explain_tr": "'Good' düzensizdir, üstünlük hâli 'the best' olur."
+         "explain_tr": "'Good' düzensizdir, üstünlük hali 'the best' olur."
         },
         {
          "q": "Children play in the ___ after school.",
@@ -10545,7 +10545,7 @@
           "showed"
          ],
          "answer": 2,
-         "explain_tr": "'Must' sonrası fiil yalın hâlde gelir: must show."
+         "explain_tr": "'Must' sonrası fiil yalın halde gelir: must show."
         },
         {
          "q": "I returned the book late, so I paid a ___.",
@@ -11390,7 +11390,7 @@
           "more loud"
          ],
          "answer": 0,
-         "explain_tr": "'As ... as' kalıbında sıfat yalın hâliyle kullanılır: as loud as."
+         "explain_tr": "'As ... as' kalıbında sıfat yalın haliyle kullanılır: as loud as."
         },
         {
          "q": "The black laptop isn't as expensive ___ the silver one.",
@@ -12207,7 +12207,7 @@
         },
         {
          "en": "nightmare",
-         "tr": "kâbus"
+         "tr": "kabus"
         },
         {
          "en": "alarm clock",
@@ -12279,7 +12279,7 @@
           "nightmare"
          ],
          "answer": 3,
-         "explain_tr": "İnsanı korkutan kötü rüya 'nightmare', yani kâbustur."
+         "explain_tr": "İnsanı korkutan kötü rüya 'nightmare', yani kabustur."
         }
        ],
        "speaking": {
@@ -12688,7 +12688,7 @@
        "tip_tr": "'Because' sebebi, 'so' sonucu anlatır: We stayed home because it was raining. It was raining, so we stayed home. 'So' öncesine genelde virgül konur.",
        "tip_example": {
         "en": "It's very windy, so let's go to the museum.",
-        "tr": "Hava çok rüzgârlı, o yüzden müzeye gidelim."
+        "tr": "Hava çok rüzgarlı, o yüzden müzeye gidelim."
        },
        "vocab": [
         {
@@ -12701,7 +12701,7 @@
         },
         {
          "en": "windy",
-         "tr": "rüzgârlı"
+         "tr": "rüzgarlı"
         },
         {
          "en": "cancel",
@@ -12713,7 +12713,7 @@
         },
         {
          "en": "indoors",
-         "tr": "kapalı mekânda"
+         "tr": "kapalı mekanda"
         },
         {
          "en": "outdoors",
@@ -12838,7 +12838,7 @@
          },
          {
           "q_en": "Suggest an indoor activity for a rainy day.",
-          "q_tr": "Yağmurlu bir gün için kapalı mekânda bir etkinlik öner.",
+          "q_tr": "Yağmurlu bir gün için kapalı mekanda bir etkinlik öner.",
           "model": "It's raining, so let's stay indoors. We can watch a film or play a board game. I'll make some popcorn.",
           "useful": [
            "It's raining, so ...",
@@ -12864,7 +12864,7 @@
        "tip_tr": "-ing sıfatları bir şeyin nasıl olduğunu anlatır: The film was boring. -ed sıfatları kişinin ne hissettiğini anlatır: I was bored. Aynı şekilde: interesting / interested, exciting / excited.",
        "tip_example": {
         "en": "The story was boring, so I was bored.",
-        "tr": "Hikâye sıkıcıydı, bu yüzden sıkıldım."
+        "tr": "Hikaye sıkıcıydı, bu yüzden sıkıldım."
        },
        "vocab": [
         {
@@ -13113,7 +13113,7 @@
           "grown"
          ],
          "answer": 1,
-         "explain_tr": "'Grow' düzensizdir, geçmiş hâli 'grew' olur."
+         "explain_tr": "'Grow' düzensizdir, geçmiş hali 'grew' olur."
         },
         {
          "q": "When I was a child, I ___ hide-and-seek with my cousins.",
@@ -13840,7 +13840,7 @@
          {
           "who": "B",
           "en": "Yes, it's still available. It's a furnished two-bedroom flat.",
-          "tr": "Evet, hâlâ boş. Eşyalı, iki yatak odalı bir daire."
+          "tr": "Evet, hala boş. Eşyalı, iki yatak odalı bir daire."
          },
          {
           "who": "A",
@@ -14403,7 +14403,7 @@
        "title_en": "Healthy living",
        "icon": "heart-pulse",
        "intro_tr": "Bu derste sağlıklı alışkanlıkları anlatmayı ve başkalarına tavsiye vermeyi öğreneceksin.",
-       "tip_tr": "Tavsiye için 'should / shouldn't' + fiilin yalın hâli kullanılır: You should drink more water. Daha güçlü bir uyarı için 'had better' kullanılır.",
+       "tip_tr": "Tavsiye için 'should / shouldn't' + fiilin yalın hali kullanılır: You should drink more water. Daha güçlü bir uyarı için 'had better' kullanılır.",
        "tip_example": {
         "en": "You shouldn't skip breakfast.",
         "tr": "Kahvaltıyı atlamamalısın."
@@ -14621,7 +14621,7 @@
        "phrases": [
         {
          "en": "My luggage hasn't arrived yet.",
-         "tr": "Bagajım hâlâ gelmedi."
+         "tr": "Bagajım hala gelmedi."
         },
         {
          "en": "I've just missed my train to Ankara.",
@@ -14706,7 +14706,7 @@
          {
           "who": "B",
           "en": "Your bag is still in Izmir. It will arrive tonight.",
-          "tr": "Çantanız hâlâ İzmir'de. Bu gece gelecek."
+          "tr": "Çantanız hala İzmir'de. Bu gece gelecek."
          },
          {
           "who": "A",
@@ -14745,11 +14745,11 @@
       },
       {
        "id": "b1-07",
-       "title_tr": "Kibarca şikâyet etmek",
+       "title_tr": "Kibarca şikayet etmek",
        "title_en": "Complaining politely",
        "icon": "message-circle",
        "intro_tr": "Bu derste bir sorunu kaba olmadan, kibar ve net biçimde dile getirmeyi öğreneceksin.",
-       "tip_tr": "Şikâyeti yumuşatmak için 'I'm afraid...', 'I'm sorry, but...' ve 'Would you mind + fiil-ing?' kalıplarını kullan: Would you mind changing it?",
+       "tip_tr": "Şikayeti yumuşatmak için 'I'm afraid...', 'I'm sorry, but...' ve 'Would you mind + fiil-ing?' kalıplarını kullan: Would you mind changing it?",
        "tip_example": {
         "en": "I'm sorry, but my soup is cold.",
         "tr": "Kusura bakmayın ama çorbam soğuk."
@@ -14757,7 +14757,7 @@
        "vocab": [
         {
          "en": "complaint",
-         "tr": "şikâyet"
+         "tr": "şikayet"
         },
         {
          "en": "manager",
@@ -14807,7 +14807,7 @@
         },
         {
          "en": "I'd like to make a complaint about the service.",
-         "tr": "Hizmetle ilgili şikâyette bulunmak istiyorum."
+         "tr": "Hizmetle ilgili şikayette bulunmak istiyorum."
         }
        ],
        "quiz": [
@@ -14831,7 +14831,7 @@
           "polite"
          ],
          "answer": 0,
-         "explain_tr": "'I'm sorry, but...' şikâyeti kibarca başlatan kalıptır."
+         "explain_tr": "'I'm sorry, but...' şikayeti kibarca başlatan kalıptır."
         },
         {
          "q": "The headphones are ___. One side doesn't work.",
@@ -14892,7 +14892,7 @@
         "prompts": [
          {
           "q_en": "Your neighbour's music is too loud late at night. Complain politely.",
-          "q_tr": "Komşunun müziği gece geç saatte çok yüksek. Kibarca şikâyet et.",
+          "q_tr": "Komşunun müziği gece geç saatte çok yüksek. Kibarca şikayet et.",
           "model": "Hi, I'm sorry to bother you, but the music is a bit loud. I have an exam tomorrow morning. Would you mind turning it down after eleven? Thanks a lot.",
           "useful": [
            "I'm sorry to bother you, but ...",
@@ -15089,7 +15089,7 @@
        "title_en": "Social media habits",
        "icon": "smartphone",
        "intro_tr": "Bu derste sosyal medya kullanımını ve dijital alışkanlıklarını anlatmayı öğreneceksin.",
-       "tip_tr": "'How long have you...?' bir durumun ne zamandır sürdüğünü sorar. Hâlâ süren eylemler için present perfect continuous de kullanılır: I've been scrolling for an hour.",
+       "tip_tr": "'How long have you...?' bir durumun ne zamandır sürdüğünü sorar. Hala süren eylemler için present perfect continuous de kullanılır: I've been scrolling for an hour.",
        "tip_example": {
         "en": "I've been using this app since 2021.",
         "tr": "Bu uygulamayı 2021'den beri kullanıyorum."
@@ -15160,7 +15160,7 @@
           "are"
          ],
          "answer": 0,
-         "explain_tr": "'had' fiilinin V3 hâli olduğu için present perfect sorusu 'have' ile kurulur."
+         "explain_tr": "'had' fiilinin V3 hali olduğu için present perfect sorusu 'have' ile kurulur."
         },
         {
          "q": "I've been ___ videos since I got home.",
@@ -15477,7 +15477,7 @@
        "phrases": [
         {
          "en": "First, chop the onions into small pieces.",
-         "tr": "Önce soğanları küçük parçalar hâlinde doğra."
+         "tr": "Önce soğanları küçük parçalar halinde doğra."
         },
         {
          "en": "Stir the sauce for about five minutes.",
@@ -16403,7 +16403,7 @@
          {
           "who": "A",
           "en": "Hello, my order hasn't arrived yet. It's been ten days.",
-          "tr": "Merhaba, siparişim hâlâ gelmedi. On gün oldu."
+          "tr": "Merhaba, siparişim hala gelmedi. On gün oldu."
          },
          {
           "who": "B",
@@ -16583,7 +16583,7 @@
          {
           "who": "A",
           "en": "Oh, do you still work at the café near campus?",
-          "tr": "Aa, hâlâ kampüsün yakınındaki kafede mi çalışıyorsun?"
+          "tr": "Aa, hala kampüsün yakınındaki kafede mi çalışıyorsun?"
          },
          {
           "who": "B",
@@ -17715,7 +17715,7 @@
         },
         {
          "en": "Can I still drop this course next week?",
-         "tr": "Bu dersi gelecek hafta hâlâ bırakabilir miyim?"
+         "tr": "Bu dersi gelecek hafta hala bırakabilir miyim?"
         }
        ],
        "quiz": [
@@ -17944,7 +17944,7 @@
          {
           "who": "B",
           "en": "Not really. I'm still getting used to sharing a room.",
-          "tr": "Pek değil. Hâlâ oda paylaşmaya alışmaya çalışıyorum."
+          "tr": "Pek değil. Hala oda paylaşmaya alışmaya çalışıyorum."
          },
          {
           "who": "A",
@@ -18715,7 +18715,7 @@
         },
         {
          "en": "proof of address",
-         "tr": "ikametgâh belgesi"
+         "tr": "ikametgah belgesi"
         },
         {
          "en": "cash machine",
@@ -18805,7 +18805,7 @@
          {
           "who": "A",
           "en": "Yes, here they are. Do you need proof of address too?",
-          "tr": "Evet, buyurun. İkametgâh belgesi de gerekiyor mu?"
+          "tr": "Evet, buyurun. İkametgah belgesi de gerekiyor mu?"
          },
          {
           "who": "B",
@@ -19342,7 +19342,7 @@
         "prompts": [
          {
           "q_en": "Tell a story about a time you got lost.",
-          "q_tr": "Kaybolduğun bir zamanı hikâye olarak anlat.",
+          "q_tr": "Kaybolduğun bir zamanı hikaye olarak anlat.",
           "model": "Last year, I got lost in Rome. I had left my phone at the hotel, so I couldn't use a map. I asked a local for help, but he didn't speak English. In the end, I found a famous landmark and walked back from there.",
           "useful": [
            "I got lost in ...",
@@ -19372,7 +19372,7 @@
        "tip_tr": "Sayılabilen isimlerle 'a few', sayılamayan isimlerle 'a little' kullanılır: a few matches, a little water. 'a' olmadan 'few' ve 'little' ise 'çok az, yetersiz' anlamı taşır.",
        "tip_example": {
         "en": "We still have a little water and a few apples.",
-        "tr": "Hâlâ biraz suyumuz ve birkaç elmamız var."
+        "tr": "Hala biraz suyumuz ve birkaç elmamız var."
        },
        "vocab": [
         {
@@ -20017,7 +20017,7 @@
          {
           "who": "A",
           "en": "I did, but I still can't make a decision.",
-          "tr": "Yazdım ama hâlâ karar veremiyorum."
+          "tr": "Yazdım ama hala karar veremiyorum."
          },
          {
           "who": "B",
@@ -20177,7 +20177,7 @@
          {
           "who": "A",
           "en": "Well, Ece said you complained about me yesterday.",
-          "tr": "Ama Ece dün benden şikâyet ettiğini söyledi."
+          "tr": "Ama Ece dün benden şikayet ettiğini söyledi."
          },
          {
           "who": "B",
@@ -20580,7 +20580,7 @@
        "tip_tr": "Karşı görüşü kabul edip fikrini savunurken 'Although / Even though + cümle' ya da 'Despite + isim / fiil-ing' kullan: Despite being expensive, it's worth it.",
        "tip_example": {
         "en": "Although I see your point, I still disagree.",
-        "tr": "Ne demek istediğini anlasam da hâlâ katılmıyorum."
+        "tr": "Ne demek istediğini anlasam da hala katılmıyorum."
        },
        "vocab": [
         {
@@ -20929,7 +20929,7 @@
         },
         {
          "en": "complaint",
-         "tr": "şikâyet"
+         "tr": "şikayet"
         },
         {
          "en": "reference number",
@@ -20975,7 +20975,7 @@
         },
         {
          "en": "The product is still under warranty.",
-         "tr": "Ürün hâlâ garanti kapsamında."
+         "tr": "Ürün hala garanti kapsamında."
         }
        ],
        "quiz": [
@@ -21039,7 +21039,7 @@
          {
           "who": "A",
           "en": "My laptop stopped working, and it's still under warranty.",
-          "tr": "Dizüstü bilgisayarım çalışmayı bıraktı ve hâlâ garantisi var."
+          "tr": "Dizüstü bilgisayarım çalışmayı bıraktı ve hala garantisi var."
          },
          {
           "who": "B",
@@ -21054,7 +21054,7 @@
          {
           "who": "B",
           "en": "I'm sorry. I'll escalate your complaint to my supervisor right away.",
-          "tr": "Özür dilerim. Şikâyetinizi hemen amirime ileteceğim."
+          "tr": "Özür dilerim. Şikayetinizi hemen amirime ileteceğim."
          }
         ],
         "prompts": [
@@ -21328,7 +21328,7 @@
           "to check"
          ],
          "answer": 1,
-         "explain_tr": "'have + nesne + V3' kalıbında fiil üçüncü hâlde olur: checked."
+         "explain_tr": "'have + nesne + V3' kalıbında fiil üçüncü halde olur: checked."
         },
         {
          "q": "We need to ___ the final report printed before the meeting.",
@@ -21951,7 +21951,7 @@
        "vocab": [
         {
          "en": "custom",
-         "tr": "âdet"
+         "tr": "adet"
         },
         {
          "en": "tradition",
@@ -21989,7 +21989,7 @@
         },
         {
          "en": "I'm still getting used to the food here.",
-         "tr": "Buradaki yemeklere hâlâ alışıyorum."
+         "tr": "Buradaki yemeklere hala alışıyorum."
         },
         {
          "en": "Is it rude to be late in your culture?",
@@ -22047,7 +22047,7 @@
           "custom"
          ],
          "answer": 3,
-         "explain_tr": "Bir toplumda yaygın olan davranış âdettir: custom."
+         "explain_tr": "Bir toplumda yaygın olan davranış adettir: custom."
         }
        ],
        "speaking": {
@@ -22065,7 +22065,7 @@
          {
           "who": "A",
           "en": "I know. I'm still getting used to it, to be honest.",
-          "tr": "Biliyorum. Açıkçası hâlâ buna alışmaya çalışıyorum."
+          "tr": "Biliyorum. Açıkçası hala buna alışmaya çalışıyorum."
          },
          {
           "who": "B",
@@ -23315,7 +23315,7 @@
        "title_en": "Appointments in the health system",
        "icon": "stethoscope",
        "intro_tr": "Bu derste hastane randevusu almayı, belirtilerini anlatmayı ve sevk sürecini konuşmayı öğreneceksin.",
-       "tip_tr": "Bir süredir devam eden ve hâlâ süren durumlar için present perfect continuous kullanılır: I've been having headaches for two weeks. Belirtileri anlatırken çok işe yarar.",
+       "tip_tr": "Bir süredir devam eden ve hala süren durumlar için present perfect continuous kullanılır: I've been having headaches for two weeks. Belirtileri anlatırken çok işe yarar.",
        "tip_example": {
         "en": "I've been feeling dizzy since Monday.",
         "tr": "Pazartesiden beri başım dönüyor."
@@ -23386,7 +23386,7 @@
           "am sleeping"
          ],
          "answer": 1,
-         "explain_tr": "'since' ile hâlâ süren bir durum için present perfect continuous kullanılır."
+         "explain_tr": "'since' ile hala süren bir durum için present perfect continuous kullanılır."
         },
         {
          "q": "How long have you been ___ these symptoms?",
@@ -23517,7 +23517,7 @@
         },
         {
          "en": "complaint form",
-         "tr": "şikâyet formu"
+         "tr": "şikayet formu"
         },
         {
          "en": "unfair",
@@ -23539,11 +23539,11 @@
         },
         {
          "en": "Do you still have your proof of purchase?",
-         "tr": "Satın alma kanıtınız hâlâ duruyor mu?"
+         "tr": "Satın alma kanıtınız hala duruyor mu?"
         },
         {
          "en": "I'll take this complaint to the consumer court.",
-         "tr": "Bu şikâyeti tüketici mahkemesine taşıyacağım."
+         "tr": "Bu şikayeti tüketici mahkemesine taşıyacağım."
         }
        ],
        "quiz": [
@@ -23602,7 +23602,7 @@
          {
           "who": "B",
           "en": "I'm sorry. Do you still have your proof of purchase?",
-          "tr": "Üzgünüm. Satın alma belgeniz hâlâ duruyor mu?"
+          "tr": "Üzgünüm. Satın alma belgeniz hala duruyor mu?"
          },
          {
           "who": "A",
@@ -24105,7 +24105,7 @@
           "bullet points"
          ],
          "answer": 0,
-         "explain_tr": "e.g. ve etc. kelimelerin kısaltılmış hâlleridir: abbreviations."
+         "explain_tr": "e.g. ve etc. kelimelerin kısaltılmış halleridir: abbreviations."
         }
        ],
        "speaking": {
@@ -24774,7 +24774,7 @@
           "reduce"
          ],
          "answer": 0,
-         "explain_tr": "Bir konuyu daha dar ve belirli hâle getirmek 'narrow down' ile anlatılır."
+         "explain_tr": "Bir konuyu daha dar ve belirli hale getirmek 'narrow down' ile anlatılır."
         },
         {
          "q": "Before you collect data, write a clear ___ that you can test.",
@@ -26294,7 +26294,7 @@
           "must be"
          ],
          "answer": 1,
-         "explain_tr": "Bir şeyin geçmişte olmasının imkânsız olduğunu düşünüyorsak 'can't have + V3' kullanırız."
+         "explain_tr": "Bir şeyin geçmişte olmasının imkansız olduğunu düşünüyorsak 'can't have + V3' kullanırız."
         },
         {
          "q": "Millions of people shared it. It ___ gone viral very quickly.",
@@ -26360,7 +26360,7 @@
          {
           "who": "B",
           "en": "Exactly. Let's report the post instead of spreading it further.",
-          "tr": "Aynen. Daha fazla yaymak yerine paylaşımı şikâyet edelim."
+          "tr": "Aynen. Daha fazla yaymak yerine paylaşımı şikayet edelim."
          }
         ],
         "prompts": [
@@ -26615,7 +26615,7 @@
         },
         {
          "en": "My pronunciation still needs a lot of work.",
-         "tr": "Telaffuzumun hâlâ çok çalışılması gerekiyor."
+         "tr": "Telaffuzumun hala çok çalışılması gerekiyor."
         },
         {
          "en": "I practise with a native speaker every week.",
@@ -26706,7 +26706,7 @@
          {
           "who": "B",
           "en": "Pronunciation, definitely. My accent is still very strong.",
-          "tr": "Kesinlikle telaffuz. Aksanım hâlâ çok belirgin."
+          "tr": "Kesinlikle telaffuz. Aksanım hala çok belirgin."
          }
         ],
         "prompts": [
@@ -27261,7 +27261,7 @@
         },
         {
          "en": "artificial intelligence",
-         "tr": "yapay zekâ"
+         "tr": "yapay zeka"
         },
         {
          "en": "replace",
@@ -27361,7 +27361,7 @@
          {
           "who": "A",
           "en": "Do you think artificial intelligence will replace teachers one day?",
-          "tr": "Sence yapay zekâ bir gün öğretmenlerin yerini alacak mı?"
+          "tr": "Sence yapay zeka bir gün öğretmenlerin yerini alacak mı?"
          },
          {
           "who": "B",
@@ -27987,7 +27987,7 @@
         },
         {
          "en": "While I concede that point, the overall argument still stands.",
-         "tr": "Bu noktada hak versem de genel argüman hâlâ geçerli."
+         "tr": "Bu noktada hak versem de genel argüman hala geçerli."
         },
         {
          "en": "Not only is it cheaper, but it's also far more efficient.",
@@ -28193,7 +28193,7 @@
           "installed"
          ],
          "answer": 2,
-         "explain_tr": "'have someone do something' yapısında fiil yalın hâlde gelir: 'have the team install'."
+         "explain_tr": "'have someone do something' yapısında fiil yalın halde gelir: 'have the team install'."
         },
         {
          "q": "Team ___ dropped sharply after the layoffs were announced.",
@@ -28440,7 +28440,7 @@
          },
          {
           "q_en": "Talk about a decision in the past that still affects you today.",
-          "q_tr": "Geçmişte verdiğin ve bugün hâlâ seni etkileyen bir kararı anlat.",
+          "q_tr": "Geçmişte verdiğin ve bugün hala seni etkileyen bir kararı anlat.",
           "model": "A few years ago I turned down a place on an exchange programme because I was nervous about living abroad. If I had accepted it, I would probably speak much better English now. I also think I'd be more independent today. Still, I can't really justify regretting it forever. These days I try to say yes to opportunities more often.",
           "useful": [
            "If I had ..., I would ... now.",
@@ -28503,7 +28503,7 @@
         },
         {
          "en": "There's still some room for improvement in the conclusion.",
-         "tr": "Sonuç bölümünde hâlâ geliştirilebilecek yerler var."
+         "tr": "Sonuç bölümünde hala geliştirilebilecek yerler var."
         },
         {
          "en": "Perhaps you could cut the second section down a little.",
@@ -28579,7 +28579,7 @@
          {
           "who": "A",
           "en": "There's still some room for improvement in the conclusion. It feels a bit rushed.",
-          "tr": "Sonuç bölümünde hâlâ geliştirilebilecek yerler var. Biraz aceleye gelmiş gibi duruyor."
+          "tr": "Sonuç bölümünde hala geliştirilebilecek yerler var. Biraz aceleye gelmiş gibi duruyor."
          },
          {
           "who": "B",
@@ -29025,7 +29025,7 @@
         },
         {
          "en": "There's still a lot of stigma around asking for help.",
-         "tr": "Yardım istemek konusunda hâlâ çok fazla damgalama var."
+         "tr": "Yardım istemek konusunda hala çok fazla damgalama var."
         }
        ],
        "quiz": [
@@ -29280,7 +29280,7 @@
          {
           "who": "B",
           "en": "Agreed. Never before have solar and wind power been so cheap.",
-          "tr": "Katılıyorum. Güneş ve rüzgâr enerjisi daha önce hiç bu kadar ucuz olmamıştı."
+          "tr": "Katılıyorum. Güneş ve rüzgar enerjisi daha önce hiç bu kadar ucuz olmamıştı."
          }
         ],
         "prompts": [
@@ -29309,14 +29309,14 @@
       },
       {
        "id": "c1-12",
-       "title_tr": "Gündelik hayatta yapay zekâ",
+       "title_tr": "Gündelik hayatta yapay zeka",
        "title_en": "AI in everyday life",
        "icon": "laptop",
-       "intro_tr": "Bu derste yapay zekânın gündelik hayattaki yerini, faydalarını ve risklerini dengeli bir dille tartışmayı öğreneceksin.",
+       "intro_tr": "Bu derste yapay zekanın gündelik hayattaki yerini, faydalarını ve risklerini dengeli bir dille tartışmayı öğreneceksin.",
        "tip_tr": "Bir görüşü kesinleştirmeden sunmak için 'arguably', 'to a large extent' ve 'it could be argued that' kullan. 'Arguably' cümleye 'savunulabilir ki' anlamı katar.",
        "tip_example": {
         "en": "Arguably, AI tools have changed how we search for information.",
-        "tr": "Yapay zekâ araçlarının bilgi arama biçimimizi değiştirdiği savunulabilir."
+        "tr": "Yapay zeka araçlarının bilgi arama biçimimizi değiştirdiği savunulabilir."
        },
        "vocab": [
         {
@@ -29355,7 +29355,7 @@
        "phrases": [
         {
          "en": "I use AI tools to draft emails, but I always edit them.",
-         "tr": "E-posta taslakları için yapay zekâ kullanıyorum ama her zaman düzenliyorum."
+         "tr": "E-posta taslakları için yapay zeka kullanıyorum ama her zaman düzenliyorum."
         },
         {
          "en": "These algorithms can reinforce existing biases without anyone noticing.",
@@ -29425,7 +29425,7 @@
          {
           "who": "A",
           "en": "Do you use AI tools for your assignments, or do you think it's cheating?",
-          "tr": "Ödevlerin için yapay zekâ araçları kullanıyor musun, yoksa bunun kopya olduğunu mu düşünüyorsun?"
+          "tr": "Ödevlerin için yapay zeka araçları kullanıyor musun, yoksa bunun kopya olduğunu mu düşünüyorsun?"
          },
          {
           "who": "B",
@@ -29456,7 +29456,7 @@
         "prompts": [
          {
           "q_en": "How has artificial intelligence changed your daily life? Give specific examples.",
-          "q_tr": "Yapay zekâ gündelik hayatını nasıl değiştirdi? Somut örnekler ver.",
+          "q_tr": "Yapay zeka gündelik hayatını nasıl değiştirdi? Somut örnekler ver.",
           "model": "Arguably, AI has crept into my life without my really noticing. I use a navigation app that predicts traffic, and my phone suggests replies to messages. For studying, I sometimes ask a chatbot to explain difficult concepts. That said, I always double-check the answers because they're not always accurate. To a large extent, it saves me time, but I try not to depend on it too much.",
           "useful": [
            "Arguably, ...",
@@ -29466,7 +29466,7 @@
          },
          {
           "q_en": "Should AI tools be banned in schools and universities? Explain your position.",
-          "q_tr": "Yapay zekâ araçları okullarda ve üniversitelerde yasaklanmalı mı? Tutumunu açıkla.",
+          "q_tr": "Yapay zeka araçları okullarda ve üniversitelerde yasaklanmalı mı? Tutumunu açıkla.",
           "model": "I don't think a complete ban would be realistic or helpful. It could be argued that students will need these tools in their future jobs anyway. What matters is teaching them to use AI critically and honestly. Universities could, for instance, require students to explain how they used it. Banning it would simply push its use underground.",
           "useful": [
            "It could be argued that ...",
@@ -29541,7 +29541,7 @@
         },
         {
          "en": "The offer becomes binding once both sides have signed it.",
-         "tr": "Teklif iki taraf da imzaladığında bağlayıcı hâle gelir."
+         "tr": "Teklif iki taraf da imzaladığında bağlayıcı hale gelir."
         }
        ],
        "quiz": [
@@ -29620,7 +29620,7 @@
          {
           "who": "B",
           "en": "Definitely, and read the fine print carefully before the contract becomes binding.",
-          "tr": "Kesinlikle, ayrıca sözleşme bağlayıcı hâle gelmeden önce küçük yazıları dikkatle oku."
+          "tr": "Kesinlikle, ayrıca sözleşme bağlayıcı hale gelmeden önce küçük yazıları dikkatle oku."
          }
         ],
         "prompts": [
@@ -30375,7 +30375,7 @@
         },
         {
          "en": "bootstrap",
-         "tr": "kendi imkânlarıyla kurmak"
+         "tr": "kendi imkanlarıyla kurmak"
         }
        ],
        "phrases": [
@@ -30393,11 +30393,11 @@
         },
         {
          "en": "We bootstrapped the company for two years before finding investors.",
-         "tr": "Yatırımcı bulmadan önce şirketi iki yıl kendi imkânlarımızla yürüttük."
+         "tr": "Yatırımcı bulmadan önce şirketi iki yıl kendi imkanlarımızla yürüttük."
         },
         {
          "en": "If I hadn't taken that risk, I'd still be stuck in an office.",
-         "tr": "O riski almasaydım hâlâ bir ofise sıkışıp kalmış olurdum."
+         "tr": "O riski almasaydım hala bir ofise sıkışıp kalmış olurdum."
         }
        ],
        "quiz": [
@@ -30476,7 +30476,7 @@
          {
           "who": "B",
           "en": "We bootstrapped it for two years and expect to break even within eighteen months.",
-          "tr": "İki yıl kendi imkânlarımızla yürüttük ve on sekiz ay içinde başa baş noktasına gelmeyi bekliyoruz."
+          "tr": "İki yıl kendi imkanlarımızla yürüttük ve on sekiz ay içinde başa baş noktasına gelmeyi bekliyoruz."
          }
         ],
         "prompts": [
@@ -30559,7 +30559,7 @@
         },
         {
          "en": "Women are still underrepresented in senior management roles.",
-         "tr": "Kadınlar üst yönetim rollerinde hâlâ yeterince temsil edilmiyor."
+         "tr": "Kadınlar üst yönetim rollerinde hala yeterince temsil edilmiyor."
         },
         {
          "en": "We all have unconscious biases that affect our decisions.",
@@ -30631,7 +30631,7 @@
          {
           "who": "A",
           "en": "What could we change in the hiring process to make it fairer?",
-          "tr": "İşe alım sürecini daha adil hâle getirmek için neyi değiştirebiliriz?"
+          "tr": "İşe alım sürecini daha adil hale getirmek için neyi değiştirebiliriz?"
          },
          {
           "who": "B",
@@ -30682,7 +30682,7 @@
        "tip_tr": "Resmi yazışmada kısaltma kullanılmaz, gündelik fiiller yerine resmi karşılıklar seçilir: 'get' yerine 'receive', 'ask for' yerine 'request'. 'Should you have any questions...' çok yaygındır.",
        "tip_example": {
         "en": "Should you require any further information, please do not hesitate to contact me.",
-        "tr": "Ek bilgiye ihtiyaç duymanız hâlinde benimle iletişime geçmekten çekinmeyin."
+        "tr": "Ek bilgiye ihtiyaç duymanız halinde benimle iletişime geçmekten çekinmeyin."
        },
        "vocab": [
         {
@@ -30711,7 +30711,7 @@
         },
         {
          "en": "promptly",
-         "tr": "derhâl"
+         "tr": "derhal"
         },
         {
          "en": "recipient",
@@ -30816,7 +30816,7 @@
          {
           "who": "B",
           "en": "Of course. Please email it promptly, and we will acknowledge receipt within two days.",
-          "tr": "Elbette. Lütfen derhâl e-postayla gönderin, iki gün içinde alındığını bildireceğiz."
+          "tr": "Elbette. Lütfen derhal e-postayla gönderin, iki gün içinde alındığını bildireceğiz."
          }
         ],
         "prompts": [
@@ -31534,7 +31534,7 @@
        "title_tr": "Disiplinlerarası çalışma",
        "title_en": "Interdisciplinary work",
        "icon": "lightbulb",
-       "intro_tr": "Bu derste farklı disiplinlerden insanlarla ortak proje yürütmeyi ve uzmanlık dilini herkesin anlayacağı hâle getirmeyi öğreneceksin.",
+       "intro_tr": "Bu derste farklı disiplinlerden insanlarla ortak proje yürütmeyi ve uzmanlık dilini herkesin anlayacağı hale getirmeyi öğreneceksin.",
        "tip_tr": "Birlikte artan iki durumu anlatmak için 'the + karşılaştırma, the + karşılaştırma' yapısı kullanılır: 'The more we share ideas, the faster we solve problems.' Her iki bölümde de 'the' zorunludur.",
        "tip_example": {
         "en": "The more disciplines we involve, the richer our results become.",
@@ -32144,7 +32144,7 @@
           "be"
          ],
          "answer": 3,
-         "explain_tr": "'It is vital that' sonrası subjunctive gelir; 'be' yalın hâliyle kullanılır."
+         "explain_tr": "'It is vital that' sonrası subjunctive gelir; 'be' yalın haliyle kullanılır."
         },
         {
          "q": "We need to define the ___ clearly so the project doesn't keep growing.",
@@ -32229,7 +32229,7 @@
        "vocab": [
         {
          "en": "grievance",
-         "tr": "şikâyet"
+         "tr": "şikayet"
         },
         {
          "en": "mediate",
@@ -33019,7 +33019,7 @@
          {
           "who": "A",
           "en": "Have you heard the bank is introducing AI to handle customer applications?",
-          "tr": "Bankanın müşteri başvurularını yürütmek için yapay zekâ getireceğini duydun mu?"
+          "tr": "Bankanın müşteri başvurularını yürütmek için yapay zeka getireceğini duydun mu?"
          },
          {
           "who": "B",
@@ -33050,7 +33050,7 @@
         "prompts": [
          {
           "q_en": "Which jobs do you think will have disappeared by 2050, and which will still exist? Explain.",
-          "q_tr": "Sence 2050'ye kadar hangi meslekler ortadan kalkmış olacak, hangileri hâlâ var olacak? Açıkla.",
+          "q_tr": "Sence 2050'ye kadar hangi meslekler ortadan kalkmış olacak, hangileri hala var olacak? Açıkla.",
           "model": "By 2050, I think many cashier and data entry jobs will have disappeared. Self-service machines and software can already do much of this work. On the other hand, jobs that require empathy, such as nursing and teaching, will probably still exist. Creative roles may change, but they're unlikely to become obsolete. The key will be how quickly people can adapt and learn new skills.",
           "useful": [
            "By 2050, ... will have ...",
@@ -33589,11 +33589,11 @@
       },
       {
        "id": "c1-37",
-       "title_tr": "Hikâye anlatarak ikna etmek",
+       "title_tr": "Hikaye anlatarak ikna etmek",
        "title_en": "Persuading through storytelling",
        "icon": "sparkles",
-       "intro_tr": "Bu derste kişisel bir hikâyeyi dinleyiciyi etkileyecek ve ikna edecek biçimde kurgulayıp anlatmayı öğreneceksin.",
-       "tip_tr": "Hikâyede bir olaydan önce süregelen durumu anlatmak için past perfect continuous kullanılır: 'I had been working there for years when everything changed.' Yapı: had been + -ing.",
+       "intro_tr": "Bu derste kişisel bir hikayeyi dinleyiciyi etkileyecek ve ikna edecek biçimde kurgulayıp anlatmayı öğreneceksin.",
+       "tip_tr": "Hikayede bir olaydan önce süregelen durumu anlatmak için past perfect continuous kullanılır: 'I had been working there for years when everything changed.' Yapı: had been + -ing.",
        "tip_example": {
         "en": "We had been searching for a solution for months when a customer gave us the idea.",
         "tr": "Bir müşteri bize fikri verdiğinde aylardır çözüm arıyorduk."
@@ -33635,7 +33635,7 @@
        "phrases": [
         {
          "en": "Let me start with a short story from my first job.",
-         "tr": "İlk işimden kısa bir hikâyeyle başlayayım."
+         "tr": "İlk işimden kısa bir hikayeyle başlayayım."
         },
         {
          "en": "I had been working there for two years when everything changed.",
@@ -33651,7 +33651,7 @@
         },
         {
          "en": "The moral of the story is that small actions matter.",
-         "tr": "Hikâyeden çıkan ders, küçük davranışların önemli olduğudur."
+         "tr": "Hikayeden çıkan ders, küçük davranışların önemli olduğudur."
         }
        ],
        "quiz": [
@@ -33710,7 +33710,7 @@
          {
           "who": "B",
           "en": "Don't start with statistics. Start with a short, relatable story instead.",
-          "tr": "İstatistiklerle başlama. Onun yerine kısa ve insanın kendinden bir şey bulacağı bir hikâyeyle başla."
+          "tr": "İstatistiklerle başlama. Onun yerine kısa ve insanın kendinden bir şey bulacağı bir hikayeyle başla."
          },
          {
           "who": "A",
@@ -33730,13 +33730,13 @@
          {
           "who": "B",
           "en": "Exactly. Then finish with the moral of the story and a clear request.",
-          "tr": "Aynen. Sonra hikâyeden çıkan ders ve net bir çağrıyla bitir."
+          "tr": "Aynen. Sonra hikayeden çıkan ders ve net bir çağrıyla bitir."
          }
         ],
         "prompts": [
          {
           "q_en": "Tell a short personal story that persuades your listeners to try something new.",
-          "q_tr": "Dinleyicilerini yeni bir şey denemeye ikna eden kısa bir kişisel hikâye anlat.",
+          "q_tr": "Dinleyicilerini yeni bir şey denemeye ikna eden kısa bir kişisel hikaye anlat.",
           "model": "Two years ago, I had never even been on a bicycle. I had been taking crowded buses to university every day when a friend offered to teach me to ride. At first, I fell off constantly and felt ridiculous. Now I cycle everywhere, save money, and arrive at class feeling energetic. If I could learn at twenty, I promise you can too.",
           "useful": [
            "Two years ago, I had never ...",
@@ -33746,7 +33746,7 @@
          },
          {
           "q_en": "Why are stories often more persuasive than facts and figures? Give your view.",
-          "q_tr": "Hikâyeler neden çoğu zaman gerçeklerden ve rakamlardan daha ikna edicidir? Görüşünü belirt.",
+          "q_tr": "Hikayeler neden çoğu zaman gerçeklerden ve rakamlardan daha ikna edicidir? Görüşünü belirt.",
           "model": "I think stories work because they make abstract problems feel personal. When we hear about one real person, we can imagine ourselves in their situation. Statistics, however impressive, are easy to forget by the next day. A vivid narrative also creates emotions, and emotions drive many of our decisions. The best speakers usually combine a strong story with a few key facts.",
           "useful": [
            "I think stories work because ...",
@@ -34335,7 +34335,7 @@
         },
         {
          "en": "I'm still on the fence about accepting their offer.",
-         "tr": "Tekliflerini kabul etme konusunda hâlâ kararsızım."
+         "tr": "Tekliflerini kabul etme konusunda hala kararsızım."
         },
         {
          "en": "We'll just have to bite the bullet and pay the fine.",
@@ -34417,12 +34417,12 @@
          {
           "who": "A",
           "en": "Do you think she'll accept that job offer in Berlin now that she's single?",
-          "tr": "Artık bekâr olduğuna göre Berlin'deki o iş teklifini kabul edeceğini düşünüyor musun?"
+          "tr": "Artık bekar olduğuna göre Berlin'deki o iş teklifini kabul edeceğini düşünüyor musun?"
          },
          {
           "who": "B",
           "en": "She's still on the fence, though moving abroad was always a long shot for her.",
-          "tr": "Hâlâ kararsız, gerçi yurt dışına taşınmak onun için her zaman zayıf bir ihtimaldi."
+          "tr": "Hala kararsız, gerçi yurt dışına taşınmak onun için her zaman zayıf bir ihtimaldi."
          }
         ],
         "prompts": [
@@ -34577,7 +34577,7 @@
          {
           "who": "A",
           "en": "Honestly, your deadpan delivery makes it impossible to tell when you're joking.",
-          "tr": "Açıkçası o ifadesiz yüzünle ne zaman şaka yaptığını anlamak imkânsız."
+          "tr": "Açıkçası o ifadesiz yüzünle ne zaman şaka yaptığını anlamak imkansız."
          },
          {
           "who": "B",
@@ -34598,7 +34598,7 @@
         "prompts": [
          {
           "q_en": "Describe a situation in which something went ironically wrong. Tell the story using understatement.",
-          "q_tr": "Bir şeyin ironik biçimde ters gittiği bir durumu anlat. Hikâyeyi hafifleterek anlatım kullanarak aktar.",
+          "q_tr": "Bir şeyin ironik biçimde ters gittiği bir durumu anlat. Hikayeyi hafifleterek anlatım kullanarak aktar.",
           "model": "Last winter I decided to save money by cycling to work instead of taking the bus. Ironically, on the very first day I got a flat tyre and had to take a taxi. The fare was not exactly what I'd call a bargain. I arrived soaking wet and an hour late, which was hardly the highlight of my week.",
           "useful": [
            "Ironically, ...",
@@ -35223,7 +35223,7 @@
           "narrator"
          ],
          "answer": 3,
-         "explain_tr": "Hikâyeyi anlatan ama güvenilmeyen kişiye 'unreliable narrator' denir."
+         "explain_tr": "Hikayeyi anlatan ama güvenilmeyen kişiye 'unreliable narrator' denir."
         },
         {
          "q": "Early hints about the hero's death are a clear example of ___.",
@@ -35294,7 +35294,7 @@
          },
          {
           "q_en": "Do you prefer stories with a clear ending or an open ending? Explain why.",
-          "q_tr": "Net bir sonla biten hikâyeleri mi yoksa açık uçlu sonları mı tercih edersin? Nedenini açıkla.",
+          "q_tr": "Net bir sonla biten hikayeleri mi yoksa açık uçlu sonları mı tercih edersin? Nedenini açıkla.",
           "model": "I generally prefer open endings, even though they can be frustrating at first. A story that leaves questions unanswered stays with me for days. Clear endings feel satisfying, albeit rather forgettable in many cases. That said, an open ending only works if the author has foreshadowed it carefully.",
           "useful": [
            "I generally prefer ..., even though ...",
@@ -35527,7 +35527,7 @@
         },
         {
          "en": "Let me start with a short story from my childhood.",
-         "tr": "Çocukluğumdan kısa bir hikâyeyle başlayayım."
+         "tr": "Çocukluğumdan kısa bir hikayeyle başlayayım."
         },
         {
          "en": "It was only then that I understood what failure meant.",
@@ -35585,7 +35585,7 @@
           "anecdote"
          ],
          "answer": 3,
-         "explain_tr": "Kişisel deneyimden kısa ve eğlenceli hikâye 'anecdote' demektir."
+         "explain_tr": "Kişisel deneyimden kısa ve eğlenceli hikaye 'anecdote' demektir."
         }
        ],
        "speaking": {
@@ -35608,7 +35608,7 @@
          {
           "who": "B",
           "en": "Perfect, a personal story will win the audience over far faster than statistics.",
-          "tr": "Mükemmel, kişisel bir hikâye dinleyiciyi istatistiklerden çok daha hızlı kazanır."
+          "tr": "Mükemmel, kişisel bir hikaye dinleyiciyi istatistiklerden çok daha hızlı kazanır."
          },
          {
           "who": "A",
@@ -36294,12 +36294,12 @@
          {
           "who": "B",
           "en": "It could easily be a Trojan horse for collecting our personal data.",
-          "tr": "Kişisel verilerimizi toplamak için pekâlâ bir Truva atı olabilir."
+          "tr": "Kişisel verilerimizi toplamak için pekala bir Truva atı olabilir."
          },
          {
           "who": "A",
           "en": "Still, complaining might open Pandora's box with the whole management team.",
-          "tr": "Yine de şikâyet etmek tüm yönetimle başımıza büyük dertler açabilir."
+          "tr": "Yine de şikayet etmek tüm yönetimle başımıza büyük dertler açabilir."
          },
          {
           "who": "B",
@@ -36985,7 +36985,7 @@
          {
           "who": "A",
           "en": "Had the drought not happened, do you think the city would still exist today?",
-          "tr": "Kuraklık olmasaydı sence şehir bugün hâlâ var olur muydu?"
+          "tr": "Kuraklık olmasaydı sence şehir bugün hala var olur muydu?"
          },
          {
           "who": "B",
@@ -37575,7 +37575,7 @@
        "phrases": [
         {
          "en": "By the end of the decade, remote work will have become the norm.",
-         "tr": "On yılın sonunda uzaktan çalışma olağan hâle gelmiş olacak."
+         "tr": "On yılın sonunda uzaktan çalışma olağan hale gelmiş olacak."
         },
         {
          "en": "Scientists believe we're on the verge of a major breakthrough.",
@@ -37591,7 +37591,7 @@
         },
         {
          "en": "Flying cars still seem rather far-fetched to me.",
-         "tr": "Uçan arabalar bana hâlâ oldukça gerçek dışı görünüyor."
+         "tr": "Uçan arabalar bana hala oldukça gerçek dışı görünüyor."
         }
        ],
        "quiz": [
@@ -37650,7 +37650,7 @@
          {
           "who": "B",
           "en": "By the end of the decade, it will have become completely normal for office jobs.",
-          "tr": "On yılın sonunda ofis işleri için tamamen olağan hâle gelmiş olacak."
+          "tr": "On yılın sonunda ofis işleri için tamamen olağan hale gelmiş olacak."
          },
          {
           "who": "A",
@@ -37660,7 +37660,7 @@
          {
           "who": "B",
           "en": "Honestly, that still seems rather far-fetched given the safety rules and costs.",
-          "tr": "Açıkçası güvenlik kuralları ve maliyetler düşünülünce bu hâlâ oldukça gerçek dışı görünüyor."
+          "tr": "Açıkçası güvenlik kuralları ve maliyetler düşünülünce bu hala oldukça gerçek dışı görünüyor."
          },
          {
           "who": "A",
@@ -37741,7 +37741,7 @@
         },
         {
          "en": "economically disadvantaged",
-         "tr": "maddi imkânı kısıtlı"
+         "tr": "maddi imkanı kısıtlı"
         },
         {
          "en": "comfort break",
@@ -37882,7 +37882,7 @@
        "tip_tr": "Litotes, yani zıt anlamlı kelimeyi olumsuzlamak eleştiriyi yumuşatır: 'bad' yerine 'not ideal', 'wrong' yerine 'not entirely accurate'. 'slightly', 'a tad' ve 'somewhat' gibi zarflar da etkiyi azaltır.",
        "tip_example": {
         "en": "The conclusion isn't entirely convincing in its current form.",
-        "tr": "Sonuç bölümü şu hâliyle pek ikna edici değil."
+        "tr": "Sonuç bölümü şu haliyle pek ikna edici değil."
        },
        "vocab": [
         {
@@ -37921,7 +37921,7 @@
        "phrases": [
         {
          "en": "There's still some room for improvement in the second section.",
-         "tr": "İkinci bölümde hâlâ geliştirilebilecek yerler var."
+         "tr": "İkinci bölümde hala geliştirilebilecek yerler var."
         },
         {
          "en": "I'm not entirely convinced the data supports this conclusion.",
@@ -38186,7 +38186,7 @@
          {
           "who": "B",
           "en": "No, write something like, Should you require further documents, please let me know.",
-          "tr": "Hayır, Ek belgeye ihtiyaç duymanız hâlinde lütfen bana bildirin, gibi bir şey yaz."
+          "tr": "Hayır, Ek belgeye ihtiyaç duymanız halinde lütfen bana bildirin, gibi bir şey yaz."
          }
         ],
         "prompts": [
@@ -38222,7 +38222,7 @@
        "tip_tr": "Anadili İngilizce olanlar atasözünün çoğu zaman yalnızca ilk yarısını söyler: 'When in Rome...' ya da 'Speak of the devil!' Dinleyicinin devamını bildiği varsayılır. Atasözlerinin kalıbı değiştirilmez.",
        "tip_example": {
         "en": "We'd better eat with our hands here. When in Rome, as they say.",
-        "tr": "Burada elle yesek iyi olur. Ne de olsa gittiğin yerin âdetine uy derler."
+        "tr": "Burada elle yesek iyi olur. Ne de olsa gittiğin yerin adetine uy derler."
        },
        "vocab": [
         {
@@ -38356,7 +38356,7 @@
          {
           "who": "B",
           "en": "Then wear a suit like everyone else does. When in Rome, as they say.",
-          "tr": "O zaman herkes gibi takım elbise giy. Gittiğin yerin âdetine uy derler."
+          "tr": "O zaman herkes gibi takım elbise giy. Gittiğin yerin adetine uy derler."
          }
         ],
         "prompts": [
@@ -38372,7 +38372,7 @@
          },
          {
           "q_en": "Do proverbs still offer useful advice today, or are they just clichés? Give your view.",
-          "q_tr": "Atasözleri bugün hâlâ faydalı öğütler sunuyor mu, yoksa sadece klişe mi? Görüşünü söyle.",
+          "q_tr": "Atasözleri bugün hala faydalı öğütler sunuyor mu, yoksa sadece klişe mi? Görüşünü söyle.",
           "model": "I think many proverbs still contain genuine pearls of wisdom. For instance, actions speak louder than words is as relevant on social media as it ever was. That said, some sayings contradict each other, like look before you leap and he who hesitates is lost. So I'd treat them as rules of thumb rather than absolute truths.",
           "useful": [
            "Many proverbs still contain ...",
@@ -38501,7 +38501,7 @@
          {
           "who": "A",
           "en": "We need a catchy name for the new coffee shop next to the law faculty.",
-          "tr": "Hukuk fakültesinin yanındaki yeni kahve dükkânı için akılda kalıcı bir isim lazım."
+          "tr": "Hukuk fakültesinin yanındaki yeni kahve dükkanı için akılda kalıcı bir isim lazım."
          },
          {
           "who": "B",
@@ -38888,7 +38888,7 @@
          },
          {
           "q_en": "Tell the story of a decision that changed someone's life, using was to or was never to.",
-          "q_tr": "Birinin hayatını değiştiren bir kararın hikâyesini was to ya da was never to kullanarak anlat.",
+          "q_tr": "Birinin hayatını değiştiren bir kararın hikayesini was to ya da was never to kullanarak anlat.",
           "model": "In 1990, my grandfather moved to Germany for what he thought would be a two-year contract. He was to stay there for almost thirty years. He met my grandmother in a factory canteen, and she was to become the love of his life. He was never to live in his village again, although he visited it every summer.",
           "useful": [
            "He was to stay there for ...",
@@ -38901,10 +38901,10 @@
       },
       {
        "id": "c2-28",
-       "title_tr": "Yapay zekâ etiği",
+       "title_tr": "Yapay zeka etiği",
        "title_en": "AI ethics",
        "icon": "laptop",
-       "intro_tr": "Bu derste yapay zekâda önyargı, şeffaflık ve hesap verebilirlik gibi etik sorunları derinlemesine tartışmayı öğreneceksin.",
+       "intro_tr": "Bu derste yapay zekada önyargı, şeffaflık ve hesap verebilirlik gibi etik sorunları derinlemesine tartışmayı öğreneceksin.",
        "tip_tr": "Resmi ve ağırbaşlı 'lest' (…mesin diye) kaçınılmak istenen sonucu anlatır. Ardından yalın fiil ya da 'should' gelir: 'We must audit these systems lest they reinforce bias.'",
        "tip_example": {
         "en": "Developers must test their models carefully lest they harm vulnerable users.",
@@ -38955,11 +38955,11 @@
         },
         {
          "en": "Many AI systems remain a black box even to their creators.",
-         "tr": "Birçok yapay zekâ sistemi yaratıcıları için bile bir kara kutu olmaya devam ediyor."
+         "tr": "Birçok yapay zeka sistemi yaratıcıları için bile bir kara kutu olmaya devam ediyor."
         },
         {
          "en": "Deepfakes make it harder than ever to trust what we see.",
-         "tr": "Sahte videolar gördüğümüze güvenmeyi her zamankinden zor hâle getiriyor."
+         "tr": "Sahte videolar gördüğümüze güvenmeyi her zamankinden zor hale getiriyor."
         },
         {
          "en": "Patients deserve to know why an algorithm rejected their treatment.",
@@ -39009,7 +39009,7 @@
           "deepfake"
          ],
          "answer": 3,
-         "explain_tr": "Yapay zekâyla üretilmiş gerçekçi sahte video 'deepfake' olarak adlandırılır."
+         "explain_tr": "Yapay zekayla üretilmiş gerçekçi sahte video 'deepfake' olarak adlandırılır."
         }
        ],
        "speaking": {
@@ -39037,7 +39037,7 @@
          {
           "who": "A",
           "en": "Then shouldn't we pause it before anyone files a discrimination complaint?",
-          "tr": "O zaman biri ayrımcılık şikâyetinde bulunmadan önce onu durdurmamız gerekmez mi?"
+          "tr": "O zaman biri ayrımcılık şikayetinde bulunmadan önce onu durdurmamız gerekmez mi?"
          },
          {
           "who": "B",
@@ -39048,7 +39048,7 @@
         "prompts": [
          {
           "q_en": "Who should be held accountable when an AI system makes a harmful decision? Explain your view.",
-          "q_tr": "Bir yapay zekâ sistemi zararlı bir karar verdiğinde kim sorumlu tutulmalı? Görüşünü açıkla.",
+          "q_tr": "Bir yapay zeka sistemi zararlı bir karar verdiğinde kim sorumlu tutulmalı? Görüşünü açıkla.",
           "model": "In my view, accountability must always rest with humans, not with the software itself. The company that deploys the system should be responsible for testing it properly. Developers also have a duty to document their training data and its limitations. We should never allow companies to hide behind the excuse that the algorithm decided.",
           "useful": [
            "Accountability must rest with ...",
@@ -39202,7 +39202,7 @@
          {
           "who": "B",
           "en": "Then it loses legitimacy, and civil disobedience may become morally justified.",
-          "tr": "O zaman meşruiyetini kaybeder ve sivil itaatsizlik ahlaken haklı hâle gelebilir."
+          "tr": "O zaman meşruiyetini kaybeder ve sivil itaatsizlik ahlaken haklı hale gelebilir."
          },
          {
           "who": "A",
@@ -39248,7 +39248,7 @@
        "tip_tr": "'Sıfat + as + özne + fiil' yapısı 'although' anlamında zarif bir kabul cümlesi kurar: 'Beautiful as it is, the building is impractical.' Bu yapı resmî ve edebî anlatımda sık görülür.",
        "tip_example": {
         "en": "Simple as the design is, it took months to perfect.",
-        "tr": "Tasarım ne kadar sade olsa da kusursuz hâle getirmek aylar sürdü."
+        "tr": "Tasarım ne kadar sade olsa da kusursuz hale getirmek aylar sürdü."
        },
        "vocab": [
         {
@@ -39525,7 +39525,7 @@
           "morality"
          ],
          "answer": 2,
-         "explain_tr": "Ekibin motivasyonu ve ruh hâli 'morale' ile anlatılır. 'moral' ahlaki demektir."
+         "explain_tr": "Ekibin motivasyonu ve ruh hali 'morale' ile anlatılır. 'moral' ahlaki demektir."
         }
        ],
        "speaking": {
@@ -39761,7 +39761,7 @@
        "title_en": "Defending yourself in public",
        "icon": "mic",
        "intro_tr": "Bu derste eleştiriler ve suçlamalar karşısında kendini kamuoyu önünde sakin, net ve inandırıcı biçimde savunmayı öğreneceksin.",
-       "tip_tr": "Olumsuz zarflar cümle başına gelince devrik yapı kullanılır ve inkâr güçlenir: 'At no point did I mislead the public.' 'Never have I...' ve 'Under no circumstances would I...' de aynı etkiyi yaratır.",
+       "tip_tr": "Olumsuz zarflar cümle başına gelince devrik yapı kullanılır ve inkar güçlenir: 'At no point did I mislead the public.' 'Never have I...' ve 'Under no circumstances would I...' de aynı etkiyi yaratır.",
        "tip_example": {
         "en": "At no point did I receive any payment from the contractor.",
         "tr": "Yükleniciden hiçbir aşamada herhangi bir ödeme almadım."
@@ -39931,7 +39931,7 @@
        "title_en": "Stakeholder management",
        "icon": "briefcase",
        "intro_tr": "Bu derste yatırımcı, çalışan ve yerel halk gibi paydaşların beklentilerini dengelemeyi ve onlarla etkili iletişim kurmayı öğreneceksin.",
-       "tip_tr": "'With a view to + -ing' (…amacıyla) resmi bir amaç bildirir. Buradaki 'to' bir edattır, bu yüzden ardından fiilin -ing hâli gelir: 'We met them with a view to reaching an agreement.'",
+       "tip_tr": "'With a view to + -ing' (…amacıyla) resmi bir amaç bildirir. Buradaki 'to' bir edattır, bu yüzden ardından fiilin -ing hali gelir: 'We met them with a view to reaching an agreement.'",
        "tip_example": {
         "en": "We held public meetings with a view to building local support.",
         "tr": "Yerel desteği artırmak amacıyla halka açık toplantılar düzenledik."
@@ -39985,7 +39985,7 @@
         },
         {
          "en": "Shareholders want profit, but residents want clean air and quiet.",
-         "tr": "Hissedarlar kâr istiyor, bölge sakinleri ise temiz hava ve sessizlik."
+         "tr": "Hissedarlar kar istiyor, bölge sakinleri ise temiz hava ve sessizlik."
         },
         {
          "en": "We launched a public consultation with a view to hearing every concern.",
@@ -40043,7 +40043,7 @@
          {
           "who": "A",
           "en": "The residents are furious about the new wind farm. Why weren't they consulted earlier?",
-          "tr": "Bölge sakinleri yeni rüzgâr santraline çok öfkeli. Onlara neden daha önce danışılmadı?"
+          "tr": "Bölge sakinleri yeni rüzgar santraline çok öfkeli. Onlara neden daha önce danışılmadı?"
          },
          {
           "who": "B",
@@ -40335,7 +40335,7 @@
         },
         {
          "en": "Joking about religion is still taboo in many countries.",
-         "tr": "Din hakkında şaka yapmak birçok ülkede hâlâ tabu."
+         "tr": "Din hakkında şaka yapmak birçok ülkede hala tabu."
         }
        ],
        "quiz": [
@@ -40579,7 +40579,7 @@
          {
           "who": "A",
           "en": "True. If only we'd recorded Grandma telling her old stories while we could.",
-          "tr": "Doğru. Keşke fırsatımız varken büyükannemi eski hikâyelerini anlatırken kaydetseydik."
+          "tr": "Doğru. Keşke fırsatımız varken büyükannemi eski hikayelerini anlatırken kaydetseydik."
          },
          {
           "who": "B",
@@ -40869,7 +40869,7 @@
           "alleged"
          ],
          "answer": 1,
-         "explain_tr": "Uzun inkârdan sonra isteksizce kabul etmek 'admitted' ile anlatılır."
+         "explain_tr": "Uzun inkardan sonra isteksizce kabul etmek 'admitted' ile anlatılır."
         },
         {
          "q": "Social media can trap us in an echo ___ where we only hear similar views.",
