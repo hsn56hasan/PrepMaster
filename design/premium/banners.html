@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PrepKampüs — Reklam görselleri (3 yön × 3 format)</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ---------- Önizleme sayfası ---------- */
+  body {
+    background: var(--paper-100);
+    color: var(--ink-900);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { --s: .32; max-width: 1240px; margin: 0 auto; padding: 64px 32px 96px; }
+  .page-eyebrow { font: var(--eyebrow-font); letter-spacing: var(--eyebrow-tracking); text-transform: uppercase; color: var(--forest-700); }
+  .page h1 { font-family: var(--font-serif); font-weight: 500; font-size: var(--text-4xl); line-height: 1.05; letter-spacing: -.02em; margin-top: 16px; text-wrap: balance; }
+  .page h1 em { color: var(--forest-600); }
+  .page-lead { max-width: 68ch; color: var(--ink-500); font-size: var(--text-lg); margin-top: 16px; }
+  .dirs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 40px; border-top: 1px solid var(--paper-300); border-bottom: 1px solid var(--paper-300); }
+  .dirs div { padding: 20px 24px 22px; border-left: 1px solid var(--paper-300); }
+  .dirs div:first-child { border-left: 0; padding-left: 0; }
+  .dirs dt { font-family: var(--font-serif); font-weight: 600; font-size: 1.25rem; }
+  .dirs dt span { font-family: var(--font-sans); font-size: .75rem; font-weight: 700; letter-spacing: .16em; color: var(--forest-700); margin-right: 8px; }
+  .dirs dd { color: var(--ink-500); font-size: .95rem; margin-top: 6px; }
+
+  .set { margin-top: 72px; }
+  .set-head { display: flex; align-items: baseline; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--paper-300); }
+  .set-head h2 { font-family: var(--font-serif); font-weight: 500; font-size: var(--text-3xl); letter-spacing: -.02em; }
+  .set-head span { font: var(--eyebrow-font); letter-spacing: var(--eyebrow-tracking); text-transform: uppercase; color: var(--ink-500); }
+  .row { display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start; margin-top: 28px; }
+
+  figure { width: calc(var(--w) * var(--s) * 1px); }
+  .pv {
+    position: relative;
+    width: calc(var(--w) * var(--s) * 1px);
+    height: calc(var(--h) * var(--s) * 1px);
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-md);
+    background: var(--paper-0);
+  }
+  .pv > .bn { position: absolute; top: 0; left: 0; transform: scale(var(--s)); transform-origin: 0 0; }
+  .pv.f-sq { --w: 1080; --h: 1080; }
+  .pv.f-st { --w: 1080; --h: 1920; }
+  .pv.f-wd { --w: 1200; --h: 628; }
+  figure.f-sq { --w: 1080; } figure.f-st { --w: 1080; } figure.f-wd { --w: 1200; }
+  figcaption { margin-top: 12px; font-size: .8rem; line-height: 1.5; color: var(--ink-500); }
+  figcaption b { color: var(--ink-900); font-weight: 700; }
+
+  @media (max-width: 820px) {
+    .page { --s: .26; padding: 40px 20px 72px; }
+    .dirs { grid-template-columns: 1fr; }
+    .dirs div { border-left: 0; padding-left: 0; border-top: 1px solid var(--paper-300); }
+    .dirs div:first-child { border-top: 0; }
+  }
+
+  /* ---------- Banner ortakları (gerçek piksel) ---------- */
+  .bn { position: relative; overflow: hidden; font-family: var(--font-sans); color: var(--ink-900); -webkit-font-smoothing: antialiased; font-optical-sizing: auto; }
+  .sq { width: 1080px; height: 1080px; }
+  .st { width: 1080px; height: 1920px; }
+  .wd { width: 1200px; height: 628px; }
+  .bn em { font-style: italic; }
+  .ic { display: inline-block; flex: none; }
+
+  .brand { display: flex; align-items: center; gap: 18px; }
+  .brand img { display: block; width: 72px; height: 72px; border-radius: 18px; object-fit: cover; }
+  .brand b { font-family: var(--font-serif); font-weight: 600; font-size: 34px; letter-spacing: -.01em; }
+  .wd .brand { gap: 14px; }
+  .wd .brand img { width: 52px; height: 52px; border-radius: 13px; }
+  .wd .brand b { font-size: 26px; }
+
+  .ey { font: 700 18px/1 var(--font-sans); letter-spacing: .16em; text-transform: uppercase; }
+  .wd .ey { font-size: 13px; }
+
+  .cta { display: inline-flex; align-items: center; gap: 14px; height: 88px; padding: 0 44px; border-radius: var(--radius-pill); background: var(--forest-600); color: var(--paper-0); font: 600 30px/1 var(--font-sans); white-space: nowrap; }
+  .cta .ic { width: 30px; height: 30px; }
+  .wd .cta { height: 60px; padding: 0 30px; gap: 10px; font-size: 21px; }
+  .wd .cta .ic { width: 22px; height: 22px; }
+  .url { font: 600 26px/1 var(--font-sans); color: var(--forest-800); letter-spacing: .01em; white-space: nowrap; }
+  .wd .url { font-size: 19px; }
+
+  .note { position: absolute; right: 72px; bottom: 30px; font: 500 15px/1.3 var(--font-sans); color: var(--ink-500); white-space: nowrap; }
+  .wd .note { right: 56px; bottom: 16px; font-size: 12px; }
+  .safe { position: absolute; left: 80px; right: 80px; top: 230px; bottom: 230px; } /* Story: üst/alt %12 boş */
+  .safe .note { right: 0; bottom: 0; }
+
+  /* ---------- A · Editoryal Kâğıt ---------- */
+  .ed { background: var(--paper-50); }
+  .ed h1 { font-family: var(--font-serif); font-weight: 500; letter-spacing: -.025em; text-wrap: balance; }
+  .ed h1 em { color: var(--forest-600); }
+  .ed .ey { color: var(--forest-700); }
+  .ed .issue { font: 600 17px/1.2 var(--font-sans); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-500); text-align: right; }
+
+  .a1 .in { position: absolute; inset: 64px 72px 84px; display: flex; flex-direction: column; }
+  .a1 .top { display: flex; justify-content: space-between; align-items: center; padding-bottom: 28px; border-bottom: 1px solid var(--ink-900); }
+  .a1 .ey { margin-top: 44px; }
+  .a1 h1 { font-size: 92px; line-height: 1.0; margin-top: 22px; }
+  .a1 p { font-size: 28px; line-height: 1.45; color: var(--ink-500); margin-top: 24px; max-width: 840px; }
+  .a1 .stats { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: auto; border-top: 1px solid var(--paper-300); border-bottom: 1px solid var(--paper-300); }
+  .a1 .stats div { padding: 18px 0 16px 22px; border-left: 1px solid var(--paper-300); }
+  .a1 .stats div:first-child { border-left: 0; padding-left: 0; }
+  .a1 .stats strong { display: block; font: 500 46px/1 var(--font-serif); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .a1 .stats span { display: block; margin-top: 10px; font: 700 14px/1 var(--font-sans); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-500); }
+  .a1 .bot { display: flex; align-items: center; gap: 32px; margin-top: 30px; }
+
+  .a2 .safe { display: flex; flex-direction: column; }
+  .a2 .mast { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 24px; border-bottom: 3px solid var(--ink-900); }
+  .a2 .rule { height: 1px; background: var(--ink-900); margin-top: 6px; }
+  .a2 .brand img { width: 84px; height: 84px; border-radius: 21px; }
+  .a2 .brand b { font-size: 46px; }
+  .a2 .ey { margin-top: 64px; }
+  .a2 h1 { font-size: 150px; line-height: .95; letter-spacing: -.035em; margin-top: 28px; }
+  .a2 p { font-size: 34px; line-height: 1.45; color: var(--ink-700); margin-top: 36px; max-width: 880px; }
+  .a2 ol { list-style: none; margin-top: 56px; border-top: 1px solid var(--paper-300); }
+  .a2 li { display: flex; align-items: baseline; gap: 28px; padding: 22px 0; border-bottom: 1px solid var(--paper-300); font: 600 30px/1.3 var(--font-sans); color: var(--ink-900); }
+  .a2 li span { width: 56px; flex: none; font: italic 500 30px/1 var(--font-serif); color: var(--forest-600); }
+  .a2 .bot { margin-top: auto; padding-bottom: 60px; display: flex; align-items: center; justify-content: space-between; }
+
+  .a3 { display: grid; grid-template-columns: 1fr 400px; }
+  .a3 .l { padding: 44px 48px 52px 56px; display: flex; flex-direction: column; }
+  .a3 .l .ey { margin-top: 40px; }
+  .a3 h1 { font-size: 64px; line-height: 1.02; margin-top: 16px; }
+  .a3 p { font-size: 21px; line-height: 1.5; color: var(--ink-500); margin-top: 18px; max-width: 560px; }
+  .a3 .bot { margin-top: auto; display: flex; align-items: center; gap: 24px; }
+  .a3 .r { background: var(--paper-100); border-left: 1px solid var(--paper-300); padding: 48px 40px 52px; }
+  .a3 .r .ey { color: var(--ink-500); }
+  .a3 .names { display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; margin-top: 20px; border-top: 1px solid var(--paper-300); }
+  .a3 .names span { font: 500 27px/1 var(--font-serif); letter-spacing: -.01em; padding: 15px 0; border-bottom: 1px solid var(--paper-300); }
+  .a3 .names .more { grid-column: 1 / -1; font-style: italic; color: var(--forest-700); }
+  .a3 .note { right: 24px; }
+
+  /* ---------- B · Orman Gecesi ---------- */
+  .dk { background: var(--forest-950); color: var(--color-on-inverse); }
+  .dk h1 { font-family: var(--font-serif); font-weight: 500; letter-spacing: -.025em; text-wrap: balance; }
+  .dk h1 em { color: var(--forest-400); }
+  .dk .ey { color: var(--brass-300); }
+  .dk p { color: var(--color-on-inverse-muted); }
+  .dk .cta { background: var(--forest-400); color: var(--forest-950); }
+  .dk .url { color: var(--color-on-inverse); }
+  .dk .note { color: color-mix(in srgb, var(--paper-50) 58%, transparent); }
+
+  .trail { position: absolute; top: 0; left: 0; overflow: visible; pointer-events: none; }
+  .trail polyline { fill: none; stroke: var(--forest-800); stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1 22; }
+  .node { position: absolute; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 50%; display: grid; place-items: center; }
+  .node .ic { width: 48px; height: 48px; }
+  .node.done { background: var(--forest-600); color: var(--paper-0); box-shadow: 0 10px 0 var(--forest-800); }
+  .node.cur { width: 172px; height: 172px; margin: -86px 0 0 -86px; background: var(--forest-400); color: var(--forest-950);
+    box-shadow: 0 12px 0 var(--forest-700), 0 0 0 18px color-mix(in srgb, var(--forest-400) 16%, transparent), 0 0 0 36px color-mix(in srgb, var(--forest-400) 7%, transparent); }
+  .node.cur .ic { width: 64px; height: 64px; }
+  .node.lock { background: var(--forest-900); color: color-mix(in srgb, var(--paper-50) 42%, transparent); box-shadow: 0 10px 0 var(--night-800); }
+  .badge { position: absolute; top: -4px; right: -4px; width: 56px; height: 56px; border-radius: 50%; background: var(--brass-300); color: var(--forest-950); display: grid; place-items: center; box-shadow: 0 0 0 6px var(--forest-950); }
+  .node .badge .ic { width: 28px; height: 28px; }
+  .pill { display: inline-flex; align-items: center; gap: 12px; height: 56px; padding: 0 24px; border-radius: var(--radius-pill); border: 1.5px solid var(--night-600); font: 600 22px/1 var(--font-sans); color: var(--color-on-inverse); }
+  .pill .ic { width: 26px; height: 26px; color: var(--forest-400); }
+  .pill.brass .ic { color: var(--brass-300); }
+
+  .b1 .brand { position: absolute; left: 72px; top: 64px; }
+  .b1 .tx { position: absolute; left: 72px; bottom: 112px; width: 640px; }
+  .b1 h1 { font-size: 88px; line-height: 1.02; margin-top: 26px; }
+  .b1 p { font-size: 28px; line-height: 1.45; margin-top: 24px; }
+  .b1 .hud { display: flex; gap: 28px; margin-top: 30px; }
+  .b1 .hud span { display: inline-flex; align-items: center; gap: 10px; font: 600 21px/1 var(--font-sans); }
+  .b1 .hud .ic { width: 26px; height: 26px; color: var(--forest-400); }
+  .b1 .hud .star .ic { color: var(--brass-300); }
+  .b1 .cta { margin-top: 40px; }
+
+  .b2 .top { display: flex; justify-content: space-between; align-items: center; }
+  .b2 .brand img { width: 84px; height: 84px; border-radius: 21px; }
+  .b2 .brand b { font-size: 44px; }
+  .b2 h1 { font-size: 112px; line-height: 1.0; margin-top: 72px; }
+  .b2 p { font-size: 34px; line-height: 1.45; margin-top: 32px; max-width: 880px; }
+  .b2 .chips { position: absolute; left: 0; top: 1040px; display: flex; gap: 16px; }
+  .b2 .bot { position: absolute; left: 0; right: 0; bottom: 72px; display: flex; align-items: center; justify-content: space-between; }
+  .b2 .app { display: inline-flex; align-items: center; gap: 12px; font: 600 24px/1.2 var(--font-sans); color: var(--color-on-inverse-muted); }
+  .b2 .app .ic { width: 30px; height: 30px; color: var(--forest-400); }
+
+  .b3 .tx { position: absolute; left: 56px; top: 44px; bottom: 52px; width: 580px; display: flex; flex-direction: column; }
+  .b3 .ey { margin-top: 38px; }
+  .b3 h1 { font-size: 60px; line-height: 1.03; margin-top: 16px; }
+  .b3 p { font-size: 21px; line-height: 1.5; margin-top: 18px; }
+  .b3 .tx .cta { margin-top: auto; align-self: flex-start; }
+  .b3 .node { width: 104px; height: 104px; margin: -52px 0 0 -52px; }
+  .b3 .node .ic { width: 42px; height: 42px; }
+  .b3 .node.cur { width: 140px; height: 140px; margin: -70px 0 0 -70px; }
+  .b3 .node.cur .ic { width: 54px; height: 54px; }
+  .b3 .badge { width: 44px; height: 44px; top: -6px; right: -6px; }
+  .b3 .node .badge .ic { width: 22px; height: 22px; }
+  .b3 .lbl { position: absolute; transform: translateX(-50%); font: 600 17px/1 var(--font-sans); letter-spacing: .04em; color: var(--color-on-inverse-muted); white-space: nowrap; }
+
+  /* ---------- C · Kinetik Tipografi ---------- */
+  .kn { background: var(--paper-50); }
+  .kn .big { font-family: var(--font-serif); font-weight: 500; letter-spacing: -.06em; line-height: .78; color: var(--forest-600); font-variant-numeric: lining-nums; }
+  .kn .unit { font-family: var(--font-serif); font-style: italic; font-weight: 500; letter-spacing: -.03em; line-height: 1; }
+  .kn .line2 { font-family: var(--font-sans); font-weight: 800; letter-spacing: -.045em; line-height: .92; }
+  .kn .top { display: flex; justify-content: space-between; align-items: center; }
+  .kn .top .ey { color: var(--forest-700); }
+
+  .c1 .in { position: absolute; inset: 64px 72px 84px; display: flex; flex-direction: column; }
+  .c1 .hl { display: flex; align-items: baseline; gap: 24px; margin-top: 64px; }
+  .c1 .big { font-size: 440px; }
+  .c1 .unit { font-size: 170px; color: var(--ink-900); }
+  .c1 .line2 { font-size: 118px; margin-top: 12px; }
+  .c1 p { font-size: 28px; line-height: 1.45; color: var(--ink-500); margin-top: 32px; max-width: 800px; }
+  .c1 .bot { margin-top: auto; display: flex; align-items: center; gap: 32px; }
+
+  .c2 { background: var(--forest-700); color: var(--paper-50); }
+  .c2 .safe { display: flex; flex-direction: column; }
+  .c2 .brand img { width: 84px; height: 84px; border-radius: 21px; }
+  .c2 .brand b { font-size: 44px; }
+  .c2 .top .ey { color: var(--forest-200); }
+  .c2 .big { font-size: 440px; color: var(--paper-50); margin-top: 88px; }
+  .c2 .unit { font-size: 260px; line-height: .86; color: var(--forest-200); }
+  .c2 .line2 { font-size: 104px; margin-top: 28px; }
+  .c2 .ladder { display: flex; gap: 12px; margin-top: 48px; }
+  .c2 .ladder span { flex: 1; height: 64px; border-radius: var(--radius-pill); display: grid; place-items: center; font: 700 24px/1 var(--font-sans); letter-spacing: .04em; border: 2px solid color-mix(in srgb, var(--paper-50) 40%, transparent); }
+  .c2 .ladder span:nth-child(2) { background: color-mix(in srgb, var(--paper-50) 8%, transparent); }
+  .c2 .ladder span:nth-child(3) { background: color-mix(in srgb, var(--paper-50) 16%, transparent); }
+  .c2 .ladder span:nth-child(4) { background: color-mix(in srgb, var(--paper-50) 26%, transparent); }
+  .c2 .ladder span:nth-child(5) { background: color-mix(in srgb, var(--paper-50) 38%, transparent); }
+  .c2 .ladder span:nth-child(6) { background: var(--paper-50); color: var(--forest-800); border-color: var(--paper-50); }
+  .c2 p { font-size: 34px; line-height: 1.45; color: color-mix(in srgb, var(--paper-50) 84%, transparent); margin-top: 44px; max-width: 880px; }
+  .c2 .bot { margin-top: auto; padding-bottom: 60px; display: flex; align-items: center; justify-content: space-between; }
+  .c2 .cta { background: var(--paper-50); color: var(--forest-800); }
+  .c2 .url { color: var(--paper-50); }
+  .c2 .note { color: color-mix(in srgb, var(--paper-50) 66%, transparent); }
+
+  .c3 .in { position: absolute; inset: 40px 56px 48px; display: flex; flex-direction: column; }
+  .c3 .hl { display: flex; align-items: baseline; gap: 22px; margin-top: 30px; }
+  .c3 .big { font-size: 230px; }
+  .c3 .unit { font-size: 118px; color: var(--ink-900); }
+  .c3 .line2 { font-size: 60px; margin-top: 14px; }
+  .c3 .bot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+  .c3 p { font-size: 21px; line-height: 1.45; color: var(--ink-500); max-width: 560px; }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <header>
+    <p class="page-eyebrow">Tasarım önerisi · Reklam görselleri</p>
+    <h1>Üç sanat yönü, üç format: <em>dokuz banner.</em></h1>
+    <p class="page-lead">Her görsel gerçek piksel boyutunda kuruldu ve burada küçültülmüş önizleme olarak gösteriliyor. Story formatlarında üst ve alt %12’lik (230 px) güvenli alan boş bırakıldı.</p>
+    <dl class="dirs">
+      <div>
+        <dt><span>A</span>Editoryal Kâğıt</dt>
+        <dd>Krem kâğıt üzerinde büyük Fraunces başlık, italik zümrüt vurgu ve ince çizgilerle akademik bir dergi düzeni.</dd>
+      </div>
+      <div>
+        <dt><span>B</span>Orman Gecesi</dt>
+        <dd>Orman mürekkebi zeminde krem yazı, küçük pirinç vurgu ve Konu Yolu düğümlerini andıran zümrüt daireler.</dd>
+      </div>
+      <div>
+        <dt><span>C</span>Kinetik Tipografi</dt>
+        <dd>Tek güçlü sayının odakta durduğu, sıkı satır aralıklı serif ve sans karışımı iri yazı.</dd>
+      </div>
+    </dl>
+  </header>
+
+  <!-- =============================== A =============================== -->
+  <section class="set">
+    <div class="set-head"><h2>A — Editoryal Kâğıt</h2><span>Krem · Fraunces · ince çizgi</span></div>
+    <div class="row">
+
+      <figure class="f-sq">
+        <div class="pv f-sq">
+          <div class="bn sq ed a1">
+            <div class="in">
+              <div class="top">
+                <div class="brand"><img src="../../static/img/logo.png" alt="PrepKampüs logosu"><b>PrepKampüs</b></div>
+                <span class="issue">Muafiyet hazırlığı</span>
+              </div>
+              <span class="ey">01 — Okul formatında deneme</span>
+              <h1>Muafiyet sınavına <em>okulunun formatında</em> hazırlan.</h1>
+              <p>İTÜ, ODTÜ, Boğaziçi, Bilkent ve 22 okulun daha sınav formatında denemeler.</p>
+              <div class="stats">
+                <div><strong>26</strong><span>Okul</span></div>
+                <div><strong>11.525</strong><span>Soru</span></div>
+                <div><strong>2.078</strong><span>Kelime</span></div>
+                <div><strong>120</strong><span>Ders</span></div>
+              </div>
+              <div class="bot">
+                <span class="cta">Ücretsiz başla <i data-lucide="arrow-right" class="ic"></i></span>
+                <span class="url">prepkampus.com</span>
+              </div>
+            </div>
+            <span class="note">Bağımsız platform; üniversitelerle resmi bağı yoktur.</span>
+          </div>
+        </div>
+        <figcaption><b>A · Editoryal Kâğıt</b> — Instagram kare · 1080×1080<br>Öneri: Instagram/Facebook akış gönderisi; okul seçimi ve kayıt dönemi.</figcaption>
+      </figure>
+
+      <figure class="f-st">
+        <div class="pv f-st">
+          <div class="bn st ed a2">
+            <div class="safe">
+              <div class="mast">
+                <div class="brand"><img src="../../static/img/logo.png" alt="PrepKampüs logosu"><b>PrepKampüs</b></div>
+                <span class="issue">Proficiency<br>hazırlık</span>
+              </div>
+              <div class="rule"></div>
+              <span class="ey">04 — Fiyat</span>
+              <h1>Kendi okulun <em>ücretsiz.</em></h1>
+              <p>Öğrenci belgenle kendi okulunun paketi ücretsiz; başka bir okul tek sefer 50 TL.</p>
+              <ol>
+                <li><span>01</span>26 okulun sınav formatında deneme</li>
+                <li><span>02</span>A1–C2 seviye tespiti</li>
+                <li><span>03</span>Konu Yolu: 120 gündelik hayat dersi</li>
+                <li><span>04</span>Hata Kasası ve günlük görevler</li>
+              </ol>
+              <div class="bot">
+                <span class="cta">Ücretsiz başla <i data-lucide="arrow-right" class="ic"></i></span>
+                <span class="url">prepkampus.com</span>
+              </div>
+              <span class="note">Bağımsız platform; üniversitelerle resmi bağı yoktur.</span>
+            </div>
+          </div>
+        </div>
+        <figcaption><b>A · Editoryal Kâğıt</b> — Story / Reels kapağı · 1080×1920<br>Öneri: Instagram Story; fiyat mesajı (kendi okulun ücretsiz).</figcaption>
+      </figure>
+
+      <figure class="f-wd">
+        <div class="pv f-wd">
+          <div class="bn wd ed a3">
+            <div class="l">
+              <div class="brand"><img src="../../static/img/logo.png" alt="PrepKampüs logosu"><b>PrepKampüs</b></div>
+              <span class="ey">Muafiyet sınavı hazırlığı</span>
+              <h1>Okulunun sınavını <em>tanıyan</em> platform.</h1>
+              <p>26 üniversitenin muafiyet sınavı formatında denemeler ve 11.525 soru.</p>
+              <div class="bot">
+                <span class="cta">Ücretsiz başla <i data-lucide="arrow-right" class="ic"></i></span>
+                <span class="url">prepkampus.com</span>
+              </div>
+            </div>
+            <div class="r">
+              <span class="ey">Formatı hazır okullar</span>
+              <div class="names">
+                <span>İTÜ</span><span>ODTÜ</span>
+                <span>Boğaziçi</span><span>Bilkent</span>
+                <span>YTÜ</span><span>Hacettepe</span>
+                <span>Koç</span><span>Sabancı</span>
+                <span class="more">ve 18 okul daha</span>
+              </div>
+            </div>
+            <span class="note">Bağımsız platform; üniversitelerle resmi bağı yoktur.</span>
+          </div>
+        </div>
+        <figcaption><b>A · Editoryal Kâğıt</b> — Bağlantı / Google Display · 1200×628<br>Öneri: Bağlantı önizlemesi (Open Graph) ve Google Display yatay alanı.</figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- =============================== B =============================== -->
+  <section class="set">
+    <div class="set-head"><h2>B — Orman Gecesi</h2><span>Mürekkep yeşili · krem · pirinç</span></div>
+    <div class="row">
+
+      <figure class="f-sq">
+        <div class="pv f-sq">
+          <div class="bn sq dk b1">
+            <svg class="trail" width="1080" height="1080" viewBox="0 0 1080 1080" aria-hidden="true">
+              <polyline points="800,-20 920,170 800,330 920,510 800,700 920,870 800,1100"/>
+            </svg>
+            <span class="node done" style="left:920px;top:170px"><i data-lucide="check" class="ic"></i></span>
+            <span class="node done" style="left:800px;top:330px"><i data-lucide="check" class="ic"></i></span>
+            <span class="node cur" style="left:920px;top:510px"><i data-lucide="play" class="ic"></i><span class="badge"><i data-lucide="star" class="ic"></i></span></span>
+            <span class="node lock" style="left:800px;top:700px"><i data-lucide="lock" class="ic"></i></span>
+            <span class="node lock" style="left:920px;top:870px"><i data-lucide="flag" class="ic"></i></span>
+
+            <div class="brand"><img src="../../static/img/logo.png" alt="PrepKampüs logosu"><b>PrepKampüs</b></div>
+            <div class="tx">
+              <span class="ey">Konu Yolu</span>
+              <h1>Her gün bir ders, <em>A1’den C2’ye.</em></h1>
+              <p>120 gündelik hayat dersi; alıştırma, kalp, yıldız ve XP ile adım adım ilerle.</p>
+              <div class="hud">
+                <span><i data-lucide="dumbbell" class="ic"></i>Alıştırma</span>
+                <span><i data-lucide="heart" class="ic"></i>Kalp</span>
+                <span class="star"><i data-lucide="star" class="ic"></i>Yıldız</span>
+                <span><i data-lucide="zap" class="ic"></i>XP</span>
+              </div>
+              <span class="cta">Ücretsiz başla <i data-lucide="arrow-right" class="ic"></i></span>
+            </div>
+            <span class="note">Bağımsız platform; üniversitelerle resmi bağı yoktur.</span>
+          </div>
+        </div>
+        <figcaption><b>B · Orman Gecesi</b> — Instagram kare · 1080×1080<br>Öneri: Akış gönderisi; Konu Yolu ve uygulama tarzı dersleri tanıtma.</figcaption>
+      </figure>
+
+      <figure class="f-st">
+        <div class="pv f-st">
+          <div class="bn st dk b2">
+            <div class="safe">
+              <svg class="trail" width="920" height="1460" viewBox="0 0 920 1460" aria-hidden="true">
+                <polyline points="-100,660 110,790 330,920 560,790 800,920 1020,790"/>
+              </svg>
+              <span class="node done" style="left:110px;top:790px"><i data-lucide="check" class="ic"></i></span>
+              <span class="node done" style="left:330px;top:920px"><i data-lucide="check" class="ic"></i></span>
+              <span class="node cur" style="left:560px;top:790px"><i data-lucide="play" class="ic"></i><span class="badge"><i data-lucide="star" class="ic"></i></span></span>
+              <span class="node lock" style="left:800px;top:920px"><i data-lucide="lock" class="ic"></i></span>
+
+              <div class="top">
+                <div class="brand"><img src="../../static/img/logo.png" alt="PrepKampüs logosu"><b>PrepKampüs</b></div>
+                <span class="pill brass"><i data-lucide="flame" class="ic"></i>Günlük görev</span>
+              </div>
+              <h1>Seriyi bozma. <em>Bugünün dersi hazır.</em></h1>
+              <p>Günlük görevini yap, serini koru; yanlışlarını Hata Kasası’nda tekrar çöz.</p>
+              <div class="chips">
+                <span class="pill"><i data-lucide="headphones" class="ic"></i>Dinleme</span>
+                <span class="pill"><i data-lucide="mic" class="ic"></i>Konuşma</span>
+                <span class="pill"><i data-lucide="pen-line" class="ic"></i>Yazma</span>
+              </div>
+              <div class="bot">
+                <span class="cta">Ücretsiz başla <i data-lucide="arrow-right" class="ic"></i></span>
+                <span class="app"><i data-lucide="smartphone" class="ic"></i>Android uygulaması v2.1</span>
+              </div>
+              <span class="note">Bağımsız platform; üniversitelerle resmi bağı yoktur.</span>
+            </div>
+          </div>
+        </div>
+        <figcaption><b>B · Orman Gecesi</b> — Story / Reels kapağı · 1080×1920<br>Öneri: Story reklamı; Android uygulaması v2.1 indirme yönlendirmesi.</figcaption>
+      </figure>
+
+      <figure class="f-wd">
+        <div class="pv f-wd">
+          <div class="bn wd dk b3">
+            <svg class="trail" width="1200" height="628" viewBox="0 0 1200 628" aria-hidden="true">
+              <polyline points="650,380 790,250 940,380 1090,250 1260,380"/>
+            </svg>
+            <span class="node done" style="left:790px;top:250px"><i data-lucide="headphones" class="ic"></i></span>
+            <span class="node cur" style="left:940px;top:380px"><i data-lucide="mic" class="ic"></i><span class="badge"><i data-lucide="star" class="ic"></i></span></span>
+            <span class="node lock" style="left:1090px;top:250px"><i data-lucide="pen-line" class="ic"></i></span>
+            <span class="lbl" style="left:790px;top:330px">Dinleme</span>
+            <span class="lbl" style="left:940px;top:480px">Konuşma</span>
+            <span class="lbl" style="left:1090px;top:330px">Yazma</span>
+
+            <div class="tx">
+              <div class="brand"><img src="../../static/img/logo.png" alt="PrepKampüs logosu"><b>PrepKampüs</b></div>
+              <span class="ey">Pratik</span>
+              <h1>Dinle, konuş, yaz. <em>Her gün biraz.</em></h1>
+              <p>Dinleme, konuşma ve yazma pratiği; günlük görevler ve seriyle.</p>
+              <span class="cta">Ücretsiz başla <i data-lucide="arrow-right" class="ic"></i></span>
+            </div>
+            <span class="note">Bağımsız platform; üniversitelerle resmi bağı yoktur.</span>
+          </div>
+        </div>
+        <figcaption><b>B · Orman Gecesi</b> — Bağlantı / Google Display · 1200×628<br>Öneri: Google Display ve LinkedIn yatay; pratik özelliklerini anlatma.</figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- =============================== C =============================== -->
+  <section class="set">
+    <div class="set-head"><h2>C — Kinetik Tipografi</h2><span>Tek sayı · zümrüt + kâğıt</span></div>
+    <div class="row">
+
+      <figure class="f-sq">
+        <div class="pv f-sq">
+          <div class="bn sq kn c1">
+            <div class="in">
+              <div class="top">
+                <div class="brand"><img src="../../static/img/logo.png" alt="PrepKampüs logosu"><b>PrepKampüs</b></div>
+                <span class="ey">Okul formatında deneme</span>
+              </div>
+              <h1 class="hl"><span class="big">26</span><span class="unit">okul.</span></h1>
+              <div class="line2">Tek platform.</div>
+              <p>İTÜ’den Sabancı’ya, okulunun muafiyet sınavı formatında denemeler.</p>
+              <div class="bot">
+                <span class="cta">Ücretsiz başla <i data-lucide="arrow-right" class="ic"></i></span>
+                <span class="url">prepkampus.com</span>
+              </div>
+            </div>
+            <span class="note">Bağımsız platform; üniversitelerle resmi bağı yoktur.</span>
+          </div>
+        </div>
+        <figcaption><b>C · Kinetik Tipografi</b> — Instagram kare · 1080×1080<br>Öneri: Akış gönderisi; soğuk kitlede ilk dikkat çekme.</figcaption>
+      </figure>
+
+      <figure class="f-st">
+        <div class="pv f-st">
+          <div class="bn st kn c2">
+            <div class="safe">
+              <div class="top">
+                <div class="brand"><img src="../../static/img/logo.png" alt="PrepKampüs logosu"><b>PrepKampüs</b></div>
+                <span class="ey">Konu Yolu</span>
+              </div>
+              <h1 class="big">120</h1>
+              <div class="unit">ders.</div>
+              <div class="line2">A1’den C2’ye.</div>
+              <div class="ladder" aria-hidden="true">
+                <span>A1</span><span>A2</span><span>B1</span><span>B2</span><span>C1</span><span>C2</span>
+              </div>
+              <p>Gündelik hayat dersleriyle alıştırma, kalp, yıldız ve XP toplayarak adım adım ilerle.</p>
+              <div class="bot">
+                <span class="cta">Ücretsiz başla <i data-lucide="arrow-right" class="ic"></i></span>
+                <span class="url">prepkampus.com</span>
+              </div>
+              <span class="note">Bağımsız platform; üniversitelerle resmi bağı yoktur.</span>
+            </div>
+          </div>
+        </div>
+        <figcaption><b>C · Kinetik Tipografi</b> — Story / Reels kapağı · 1080×1920<br>Öneri: Reels kapağı ve yeniden hedefleme Story’si.</figcaption>
+      </figure>
+
+      <figure class="f-wd">
+        <div class="pv f-wd">
+          <div class="bn wd kn c3">
+            <div class="in">
+              <div class="top">
+                <div class="brand"><img src="../../static/img/logo.png" alt="PrepKampüs logosu"><b>PrepKampüs</b></div>
+                <span class="ey">26 okul · A1–C2</span>
+              </div>
+              <h1 class="hl"><span class="big">11.525</span><span class="unit">soru.</span></h1>
+              <div class="line2">Okul ve kura göre.</div>
+              <div class="bot">
+                <p>Genel soru havuzu ücretsiz; kendi okulun öğrenci belgesiyle.</p>
+                <span class="cta">prepkampus.com <i data-lucide="arrow-right" class="ic"></i></span>
+              </div>
+            </div>
+            <span class="note">Bağımsız platform; üniversitelerle resmi bağı yoktur.</span>
+          </div>
+        </div>
+        <figcaption><b>C · Kinetik Tipografi</b> — Bağlantı / Google Display · 1200×628<br>Öneri: Google Display; içerik derinliğini öne çıkaran geniş kitle görseli.</figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+</main>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+  if (window.lucide) { lucide.createIcons({ attrs: { 'stroke-width': 1.75 } }); }
+</script>
+</body>
+</html>

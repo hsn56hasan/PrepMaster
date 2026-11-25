@@ -73,7 +73,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon-32x32.png?v=2">
   <link rel="shortcut icon" href="/static/favicon.ico?v=2">
   <link rel="manifest" href="/static/manifest.json">
-  <meta name="theme-color" content="#047857">
+  <meta name="theme-color" content="#062A21">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -102,16 +102,17 @@
       }
     }
   </script>
-  <script src="/static/js/theme_palette.js?v=1.0"></script>
+  <script src="/static/js/theme_palette.js?v=1.1"></script>
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <!-- Custom Styles -->
-  <link rel="stylesheet" href="/static/css/style.css?v=4.3">
+  <link rel="stylesheet" href="/static/css/style.css?v=4.4">
+  <link rel="stylesheet" href="/static/css/premium.css?v=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
     body {
@@ -885,50 +886,313 @@
     </div>
   </div>
 
-  <!-- ================= KULLANICI GİRİŞ & HESAP YÖNETİMİ MODAL (TAM EKRAN KARŞILAMA KAPISI) ================= -->
+  <!-- ================= GİRİŞSİZ ZİYARETÇİ: PREMIUM TANITIM + GİRİŞ PANELİ ================= -->
+  <!-- Ziyaretçi önce tanıtımı görür; "Giriş yap / Ücretsiz başla" giriş panelini (#auth-card-wrap) tanıtımın üstünde açar.
+       Giriş yapmış kullanıcı "Hesabım"dan açınca yalnızca panel görünür (setLandingMode(false)). -->
   <div id="auth-modal" data-mandatory="true" class="fixed inset-0 z-50 landing-shell overflow-y-auto">
-    <!-- Ana sayfa (girişsiz ziyaretçi): solda tanıtım, sağda giriş kartı; telefonda tanıtım → kart → özellikler -->
-    <div class="landing-blob landing-blob-a" aria-hidden="true"></div>
-    <div class="landing-blob landing-blob-b" aria-hidden="true"></div>
-    <div id="auth-landing-grid" class="landing-grid">
+    <div id="pk-landing" class="pk">
 
-      <!-- Tanıtım -->
-      <div id="auth-gate-brand-header" class="landing-hero">
-        <div class="flex items-center gap-3 reveal" style="--d:0ms">
-          <img src="/static/img/logo.png?v=2" alt="PrepKampüs Logo" class="w-12 h-12 rounded-2xl object-cover landing-logo">
-          <div>
-            <div class="text-xl font-black text-slate-900 tracking-tight">PrepKampüs</div>
-            <div class="text-[11px] font-bold text-emerald-700">Üniversite hazırlık &amp; muafiyet</div>
+  <a class="sr-only" href="#pk-icerik" data-pk-scroll>İçeriğe geç</a>
+
+  <!-- Üst çubuk -->
+  <header class="pk-nav" id="pk-nav">
+    <div class="pk-container pk-nav-inner">
+      <a href="/" class="pk-brand" aria-label="PrepKampüs ana sayfa">
+        <img src="/static/img/logo.png?v=2" alt="" width="34" height="34">
+        <span>PrepKampüs</span>
+      </a>
+      <nav class="pk-nav-links" aria-label="Sayfa bölümleri">
+        <a href="#pk-yontem" data-pk-scroll>Yöntem</a>
+        <a href="#pk-ozellikler" data-pk-scroll>Özellikler</a>
+        <a href="#pk-okulun" data-pk-scroll>Okulun</a>
+        <a href="#pk-fiyat" data-pk-scroll>Fiyat</a>
+      </nav>
+      <div class="pk-nav-cta">
+        <button class="pk-theme-toggle" id="pk-theme-toggle" type="button" onclick="toggleDarkMode()" aria-label="Karanlık modu aç/kapat"><i data-lucide="moon" class="pk-icon-moon"></i><i data-lucide="sun" class="pk-icon-sun"></i></button>
+        <button type="button" id="landing-cta-login" onclick="landingGo('login')" class="pk-btn pk-btn-ghost pk-btn-sm">Giriş yap</button>
+        <button type="button" onclick="landingGo('register')" class="pk-btn pk-btn-primary pk-btn-sm">Ücretsiz başla</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="pk-icerik" role="main">
+    <!-- Hero -->
+    <section class="pk-hero" id="auth-gate-brand-header">
+      <div class="pk-container pk-hero-grid">
+        <div>
+          <span class="pk-badge pk-reveal"><span class="pk-pill">YENİ</span> Konu Yolu: 120 gündelik hayat dersi</span>
+          <h1 class="pk-display pk-reveal" style="--d:80ms">Muafiyet sınavına <em>okulunun formatında</em> hazırlan.</h1>
+          <p class="pk-lead pk-reveal" style="--d:160ms">İTÜ'den ODTÜ'ye 26 üniversitenin hazırlık sınavı, kendi soru tipleri ve süreleriyle. Seviyeni ölç, her gün küçük bir görevi bitir, sınav günü sürpriz yaşama.</p>
+          <div class="pk-hero-actions pk-reveal" style="--d:240ms">
+            <button type="button" id="landing-cta-register" onclick="landingGo('register')" class="pk-btn pk-btn-primary">Ücretsiz hesap oluştur <i data-lucide="arrow-right" class="pk-arrow"></i></button>
+            <a href="#pk-okulun" data-pk-scroll class="pk-btn pk-btn-ghost"><i data-lucide="search"></i> Okulunun sınavına bak</a>
+          </div>
+          <p class="pk-have-account pk-reveal" style="--d:280ms">Hesabın var mı? <button type="button" onclick="landingGo('login')">Giriş yap</button></p>
+          <div class="pk-trust pk-reveal" style="--d:320ms">
+            <span><i data-lucide="credit-card"></i> Kart bilgisi gerekmez</span>
+            <span><i data-lucide="badge-check"></i> Öğrenci belgesiyle kendi okulun ücretsiz</span>
+            <span><i data-lucide="smartphone"></i> Web ve Android</span>
           </div>
         </div>
-        <h1 class="landing-title reveal" style="--d:60ms">
-          Muafiyet sınavına <span class="landing-highlight">okulunun formatında</span> hazırlan.
-        </h1>
-        <p class="landing-lead reveal" style="--d:120ms">
-          26 üniversitenin proficiency sınavına özel sorular, seviyene göre günlük görevler ve adım adım ilerleme takibi.
-          Ücretsiz seviye tespitiyle başla, hazırlık yılını planlı geçir.
-        </p>
-        <div class="flex flex-wrap items-center gap-2.5 reveal" style="--d:180ms">
-          <button type="button" id="landing-cta-register" onclick="landingGo('register')" class="landing-btn landing-btn-primary">
-            <i data-lucide="sparkles" class="w-4 h-4"></i><span>Ücretsiz hesap oluştur</span>
-          </button>
-          <button type="button" id="landing-cta-login" onclick="landingGo('login')" class="landing-btn">
-            <i data-lucide="log-in" class="w-4 h-4"></i><span>Giriş yap</span>
-          </button>
-          <button type="button" onclick="openApkDownloadModal()" class="landing-btn landing-btn-ghost">
-            <i data-lucide="smartphone" class="w-4 h-4"></i><span>Android uygulama</span>
-          </button>
-        </div>
-        <div class="landing-stats reveal" style="--d:240ms">
-          <div><strong>26</strong><span>üniversite</span></div>
-          <div><strong>11.525</strong><span>soru</span></div>
-          <div><strong>2.078</strong><span>kelime</span></div>
-          <div><strong>A1–C2</strong><span>tüm kurlar</span></div>
+
+        <div class="pk-preview pk-reveal" style="--d:200ms" aria-label="Uygulama önizlemesi: Konu Yolu ve günlük görevler">
+          <div class="pk-window" aria-hidden="true">
+            <div class="pk-window-bar"><i></i><i></i><i></i><span class="pk-url">prepkampus.com/konu-yolu</span></div>
+            <div class="pk-window-body">
+              <div class="pk-wpath">
+                <div class="pk-wunit"><small>B1 · ÜNİTE 1</small><b>Yeni bir başlangıç</b></div>
+                <div class="pk-wnodes">
+                  <div class="pk-wnode" style="transform:translateX(0)"><i data-lucide="key"></i></div>
+                  <div class="pk-wstars" style="transform:translateX(0)">★★★</div>
+                  <div class="pk-wnode" style="transform:translateX(34px)"><i data-lucide="briefcase"></i></div>
+                  <div class="pk-wstars" style="transform:translateX(34px)">★★☆</div>
+                  <div class="pk-wnode pk-current" style="transform:translateX(52px); margin-top:22px"><span class="pk-wbubble">BAŞLA</span><i data-lucide="school"></i></div>
+                  <div class="pk-wnode pk-locked" style="transform:translateX(24px)"><i data-lucide="lock"></i></div>
+                  <div class="pk-wnode pk-locked" style="transform:translateX(-12px)"><i data-lucide="lock"></i></div>
+                </div>
+              </div>
+              <div class="pk-wside">
+                <div class="pk-wcard">
+                  <h4>Bugünün görevleri <span>+30 XP</span></h4>
+                  <div class="pk-wtask"><span class="pk-tick pk-on"><i data-lucide="check"></i></span>20 kelime tekrarı</div>
+                  <div class="pk-wtask"><span class="pk-tick pk-on"><i data-lucide="check"></i></span>15 soru · Grammar</div>
+                  <div class="pk-wtask"><span class="pk-tick"></span>Hata Kasası'ndan 5 soru</div>
+                </div>
+                <div class="pk-wcard">
+                  <h4>Bu hafta</h4>
+                  <div class="pk-wweek"><b class="pk-on">Pt</b><b class="pk-on">Sa</b><b class="pk-on">Ça</b><b class="pk-on">Pe</b><b>Cu</b><b>Ct</b><b>Pz</b></div>
+                </div>
+                <div class="pk-wcard">
+                  <h4>B1 → B2 yolculuğu</h4>
+                  <div class="pk-wbar"><i style="width:64%"></i></div>
+                  <div class="pk-wtask" style="justify-content:space-between"><span>%64 doğru</span><span>hedef %70</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pk-float-card" aria-hidden="true">
+            <span class="pk-ic"><i data-lucide="trophy"></i></span>
+            <div><b>Ders tamamlandı</b><small>Kusursuz · +15 XP</small></div>
+          </div>
         </div>
       </div>
+    </section>
 
-      <!-- Giriş / kayıt kartı -->
-      <div id="auth-card-wrap" class="landing-card-wrap reveal" style="--d:120ms">
+    <!-- Okul şeridi -->
+    <div class="pk-marquee-wrap">
+      <div class="pk-marquee" aria-label="Kapsanan üniversiteler">
+        <div class="pk-marquee-track" id="pk-marquee"></div>
+      </div>
+      <p class="pk-marquee-note">Bağımsız bir hazırlık platformudur; üniversitelerle resmi bağı yoktur.</p>
+    </div>
+
+    <!-- Rakamlar -->
+    <section class="pk-section" style="padding-bottom: 0">
+      <div class="pk-container">
+        <div class="pk-ledger">
+          <div class="pk-reveal"><b class="pk-tabular">26</b><span>üniversitenin muafiyet sınavı formatı</span></div>
+          <div class="pk-reveal" style="--d:80ms"><b class="pk-tabular">11.525</b><span>açıklamalı soru, okul ve kura göre</span></div>
+          <div class="pk-reveal" style="--d:160ms"><b class="pk-tabular">2.078</b><span>sesli kelime kartı, A1'den C2'ye</span></div>
+          <div class="pk-reveal" style="--d:240ms"><b class="pk-tabular">120</b><span>alıştırmalı Konu Yolu dersi</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 01 Yöntem -->
+    <section class="pk-section" id="pk-yontem">
+      <div class="pk-container">
+        <div class="pk-section-head">
+          <span class="pk-eyebrow pk-reveal"><span class="pk-num">01</span><span class="pk-rule"></span>Yöntem</span>
+          <h2 class="pk-h2 pk-reveal">Daha çok soru değil, <em>doğru sıra.</em></h2>
+          <p class="pk-lead pk-reveal">Ücretsiz içerik her yerde var. Eksik olan, bugün neyi çalışacağını bilmek. PrepKampüs her gün bir sonraki adımı önüne koyar.</p>
+        </div>
+        <div class="pk-steps">
+          <div class="pk-step pk-reveal"><span class="pk-ic"><i data-lucide="gauge"></i></span><small>ADIM 1</small><h3>Seviyeni ölç</h3><p>En fazla 24 soruluk uyarlamalı test, A1–C2 arası kurunu bulur.</p></div>
+          <div class="pk-step pk-reveal" style="--d:80ms"><span class="pk-ic"><i data-lucide="list-checks"></i></span><small>ADIM 2</small><h3>Günlük görev</h3><p>Kuruna göre kelime ve soru hedefi; bitirdikçe serin uzar.</p></div>
+          <div class="pk-step pk-reveal" style="--d:160ms"><span class="pk-ic"><i data-lucide="route"></i></span><small>ADIM 3</small><h3>Konu Yolu</h3><p>Kısa anlatım ve 13 alıştırmalık derslerle temeli adım adım kur.</p></div>
+          <div class="pk-step pk-reveal" style="--d:240ms"><span class="pk-ic"><i data-lucide="file-text"></i></span><small>ADIM 4</small><h3>Okul denemesi</h3><p>Kendi okulunun soru tipleri ve süresiyle gerçek prova.</p></div>
+          <div class="pk-step pk-reveal" style="--d:320ms"><span class="pk-ic"><i data-lucide="shield-check"></i></span><small>ADIM 5</small><h3>Hata Kasası</h3><p>Yanlış yaptığın her soru, doğru çözene kadar seninle kalır.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 Özellikler -->
+    <section class="pk-section" id="pk-ozellikler" data-legacy="auth-gate-features" style="background: var(--color-background-alt); border-block: 1px solid var(--color-border)">
+      <div class="pk-container">
+        <div class="pk-section-head">
+          <span class="pk-eyebrow pk-reveal"><span class="pk-num">02</span><span class="pk-rule"></span>Özellikler</span>
+          <h2 class="pk-h2 pk-reveal">Bir hazırlık yılına gereken her şey, <em>tek yerde.</em></h2>
+        </div>
+        <div class="pk-bento">
+          <article class="pk-tile pk-t-path pk-reveal">
+            <span class="pk-ic"><i data-lucide="route"></i></span>
+            <h3>Konu Yolu</h3>
+            <p>A1'den C2'ye 120 gündelik hayat dersi. Selamlaşmadan müzakereye; her ders sesli kelimeler, kısa bir dil bilgisi ipucu ve 13 alıştırma. Yanlışların dersin sonunda yeniden gelir; yıldız ve XP topladıkça bir sonraki konu açılır.</p>
+            <div class="pk-path-demo" aria-hidden="true">
+              <span class="pk-n"><i data-lucide="hand"></i></span><span class="pk-line"></span>
+              <span class="pk-n"><i data-lucide="coffee"></i></span><span class="pk-line"></span>
+              <span class="pk-n"><i data-lucide="map-pin"></i></span><span class="pk-line"></span>
+              <span class="pk-n pk-l"><i data-lucide="lock"></i></span><span class="pk-line"></span>
+              <span class="pk-n pk-l"><i data-lucide="trophy"></i></span>
+            </div>
+            <div class="pk-types">
+              <span>Anlam seçme</span><span>Eşleştirme</span><span>Dinleme</span><span>Cümle kurma</span><span>Boşluk doldurma</span><span>Yazma</span>
+            </div>
+          </article>
+          <article class="pk-tile pk-t-exam pk-reveal" style="--d:80ms">
+            <span class="pk-ic"><i data-lucide="file-text"></i></span>
+            <h3>Okulunun formatında deneme</h3>
+            <p>Her okulun bölümleri, soru sayısı ve süresi ayrı. Deneme de öyle.</p>
+            <div class="pk-exam-mini">
+              <div><span>ODTÜ EPE</span><b>65 soru · 180 dk</b></div>
+              <div><span>BUEPT</span><b>50 soru · 210 dk</b></div>
+              <div><span>İTÜ Proficiency</span><b>60 soru · 150 dk</b></div>
+              <div><span>Bilkent COPE</span><b>55 soru · 180 dk</b></div>
+            </div>
+          </article>
+          <article class="pk-tile pk-t-skill pk-reveal" style="--d:120ms">
+            <span class="pk-ic"><i data-lucide="headphones"></i></span>
+            <h3>Dinleme, konuşma, yazma</h3>
+            <p>Akademik dinleme kayıtları, konuşma görevleri ve yazma rehberleri; otomatik geri bildirimle.</p>
+          </article>
+          <article class="pk-tile pk-t-vault pk-reveal" style="--d:160ms">
+            <span class="pk-ic"><i data-lucide="shield-alert"></i></span>
+            <h3>Hata Kasası</h3>
+            <p>Yanlışlar kategoriye göre birikir; en zayıf konun her gün görev olarak geri döner.</p>
+          </article>
+          <article class="pk-tile pk-t-mobile pk-reveal" style="--d:200ms">
+            <span class="pk-ic"><i data-lucide="smartphone"></i></span>
+            <h3>Cebinde, çevrimdışı da</h3>
+            <p>Android uygulaması web hesabınla eşitlenir. Kelime kartları ve pratik internetsiz çalışır.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 Okulun -->
+    <section class="pk-section" id="pk-okulun">
+      <div class="pk-container">
+        <div class="pk-section-head">
+          <span class="pk-eyebrow pk-reveal"><span class="pk-num">03</span><span class="pk-rule"></span>Okulun</span>
+          <h2 class="pk-h2 pk-reveal">Okulunu seç, <em>sınavını tanı.</em></h2>
+          <p class="pk-lead pk-reveal">Her muafiyet sınavı farklı. Hangisine gireceksen hazırlığın da ona göre şekillenir.</p>
+        </div>
+        <div class="pk-schools">
+          <div class="pk-school-list pk-reveal" id="pk-school-list" role="group" aria-label="Üniversite seç"></div>
+          <div class="pk-school-card pk-reveal" style="--d:120ms" aria-live="polite">
+            <div class="pk-short" id="pk-sc-short">İTÜ</div>
+            <div class="pk-exam" id="pk-sc-exam">İTÜ Proficiency Sınavı</div>
+            <div class="pk-facts">
+              <div><b id="pk-sc-q" class="pk-tabular">60</b><span>soru</span></div>
+              <div><b id="pk-sc-d" class="pk-tabular">150</b><span>dakika</span></div>
+              <div><b id="pk-sc-p" class="pk-tabular">60</b><span>geçme puanı</span></div>
+            </div>
+            <ul>
+              <li><i data-lucide="check"></i><span>Bu formatta zamanlı deneme ve açıklamalı çözümler</span></li>
+              <li><i data-lucide="check"></i><span>Kura göre ayrılmış okul havuzu (A1–C2)</span></li>
+              <li><i data-lucide="check"></i><span>Bölüm bazında ilerleme ve zayıf konu raporu</span></li>
+            </ul>
+            <div class="pk-hero-actions" style="margin-top:28px">
+              <a href="#" onclick="landingGo('register'); return false;" class="pk-btn pk-btn-primary" id="pk-sc-cta">İTÜ hazırlığına başla <i data-lucide="arrow-right" class="pk-arrow"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 Fiyat -->
+    <section class="pk-section" id="pk-fiyat" style="padding-top: 0">
+      <div class="pk-container">
+        <div class="pk-section-head">
+          <span class="pk-eyebrow pk-reveal"><span class="pk-num">04</span><span class="pk-rule"></span>Fiyat</span>
+          <h2 class="pk-h2 pk-reveal">Kendi okulun <em>ücretsiz.</em> Gerisi bir kahve parası.</h2>
+        </div>
+        <div class="pk-pricing">
+          <div class="pk-plan pk-featured pk-reveal">
+            <span class="pk-tag">Öğrenciye</span>
+            <h3>Kendi okulun</h3>
+            <div class="pk-price">0 TL</div>
+            <p class="pk-muted" style="margin:0">Öğrenci belgeni yükle, okulunun bütün hazırlık paketi açılsın.</p>
+            <ul>
+              <li><i data-lucide="check"></i>Okulunun formatında bütün denemeler</li>
+              <li><i data-lucide="check"></i>Seviye tespiti, günlük görevler, Konu Yolu</li>
+              <li><i data-lucide="check"></i>Hata Kasası ve ilerleme raporu</li>
+              <li><i data-lucide="check"></i>Web ve Android, tek hesap</li>
+            </ul>
+            <a href="#" onclick="landingGo('register'); return false;" class="pk-btn pk-btn-primary">Belgemle ücretsiz aç <i data-lucide="arrow-right" class="pk-arrow"></i></a>
+          </div>
+          <div class="pk-plan pk-reveal" style="--d:100ms">
+            <span class="pk-tag">Tek sefer</span>
+            <h3>Başka bir okul</h3>
+            <div class="pk-price">50 TL <small class="pk-muted">/ okul</small></div>
+            <p class="pk-muted" style="margin:0">Yatay geçiş, ikinci tercih ya da merak: istediğin okulun paketini ekle.</p>
+            <ul>
+              <li><i data-lucide="check"></i>O okulun bütün denemeleri ve havuzu</li>
+              <li><i data-lucide="check"></i>Abonelik yok, yenileme yok</li>
+              <li><i data-lucide="check"></i>Diğer bütün özellikler zaten açık</li>
+            </ul>
+            <a href="#pk-okulun" data-pk-scroll class="pk-btn pk-btn-ghost">Okul seç</a>
+          </div>
+        </div>
+        <div class="pk-free-row pk-reveal"><i data-lucide="gift"></i><span>Belge yüklemeden de genel soru havuzu, kelime kartları ve Konu Yolu ücretsiz.</span></div>
+      </div>
+    </section>
+
+    <!-- SSS -->
+    <section class="pk-section" style="padding-top: 0">
+      <div class="pk-container">
+        <span class="pk-eyebrow pk-reveal"><span class="pk-num">05</span><span class="pk-rule"></span>Sorular</span>
+        <h2 class="pk-h2 pk-reveal">Sık sorulanlar</h2>
+        <div class="pk-faq pk-reveal">
+          <details><summary>Sorular okulların gerçek sınavlarından mı alınıyor?<span class="pk-plus"><i data-lucide="plus"></i></span></summary><p>Hayır. Sorular özgündür; her okulun sınavındaki bölüm yapısı, soru tipleri, soru sayısı ve süresi örnek alınarak hazırlanır. Resmi sınav soruları kullanılmaz.</p></details>
+          <details><summary>Kendi okulumu nasıl ücretsiz açarım?<span class="pk-plus"><i data-lucide="plus"></i></span></summary><p>e-Devlet'ten aldığın öğrenci belgesini yüklersin. Belge okunup okulun doğrulanınca o okulun bütün hazırlık paketi hesabına tanımlanır.</p></details>
+          <details><summary>Hangi seviyeden başlamalıyım?<span class="pk-plus"><i data-lucide="plus"></i></span></summary><p>Seviye tespiti en fazla 24 soruda kurunu bulur. Günlük görevler ve Konu Yolu bu sonuca göre açılır; istediğin zaman testi yeniden çözebilirsin.</p></details>
+          <details><summary>Telefonda çalışabilir miyim?<span class="pk-plus"><i data-lucide="plus"></i></span></summary><p>Evet. Android uygulaması web hesabınla eşitlenir; kelime kartları ve pratik modu internetsiz de çalışır.</p></details>
+          <details><summary>Yazma ve konuşma nasıl değerlendiriliyor?<span class="pk-plus"><i data-lucide="plus"></i></span></summary><p>Otomatik ölçütlerle anında geri bildirim verilir. Bir öğretmen değerlendirmesinin yerini tutmaz; nerede zorlandığını görmen için tasarlandı.</p></details>
+          <details><summary>Muafiyeti garanti ediyor musunuz?<span class="pk-plus"><i data-lucide="plus"></i></span></summary><p>Hayır, hiçbir hazırlık platformu bunu dürüstçe vaat edemez. Biz düzenli çalışmanı ve sınav formatına alışmanı kolaylaştırıyoruz.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="pk-section" style="padding-top: 0">
+      <div class="pk-container">
+        <div class="pk-final pk-reveal">
+          <h2>Sınav günü, <em>tanıdık</em> bir sayfa aç.</h2>
+          <p>Bugün seviyeni ölç, ilk dersini bitir. Beş dakika sürer.</p>
+          <div class="pk-hero-actions">
+            <button type="button" onclick="landingGo('register')" class="pk-btn pk-btn-primary">Ücretsiz başla <i data-lucide="arrow-right" class="pk-arrow"></i></button>
+            <button type="button" onclick="openApkDownloadModal()" class="pk-btn pk-btn-ghost"><i data-lucide="download"></i> Android uygulaması (APK)</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="pk-footer" id="auth-gate-guides">
+    <div class="pk-container">
+      <div class="pk-foot-grid">
+        <div>
+          <a href="/" class="pk-brand" style="color: var(--color-foreground)"><img src="/static/img/logo.png?v=2" alt="" width="34" height="34"><span>PrepKampüs</span></a>
+          <p style="max-width: 34ch; margin-top: 14px">Türkiye'deki üniversitelerin İngilizce hazırlık muafiyet sınavlarına bağımsız hazırlık platformu.</p>
+        </div>
+        <div><h5>Ürün</h5><a href="#pk-yontem" data-pk-scroll>Yöntem</a><a href="#pk-ozellikler" data-pk-scroll>Özellikler</a><a href="#pk-fiyat" data-pk-scroll>Fiyat</a><a href="#" onclick="openApkDownloadModal(); return false;">Android uygulaması</a></div>
+        <div><h5>Sınav rehberleri</h5><a href="/sinavlar">Tüm 26 üniversite</a><a href="/universite/itu">İTÜ Proficiency</a><a href="/universite/metu">ODTÜ EPE</a><a href="/universite/boun">Boğaziçi BUEPT</a><a href="/universite/bilkent">Bilkent COPE</a><a href="/universite/ytu">YTÜ İYS</a><a href="/universite/koc">Koç KUEPE</a><a href="/universite/sabanci">Sabancı ELAE</a><a href="/universite/hacettepe">Hacettepe</a></div>
+        <div><h5>Yasal ve destek</h5><a href="/kvkk">KVKK aydınlatma metni</a><a href="#" onclick="openSupportKvkkModal('sozlesme'); return false;">Kullanıcı sözleşmesi</a><a href="#" onclick="openSupportKvkkModal('support'); return false;">Destek ve iletişim</a></div>
+      </div>
+      <div class="pk-foot-bottom">
+        <span>© 2026 PrepKampüs</span>
+        <span>Üniversitelerle resmi bağı olmayan bağımsız bir platformdur.</span>
+      </div>
+    </div>
+  </footer>
+    </div>
+
+    <!-- Giriş / kayıt paneli -->
+    <div id="auth-card-wrap" class="auth-sheet" role="dialog" aria-modal="true" aria-labelledby="auth-modal-title">
+      <div class="auth-sheet-backdrop" onclick="closeAuthSheet()" aria-hidden="true"></div>
+      <div class="auth-sheet-panel">
+        <button type="button" class="auth-sheet-close" onclick="closeAuthSheet()" aria-label="Paneli kapat, tanıtıma dön"><i data-lucide="x" class="w-5 h-5"></i></button>
     <div id="auth-card" class="landing-card bg-white rounded-3xl w-full p-6 border border-slate-100 space-y-4">
       
       <!-- Modal Header -->
@@ -1162,71 +1426,6 @@
       </div>
 
     </div>
-      </div>
-
-      <!-- Özellikler -->
-      <div id="auth-gate-features" class="landing-features">
-        <div class="landing-feature reveal" style="--d:180ms">
-          <span class="landing-feature-icon"><i data-lucide="building-2" class="w-5 h-5"></i></span>
-          <div>
-            <h3 class="text-sm font-extrabold text-slate-900">26 üniversiteye özel</h3>
-            <p class="text-xs text-slate-500 leading-relaxed mt-0.5">İTÜ, ODTÜ, Boğaziçi, Bilkent ve 22 okulun sınav formatına göre denemeler.</p>
-          </div>
-        </div>
-        <div class="landing-feature reveal" style="--d:250ms">
-          <span class="landing-feature-icon"><i data-lucide="list-checks" class="w-5 h-5"></i></span>
-          <div>
-            <h3 class="text-sm font-extrabold text-slate-900">11.525 soru</h3>
-            <p class="text-xs text-slate-500 leading-relaxed mt-0.5">Her kurda okula özel sorular, açıklamalı çözümler ve Hata Kasası.</p>
-          </div>
-        </div>
-        <div class="landing-feature reveal" style="--d:320ms">
-          <span class="landing-feature-icon"><i data-lucide="gauge" class="w-5 h-5"></i></span>
-          <div>
-            <h3 class="text-sm font-extrabold text-slate-900">Seviye tespiti</h3>
-            <p class="text-xs text-slate-500 leading-relaxed mt-0.5">5 dakikalık uyarlamalı sınavla A1–C2 arasında başlangıç kurunu bul.</p>
-          </div>
-        </div>
-        <div class="landing-feature reveal" style="--d:390ms">
-          <span class="landing-feature-icon"><i data-lucide="calendar-check" class="w-5 h-5"></i></span>
-          <div>
-            <h3 class="text-sm font-extrabold text-slate-900">Günlük görevler</h3>
-            <p class="text-xs text-slate-500 leading-relaxed mt-0.5">Seviyene göre kelime, soru ve hata görevleri; seri ve XP ile ilerle.</p>
-          </div>
-        </div>
-        <div class="landing-feature reveal" style="--d:460ms">
-          <span class="landing-feature-icon"><i data-lucide="headphones" class="w-5 h-5"></i></span>
-          <div>
-            <h3 class="text-sm font-extrabold text-slate-900">Dinleme, konuşma, yazma</h3>
-            <p class="text-xs text-slate-500 leading-relaxed mt-0.5">Akademik dinleme, konuşma görevleri ve yazma rehberleri tek yerde.</p>
-          </div>
-        </div>
-        <div class="landing-feature reveal" style="--d:530ms">
-          <span class="landing-feature-icon"><i data-lucide="smartphone" class="w-5 h-5"></i></span>
-          <div>
-            <h3 class="text-sm font-extrabold text-slate-900">Mobil uygulama v2.1</h3>
-            <p class="text-xs text-slate-500 leading-relaxed mt-0.5">Android uygulamasıyla kelime kartları ve sorular her an cebinde.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sınav rehberleri (SEO bağlantıları) -->
-      <div id="auth-gate-guides" class="landing-guides reveal" style="--d:600ms">
-        <div class="flex items-center justify-between gap-3 mb-2">
-          <span class="text-xs font-extrabold text-slate-800">Sınav rehberleri</span>
-          <a href="/sinavlar" class="text-xs font-bold text-emerald-700 hover:underline">Tüm 26 üniversite →</a>
-        </div>
-        <div class="flex flex-wrap gap-1.5">
-          <a href="/universite/itu" class="landing-chip">İTÜ Proficiency</a>
-          <a href="/universite/boun" class="landing-chip">Boğaziçi BUEPT</a>
-          <a href="/universite/metu" class="landing-chip">ODTÜ EPE</a>
-          <a href="/universite/bilkent" class="landing-chip">Bilkent COPE</a>
-          <a href="/universite/ytu" class="landing-chip">YTÜ İYS</a>
-          <a href="/universite/koc" class="landing-chip">Koç KUEPE</a>
-          <a href="/universite/sabanci" class="landing-chip">Sabancı ELAE</a>
-          <a href="/universite/hacettepe" class="landing-chip">Hacettepe</a>
-          <a href="/kvkk" class="landing-chip landing-chip-muted">KVKK &amp; destek</a>
-        </div>
       </div>
     </div>
   </div>
@@ -2110,15 +2309,16 @@
     </div>
   </div>
 
-  <script src="/static/js/auth_fetch.js?v=2.0"></script>
+  <script src="/static/js/auth_fetch.js?v=2.1"></script>
   <script src="/static/js/flashcards.js?v=2.0"></script>
   <script src="/static/js/exam.js?v=2.2"></script>
   <script src="/static/js/listening.js?v=2.0"></script>
   <script src="/static/js/speaking.js?v=2.0"></script>
   <script src="/static/js/writing_ai.js?v=2.0"></script>
-  <script src="/static/js/app.js?v=3.4"></script>
+  <script src="/static/js/app.js?v=3.5"></script>
   <script src="/static/js/placement.js?v=1.2"></script>
   <script src="/static/js/path.js?v=1.0"></script>
+  <script src="/static/js/landing.js?v=1.0"></script>
 
   <!-- 3D Secure ödeme Entegrasyonu -->
   <script>

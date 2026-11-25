@@ -35,7 +35,11 @@
       localStorage.removeItem("auth_user");
       if (window.appState) window.appState.currentUser = null;
       if (typeof window.openAuthModal === "function") {
-        try { window.openAuthModal(true); } catch (_) {}
+        try {
+          window.openAuthModal(true);
+          // Oturumu düşen kullanıcıya tanıtım yerine doğrudan giriş paneli
+          if (typeof window.landingGo === "function") window.landingGo("login");
+        } catch (_) {}
       }
     }
     return res;

@@ -1850,22 +1850,54 @@ function openAuthModal(isMandatory = false) {
 
 // Ana sayfa düzeni (tanıtım + özellikler + rehberler) yalnız girişsiz ziyaretçiye; "Hesabım" penceresinde yalnız kart
 function setLandingMode(on) {
-  ["auth-gate-brand-header", "auth-gate-features", "auth-gate-guides"].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.classList.toggle("hidden", !on);
-  });
-  const grid = document.getElementById("auth-landing-grid");
-  if (grid) grid.classList.toggle("is-compact", !on);
-  document.querySelectorAll("#auth-modal .landing-blob").forEach(b => b.classList.toggle("hidden", !on));
+  // Tanıtım (girişsiz ziyaretçi) ↔ yalnız panel (giriş yapmış "Hesabım")
+  const landing = document.getElementById("pk-landing");
+  if (landing) landing.classList.toggle("hidden", !on);
+  closeAuthSheet(true);
 }
 
-// Tanıtımdaki düğmeler: ilgili sekmeyi açar, karta kaydırır ve ilk alana odaklanır
+// Giriş paneli: tanıtımın üstünde açılır (telefonda alttan kayan sayfa)
+let _authSheetReturnFocus = null;
+function openAuthSheet() {
+  const modal = document.getElementById("auth-modal");
+  const sheet = document.getElementById("auth-card-wrap");
+  if (!modal || !sheet || !modal.classList.contains("landing-shell")) return;
+  if (!sheet.classList.contains("is-open")) _authSheetReturnFocus = document.activeElement;
+  sheet.classList.add("is-open");
+  modal.classList.add("sheet-open");
+}
+function closeAuthSheet(silent) {
+  const modal = document.getElementById("auth-modal");
+  const sheet = document.getElementById("auth-card-wrap");
+  if (!sheet) return;
+  const wasOpen = sheet.classList.contains("is-open");
+  sheet.classList.remove("is-open");
+  if (modal) modal.classList.remove("sheet-open");
+  if (wasOpen && !silent && _authSheetReturnFocus && _authSheetReturnFocus.focus) {
+    try { _authSheetReturnFocus.focus({ preventScroll: true }); } catch (_) {}
+  }
+}
+window.openAuthSheet = openAuthSheet;
+window.closeAuthSheet = closeAuthSheet;
+
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Escape") return;
+  const sheet = document.getElementById("auth-card-wrap");
+  if (sheet && sheet.classList.contains("is-open")) { e.preventDefault(); closeAuthSheet(); }
+});
+
+// Tanıtımdaki düğmeler: giriş panelini ilgili sekmeyle açar ve ilk alana odaklanır
 function landingGo(tab) {
   switchAuthTab(tab);
-  const card = document.getElementById("auth-card");
-  if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
+  const modal = document.getElementById("auth-modal");
+  if (modal && modal.classList.contains("landing-shell")) {
+    openAuthSheet();
+  } else {
+    const card = document.getElementById("auth-card");
+    if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
   const field = document.getElementById(tab === "register" ? "reg-fullname" : "login-identifier");
-  if (field) setTimeout(() => field.focus({ preventScroll: true }), 350);
+  if (field) setTimeout(() => field.focus({ preventScroll: true }), 320);
 }
 window.landingGo = landingGo;
 
