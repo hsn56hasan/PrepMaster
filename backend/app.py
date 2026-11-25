@@ -25,6 +25,7 @@ from database import (
     record_question_answers, get_question_progress, get_today_activity,
     daily_targets_for, get_daily_activity, save_placement_result, get_placement_result,
     record_lesson_result, get_lesson_progress,
+    record_consents, get_consent_state,
     bulk_upsert_mistakes, bulk_upsert_vocab_progress, bulk_resolve_mistakes,
     create_user, authenticate_user, verify_student, get_verification_status,
     create_student_otp, verify_student_otp,
@@ -69,6 +70,7 @@ from seo_pages import (
 )
 
 from security import (
+    get_client_ip,
     SecurityHeadersMiddleware,
     DoSProtectionMiddleware,
     IS_PRODUCTION,
@@ -342,8 +344,15 @@ class RegisterRequest(BaseModel):
     full_name: str = Field(..., min_length=2, max_length=100)
     university_id: Optional[str] = Field("itu", max_length=50, pattern=r"^[a-zA-Z0-9_-]+$")
     student_number: Optional[str] = Field("", max_length=30, pattern=r"^[a-zA-Z0-9_-]*$")
-    # Kullanıcı Sözleşmesi + Aydınlatma Metni onayı ZORUNLU; açık rıza ayrı ve isteğe bağlı
+    # Ayrı beyanlar (KVKK Kurulu 2026/347 ilke kararı: aydınlatma ile onaylar iç içe alınmaz):
+    # terms_accepted: Kullanıcı Sözleşmesi kabulü ve yaş beyanı (ZORUNLU)
+    # privacy_notice_ack: Aydınlatma Metni'nin okunduğu bilgisi (ZORUNLU; onay değildir).
+    #   Gönderilmezse (Android v2.1 ve öncesi tek kutu kullanır) eski birleşik kutu kabul edilir.
+    # marketing_consent: 6563 sayılı Kanun kapsamında ticari elektronik ileti onayı (İSTEĞE BAĞLI)
+    # explicit_consent: eski istemcilerden gelen açık rıza kutusu; yalnızca kayıt altına alınır.
     terms_accepted: bool = False
+    privacy_notice_ack: Optional[bool] = None
+    marketing_consent: bool = False
     explicit_consent: bool = False
 
     @field_validator("full_name", "username", "student_number", mode="before")
@@ -487,11 +496,58 @@ def public_config():
         "membership_price_try": MEMBERSHIP_PRICE_TRY,
     }
 
+# --- Hukuki metin sürümleri (metin değişince tarihi güncelleyin; eski onaylar geçmişte kalır) ---
+LEGAL_VERSIONS = {
+    "kullanici_sozlesmesi": "2026-11-25",
+    "aydinlatma_metni": "2026-11-25",
+    "ticari_ileti": "2026-11-25",
+    "acik_riza": "2025-legacy",
+}
+
+
+def _registration_consents(req: "RegisterRequest") -> List[Dict[str, str]]:
+    legacy = req.privacy_notice_ack is None
+    channel = "legacy-combined" if legacy else "web"
+    entries = [
+        {"doc_key": "kullanici_sozlesmesi", "doc_version": LEGAL_VERSIONS["kullanici_sozlesmesi"], "action": "accepted", "channel": channel},
+        {"doc_key": "aydinlatma_metni", "doc_version": LEGAL_VERSIONS["aydinlatma_metni"], "action": "acknowledged", "channel": channel},
+    ]
+    if req.marketing_consent:
+        entries.append({"doc_key": "ticari_ileti", "doc_version": LEGAL_VERSIONS["ticari_ileti"], "action": "granted", "channel": channel})
+    if req.explicit_consent:
+        entries.append({"doc_key": "acik_riza", "doc_version": LEGAL_VERSIONS["acik_riza"], "action": "granted", "channel": channel})
+    return entries
+
+
+class MarketingConsentRequest(BaseModel):
+    granted: bool
+
+
+@app.get("/api/consents")
+def get_consents_endpoint(request: Request):
+    """Kullanıcının hukuki onay durumu ve geçmişi (Hesabım ekranı)."""
+    uid = _current_user_id(request)
+    return {"versions": LEGAL_VERSIONS, **get_consent_state(uid)}
+
+
+@app.post("/api/consents/marketing")
+def set_marketing_consent_endpoint(req: MarketingConsentRequest, request: Request):
+    """Ticari elektronik ileti onayı verme / geri çekme (ret hakkı her an, ücretsiz)."""
+    uid = _current_user_id(request)
+    record_consents(uid, [{
+        "doc_key": "ticari_ileti", "doc_version": LEGAL_VERSIONS["ticari_ileti"],
+        "action": "granted" if req.granted else "withdrawn", "channel": "account",
+    }], get_client_ip(request), request.headers.get("user-agent", ""))
+    return {"status": "ok", "marketing_consent": req.granted}
+
+
 # --- Authentication & Student Verification Endpoints ---
 @app.post("/api/auth/register")
 def register_endpoint(req: RegisterRequest, request: Request, background_tasks: BackgroundTasks, _=Depends(rate_limit_register)):
     if not req.terms_accepted:
-        raise HTTPException(status_code=400, detail="Kayıt için Kullanıcı Sözleşmesi'ni kabul etmeniz ve KVKK Aydınlatma Metni'ni okumanız gerekir.")
+        raise HTTPException(status_code=400, detail="Kayıt için Kullanıcı Sözleşmesi'ni kabul etmeniz gerekir.")
+    if req.privacy_notice_ack is False:
+        raise HTTPException(status_code=400, detail="Kayıt için KVKK Aydınlatma Metni'ni okuduğunuzu işaretlemeniz gerekir.")
     try:
         user = create_user(
             email=req.email,
@@ -503,6 +559,8 @@ def register_endpoint(req: RegisterRequest, request: Request, background_tasks: 
             terms_accepted=True,
             explicit_consent=bool(req.explicit_consent),
         )
+        record_consents(user["id"], _registration_consents(req), get_client_ip(request),
+                        request.headers.get("user-agent", ""))
         token, expires_in = create_session_token(user["id"], user["username"], user["email"])
         if email_configured() and user.get("email"):
             uni = next((u for u in universities_data if u["id"] == user.get("university_id")), None)
@@ -2174,9 +2232,9 @@ def get_mobile_app_info():
     return {
         "available": apk_path is not None,
         "app_name": "PrepKampüs Mobil (Android)",
-        "version": "2.1.0",
+        "version": "2.2.0",
         "build_type": "Release (ARM64)",
-        "filename": "PrepKampus-v2.1-Android.apk",
+        "filename": "PrepKampus-v2.2-Android.apk",
         "size_mb": size_mb,
         "min_android": "Android 8.0+ (API 26+)",
         "download_url": "/api/download/apk",
@@ -2185,7 +2243,7 @@ def get_mobile_app_info():
             "İnternetsiz (Offline) Kelime Kartları, Sesli Telaffuz ve Gramer Pratik Modu",
             "Uyarlamalı Seviye Tespit Sınavı (A1–C2, internetsiz, en fazla 24 soru)",
             "Seviyene göre Günlük Görevler, görev serisi ve Kur Yolculuğu",
-            "Konu Yolu: A1–C2 arası 120 gündelik hayat dersi, alıştırma, kalp, yıldız ve XP",
+            "Konu Yolu: A1–C2 arası 240 gündelik hayat dersi, örnek konuşmalar, sesli pratik, kalp, yıldız ve XP",
             "26 Üniversite Muafiyet Deneme Sınavı (30 Soru/Kur) & 24 Akademik Dinleme (MP3)",
             "E-Devlet Öğrenci Belgesi Tarama ve AI Writing / Speaking Değerlendirme"
         ]
@@ -2203,9 +2261,9 @@ def download_android_apk():
     return FileResponse(
         path=apk_path,
         media_type="application/vnd.android.package-archive",
-        filename="PrepKampus-v2.1-Android.apk",
+        filename="PrepKampus-v2.2-Android.apk",
         headers={
-            "Content-Disposition": 'attachment; filename="PrepKampus-v2.1-Android.apk"',
+            "Content-Disposition": 'attachment; filename="PrepKampus-v2.2-Android.apk"',
             "Cache-Control": "public, max-age=3600"
         }
     )
@@ -2382,10 +2440,15 @@ SUPPORT_CONTACT_INFO = {
     "kvkk_url": "/kvkk",
     "documents": [
         {"id": "kvkk-aydinlatma", "code": "PM-KVKK-01", "title": "6698 Sayılı KVKK Aydınlatma Metni"},
-        {"id": "acik-riza", "code": "PM-KVKK-02", "title": "Açık Rıza Beyanı Metni"},
-        {"id": "gizlilik-cerez", "code": "PM-KVKK-03", "title": "Gizlilik, Veri Güvenliği ve Çerez Politikası"},
+        {"id": "acik-riza", "code": "PM-KVKK-02", "title": "Açık Rıza Hakkında Bilgilendirme"},
+        {"id": "ticari-ileti", "code": "PM-ILETI-09", "title": "Ticari Elektronik İleti Onay Metni"},
+        {"id": "gizlilik-cerez", "code": "PM-KVKK-03", "title": "Gizlilik ve Veri Güvenliği Politikası"},
+        {"id": "cerez-politikasi", "code": "PM-KVKK-03B", "title": "Çerez ve Tarayıcı Depolama Politikası"},
         {"id": "kullanici-sozlesmesi", "code": "PM-HUKUK-04", "title": "Kullanıcı Sözleşmesi ve Hizmet Koşulları"},
-        {"id": "kvkk-basvuru", "code": "PM-KVKK-05", "title": "KVKK Madde 11 Veri Sahibi Başvuru Formu"},
+        {"id": "kvkk-basvuru", "code": "PM-KVKK-05", "title": "Veri Sahibi Başvurusu ve Hesap Silme"},
+        {"id": "mesafeli-satis", "code": "PM-SATIS-07", "title": "Mesafeli Satış Sözleşmesi"},
+        {"id": "iade-cayma", "code": "PM-SATIS-08", "title": "İptal, İade ve Cayma Koşulları"},
+        {"id": "teslimat-kargo", "code": "PM-SATIS-09", "title": "Teslimat ve Kargo Koşulları"},
     ],
 }
 
@@ -2535,6 +2598,26 @@ def admin_get_support_tickets_endpoint(request: Request):
 @app.get("/destek")
 def serve_kvkk_page():
     return FileResponse(STATIC_DIR / "kvkk.html", media_type="text/html")
+
+
+# Ödeme kuruluşu incelemesi ve kullanıcılar için kısa, ayrı adresler (hepsi /kvkk içindeki bölümlere gider).
+LEGAL_SHORTCUTS = {
+    "/iletisim": "iletisim",
+    "/teslimat-ve-kargo": "teslimat-kargo",
+    "/iptal-ve-iade": "iade-cayma",
+    "/mesafeli-satis-sozlesmesi": "mesafeli-satis",
+    "/on-bilgilendirme-formu": "on-bilgilendirme",
+}
+
+
+def _legal_shortcut(anchor: str):
+    def handler():
+        return RedirectResponse(f"/kvkk#{anchor}", status_code=302)
+    return handler
+
+
+for _path, _anchor in LEGAL_SHORTCUTS.items():
+    app.add_api_route(_path, _legal_shortcut(_anchor), methods=["GET"], include_in_schema=False)
 
 
 @app.get("/robots.txt", response_class=PlainTextResponse)

@@ -33,13 +33,16 @@ class TestLessonContent(unittest.TestCase):
         ids = set()
         for code, lv in levels.items():
             topics = [t for u in lv["units"] for t in u["topics"]]
-            self.assertGreaterEqual(len(topics), 20, code)
+            self.assertGreaterEqual(len(topics), 40, code)
             for t in topics:
                 self.assertNotIn(t["id"], ids)
                 ids.add(t["id"])
                 self.assertEqual(len(t["vocab"]), 8, t["id"])
                 self.assertEqual(len(t["phrases"]), 5, t["id"])
                 self.assertEqual(len(t["quiz"]), 4, t["id"])
+                sp = t.get("speaking") or {}
+                self.assertEqual([l["who"] for l in sp.get("dialogue", [])], ["A", "B"] * 3, t["id"])
+                self.assertEqual(len(sp.get("prompts", [])), 2, t["id"])
                 for q in t["quiz"]:
                     self.assertEqual(q["q"].count("___"), 1, t["id"])
                     self.assertEqual(len(q["options"]), 4, t["id"])

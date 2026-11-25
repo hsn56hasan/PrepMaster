@@ -158,6 +158,7 @@ class _LessonScreenState extends State<LessonScreen> {
       case ExerciseType.choice:
       case ExerciseType.listen:
       case ExerciseType.quiz:
+      case ExerciseType.dialogue:
         return _selection != null;
       case ExerciseType.order:
         return _picked.isNotEmpty;
@@ -176,6 +177,7 @@ class _LessonScreenState extends State<LessonScreen> {
       case ExerciseType.choice:
       case ExerciseType.listen:
       case ExerciseType.quiz:
+      case ExerciseType.dialogue:
         ok = _selection == ex.answer;
         break;
       case ExerciseType.order:
@@ -474,6 +476,7 @@ class _LessonScreenState extends State<LessonScreen> {
             ),
           ]),
         ),
+        ..._speakingSection(t['speaking']),
       ]);
     }
     return _scroll([
@@ -508,6 +511,14 @@ class _LessonScreenState extends State<LessonScreen> {
       case ExerciseType.quiz:
         children.add(_displayCard(ex));
         children.add(const SizedBox(height: 16));
+        children.addAll(_options(ex, locked));
+        break;
+      case ExerciseType.dialogue:
+        children.add(Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          for (final l in ex.context) _bubble(l.who, l.en, null),
+          _bubble('B', '…', null, empty: true),
+        ]));
+        children.add(const SizedBox(height: 14));
         children.addAll(_options(ex, locked));
         break;
       case ExerciseType.listen:
@@ -665,6 +676,181 @@ class _LessonScreenState extends State<LessonScreen> {
           ),
         ),
       ]),
+    );
+  }
+
+  bool _playingAll = false;
+
+  Future<void> _playDialogue(List<String> lines) async {
+    if (_playingAll) {
+      setState(() => _playingAll = false);
+      await SpeechService.instance.stop();
+      return;
+    }
+    setState(() => _playingAll = true);
+    for (final l in lines) {
+      if (!mounted || !_playingAll) break;
+      final ok = await SpeechService.instance.speak(l);
+      if (!ok) break;
+    }
+    if (mounted) setState(() => _playingAll = false);
+  }
+
+  Widget _bubble(String who, String en, String? tr, {bool empty = false}) {
+    final isB = who == 'B';
+    final dark = Theme.of(context).brightness == Brightness.dark;
+    final bg = isB
+        ? (dark ? const Color(0x24059669) : const Color(0xFFECFDF5))
+        : PanelColors.card(context);
+    final border = isB ? const Color(0xFFA7F3D0) : PanelColors.border(context);
+    final avatar = Container(
+      width: 26,
+      height: 26,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: isB ? const Color(0xFFD1FAE5) : PanelColors.track(context),
+      ),
+      child: Text(who,
+          style: TextStyle(
+              fontSize: 11, fontWeight: FontWeight.w900, color: isB ? const Color(0xFF065F46) : PanelColors.muted(context))),
+    );
+    final bubble = Flexible(
+      child: InkWell(
+        borderRadius: BorderRadius.circular(16),
+        onTap: empty ? null : () => _speak(en),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
+          decoration: BoxDecoration(
+            color: bg,
+            border: Border.all(color: border),
+            borderRadius: BorderRadius.only(
+              topLeft: const Radius.circular(16),
+              topRight: const Radius.circular(16),
+              bottomLeft: Radius.circular(isB ? 16 : 4),
+              bottomRight: Radius.circular(isB ? 4 : 16),
+            ),
+          ),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(en,
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: empty ? FontWeight.w900 : FontWeight.w600,
+                    color: empty ? PanelColors.muted(context) : PanelColors.text(context),
+                    letterSpacing: empty ? 3 : 0)),
+            if (tr != null && tr.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(top: 2),
+                child: Text(tr, style: TextStyle(fontSize: 12, color: PanelColors.muted(context))),
+              ),
+          ]),
+        ),
+      ),
+    );
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        mainAxisAlignment: isB ? MainAxisAlignment.end : MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: isB
+            ? [const SizedBox(width: 28), bubble, const SizedBox(width: 6), avatar]
+            : [avatar, const SizedBox(width: 6), bubble, const SizedBox(width: 28)],
+      ),
+    );
+  }
+
+  List<Widget> _speakingSection(dynamic sp) {
+    if (sp is! Map) return const [];
+    final dialogue = (sp['dialogue'] as List?) ?? const [];
+    if (dialogue.isEmpty) return const [];
+    final prompts = ((sp['prompts'] as List?) ?? const []).cast<Map>();
+    final label = TextStyle(fontSize: 11, fontWeight: FontWeight.w900, letterSpacing: 0.6, color: PanelColors.muted(context));
+    return [
+      const SizedBox(height: 20),
+      Row(children: [
+        Expanded(child: Text('ÖRNEK KONUŞMA', style: label)),
+        TextButton.icon(
+          key: const Key('lesson_play_dialogue'),
+          onPressed: () => _playDialogue([for (final l in dialogue) '${l['en']}']),
+          icon: Icon(_playingAll ? Icons.stop_rounded : Icons.play_arrow_rounded, size: 18),
+          label: Text(_playingAll ? 'Durdur' : 'Tümünü dinle'),
+        ),
+      ]),
+      const SizedBox(height: 4),
+      for (final l in dialogue) _bubble('${l['who']}', '${l['en']}', '${l['tr']}'),
+      if (prompts.isNotEmpty) ...[
+        const SizedBox(height: 14),
+        Text('SESLİ PRATİK', style: label),
+        const SizedBox(height: 8),
+        for (var i = 0; i < prompts.length; i++) _promptCard(i, prompts[i]),
+      ],
+    ];
+  }
+
+  Widget _promptCard(int i, Map p) {
+    final useful = ((p['useful'] as List?) ?? const []).map((e) => '$e').toList();
+    // ExpansionTile kendi Material'ına çizer; kart rengi Material'dan gelmeli
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Material(
+      color: PanelColors.card(context),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: PanelColors.border(context)),
+      ),
+      child: Padding(
+      padding: const EdgeInsets.all(14),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text('KONUŞMA GÖREVİ ${i + 1}',
+            style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 0.6, color: PanelColors.muted(context))),
+        const SizedBox(height: 4),
+        Text('${p['q_en']}', style: TextStyle(fontWeight: FontWeight.w800, color: PanelColors.text(context))),
+        Text('${p['q_tr']}', style: TextStyle(fontSize: 12, color: PanelColors.muted(context))),
+        if (useful.isNotEmpty) ...[
+          const SizedBox(height: 8),
+          Wrap(spacing: 6, runSpacing: 6, children: [
+            for (final u in useful)
+              ActionChip(
+                label: Text(u, style: const TextStyle(fontSize: 12)),
+                onPressed: () => _speak(u),
+                visualDensity: VisualDensity.compact,
+              ),
+          ]),
+        ],
+        Theme(
+          data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+          child: ExpansionTile(
+            key: Key('lesson_model_$i'),
+            tilePadding: EdgeInsets.zero,
+            childrenPadding: const EdgeInsets.only(bottom: 4),
+            title: const Text('Örnek cevabı göster',
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800, color: Color(0xFF047857))),
+            children: [
+              InkWell(
+                onTap: () => _speak('${p['model']}'),
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).brightness == Brightness.dark ? const Color(0x1F059669) : const Color(0xFFECFDF5),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: const Color(0xFFA7F3D0)),
+                  ),
+                  child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    const Icon(Icons.volume_up_rounded, size: 18, color: AppTheme.brandBlue),
+                    const SizedBox(width: 8),
+                    Expanded(child: Text('${p['model']}', style: TextStyle(color: PanelColors.text(context), height: 1.45))),
+                  ]),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Text('Önce kendin sesli cevapla, sonra örnek cevabı dinleyip karşılaştır.',
+            style: TextStyle(fontSize: 11, color: PanelColors.muted(context))),
+      ]),
+      ),
+      ),
     );
   }
 

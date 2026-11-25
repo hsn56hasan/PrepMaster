@@ -1,5 +1,5 @@
 // PrepKampüs — Konu Yolu
-// Seviyeye göre sırayla açılan gündelik hayat dersleri. Her ders: kısa tanıtım + 13 alıştırma
+// Seviyeye göre sırayla açılan gündelik hayat dersleri. Her ders: kısa tanıtım, örnek konuşma ve 14 alıştırma
 // (anlam seçme, eşleştirme, dinleme, cümle kurma, boşluk doldurma, yazma). Yanlışlar dersin
 // sonuna geri gelir; 5 kalp biterse ders yeniden denenir. Sonuç sunucuya yazılır (yıldız + XP).
 (function () {
@@ -109,7 +109,7 @@
                   <i data-lucide="route" class="w-3.5 h-3.5"></i> Konu Yolu
                 </div>
                 <h2 class="mt-2 text-2xl sm:text-3xl font-extrabold leading-tight">Gündelik İngilizceyi adım adım öğren</h2>
-                <p class="mt-1 text-sm text-white/80 max-w-xl">Her ders kısa bir anlatım ve 13 alıştırmadan oluşur. Bir dersi bitirince sıradaki açılır; yanlışların dersin sonunda tekrar karşına çıkar.</p>
+                <p class="mt-1 text-sm text-white/80 max-w-xl">Her ders kısa bir anlatım, örnek bir konuşma ve 14 alıştırmadan oluşur. Bir dersi bitirince sıradaki açılır; yanlışların dersin sonunda tekrar karşına çıkar.</p>
               </div>
               ${cur ? `<button type="button" class="path-btn path-btn-light shrink-0" data-path-topic="${cur}">
                   <i data-lucide="play" class="w-4 h-4"></i> Kaldığın yerden devam</button>` : ""}
@@ -269,12 +269,29 @@
     return { type: "type", prompt: "İngilizcesini yaz", display: item.tr, answer: item.en, speak: item.en };
   }
 
+  // Konuşmayı tamamla: diyalogdaki bir B cevabını, önceki satırlara bakarak seç
+  function dialogueEx(dialogue, otherReplies) {
+    if (!Array.isArray(dialogue) || dialogue.length < 2) return null;
+    const bIdx = dialogue.map((l, i) => (l.who === "B" && i > 0 ? i : -1)).filter((i) => i > 0);
+    if (!bIdx.length) return null;
+    const i = bIdx[Math.floor(Math.random() * bIdx.length)];
+    const answer = dialogue[i].en;
+    const pool = [...new Set(otherReplies.filter((t) => t && t !== answer))];
+    const options = shuffle([answer, ...sample(pool, 3)]);
+    if (options.length < 3) return null;
+    return { type: "dialogue", prompt: "Konuşmayı tamamla", context: dialogue.slice(Math.max(0, i - 3), i),
+      options, answer, speak: answer, tr: dialogue[i].tr };
+  }
+
   function buildExercises(bundle) {
     const topics = bundle.topics || [];
     const level = bundle.level || "";
     const vocab = topics.flatMap((t) => t.vocab || []);
     const phrases = topics.flatMap((t) => t.phrases || []);
     const quiz = topics.flatMap((t) => t.quiz || []);
+    const dialogues = topics.map((t) => (t.speaking && t.speaking.dialogue) || []).filter((d) => d.length);
+    const replies = dialogues.flatMap((d) => d.filter((l) => l.who === "B").map((l) => l.en));
+    const replyPool = replies.length >= 4 ? replies : [...replies, ...phrases.map((p) => p.en)];
     const tts = ttsOk();
     const ex = [];
     if (topics.length === 1) {
@@ -283,17 +300,64 @@
       ex.push(matchEx(v.slice(3, 8)));
       ex.push(tts ? listenEx(v[4], vocab) : vocabChoice(v[4], vocab, "en-tr"));
       ex.push(orderEx(ph[0], vocab, level), quizEx(qz[0]), quizEx(qz[1]));
-      ex.push(phraseChoice(ph[1], phrases), typeEx(v[5]), orderEx(ph[2], vocab, level));
+      ex.push(phraseChoice(ph[1], phrases), dialogueEx(dialogues[0], replyPool), typeEx(v[5]), orderEx(ph[2], vocab, level));
       ex.push(quizEx(qz[2]), quizEx(qz[3]));
     } else {
-      const v = shuffle(vocab), ph = shuffle(phrases), qz = shuffle(quiz);
+      const v = shuffle(vocab), ph = shuffle(phrases), qz = shuffle(quiz), dl = shuffle(dialogues);
       ex.push(vocabChoice(v[0], vocab, "en-tr"), vocabChoice(v[1], vocab, "tr-en"), vocabChoice(v[2], vocab, "en-tr"));
       ex.push(matchEx(v.slice(3, 8)));
       ex.push(tts ? listenEx(v[8], vocab) : vocabChoice(v[8], vocab, "tr-en"));
-      ex.push(orderEx(ph[0], vocab, level), quizEx(qz[0]), quizEx(qz[1]), phraseChoice(ph[1], phrases));
-      ex.push(typeEx(v[9]), quizEx(qz[2]), orderEx(ph[2], vocab, level), quizEx(qz[3]), typeEx(v[10]), quizEx(qz[4]));
+      ex.push(orderEx(ph[0], vocab, level), quizEx(qz[0]), dialogueEx(dl[0], replyPool), quizEx(qz[1]), phraseChoice(ph[1], phrases));
+      ex.push(typeEx(v[9]), quizEx(qz[2]), dialogueEx(dl[1], replyPool), orderEx(ph[2], vocab, level), quizEx(qz[3]), typeEx(v[10]), quizEx(qz[4]));
     }
     return ex.filter(Boolean).map((e, i) => Object.assign(e, { key: i }));
+  }
+
+  // Örnek konuşma ve konuşma görevleri (ders girişinde)
+  function speakingHtml(sp) {
+    if (!sp || !Array.isArray(sp.dialogue) || !sp.dialogue.length) return "";
+    const lines = sp.dialogue.map((l) => `
+        <div class="lesson-bubble-row ${l.who === "B" ? "is-b" : ""}">
+          <span class="lesson-who" aria-hidden="true">${esc(l.who)}</span>
+          <button type="button" class="lesson-bubble" data-speak="${esc(l.en)}">
+            <span class="block font-semibold text-slate-900 dark:text-white">${esc(l.en)}</span>
+            <span class="block text-xs text-slate-500 mt-0.5">${esc(l.tr)}</span>
+          </button>
+        </div>`).join("");
+    const prompts = (sp.prompts || []).map((p, i) => `
+        <div class="lesson-prompt">
+          <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Konuşma görevi ${i + 1}</div>
+          <p class="mt-1 font-bold text-slate-900 dark:text-white">${esc(p.q_en)}</p>
+          <p class="text-xs text-slate-500">${esc(p.q_tr)}</p>
+          <div class="mt-2 flex flex-wrap gap-1.5">${(p.useful || []).map((u) => `<button type="button" class="lesson-chip" data-speak="${esc(u)}">${esc(u)}</button>`).join("")}</div>
+          <details class="mt-2">
+            <summary class="text-xs font-bold text-emerald-700 dark:text-emerald-400 cursor-pointer select-none">Örnek cevabı göster</summary>
+            <button type="button" class="mt-2 w-full text-left text-sm text-slate-700 dark:text-slate-200 lesson-model" data-speak="${esc(p.model)}">
+              <i data-lucide="volume-2" class="w-4 h-4 text-emerald-600 inline -mt-0.5 mr-1"></i>${esc(p.model)}</button>
+          </details>
+          <p class="mt-2 text-[11px] text-slate-500">Önce kendin sesli cevapla, sonra örnek cevabı dinleyip karşılaştır.</p>
+        </div>`).join("");
+    return `
+        <div class="mt-5 flex items-center justify-between gap-2">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">Örnek konuşma</h3>
+          ${ttsOk() ? `<button type="button" class="path-btn path-btn-ghost !py-1.5 !px-3 !text-xs" data-speak-all><i data-lucide="play" class="w-3.5 h-3.5"></i> Tümünü dinle</button>` : ""}
+        </div>
+        <div class="lesson-dialogue mt-2" data-dialogue='${esc(JSON.stringify(sp.dialogue.map((l) => l.en)))}'>${lines}</div>
+        ${prompts ? `<h3 class="mt-5 mb-2 text-xs font-bold uppercase tracking-wider text-slate-500">Sesli pratik</h3><div class="space-y-3">${prompts}</div>` : ""}`;
+  }
+
+  function speakAll(texts) {
+    if (!ttsOk() || !texts.length) return;
+    try {
+      window.speechSynthesis.cancel();
+      const v = window.speechSynthesis.getVoices().filter((x) => /^en(-|_)/i.test(x.lang));
+      texts.forEach((t, i) => {
+        const u = new SpeechSynthesisUtterance(t);
+        u.lang = "en-US"; u.rate = 0.9;
+        if (v.length) u.voice = v[i % 2 && v.length > 1 ? 1 : 0]; // A ve B farklı ses (varsa)
+        window.speechSynthesis.speak(u);
+      });
+    } catch (_) {}
   }
 
   // ---------------- Ders akışı ----------------
@@ -385,7 +449,8 @@
             <span class="font-bold text-slate-900 dark:text-white">${esc(t.tip_example.en)}</span>
             <span class="block text-xs text-slate-500">${esc(t.tip_example.tr)}</span>
           </button>
-        </div>`;
+        </div>
+        ${speakingHtml(t.speaking)}`;
     } else {
       const names = b.topics.map((t) => `<li class="flex items-center gap-2"><i data-lucide="${esc(t.icon || "book-open")}" class="w-4 h-4 text-emerald-600"></i>${esc(t.title_tr)}</li>`).join("");
       body = `
@@ -442,6 +507,17 @@
             <span>${esc(ex.display)}</span></div>`;
       main = `${head}<div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">${ex.options.map((o, i) =>
         `<button type="button" class="lesson-option" data-opt="${esc(o)}"><span class="lesson-key">${i + 1}</span><span>${esc(o)}</span></button>`).join("")}</div>`;
+    } else if (ex.type === "dialogue") {
+      const ctx = ex.context.map((l) => `
+        <div class="lesson-bubble-row ${l.who === "B" ? "is-b" : ""}">
+          <span class="lesson-who" aria-hidden="true">${esc(l.who)}</span>
+          <button type="button" class="lesson-bubble" data-speak="${esc(l.en)}"><span class="block font-semibold text-slate-900 dark:text-white">${esc(l.en)}</span></button>
+        </div>`).join("");
+      main = `<div class="lesson-dialogue my-4">${ctx}
+          <div class="lesson-bubble-row is-b"><span class="lesson-who" aria-hidden="true">B</span><div class="lesson-bubble is-empty">…</div></div>
+        </div>
+        <div class="grid grid-cols-1 gap-2.5">${ex.options.map((o, i) =>
+          `<button type="button" class="lesson-option" data-opt="${esc(o)}"><span class="lesson-key">${i + 1}</span><span>${esc(o)}</span></button>`).join("")}</div>`;
     } else if (ex.type === "quiz") {
       const parts = ex.q.split("___");
       main = `<div class="lesson-display is-long"><span>${esc(parts[0])}<span class="lesson-blank">____</span>${esc(parts[1] || "")}</span></div>
@@ -508,8 +584,8 @@
     const ex = L.current;
     if (!L || L.phase !== "exercise") return;
     let ok = false, typo = false, correctText = "";
-    if (ex.type === "choice" || ex.type === "listen") {
-      ok = L.selection === ex.answer; correctText = ex.answer;
+    if (ex.type === "choice" || ex.type === "listen" || ex.type === "dialogue") {
+      ok = L.selection === ex.answer; correctText = ex.type === "dialogue" && ex.tr ? `${ex.answer} (${ex.tr})` : ex.answer;
     } else if (ex.type === "quiz") {
       ok = Number(L.selection) === ex.answer; correctText = ex.full;
     } else if (ex.type === "order") {
@@ -656,6 +732,12 @@
     if (!el || el.classList.contains("hidden") || !el.contains(ev.target)) return;
     const L = state.lesson;
     const t = ev.target;
+    const all = t.closest("[data-speak-all]");
+    if (all) {
+      const d = el.querySelector(".lesson-dialogue[data-dialogue]");
+      try { speakAll(JSON.parse(d.getAttribute("data-dialogue"))); } catch (_) {}
+      return;
+    }
     const sp = t.closest("[data-speak]");
     if (sp) { speak(sp.getAttribute("data-speak")); if (!t.closest(".lesson-option")) return; }
     const slow = t.closest("[data-speak-slow]");

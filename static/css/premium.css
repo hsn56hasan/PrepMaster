@@ -612,3 +612,4 @@ html.dark #auth-modal.landing-shell .auth-sheet-close:hover { background: var(--
 .pk .pk-have-account { margin-top: 14px; font-size: .92rem; color: var(--color-muted); }
 .pk .pk-have-account button { color: var(--color-primary-ink); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; padding: 6px 2px; min-height: 44px; }
 .pk .pk-have-account button:hover { color: var(--color-primary); }
+#auth-modal.sheet-open ~ #cookie-notice { display: none !important; }

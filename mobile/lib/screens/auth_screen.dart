@@ -25,8 +25,10 @@ class _AuthScreenState extends State<AuthScreen> {
   final _regPass = TextEditingController();
 
   bool _busy = false;
-  bool _termsAccepted = false;
-  bool _explicitConsent = false;
+  // Ayrı beyanlar (KVKK Kurulu 2026/347 ilke kararı); hiçbiri ön işaretli değil.
+  bool _termsAccepted = false; // sözleşme + yaş beyanı (zorunlu)
+  bool _privacyAck = false; // aydınlatma metni okundu (zorunlu bilgilendirme)
+  bool _marketingConsent = false; // ticari elektronik ileti onayı (isteğe bağlı)
   String? _error;
   List<University> _universities = [];
   String _regUniId = 'itu';
@@ -83,8 +85,12 @@ class _AuthScreenState extends State<AuthScreen> {
       setState(() => _error = 'Lütfen tüm alanları doldurun.');
       return;
     }
-    if (!_termsAccepted) {
-      setState(() => _error = "Kayıt için Kullanıcı Sözleşmesi'ni kabul etmelisiniz.");
+    final missing = <String>[
+      if (!_termsAccepted) "Kullanıcı Sözleşmesi'ni kabul etmeniz",
+      if (!_privacyAck) "KVKK Aydınlatma Metni'ni okuduğunuzu işaretlemeniz",
+    ];
+    if (missing.isNotEmpty) {
+      setState(() => _error = 'Kayıt olabilmek için ${missing.join(' ve ')} gerekir.');
       return;
     }
     setState(() {
@@ -98,7 +104,8 @@ class _AuthScreenState extends State<AuthScreen> {
       fullName: name,
       universityId: _regUniId,
       termsAccepted: _termsAccepted,
-      explicitConsent: _explicitConsent,
+      privacyNoticeAck: _privacyAck,
+      marketingConsent: _marketingConsent,
     );
     if (!mounted) return;
     setState(() => _busy = false);
@@ -107,6 +114,57 @@ class _AuthScreenState extends State<AuthScreen> {
     } else {
       setState(() => _error = res['message']?.toString() ?? 'Kayıt yapılamadı.');
     }
+  }
+
+  Widget _consentTile({
+    required Key key,
+    required bool value,
+    required ValueChanged<bool> onChanged,
+    required String text,
+    required String badge,
+    required bool required,
+    required String linkLabel,
+    required VoidCallback onLink,
+  }) {
+    final muted = Theme.of(context).hintColor;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 2),
+      child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Checkbox(key: key, value: value, onChanged: (v) => onChanged(v ?? false)),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 6),
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              GestureDetector(
+                onTap: () => onChanged(!value),
+                child: Text.rich(
+                  TextSpan(children: [
+                    TextSpan(text: '$text '),
+                    TextSpan(
+                      text: badge,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        color: required ? const Color(0xFFE11D48) : muted,
+                      ),
+                    ),
+                  ]),
+                  style: const TextStyle(fontSize: 12, height: 1.4),
+                ),
+              ),
+              InkWell(
+                onTap: onLink,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 6),
+                  child: Text(linkLabel,
+                      style: const TextStyle(
+                          fontSize: 12, fontWeight: FontWeight.w700, decoration: TextDecoration.underline)),
+                ),
+              ),
+            ]),
+          ),
+        ),
+      ]),
+    );
   }
 
   void _openLegal(String anchor, String title) {
@@ -201,32 +259,51 @@ class _AuthScreenState extends State<AuthScreen> {
             onChanged: (v) => setState(() => _regUniId = v ?? _regUniId),
           ),
         const SizedBox(height: 6),
-        CheckboxListTile(
+        _consentTile(
           key: const Key('reg_terms'),
           value: _termsAccepted,
-          onChanged: (v) => setState(() => _termsAccepted = v ?? false),
-          controlAffinity: ListTileControlAffinity.leading,
-          contentPadding: EdgeInsets.zero,
-          dense: true,
-          title: const Text(
-            "Kullanıcı Sözleşmesi'ni kabul ediyorum ve KVKK Aydınlatma Metni'ni okudum (zorunlu).",
-            style: TextStyle(fontSize: 12),
-          ),
+          onChanged: (v) => setState(() => _termsAccepted = v),
+          text: "Kullanıcı Sözleşmesi'ni okudum ve kabul ediyorum. 18 yaşından büyük olduğumu ya da "
+              "18 yaşından küçüksem veli/vasimin bilgisi ve onayıyla kayıt olduğumu beyan ederim.",
+          badge: '(zorunlu)',
+          required: true,
+          linkLabel: 'Sözleşmeyi oku',
+          onLink: () => _openLegal('kullanici-sozlesmesi', 'Kullanıcı Sözleşmesi'),
         ),
-        CheckboxListTile(
-          key: const Key('reg_explicit'),
-          value: _explicitConsent,
-          onChanged: (v) => setState(() => _explicitConsent = v ?? false),
-          controlAffinity: ListTileControlAffinity.leading,
-          contentPadding: EdgeInsets.zero,
-          dense: true,
-          title: const Text("Açık Rıza Beyanı'nı kabul ediyorum (isteğe bağlı).", style: TextStyle(fontSize: 12)),
+        _consentTile(
+          key: const Key('reg_privacy'),
+          value: _privacyAck,
+          onChanged: (v) => setState(() => _privacyAck = v),
+          text: "Kişisel verilerimin işlenmesine ilişkin KVKK Aydınlatma Metni'ni okudum.",
+          badge: '(zorunlu bilgilendirme)',
+          required: true,
+          linkLabel: 'Aydınlatma Metni',
+          onLink: () => _openLegal('kvkk-aydinlatma', 'KVKK Aydınlatma Metni'),
+        ),
+        _consentTile(
+          key: const Key('reg_marketing'),
+          value: _marketingConsent,
+          onChanged: (v) => setState(() => _marketingConsent = v),
+          text: 'Yeni sınav içerikleri, kampanya ve duyurulardan e-posta ile haberdar olmak için '
+              'Ticari Elektronik İleti Onay Metni\'ni kabul ediyorum.',
+          badge: '(isteğe bağlı, dilediğin an geri çekebilirsin)',
+          required: false,
+          linkLabel: 'Onay metni',
+          onLink: () => _openLegal('ticari-ileti', 'Ticari Elektronik İleti Onayı'),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 4, top: 2),
+          child: Text(
+            'Hesap, deneme ve ilerleme verilerin sözleşmenin ifası ve meşru menfaat kapsamında işlenir; '
+            'bunun için ayrıca açık rıza istemiyoruz.',
+            style: TextStyle(fontSize: 11, color: Theme.of(context).hintColor, height: 1.35),
+          ),
         ),
         Wrap(
           spacing: 4,
           children: [
-            TextButton(onPressed: () => _openLegal('kullanici-sozlesmesi', 'Kullanıcı Sözleşmesi'), child: const Text('Sözleşmeyi oku')),
-            TextButton(onPressed: () => _openLegal('kvkk-aydinlatma', 'KVKK Aydınlatma Metni'), child: const Text('KVKK metnini oku')),
+            TextButton(onPressed: () => _openLegal('cerez-politikasi', 'Çerez Politikası'), child: const Text('Çerez politikası')),
+            TextButton(onPressed: () => _openLegal('kvkk-basvuru', 'Veri Sahibi Başvurusu'), child: const Text('Veri başvurusu')),
           ],
         ),
         const SizedBox(height: 6),

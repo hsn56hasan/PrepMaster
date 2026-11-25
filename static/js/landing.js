@@ -102,6 +102,23 @@
     if (window.lucide) window.lucide.createIcons();
   }
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
-  else init();
+  // Çerez/yerel depolama bilgilendirmesi: yalnızca zorunlu depolama kullanıldığı için tek düğmeli bilgi bandı
+  const COOKIE_NOTICE_VERSION = "2026-11-25";
+  function initCookieNotice() {
+    const box = $("cookie-notice");
+    if (!box) return;
+    let seen = null;
+    try { seen = localStorage.getItem("pk_cookie_notice"); } catch (_) {}
+    if (seen === COOKIE_NOTICE_VERSION) return;
+    box.classList.remove("hidden");
+    const ok = $("cookie-notice-ok");
+    if (ok) ok.addEventListener("click", () => {
+      try { localStorage.setItem("pk_cookie_notice", COOKIE_NOTICE_VERSION); } catch (_) {}
+      box.classList.add("hidden");
+    });
+  }
+
+  function boot() { init(); initCookieNotice(); }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
 })();

@@ -116,13 +116,21 @@ class TestDoSProtection(unittest.TestCase):
         info = self.client.get("/api/support/info").json()
         self.assertEqual(info["email"], "destek@prepkampus.com")
         self.assertEqual(info["phone"], "05398381887")
-        self.assertEqual(len(info["documents"]), 5)
+        self.assertEqual(len(info["documents"]), 10)  # + satış sözleşmesi, iptal/iade, teslimat ve kargo
 
         kvkk_page = self.client.get("/kvkk")
         self.assertEqual(kvkk_page.status_code, 200)
         self.assertIn("6698 Sayılı Kişisel Verilerin Korunması Kanunu", kvkk_page.text)
         self.assertIn("destek@prepkampus.com", kvkk_page.text)
         self.assertIn("0539 838 18 87", kvkk_page.text)
+        # Ödeme kuruluşu canlı mod şartları: iletişim, adres, teslimat/kargo, satış sözleşmesi, iptal/iade
+        for anchor in ("iletisim", "teslimat-kargo", "mesafeli-satis", "iade-cayma", "on-bilgilendirme"):
+            self.assertIn(f'id="{anchor}"', kvkk_page.text)
+        self.assertIn("Çankaya / Ankara", kvkk_page.text)
+        for path, anchor in app_module.LEGAL_SHORTCUTS.items():
+            r = self.client.get(path, follow_redirects=False)
+            self.assertEqual(r.status_code, 302, path)
+            self.assertEqual(r.headers["location"], f"/kvkk#{anchor}")
 
         t_res = self.client.post("/api/support/ticket", json={
             "category": "KVKK Başvurusu",

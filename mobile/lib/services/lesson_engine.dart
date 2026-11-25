@@ -1,7 +1,15 @@
 import 'dart:math';
 
 /// Konu Yolu alıştırma türleri.
-enum ExerciseType { choice, listen, match, order, quiz, type }
+enum ExerciseType { choice, listen, match, order, quiz, type, dialogue }
+
+/// Örnek konuşmanın bir satırı (A/B).
+class DialogueLine {
+  final String who;
+  final String en;
+  final String tr;
+  const DialogueLine(this.who, this.en, this.tr);
+}
 
 /// Tek bir alıştırma. Seçenekli türlerde [answer] doğru seçeneğin metnidir.
 class Exercise {
@@ -18,6 +26,8 @@ class Exercise {
   final List<String> tokens; // cümle kurma
   final String? explain;
   final String? full; // boşluk doldurmanın tam cümlesi
+  final List<DialogueLine> context; // konuşmayı tamamla: önceki satırlar
+  final String? translation; // doğru cevabın Türkçesi
 
   const Exercise({
     required this.key,
@@ -33,6 +43,8 @@ class Exercise {
     this.tokens = const [],
     this.explain,
     this.full,
+    this.context = const [],
+    this.translation,
   });
 
   /// Yanlış yapılıp dersin sonuna geri gelen kopya: seçenekler/kelimeler yeniden karışır.
@@ -50,11 +62,14 @@ class Exercise {
         tokens: _shuffle(tokens, rnd),
         explain: explain,
         full: full,
+        context: context,
+        translation: translation,
       );
 
   /// Ekranda gösterilecek doğru cevap.
   String get answerText {
     if (type == ExerciseType.quiz) return full ?? answer;
+    if (type == ExerciseType.dialogue && translation != null) return '$answer ($translation)';
     if (type == ExerciseType.match) return pairs.map((p) => '${p.key} = ${p.value}').join(' · ');
     return answer;
   }
@@ -78,6 +93,7 @@ class LessonEngine {
     final vocab = <_Item>[];
     final phrases = <_Item>[];
     final quiz = <Map<String, dynamic>>[];
+    final dialogues = <List<DialogueLine>>[];
     for (final t in topics) {
       for (final v in (t['vocab'] as List? ?? const [])) {
         vocab.add(_Item('${v['en']}', '${v['tr']}'));
@@ -87,6 +103,11 @@ class LessonEngine {
       }
       for (final q in (t['quiz'] as List? ?? const [])) {
         quiz.add(Map<String, dynamic>.from(q as Map));
+      }
+      final sp = t['speaking'];
+      final dl = sp is Map ? sp['dialogue'] : null;
+      if (dl is List && dl.length >= 2) {
+        dialogues.add([for (final l in dl) DialogueLine('${l['who']}', '${l['en']}', '${l['tr']}')]);
       }
     }
     if (vocab.length < 8 || phrases.length < 3 || quiz.length < 4) return const [];
@@ -182,6 +203,30 @@ class LessonEngine {
       );
     }
 
+    final replies = [for (final d in dialogues) for (final l in d) if (l.who == 'B') l.en];
+    final replyPool = replies.length >= 4 ? replies : [...replies, ...phrases.map((p) => p.en)];
+
+    Exercise? dialogueEx(List<DialogueLine>? d) {
+      if (d == null) return null;
+      final bIdx = [for (var i = 1; i < d.length; i++) if (d[i].who == 'B') i];
+      if (bIdx.isEmpty) return null;
+      final i = bIdx[rnd.nextInt(bIdx.length)];
+      final answer = d[i].en;
+      final pool = _shuffle(replyPool.where((r) => r != answer).toSet().toList(), rnd).take(3).toList();
+      if (pool.length < 2) return null;
+      return Exercise(
+        key: key++,
+        type: ExerciseType.dialogue,
+        prompt: 'Konuşmayı tamamla',
+        context: d.sublist(i - 3 < 0 ? 0 : i - 3, i),
+        options: _shuffle([answer, ...pool], rnd),
+        answer: answer,
+        speak: answer,
+        translation: d[i].tr,
+        long: true,
+      );
+    }
+
     Exercise typeEx(_Item item) => Exercise(
           key: key++,
           type: ExerciseType.type,
@@ -192,22 +237,24 @@ class LessonEngine {
         );
 
     if (topics.length == 1 || vocab.length < 11 || quiz.length < 5) {
-      return [
+      return <Exercise?>[
         choice(v[0], enToTr: true), choice(v[1], enToTr: true), choice(v[2], enToTr: false),
         match(v.sublist(3, 8)),
         listen(v[4]),
         order(ph[0]), quizEx(qz[0]), quizEx(qz[1]),
-        phraseChoice(ph[1]), typeEx(v[5]), order(ph[2]),
+        phraseChoice(ph[1]), dialogueEx(dialogues.isEmpty ? null : dialogues.first), typeEx(v[5]), order(ph[2]),
         quizEx(qz[2]), quizEx(qz[3]),
-      ];
+      ].whereType<Exercise>().toList();
     }
-    return [
+    final dl = _shuffle(dialogues, rnd);
+    return <Exercise?>[
       choice(v[0], enToTr: true), choice(v[1], enToTr: false), choice(v[2], enToTr: true),
       match(v.sublist(3, 8)),
       listen(v[8]),
-      order(ph[0]), quizEx(qz[0]), quizEx(qz[1]), phraseChoice(ph[1]),
-      typeEx(v[9]), quizEx(qz[2]), order(ph[2]), quizEx(qz[3]), typeEx(v[10]), quizEx(qz[4]),
-    ];
+      order(ph[0]), quizEx(qz[0]), dialogueEx(dl.isEmpty ? null : dl[0]), quizEx(qz[1]), phraseChoice(ph[1]),
+      typeEx(v[9]), quizEx(qz[2]), dialogueEx(dl.length > 1 ? dl[1] : null), order(ph[2]), quizEx(qz[3]),
+      typeEx(v[10]), quizEx(qz[4]),
+    ].whereType<Exercise>().toList();
   }
 
   /// Karşılaştırma için sadeleştirme: küçük harf, noktalama yok, tek boşluk.

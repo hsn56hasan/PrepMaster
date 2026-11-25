@@ -610,3 +610,27 @@ html.dark .lesson-foot.is-right .path-btn-primary { background: #34d399; color: 
 html.dark .lesson-foot.is-wrong .path-btn-danger { background: #fb7185; color: #4c0519; box-shadow: 0 4px 0 #e11d48; }
 html.dark .lesson-big-star.is-on { color: #f59e0b; }
 .path-node-wrap.has-bubble { margin-top: 30px; }
+
+/* ---- Konu Yolu: örnek konuşma ve diyalog alıştırması ---- */
+.lesson-dialogue { display: flex; flex-direction: column; gap: 8px; }
+.lesson-bubble-row { display: flex; align-items: flex-end; gap: 8px; max-width: 92%; }
+.lesson-bubble-row.is-b { align-self: flex-end; flex-direction: row-reverse; }
+.lesson-who { width: 26px; height: 26px; border-radius: 999px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800; background: #ece9df; color: #46554e; }
+.lesson-bubble-row.is-b .lesson-who { background: #d1fae5; color: #065f46; }
+.lesson-bubble { text-align: left; padding: 10px 13px; border-radius: 16px 16px 16px 4px; background: #fff; border: 1px solid #ece9df;
+  font-size: 14px; line-height: 1.4; transition: transform .12s, border-color .12s; }
+.lesson-bubble-row.is-b .lesson-bubble { border-radius: 16px 16px 4px 16px; background: #ecfdf5; border-color: #a7f3d0; }
+button.lesson-bubble:hover { transform: translateY(-1px); border-color: #34d399; }
+.lesson-bubble.is-empty { min-width: 72px; text-align: center; color: #8e9993; font-weight: 800; letter-spacing: .2em; border-style: dashed; }
+html.dark .lesson-who { background: #2b3a34; color: #dad6c9; }
+html.dark .lesson-bubble-row.is-b .lesson-who { background: rgba(5,150,105,.25); color: #a7f3d0; }
+html.dark .lesson-bubble { background: #13261f; border-color: #2b3a34; }
+html.dark .lesson-bubble-row.is-b .lesson-bubble { background: rgba(5,150,105,.14); border-color: #065f46; }
+.lesson-prompt { padding: 14px 16px; border-radius: 16px; background: #fff; border: 1px solid #ece9df; }
+html.dark .lesson-prompt { background: #13261f; border-color: #2b3a34; }
+.lesson-chip { padding: 5px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; background: #f5f3ec; border: 1px solid #ece9df; color: #2b3a34; }
+.lesson-chip:hover { border-color: #34d399; }
+html.dark .lesson-chip { background: #0b1a15; border-color: #2b3a34; color: #dad6c9; }
+.lesson-model { padding: 10px 12px; border-radius: 12px; background: #ecfdf5; border: 1px solid #a7f3d0; line-height: 1.5; }
+html.dark .lesson-model { background: rgba(5,150,105,.12); border-color: #065f46; }

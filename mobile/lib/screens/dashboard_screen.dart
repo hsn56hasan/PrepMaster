@@ -1109,8 +1109,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
       final regPassCtrl = TextEditingController();
       final regNumCtrl = TextEditingController();
       // Onaylar: sözleşme zorunlu, açık rıza isteğe bağlı; ikisi de boş başlar
+      // Ayrı beyanlar; hiçbiri ön işaretli değil (KVKK Kurulu 2026/347)
       bool termsAccepted = false;
-      bool explicitConsent = false;
+      bool privacyAck = false;
+      bool marketingConsent = false;
       final regUniId = widget.currentUniversity.id;
 
       showDialog(
@@ -1319,21 +1321,35 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               contentPadding: EdgeInsets.zero,
                               dense: true,
                               title: const Text(
-                                "Kullanıcı Sözleşmesi'ni kabul ediyorum ve KVKK Aydınlatma Metni'ni okudum (zorunlu). Metinler: sitede /kvkk",
+                                "Kullanıcı Sözleşmesi'ni okudum ve kabul ediyorum; 18 yaşından büyüğüm ya da veli/vasimin onayıyla kayıt oluyorum (zorunlu).",
                                 style: TextStyle(fontSize: 12),
                               ),
                             ),
                             CheckboxListTile(
-                              key: const Key('reg_explicit'),
-                              value: explicitConsent,
+                              key: const Key('reg_privacy'),
+                              value: privacyAck,
                               onChanged: (v) => setDialogState(
-                                () => explicitConsent = v ?? false,
+                                () => privacyAck = v ?? false,
                               ),
                               controlAffinity: ListTileControlAffinity.leading,
                               contentPadding: EdgeInsets.zero,
                               dense: true,
                               title: const Text(
-                                "Açık Rıza Beyanı'nı kabul ediyorum (isteğe bağlı)",
+                                "KVKK Aydınlatma Metni'ni okudum (zorunlu bilgilendirme).",
+                                style: TextStyle(fontSize: 12),
+                              ),
+                            ),
+                            CheckboxListTile(
+                              key: const Key('reg_marketing'),
+                              value: marketingConsent,
+                              onChanged: (v) => setDialogState(
+                                () => marketingConsent = v ?? false,
+                              ),
+                              controlAffinity: ListTileControlAffinity.leading,
+                              contentPadding: EdgeInsets.zero,
+                              dense: true,
+                              title: const Text(
+                                "Kampanya ve duyuru e-postalarına onay veriyorum; Ticari İleti Onay Metni (isteğe bağlı). Metinler: sitede /kvkk",
                                 style: TextStyle(fontSize: 12),
                               ),
                             ),
@@ -1361,11 +1377,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     );
                                     return;
                                   }
-                                  if (!termsAccepted) {
+                                  if (!termsAccepted || !privacyAck) {
                                     messenger.showSnackBar(
                                       const SnackBar(
                                         content: Text(
-                                          "Kayıt için Kullanıcı Sözleşmesi'ni kabul etmelisiniz.",
+                                          "Kayıt için Kullanıcı Sözleşmesi'ni kabul etmeniz ve KVKK Aydınlatma Metni'ni okuduğunuzu işaretlemeniz gerekir.",
                                         ),
                                       ),
                                     );
@@ -1374,7 +1390,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
                                   final res = await ApiService().register(
                                     termsAccepted: termsAccepted,
-                                    explicitConsent: explicitConsent,
+                                    privacyNoticeAck: privacyAck,
+                                    marketingConsent: marketingConsent,
                                     email: email,
                                     username: user,
                                     password: pass,

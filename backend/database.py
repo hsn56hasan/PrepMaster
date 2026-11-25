@@ -251,6 +251,21 @@ def init_db():
             PRIMARY KEY (user_id, day)
         );
 
+        -- Hukuki onay geçmişi (KVKK ispat yükü veri sorumlusunda): hangi metnin hangi sürümü,
+        -- ne zaman, hangi kanaldan onaylandı/okundu/geri çekildi. Kayıtlar silinmez, yenisi eklenir.
+        CREATE TABLE IF NOT EXISTS consent_log (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            doc_key TEXT NOT NULL,
+            doc_version TEXT NOT NULL,
+            action TEXT NOT NULL,
+            channel TEXT,
+            ip TEXT,
+            user_agent TEXT,
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP
+        );
+        CREATE INDEX IF NOT EXISTS idx_consent_log_user ON consent_log(user_id, doc_key);
+
         -- Konu Yolu (Duolingo tarzı dersler): ders/ünite/tekrar başına en iyi sonuç ve XP.
         CREATE TABLE IF NOT EXISTS lesson_progress (
             user_id INTEGER NOT NULL,
@@ -300,6 +315,13 @@ def init_db():
         conn.execute("ALTER TABLE users ADD COLUMN terms_accepted_at TEXT")
     if "explicit_consent_at" not in cols:
         conn.execute("ALTER TABLE users ADD COLUMN explicit_consent_at TEXT")
+    # Aydınlatma Metni okundu bilgisi (onay değil) ve 6563 sayılı Kanun kapsamında ticari ileti onayı
+    if "privacy_notice_ack_at" not in cols:
+        conn.execute("ALTER TABLE users ADD COLUMN privacy_notice_ack_at TEXT")
+    if "marketing_consent" not in cols:
+        conn.execute("ALTER TABLE users ADD COLUMN marketing_consent INTEGER DEFAULT 0")
+    if "marketing_consent_at" not in cols:
+        conn.execute("ALTER TABLE users ADD COLUMN marketing_consent_at TEXT")
     if "last_study_date" not in cols:
         # Seri için İstanbul takvim günü (YYYY-MM-DD); last_active'ten ayrı tutulur
         # çünkü last_active profil güncellemesinde de değişiyor.
@@ -1928,3 +1950,42 @@ def get_lesson_progress(user_id: int) -> Dict[str, Dict[str, Any]]:
     rows = conn.execute("SELECT * FROM lesson_progress WHERE user_id = ?", (user_id,)).fetchall()
     conn.close()
     return {r["node_id"]: dict(r) for r in rows}
+
+
+# ---------------- Hukuki onay kayıtları ----------------
+
+def record_consents(user_id: int, entries: List[Dict[str, str]], ip: str = "", user_agent: str = "") -> None:
+    """entries: [{doc_key, doc_version, action, channel}]. Onay geçmişi yalnızca eklenir."""
+    if not entries:
+        return
+    conn = get_db()
+    with conn:
+        for e in entries:
+            conn.execute(
+                "INSERT INTO consent_log (user_id, doc_key, doc_version, action, channel, ip, user_agent) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                (user_id, e["doc_key"], e["doc_version"], e["action"], e.get("channel") or "web",
+                 (ip or "")[:64], (user_agent or "")[:255]),
+            )
+        keys = {e["doc_key"]: e for e in entries}
+        if "aydinlatma_metni" in keys:
+            conn.execute("UPDATE users SET privacy_notice_ack_at = COALESCE(privacy_notice_ack_at, CURRENT_TIMESTAMP) WHERE id = ?", (user_id,))
+        if "ticari_ileti" in keys:
+            granted = keys["ticari_ileti"]["action"] == "granted"
+            conn.execute("UPDATE users SET marketing_consent = ?, marketing_consent_at = CURRENT_TIMESTAMP WHERE id = ?",
+                         (1 if granted else 0, user_id))
+    conn.close()
+
+
+def get_consent_state(user_id: int) -> Dict[str, Any]:
+    conn = get_db()
+    row = conn.execute(
+        "SELECT terms_accepted_at, privacy_notice_ack_at, marketing_consent, marketing_consent_at, explicit_consent_at FROM users WHERE id = ?",
+        (user_id,)).fetchone()
+    history = conn.execute(
+        "SELECT doc_key, doc_version, action, channel, created_at FROM consent_log WHERE user_id = ? ORDER BY id DESC LIMIT 50",
+        (user_id,)).fetchall()
+    conn.close()
+    base = dict(row) if row else {}
+    base["marketing_consent"] = bool(base.get("marketing_consent"))
+    base["history"] = [dict(h) for h in history]
+    return base

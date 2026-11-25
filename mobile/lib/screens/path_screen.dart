@@ -230,7 +230,7 @@ class _PathScreenState extends State<PathScreen> with SingleTickerProviderStateM
         const Text('Gündelik İngilizceyi adım adım öğren',
             style: TextStyle(color: Colors.white, fontSize: 19, fontWeight: FontWeight.w900, height: 1.2)),
         const SizedBox(height: 6),
-        Text('Her ders kısa bir anlatım ve 13 alıştırma. Bitirince sıradaki açılır; yanlışların dersin sonunda yeniden gelir.',
+        Text('Her ders kısa bir anlatım, örnek bir konuşma ve 14 alıştırma. Bitirince sıradaki açılır; yanlışların dersin sonunda yeniden gelir.',
             style: TextStyle(color: Colors.white.withValues(alpha: 0.85), fontSize: 13, height: 1.35)),
         if (current != null) ...[
           const SizedBox(height: 14),

@@ -919,7 +919,8 @@ class ApiService {
     String? universityId,
     String? studentNumber,
     bool termsAccepted = false,
-    bool explicitConsent = false,
+    bool privacyNoticeAck = false,
+    bool marketingConsent = false,
   }) async {
     try {
       final res = await AuthHttp.instance.post(
@@ -933,7 +934,8 @@ class ApiService {
           'university_id': universityId ?? 'itu',
           'student_number': studentNumber ?? '',
           'terms_accepted': termsAccepted,
-          'explicit_consent': explicitConsent,
+          'privacy_notice_ack': privacyNoticeAck,
+          'marketing_consent': marketingConsent,
         }),
       ).timeout(const Duration(seconds: 4));
 

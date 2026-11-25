@@ -248,7 +248,8 @@ class TestQuickFixes(unittest.TestCase):
     def test_registration_checkboxes_start_unchecked(self):
         html = (BASE_DIR / "static" / "index.html").read_text(encoding="utf-8")
         import re
-        for cid in ("reg-kvkk-consent", "reg-explicit-consent", "paytr-pre-info"):
+        # Ayrı beyanlar (2026/347 ilke kararı): sözleşme, aydınlatma okundu, ticari ileti, ödeme ön bilgilendirme
+        for cid in ("reg-terms", "reg-privacy-ack", "reg-marketing", "paytr-pre-info"):
             tag = re.search(r'<input[^>]*id="%s"[^>]*>' % cid, html)
             self.assertIsNotNone(tag, cid)
             self.assertNotIn("checked", tag.group(0), cid)

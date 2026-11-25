@@ -115,6 +115,7 @@ String _optionText(WidgetTester t, int i) {
 Future<void> answerCorrectly(WidgetTester t, Exercise ex) async {
   switch (ex.type) {
     case ExerciseType.choice:
+    case ExerciseType.dialogue:
     case ExerciseType.listen:
     case ExerciseType.quiz:
       for (var i = 0; i < ex.options.length; i++) {
@@ -163,12 +164,12 @@ void main() {
   tearDown(() => SpeechService.debugOverride = null);
 
   group('LessonEngine', () {
-    test('tek konudan 13, üniteden 15 alıştırma; bütün türler var', () {
+    test('tek konudan 14, üniteden 17 alıştırma; konuşmayı tamamlama dahil bütün türler var', () {
       final one = LessonEngine.build(_topicBundle('a1-01', 'A1'), random: Random(3));
-      expect(one.length, 13);
+      expect(one.length, 14);
       expect(one.map((e) => e.type).toSet(), ExerciseType.values.toSet());
       final unit = LessonEngine.build(_unitBundle('B2', 1), random: Random(3));
-      expect(unit.length, 15);
+      expect(unit.length, 17);
       for (final e in [...one, ...unit]) {
         if (e.options.isNotEmpty) {
           expect(e.options, contains(e.answer));
@@ -182,8 +183,20 @@ void main() {
         for (final u in lv['units'] as List) {
           for (final t in u['topics'] as List) {
             final ex = LessonEngine.build(_topicBundle(t['id'] as String, lv['level'] as String), random: Random(1));
-            expect(ex.length, 13, reason: '${t['id']}');
+            expect(ex.length, 14, reason: '${t['id']}');
           }
+        }
+      }
+    });
+
+    test('her konuda 6 satırlık örnek konuşma ve 2 konuşma görevi var; seviye başına 40 konu', () {
+      for (final lv in _lessons['levels'] as List) {
+        final topics = [for (final u in lv['units'] as List) ...(u['topics'] as List)];
+        expect(topics.length, 40, reason: '${lv['level']}');
+        for (final t in topics) {
+          final sp = t['speaking'] as Map;
+          expect((sp['dialogue'] as List).length, 6, reason: '${t['id']}');
+          expect((sp['prompts'] as List).length, 2, reason: '${t['id']}');
         }
       }
     });
@@ -242,7 +255,7 @@ void main() {
       await t.tap(find.byKey(const Key('lesson_continue')));
       await t.pumpAndSettle();
     }
-    expect(sent, {'correct': 13, 'total': 13});
+    expect(sent, {'correct': 14, 'total': 14});
     expect(find.text('Kusursuz!'), findsOneWidget);
     expect(find.text('+15'), findsOneWidget);
     expect(find.byKey(const Key('lesson_next')), findsOneWidget);

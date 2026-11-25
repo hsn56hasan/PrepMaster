@@ -1831,6 +1831,7 @@ function openAuthModal(isMandatory = false) {
     if (uniName) uniName.innerText = user.university ? user.university.name : (user.university_id ? user.university_id.toUpperCase() : "-");
     if (sNum) sNum.innerText = user.student_number || "-";
 
+    loadConsentState();
     const isVerified = user.is_verified_student === 1 || user.verification_status === "verified";
     if (verifEl) {
       verifEl.innerText = isVerified ? "✓ Doğrulanmış Öğrenci" : "⚠️ Doğrulanmadı";
@@ -1849,6 +1850,38 @@ function openAuthModal(isMandatory = false) {
 }
 
 // Ana sayfa düzeni (tanıtım + özellikler + rehberler) yalnız girişsiz ziyaretçiye; "Hesabım" penceresinde yalnız kart
+// --- Hukuki tercihler (Hesabım): ticari ileti onayı ---
+async function loadConsentState() {
+  const box = document.getElementById("profile-marketing-consent");
+  const status = document.getElementById("profile-marketing-status");
+  if (!box) return;
+  try {
+    const res = await fetch("/api/consents");
+    if (!res.ok) return;
+    const data = await res.json();
+    box.checked = !!data.marketing_consent;
+    if (status) status.textContent = data.marketing_consent ? "Açık" : "Kapalı";
+  } catch (_) { /* çevrimdışı: mevcut durum kalır */ }
+}
+
+async function setMarketingConsent(granted) {
+  const box = document.getElementById("profile-marketing-consent");
+  const status = document.getElementById("profile-marketing-status");
+  try {
+    const res = await fetch("/api/consents/marketing", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ granted: !!granted }),
+    });
+    if (!res.ok) throw new Error();
+    if (status) status.textContent = granted ? "Açık" : "Kapalı";
+    showNotification(granted ? "Kampanya e-postalarına onay verdin." : "Ticari ileti onayın geri çekildi.", "emerald");
+  } catch (_) {
+    if (box) box.checked = !granted;
+    showNotification("Tercihin kaydedilemedi, lütfen tekrar dene.", "rose");
+  }
+}
+window.setMarketingConsent = setMarketingConsent;
+
 function setLandingMode(on) {
   // Tanıtım (girişsiz ziyaretçi) ↔ yalnız panel (giriş yapmış "Hesabım")
   const landing = document.getElementById("pk-landing");
@@ -2038,12 +2071,18 @@ async function submitRegister() {
     return;
   }
 
-  const kvkkBox = document.getElementById("reg-kvkk-consent");
-  if (kvkkBox && !kvkkBox.checked) {
+  // Ayrı beyanlar: sözleşme (zorunlu), aydınlatma okundu (zorunlu), ticari ileti (isteğe bağlı)
+  const termsBox = document.getElementById("reg-terms");
+  const privacyBox = document.getElementById("reg-privacy-ack");
+  const missing = [];
+  if (termsBox && !termsBox.checked) missing.push("Kullanıcı Sözleşmesi'ni kabul etmeniz");
+  if (privacyBox && !privacyBox.checked) missing.push("KVKK Aydınlatma Metni'ni okuduğunuzu işaretlemeniz");
+  if (missing.length) {
     if (errEl) {
-      errEl.innerText = "Kayıt olabilmek için Kullanıcı Sözleşmesi'ni kabul etmeniz ve KVKK Aydınlatma Metni'ni okumanız gerekir.";
+      errEl.innerText = "Kayıt olabilmek için " + missing.join(" ve ") + " gerekir.";
       errEl.classList.remove("hidden");
     }
+    (termsBox && !termsBox.checked ? termsBox : privacyBox).focus();
     return;
   }
 
@@ -2059,7 +2098,8 @@ async function submitRegister() {
         student_number: studentNumber,
         password: password,
         terms_accepted: true,
-        explicit_consent: !!document.getElementById("reg-explicit-consent")?.checked
+        privacy_notice_ack: true,
+        marketing_consent: !!document.getElementById("reg-marketing")?.checked
       })
     });
     const data = await res.json();
