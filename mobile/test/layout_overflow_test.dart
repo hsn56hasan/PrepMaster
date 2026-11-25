@@ -188,7 +188,7 @@ void main() {
     }
   }
 
-  final tabs = ['Deneme', 'Hatalar', 'Kelime', 'Pratik'];
+  final tabs = ['Yol', 'Deneme', 'Hatalar', 'Kelime', 'Pratik'];
 
   Future<void> waitForNav(WidgetTester t) async {
     for (var i = 0; i < 30 && find.byType(NavigationBar).evaluate().isEmpty; i++) {
@@ -267,6 +267,36 @@ void main() {
       });
     }
     await scan(t, 'OkulDenemeleri', () => ExamsScreen(currentUniversity: _uni(), currentLevel: 'B2'));
+    Map<String, dynamic> daily(bool locked) => locked
+        ? {'locked': true, 'tasks': []}
+        : {
+            'locked': false, 'placement': {'level': 'B2', 'mastered': 'B1'}, 'streak': 128, 'xp_today': 1250,
+            'tasks_done': 1, 'tasks_total': 4, 'all_done': false,
+            'week': [for (final l in ['Çar', 'Per', 'Cum', 'Cmt', 'Paz', 'Pzt', 'Sal'])
+              {'day': '2026-11-24', 'label': l, 'today': l == 'Sal', 'completed': l == 'Pzt', 'active': true}],
+            'tasks': [
+              {'id': 'vocab', 'icon': 'layers', 'xp': 10, 'title': '25 kelime tekrarı', 'done': 25, 'target': 25, 'action': {}},
+              {'id': 'weakest', 'icon': 'trending-up', 'xp': 15, 'title': 'C1 Paragraph Completion · 10 soru', 'done': 3, 'target': 10, 'action': {}},
+              {'id': 'questions', 'icon': 'target', 'xp': 15, 'title': 'Günün soru hedefi: 20 soru', 'done': 12, 'target': 20, 'action': {}},
+              {'id': 'mistakes', 'icon': 'shield-alert', 'xp': 10, 'title': "Hata Kasası'ndan 5 soru", 'done': 0, 'target': 5, 'action': {}},
+            ],
+            'journey': {'level': 'C1', 'correct': 180, 'total': 204, 'pct': 88, 'ready_pct': 70, 'next_level': 'C2', 'ready': true},
+          };
+    for (final locked in [true, false]) {
+      await scan(t, locked ? 'GörevlerKilitli' : 'Görevler', () {
+        final d = daily(locked);
+        return Scaffold(
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(20),
+            child: Column(children: [
+              DailyTasksCard(daily: d, onStartPlacement: () {}, onTask: (_) {}),
+              if (d['journey'] != null)
+                JourneyCard(journey: (d['journey'] as Map).cast<String, dynamic>(), onNextLevel: (_) {}),
+            ]),
+          ),
+        );
+      });
+    }
   });
   testWidgets('Seviye tespiti', (t) async {
     final pool = _placementPool();

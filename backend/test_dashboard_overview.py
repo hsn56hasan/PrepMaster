@@ -86,10 +86,23 @@ class TestDashboardOverview(unittest.TestCase):
         self.assertEqual(data["kpis"]["unresolved_mistakes"], 1)
         self.assertEqual(data["mistakes_by_category"], {"Grammar": 1})
 
-        plan = {p["id"]: p for p in data["plan"]}
-        self.assertEqual(plan["vocab"]["target"], 20)
-        self.assertIn("weakest", plan)
-        self.assertEqual(plan["mistakes"]["done"], 0)
+        # Seviye tespiti yapılmadan günlük görevler kilitli
+        self.assertTrue(data["daily"]["locked"])
+        self.assertEqual(data["plan"], [])
+
+        r = self.client.post("/api/placement/result", json={"level": "B2", "mastered": "B1"}, headers=h)
+        self.assertEqual(r.status_code, 200, r.text)
+        data = self.client.get("/api/dashboard/overview?level=B2", headers=h).json()
+        daily = data["daily"]
+        self.assertFalse(daily["locked"])
+        self.assertEqual(daily["placement"]["level"], "B2")
+        tasks = {t["id"]: t for t in daily["tasks"]}
+        self.assertEqual(tasks["vocab"]["target"], 20)
+        self.assertEqual(tasks["questions"]["target"], 15)
+        self.assertEqual(tasks["questions"]["done"], 3)  # bugün 3 pratik cevabı
+        self.assertIn("weakest", tasks)
+        self.assertEqual(tasks["mistakes"]["done"], 0)
+        self.assertEqual(data["plan"], daily["tasks"])
 
         # Yanlış soru tekrar doğru cevaplanınca kasadan çıkar ve bugünün çözümü sayılır
         self.client.post("/api/practice/answer", json={"question_id": grammar[2]["id"],
@@ -98,7 +111,54 @@ class TestDashboardOverview(unittest.TestCase):
         g = next(s for s in data["sections"] if s["category"] == "Grammar")
         self.assertEqual(g["correct"], 3)
         self.assertEqual(data["kpis"]["unresolved_mistakes"], 0)
-        self.assertEqual({p["id"]: p for p in data["plan"]}["mistakes"]["done"], 1)
+        self.assertEqual({t["id"]: t for t in data["daily"]["tasks"]}["mistakes"]["done"], 1)
+
+    def test_daily_tasks_streak_week_and_journey(self):
+        uid, h = self._register("panel_gorev")
+        self.client.post("/api/placement/result", json={"level": "A1", "mastered": None}, headers=h)
+        self.client.post("/api/profile", json={"university_id": "itu", "current_level": "A1"}, headers=h)
+
+        # Dünü ve önceki günü tamamlanmış say (hedefler tutturulmuş)
+        import datetime as dt
+        today = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=3)).date()
+        conn = db.get_db()
+        with conn:
+            for back in (1, 2):
+                conn.execute("INSERT INTO daily_activity (user_id, day, vocab_reviews, questions_answered, "
+                             "vocab_target, question_target) VALUES (?, ?, 10, 10, 10, 10)",
+                             (uid, (today - dt.timedelta(days=back)).isoformat()))
+        conn.close()
+
+        daily = self.client.get("/api/dashboard/overview?level=A1", headers=h).json()["daily"]
+        self.assertEqual(daily["streak"], 2)
+        self.assertEqual(len(daily["week"]), 7)
+        self.assertTrue(daily["week"][-1]["today"])
+        self.assertTrue(daily["week"][-2]["completed"] and daily["week"][-3]["completed"])
+        self.assertFalse(daily["all_done"])
+
+        # Bugün A1 hedefleri: 10 kelime + 10 soru → gün tamam, seri 3
+        vocab = json.loads((BASE_DIR / "data" / "vocabulary.json").read_text(encoding="utf-8"))
+        for w in vocab[:10]:
+            self.client.post(f"/api/vocabulary/{w['id']}/status", json={"status": "mastered"}, headers=h)
+        a1 = [q for q in QUESTIONS if q["id"].startswith("q-orj-a1-")][:10]
+        for q in a1:
+            self.client.post("/api/practice/answer", json={"question_id": q["id"], "chosen_answer": q["correct_answer"]},
+                             headers=h)
+        daily = self.client.get("/api/dashboard/overview?level=A1", headers=h).json()["daily"]
+        tasks = {t["id"]: t for t in daily["tasks"]}
+        self.assertEqual((tasks["vocab"]["done"], tasks["vocab"]["target"]), (10, 10))
+        self.assertEqual((tasks["questions"]["done"], tasks["questions"]["target"]), (10, 10))
+        self.assertEqual(daily["streak"], 3)
+        self.assertTrue(daily["week"][-1]["completed"])
+        # Kur yolculuğu: genel havuz A1'de 20 sorudan 10 doğru = %50, henüz hazır değil
+        self.assertEqual(daily["journey"]["pct"], 50)
+        self.assertFalse(daily["journey"]["ready"])
+        self.assertEqual(daily["journey"]["next_level"], "A2")
+
+    def test_placement_result_requires_login_and_valid_level(self):
+        self.assertEqual(self.client.post("/api/placement/result", json={"level": "B2"}).status_code, 401)
+        _, h = self._register("panel_seviye")
+        self.assertEqual(self.client.post("/api/placement/result", json={"level": "Z9"}, headers=h).status_code, 422)
 
     def test_exam_submit_counts_towards_progress_and_school_pool_after_unlock(self):
         uid, h = self._register("panel_okul")

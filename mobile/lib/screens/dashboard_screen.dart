@@ -73,6 +73,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
     final action = (item['action'] as Map?) ?? {};
     if (action['type'] == 'practice') {
       _practiceCategory('${action['category']}', level: '${action['level']}');
+    } else if (action['type'] == 'quick') {
+      _practiceCategory(null, count: 15);
     } else if (action['tab'] == 'flashcards') {
       widget.onTabSwitch(3);
     } else if (action['tab'] == 'mistakes') {
@@ -81,7 +83,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   /// Bir bölümden kısa pratik: okul havuzu açıksa okulun, değilse genel havuzun soruları.
-  Future<void> _practiceCategory(String category, {String? level}) async {
+  Future<void> _practiceCategory(
+    String? category, {
+    String? level,
+    int count = 10,
+  }) async {
     final uni = widget.currentUniversity;
     final lvl = level ?? widget.currentLevel;
     final school = _overview?['pool'] == 'school';
@@ -95,7 +101,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             .where((q) => q.universityId == (school ? uni.id : 'general'))
             .toList()
           ..shuffle();
-    final questions = pool.take(10).toList();
+    final questions = pool.take(count).toList();
     if (!mounted) return;
     if (questions.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -128,10 +134,24 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Future<void> _loadData() async {
     final unis = await ApiService().getUniversities();
     final stats = await ApiService().getStats();
-    final overview = await ApiService().getDashboardOverview(
+    var overview = await ApiService().getDashboardOverview(
       level: widget.currentLevel,
     );
     final prefs = await SharedPreferences.getInstance();
+    final localPlacement = prefs.getString(PlacementTestScreen.prefLevel);
+    if (overview?['daily'] is Map &&
+        (overview!['daily'] as Map)['locked'] == true &&
+        localPlacement != null) {
+      final sent = await ApiService().savePlacementResult(
+        level: localPlacement,
+        mastered: prefs.getString(PlacementTestScreen.prefMastered),
+      );
+      if (sent) {
+        overview = await ApiService().getDashboardOverview(
+          level: widget.currentLevel,
+        );
+      }
+    }
     if (mounted) {
       setState(() {
         _universities = unis;
@@ -153,12 +173,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
       ),
     );
-    final prefs = await SharedPreferences.getInstance();
-    if (!mounted) return;
-    setState(() {
-      _placementLevel = prefs.getString(PlacementTestScreen.prefLevel);
-      _placementMastered = prefs.getString(PlacementTestScreen.prefMastered);
-    });
+    // Sonuç hesaba yazıldı: günlük görevler açılsın diye panel yeniden yüklenir
+    await _loadData();
   }
 
   /// Seviye tespit sınavı: çözülmediyse belirgin kart, çözüldüyse kısa özet.
@@ -928,7 +944,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w800,
-                      color: Colors.indigo,
+                      color: AppTheme.sageSwatch,
                     ),
                   ),
                 ],
@@ -992,7 +1008,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.blue.shade50,
+                  color: AppTheme.brandSwatch.shade50,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Icon(
@@ -1657,7 +1673,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 }).toList(),
               ),
               const SizedBox(height: 12),
-              _placementCard(),
+              if (_overview?['daily'] == null) _placementCard(),
               const SizedBox(height: 16),
 
               // Özet kutucukları (web paneliyle aynı dil)
@@ -1683,7 +1699,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                   KpiTile(
                     icon: Icons.menu_book_outlined,
-                    iconColor: Colors.indigo,
+                    iconColor: AppTheme.sageSwatch,
                     label: 'Öğrenilen kelime',
                     value: '$masteredVocab/$totalVocab',
                   ),
@@ -1720,11 +1736,26 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 const SizedBox(height: 8),
               ],
               if (_overview != null) ...[
-                TodayPlanCard(
-                  plan: ((_overview!['plan'] as List<dynamic>?) ?? [])
-                      .cast<Map<String, dynamic>>(),
-                  onAction: _runPlanAction,
-                ),
+                if (_overview!['daily'] is Map) ...[
+                  DailyTasksCard(
+                    daily: (_overview!['daily'] as Map).cast<String, dynamic>(),
+                    onStartPlacement: _openPlacementTest,
+                    onTask: _runPlanAction,
+                  ),
+                  if ((_overview!['daily'] as Map)['journey'] is Map) ...[
+                    const SizedBox(height: 12),
+                    JourneyCard(
+                      journey: ((_overview!['daily'] as Map)['journey'] as Map)
+                          .cast<String, dynamic>(),
+                      onNextLevel: widget.onLevelChange,
+                    ),
+                  ],
+                ] else
+                  TodayPlanCard(
+                    plan: ((_overview!['plan'] as List<dynamic>?) ?? [])
+                        .cast<Map<String, dynamic>>(),
+                    onAction: _runPlanAction,
+                  ),
                 const SizedBox(height: 12),
                 ProgressTabsCard(
                   overview: _overview!,
@@ -1927,7 +1958,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             Container(
                               padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
-                                color: Colors.blue.shade50,
+                                color: AppTheme.brandSwatch.shade50,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: const Icon(
@@ -1990,13 +2021,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             Container(
                               padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
-                                color: Colors.indigo.shade50,
+                                color: AppTheme.sageSwatch.shade50,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: const Icon(
                                 Icons.auto_awesome,
                                 size: 20,
-                                color: Colors.indigo,
+                                color: AppTheme.sageSwatch,
                               ),
                             ),
                             const SizedBox(height: 10),
@@ -2040,7 +2071,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(18),
-                    border: Border.all(color: const Color(0xFFE0E7FF)),
+                    border: Border.all(color: const Color(0xFFDDE9E2)),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withValues(alpha: 0.02),
@@ -2054,13 +2085,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFEEF2FF),
+                          color: const Color(0xFFEEF5F1),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: const Icon(
                           Icons.mic,
                           size: 22,
-                          color: Color(0xFF4F46E5),
+                          color: Color(0xFF4A775F),
                         ),
                       ),
                       const SizedBox(width: 14),

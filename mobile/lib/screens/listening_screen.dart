@@ -56,7 +56,7 @@ class _ListeningScreenState extends State<ListeningScreen> {
                     padding: const EdgeInsets.all(22),
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
-                        colors: [Color(0xFF1E3A8A), Color(0xFF0F172A)],
+                        colors: [Color(0xFF064E3B), Color(0xFF0F172A)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
@@ -80,10 +80,10 @@ class _ListeningScreenState extends State<ListeningScreen> {
                                 vertical: 4,
                               ),
                               decoration: BoxDecoration(
-                                color: Colors.blue.withValues(alpha: 0.3),
+                                color: AppTheme.brandSwatch.withValues(alpha: 0.3),
                                 borderRadius: BorderRadius.circular(8),
                                 border: Border.all(
-                                  color: Colors.blueAccent.withValues(
+                                  color: AppTheme.brandSwatch.withValues(
                                     alpha: 0.4,
                                   ),
                                 ),
@@ -243,12 +243,12 @@ class _ListeningScreenState extends State<ListeningScreen> {
                                 decoration: BoxDecoration(
                                   color: isNoteTaking
                                       ? Colors.amber.shade50
-                                      : Colors.blue.shade50,
+                                      : AppTheme.brandSwatch.shade50,
                                   borderRadius: BorderRadius.circular(8),
                                   border: Border.all(
                                     color: isNoteTaking
                                         ? Colors.amber.shade300
-                                        : Colors.blue.shade200,
+                                        : AppTheme.brandSwatch.shade200,
                                   ),
                                 ),
                                 child: Text(
@@ -483,7 +483,7 @@ class _ListeningRunnerScreenState extends State<ListeningRunnerScreen> {
             padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
               gradient: const LinearGradient(
-                colors: [Color(0xFF0F172A), Color(0xFF1E1B4B)],
+                colors: [Color(0xFF0F172A), Color(0xFF022C22)],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -530,7 +530,7 @@ class _ListeningRunnerScreenState extends State<ListeningRunnerScreen> {
                             style: TextStyle(
                               fontSize: 10,
                               fontWeight: FontWeight.w800,
-                              color: Colors.blueAccent,
+                              color: AppTheme.brandSwatch,
                             ),
                           ),
                           const SizedBox(height: 2),

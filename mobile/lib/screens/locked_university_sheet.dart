@@ -1,3 +1,4 @@
+import '../theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 import '../services/api_service.dart';
@@ -204,7 +205,7 @@ class _LockedUniversitySheetState extends State<LockedUniversitySheet> {
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: Colors.blue.shade50,
+            color: AppTheme.brandSwatch.shade50,
             borderRadius: BorderRadius.circular(14),
           ),
           child: Column(
@@ -215,7 +216,7 @@ class _LockedUniversitySheetState extends State<LockedUniversitySheet> {
                 key: const Key('locked_price'),
                 style: theme.textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.w900,
-                  color: Colors.blue.shade900,
+                  color: AppTheme.brandSwatch.shade900,
                 ),
               ),
               const SizedBox(height: 4),

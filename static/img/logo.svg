@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0a1535"/>
-      <stop offset="50%" stop-color="#15358d"/>
-      <stop offset="100%" stop-color="#3730a3"/>
+      <stop offset="0%" stop-color="#032b21"/>
+      <stop offset="50%" stop-color="#065f46"/>
+      <stop offset="100%" stop-color="#047857"/>
     </linearGradient>
     <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="0%" stop-color="#6FA287"/>
       <stop offset="100%" stop-color="#10b981"/>
     </linearGradient>
   </defs>
@@ -15,17 +15,17 @@
   <polygon points="256,100 112,168 170,194 170,178 256,144 342,178 342,194 400,168" fill="#ffffff"/>
   <!-- Tassel -->
   <rect x="135" y="154" width="10" height="58" rx="4" fill="#10b981"/>
-  <circle cx="140" cy="215" r="11" fill="#06b6d4"/>
-  <polygon points="133,222 147,222 155,256 125,256" fill="#06b6d4"/>
+  <circle cx="140" cy="215" r="11" fill="#6FA287"/>
+  <polygon points="133,222 147,222 155,256 125,256" fill="#6FA287"/>
   <!-- Open Book Base -->
   <path d="M132,274 L146,274 L146,355 L212,374 L212,390 L132,366 Z" fill="#ffffff"/>
   <path d="M380,274 L366,274 L366,355 L256,396 L224,382 L224,398 L256,412 L380,366 Z" fill="#ffffff"/>
-  <polygon points="155,274 169,264 169,348 155,344" fill="#06b6d4"/>
-  <path d="M224,322 L250,336 L250,378 L224,364 Z" fill="#06b6d4"/>
+  <polygon points="155,274 169,264 169,348 155,344" fill="#6FA287"/>
+  <path d="M224,322 L250,336 L250,378 L224,364 Z" fill="#6FA287"/>
   <path d="M261,338 L334,295 L334,264 L356,264 L356,346 L261,380 Z" fill="url(#cyanGrad)"/>
   <!-- Bold P Monogram -->
   <path d="M181,191 C215,168 295,168 331,191 L331,254 C331,286 296,306 256,326 L213,300 L213,390 L181,376 Z M213,210 L213,262 L256,288 L299,262 L299,210 Z" fill="#ffffff"/>
   <!-- Inner Shield Crest -->
-  <path d="M226,225 L256,225 L256,274 L235,261 C228,256 226,248 226,240 Z" fill="#06b6d4"/>
+  <path d="M226,225 L256,225 L256,274 L235,261 C228,256 226,248 226,240 Z" fill="#6FA287"/>
   <path d="M256,225 L286,225 L286,240 C286,248 284,256 277,261 L256,274 Z" fill="#10b981"/>
 </svg>

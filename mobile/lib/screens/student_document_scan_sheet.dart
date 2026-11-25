@@ -275,7 +275,7 @@ Barkod No: EDEVLET-KOC-2026-X94B
                     ListTile(
                       key: const Key('template_sabanci'),
                       leading: const CircleAvatar(
-                        backgroundColor: Colors.indigo,
+                        backgroundColor: AppTheme.sageSwatch,
                         radius: 16,
                         child: Text('SU', style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold)),
                       ),
@@ -287,7 +287,7 @@ Barkod No: EDEVLET-KOC-2026-X94B
                     ListTile(
                       key: const Key('template_ankara'),
                       leading: const CircleAvatar(
-                        backgroundColor: Colors.blue,
+                        backgroundColor: AppTheme.brandSwatch,
                         radius: 16,
                         child: Text('AÜ', style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold)),
                       ),
@@ -299,7 +299,7 @@ Barkod No: EDEVLET-KOC-2026-X94B
                     ListTile(
                       key: const Key('template_boun'),
                       leading: const CircleAvatar(
-                        backgroundColor: Colors.blueAccent,
+                        backgroundColor: AppTheme.brandSwatch,
                         radius: 16,
                         child: Text('BÜ', style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold)),
                       ),

@@ -18,6 +18,7 @@ import '../models/listening_track.dart';
 import '../models/essay_evaluation_result.dart';
 import '../models/speaking_task.dart';
 import '../models/speaking_evaluation_result.dart';
+import '../models/lesson_path.dart';
 
 class ApiService {
   static final ApiService _instance = ApiService._internal();
@@ -401,6 +402,67 @@ class ApiService {
       }
     } catch (_) {}
     return null;
+  }
+
+  /// Seviye tespiti sonucunu hesaba yazar (günlük görevler sunucuda bundan sonra açılır).
+  /// Bağlantı yoksa false döner; panel bir sonraki açılışta yereldeki sonucu yeniden gönderir.
+  Future<bool> savePlacementResult({required String level, String? mastered}) async {
+    try {
+      final res = await AuthHttp.instance.post(
+        Uri.parse('$baseUrl/api/placement/result'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'level': level, 'mastered': (mastered == null || mastered == 'none') ? null : mastered}),
+      ).timeout(const Duration(seconds: 4));
+      return res.statusCode == 200;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  // --- Konu Yolu (seviyeye göre ilerleyen alıştırmalı dersler) ---
+  // Yanıt: status (0 = bağlantı yok), data (200 ise gövde), error (sunucunun Türkçe açıklaması).
+  Future<PathResponse> _pathRequest(Future<dynamic> Function() send) async {
+    try {
+      final res = await send().timeout(const Duration(seconds: 8));
+      final body = res.bodyBytes.isEmpty ? null : json.decode(utf8.decode(res.bodyBytes));
+      if (res.statusCode == 200 && body is Map<String, dynamic>) {
+        return PathResponse(200, body, null);
+      }
+      final detail = body is Map ? body['detail'] : null;
+      return PathResponse(res.statusCode as int, null, detail is String ? detail : 'İstek tamamlanamadı (${res.statusCode}).');
+    } catch (_) {
+      return const PathResponse(0, null, 'Sunucuya bağlanılamadı. İnternet bağlantını kontrol et.');
+    }
+  }
+
+  Future<PathResponse> getPathOverview({String? level}) {
+    final uri = Uri.parse('$baseUrl/api/path/overview').replace(queryParameters: {
+      if (level != null && level.isNotEmpty) 'level': level,
+    });
+    return _pathRequest(() => AuthHttp.instance.get(uri));
+  }
+
+  /// kind: topic (konu id), unit (ünite id) veya review (seviye kodu ya da boş).
+  Future<PathResponse> getPathBundle(String kind, String? id) {
+    final Uri uri;
+    if (kind == 'topic') {
+      uri = Uri.parse('$baseUrl/api/path/topic/${Uri.encodeComponent(id ?? '')}');
+    } else if (kind == 'unit') {
+      uri = Uri.parse('$baseUrl/api/path/unit/${Uri.encodeComponent(id ?? '')}');
+    } else {
+      uri = Uri.parse('$baseUrl/api/path/review').replace(queryParameters: {
+        if (id != null && id.isNotEmpty) 'level': id,
+      });
+    }
+    return _pathRequest(() => AuthHttp.instance.get(uri));
+  }
+
+  Future<PathResponse> postPathResult({required String nodeId, required int correct, required int total}) {
+    return _pathRequest(() => AuthHttp.instance.post(
+          Uri.parse('$baseUrl/api/path/result'),
+          headers: {'Content-Type': 'application/json'},
+          body: json.encode({'node_id': nodeId, 'correct': correct, 'total': total}),
+        ));
   }
 
   // --- Dashboard Stats ---

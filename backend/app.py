@@ -1,7 +1,7 @@
 import json
 import random
 import re
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import List, Optional, Dict, Any
 from fastapi import FastAPI, HTTPException, Query, Request, Depends, status, UploadFile, File, Form, BackgroundTasks
@@ -23,6 +23,8 @@ from database import (
     record_mistake, resolve_mistake, delete_mistake,
     get_mistakes, get_mistake_count,
     record_question_answers, get_question_progress, get_today_activity,
+    daily_targets_for, get_daily_activity, save_placement_result, get_placement_result,
+    record_lesson_result, get_lesson_progress,
     bulk_upsert_mistakes, bulk_upsert_vocab_progress, bulk_resolve_mistakes,
     create_user, authenticate_user, verify_student, get_verification_status,
     create_student_otp, verify_student_otp,
@@ -35,6 +37,7 @@ from database import (
     admin_reset_student_password, admin_delete_student,
     create_support_ticket, list_support_tickets
 )
+from lesson_path import LessonPath, LEVELS as PATH_LEVELS
 from document_scanner import (
     scan_student_document, extract_text_from_bytes, SAMPLE_DOCUMENTS
 )
@@ -245,6 +248,7 @@ vocabulary_data = load_json("vocabulary.json")
 writing_guides_data = load_json("writing_guides.json")
 listening_data = load_json("listening.json")
 speaking_data = load_json("speaking.json")
+lesson_path = LessonPath.load(DATA_DIR / "lessons.json")
 
 @app.on_event("startup")
 def startup_event():
@@ -255,6 +259,8 @@ def startup_event():
     writing_guides_data = load_json("writing_guides.json")
     listening_data = load_json("listening.json")
     speaking_data = load_json("speaking.json")
+    global lesson_path
+    lesson_path = LessonPath.load(DATA_DIR / "lessons.json")
     init_db()
     # Günde bir otomatik veritabanı yedeği (veritabanının yanındaki backups/ klasörüne)
     try:
@@ -1521,6 +1527,223 @@ def get_overall_stats(request: Request):
     }
 
 DASHBOARD_LEVELS = ["A1", "A2", "B1", "B2", "C1", "C2"]
+TR_WEEKDAYS = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"]
+JOURNEY_READY_PCT = 70
+
+
+def _istanbul_today_date():
+    return (datetime.now(timezone.utc) + timedelta(hours=3)).date()
+
+
+def _day_completed(row: Optional[Dict[str, Any]]) -> bool:
+    """Bir gün tamam sayılır: kelime ve soru hedefi tutturulduysa (geçmiş günler için yeniden hesaplanabilir)."""
+    if not row:
+        return False
+    return row["vocab_reviews"] >= row["vocab_target"] and row["questions_answered"] >= row["question_target"]
+
+
+def _build_daily(uid, lvl, sections, by_cat, progress, levels, unresolved) -> Dict[str, Any]:
+    """Günlük görevler: yalnız seviye tespitinden sonra açılır.
+    Görevler kura göre hedeflenir; ilerleme = görev serisi, son 7 gün ve kur yolculuğu."""
+    placement = get_placement_result(uid)
+    if not placement:
+        return {"locked": True, "placement": None, "tasks": []}
+
+    activity = get_daily_activity(uid, days=60)
+    today = _istanbul_today_date()
+    row = activity.get(today.isoformat())
+    targets = daily_targets_for(lvl)
+    vocab_target = row["vocab_target"] if row else targets["vocab"]
+    question_target = row["question_target"] if row else targets["questions"]
+    vocab_done = row["vocab_reviews"] if row else 0
+    answered = row["questions_answered"] if row else 0
+    resolved_today = row["mistakes_resolved"] if row else 0
+
+    tasks = [{
+        "id": "vocab", "icon": "layers", "xp": 10,
+        "title": f"{vocab_target} kelime tekrarı", "subtitle": "Kelime kartlarında öğrendim/tekrar de",
+        "done": min(vocab_done, vocab_target), "target": vocab_target,
+        "action": {"type": "tab", "tab": "flashcards"},
+    }, {
+        "id": "questions", "icon": "target", "xp": 15,
+        "title": f"Günün soru hedefi: {question_target} soru", "subtitle": "Pratik ya da denemede çözdüğün her soru sayılır",
+        "done": min(answered, question_target), "target": question_target,
+        "action": {"type": "quick"},
+    }]
+    if sections:
+        weakest = min(sections, key=lambda x: (x["correct"] / x["total"] if x["total"] else 1, -x["total"]))
+        cat_ids = {q["id"] for q in by_cat[weakest["category"]]}
+        done_today = sum(1 for qid in cat_ids if progress.get(qid, {}).get("today"))
+        n = min(10, weakest["total"])
+        tasks.insert(1, {
+            "id": "weakest", "icon": "trending-up", "xp": 15,
+            "title": f"{lvl} {weakest['category']} · {n} soru", "subtitle": "En zayıf bölümün; bugün buna odaklan",
+            "done": min(done_today, n), "target": n,
+            "action": {"type": "practice", "category": weakest["category"], "level": lvl},
+        })
+    if unresolved or resolved_today:
+        k = min(5, unresolved + resolved_today)
+        tasks.append({
+            "id": "mistakes", "icon": "shield-alert", "xp": 10,
+            "title": f"Hata Kasası'ndan {k} soru", "subtitle": "Yanlışlarını tekrar çözüp kasadan çıkar",
+            "done": min(resolved_today, k), "target": k,
+            "action": {"type": "tab", "tab": "mistakes"},
+        })
+
+    tasks_done = sum(1 for t in tasks if t["done"] >= t["target"])
+    xp_today = sum(t["xp"] for t in tasks if t["done"] >= t["target"]) + (20 if tasks_done == len(tasks) else 0)
+
+    # Görev serisi: hedefleri tutturulan ardışık günler (bugün henüz tamamlanmadıysa dünden geriye)
+    day = today if _day_completed(row) else today - timedelta(days=1)
+    streak = 0
+    while _day_completed(activity.get(day.isoformat())):
+        streak += 1
+        day -= timedelta(days=1)
+
+    week = []
+    for i in range(6, -1, -1):
+        d = today - timedelta(days=i)
+        r = activity.get(d.isoformat())
+        week.append({
+            "day": d.isoformat(), "label": TR_WEEKDAYS[d.weekday()], "today": i == 0,
+            "completed": _day_completed(r), "active": bool(r),
+        })
+
+    lv = next((x for x in levels if x["level"] == lvl), {"total": 0, "correct": 0})
+    pct = round(lv["correct"] / lv["total"] * 100) if lv["total"] else 0
+    idx = DASHBOARD_LEVELS.index(lvl)
+    next_level = DASHBOARD_LEVELS[idx + 1] if idx + 1 < len(DASHBOARD_LEVELS) else None
+
+    return {
+        "locked": False,
+        "placement": placement,
+        "tasks": tasks,
+        "tasks_done": tasks_done,
+        "tasks_total": len(tasks),
+        "all_done": tasks_done == len(tasks),
+        "xp_today": xp_today,
+        "streak": streak,
+        "completed_days": sum(1 for r in activity.values() if _day_completed(r)),
+        "week": week,
+        "journey": {
+            "level": lvl, "correct": lv["correct"], "total": lv["total"], "pct": pct,
+            "ready_pct": JOURNEY_READY_PCT, "next_level": next_level,
+            "ready": bool(next_level) and pct >= JOURNEY_READY_PCT,
+        },
+    }
+
+
+class PlacementResultRequest(BaseModel):
+    level: str = Field(..., pattern=r"^(A1|A2|B1|B2|C1|C2)$")
+    mastered: Optional[str] = Field(None, pattern=r"^(A1|A2|B1|B2|C1|C2)$")
+
+
+@app.post("/api/placement/result")
+def save_placement_result_endpoint(req: PlacementResultRequest, request: Request):
+    """Seviye tespiti sonucunu hesaba yazar; günlük görevler bundan sonra açılır."""
+    uid = _current_user_id(request)
+    save_placement_result(uid, req.level, req.mastered)
+    return {"status": "ok", "placement": get_placement_result(uid)}
+
+
+
+
+# ---------------- Konu Yolu (seviyeye göre ilerleyen alıştırmalı dersler) ----------------
+
+def _path_start_level(uid: int) -> str:
+    """Yolun açık başlangıç seviyesi: seviye tespiti sonucu, yoksa profildeki kur, o da yoksa A1."""
+    placement = get_placement_result(uid)
+    lvl = (placement or {}).get("level") or (get_profile(uid) or {}).get("current_level") or "A1"
+    lvl = str(lvl).upper()
+    return lvl if lvl in PATH_LEVELS else "A1"
+
+
+@app.get("/api/path/overview")
+def path_overview(request: Request, level: Optional[str] = None):
+    uid = _current_user_id(request)
+    progress = get_lesson_progress(uid)
+    sel = level.upper() if level else None
+    return lesson_path.overview(progress, _path_start_level(uid), sel)
+
+
+@app.get("/api/path/topic/{topic_id}")
+def path_topic(topic_id: str, request: Request):
+    uid = _current_user_id(request)
+    t = lesson_path.topics.get(topic_id)
+    if not t:
+        raise HTTPException(status_code=404, detail="Konu bulunamadı.")
+    if not lesson_path.topic_unlocked(get_lesson_progress(uid), _path_start_level(uid), topic_id):
+        raise HTTPException(status_code=403, detail="Bu konu henüz kilitli. Önceki dersi tamamla.")
+    _record_study(request)
+    unit = lesson_path.units[t["_unit"]]
+    return {"kind": "topic", "id": topic_id, "level": t["_level"], "title_tr": t["title_tr"],
+            "unit_title": unit["title_tr"], "topics": [lesson_path.public_topic(t)]}
+
+
+@app.get("/api/path/unit/{unit_id}")
+def path_unit(unit_id: str, request: Request):
+    uid = _current_user_id(request)
+    if unit_id not in lesson_path.units:
+        raise HTTPException(status_code=404, detail="Ünite bulunamadı.")
+    if not lesson_path.unit_unlocked(get_lesson_progress(uid), _path_start_level(uid), unit_id):
+        raise HTTPException(status_code=403, detail="Ünite tekrarı, ünitedeki bütün dersler bitince açılır.")
+    _record_study(request)
+    return lesson_path.unit_bundle(unit_id)
+
+
+@app.get("/api/path/review")
+def path_review(request: Request, level: Optional[str] = None):
+    uid = _current_user_id(request)
+    lvl = level.upper() if level else None
+    if lvl and lvl not in PATH_LEVELS:
+        raise HTTPException(status_code=400, detail="Geçersiz seviye.")
+    bundle = lesson_path.review_bundle(get_lesson_progress(uid), lvl)
+    if not bundle["topics"]:
+        raise HTTPException(status_code=404, detail="Tekrar için önce en az bir ders bitir.")
+    _record_study(request)
+    return bundle
+
+
+class PathResultRequest(BaseModel):
+    node_id: str = Field(..., min_length=3, max_length=40, pattern=r"^[a-z0-9-]+$")
+    correct: int = Field(..., ge=0, le=60)
+    total: int = Field(..., ge=1, le=60)
+
+
+@app.post("/api/path/result")
+def path_result(req: PathResultRequest, request: Request):
+    """Ders/ünite/tekrar sonucunu kaydeder; yıldız ve XP hesaplar."""
+    uid = _current_user_id(request)
+    kind = lesson_path.node_kind(req.node_id)
+    if not kind:
+        raise HTTPException(status_code=404, detail="Ders bulunamadı.")
+    progress = get_lesson_progress(uid)
+    start = _path_start_level(uid)
+    if kind == "topic":
+        if not lesson_path.topic_unlocked(progress, start, req.node_id):
+            raise HTTPException(status_code=403, detail="Bu konu henüz kilitli.")
+        level = lesson_path.topics[req.node_id]["_level"]
+    elif kind == "unit":
+        if not lesson_path.unit_unlocked(progress, start, req.node_id):
+            raise HTTPException(status_code=403, detail="Ünite tekrarı henüz kilitli.")
+        level = lesson_path.units[req.node_id]["_level"]
+    else:
+        if not any(v.get("stars", 0) >= 1 for k, v in progress.items() if k in lesson_path.topics):
+            raise HTTPException(status_code=403, detail="Tekrar için önce bir ders bitir.")
+        suffix = req.node_id[7:].upper()
+        level = suffix if suffix in PATH_LEVELS else None
+    correct = min(req.correct, req.total)
+    pct = round(correct * 100 / req.total)
+    result = record_lesson_result(uid, req.node_id, level, correct, req.total, lesson_path.xp_for(kind, pct))
+    after = get_lesson_progress(uid)
+    next_topic = None
+    if kind == "topic" and result["best_stars"]:
+        order = lesson_path.topic_order[level]
+        i = order.index(req.node_id)
+        if i + 1 < len(order):
+            next_topic = order[i + 1]
+    return {"status": "ok", **result, "next_topic": next_topic,
+            "xp_total": sum(int(p.get("xp_total") or 0) for p in after.values())}
 
 
 @app.get("/api/dashboard/overview")
@@ -1570,28 +1793,8 @@ def get_dashboard_overview(request: Request, level: Optional[str] = None):
     total_exams = len(history)
     avg_score = round(sum(h["score"] for h in history) / total_exams, 1) if total_exams else 0
     vocab_progress = get_vocab_progress(uid)
-    today = get_today_activity(uid)
-
-    # Günün planı: kelime tekrarı, en zayıf bölüm, Hata Kasası
-    plan = [{
-        "id": "vocab", "title": "20 kelime tekrarı", "done": min(today["vocab_reviewed"], 20), "target": 20,
-        "action": {"type": "tab", "tab": "flashcards"},
-    }]
-    if sections:
-        weakest = min(sections, key=lambda x: (x["correct"] / x["total"] if x["total"] else 1, -x["total"]))
-        cat_ids = {q["id"] for q in by_cat[weakest["category"]]}
-        done_today = sum(1 for qid in cat_ids if progress.get(qid, {}).get("today"))
-        target = min(10, weakest["total"])
-        plan.append({
-            "id": "weakest", "title": f"{lvl} {weakest['category']} · {target} soru", "done": min(done_today, target),
-            "target": target, "action": {"type": "practice", "category": weakest["category"], "level": lvl},
-        })
-    if mistakes or today["mistakes_resolved"]:
-        target = min(5, len(mistakes) + today["mistakes_resolved"])
-        plan.append({
-            "id": "mistakes", "title": f"Hata Kasası'ndan {target} soru", "done": min(today["mistakes_resolved"], target),
-            "target": target, "action": {"type": "tab", "tab": "mistakes"},
-        })
+    daily = _build_daily(uid, lvl, sections, by_cat, progress, levels, len(mistakes))
+    plan = daily.get("tasks", [])
 
     return {
         "university_id": uni_id,
@@ -1609,6 +1812,7 @@ def get_dashboard_overview(request: Request, level: Optional[str] = None):
         "levels": levels,
         "mistakes_by_category": dict(sorted(mistakes_by_cat.items(), key=lambda kv: -kv[1])),
         "plan": plan,
+        "daily": daily,
         "recent_exams": history[:5],
     }
 
@@ -1970,9 +2174,9 @@ def get_mobile_app_info():
     return {
         "available": apk_path is not None,
         "app_name": "PrepKampüs Mobil (Android)",
-        "version": "1.8.0",
+        "version": "2.1.0",
         "build_type": "Release (ARM64)",
-        "filename": "PrepKampus-v1.8-Android.apk",
+        "filename": "PrepKampus-v2.1-Android.apk",
         "size_mb": size_mb,
         "min_android": "Android 8.0+ (API 26+)",
         "download_url": "/api/download/apk",
@@ -1980,6 +2184,8 @@ def get_mobile_app_info():
             "Web hesabınızla anlık Bulut Senkronizasyon (Kaldığınız yerden devam)",
             "İnternetsiz (Offline) Kelime Kartları, Sesli Telaffuz ve Gramer Pratik Modu",
             "Uyarlamalı Seviye Tespit Sınavı (A1–C2, internetsiz, en fazla 24 soru)",
+            "Seviyene göre Günlük Görevler, görev serisi ve Kur Yolculuğu",
+            "Konu Yolu: A1–C2 arası 120 gündelik hayat dersi, alıştırma, kalp, yıldız ve XP",
             "26 Üniversite Muafiyet Deneme Sınavı (30 Soru/Kur) & 24 Akademik Dinleme (MP3)",
             "E-Devlet Öğrenci Belgesi Tarama ve AI Writing / Speaking Değerlendirme"
         ]
@@ -1997,9 +2203,9 @@ def download_android_apk():
     return FileResponse(
         path=apk_path,
         media_type="application/vnd.android.package-archive",
-        filename="PrepKampus-v1.8-Android.apk",
+        filename="PrepKampus-v2.1-Android.apk",
         headers={
-            "Content-Disposition": 'attachment; filename="PrepKampus-v1.8-Android.apk"',
+            "Content-Disposition": 'attachment; filename="PrepKampus-v2.1-Android.apk"',
             "Cache-Control": "public, max-age=3600"
         }
     )

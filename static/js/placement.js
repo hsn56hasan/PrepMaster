@@ -83,7 +83,30 @@
   function saveResult(engine) {
     const data = { level: engine.recommendedLevel, mastered: engine.masteredLevel, date: new Date().toISOString() };
     try { localStorage.setItem(STORE_KEY, JSON.stringify(data)); } catch (_) {}
+    pushResult(data);
     return data;
+  }
+
+  // Sonuç hesaba yazılır: günlük görevler sunucuda bundan sonra açılır (web ve mobil aynı hesabı görür)
+  async function pushResult(data) {
+    try {
+      const res = await fetch("/api/placement/result", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ level: data.level, mastered: data.mastered || null }),
+      });
+      if (res.ok && window.loadDashboardStats && window.appState?.activeTab === "dashboard") window.loadDashboardStats();
+      return res.ok;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  /** Bu tarayıcıda daha önce çözülmüş ama hesaba yazılmamış sonuç varsa gönderir. */
+  async function syncSavedResult() {
+    const saved = loadSaved();
+    if (!saved || !saved.level) return false;
+    return pushResult(saved);
   }
 
   // ---------------- Arayüz ----------------
@@ -324,4 +347,5 @@
   window.answerPlacementQuestion = answer;
   window.applyPlacementLevel = applyLevel;
   window.renderPlacementCard = renderPlacementCard;
+  window.syncSavedPlacementResult = syncSavedResult;
 })();

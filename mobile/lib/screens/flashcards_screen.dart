@@ -513,14 +513,14 @@ class _FlashcardsScreenState extends State<FlashcardsScreen>
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
           gradient: const LinearGradient(
-            colors: [Color(0xFF1E3A8A), Color(0xFF312E81)],
+            colors: [Color(0xFF064E3B), Color(0xFF065F46)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(28),
           boxShadow: [
             BoxShadow(
-              color: Colors.indigo.withValues(alpha: 0.3),
+              color: AppTheme.sageSwatch.withValues(alpha: 0.3),
               blurRadius: 20,
               offset: const Offset(0, 10),
             ),

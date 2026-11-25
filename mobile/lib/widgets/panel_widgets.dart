@@ -12,7 +12,7 @@ const Map<String, Color> categoryColors = {
   'Reading': Color(0xFFD85A30),
   'Restatement': Color(0xFFBA7517),
   'Cloze Test': Color(0xFFD4537E),
-  'Sentence Completion': Color(0xFF185FA5),
+  'Sentence Completion': Color(0xFF475569),
   'Paragraph Completion': Color(0xFF0F6E56),
   'Dialogue': Color(0xFF993556),
 };
@@ -32,9 +32,24 @@ class PanelColors {
   static Color muted(BuildContext c) =>
       _dark(c) ? AppTheme.darkTextMuted : AppTheme.textMuted;
   static Color tile(BuildContext c) =>
-      _dark(c) ? AppTheme.darkCardBg : const Color(0xFFF1F5F9);
+      _dark(c) ? AppTheme.darkCardBg : const Color(0xFFE6F2EC);
   static Color track(BuildContext c) =>
-      _dark(c) ? AppTheme.darkBorderSubtle : const Color(0xFFEEF2F7);
+      _dark(c) ? AppTheme.darkBorderSubtle : const Color(0xFFE1EEE7);
+  static List<BoxShadow> cardShadow(BuildContext c) => _dark(c)
+      ? const []
+      : const [
+          BoxShadow(
+            color: Color(0x0A0F172A),
+            blurRadius: 2,
+            offset: Offset(0, 1),
+          ),
+          BoxShadow(
+            color: Color(0x140F172A),
+            blurRadius: 24,
+            spreadRadius: -12,
+            offset: Offset(0, 10),
+          ),
+        ];
 }
 
 class PanelCard extends StatelessWidget {
@@ -54,8 +69,9 @@ class PanelCard extends StatelessWidget {
       padding: padding,
       decoration: BoxDecoration(
         color: PanelColors.card(context),
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(color: PanelColors.border(context)),
+        boxShadow: PanelColors.cardShadow(context),
       ),
       child: child,
     );
@@ -81,8 +97,10 @@ class KpiTile extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
-        color: PanelColors.tile(context),
-        borderRadius: BorderRadius.circular(10),
+        color: PanelColors.card(context),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: PanelColors.border(context)),
+        boxShadow: PanelColors.cardShadow(context),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -170,10 +188,10 @@ class AlertRow extends StatelessWidget {
     final warning = tone == AlertTone.warning;
     final bg = warning
         ? (dark ? const Color(0xFF451A03) : const Color(0xFFFFFBEB))
-        : (dark ? const Color(0xFF172554) : const Color(0xFFEFF6FF));
+        : (dark ? const Color(0xFF172554) : const Color(0xFFECFDF5));
     final fg = warning
         ? (dark ? const Color(0xFFFDE68A) : const Color(0xFF92400E))
-        : (dark ? const Color(0xFFBFDBFE) : const Color(0xFF1E40AF));
+        : (dark ? const Color(0xFFA7F3D0) : const Color(0xFF065F46));
     return Material(
       color: bg,
       borderRadius: BorderRadius.circular(10),
@@ -620,6 +638,611 @@ class _ProgressTabsCardState extends State<ProgressTabsCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [_tabs(), ...body],
+      ),
+    );
+  }
+}
+
+/// Basınca hafifçe küçülen, bırakınca yükselen gölgeli düğme (premium his).
+class LiftButton extends StatefulWidget {
+  final Widget child;
+  final VoidCallback? onPressed;
+  final bool primary;
+  final EdgeInsetsGeometry padding;
+
+  const LiftButton({
+    super.key,
+    required this.child,
+    required this.onPressed,
+    this.primary = false,
+    this.padding = const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+  });
+
+  @override
+  State<LiftButton> createState() => _LiftButtonState();
+}
+
+class _LiftButtonState extends State<LiftButton> {
+  bool _down = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final primary = widget.primary;
+    final shadow = primary
+        ? [
+            BoxShadow(
+              color: AppTheme.brandBlue.withValues(alpha: _down ? 0.25 : 0.45),
+              blurRadius: _down ? 6 : 16,
+              spreadRadius: -4,
+              offset: Offset(0, _down ? 2 : 8),
+            ),
+          ]
+        : [
+            BoxShadow(
+              color: const Color(0xFF0F172A)
+                  .withValues(alpha: _down ? 0.04 : 0.10),
+              blurRadius: _down ? 2 : 12,
+              spreadRadius: -4,
+              offset: Offset(0, _down ? 1 : 6),
+            ),
+          ];
+    return GestureDetector(
+      onTapDown: (_) => setState(() => _down = true),
+      onTapCancel: () => setState(() => _down = false),
+      onTapUp: (_) => setState(() => _down = false),
+      onTap: widget.onPressed,
+      child: AnimatedScale(
+        scale: _down ? 0.96 : 1,
+        duration: const Duration(milliseconds: 120),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 160),
+          padding: widget.padding,
+          decoration: BoxDecoration(
+            gradient: primary
+                ? const LinearGradient(
+                    colors: [
+                      Color(0xFF10B981),
+                      Color(0xFF059669),
+                      Color(0xFF047857),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  )
+                : null,
+            color: primary ? null : PanelColors.card(context),
+            borderRadius: BorderRadius.circular(10),
+            border: primary
+                ? null
+                : Border.all(color: PanelColors.border(context)),
+            boxShadow: shadow,
+          ),
+          child: DefaultTextStyle.merge(
+            style: TextStyle(
+              fontSize: 12.5,
+              fontWeight: FontWeight.w700,
+              color: primary ? Colors.white : PanelColors.text(context),
+            ),
+            child: IconTheme.merge(
+              data: IconThemeData(
+                size: 16,
+                color: primary ? Colors.white : PanelColors.text(context),
+              ),
+              child: widget.child,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _Pill extends StatelessWidget {
+  final IconData? icon;
+  final String text;
+  final Color bg;
+  final Color fg;
+
+  const _Pill({
+    this.icon,
+    required this.text,
+    required this.bg,
+    required this.fg,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
+      decoration: BoxDecoration(
+        color: bg,
+        borderRadius: BorderRadius.circular(99),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (icon != null) ...[
+            Icon(icon, size: 14, color: fg),
+            const SizedBox(width: 4),
+          ],
+          Text(
+            text,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w800,
+              color: fg,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const Map<String, IconData> _taskIcons = {
+  'layers': Icons.layers_outlined,
+  'trending-up': Icons.trending_up,
+  'target': Icons.track_changes,
+  'shield-alert': Icons.shield_outlined,
+};
+
+Widget _gradientBar() => Container(
+  height: 3,
+  decoration: const BoxDecoration(
+    gradient: LinearGradient(
+      colors: [Color(0xFF10B981), Color(0xFF6FA287), Color(0xFF10B981)],
+    ),
+  ),
+);
+
+/// Günlük görevler: seviye tespitinden önce kilitli; sonra seri, haftalık takvim ve görev listesi.
+class DailyTasksCard extends StatelessWidget {
+  final Map<String, dynamic> daily;
+  final VoidCallback onStartPlacement;
+  final void Function(Map<String, dynamic> task) onTask;
+
+  const DailyTasksCard({
+    super.key,
+    required this.daily,
+    required this.onStartPlacement,
+    required this.onTask,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final text = PanelColors.text(context);
+    final muted = PanelColors.muted(context);
+    if (daily['locked'] == true) {
+      return PanelCard(
+        key: const Key('daily_locked'),
+        padding: EdgeInsets.zero,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _gradientBar(),
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          width: 44,
+                          height: 44,
+                          decoration: BoxDecoration(
+                            color: AppTheme.brandBlue,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: const Icon(
+                            Icons.insights_rounded,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            'Günlük görevlerin seviye tespitinden sonra açılır',
+                            style: TextStyle(
+                              fontSize: 14.5,
+                              fontWeight: FontWeight.w800,
+                              color: text,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      '5 dakikalık uyarlamalı sınavla seviyeni belirle; sana her gün kelime, soru ve hata görevleri verelim, ilerlemeni seri ve kur yolculuğuyla takip et.',
+                      style: TextStyle(fontSize: 12, height: 1.4, color: muted),
+                    ),
+                    const SizedBox(height: 12),
+                    SizedBox(
+                      width: double.infinity,
+                      child: LiftButton(
+                        key: const Key('daily_start_placement'),
+                        primary: true,
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        onPressed: onStartPlacement,
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.play_arrow_rounded),
+                            SizedBox(width: 6),
+                            Text('Seviye tespitine başla'),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    final placement = (daily['placement'] as Map?) ?? {};
+    final tasks = ((daily['tasks'] as List?) ?? [])
+        .cast<Map<String, dynamic>>();
+    final week = ((daily['week'] as List?) ?? []).cast<Map<String, dynamic>>();
+    final mastered = placement['mastered'];
+    final masteredText = mastered != null ? '$mastered geçildi · ' : '';
+    final allDone = daily['all_done'] == true;
+    return PanelCard(
+      key: const Key('daily_tasks'),
+      padding: EdgeInsets.zero,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _gradientBar(),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(14, 14, 14, 6),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'Günlük görevler',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w800,
+                            color: text,
+                          ),
+                        ),
+                      ),
+                      _Pill(
+                        icon: Icons.local_fire_department,
+                        text: '${daily['streak'] ?? 0} gün',
+                        bg: const Color(0xFFFFF7ED),
+                        fg: const Color(0xFFC2410C),
+                      ),
+                      const SizedBox(width: 6),
+                      _Pill(
+                        text: '${daily['xp_today'] ?? 0} XP',
+                        bg: const Color(0xFFEEF5F1),
+                        fg: const Color(0xFF4A775F),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    'Seviye tespiti: $masteredText'
+                    'önerilen ${placement['level']}',
+                    style: TextStyle(fontSize: 11, color: muted),
+                  ),
+                  const SizedBox(height: 12),
+                  Row(
+                    key: const Key('daily_week'),
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      for (final w in week) _weekDot(context, w, muted),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    allDone
+                        ? 'Bugünün görevleri tamam! +20 bonus XP kazandın.'
+                        : '${daily['tasks_done'] ?? 0}/${daily['tasks_total'] ?? tasks.length} görev tamam',
+                    key: const Key('daily_summary'),
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                      color: allDone ? AppTheme.accentEmerald : muted,
+                    ),
+                  ),
+                  for (var i = 0; i < tasks.length; i++)
+                    _taskRow(context, tasks[i], i < tasks.length - 1),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _weekDot(BuildContext context, Map<String, dynamic> w, Color muted) {
+    final completed = w['completed'] == true;
+    final today = w['today'] == true;
+    return Column(
+      children: [
+        Container(
+          width: 28,
+          height: 28,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: completed
+                ? AppTheme.accentEmerald
+                : w['active'] == true
+                ? const Color(0xFFD1FAE5)
+                : PanelColors.tile(context),
+            border: today
+                ? Border.all(color: AppTheme.brandBlue, width: 2)
+                : null,
+          ),
+          child: completed
+              ? const Icon(Icons.check, size: 15, color: Colors.white)
+              : null,
+        ),
+        const SizedBox(height: 3),
+        Text(
+          '${w['label']}',
+          style: TextStyle(
+            fontSize: 10,
+            fontWeight: FontWeight.w600,
+            color: today ? AppTheme.brandBlue : muted,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _taskRow(BuildContext context, Map<String, dynamic> t, bool divider) {
+    final done = (t['done'] as num?)?.toInt() ?? 0;
+    final target = (t['target'] as num?)?.toInt() ?? 1;
+    final complete = done >= target;
+    return DecoratedBox(
+      key: Key('task_${t['id']}'),
+      decoration: BoxDecoration(
+        border: divider
+            ? Border(bottom: BorderSide(color: PanelColors.border(context)))
+            : null,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: Row(
+          children: [
+            Container(
+              width: 36,
+              height: 36,
+              decoration: BoxDecoration(
+                color: complete
+                    ? AppTheme.accentEmerald
+                    : AppTheme.brandLightBlue,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Icon(
+                complete
+                    ? Icons.check
+                    : (_taskIcons[t['icon']] ?? Icons.circle_outlined),
+                size: 18,
+                color: complete ? Colors.white : AppTheme.brandBlue,
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          '${t['title']}',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w700,
+                            color: complete
+                                ? PanelColors.muted(context)
+                                : PanelColors.text(context),
+                            decoration: complete
+                                ? TextDecoration.lineThrough
+                                : null,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      Text(
+                        '$done/$target',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: PanelColors.muted(context),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 5),
+                  ProgressLine(
+                    value: target == 0 ? 0 : done / target,
+                    color: complete
+                        ? AppTheme.accentEmerald
+                        : AppTheme.brandBlue,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 8),
+            complete
+                ? _Pill(
+                    text: '+${t['xp'] ?? 10} XP',
+                    bg: const Color(0xFFECFDF5),
+                    fg: const Color(0xFF047857),
+                  )
+                : LiftButton(
+                    key: Key('task_start_${t['id']}'),
+                    onPressed: () => onTask(t),
+                    child: const Text('Başla'),
+                  ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Kur yolculuğu: seçili kurdaki doğru oranı ve üst kura hazır olma.
+class JourneyCard extends StatelessWidget {
+  final Map<String, dynamic> journey;
+  final void Function(String level) onNextLevel;
+
+  const JourneyCard({
+    super.key,
+    required this.journey,
+    required this.onNextLevel,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final pct = (journey['pct'] as num?)?.toInt() ?? 0;
+    final readyPct = (journey['ready_pct'] as num?)?.toInt() ?? 70;
+    final next = journey['next_level'];
+    final ready = journey['ready'] == true;
+    final subtitle = next != null
+        ? '${journey['level']} · hedef $next · %$readyPct doğruda üst kura hazırsın'
+        : '${journey['level']} · en üst kur';
+    return PanelCard(
+      key: const Key('journey_card'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 36,
+                height: 36,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFEEF5F1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Icon(
+                  Icons.landscape_outlined,
+                  size: 19,
+                  color: Color(0xFF4A775F),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Kur yolculuğu',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w800,
+                        color: PanelColors.text(context),
+                      ),
+                    ),
+                    Text(
+                      subtitle,
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: PanelColors.muted(context),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Text(
+                '%$pct',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
+                  color: PanelColors.text(context),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          LayoutBuilder(
+            builder: (context, box) => Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Container(
+                  height: 10,
+                  decoration: BoxDecoration(
+                    color: PanelColors.track(context),
+                    borderRadius: BorderRadius.circular(99),
+                  ),
+                ),
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 700),
+                  curve: Curves.easeOutCubic,
+                  height: 10,
+                  width: box.maxWidth * (pct.clamp(0, 100) / 100),
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [
+                        Color(0xFF6FA287),
+                        Color(0xFF10B981),
+                        Color(0xFF10B981),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(99),
+                  ),
+                ),
+                Positioned(
+                  left: box.maxWidth * readyPct / 100 - 1,
+                  top: -4,
+                  child: Container(
+                    width: 2,
+                    height: 18,
+                    color: PanelColors.text(context).withValues(alpha: 0.35),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  '${journey['correct']}/${journey['total']} soru doğru',
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: PanelColors.muted(context),
+                  ),
+                ),
+              ),
+              if (ready && next != null)
+                LiftButton(
+                  key: const Key('journey_next'),
+                  primary: true,
+                  onPressed: () => onNextLevel('$next'),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.rocket_launch_outlined),
+                      const SizedBox(width: 6),
+                      Text('$next kuruna geç'),
+                    ],
+                  ),
+                ),
+            ],
+          ),
+        ],
       ),
     );
   }

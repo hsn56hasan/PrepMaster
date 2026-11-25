@@ -169,14 +169,14 @@ class _WritingScreenState extends State<WritingScreen>
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             gradient: const LinearGradient(
-              colors: [Color(0xFF312E81), Color(0xFF1E1B4B)],
+              colors: [Color(0xFF065F46), Color(0xFF022C22)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(22),
             boxShadow: [
               BoxShadow(
-                color: Colors.indigo.withValues(alpha: 0.3),
+                color: AppTheme.sageSwatch.withValues(alpha: 0.3),
                 blurRadius: 14,
                 offset: const Offset(0, 6),
               ),
@@ -191,7 +191,7 @@ class _WritingScreenState extends State<WritingScreen>
                   vertical: 4,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.indigoAccent.withValues(alpha: 0.3),
+                  color: AppTheme.sageSwatch.withValues(alpha: 0.3),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: const Row(
@@ -293,9 +293,9 @@ class _WritingScreenState extends State<WritingScreen>
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Colors.blue.shade50.withValues(alpha: 0.5),
+                  color: AppTheme.brandSwatch.shade50.withValues(alpha: 0.5),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.blue.shade100),
+                  border: Border.all(color: AppTheme.brandSwatch.shade100),
                 ),
                 child: Text(
                   _selectedPrompt['desc']!,
@@ -560,9 +560,9 @@ class _WritingScreenState extends State<WritingScreen>
                     vertical: 3,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.blue.shade50,
+                    color: AppTheme.brandSwatch.shade50,
                     borderRadius: BorderRadius.circular(6),
-                    border: Border.all(color: Colors.blue.shade200),
+                    border: Border.all(color: AppTheme.brandSwatch.shade200),
                   ),
                   child: Text(
                     t,
@@ -889,9 +889,9 @@ class _WritingScreenState extends State<WritingScreen>
                                 vertical: 4,
                               ),
                               decoration: BoxDecoration(
-                                color: Colors.blue.shade50,
+                                color: AppTheme.brandSwatch.shade50,
                                 borderRadius: BorderRadius.circular(8),
-                                border: Border.all(color: Colors.blue.shade200),
+                                border: Border.all(color: AppTheme.brandSwatch.shade200),
                               ),
                               child: Text(
                                 tr,

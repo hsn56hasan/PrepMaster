@@ -11,6 +11,7 @@ import 'flashcards_screen.dart';
 import 'practice_screen.dart';
 import 'writing_screen.dart';
 import 'analytics_screen.dart';
+import 'path_screen.dart';
 
 class HomeNavigation extends StatefulWidget {
   const HomeNavigation({super.key});
@@ -25,6 +26,7 @@ class _HomeNavigationState extends State<HomeNavigation> {
   String _currentLevel = 'B2';
   int _mistakeCount = 0;
   bool _isLoading = true;
+  bool _pathVisited = false; // Konu Yolu ilk açılışta yüklenir
 
   @override
   void initState() {
@@ -82,6 +84,7 @@ class _HomeNavigationState extends State<HomeNavigation> {
   void _onTabSwitch(int index) {
     setState(() {
       _currentIndex = index;
+      if (index == 7) _pathVisited = true;
     });
   }
 
@@ -121,7 +124,12 @@ class _HomeNavigationState extends State<HomeNavigation> {
         currentLevel: _currentLevel,
       ),
       const AnalyticsScreen(),
+      _pathVisited ? const PathScreen() : const SizedBox.shrink(), // 7: Konu Yolu
     ];
+
+    // Alt çubuk sırası -> sayfa indeksi (Konu Yolu ikinci sırada)
+    const navPages = [0, 7, 1, 2, 3, 4];
+    final navIndex = navPages.indexOf(_currentIndex);
 
     return Scaffold(
       body: IndexedStack(
@@ -129,10 +137,11 @@ class _HomeNavigationState extends State<HomeNavigation> {
         children: pages,
       ),
       bottomNavigationBar: NavigationBar(
-        selectedIndex: _currentIndex > 4 ? 0 : _currentIndex,
+        selectedIndex: navIndex < 0 ? 0 : navIndex,
         onDestinationSelected: (idx) {
           setState(() {
-            _currentIndex = idx;
+            _currentIndex = navPages[idx];
+            if (_currentIndex == 7) _pathVisited = true;
           });
         },
         backgroundColor: Colors.white,
@@ -143,6 +152,11 @@ class _HomeNavigationState extends State<HomeNavigation> {
             icon: Icon(Icons.dashboard_outlined),
             selectedIcon: Icon(Icons.dashboard_rounded, color: AppTheme.brandBlue),
             label: 'Özet',
+          ),
+          const NavigationDestination(
+            icon: Icon(Icons.route_outlined),
+            selectedIcon: Icon(Icons.route_rounded, color: AppTheme.brandBlue),
+            label: 'Yol',
           ),
           const NavigationDestination(
             icon: Icon(Icons.description_outlined),

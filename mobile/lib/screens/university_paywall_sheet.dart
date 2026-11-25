@@ -382,17 +382,17 @@ class _UniversityPaywallSheetState extends State<UniversityPaywallSheet> {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.blue.shade50,
+                  color: AppTheme.brandSwatch.shade50,
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: Colors.blue.shade200),
+                  border: Border.all(color: AppTheme.brandSwatch.shade200),
                 ),
                 child: Column(
                   children: [
-                    const Icon(Icons.security_rounded, color: Colors.blue, size: 36),
+                    const Icon(Icons.security_rounded, color: AppTheme.brandSwatch, size: 36),
                     const SizedBox(height: 6),
                     const Text(
                       'PrepKampüs 3D Secure Doğrulama',
-                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue, fontSize: 15),
+                      style: TextStyle(fontWeight: FontWeight.bold, color: AppTheme.brandSwatch, fontSize: 15),
                     ),
                     const SizedBox(height: 4),
                     Text(
@@ -441,7 +441,7 @@ class _UniversityPaywallSheetState extends State<UniversityPaywallSheet> {
                 key: const Key('btn_verify_3ds'),
                 onPressed: isLoading ? null : _verify3DSAndComplete,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue.shade700,
+                  backgroundColor: AppTheme.brandSwatch.shade700,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),

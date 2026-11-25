@@ -16,11 +16,11 @@
   <meta property="og:title" content="PrepKampüs (PrepKampus) | 26 Üniversite İngilizce Hazırlık & Muafiyet Sınav Platformu">
   <meta property="og:description" content="PrepKampüs (PrepKampus): İTÜ Proficiency, Boğaziçi BUEPT, ODTÜ EPE, Bilkent PAE/COPE, YTÜ İYS, Koç KUEPE ve Sabancı ELAE dâhil 26 üniversite için 11.525 soru, 2.019 kelime, 656 listening ve 657 speaking denemesi.">
   <meta property="og:url" content="https://prepkampus.com/">
-  <meta property="og:image" content="https://prepkampus.com/static/img/logo-512.png">
+  <meta property="og:image" content="https://prepkampus.com/static/img/logo-512.png?v=2">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PrepKampüs (PrepKampus) | Üniversite İngilizce Hazırlık & Muafiyet Platformu">
   <meta name="twitter:description" content="PrepKampüs (PrepKampus): 26 üniversitenin İngilizce hazırlık muafiyet ve A1–C2 kur sınavları. E-Devlet öğrenci belgenle kendi okulunu ücretsiz aç!">
-  <meta name="twitter:image" content="https://prepkampus.com/static/img/logo-512.png">
+  <meta name="twitter:image" content="https://prepkampus.com/static/img/logo-512.png?v=2">
 
   <!-- Structured Data (Schema.org JSON-LD) -->
   <script type="application/ld+json">
@@ -32,7 +32,7 @@
         "name": "PrepKampüs",
         "alternateName": ["PrepKampus", "prepkampus", "Prep Kampüs", "Prep Kampus", "PerpKampus", "PerpKampüs", "prepkampus.com"],
         "url": "https://prepkampus.com/",
-        "logo": "https://prepkampus.com/static/img/logo-512.png",
+        "logo": "https://prepkampus.com/static/img/logo-512.png?v=2",
         "description": "PrepKampüs (PrepKampus) — Türkiye'deki 26 üniversitenin İngilizce hazırlık muafiyet (Proficiency) ve A1–C2 kur sınavlarına yönelik çevrimiçi çalışma ve deneme platformu.",
         "email": "destek@prepkampus.com"
       },
@@ -69,16 +69,16 @@
   </script>
   
   <!-- Mobile & PWA Metas -->
-  <link rel="icon" type="image/svg+xml" href="/static/img/logo.svg">
-  <link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon-32x32.png">
-  <link rel="shortcut icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/static/img/logo.svg?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon-32x32.png?v=2">
+  <link rel="shortcut icon" href="/static/favicon.ico?v=2">
   <link rel="manifest" href="/static/manifest.json">
-  <meta name="theme-color" content="#1e3a8a">
+  <meta name="theme-color" content="#047857">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="PrepKampüs">
-  <link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png?v=2">
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -89,25 +89,26 @@
         extend: {
           colors: {
             brand: {
-              50: '#eff6ff',
-              100: '#dbeafe',
-              500: '#3b82f6',
-              600: '#2563eb',
-              700: '#1d4ed8',
-              800: '#1e40af',
-              900: '#1e3a8a',
+              50: '#effaf4',
+              100: '#d9f2e5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
             }
           }
         }
       }
     }
   </script>
+  <script src="/static/js/theme_palette.js?v=1.0"></script>
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <!-- Custom Styles -->
-  <link rel="stylesheet" href="/static/css/style.css?v=2.2">
+  <link rel="stylesheet" href="/static/css/style.css?v=4.3">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -125,13 +126,14 @@
     <div class="max-w-[1760px] mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center gap-3 lg:gap-6">
 
       <button type="button" data-nav-tab="dashboard" data-nav-style="brand" class="flex items-center gap-2 shrink-0" title="Panel">
-        <img src="/static/img/logo.png" alt="PrepKampüs Logo" class="w-8 h-8 rounded-lg object-cover">
+        <img src="/static/img/logo.png?v=2" alt="PrepKampüs Logo" class="w-8 h-8 rounded-lg object-cover">
         <span class="font-extrabold text-[15px] tracking-tight text-slate-900">PrepKampüs</span>
       </button>
 
       <!-- Masaüstü menü (telefonda alt çubuk kullanılır) -->
       <nav id="top-nav" class="hidden md:flex items-stretch self-stretch gap-0.5" aria-label="Ana menü">
         <button type="button" data-nav-tab="dashboard" data-nav-style="top" class="top-nav-link">Panel</button>
+        <button type="button" data-nav-tab="path" data-nav-style="top" class="top-nav-link"><i data-lucide="route" class="w-4 h-4 opacity-70"></i>Konu Yolu</button>
 
         <div class="relative flex" data-nav-group="exams mistakes">
           <button type="button" class="top-nav-link" data-nav-group-btn aria-haspopup="true" aria-expanded="false">
@@ -223,7 +225,7 @@
             </button>
             <button role="menuitem" onclick="closeHeaderMenu(); openApkDownloadModal()" id="header-apk-btn" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700/60 transition text-left" title="Android Mobil Uygulamayı İndir (.APK)">
               <i data-lucide="smartphone" class="w-4 h-4 text-emerald-600"></i>
-              <span>Mobil Uygulama (APK v1.8)</span>
+              <span>Mobil Uygulama (APK v2.1)</span>
             </button>
             <button role="menuitem" onclick="toggleDarkMode()" id="header-theme-btn" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700/60 transition text-left" title="Karanlık / Aydınlık Mod">
               <i data-lucide="moon" class="w-4 h-4" id="theme-icon"></i>
@@ -297,17 +299,8 @@
             <!-- Uyarılar (Hata Kasası, kilitli okul) -->
             <div id="dashboard-alerts" class="space-y-2"></div>
 
-            <!-- Seviye tespiti teklifi / özeti (static/js/placement.js doldurur) -->
-            <div id="placement-card"></div>
-
-            <!-- Bugünün planı -->
-            <div class="panel-card p-4 sm:p-5">
-              <div class="flex items-center justify-between mb-1">
-                <h3 class="text-sm font-extrabold text-slate-900">Bugünün planı</h3>
-                <span id="dashboard-plan-progress" class="text-xs font-semibold text-slate-500"></span>
-              </div>
-              <div id="dashboard-plan"><p class="text-xs text-slate-400 py-3">Yükleniyor…</p></div>
-            </div>
+            <!-- Günlük görevler (seviye tespitinden sonra açılır) ve kur yolculuğu -->
+            <div id="dashboard-daily"></div>
 
             <!-- Okul ve sınav formatı -->
             <div class="panel-card p-4 sm:p-5">
@@ -356,6 +349,11 @@
       </section>
 
       <!-- ================= 2. TAB: EXAMS ================= -->
+      <!-- ================= KONU YOLU: seviyeye göre ilerleyen alıştırmalı dersler ================= -->
+      <section id="tab-content-path" class="hidden">
+        <div id="path-root"></div>
+      </section>
+
       <section id="tab-content-exams" class="hidden space-y-5">
         <!-- renderExamsTab() doldurur: deneme satırları, sınav formatı, ipuçları -->
         <div id="exams-cards-container"></div>
@@ -686,6 +684,10 @@
       <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
       <span>Özet</span>
     </button>
+    <button data-nav-tab="path" class="shrink-0 min-w-[64px] flex flex-col items-center gap-1 p-2 text-slate-500 text-[10px] font-bold">
+      <i data-lucide="route" class="w-5 h-5 text-emerald-600"></i>
+      <span>Konu Yolu</span>
+    </button>
     <button data-nav-tab="exams" class="shrink-0 min-w-[64px] flex flex-col items-center gap-1 p-2 text-slate-500 text-[10px] font-bold">
       <i data-lucide="file-text" class="w-5 h-5"></i>
       <span>Denemeler</span>
@@ -884,22 +886,50 @@
   </div>
 
   <!-- ================= KULLANICI GİRİŞ & HESAP YÖNETİMİ MODAL (TAM EKRAN KARŞILAMA KAPISI) ================= -->
-  <div id="auth-modal" data-mandatory="true" class="fixed inset-0 z-50 bg-gradient-to-br from-slate-950 via-blue-950 to-indigo-950 p-4 overflow-y-auto flex flex-col items-center justify-center">
-    <!-- Tam Ekran Karşılama Başlığı (Giriş Yapılmadığında Gözükür) -->
-    <div id="auth-gate-brand-header" class="text-center mb-5 max-w-md w-full px-2">
-      <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl shadow-xl shadow-blue-500/30 mb-3 border border-white/15 overflow-hidden">
-        <img src="/static/img/logo.png" alt="PrepKampüs Logo" class="w-full h-full object-cover">
-      </div>
-      <div class="flex items-center justify-center gap-2 mb-1">
-        <h1 class="text-2xl font-black text-white tracking-tight">PrepKampüs</h1>
-        <span class="text-[10px] uppercase font-extrabold tracking-widest px-2.5 py-0.5 bg-blue-500/20 text-blue-300 border border-blue-400/30 rounded-full">YÖK & Hazırlık</span>
-      </div>
-      <p class="text-xs text-slate-300 font-medium">
-        Üniversite İngilizce Hazırlık Muafiyet & Kur Sınavı Simülasyon Platformu
-      </p>
-    </div>
+  <div id="auth-modal" data-mandatory="true" class="fixed inset-0 z-50 landing-shell overflow-y-auto">
+    <!-- Ana sayfa (girişsiz ziyaretçi): solda tanıtım, sağda giriş kartı; telefonda tanıtım → kart → özellikler -->
+    <div class="landing-blob landing-blob-a" aria-hidden="true"></div>
+    <div class="landing-blob landing-blob-b" aria-hidden="true"></div>
+    <div id="auth-landing-grid" class="landing-grid">
 
-    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-100 space-y-4 my-auto">
+      <!-- Tanıtım -->
+      <div id="auth-gate-brand-header" class="landing-hero">
+        <div class="flex items-center gap-3 reveal" style="--d:0ms">
+          <img src="/static/img/logo.png?v=2" alt="PrepKampüs Logo" class="w-12 h-12 rounded-2xl object-cover landing-logo">
+          <div>
+            <div class="text-xl font-black text-slate-900 tracking-tight">PrepKampüs</div>
+            <div class="text-[11px] font-bold text-emerald-700">Üniversite hazırlık &amp; muafiyet</div>
+          </div>
+        </div>
+        <h1 class="landing-title reveal" style="--d:60ms">
+          Muafiyet sınavına <span class="landing-highlight">okulunun formatında</span> hazırlan.
+        </h1>
+        <p class="landing-lead reveal" style="--d:120ms">
+          26 üniversitenin proficiency sınavına özel sorular, seviyene göre günlük görevler ve adım adım ilerleme takibi.
+          Ücretsiz seviye tespitiyle başla, hazırlık yılını planlı geçir.
+        </p>
+        <div class="flex flex-wrap items-center gap-2.5 reveal" style="--d:180ms">
+          <button type="button" id="landing-cta-register" onclick="landingGo('register')" class="landing-btn landing-btn-primary">
+            <i data-lucide="sparkles" class="w-4 h-4"></i><span>Ücretsiz hesap oluştur</span>
+          </button>
+          <button type="button" id="landing-cta-login" onclick="landingGo('login')" class="landing-btn">
+            <i data-lucide="log-in" class="w-4 h-4"></i><span>Giriş yap</span>
+          </button>
+          <button type="button" onclick="openApkDownloadModal()" class="landing-btn landing-btn-ghost">
+            <i data-lucide="smartphone" class="w-4 h-4"></i><span>Android uygulama</span>
+          </button>
+        </div>
+        <div class="landing-stats reveal" style="--d:240ms">
+          <div><strong>26</strong><span>üniversite</span></div>
+          <div><strong>11.525</strong><span>soru</span></div>
+          <div><strong>2.078</strong><span>kelime</span></div>
+          <div><strong>A1–C2</strong><span>tüm kurlar</span></div>
+        </div>
+      </div>
+
+      <!-- Giriş / kayıt kartı -->
+      <div id="auth-card-wrap" class="landing-card-wrap reveal" style="--d:120ms">
+    <div id="auth-card" class="landing-card bg-white rounded-3xl w-full p-6 border border-slate-100 space-y-4">
       
       <!-- Modal Header -->
       <div class="flex items-center justify-between pb-3 border-b border-slate-100">
@@ -1100,7 +1130,7 @@
             <i data-lucide="smartphone" class="w-4 h-4 text-emerald-400"></i>
             <span>Uygulama Olarak Kullan (Android APK İndir)</span>
           </span>
-          <span class="text-[10px] font-black px-2 py-0.5 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 rounded-full">19.2 MB ↓</span>
+          <span class="text-[10px] font-black px-2 py-0.5 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 rounded-full">19.6 MB ↓</span>
         </button>
 
         <!-- Öğrenci Destek & KVKK Hızlı Erişim Barı -->
@@ -1127,27 +1157,76 @@
 
         <div class="flex items-center justify-between text-[11px] text-slate-400">
           <span class="flex items-center gap-1"><i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i> 6698 S. KVKK Uyumlu</span>
-          <span>Kendi Okuluna %100 Ücretsiz</span>
+          <span>Öğrenci belgesiyle kendi okulun ücretsiz</span>
         </div>
       </div>
 
     </div>
-
-    <!-- Google & Ziyaretçiler İçin 26 Üniversite Sınav Rehberi Özeti -->
-    <div class="max-w-md w-full mt-4 p-4 rounded-2xl bg-slate-900/60 border border-white/10 text-slate-200 space-y-2.5 text-center">
-      <div class="flex items-center justify-between text-[11px] font-bold">
-        <span class="text-blue-300">PrepKampüs (PrepKampus) • 26 Üniversite • 11.525 Soru</span>
-        <a href="/sinavlar" class="text-emerald-300 hover:text-emerald-200 underline">Tüm Sınav Rehberleri →</a>
       </div>
-      <div class="flex flex-wrap items-center justify-center gap-1.5 text-[10px] font-bold">
-        <a href="/universite/itu" class="px-2 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white transition">İTÜ Proficiency</a>
-        <a href="/universite/boun" class="px-2 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white transition">Boğaziçi BUEPT</a>
-        <a href="/universite/metu" class="px-2 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white transition">ODTÜ EPE</a>
-        <a href="/universite/bilkent" class="px-2 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white transition">Bilkent PAE/COPE</a>
-        <a href="/universite/ytu" class="px-2 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white transition">YTÜ İYS</a>
-        <a href="/universite/koc" class="px-2 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white transition">Koç KUEPE</a>
-        <a href="/universite/sabanci" class="px-2 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white transition">Sabancı ELAE</a>
-        <a href="/kvkk" class="px-2 py-1 rounded-lg bg-white/5 hover:bg-white/15 text-slate-300 transition">KVKK &amp; Destek</a>
+
+      <!-- Özellikler -->
+      <div id="auth-gate-features" class="landing-features">
+        <div class="landing-feature reveal" style="--d:180ms">
+          <span class="landing-feature-icon"><i data-lucide="building-2" class="w-5 h-5"></i></span>
+          <div>
+            <h3 class="text-sm font-extrabold text-slate-900">26 üniversiteye özel</h3>
+            <p class="text-xs text-slate-500 leading-relaxed mt-0.5">İTÜ, ODTÜ, Boğaziçi, Bilkent ve 22 okulun sınav formatına göre denemeler.</p>
+          </div>
+        </div>
+        <div class="landing-feature reveal" style="--d:250ms">
+          <span class="landing-feature-icon"><i data-lucide="list-checks" class="w-5 h-5"></i></span>
+          <div>
+            <h3 class="text-sm font-extrabold text-slate-900">11.525 soru</h3>
+            <p class="text-xs text-slate-500 leading-relaxed mt-0.5">Her kurda okula özel sorular, açıklamalı çözümler ve Hata Kasası.</p>
+          </div>
+        </div>
+        <div class="landing-feature reveal" style="--d:320ms">
+          <span class="landing-feature-icon"><i data-lucide="gauge" class="w-5 h-5"></i></span>
+          <div>
+            <h3 class="text-sm font-extrabold text-slate-900">Seviye tespiti</h3>
+            <p class="text-xs text-slate-500 leading-relaxed mt-0.5">5 dakikalık uyarlamalı sınavla A1–C2 arasında başlangıç kurunu bul.</p>
+          </div>
+        </div>
+        <div class="landing-feature reveal" style="--d:390ms">
+          <span class="landing-feature-icon"><i data-lucide="calendar-check" class="w-5 h-5"></i></span>
+          <div>
+            <h3 class="text-sm font-extrabold text-slate-900">Günlük görevler</h3>
+            <p class="text-xs text-slate-500 leading-relaxed mt-0.5">Seviyene göre kelime, soru ve hata görevleri; seri ve XP ile ilerle.</p>
+          </div>
+        </div>
+        <div class="landing-feature reveal" style="--d:460ms">
+          <span class="landing-feature-icon"><i data-lucide="headphones" class="w-5 h-5"></i></span>
+          <div>
+            <h3 class="text-sm font-extrabold text-slate-900">Dinleme, konuşma, yazma</h3>
+            <p class="text-xs text-slate-500 leading-relaxed mt-0.5">Akademik dinleme, konuşma görevleri ve yazma rehberleri tek yerde.</p>
+          </div>
+        </div>
+        <div class="landing-feature reveal" style="--d:530ms">
+          <span class="landing-feature-icon"><i data-lucide="smartphone" class="w-5 h-5"></i></span>
+          <div>
+            <h3 class="text-sm font-extrabold text-slate-900">Mobil uygulama v2.1</h3>
+            <p class="text-xs text-slate-500 leading-relaxed mt-0.5">Android uygulamasıyla kelime kartları ve sorular her an cebinde.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sınav rehberleri (SEO bağlantıları) -->
+      <div id="auth-gate-guides" class="landing-guides reveal" style="--d:600ms">
+        <div class="flex items-center justify-between gap-3 mb-2">
+          <span class="text-xs font-extrabold text-slate-800">Sınav rehberleri</span>
+          <a href="/sinavlar" class="text-xs font-bold text-emerald-700 hover:underline">Tüm 26 üniversite →</a>
+        </div>
+        <div class="flex flex-wrap gap-1.5">
+          <a href="/universite/itu" class="landing-chip">İTÜ Proficiency</a>
+          <a href="/universite/boun" class="landing-chip">Boğaziçi BUEPT</a>
+          <a href="/universite/metu" class="landing-chip">ODTÜ EPE</a>
+          <a href="/universite/bilkent" class="landing-chip">Bilkent COPE</a>
+          <a href="/universite/ytu" class="landing-chip">YTÜ İYS</a>
+          <a href="/universite/koc" class="landing-chip">Koç KUEPE</a>
+          <a href="/universite/sabanci" class="landing-chip">Sabancı ELAE</a>
+          <a href="/universite/hacettepe" class="landing-chip">Hacettepe</a>
+          <a href="/kvkk" class="landing-chip landing-chip-muted">KVKK &amp; destek</a>
+        </div>
       </div>
     </div>
   </div>
@@ -1805,7 +1884,7 @@
         <div class="flex items-center justify-between">
           <div>
             <div class="text-xs font-extrabold text-emerald-300 uppercase tracking-wider">Resmi Android Paketi</div>
-            <div class="text-base font-black text-white mt-0.5">PrepKampus-v1.8-Android.apk</div>
+            <div class="text-base font-black text-white mt-0.5">PrepKampus-v2.1-Android.apk</div>
           </div>
           <div class="text-right">
             <span id="apk-modal-size-badge" class="text-sm font-black text-emerald-400 block">19.2 MB</span>
@@ -1821,7 +1900,7 @@
         </div>
 
         <div class="flex flex-col sm:flex-row gap-2 pt-1">
-          <a href="/api/download/apk" download="PrepKampus-v1.8-Android.apk" onclick="trackApkDownloadClick()" class="flex-1 py-3 px-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-black text-xs rounded-xl shadow-lg shadow-emerald-500/25 transition flex items-center justify-center gap-2">
+          <a href="/api/download/apk" download="PrepKampus-v2.1-Android.apk" onclick="trackApkDownloadClick()" class="flex-1 py-3 px-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-black text-xs rounded-xl shadow-lg shadow-emerald-500/25 transition flex items-center justify-center gap-2">
             <i data-lucide="download" class="w-4 h-4"></i>
             <span>Android APK Dosyasını İndir (19.2 MB)</span>
           </a>
@@ -1839,7 +1918,7 @@
           <span>3 Adımda Kolay Kurulum:</span>
         </div>
         <ol class="text-[11px] text-slate-600 dark:text-slate-300 space-y-1.5 list-decimal list-inside leading-relaxed">
-          <li>Yukarıdaki <strong>"Android APK Dosyasını İndir"</strong> butonuna tıklayarak <code>PrepKampus-v1.8-Android.apk</code> dosyasını telefonunuza indirin.</li>
+          <li>Yukarıdaki <strong>"Android APK Dosyasını İndir"</strong> butonuna tıklayarak <code>PrepKampus-v2.1-Android.apk</code> dosyasını telefonunuza indirin.</li>
           <li>İndirilen dosyaya dokunun. İlk kez mağaza dışı uygulama kuruyorsanız <strong>"Bilinmeyen kaynaklardan uygulama yüklemeye izin ver"</strong> seçeneğini onaylayın.</li>
           <li>Uygulamayı açıp webde oluşturduğunuz <strong>öğrenci hesabınızla giriş yapın</strong>; okulunuz ve tüm ilerlemeniz otomatik eşitlenir!</li>
         </ol>
@@ -2037,8 +2116,9 @@
   <script src="/static/js/listening.js?v=2.0"></script>
   <script src="/static/js/speaking.js?v=2.0"></script>
   <script src="/static/js/writing_ai.js?v=2.0"></script>
-  <script src="/static/js/app.js?v=3.0"></script>
-  <script src="/static/js/placement.js?v=1.1"></script>
+  <script src="/static/js/app.js?v=3.4"></script>
+  <script src="/static/js/placement.js?v=1.2"></script>
+  <script src="/static/js/path.js?v=1.0"></script>
 
   <!-- 3D Secure ödeme Entegrasyonu -->
   <script>

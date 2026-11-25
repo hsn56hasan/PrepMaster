@@ -58,8 +58,8 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
                         colors: [
-                          Color(0xFF312E81),
-                          Color(0xFF4C1D95),
+                          Color(0xFF065F46),
+                          Color(0xFF14221B),
                           Color(0xFF0F172A),
                         ],
                         begin: Alignment.topLeft,
@@ -68,7 +68,7 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
                       borderRadius: BorderRadius.circular(24),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF4338CA)
+                          color: const Color(0xFF4A775F)
                               .withValues(alpha: 0.25),
                           blurRadius: 16,
                           offset: const Offset(0, 8),
@@ -135,7 +135,7 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
                   LevelSelector(
                     selected: _selectedLevel,
                     highlight: widget.currentLevel,
-                    selectedColor: const Color(0xFF4F46E5),
+                    selectedColor: const Color(0xFF4A775F),
                     padding: EdgeInsets.zero,
                     onSelected: (lvl) {
                       setState(() => _selectedLevel = lvl);
@@ -161,7 +161,7 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
                           vertical: 2,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFEEF2FF),
+                          color: const Color(0xFFEEF5F1),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
@@ -169,7 +169,7 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
                           style: const TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF4F46E5),
+                            color: Color(0xFF4A775F),
                           ),
                         ),
                       ),
@@ -246,7 +246,7 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFEEF2FF),
+                    color: const Color(0xFFEEF5F1),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
@@ -254,7 +254,7 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
-                      color: Color(0xFF4338CA),
+                      color: Color(0xFF4A775F),
                       fontSize: 11,
                       fontWeight: FontWeight.bold,
                     ),
@@ -301,7 +301,7 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: const Color(0xFFF8FAFC),
+              color: const Color(0xFFEEF7F2),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(color: Colors.grey.shade200),
             ),
@@ -343,7 +343,7 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF4F46E5),
+                backgroundColor: const Color(0xFF4A775F),
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -504,7 +504,7 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: const Color(0xFFE0E7FF)),
+                border: Border.all(color: const Color(0xFFDDE9E2)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -546,7 +546,7 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
                           const Icon(
                             Icons.arrow_right,
                             size: 16,
-                            color: Color(0xFF4F46E5),
+                            color: Color(0xFF4A775F),
                           ),
                           Expanded(
                             child: Text(
@@ -610,7 +610,7 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF4F46E5),
+              backgroundColor: const Color(0xFF4A775F),
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -789,7 +789,7 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w800,
-                      color: Color(0xFF4338CA),
+                      color: Color(0xFF4A775F),
                     ),
                   ),
                 ],
@@ -865,7 +865,7 @@ class _SpeakingRunnerScreenState extends State<SpeakingRunnerScreen> {
             child: ElevatedButton(
               onPressed: () => Navigator.pop(context),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF4F46E5),
+                backgroundColor: const Color(0xFF4A775F),
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),

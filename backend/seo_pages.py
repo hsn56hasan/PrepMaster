@@ -131,21 +131,21 @@ def compute_counts_by_uni(
 _PAGE_CSS = """
 :root{color-scheme:light}
 *{box-sizing:border-box}
-body{margin:0;font-family:'Plus Jakarta Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#f8fafc;color:#0f172a;line-height:1.6}
-a{color:#1d4ed8;text-decoration:none}
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#eef8f3;color:#0f172a;line-height:1.6}
+a{color:#047857;text-decoration:none}
 a:hover{text-decoration:underline}
-.topbar{background:linear-gradient(135deg,#0f172a,#1e3a8a 60%,#312e81);color:#fff;padding:18px 20px}
+.topbar{background:linear-gradient(135deg,#0f172a,#064e3b 60%,#065f46);color:#fff;padding:18px 20px}
 .container{max-width:1100px;margin:0 auto;padding:0 18px}
 .nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
 .brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:800;font-size:18px}
 .navlinks{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;font-weight:700}
 .navlinks a{color:#cbd5e1}
 .navlinks a:hover{color:#fff}
-.btn{display:inline-block;background:#2563eb;color:#fff;font-weight:700;font-size:13px;padding:10px 18px;border-radius:12px;border:0}
-.btn:hover{background:#1d4ed8;text-decoration:none}
-.btn-outline{display:inline-block;background:#fff;color:#1e3a8a;border:1px solid #cbd5e1;font-weight:700;font-size:13px;padding:9px 16px;border-radius:12px}
+.btn{display:inline-block;background:#059669;color:#fff;font-weight:700;font-size:13px;padding:10px 18px;border-radius:12px;border:0}
+.btn:hover{background:#047857;text-decoration:none}
+.btn-outline{display:inline-block;background:#fff;color:#064e3b;border:1px solid #cbd5e1;font-weight:700;font-size:13px;padding:9px 16px;border-radius:12px}
 .hero{padding:28px 0 12px}
-.badge{display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;background:#dbeafe;color:#1e40af;padding:4px 10px;border-radius:999px}
+.badge{display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;background:#d1fae5;color:#065f46;padding:4px 10px;border-radius:999px}
 h1{font-size:28px;line-height:1.25;margin:10px 0 8px}
 h2{font-size:20px;margin:26px 0 12px;color:#0f172a}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:18px 0}
@@ -159,7 +159,7 @@ h2{font-size:20px;margin:26px 0 12px;color:#0f172a}
 .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .pill{font-size:11px;font-weight:700;background:#f1f5f9;color:#334155;padding:3px 9px;border-radius:999px}
 .section-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
-.tips{background:#eff6ff;border:1px solid #bfdbfe;border-radius:18px;padding:18px 22px}
+.tips{background:#ecfdf5;border:1px solid #a7f3d0;border-radius:18px;padding:18px 22px}
 .tips li{margin-bottom:6px;font-size:14px;color:#1e293b}
 .faq-item{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:14px 18px;margin-bottom:10px}
 .faq-item h3{margin:0 0 6px;font-size:15px}
@@ -253,8 +253,8 @@ def render_exams_hub_html(
   <meta property="og:title" content="{_html.escape(title)}" />
   <meta property="og:description" content="{_html.escape(description)}" />
   <meta property="og:url" content="{_html.escape(canonical)}" />
-  <meta property="og:image" content="{base}/static/img/logo-512.png" />
-  <link rel="icon" type="image/svg+xml" href="/static/img/logo.svg" />
+  <meta property="og:image" content="{base}/static/img/logo-512.png?v=2" />
+  <link rel="icon" type="image/svg+xml" href="/static/img/logo.svg?v=2" />
   <link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon-32x32.png" />
   <link rel="shortcut icon" href="/static/favicon.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
@@ -264,7 +264,7 @@ def render_exams_hub_html(
 <body>
   <header class="topbar">
     <div class="container nav">
-      <a class="brand" href="/" style="display:inline-flex;align-items:center;gap:10px"><img src="/static/img/logo.png" alt="PrepKampüs" width="32" height="32" style="border-radius:8px;vertical-align:middle" />PrepKampüs — İngilizce Hazırlık &amp; Muafiyet</a>
+      <a class="brand" href="/" style="display:inline-flex;align-items:center;gap:10px"><img src="/static/img/logo.png?v=2" alt="PrepKampüs" width="32" height="32" style="border-radius:8px;vertical-align:middle" />PrepKampüs — İngilizce Hazırlık &amp; Muafiyet</a>
       <nav class="navlinks">
         <a href="/">Ana Platform</a>
         <a href="/sinavlar">26 Üniversite Rehberi</a>
@@ -422,8 +422,8 @@ def render_university_seo_html(
   <meta property="og:title" content="{_html.escape(title)}" />
   <meta property="og:description" content="{_html.escape(meta_desc)}" />
   <meta property="og:url" content="{_html.escape(canonical)}" />
-  <meta property="og:image" content="{base}/static/img/logo-512.png" />
-  <link rel="icon" type="image/svg+xml" href="/static/img/logo.svg" />
+  <meta property="og:image" content="{base}/static/img/logo-512.png?v=2" />
+  <link rel="icon" type="image/svg+xml" href="/static/img/logo.svg?v=2" />
   <link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon-32x32.png" />
   <link rel="shortcut icon" href="/static/favicon.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
@@ -433,7 +433,7 @@ def render_university_seo_html(
 <body>
   <header class="topbar">
     <div class="container nav">
-      <a class="brand" href="/" style="display:inline-flex;align-items:center;gap:10px"><img src="/static/img/logo.png" alt="PrepKampüs" width="32" height="32" style="border-radius:8px;vertical-align:middle" />PrepKampüs — İngilizce Hazırlık &amp; Muafiyet</a>
+      <a class="brand" href="/" style="display:inline-flex;align-items:center;gap:10px"><img src="/static/img/logo.png?v=2" alt="PrepKampüs" width="32" height="32" style="border-radius:8px;vertical-align:middle" />PrepKampüs — İngilizce Hazırlık &amp; Muafiyet</a>
       <nav class="navlinks">
         <a href="/">Ana Platform</a>
         <a href="/sinavlar">Tüm 26 Üniversite</a>

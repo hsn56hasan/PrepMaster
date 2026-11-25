@@ -171,7 +171,7 @@ function renderUniversityHeader() {
           <span class="font-bold text-slate-800">${sec.name}</span>
           <span class="text-xs font-semibold text-slate-500 shrink-0">%${sec.weight_percent}</span>
         </div>
-        <div class="progress-track mt-1.5"><div class="progress-fill" style="width:${Math.min(100, sec.weight_percent)}%;background:#2563eb"></div></div>
+        <div class="progress-track mt-1.5"><div class="progress-fill" style="width:${Math.min(100, sec.weight_percent)}%;background:#059669"></div></div>
         <p class="text-[11px] text-slate-500 leading-relaxed mt-1">${sec.description}</p>
       </div>
     `).join('');
@@ -257,7 +257,7 @@ function switchTab(tabName) {
   const currentLvl = window.appState.currentLevel;
 
   // Toggle visible sections
-  const tabs = ['dashboard', 'exams', 'listening', 'speaking', 'practice', 'flashcards', 'writing', 'analytics', 'mistakes'];
+  const tabs = ['dashboard', 'path', 'exams', 'listening', 'speaking', 'practice', 'flashcards', 'writing', 'analytics', 'mistakes'];
   tabs.forEach(t => {
     const el = document.getElementById(`tab-content-${t}`);
     if (el) {
@@ -295,6 +295,8 @@ function switchTab(tabName) {
   // Execute tab-specific loaders with active level parameter
   if (tabName === 'dashboard') {
     loadDashboardStats();
+  } else if (tabName === 'path') {
+    if (window.loadLessonPath) window.loadLessonPath();
   } else if (tabName === 'exams') {
     renderExamsTab(currentLvl);
   } else if (tabName === 'listening') {
@@ -324,11 +326,11 @@ const CATEGORY_COLORS = {
   "Reading": "#D85A30",
   "Restatement": "#BA7517",
   "Cloze Test": "#D4537E",
-  "Sentence Completion": "#185FA5",
+  "Sentence Completion": "#475569",
   "Paragraph Completion": "#0F6E56",
   "Dialogue": "#993556",
 };
-const LEVEL_COLOR = "#2563eb";
+const LEVEL_COLOR = "#059669";
 const dashboardState = { tab: "sections", data: null };
 
 function escHtml(s) {
@@ -351,6 +353,7 @@ function runPlanAction(index) {
   if (!item) return;
   if (item.action.type === "tab") switchTab(item.action.tab);
   else if (item.action.type === "practice") startCategoryPractice(item.action.category, item.action.level);
+  else if (item.action.type === "quick") startExamSimulation();
 }
 
 function renderDashboardSide() {
@@ -430,27 +433,118 @@ function renderDashboardSide() {
   if (window.lucide) window.lucide.createIcons();
 }
 
-function renderDashboardPlan() {
+function renderDashboardDaily() {
   const d = dashboardState.data;
-  const el = document.getElementById("dashboard-plan");
-  const progEl = document.getElementById("dashboard-plan-progress");
+  const el = document.getElementById("dashboard-daily");
   if (!el) return;
-  if (!d) { el.innerHTML = ""; if (progEl) progEl.innerText = ""; return; }
-  const doneCount = d.plan.filter(p => p.done >= p.target).length;
-  if (progEl) progEl.innerText = `${doneCount}/${d.plan.length} tamam`;
-  el.innerHTML = d.plan.map((p, i) => {
-    const complete = p.done >= p.target;
+  if (!d || !d.daily) { el.innerHTML = ""; return; }
+  const daily = d.daily;
+
+  if (daily.locked) {
+    el.innerHTML = `
+      <div class="panel-card premium-hero p-5 sm:p-6" id="daily-locked">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+          <div class="icon-badge icon-badge-lg bg-blue-600 text-white shrink-0"><i data-lucide="gauge" class="w-6 h-6"></i></div>
+          <div class="flex-1 min-w-0">
+            <h3 class="text-base font-extrabold text-slate-900">Günlük görevlerin seviye tespitinden sonra açılır</h3>
+            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+              5 dakikalık uyarlamalı sınavla seviyeni belirle; sana her gün kelime, soru ve hata görevleri verelim,
+              ilerlemeni seri ve kur yolculuğuyla takip et.
+            </p>
+          </div>
+          <button type="button" id="daily-start-placement" onclick="openPlacementTest()" class="toolbar-chip toolbar-chip-primary btn-lg justify-center shrink-0">
+            <i data-lucide="play" class="w-4 h-4"></i><span>Seviye tespitine başla</span>
+          </button>
+        </div>
+      </div>`;
+    if (window.lucide) window.lucide.createIcons();
+    return;
+  }
+
+  const p = daily.placement || {};
+  const week = daily.week.map(w => `
+    <div class="flex flex-col items-center gap-1">
+      <span class="week-dot ${w.completed ? "is-done" : w.active ? "is-active" : ""} ${w.today ? "is-today" : ""}" title="${escHtml(w.day)}">
+        ${w.completed ? `<i data-lucide="check" class="w-3.5 h-3.5"></i>` : ""}
+      </span>
+      <span class="text-[10px] font-semibold ${w.today ? "text-blue-600" : "text-slate-400"}">${escHtml(w.label)}</span>
+    </div>`).join("");
+
+  const tasks = daily.tasks.map((t, i) => {
+    const complete = t.done >= t.target;
+    const pct = t.target ? (t.done / t.target) * 100 : 0;
     return `
-      <button type="button" onclick="runPlanAction(${i})" class="w-full flex items-center gap-3 py-2.5 border-b border-slate-100 last:border-b-0 text-left group">
-        <i data-lucide="${complete ? "circle-check" : "circle"}" class="w-5 h-5 shrink-0 ${complete ? "text-emerald-500" : "text-slate-300"}"></i>
-        <span class="flex-1 min-w-0">
-          <span class="block text-[13px] font-semibold ${complete ? "text-slate-400 line-through" : "text-slate-800"}">${escHtml(p.title)}</span>
-          ${progressBar(p.target ? (p.done / p.target) * 100 : 0, complete ? "#10b981" : "#2563eb")}
+      <div class="task-row ${complete ? "is-done" : ""}" data-task="${escHtml(t.id)}">
+        <span class="icon-badge ${complete ? "bg-emerald-500 text-white" : "bg-blue-50 text-blue-600"} shrink-0">
+          <i data-lucide="${complete ? "check" : escHtml(t.icon || "circle")}" class="w-[18px] h-[18px]"></i>
         </span>
-        <span class="text-xs font-semibold text-slate-500 shrink-0">${p.done}/${p.target}</span>
-        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300 group-hover:text-slate-500"></i>
-      </button>`;
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[13px] font-bold ${complete ? "text-slate-400 line-through" : "text-slate-900"} truncate">${escHtml(t.title)}</span>
+            <span class="text-xs font-semibold text-slate-500 shrink-0">${t.done}/${t.target}</span>
+          </div>
+          <div class="text-[11px] text-slate-500 truncate">${escHtml(t.subtitle || "")}</div>
+          ${progressBar(pct, complete ? "#10b981" : "#059669")}
+        </div>
+        ${complete
+          ? `<span class="xp-pill is-earned shrink-0">+${t.xp} XP</span>`
+          : `<button type="button" onclick="runPlanAction(${i})" class="toolbar-chip shrink-0"><span>Başla</span><i data-lucide="arrow-right" class="w-4 h-4"></i></button>`}
+      </div>`;
   }).join("");
+
+  const j = daily.journey;
+  const journey = `
+    <div class="panel-card p-4 sm:p-5" id="daily-journey">
+      <div class="flex items-center justify-between gap-3 mb-2">
+        <div class="flex items-center gap-2 min-w-0">
+          <span class="icon-badge bg-indigo-50 text-indigo-600 shrink-0"><i data-lucide="mountain" class="w-[18px] h-[18px]"></i></span>
+          <div class="min-w-0">
+            <h3 class="text-sm font-extrabold text-slate-900">Kur yolculuğu</h3>
+            <p class="text-[11px] text-slate-500">${j.next_level ? `${j.level} → ${j.next_level} · %${j.ready_pct} doğruya ulaşınca üst kura hazırsın` : `${j.level} · en üst kur`}</p>
+          </div>
+        </div>
+        <span class="text-lg font-extrabold text-slate-900 shrink-0">%${j.pct}</span>
+      </div>
+      <div class="journey-track">
+        <div class="journey-fill" style="width:${Math.min(100, j.pct)}%"></div>
+        <span class="journey-mark" style="left:${j.ready_pct}%"></span>
+      </div>
+      <div class="flex items-center justify-between gap-3 mt-2">
+        <span class="text-[11px] text-slate-500">${j.correct}/${j.total} soru doğru</span>
+        ${j.ready
+          ? `<button type="button" onclick="changeCurrentLevel('${escHtml(j.next_level)}')" class="toolbar-chip toolbar-chip-primary"><i data-lucide="rocket" class="w-4 h-4"></i><span>${escHtml(j.next_level)} kuruna geç</span></button>`
+          : `<span class="text-[11px] font-semibold text-slate-400">${j.next_level ? `Hedef: %${j.ready_pct}` : ""}</span>`}
+      </div>
+    </div>`;
+
+  el.innerHTML = `
+    <div class="space-y-4">
+      <div class="panel-card premium-hero p-4 sm:p-5" id="daily-tasks">
+        <div class="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <h3 class="text-base font-extrabold text-slate-900">Günlük görevler</h3>
+            <p class="text-[11px] text-slate-500 mt-0.5">
+              Seviye tespiti: ${p.mastered ? `${escHtml(p.mastered)} geçildi · ` : ""}önerilen ${escHtml(p.level)}
+              · <button type="button" onclick="openPlacementTest()" class="text-blue-600 font-semibold hover:underline">Tekrar çöz</button>
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="streak-pill" title="Görevlerini tamamladığın ardışık günler"><i data-lucide="flame" class="w-4 h-4"></i>${daily.streak} gün</span>
+            <span class="xp-pill">${daily.xp_today} XP</span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between gap-2 mt-4 mb-1 px-1" id="daily-week">${week}</div>
+        ${daily.all_done ? `
+          <div class="alert-row mt-3 bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200" id="daily-all-done">
+            <i data-lucide="party-popper" class="w-4 h-4 shrink-0"></i>
+            <span class="flex-1">Bugünün görevleri tamam! +20 bonus XP kazandın, yarın seriyi sürdür.</span>
+          </div>` : `
+          <div class="text-xs font-semibold text-slate-500 mt-3">${daily.tasks_done}/${daily.tasks_total} görev tamam</div>`}
+        <div class="mt-1">${tasks}</div>
+      </div>
+      ${journey}
+    </div>`;
+  if (window.lucide) window.lucide.createIcons();
 }
 
 function renderDashboardAlerts() {
@@ -509,6 +603,11 @@ async function loadDashboardStats() {
   } catch (err) {
     console.error("Dashboard overview error:", err);
   }
+  // Bu tarayıcıda çözülmüş ama hesaba yazılmamış seviye tespiti varsa bir kez gönder ve yenile
+  if (data && data.daily && data.daily.locked && !dashboardState.syncedPlacement && window.syncSavedPlacementResult) {
+    dashboardState.syncedPlacement = true;
+    if (await window.syncSavedPlacementResult()) return;
+  }
   dashboardState.data = data;
 
   const set = (id, text) => { const el = document.getElementById(id); if (el) el.innerText = text; };
@@ -526,7 +625,7 @@ async function loadDashboardStats() {
     }
   }
   renderDashboardAlerts();
-  renderDashboardPlan();
+  renderDashboardDaily();
   renderDashboardSide();
   renderRecentExams(data ? data.recent_exams : []);
   if (window.lucide) window.lucide.createIcons();
@@ -999,7 +1098,7 @@ async function renderExamsTab(targetLevel = null) {
 
   const rows = [
     {
-      color: "#2563eb", icon: "graduation-cap", badge: "Önerilen",
+      color: "#059669", icon: "graduation-cap", badge: "Önerilen",
       title: `${lvl} muafiyet denemesi`,
       meta: `30 soru · dinleme · yazma ve konuşma görevi · ${u.duration_minutes || 120} dk`,
       action: `startFullMockExam('${uid}', '${lvl}')`, primary: true,
@@ -1069,7 +1168,7 @@ async function renderExamsTab(targetLevel = null) {
         <span class="font-bold text-slate-800">${escHtml(sec.name)}</span>
         <span class="text-xs font-semibold text-slate-500 shrink-0">${sec.questions_count ? `${sec.questions_count} soru · ` : ""}%${sec.weight_percent}</span>
       </div>
-      <div class="progress-track mt-1.5"><div class="progress-fill" style="width:${Math.min(100, sec.weight_percent || 0)}%;background:#2563eb"></div></div>
+      <div class="progress-track mt-1.5"><div class="progress-fill" style="width:${Math.min(100, sec.weight_percent || 0)}%;background:#059669"></div></div>
     </div>`).join("");
 
   const tips = (u.tips || []).map(t => `
@@ -1703,14 +1802,14 @@ function openAuthModal(isMandatory = false) {
   if (isMandatory || !user) {
     modal.setAttribute("data-mandatory", "true");
     setAppShellVisible(false);
-    modal.className = "fixed inset-0 z-50 bg-gradient-to-br from-slate-950 via-blue-950 to-indigo-950 p-4 overflow-y-auto flex flex-col items-center justify-center";
+    modal.className = "fixed inset-0 z-50 landing-shell overflow-y-auto";
     if (closeBtn) closeBtn.classList.add("hidden");
-    if (brandHeader) brandHeader.classList.remove("hidden");
+    setLandingMode(true);
   } else {
     modal.removeAttribute("data-mandatory");
     modal.className = "fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm p-4 overflow-y-auto flex flex-col items-center justify-center";
     if (closeBtn) closeBtn.classList.remove("hidden");
-    if (brandHeader) brandHeader.classList.add("hidden");
+    setLandingMode(false);
   }
 
   if (user && user.id) {
@@ -1748,6 +1847,27 @@ function openAuthModal(isMandatory = false) {
   modal.classList.remove("hidden");
   if (window.lucide) window.lucide.createIcons();
 }
+
+// Ana sayfa düzeni (tanıtım + özellikler + rehberler) yalnız girişsiz ziyaretçiye; "Hesabım" penceresinde yalnız kart
+function setLandingMode(on) {
+  ["auth-gate-brand-header", "auth-gate-features", "auth-gate-guides"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle("hidden", !on);
+  });
+  const grid = document.getElementById("auth-landing-grid");
+  if (grid) grid.classList.toggle("is-compact", !on);
+  document.querySelectorAll("#auth-modal .landing-blob").forEach(b => b.classList.toggle("hidden", !on));
+}
+
+// Tanıtımdaki düğmeler: ilgili sekmeyi açar, karta kaydırır ve ilk alana odaklanır
+function landingGo(tab) {
+  switchAuthTab(tab);
+  const card = document.getElementById("auth-card");
+  if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
+  const field = document.getElementById(tab === "register" ? "reg-fullname" : "login-identifier");
+  if (field) setTimeout(() => field.focus({ preventScroll: true }), 350);
+}
+window.landingGo = landingGo;
 
 function closeAuthModal() {
   const modal = document.getElementById("auth-modal");

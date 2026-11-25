@@ -237,6 +237,34 @@ def init_db():
             PRIMARY KEY (user_id, question_id)
         );
 
+        -- Günlük aktivite (İstanbul takvim günü): günlük görevler, görev serisi ve haftalık takvim için.
+        -- Hedefler günün ilk kaydında o günkü kura göre sabitlenir.
+        CREATE TABLE IF NOT EXISTS daily_activity (
+            user_id INTEGER NOT NULL,
+            day TEXT NOT NULL,
+            vocab_reviews INTEGER DEFAULT 0,
+            questions_answered INTEGER DEFAULT 0,
+            questions_correct INTEGER DEFAULT 0,
+            mistakes_resolved INTEGER DEFAULT 0,
+            vocab_target INTEGER DEFAULT 20,
+            question_target INTEGER DEFAULT 15,
+            PRIMARY KEY (user_id, day)
+        );
+
+        -- Konu Yolu (Duolingo tarzı dersler): ders/ünite/tekrar başına en iyi sonuç ve XP.
+        CREATE TABLE IF NOT EXISTS lesson_progress (
+            user_id INTEGER NOT NULL,
+            node_id TEXT NOT NULL,
+            level TEXT,
+            stars INTEGER DEFAULT 0,
+            best_pct INTEGER DEFAULT 0,
+            attempts INTEGER DEFAULT 0,
+            xp_total INTEGER DEFAULT 0,
+            completed_at TEXT,
+            last_at TEXT,
+            PRIMARY KEY (user_id, node_id)
+        );
+
         -- 6-Digit Email OTP Verification Table --
         CREATE TABLE IF NOT EXISTS student_otps (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -276,6 +304,13 @@ def init_db():
         # Seri için İstanbul takvim günü (YYYY-MM-DD); last_active'ten ayrı tutulur
         # çünkü last_active profil güncellemesinde de değişiyor.
         conn.execute("ALTER TABLE users ADD COLUMN last_study_date TEXT")
+    # Seviye tespiti sonucu (günlük görevler bundan sonra açılır)
+    if "placement_level" not in cols:
+        conn.execute("ALTER TABLE users ADD COLUMN placement_level TEXT")
+    if "placement_mastered" not in cols:
+        conn.execute("ALTER TABLE users ADD COLUMN placement_mastered TEXT")
+    if "placement_at" not in cols:
+        conn.execute("ALTER TABLE users ADD COLUMN placement_at TEXT")
 
     all_26_unis_json = json.dumps([
         "general", "itu", "boun", "metu", "bilkent", "ytu", "hacettepe",
@@ -963,6 +998,7 @@ def set_vocab_status(user_id: int, word_id: str, status: str) -> None:
                 last_reviewed = CURRENT_TIMESTAMP
         """, (user_id, word_id, status))
     conn.close()
+    bump_daily_activity(user_id, vocab=1)
 
 
 def get_vocab_progress(user_id: int) -> Dict[str, str]:
@@ -993,12 +1029,15 @@ def record_mistake(user_id: int, question_id: str, university_id: str, level: st
 def resolve_mistake(user_id: int, question_id: str) -> None:
     conn = get_db()
     with conn:
-        conn.execute("""
+        cur = conn.execute("""
             UPDATE mistake_vault
             SET is_resolved = 1, resolved_at = CURRENT_TIMESTAMP
             WHERE user_id = ? AND question_id = ? AND is_resolved = 0
         """, (user_id, question_id))
+        resolved = cur.rowcount
     conn.close()
+    if resolved:
+        bump_daily_activity(user_id, resolved=resolved)
 
 
 def delete_mistake(user_id: int, question_id: str) -> None:
@@ -1019,6 +1058,67 @@ def get_mistakes(user_id: int, is_resolved: bool = False) -> List[Dict[str, Any]
     """, (user_id, 1 if is_resolved else 0)).fetchall()
     conn.close()
     return [dict(r) for r in rows]
+
+
+DAILY_TARGETS = {
+    "A1": (10, 10), "A2": (10, 10),
+    "B1": (20, 15), "B2": (20, 15),
+    "C1": (25, 20), "C2": (25, 20),
+}
+
+
+def daily_targets_for(level: Optional[str]) -> Dict[str, int]:
+    vocab, questions = DAILY_TARGETS.get((level or "B2").upper(), (20, 15))
+    return {"vocab": vocab, "questions": questions}
+
+
+def bump_daily_activity(user_id: int, vocab: int = 0, answered: int = 0, correct: int = 0, resolved: int = 0) -> None:
+    """Bugünün sayaçlarını artırır; günün ilk kaydında hedefleri kullanıcının kuruna göre sabitler."""
+    if not user_id or not (vocab or answered or correct or resolved):
+        return
+    day = _istanbul_today().isoformat()
+    conn = get_db()
+    with conn:
+        row = conn.execute("SELECT current_level FROM users WHERE id = ?", (user_id,)).fetchone()
+        t = daily_targets_for(row["current_level"] if row else None)
+        conn.execute("""
+            INSERT INTO daily_activity (user_id, day, vocab_reviews, questions_answered, questions_correct,
+                                        mistakes_resolved, vocab_target, question_target)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(user_id, day) DO UPDATE SET
+                vocab_reviews = vocab_reviews + excluded.vocab_reviews,
+                questions_answered = questions_answered + excluded.questions_answered,
+                questions_correct = questions_correct + excluded.questions_correct,
+                mistakes_resolved = mistakes_resolved + excluded.mistakes_resolved
+        """, (user_id, day, vocab, answered, correct, resolved, t["vocab"], t["questions"]))
+    conn.close()
+
+
+def get_daily_activity(user_id: int, days: int = 60) -> Dict[str, Dict[str, Any]]:
+    """Son [days] günün aktivitesi: {"YYYY-MM-DD": {...}}."""
+    since = (_istanbul_today() - timedelta(days=days)).isoformat()
+    conn = get_db()
+    rows = conn.execute("SELECT * FROM daily_activity WHERE user_id = ? AND day >= ?", (user_id, since)).fetchall()
+    conn.close()
+    return {r["day"]: dict(r) for r in rows}
+
+
+def save_placement_result(user_id: int, level: str, mastered: Optional[str]) -> None:
+    conn = get_db()
+    with conn:
+        conn.execute("UPDATE users SET placement_level = ?, placement_mastered = ?, placement_at = ? WHERE id = ?",
+                     (level, mastered, datetime.now(timezone.utc).isoformat(timespec="seconds"), user_id))
+    conn.close()
+
+
+def get_placement_result(user_id: int) -> Optional[Dict[str, Any]]:
+    conn = get_db()
+    row = conn.execute("SELECT placement_level, placement_mastered, placement_at FROM users WHERE id = ?",
+                       (user_id,)).fetchone()
+    conn.close()
+    if not row or not row["placement_level"]:
+        return None
+    return {"level": row["placement_level"], "mastered": row["placement_mastered"], "date": row["placement_at"]}
 
 
 def record_question_answers(user_id: int, answers: List[Dict[str, Any]]) -> None:
@@ -1044,6 +1144,7 @@ def record_question_answers(user_id: int, answers: List[Dict[str, Any]]) -> None
                     updated_at = CURRENT_TIMESTAMP
             """, (user_id, qid, a.get("university_id"), a.get("level"), a.get("category"), ok, ok))
     conn.close()
+    bump_daily_activity(user_id, answered=len(answers), correct=sum(1 for a in answers if a.get("is_correct")))
 
 
 def get_question_progress(user_id: int) -> Dict[str, Dict[str, Any]]:
@@ -1774,3 +1875,56 @@ def list_support_tickets(limit: int = 50) -> List[Dict[str, Any]]:
 
 
 
+
+
+# ---------------- Konu Yolu ilerlemesi ----------------
+
+def lesson_stars_for(pct: int) -> int:
+    """Doğruluk yüzdesine göre yıldız: %90+ üç, %70+ iki, %50+ bir; altı geçilmemiş sayılır."""
+    if pct >= 90:
+        return 3
+    if pct >= 70:
+        return 2
+    if pct >= 50:
+        return 1
+    return 0
+
+
+def record_lesson_result(user_id: int, node_id: str, level: str, correct: int, total: int, xp: int) -> Dict[str, Any]:
+    """Ders sonucunu yazar; en iyi yıldız/yüzde korunur, XP her denemede eklenir.
+    Dönen sözlük: stars (bu deneme), best_stars, pct, xp_gained, first_completion."""
+    total = max(1, int(total))
+    correct = max(0, min(int(correct), total))
+    pct = round(correct * 100 / total)
+    stars = lesson_stars_for(pct)
+    gained = int(xp) if stars else 0
+    now = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    conn = get_db()
+    with conn:
+        prev = conn.execute("SELECT stars, completed_at FROM lesson_progress WHERE user_id = ? AND node_id = ?",
+                            (user_id, node_id)).fetchone()
+        first = bool(stars) and not (prev and prev["completed_at"])
+        conn.execute("""
+            INSERT INTO lesson_progress (user_id, node_id, level, stars, best_pct, attempts, xp_total, completed_at, last_at)
+            VALUES (?, ?, ?, ?, ?, 1, ?, ?, ?)
+            ON CONFLICT(user_id, node_id) DO UPDATE SET
+                stars = MAX(stars, excluded.stars),
+                best_pct = MAX(best_pct, excluded.best_pct),
+                attempts = attempts + 1,
+                xp_total = xp_total + excluded.xp_total,
+                completed_at = COALESCE(completed_at, excluded.completed_at),
+                last_at = excluded.last_at
+        """, (user_id, node_id, level, stars, pct, gained, now if stars else None, now))
+        best = conn.execute("SELECT stars FROM lesson_progress WHERE user_id = ? AND node_id = ?",
+                            (user_id, node_id)).fetchone()["stars"]
+    conn.close()
+    bump_daily_activity(user_id, answered=total, correct=correct)
+    return {"stars": stars, "best_stars": best, "pct": pct, "xp_gained": gained, "first_completion": first}
+
+
+def get_lesson_progress(user_id: int) -> Dict[str, Dict[str, Any]]:
+    """{node_id: {stars, best_pct, attempts, xp_total, completed_at, last_at}}"""
+    conn = get_db()
+    rows = conn.execute("SELECT * FROM lesson_progress WHERE user_id = ?", (user_id,)).fetchall()
+    conn.close()
+    return {r["node_id"]: dict(r) for r in rows}

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/question.dart';
+import '../services/api_service.dart';
 import '../services/placement_test.dart';
 import '../theme/app_theme.dart';
 
@@ -81,6 +82,11 @@ class _PlacementTestScreenState extends State<PlacementTestScreen> {
     await prefs.setString(
       PlacementTestScreen.prefDate,
       DateTime.now().toIso8601String(),
+    );
+    // Hesaba da yaz: günlük görevler web ve mobilde aynı hesapta açılır
+    await ApiService().savePlacementResult(
+      level: engine.recommendedLevel,
+      mastered: engine.masteredLevel,
     );
   }
 
@@ -312,7 +318,7 @@ class _PlacementTestScreenState extends State<PlacementTestScreen> {
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               gradient: const LinearGradient(
-                colors: [Color(0xFF1E3A8A), Color(0xFF1E1B4B)],
+                colors: [Color(0xFF064E3B), Color(0xFF022C22)],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
