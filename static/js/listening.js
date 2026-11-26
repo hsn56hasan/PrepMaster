@@ -14,8 +14,32 @@ window.listeningState = {
   currentTime: 0,
   userNotes: "",
   answers: {},
-  questionsRevealed: false
+  questionsRevealed: false,
+  // Not tutarak dinleme (gerçek sınav kuralı) için:
+  audioCompleted: false,   // ses sonuna kadar çalındı mı
+  playCount: 0,            // kaç kez başlatıldı (tek dinleme kuralı)
+  kurallar: null,          // o parçanın kuralları, listeningKurallari() ile kurulur
+  notesSaveTimer: null     // notların sunucuya yazılması için geciktirme
 };
+
+// Parçanın türüne göre kurallar. Tek yerde durur ki aynı oynatıcı hem not tutma
+// modunda (sorular kilitli, tek dinleme) hem de while_listening modunda (sorular
+// baştan açık, serbest dinleme) çalışsın; ileride tam deneme de bunu kullanacak.
+function listeningKurallari(track) {
+  const notModu = !!track && track.type === 'note_taking';
+  return {
+    notModu,
+    sorulariKilitle: notModu,    // sorular ses bitmeden açılmaz
+    tekDinleme: notModu,         // ses yalnızca bir kez çalınır
+    sarmaSerbest: !notModu,      // ileri-geri sarma
+    hizDegisebilir: !notModu,    // oynatma hızı
+    duraklatilabilir: !notModu   // başladıktan sonra duraklatma
+  };
+}
+
+function aktifKurallar() {
+  return window.listeningState.kurallar || listeningKurallari(window.listeningState.currentTrack);
+}
 
 
 function setListeningPoolMode(mode) {
@@ -157,10 +181,14 @@ function startListeningTrack(trackId) {
 
   stopAudioPlayback();
 
+  const kurallar = listeningKurallari(track);
+  window.listeningState.kurallar = kurallar;
   window.listeningState.currentTrack = track;
   window.listeningState.answers = {};
   window.listeningState.userNotes = "";
-  window.listeningState.questionsRevealed = track.type !== 'note_taking';
+  window.listeningState.questionsRevealed = !kurallar.sorulariKilitle;
+  window.listeningState.audioCompleted = false;
+  window.listeningState.playCount = 0;
   window.listeningState.currentTime = 0;
   window.listeningState.speechCharOffset = 0;
   window.listeningState.usingSpeechFallback = false;
@@ -175,6 +203,9 @@ function startListeningTrack(trackId) {
   // Initialize Audio after DOM is rendered
   initTrackAudio(track);
   syncAudioProgressUI();
+
+  // Daha önce alınmış notlar varsa geri yükle (oturum açıksa).
+  if (kurallar.notModu) loadUserNotes(track.id);
 }
 
 function exitListeningRunner() {
@@ -188,6 +219,8 @@ function renderListeningRunner() {
   if (!t) return;
 
   const isNoteTaking = t.type === 'note_taking';
+  const k = aktifKurallar();
+  const sesBitti = window.listeningState.audioCompleted;
   const curFormatted = formatAudioTime(window.listeningState.currentTime || 0);
   const durFormatted = formatAudioTime(window.listeningState.duration || estimateTrackDuration(t));
   const sliderVal = (window.listeningState.duration > 0)
@@ -233,6 +266,7 @@ function renderListeningRunner() {
 
           <!-- Hız ve Ses Kontrolleri -->
           <div class="flex items-center gap-4 flex-wrap">
+            ${k.hizDegisebilir ? `
             <div class="flex items-center gap-2">
               <span class="text-xs text-slate-400 font-semibold">Hız:</span>
               <div class="flex bg-slate-800/80 p-1 rounded-xl border border-slate-700">
@@ -241,6 +275,11 @@ function renderListeningRunner() {
                 <button onclick="setPlaybackRate(1.25)" class="px-2.5 py-1 text-xs font-bold rounded-lg rate-btn hover:text-white text-slate-400 transition" id="rate-125">1.25x</button>
               </div>
             </div>
+            ` : `
+            <span class="text-[11px] text-slate-400 font-semibold flex items-center gap-1.5" title="Gerçek sınavda kayıt tek hızda ve bir kez çalınır">
+              <i data-lucide="lock" class="w-3.5 h-3.5"></i> Sınav kuralı: tek dinleme, normal hız
+            </span>
+            `}
 
             <div class="flex items-center gap-2">
               <i data-lucide="volume-2" class="w-4 h-4 text-slate-400"></i>
@@ -253,7 +292,7 @@ function renderListeningRunner() {
         <div class="pt-2">
           <div class="flex items-center gap-3">
             <span id="audio-time-current" class="text-xs font-mono text-slate-300 w-10 text-right">${curFormatted}</span>
-            <input type="range" id="audio-seek-slider" min="0" max="100" value="${sliderVal}" step="0.1" oninput="onSeekSliderChange(this.value)" class="flex-1 h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500">
+            <input type="range" id="audio-seek-slider" min="0" max="100" value="${sliderVal}" step="0.1" oninput="onSeekSliderChange(this.value)" ${k.sarmaSerbest ? '' : 'disabled title="Sınav kuralı: ileri-geri sarma kapalı"'} class="flex-1 h-2 bg-slate-800 rounded-lg appearance-none ${k.sarmaSerbest ? 'cursor-pointer accent-blue-500' : 'cursor-not-allowed accent-slate-500 opacity-60'}">
             <span id="audio-time-duration" class="text-xs font-mono text-slate-400 w-10">${durFormatted}</span>
           </div>
         </div>
@@ -278,10 +317,12 @@ function renderListeningRunner() {
               <i data-lucide="lock" class="w-8 h-8 mx-auto text-amber-600"></i>
               <h4 class="text-sm font-extrabold text-amber-900">Sorular Şu Anda Gizli (Gerçek Sınav Kuralı)</h4>
               <p class="text-xs text-amber-800 max-w-md mx-auto">
-                Boğaziçi ve ODTÜ gibi üniversitelerde dinleme bitene kadar soru kağıdı verilmez. Dinlemeyi tamamlayıp notlarınızı aldıktan sonra soruları açın.
+                Boğaziçi ve ODTÜ gibi üniversitelerde dinleme bitene kadar soru kağıdı verilmez. Kayıt bir kez çalınır; durdurma, sarma ve hız değiştirme kapalıdır. Dinleme bitince sorular açılır.
               </p>
-              <button onclick="revealListeningQuestions()" class="px-6 py-2.5 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold rounded-xl shadow-md transition flex items-center gap-2 mx-auto">
-                <i data-lucide="unlock" class="w-4 h-4"></i> Dinlemeyi Bitir ve Soruları Yanıtla
+              <button id="listening-unlock-btn" onclick="revealListeningQuestions()" ${sesBitti ? '' : 'disabled'}
+                class="px-6 py-2.5 text-xs font-bold rounded-xl shadow-md transition flex items-center gap-2 mx-auto ${sesBitti ? 'bg-amber-600 hover:bg-amber-700 text-white cursor-pointer' : 'bg-slate-200 text-slate-400 cursor-not-allowed'}">
+                <i data-lucide="${sesBitti ? 'unlock' : 'lock'}" class="w-4 h-4"></i>
+                <span id="listening-unlock-label">${sesBitti ? 'Soruları Yanıtla' : 'Kayıt bitince açılır'}</span>
               </button>
             </div>
           ` : ''}
@@ -334,9 +375,76 @@ function renderListeningRunner() {
 
 function saveUserNotes(val) {
   window.listeningState.userNotes = val;
+
+  // Sunucuya yazmayı geciktir: her tuş vuruşunda istek atmayalım.
+  const track = window.listeningState.currentTrack;
+  if (!track || !aktifKurallar().notModu) return;
+  if (window.listeningState.notesSaveTimer) clearTimeout(window.listeningState.notesSaveTimer);
+  window.listeningState.notesSaveTimer = setTimeout(() => {
+    window.listeningState.notesSaveTimer = null;
+    persistUserNotes(track.id, window.listeningState.userNotes);
+  }, 1500);
+}
+
+// Notları sunucuya yazar. Oturum yoksa (401) sessizce vazgeçer: notlar yine
+// ekranda durur, yalnızca kalıcı olmaz.
+async function persistUserNotes(trackId, notes) {
+  try {
+    await fetch('/api/listening/notes', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ track_id: trackId, notes: (notes || '').slice(0, 8000) })
+    });
+  } catch (e) {
+    console.warn('Notlar kaydedilemedi:', e);
+  }
+}
+
+// Daha önce kaydedilmiş notları geri yükler.
+async function loadUserNotes(trackId) {
+  try {
+    const res = await fetch('/api/listening/notes/' + encodeURIComponent(trackId));
+    if (!res.ok) return;
+    const data = await res.json();
+    const notes = typeof data.notes === 'string' ? data.notes : '';
+    if (!notes) return;
+    // Parça değişmediyse yaz (yavaş yanıt başka parçaya taşmasın)
+    if (window.listeningState.currentTrack?.id !== trackId) return;
+    window.listeningState.userNotes = notes;
+    const alan = document.getElementById('listening-notes-input');
+    if (alan && !alan.value) alan.value = notes;
+  } catch (e) {
+    console.warn('Önceki notlar alınamadı:', e);
+  }
+}
+
+// Ses sonuna kadar çalındığında çağrılır. Soruların kilidini açma yetkisi
+// YALNIZCA buradan gelir; tahmini süreye değil, gerçek bitiş olayına dayanır.
+function markAudioCompleted() {
+  if (window.listeningState.audioCompleted) return;
+  window.listeningState.audioCompleted = true;
+
+  const btn = document.getElementById("listening-unlock-btn");
+  if (btn) {
+    btn.disabled = false;
+    btn.classList.remove("bg-slate-200", "text-slate-400", "cursor-not-allowed");
+    btn.classList.add("bg-amber-600", "hover:bg-amber-700", "text-white", "cursor-pointer");
+    btn.innerHTML = `<i data-lucide="unlock" class="w-4 h-4"></i><span id="listening-unlock-label">Soruları Yanıtla</span>`;
+    if (window.lucide) window.lucide.createIcons();
+  }
+  const statusEl = document.getElementById("audio-status-text");
+  if (statusEl && aktifKurallar().notModu) {
+    statusEl.innerText = "Kayıt bitti. Soruları açabilirsiniz.";
+  }
 }
 
 function revealListeningQuestions() {
+  const k = aktifKurallar();
+  if (k.sorulariKilitle && !window.listeningState.audioCompleted) {
+    const statusEl = document.getElementById("audio-status-text");
+    if (statusEl) statusEl.innerText = "Sorular kayıt bitmeden açılamaz.";
+    return;
+  }
   pauseAudioPlayback();
   window.listeningState.questionsRevealed = true;
   const lockBox = document.getElementById("listening-questions-lock-box");
@@ -448,6 +556,7 @@ function startPlaybackTicker() {
         window.listeningState.isPlaying = false;
         stopPlaybackTicker();
         updateAudioControlsUI(false);
+        markAudioCompleted();
       }
     }
   }, 250);
@@ -505,6 +614,7 @@ function initTrackAudio(track) {
     window.listeningState.currentTime = getEffectiveDuration();
     syncAudioProgressUI();
     updateAudioControlsUI(false);
+    markAudioCompleted();
   });
 
   audio.addEventListener('error', () => {
@@ -516,7 +626,14 @@ function initTrackAudio(track) {
 }
 
 function toggleAudioPlayback() {
+  const k = aktifKurallar();
   if (window.listeningState.isPlaying) {
+    // Sınav kuralı: not tutma modunda kayıt başladıktan sonra duraklatılamaz.
+    if (!k.duraklatilabilir) {
+      const statusEl = document.getElementById("audio-status-text");
+      if (statusEl) statusEl.innerText = "Sınav kuralı: kayıt duraklatılamaz.";
+      return;
+    }
     pauseAudioPlayback();
   } else {
     startAudioPlayback();
@@ -526,6 +643,19 @@ function toggleAudioPlayback() {
 function startAudioPlayback() {
   const track = window.listeningState.currentTrack;
   if (!track) return;
+
+  const k = aktifKurallar();
+  // Sınav kuralı: kayıt yalnızca bir kez çalınır.
+  if (k.tekDinleme && window.listeningState.playCount >= 1) {
+    const statusEl = document.getElementById("audio-status-text");
+    if (statusEl) {
+      statusEl.innerText = window.listeningState.audioCompleted
+        ? "Kayıt bir kez çalınır; tekrar dinlenemez."
+        : "Kayıt zaten başladı; baştan alınamaz.";
+    }
+    return;
+  }
+  window.listeningState.playCount += 1;
 
   // Reset to 0 if previously finished
   const dur = getEffectiveDuration();
@@ -582,6 +712,11 @@ function stopAudioPlayback() {
 }
 
 function onSeekSliderChange(percentVal) {
+  // Sınav kuralı: not tutma modunda ileri-geri sarma yok.
+  if (!aktifKurallar().sarmaSerbest) {
+    syncAudioProgressUI();
+    return;
+  }
   const percent = Math.min(100, Math.max(0, parseFloat(percentVal) || 0));
   const dur = getEffectiveDuration();
   const targetTime = (percent / 100) * dur;
@@ -611,6 +746,8 @@ function setAudioVolume(volVal) {
 }
 
 function setPlaybackRate(rate) {
+  // Sınav kuralı: not tutma modunda hız sabittir.
+  if (!aktifKurallar().hizDegisebilir) return;
   window.listeningState.playbackRate = rate;
 
   document.querySelectorAll(".rate-btn").forEach(b => {
@@ -700,6 +837,7 @@ function playAudioSynthesis() {
     window.listeningState.currentTime = getEffectiveDuration();
     syncAudioProgressUI();
     updateAudioControlsUI(false);
+    markAudioCompleted();
   };
 
   utterance.onerror = (e) => {
@@ -797,6 +935,9 @@ window.loadListeningHub = loadListeningHub;
 window.startListeningTrack = startListeningTrack;
 window.exitListeningRunner = exitListeningRunner;
 window.saveUserNotes = saveUserNotes;
+window.loadUserNotes = loadUserNotes;
+window.markAudioCompleted = markAudioCompleted;
+window.listeningKurallari = listeningKurallari;
 window.revealListeningQuestions = revealListeningQuestions;
 window.selectListeningAnswer = selectListeningAnswer;
 window.toggleAudioPlayback = toggleAudioPlayback;

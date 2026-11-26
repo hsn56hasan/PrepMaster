@@ -103,5 +103,92 @@ class TestSesAlanAdiTutarliligi(unittest.TestCase):
         self.assertEqual(urlsuz, [], f"audio_url'i düşen parçalar: {urlsuz[:5]}")
 
 
+class TestDinlemeNotlari(unittest.TestCase):
+    """Not tutarak dinlemede alınan notlar kullanıcıya özel ve kalıcı olmalı."""
+
+    @classmethod
+    def setUpClass(cls):
+        db.init_db()
+        cls.client = TestClient(app)
+
+    def setUp(self):
+        import backend.security as sec
+        sec.rate_limiter.reset()
+
+    def _kayit(self, kullanici):
+        # Test veritabanı diskte kalabildiği için her koşuda benzersiz kullanıcı üret.
+        import uuid
+        kullanici = f"{kullanici}_{uuid.uuid4().hex[:8]}"
+        res = self.client.post("/api/auth/register", json={
+            "terms_accepted": True,
+            "email": f"{kullanici}@example.com",
+            "username": kullanici,
+            "password": "Parola123!",
+            "full_name": "Test Ogrenci",
+            "university_id": "general",
+        })
+        self.assertEqual(res.status_code, 200, res.text)
+        return {"Authorization": f"Bearer {res.json()['token']}"}
+
+    def test_notlar_giris_istiyor(self):
+        self.assertEqual(
+            self.client.post("/api/listening/notes",
+                             json={"track_id": "lis_general_a1_01", "notes": "x"}).status_code, 401)
+        self.assertEqual(self.client.get("/api/listening/notes/lis_general_a1_01").status_code, 401)
+
+    def test_not_kaydedilir_ve_geri_okunur(self):
+        auth = self._kayit("notalan")
+        metin = "- Confirmation bias: Wason 1960\n- Framing: Kahneman & Tversky"
+        r = self.client.post("/api/listening/notes",
+                             json={"track_id": "lis_general_b1_01", "notes": metin}, headers=auth)
+        self.assertEqual(r.status_code, 200, r.text)
+        g = self.client.get("/api/listening/notes/lis_general_b1_01", headers=auth)
+        self.assertEqual(g.status_code, 200, g.text)
+        self.assertEqual(g.json()["notes"], metin)
+
+    def test_ayni_parcaya_tekrar_yazmak_uzerine_yazar(self):
+        auth = self._kayit("notguncelle")
+        for metin in ("ilk hali", "ikinci hali"):
+            self.client.post("/api/listening/notes",
+                             json={"track_id": "lis_general_b1_02", "notes": metin}, headers=auth)
+        g = self.client.get("/api/listening/notes/lis_general_b1_02", headers=auth)
+        self.assertEqual(g.json()["notes"], "ikinci hali")
+
+    def test_notlar_kullaniciya_ozel(self):
+        a = self._kayit("notlar_a")
+        b = self._kayit("notlar_b")
+        self.client.post("/api/listening/notes",
+                         json={"track_id": "lis_general_c1_01", "notes": "A'nin notu"}, headers=a)
+        self.assertEqual(
+            self.client.get("/api/listening/notes/lis_general_c1_01", headers=b).json()["notes"], "")
+        self.assertEqual(
+            self.client.get("/api/listening/notes/lis_general_c1_01", headers=a).json()["notes"], "A'nin notu")
+
+    def test_kaydedilmemis_parca_bos_doner(self):
+        auth = self._kayit("notyok")
+        g = self.client.get("/api/listening/notes/lis_general_c2_04", headers=auth)
+        self.assertEqual(g.status_code, 200)
+        self.assertEqual(g.json()["notes"], "")
+
+    def test_html_temizlenir(self):
+        auth = self._kayit("nothtml")
+        self.client.post("/api/listening/notes",
+                         json={"track_id": "lis_general_a2_01",
+                               "notes": "<script>alert(1)</script>onemli not"}, headers=auth)
+        notlar = self.client.get("/api/listening/notes/lis_general_a2_01", headers=auth).json()["notes"]
+        self.assertNotIn("<script", notlar.lower())
+        self.assertIn("onemli not", notlar)
+
+    def test_gecersiz_parca_kimligi_reddedilir(self):
+        auth = self._kayit("notgecersiz")
+        # Tek parçalık ama desene uymayan kimlik uca ulaşır ve 400 alır
+        self.assertEqual(self.client.get("/api/listening/notes/abc.def", headers=auth).status_code, 400)
+        # Yol kaçışı denemesi hiç uca ulaşmadan reddedilir (404/400 fark etmez, 200 OLMAMALI)
+        self.assertNotEqual(self.client.get("/api/listening/notes/..%2Fetc", headers=auth).status_code, 200)
+        r = self.client.post("/api/listening/notes",
+                             json={"track_id": "kotu/kimlik", "notes": "x"}, headers=auth)
+        self.assertEqual(r.status_code, 422)
+
+
 if __name__ == "__main__":
     unittest.main()

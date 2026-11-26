@@ -45,42 +45,51 @@
     "id": "metu",
     "name": "Orta Doğu Teknik Üniversitesi",
     "short_name": "ODTÜ",
-    "exam_name": "METU EPE (English Proficiency Exam)",
+    "exam_name": "İYS / EPE (İngilizce Yeterlik Sınavı)",
     "passing_score": 60,
-    "duration_minutes": 180,
-    "total_questions": 65,
+    "duration_minutes": 145,
+    "total_questions": 46,
     "badge_color": "red",
-    "description": "ODTÜ Temel İngilizce Bölümü tarafından hazırlanan; Language Use, Reading, While-Listening & Note-Taking ve Essay içeren kapsamlı sınav.",
+    "description": "ODTÜ Yabancı Diller Yüksekokulu'nun iki oturumlu yeterlik sınavı. 1. Oturum (yaklaşık 145 dakika): While Listening, Careful Reading, Note-Taking ve Independent Writing. 2. Oturum (ertesi gün): Speaking, görüşmeci eşliğinde. Toplam 100 puan; dilbilgisi/Language Use bölümü Ekim 2025 formatında YOKTUR.",
     "sections": [
       {
-        "name": "Language Use (Cloze & Grammar)",
-        "questions_count": 20,
-        "weight_percent": 20,
-        "description": "Cümle tamamlama, bağlaç seçimi ve ileri düzey gramer yapıları."
+        "name": "While Listening (1. Oturum)",
+        "questions_count": 16,
+        "weight_percent": 24,
+        "description": "Kısa konuşmalar, diyaloglar ve ders anlatımları. 16 soru, her biri 1,5 puan, üç seçenekli. Yaklaşık 25 dakika."
       },
       {
-        "name": "Reading Comprehension",
-        "questions_count": 30,
-        "weight_percent": 35,
-        "description": "Detaylı okuma, ana fikir çıkarma ve paragrafta eksik cümleyi tamamlama."
+        "name": "Careful Reading (1. Oturum)",
+        "questions_count": 24,
+        "weight_percent": 32,
+        "description": "800-1000 kelimelik dört metin. 20 anlama sorusu (1,5 puan) + 4 kelime sorusu (0,5 puan), her metinde 1 kelime sorusu. 60 dakika."
       },
       {
-        "name": "Listening & Note Taking",
-        "questions_count": 15,
-        "weight_percent": 20,
-        "description": "Akademik bir ders anlatımını dinleyip not alma ve ardından soruları yanıtlama."
+        "name": "Note-Taking (1. Oturum)",
+        "questions_count": 6,
+        "weight_percent": 9,
+        "description": "Yaklaşık 8 dakikalık bir ders dinlenip not alınır, sonra notlara dayanarak 6 soru yanıtlanır (her biri 1,5 puan). Yaklaşık 15 dakika."
       },
       {
-        "name": "Academic Writing",
+        "name": "Independent Writing (1. Oturum)",
         "questions_count": 1,
-        "weight_percent": 25,
-        "description": "Verilen iki konu arasından seçilen temada akademik argüman geliştirme (Cause & Effect veya Argumentative)."
+        "weight_percent": 20,
+        "description": "Tek görev, yaklaşık 220 kelime, kağıda el yazısıyla. 35 dakika."
+      },
+      {
+        "name": "Speaking (2. Oturum)",
+        "questions_count": 5,
+        "weight_percent": 15,
+        "description": "Görüşmeci eşliğinde yaklaşık 8 dakika. Hazırlıksız 4 soru (kişisel bilgi ve deneyim; tercih ve görüş) ve hazırlıklı 1 soru (geniş perspektif)."
       }
     ],
     "tips": [
+      "Dilbilgisi bölümü beklemeyin: Ekim 2025 formatında Language Use yok, puan tamamen dinleme, okuma, not alma, yazma ve konuşmadan geliyor.",
+      "Dinleme ve not alma soruları ÜÇ seçenekli; dört şıkka alışkınsanız eleme stratejinizi buna göre ayarlayın.",
+      "Yanlış cevap doğruyu götürmüyor (kitapçıkta açıkça yazıyor), bu yüzden hiçbir soruyu boş bırakmayın.",
+      "Okumada dört metin için 60 dakika var: metin başına yaklaşık 15 dakika, bunun içinde 1 de kelime sorusu çıkıyor.",
       "Note-taking aşamasında anahtar kelimeleri kısaltarak not alın; tam cümle yazmaya çalışıp konuyu kaçırmayın.",
-      "Metin tamamlama sorularında boşluktan önceki ve sonraki zamir (pronoun) referanslarına odaklanın.",
-      "Kelime çalışırken akademik fiil ve isim türevlerine (derive) ağırlık verin."
+      "Konuşma ertesi gün ayrı bir oturum; yalnızca 15 puan ama geçme notunu belirleyebilecek ağırlıkta."
     ]
   },
   {

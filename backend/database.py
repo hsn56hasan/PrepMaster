@@ -296,6 +296,17 @@ def init_db():
             consumed_at TEXT
         );
         CREATE INDEX IF NOT EXISTS idx_student_otps_email ON student_otps(email);
+
+        -- Not tutarak dinlemede öğrencinin aldığı notlar. Gerçek sınavda not kağıdı
+        -- öğrencide kalır; burada da parçadan çıkıp dönünce notlar kaybolmasın diye
+        -- kullanıcı + parça başına tek satır tutulur.
+        CREATE TABLE IF NOT EXISTS listening_notes (
+            user_id INTEGER NOT NULL,
+            track_id TEXT NOT NULL,
+            notes TEXT NOT NULL DEFAULT '',
+            updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (user_id, track_id)
+        );
     """)
 
     # Ensure schema migrations on existing SQLite databases
@@ -1028,6 +1039,29 @@ def get_vocab_progress(user_id: int) -> Dict[str, str]:
     rows = conn.execute("SELECT word_id, status FROM vocab_progress WHERE user_id = ?", (user_id,)).fetchall()
     conn.close()
     return {r["word_id"]: r["status"] for r in rows}
+
+
+def save_listening_notes(user_id: int, track_id: str, notes: str) -> None:
+    """Not tutarak dinlemede alınan notları kaydeder (kullanıcı + parça başına tek satır)."""
+    conn = get_db()
+    with conn:
+        conn.execute("""
+            INSERT INTO listening_notes (user_id, track_id, notes, updated_at)
+            VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+            ON CONFLICT(user_id, track_id) DO UPDATE SET
+                notes = excluded.notes,
+                updated_at = CURRENT_TIMESTAMP
+        """, (user_id, track_id, notes))
+
+
+def get_listening_notes(user_id: int, track_id: str) -> str:
+    """Kayıtlı notu döndürür; yoksa boş dize."""
+    conn = get_db()
+    row = conn.execute(
+        "SELECT notes FROM listening_notes WHERE user_id = ? AND track_id = ?",
+        (user_id, track_id),
+    ).fetchone()
+    return row["notes"] if row else ""
 
 
 def record_mistake(user_id: int, question_id: str, university_id: str, level: str, category: str,

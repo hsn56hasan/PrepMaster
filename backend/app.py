@@ -35,6 +35,7 @@ from database import (
     upsert_google_user, request_password_reset, confirm_password_reset, user_exists_with_email,
     create_paytr_order, get_paytr_order, finish_paytr_order,
     record_study_day,
+    save_listening_notes, get_listening_notes,
     admin_list_students, admin_update_student_access,
     admin_reset_student_password, admin_delete_student,
     create_support_ticket, list_support_tickets
@@ -1268,6 +1269,34 @@ def get_listening_detail(item_id: str, request: Request):
 class ListeningAnswerRequest(BaseModel):
     question_id: str = Field(..., max_length=100, pattern=r"^[a-zA-Z0-9_-]+$")
     chosen_answer: str = Field(..., max_length=5, pattern=r"^[A-Ea-e]$")
+
+
+class ListeningNotesRequest(BaseModel):
+    """Not tutarak dinlemede alınan notlar."""
+    track_id: str = Field(..., max_length=100, pattern=r"^[a-zA-Z0-9_-]+$")
+    notes: str = Field("", max_length=8000)
+
+    @field_validator("notes", mode="before")
+    @classmethod
+    def sanitize_notes(cls, v):
+        return sanitize_text(v or "", strip_tags=True, max_length=8000)
+
+
+@app.post("/api/listening/notes")
+def save_listening_notes_endpoint(req: ListeningNotesRequest, request: Request):
+    """Notları kaydeder. Gerçek sınavda not kağıdı öğrencide kalır; burada da
+    parçadan çıkıp geri dönünce notlar kaybolmasın diye saklanır."""
+    uid = _current_user_id(request)
+    save_listening_notes(uid, req.track_id, req.notes)
+    return {"status": "ok", "track_id": req.track_id, "length": len(req.notes)}
+
+
+@app.get("/api/listening/notes/{track_id}")
+def get_listening_notes_endpoint(track_id: str, request: Request):
+    uid = _current_user_id(request)
+    if not re.fullmatch(r"[a-zA-Z0-9_-]{1,100}", track_id or ""):
+        raise HTTPException(status_code=400, detail="Geçersiz parça kimliği.")
+    return {"track_id": track_id, "notes": get_listening_notes(uid, track_id)}
 
 
 @app.post("/api/listening/answer")
