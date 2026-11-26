@@ -76,6 +76,28 @@ function initAIWritingEvaluator() {
           </div>
         </div>
 
+        <!-- Dosyadan yükle: yalnızca fotoğraf (JPG/PNG/WEBP) veya PDF -->
+        <div id="essay-upload-box" class="p-4 rounded-2xl border border-dashed border-slate-300 bg-slate-50/70 space-y-3">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center shrink-0">
+                <i data-lucide="file-up" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <div class="text-xs font-extrabold text-slate-800">Kağıda yazdın mı? Fotoğrafını veya PDF'ini yükle</div>
+                <p class="text-[11px] text-slate-500 mt-0.5">Yalnızca fotoğraf (JPG, PNG, WEBP) veya PDF, en fazla 10 MB. Metin okunup aşağıdaki kutuya yazılır; puanlamadan önce kontrol et.</p>
+              </div>
+            </div>
+            <label for="essay-file-input" class="shrink-0 px-4 py-2.5 bg-white hover:bg-slate-100 border border-slate-300 text-slate-700 font-bold text-xs rounded-xl cursor-pointer transition inline-flex items-center gap-2">
+              <i data-lucide="upload" class="w-4 h-4"></i> Dosya seç
+            </label>
+            <input type="file" id="essay-file-input" class="hidden"
+                   accept="image/jpeg,image/png,image/webp,application/pdf,.jpg,.jpeg,.png,.webp,.pdf"
+                   onchange="handleEssayFileSelect(event)">
+          </div>
+          <div id="essay-upload-status" class="hidden text-xs font-semibold rounded-xl p-3" role="status" aria-live="polite"></div>
+        </div>
+
         <textarea id="ai-essay-input" oninput="updateEssayWordCount(this.value)" rows="12" class="w-full p-4 text-xs font-serif leading-relaxed text-slate-800 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-slate-400" placeholder="Write your essay here with clear paragraphs (Introduction, Body 1, Body 2, Conclusion)..."></textarea>
       </div>
 
@@ -97,6 +119,124 @@ function initAIWritingEvaluator() {
   `;
 
   if (window.lucide) window.lucide.createIcons();
+}
+
+// --- Essay dosya yükleme: yalnızca fotoğraf veya PDF ---
+const ESSAY_UPLOAD_MAX_BYTES = 10 * 1024 * 1024;
+const ESSAY_IMAGE_TYPES = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp" };
+const TESSERACT_SRC = "https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js";
+
+function setEssayUploadStatus(kind, html) {
+  const el = document.getElementById("essay-upload-status");
+  if (!el) return;
+  const styles = {
+    info: "bg-blue-50 text-blue-800 border border-blue-200",
+    ok: "bg-emerald-50 text-emerald-800 border border-emerald-200",
+    error: "bg-rose-50 text-rose-700 border border-rose-200",
+  };
+  el.className = `text-xs font-semibold rounded-xl p-3 ${styles[kind] || styles.info}`;
+  el.innerHTML = html;
+  el.classList.remove("hidden");
+}
+
+function escapeEssayHtml(s) {
+  return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+// Dosyanın gerçekten PDF / JPG / PNG / WEBP olup olmadığını ilk baytlarından anlar (uzantıya güvenmez).
+async function detectEssayFileKind(file) {
+  const b = new Uint8Array(await file.slice(0, 12).arrayBuffer());
+  const ascii = (from, to) => String.fromCharCode(...b.slice(from, to));
+  if (ascii(0, 5) === "%PDF-") return "pdf";
+  if (b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff) return "image";
+  if (b[0] === 0x89 && ascii(1, 4) === "PNG") return "image";
+  if (ascii(0, 4) === "RIFF" && ascii(8, 12) === "WEBP") return "image";
+  return null;
+}
+
+function loadTesseract() {
+  if (window.Tesseract) return Promise.resolve(window.Tesseract);
+  if (window._tesseractLoading) return window._tesseractLoading;
+  window._tesseractLoading = new Promise((resolve, reject) => {
+    const s = document.createElement("script");
+    s.src = TESSERACT_SRC;
+    s.async = true;
+    s.onload = () => (window.Tesseract ? resolve(window.Tesseract) : reject(new Error("tesseract")));
+    s.onerror = () => { window._tesseractLoading = null; reject(new Error("tesseract")); };
+    document.head.appendChild(s);
+  });
+  return window._tesseractLoading;
+}
+
+function putEssayText(text) {
+  const input = document.getElementById("ai-essay-input");
+  if (!input) return;
+  input.value = text;
+  updateEssayWordCount(text);
+  input.focus();
+}
+
+async function handleEssayFileSelect(event) {
+  const input = event.target;
+  const file = input.files && input.files[0];
+  input.value = ""; // aynı dosya yeniden seçilebilsin
+  if (!file) return;
+
+  if (file.size > ESSAY_UPLOAD_MAX_BYTES) {
+    setEssayUploadStatus("error", "Dosya en fazla 10 MB olabilir.");
+    return;
+  }
+  const kind = await detectEssayFileKind(file);
+  const declaredOk = file.type === "application/pdf" || ESSAY_IMAGE_TYPES[file.type] || /\.(pdf|jpe?g|png|webp)$/i.test(file.name);
+  if (!kind || !declaredOk) {
+    setEssayUploadStatus("error", "Yalnızca fotoğraf (JPG, PNG, WEBP) veya PDF yükleyebilirsiniz.");
+    return;
+  }
+
+  const name = escapeEssayHtml(file.name);
+  if (kind === "pdf") {
+    setEssayUploadStatus("info", `<span class="animate-pulse">${name} okunuyor...</span>`);
+    try {
+      const fd = new FormData();
+      fd.append("file", file, file.name);
+      const res = await fetch("/api/writing/extract-pdf", { method: "POST", body: fd });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.detail || "PDF okunamadı.");
+      putEssayText(data.text);
+      setEssayUploadStatus("ok", `${name}: ${data.word_count} kelime okundu. Metni kontrol edip <strong>Yapay Zeka ile Analiz Et</strong>'e bas.`);
+    } catch (err) {
+      setEssayUploadStatus("error", escapeEssayHtml(err.message || "PDF okunamadı."));
+    }
+    return;
+  }
+
+  // Fotoğraf: yazı tarayıcıda okunur, fotoğraf sunucuya gönderilmez.
+  setEssayUploadStatus("info", `<span class="animate-pulse">${name}: yazı tanıma hazırlanıyor (ilk seferde birkaç saniye sürebilir)...</span>`);
+  let worker;
+  try {
+    const T = await loadTesseract();
+    worker = await T.createWorker("eng", 1, {
+      logger: (m) => {
+        if (m.status === "recognizing text") {
+          setEssayUploadStatus("info", `${name}: yazı okunuyor... %${Math.round((m.progress || 0) * 100)}`);
+        }
+      },
+    });
+    const { data } = await worker.recognize(file);
+    const text = (data.text || "").replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+    const words = text.match(/\b[A-Za-z0-9'-]+\b/g) || [];
+    if (words.length < 5) {
+      setEssayUploadStatus("error", "Fotoğrafta okunabilir İngilizce metin bulunamadı. Daha net, düz ve iyi ışıklı bir fotoğraf deneyin.");
+      return;
+    }
+    putEssayText(text);
+    setEssayUploadStatus("ok", `${name}: ${words.length} kelime okundu. El yazısında tanıma hataları olabilir; metni kontrol edip düzelttikten sonra puanlat.`);
+  } catch (err) {
+    console.error("Essay OCR error:", err);
+    setEssayUploadStatus("error", "Fotoğraf okunamadı. İnternet bağlantını kontrol et ya da metni kutuya yaz.");
+  } finally {
+    if (worker) worker.terminate();
+  }
 }
 
 function onSelectEssayPrompt(promptId) {
@@ -273,4 +413,5 @@ window.onSelectEssayPrompt = onSelectEssayPrompt;
 window.updateEssayWordCount = updateEssayWordCount;
 window.submitEssayForEvaluation = submitEssayForEvaluation;
 window.renderAIEvaluationResults = renderAIEvaluationResults;
+window.handleEssayFileSelect = handleEssayFileSelect;
 

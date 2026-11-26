@@ -5,6 +5,10 @@
         android:label="PrepKampüs"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <!-- Writing'de fotoğraftan yazı okuma: Play Hizmetleri OCR modelini uygulama kurulunca indirir. -->
+        <meta-data
+            android:name="com.google.mlkit.vision.DEPENDENCIES"
+            android:value="ocr" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -15,6 +15,12 @@ const Map<String, Color> categoryColors = {
   'Sentence Completion': Color(0xFF475569),
   'Paragraph Completion': Color(0xFF0F6E56),
   'Dialogue': Color(0xFF993556),
+  'Use of English': Color(0xFF2563EB),
+  'Irrelevant Sentence': Color(0xFF7C3AED),
+  'Sentence Insertion': Color(0xFF0891B2),
+  'Error Identification': Color(0xFFDC2626),
+  'Word Formation': Color(0xFFCA8A04),
+  'Translation': Color(0xFF4D7C0F),
 };
 
 Color categoryColor(String category) =>

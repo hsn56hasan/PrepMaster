@@ -1,8 +1,13 @@
+import 'dart:typed_data';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../models/writing_guide.dart';
 import '../models/essay_evaluation_result.dart';
 import '../services/api_service.dart';
+import '../services/essay_import_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/level_selector.dart';
 
@@ -26,6 +31,11 @@ class _WritingScreenState extends State<WritingScreen>
   int _wordCount = 0;
   bool _isEvaluating = false;
   EssayEvaluationResult? _evalResult;
+
+  // Dosyadan yükleme (yalnızca fotoğraf veya PDF)
+  bool _importing = false;
+  String? _importNote;
+  bool _importNoteIsError = false;
 
   final List<Map<String, String>> _prompts = [
     {
@@ -91,6 +101,118 @@ class _WritingScreenState extends State<WritingScreen>
     });
   }
 
+  void _setImportNote(String? note, {bool error = false}) {
+    if (!mounted) return;
+    setState(() {
+      _importNote = note;
+      _importNoteIsError = error;
+    });
+  }
+
+  Future<void> _chooseEssaySource() async {
+    final choice = await showModalBottomSheet<String>(
+      context: context,
+      showDragHandle: true,
+      builder: (ctx) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Padding(
+              padding: EdgeInsets.fromLTRB(20, 0, 20, 8),
+              child: Text(
+                'Yalnızca fotoğraf (JPG, PNG, WEBP) veya PDF, en fazla 10 MB.',
+                style: TextStyle(fontSize: 12, color: AppTheme.textMuted),
+              ),
+            ),
+            ListTile(
+              key: const Key('essay_src_camera'),
+              leading: const Icon(Icons.photo_camera_outlined),
+              title: const Text('Fotoğraf çek'),
+              onTap: () => Navigator.pop(ctx, 'camera'),
+            ),
+            ListTile(
+              key: const Key('essay_src_gallery'),
+              leading: const Icon(Icons.photo_library_outlined),
+              title: const Text('Galeriden fotoğraf seç'),
+              onTap: () => Navigator.pop(ctx, 'gallery'),
+            ),
+            ListTile(
+              key: const Key('essay_src_pdf'),
+              leading: const Icon(Icons.picture_as_pdf_outlined),
+              title: const Text('PDF seç'),
+              onTap: () => Navigator.pop(ctx, 'pdf'),
+            ),
+          ],
+        ),
+      ),
+    );
+    if (choice == null) return;
+    await _importEssay(choice);
+  }
+
+  Future<void> _importEssay(String source) async {
+    setState(() => _importing = true);
+    _setImportNote(null);
+    try {
+      Uint8List bytes;
+      String name;
+      String? path;
+      if (source == 'pdf') {
+        final f = await FilePicker.pickFile(
+          type: FileType.custom,
+          allowedExtensions: EssayImportService.allowedExtensions,
+        );
+        if (f == null) return;
+        bytes = await f.readAsBytes();
+        name = f.name;
+        path = f.path;
+      } else {
+        final x = await ImagePicker().pickImage(
+          source: source == 'camera' ? ImageSource.camera : ImageSource.gallery,
+          maxWidth: 2400,
+          imageQuality: 90,
+        );
+        if (x == null) return;
+        bytes = await x.readAsBytes();
+        name = x.name;
+        path = x.path;
+      }
+      if (bytes.length > EssayImportService.maxBytes) {
+        _setImportNote('Dosya en fazla 10 MB olabilir.', error: true);
+        return;
+      }
+      final kind = EssayImportService.detectKind(
+        bytes.sublist(0, bytes.length < 12 ? bytes.length : 12),
+      );
+      if (kind == null) {
+        _setImportNote(EssayImportService.onlyPhotoOrPdf, error: true);
+        return;
+      }
+      _setImportNote(kind == EssayFileKind.pdf ? '$name okunuyor...' : '$name: yazı okunuyor...');
+      String text;
+      if (kind == EssayFileKind.pdf) {
+        text = await EssayImportService.extractPdf(bytes, name);
+      } else {
+        if (path == null) throw EssayImportException('Fotoğraf açılamadı.');
+        text = await EssayImportService.recognizeImage(path);
+      }
+      _essayController.text = text;
+      _onEssayChanged(text);
+      final words = EssayImportService.countWords(text);
+      _setImportNote(
+        kind == EssayFileKind.pdf
+            ? '$name: $words kelime okundu. Metni kontrol edip analiz et.'
+            : '$name: $words kelime okundu. El yazısında tanıma hataları olabilir; metni kontrol edip düzelttikten sonra analiz et.',
+      );
+    } on EssayImportException catch (e) {
+      _setImportNote(e.message, error: true);
+    } catch (_) {
+      _setImportNote('Dosya okunamadı. Başka bir dosya deneyin ya da metni kutuya yazın.', error: true);
+    } finally {
+      if (mounted) setState(() => _importing = false);
+    }
+  }
+
   Future<void> _evaluateEssay() async {
     final text = _essayController.text.trim();
     if (text.isEmpty) {
@@ -126,6 +248,60 @@ class _WritingScreenState extends State<WritingScreen>
         );
       }
     }
+  }
+
+  Widget _buildImportBox() {
+    return Container(
+      key: const Key('essay_import_box'),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade50,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: AppTheme.borderSubtle),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.upload_file, size: 20, color: AppTheme.brandBlue),
+              const SizedBox(width: 8),
+              const Expanded(
+                child: Text(
+                  "Kağıda yazdın mı? Fotoğrafını veya PDF'ini yükle",
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: AppTheme.brandNavy),
+                ),
+              ),
+              const SizedBox(width: 8),
+              OutlinedButton(
+                key: const Key('essay_upload_button'),
+                onPressed: _importing ? null : _chooseEssaySource,
+                child: _importing
+                    ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2))
+                    : const Text('Yükle'),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          const Text(
+            'Yalnızca fotoğraf (JPG, PNG, WEBP) veya PDF. Fotoğraf telefonunda okunur, sunucuya gönderilmez.',
+            style: TextStyle(fontSize: 11, color: AppTheme.textMuted),
+          ),
+          if (_importNote != null) ...[
+            const SizedBox(height: 8),
+            Text(
+              _importNote!,
+              key: const Key('essay_import_note'),
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: _importNoteIsError ? Colors.red.shade700 : AppTheme.accentEmerald,
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
   }
 
   @override
@@ -367,6 +543,8 @@ class _WritingScreenState extends State<WritingScreen>
                   ),
                 ],
               ),
+              const SizedBox(height: 10),
+              _buildImportBox(),
               const SizedBox(height: 10),
               TextField(
                 controller: _essayController,

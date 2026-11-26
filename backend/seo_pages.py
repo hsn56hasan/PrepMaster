@@ -254,9 +254,10 @@ def render_exams_hub_html(
   <meta property="og:description" content="{_html.escape(description)}" />
   <meta property="og:url" content="{_html.escape(canonical)}" />
   <meta property="og:image" content="{base}/static/img/logo-512.png?v=2" />
-  <link rel="icon" type="image/svg+xml" href="/static/img/logo.svg?v=2" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon-32x32.png" />
-  <link rel="shortcut icon" href="/static/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/static/img/favicon-96x96.png?v=3" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/static/img/favicon-48x48.png?v=3" />
+  <link rel="icon" type="image/svg+xml" href="/static/img/logo.svg?v=3" />
+  <link rel="shortcut icon" href="/favicon.ico?v=3" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>{_PAGE_CSS}</style>
   <script type="application/ld+json">{json_ld}</script>
@@ -423,9 +424,10 @@ def render_university_seo_html(
   <meta property="og:description" content="{_html.escape(meta_desc)}" />
   <meta property="og:url" content="{_html.escape(canonical)}" />
   <meta property="og:image" content="{base}/static/img/logo-512.png?v=2" />
-  <link rel="icon" type="image/svg+xml" href="/static/img/logo.svg?v=2" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon-32x32.png" />
-  <link rel="shortcut icon" href="/static/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/static/img/favicon-96x96.png?v=3" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/static/img/favicon-48x48.png?v=3" />
+  <link rel="icon" type="image/svg+xml" href="/static/img/logo.svg?v=3" />
+  <link rel="shortcut icon" href="/favicon.ico?v=3" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>{_PAGE_CSS}</style>
   <script type="application/ld+json">{ld_graph}</script>

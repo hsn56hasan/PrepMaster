@@ -323,12 +323,14 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
         # Strict enough to block unauthorized script injection and framing
         csp_directives = [
             "default-src 'self'",
-            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com https://www.paytr.com",
+            # cdn.jsdelivr.net: Writing'de fotoğraftan yazı okuyan Tesseract.js (tarayıcıda çalışır)
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com https://www.paytr.com https://cdn.jsdelivr.net",
+            "worker-src 'self' blob:",
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net",
             "font-src 'self' https://fonts.gstatic.com data:",
             "img-src 'self' data: https: https://cdn-icons-png.flaticon.com",
             "media-src 'self' blob: data:",
-            "connect-src 'self'",
+            "connect-src 'self' https://cdn.jsdelivr.net",
             # PayTR ödeme penceresi (kart bilgisi yalnızca orada girilir)
             "frame-src https://www.paytr.com",
             # PayTR penceresi ödeme sonrası /odeme-sonuc sayfasını kendi içinde açar
@@ -374,6 +376,10 @@ def _env_int(name: str, default: int) -> int:
 
 class _BodyTooLarge(Exception):
     pass
+
+
+# Dosya yüklenen uçlar genel 2 MB yerine DOS_MAX_UPLOAD_BYTES (10 MB) sınırını kullanır.
+UPLOAD_PATHS = frozenset({"/api/student/upload-document", "/api/writing/extract-pdf"})
 
 
 class DoSProtectionMiddleware:
@@ -467,7 +473,7 @@ class DoSProtectionMiddleware:
                     )
 
         # 3) Gövde boyutu sınırı
-        limit = self.max_upload if path == "/api/student/upload-document" else self.max_body
+        limit = self.max_upload if path in UPLOAD_PATHS else self.max_body
         headers = dict(scope.get("headers") or [])
         raw_len = headers.get(b"content-length")
         if raw_len is not None:

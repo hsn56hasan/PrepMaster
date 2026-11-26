@@ -4,12 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>PrepKampüs Yönetim Paneli | Öğrenci & Üniversite Erişim Merkezi</title>
-  <link rel="icon" type="image/svg+xml" href="/static/img/logo.svg?v=2" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon-32x32.png?v=2" />
-  <link rel="shortcut icon" href="/static/favicon.ico?v=2" />
+  <title>PrepKampüs Yönetim Paneli</title>
+  <link rel="icon" type="image/png" sizes="96x96" href="/static/img/favicon-96x96.png?v=3" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/static/img/favicon-48x48.png?v=3" />
+  <link rel="icon" type="image/svg+xml" href="/static/img/logo.svg?v=3" />
+  <link rel="shortcut icon" href="/favicon.ico?v=3" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="/static/js/theme_palette.js?v=1.0"></script>
+  <script src="/static/js/theme_palette.js?v=1.1"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -66,7 +67,7 @@
               <span class="font-black text-base text-white">PrepKampüs Admin</span>
               <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 rounded-full">Yönetici Paneli</span>
             </div>
-            <p class="text-[11px] text-slate-400">Öğrenci Kayıtları ve Üniversite Paket Yetkilendirme</p>
+            <p class="text-[11px] text-slate-400">Öğrenciler, siparişler, destek, içerik ve site yönetimi</p>
           </div>
         </div>
 
@@ -89,6 +90,162 @@
 
     <!-- İçerik Gövdesi -->
     <main class="flex-1 max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+      <!-- Sekmeler -->
+      <nav class="bg-slate-900 border border-slate-800 rounded-2xl p-1.5 flex gap-1 overflow-x-auto" aria-label="Yönetim bölümleri">
+        <button type="button" data-admin-nav="overview" onclick="adminShowTab('overview')" class="px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap text-slate-300 hover:bg-slate-800"><i data-lucide="layout-dashboard" class="w-4 h-4"></i>Genel Bakış</button>
+        <button type="button" data-admin-nav="students" onclick="adminShowTab('students')" class="px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap text-slate-300 hover:bg-slate-800"><i data-lucide="users" class="w-4 h-4"></i>Öğrenciler</button>
+        <button type="button" data-admin-nav="orders" onclick="adminShowTab('orders')" class="px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap text-slate-300 hover:bg-slate-800"><i data-lucide="receipt" class="w-4 h-4"></i>Siparişler</button>
+        <button type="button" data-admin-nav="support" onclick="adminShowTab('support')" class="px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap text-slate-300 hover:bg-slate-800"><i data-lucide="life-buoy" class="w-4 h-4"></i>Destek</button>
+        <button type="button" data-admin-nav="consents" onclick="adminShowTab('consents')" class="px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap text-slate-300 hover:bg-slate-800"><i data-lucide="shield-check" class="w-4 h-4"></i>KVKK &amp; İzinler</button>
+        <button type="button" data-admin-nav="content" onclick="adminShowTab('content')" class="px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap text-slate-300 hover:bg-slate-800"><i data-lucide="book-open" class="w-4 h-4"></i>İçerik</button>
+        <button type="button" data-admin-nav="announcement" onclick="adminShowTab('announcement')" class="px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap text-slate-300 hover:bg-slate-800"><i data-lucide="megaphone" class="w-4 h-4"></i>Duyuru</button>
+        <button type="button" data-admin-nav="audit" onclick="adminShowTab('audit')" class="px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap text-slate-300 hover:bg-slate-800"><i data-lucide="history" class="w-4 h-4"></i>İşlem Kayıtları</button>
+        <button type="button" data-admin-nav="system" onclick="adminShowTab('system')" class="px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap text-slate-300 hover:bg-slate-800"><i data-lucide="settings" class="w-4 h-4"></i>Sistem</button>
+      </nav>
+
+      <section data-admin-tab="overview" class="space-y-6">
+        <div id="ov-kpis" class="grid grid-cols-2 lg:grid-cols-4 gap-4"></div>
+        <div class="grid lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 p-5 bg-slate-900 border border-slate-800 rounded-3xl">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-sm font-black text-white">Son 14 gün: yeni kayıtlar</h2>
+              <span class="text-[11px] text-slate-400"><span class="inline-block w-2.5 h-2.5 rounded-sm bg-indigo-500/70 align-middle"></span> kayıt • <span class="text-emerald-400">yeşil</span>: başarılı satış</span>
+            </div>
+            <div id="ov-chart" class="flex items-end gap-1.5 h-40"></div>
+          </div>
+          <div class="p-5 bg-slate-900 border border-slate-800 rounded-3xl">
+            <h2 class="text-sm font-black text-white mb-3">En çok kayıt olan okullar</h2>
+            <div id="ov-unis"></div>
+          </div>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-6">
+          <div class="p-5 bg-slate-900 border border-slate-800 rounded-3xl">
+            <h2 class="text-sm font-black text-white mb-3">İçerik</h2>
+            <div id="ov-content"></div>
+          </div>
+          <div class="p-5 bg-slate-900 border border-slate-800 rounded-3xl">
+            <h2 class="text-sm font-black text-white mb-3">Sistem durumu</h2>
+            <div id="ov-system"></div>
+            <p class="text-[11px] text-slate-500 mt-3">Ayrıntılar ve yedek indirme için <button type="button" class="text-indigo-300 underline" onclick="adminShowTab('system')">Sistem</button> sekmesi.</p>
+          </div>
+        </div>
+      </section>
+
+      <section data-admin-tab="orders" class="space-y-4 hidden">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col md:flex-row gap-3 md:items-center">
+          <input id="orders-search" oninput="loadOrders()" placeholder="Sipariş no, öğrenci adı, e-posta veya okul ara..." class="flex-1 px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <select id="orders-status" onchange="loadOrders()" class="px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-slate-200 font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <option value="">Tüm durumlar</option><option value="success">Başarılı</option><option value="pending">Bekliyor</option>
+            <option value="failed">Başarısız</option><option value="amount_mismatch">Tutar uyuşmazlığı</option>
+          </select>
+          <button type="button" onclick="downloadAdminFile('/api/admin/export/orders.csv', 'siparisler.csv')" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-black">CSV indir</button>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-xl">
+          <div class="px-6 py-4 border-b border-slate-800 flex flex-wrap items-center justify-between gap-2">
+            <div><h2 class="text-sm font-black text-white">PayTR siparişleri</h2>
+            <p class="text-[11px] text-slate-400">Paket yalnızca PayTR'nin imzalı bildirimi gelince açılır. İade ve iptaller PayTR panelinden yapılır.</p></div>
+            <span id="orders-summary" class="text-xs font-bold text-slate-300"></span>
+          </div>
+          <div class="overflow-x-auto"><table class="w-full text-left border-collapse">
+            <thead><tr class="border-b border-slate-800 bg-slate-900/50 text-[11px] font-extrabold text-slate-400 uppercase tracking-wider"><th class="py-3 px-4">Sipariş / Tarih</th><th class="py-3 px-4">Öğrenci</th><th class="py-3 px-4">Okul</th><th class="py-3 px-4">Tutar</th><th class="py-3 px-4">Durum</th></tr></thead>
+            <tbody id="orders-tbody" class="divide-y divide-slate-800/80 text-xs"></tbody>
+          </table></div>
+        </div>
+      </section>
+
+      <section data-admin-tab="support" class="space-y-4 hidden">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-3">
+          <div><h2 class="text-sm font-black text-white">Destek ve KVKK talepleri</h2>
+          <p class="text-[11px] text-slate-400">KVKK başvurularını en geç 30 gün içinde cevaplayın; ne yaptığınızı nota yazın.</p></div>
+          <div class="flex items-center gap-2">
+            <span id="support-count" class="text-xs font-bold text-slate-300"></span>
+            <select id="support-status" onchange="loadSupport()" class="px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-slate-200 font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="">Tüm durumlar</option><option value="open">Açık</option><option value="in_progress">İşlemde</option>
+              <option value="answered">Cevaplandı</option><option value="closed">Kapandı</option>
+            </select>
+          </div>
+        </div>
+        <div id="support-list" class="space-y-3"></div>
+      </section>
+
+      <section data-admin-tab="consents" class="space-y-4 hidden">
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="p-5 bg-slate-900 border border-slate-800 rounded-2xl">
+            <div class="text-xs text-slate-400 font-semibold">Ticari ileti onayı veren öğrenci</div>
+            <div id="consents-marketing-count" class="text-3xl font-black text-fuchsia-300 mt-1">0</div>
+            <button type="button" onclick="downloadAdminFile('/api/admin/export/marketing-consents.csv', 'ticari-ileti-onaylari.csv')" class="mt-3 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-black">Onay listesini indir (CSV)</button>
+          </div>
+          <div class="md:col-span-2 p-5 bg-amber-950/20 border border-amber-800/40 rounded-2xl text-xs text-amber-100/90 leading-relaxed space-y-1.5">
+            <div class="font-black text-amber-300">Hatırlatma</div>
+            <p>Kampanya e-postasını yalnızca bu listedeki öğrencilere gönderin ve listeyi göndermeden önce İYS'ye yükleyin. Onayını geri çeken öğrenci listeden kendiliğinden çıkar.</p>
+            <p>Silme talebi gelirse öğrenciyi <strong>Öğrenciler</strong> sekmesinden silin: hesap ve tüm çalışma verileri silinir; sipariş ve onay kayıtları yasal saklama süresi için tutulur.</p>
+          </div>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-6">
+          <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-xl">
+            <div class="px-6 py-4 border-b border-slate-800"><h2 class="text-sm font-black text-white">Onay kayıtları (belge bazında)</h2></div>
+            <div class="overflow-x-auto"><table class="w-full text-left border-collapse">
+              <thead><tr class="border-b border-slate-800 bg-slate-900/50 text-[11px] font-extrabold text-slate-400 uppercase tracking-wider"><th class="py-3 px-4">Metin</th><th class="py-3 px-4">İşlem</th><th class="py-3 px-4">Adet</th><th class="py-3 px-4">Son</th></tr></thead>
+              <tbody id="consents-summary" class="divide-y divide-slate-800/80 text-xs"></tbody>
+            </table></div>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-xl">
+            <div class="px-6 py-4 border-b border-slate-800"><h2 class="text-sm font-black text-white">Ticari ileti onayı verenler (son 200)</h2></div>
+            <div class="overflow-x-auto max-h-[480px]"><table class="w-full text-left border-collapse">
+              <thead><tr class="border-b border-slate-800 bg-slate-900/50 text-[11px] font-extrabold text-slate-400 uppercase tracking-wider"><th class="py-3 px-4">Öğrenci</th><th class="py-3 px-4">E-posta</th><th class="py-3 px-4">Onay tarihi</th></tr></thead>
+              <tbody id="consents-marketing" class="divide-y divide-slate-800/80 text-xs"></tbody>
+            </table></div>
+          </div>
+        </div>
+      </section>
+
+      <section data-admin-tab="content" class="space-y-4 hidden">
+        <details class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-xl" open>
+          <summary class="px-6 py-4 cursor-pointer text-sm font-black text-white">Soru bankası dağılımı (kategori × kur)</summary>
+          <div class="overflow-x-auto px-4 pb-4"><table id="content-matrix" class="w-full text-xs"></table></div>
+        </details>
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 grid gap-2 md:grid-cols-6">
+          <input id="content-search" placeholder="Soru metni veya soru kimliği ara..." onkeydown="if(event.key==='Enter') loadContent()" class="md:col-span-2 px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <select id="content-category" onchange="loadContent()" class="px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-slate-200 font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500"><option value="">Tüm kategoriler</option></select>
+          <select id="content-level" onchange="loadContent()" class="px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-slate-200 font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500"><option value="">Tüm kurlar</option><option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>C1</option><option>C2</option></select>
+          <select id="content-uni" onchange="loadContent()" class="px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-slate-200 font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500"><option value="">Tüm havuzlar</option><option value="general">Genel havuz</option><option value="itu">İTÜ</option><option value="metu">ODTÜ</option><option value="boun">Boğaziçi</option><option value="bilkent">Bilkent</option><option value="ytu">YTÜ</option><option value="hacettepe">Hacettepe</option><option value="ankara">Ankara</option><option value="koc">Koç</option><option value="sabanci">Sabancı</option></select>
+          <select id="content-state" onchange="loadContent()" class="px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-slate-200 font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500"><option value="">Tüm sorular</option><option value="hidden">Yalnızca gizlenenler</option><option value="edited">Yalnızca düzeltilenler</option></select>
+        </div>
+        <div class="flex items-center justify-between text-xs"><span id="content-stats" class="text-slate-400"></span>
+          <button type="button" onclick="loadContent()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-black">Ara</button></div>
+        <p class="text-[11px] text-slate-500">Hatalı bir soruyu düzelttiğinizde ya da yayından kaldırdığınızda değişiklik web sitesine hemen yansır. Mobil uygulamadaki çevrimdışı genel havuz bir sonraki uygulama sürümüyle güncellenir.</p>
+        <div id="content-list" class="space-y-3"></div>
+      </section>
+
+      <section data-admin-tab="announcement" class="space-y-4 hidden">
+        <div class="max-w-3xl p-6 bg-slate-900 border border-slate-800 rounded-3xl space-y-4">
+          <div class="flex items-center justify-between"><h2 class="text-sm font-black text-white">Site duyurusu</h2><span id="ann-state" class="text-xs font-bold text-slate-300"></span></div>
+          <p class="text-[11px] text-slate-400">Öğrenci sitesinin altında, ortada yüzen bir şerit olarak görünür (ör. yeni deneme, bakım saati, kampanya). Öğrenci kapatırsa bu oturumda bir daha görmez.</p>
+          <label class="flex items-center gap-2 text-xs font-bold text-slate-200"><input id="ann-enabled" type="checkbox" onchange="renderAnnouncementPreview()" class="w-4 h-4 accent-indigo-500"> Duyuruyu sitede göster</label>
+          <textarea id="ann-text" rows="2" maxlength="300" oninput="renderAnnouncementPreview()" placeholder="Örn: Ocak muafiyet denemeleri yayında! İTÜ ve ODTÜ formatında 2 yeni tam deneme eklendi." class="w-full p-3 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+          <div class="grid sm:grid-cols-3 gap-2">
+            <select id="ann-tone" onchange="renderAnnouncementPreview()" class="px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-slate-200 font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500"><option value="info">Bilgi (mavi)</option><option value="success">Müjde (yeşil)</option><option value="warning">Uyarı (sarı)</option></select>
+            <input id="ann-link-url" oninput="renderAnnouncementPreview()" placeholder="Bağlantı (isteğe bağlı): /sinavlar" class="px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <input id="ann-link-text" oninput="renderAnnouncementPreview()" maxlength="60" placeholder="Bağlantı yazısı: Hemen bak" class="px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+          <div><div class="text-[11px] text-slate-500 mb-1.5">Önizleme</div><div id="ann-preview"></div></div>
+          <button type="button" onclick="saveAnnouncement()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-black">Kaydet</button>
+        </div>
+      </section>
+
+      <section data-admin-tab="audit" class="space-y-4 hidden">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-xl">
+          <div class="px-6 py-4 border-b border-slate-800"><h2 class="text-sm font-black text-white">Yönetici işlem kayıtları</h2>
+          <p class="text-[11px] text-slate-400">Panelde yapılan her değişiklik (erişim, silme, şifre, soru düzeltme, dışa aktarma, duyuru, yedek) zamanı ve IP adresiyle kaydedilir.</p></div>
+          <div class="overflow-x-auto"><table class="w-full text-left border-collapse">
+            <thead><tr class="border-b border-slate-800 bg-slate-900/50 text-[11px] font-extrabold text-slate-400 uppercase tracking-wider"><th class="py-3 px-4">Zaman</th><th class="py-3 px-4">İşlem</th><th class="py-3 px-4">Hedef</th><th class="py-3 px-4">Ayrıntı</th><th class="py-3 px-4">Yönetici / IP</th></tr></thead>
+            <tbody id="audit-tbody" class="divide-y divide-slate-800/80 text-xs"></tbody>
+          </table></div>
+        </div>
+      </section>
+
+      <section data-admin-tab="students" class="space-y-6 hidden">
 
       <!-- Özet İstatistik Kartları -->
       <div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
@@ -191,7 +348,10 @@
             <h2 class="text-sm font-black text-white">Tüm Kayıtlı Öğrenciler & Üniversite Erişim Yetkileri (Kalıcı Veritabanı)</h2>
             <p class="text-[11px] text-slate-400">Sisteme kayıt olan tüm öğrenciler (şu an aktif veya çevrimdışı fark etmeksizin) kalıcı olarak listelenir. İstediğiniz öğrenciye tek tıkla 26 üniversite erişimi tanımlayabilirsiniz.</p>
           </div>
-          <span id="table-count-badge" class="text-xs font-extrabold px-3 py-1 bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 rounded-full">0 Öğrenci</span>
+          <div class="flex items-center gap-2">
+            <button type="button" onclick="downloadAdminFile('/api/admin/export/students.csv', 'ogrenciler.csv')" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-[11px] font-black">CSV indir</button>
+            <span id="table-count-badge" class="text-xs font-extrabold px-3 py-1 bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 rounded-full">0 Öğrenci</span>
+          </div>
         </div>
 
         <div class="overflow-x-auto">
@@ -214,32 +374,9 @@
         </div>
       </div>
 
-      <!-- Gelen Destek & KVKK Talepleri Tablosu -->
-      <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-xl">
-        <div class="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
-          <div>
-            <h2 class="text-sm font-black text-white">Gelen Öğrenci Destek & KVKK Talepleri</h2>
-            <p class="text-[11px] text-slate-400">Sitedeki Destek & KVKK formundan gönderilen talepler (Resmi İletişim: destek@prepkampus.com • 0539 838 18 87)</p>
-          </div>
-          <span id="tickets-count-badge" class="text-xs font-extrabold px-3 py-1 bg-blue-500/20 text-blue-300 border border-blue-500/30 rounded-full">0 Talep</span>
-        </div>
-        <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse">
-            <thead>
-              <tr class="border-b border-slate-800 bg-slate-900/50 text-[11px] font-extrabold text-slate-400 uppercase tracking-wider">
-                <th class="py-3 px-4">ID / Tarih</th>
-                <th class="py-3 px-4">Öğrenci / İletişim</th>
-                <th class="py-3 px-4">Kategori</th>
-                <th class="py-3 px-4">Mesaj / Talep Detayı</th>
-              </tr>
-            </thead>
-            <tbody id="admin-tickets-tbody" class="divide-y divide-slate-800/80 text-xs">
-              <!-- JS ile doldurulur -->
-            </tbody>
-          </table>
-        </div>
-      </div>
+      </section>
 
+      <section data-admin-tab="system" class="space-y-6 hidden">
       <!-- E-Posta Altyapısı Durumu & Canlı Test -->
       <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
         <div class="px-6 py-4 border-b border-slate-800 flex flex-wrap items-center justify-between gap-3">
@@ -307,6 +444,7 @@
         </div>
       </div>
 
+      </section>
     </main>
   </div>
 
@@ -444,6 +582,43 @@
   </div>
 
   <!-- Bildirim Toast -->
+
+  <!-- ================= ÖĞRENCİ AYRINTI MODALI ================= -->
+  <div id="student-detail-modal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm p-4 overflow-y-auto">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-4xl w-full mx-auto my-6 p-6 shadow-2xl space-y-5">
+      <div class="flex items-center justify-between gap-3">
+        <h3 id="sd-title" class="font-black text-white text-base">Öğrenci</h3>
+        <button type="button" onclick="closeStudentDetail()" class="p-2 bg-slate-800 hover:bg-slate-700 rounded-xl text-slate-300" aria-label="Kapat"><i data-lucide="x" class="w-4 h-4"></i></button>
+      </div>
+      <div id="sd-body" class="space-y-6"></div>
+    </div>
+  </div>
+
+  <!-- ================= SORU DÜZENLEME MODALI ================= -->
+  <div id="question-edit-modal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm p-4 overflow-y-auto">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-3xl w-full mx-auto my-6 p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between gap-3">
+        <div><h3 class="font-black text-white text-base">Soruyu düzenle</h3><p id="qe-title" class="text-[11px] text-slate-400 font-mono"></p></div>
+        <button type="button" onclick="closeQuestionEditor()" class="p-2 bg-slate-800 hover:bg-slate-700 rounded-xl text-slate-300" aria-label="Kapat"><i data-lucide="x" class="w-4 h-4"></i></button>
+      </div>
+      <label class="block text-xs font-bold text-slate-300">Soru metni<textarea id="qe-question" rows="6" class="mt-1 w-full p-3 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-normal"></textarea></label>
+      <div class="space-y-1.5"><div class="text-xs font-bold text-slate-300">Şıklar</div><div id="qe-options" class="space-y-1.5"></div></div>
+      <label class="block text-xs font-bold text-slate-300">Doğru cevap <select id="qe-answer" class="ml-2 px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-slate-200 font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500"></select></label>
+      <label class="block text-xs font-bold text-slate-300">Türkçe çözüm<textarea id="qe-exp-tr" rows="3" class="mt-1 w-full p-3 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-normal"></textarea></label>
+      <label class="block text-xs font-bold text-slate-300">İngilizce çözüm<textarea id="qe-exp-en" rows="2" class="mt-1 w-full p-3 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-normal"></textarea></label>
+      <label class="block text-xs font-bold text-slate-300">Not (neden değiştirildi?)<input id="qe-note" maxlength="300" placeholder="Örn: Öğrenci bildirdi, B şıkkı da doğruydu" class="mt-1 w-full p-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-normal"></label>
+      <label class="flex items-center gap-2 text-xs font-bold text-rose-300"><input id="qe-hidden" type="checkbox" class="w-4 h-4 accent-rose-500"> Bu soruyu öğrencilerden gizle</label>
+      <div id="qe-msg" class="hidden p-3 rounded-xl text-xs font-bold bg-rose-950/70 border border-rose-700 text-rose-200"></div>
+      <div class="flex flex-wrap justify-between gap-2 pt-2 border-t border-slate-800">
+        <button type="button" id="qe-original" onclick="saveQuestionEdit(true)" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-xl text-xs font-bold">Orijinal haline döndür</button>
+        <div class="flex gap-2 ml-auto">
+          <button type="button" onclick="closeQuestionEditor()" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold">Vazgeç</button>
+          <button type="button" onclick="saveQuestionEdit()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-black">Kaydet ve yayınla</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="admin-toast" class="hidden fixed bottom-5 right-5 z-[90] px-4 py-3 rounded-2xl shadow-2xl text-xs font-extrabold border"></div>
 
   <script>
@@ -555,6 +730,7 @@
         sessionStorage.setItem("prepmaster_admin_token", data.token);
         showDashboardView();
         await loadAdminData();
+        if (window.adminShowTab) adminShowTab("overview");
         showAdminToast("✓ Yönetim paneline giriş yapıldı.");
       } catch (err) {
         if (errEl) {
@@ -835,6 +1011,7 @@
 
             <td class="py-3.5 px-4 text-right">
               <div class="inline-flex items-center gap-1.5">
+                <button onclick="openStudentDetail(${Number(st.id)})" title="Öğrencinin tüm kayıtları" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-xl text-[11px] font-bold transition">Ayrıntı</button>
                 <button onclick="openStudentAccessModal(${Number(st.id)})" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-[11px] font-extrabold shadow transition flex items-center gap-1">
                   <i data-lucide="key-round" class="w-3.5 h-3.5"></i>
                   <span>Üniversite Erişimi Tanımla</span>
@@ -1024,7 +1201,7 @@
     async function deleteStudentAccount(userId) {
       const st = adminStudentsList.find(s => s.id === userId);
       if (!st) return;
-      if (!confirm(`${st.full_name || st.username} (${st.email}) adlı öğrenci kaydını silmek istediğinize emin misiniz?`)) {
+      if (!confirm(`${st.full_name || st.username} (${st.email}) adlı öğrencinin hesabı ve tüm çalışma verileri kalıcı olarak silinecek. Sipariş ve onay kayıtları yasal saklama için tutulur. Bu işlem geri alınamaz. Devam edilsin mi?`)) {
         return;
       }
       try {
@@ -1053,5 +1230,6 @@
       }, 15000);
     });
   </script>
+  <script src="/static/js/admin_panel.js?v=1.0"></script>
 </body>
 </html>

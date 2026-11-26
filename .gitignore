@@ -11,6 +11,7 @@ venv/
 # Flutter / Dart
 mobile/.dart_tool/
 mobile/build/
+mobile/android/build/
 mobile/.flutter-plugins
 mobile/.flutter-plugins-dependencies
 mobile/.packages

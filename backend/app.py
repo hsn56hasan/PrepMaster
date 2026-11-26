@@ -1,3 +1,4 @@
+import io
 import json
 import random
 import re
@@ -37,6 +38,13 @@ from database import (
     admin_list_students, admin_update_student_access,
     admin_reset_student_password, admin_delete_student,
     create_support_ticket, list_support_tickets
+)
+from admin_db import (
+    init_admin_tables, log_admin_action, list_audit_log, admin_overview, admin_list_orders,
+    admin_list_tickets, admin_update_ticket, admin_student_detail, admin_students_export_rows,
+    admin_marketing_consents, admin_consent_summary, admin_delete_user_everywhere,
+    get_setting, set_setting, list_question_overrides, save_question_override, apply_question_overrides,
+    TICKET_STATUSES,
 )
 from lesson_path import LessonPath, LEVELS as PATH_LEVELS
 from document_scanner import (
@@ -244,8 +252,19 @@ def load_json(filename: str):
     with open(file_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
+init_admin_tables()
+
+
+def rebuild_questions_data() -> None:
+    """Öğrencilere sunulan soru listesi = ham soru bankası + yöneticinin gizleme/düzeltmeleri."""
+    global questions_data
+    questions_data = apply_question_overrides(questions_raw, list_question_overrides())
+
+
 universities_data = load_json("universities.json")
-questions_data = load_json("questions.json")
+questions_raw = load_json("questions.json")
+questions_data = []
+rebuild_questions_data()
 vocabulary_data = load_json("vocabulary.json")
 writing_guides_data = load_json("writing_guides.json")
 listening_data = load_json("listening.json")
@@ -254,9 +273,12 @@ lesson_path = LessonPath.load(DATA_DIR / "lessons.json")
 
 @app.on_event("startup")
 def startup_event():
-    global universities_data, questions_data, vocabulary_data, writing_guides_data, listening_data, speaking_data
+    global universities_data, questions_raw, vocabulary_data, writing_guides_data, listening_data, speaking_data
+    init_db()
+    init_admin_tables()
     universities_data = load_json("universities.json")
-    questions_data = load_json("questions.json")
+    questions_raw = load_json("questions.json")
+    rebuild_questions_data()
     vocabulary_data = load_json("vocabulary.json")
     writing_guides_data = load_json("writing_guides.json")
     listening_data = load_json("listening.json")
@@ -1218,6 +1240,44 @@ def listening_answer_endpoint(req: ListeningAnswerRequest, request: Request):
             wrong_answer=chosen,
         )
     return {"question_id": q["id"], "is_correct": is_correct, "correct_answer": q["correct_answer"]}
+
+
+WRITING_PDF_MAX_BYTES = 10 * 1024 * 1024
+WRITING_PDF_MAX_PAGES = 10
+
+
+@app.post("/api/writing/extract-pdf")
+async def writing_extract_pdf_endpoint(request: Request, file: UploadFile = File(...), _=Depends(rate_limit_ai_writing)):
+    """Writing için yüklenen PDF'ten metni çıkarır. Yalnızca PDF kabul edilir; fotoğraflar tarayıcıda okunur.
+    Dosya diske yazılmaz ve saklanmaz."""
+    require_current_user(request)
+    content = await file.read(WRITING_PDF_MAX_BYTES + 1)
+    if len(content) > WRITING_PDF_MAX_BYTES:
+        raise HTTPException(status_code=413, detail="Dosya en fazla 10 MB olabilir.")
+    if not content.startswith(b"%PDF-"):
+        raise HTTPException(status_code=415, detail="Yalnızca PDF veya fotoğraf (JPG, PNG, WEBP) yükleyebilirsiniz.")
+    try:
+        from pypdf import PdfReader
+        reader = PdfReader(io.BytesIO(content))
+        if reader.is_encrypted:
+            raise HTTPException(status_code=422, detail="Şifreli PDF okunamıyor. Şifresiz bir PDF ya da sayfanın fotoğrafını yükleyin.")
+        pages = reader.pages
+        if len(pages) > WRITING_PDF_MAX_PAGES:
+            raise HTTPException(status_code=422, detail=f"PDF en fazla {WRITING_PDF_MAX_PAGES} sayfa olabilir.")
+        text = "\n".join((p.extract_text() or "") for p in pages)
+    except HTTPException:
+        raise
+    except Exception:
+        raise HTTPException(status_code=422, detail="PDF okunamadı. Dosya bozuk olabilir; başka bir PDF ya da sayfanın fotoğrafını deneyin.")
+    lines = [" ".join(line.split()) for line in text.replace("\r", "\n").split("\n")]
+    cleaned = "\n".join(lines)
+    cleaned = re.sub(r"\n{3,}", "\n\n", cleaned).strip()[:20000]
+    if len(re.findall(r"[A-Za-z]{2,}", cleaned)) < 5:
+        raise HTTPException(
+            status_code=422,
+            detail="Bu PDF'te seçilebilir metin yok (taranmış belge olabilir). Sayfanın fotoğrafını yükleyin ya da metni yazın.",
+        )
+    return {"text": cleaned, "pages": len(pages), "word_count": len(re.findall(r"\b[A-Za-z0-9'-]+\b", cleaned))}
 
 
 @app.post("/api/writing/evaluate")
@@ -2232,9 +2292,9 @@ def get_mobile_app_info():
     return {
         "available": apk_path is not None,
         "app_name": "PrepKampüs Mobil (Android)",
-        "version": "2.2.0",
+        "version": "2.3.0",
         "build_type": "Release (ARM64)",
-        "filename": "PrepKampus-v2.2-Android.apk",
+        "filename": "PrepKampus-v2.3-Android.apk",
         "size_mb": size_mb,
         "min_android": "Android 8.0+ (API 26+)",
         "download_url": "/api/download/apk",
@@ -2261,9 +2321,9 @@ def download_android_apk():
     return FileResponse(
         path=apk_path,
         media_type="application/vnd.android.package-archive",
-        filename="PrepKampus-v2.2-Android.apk",
+        filename="PrepKampus-v2.3-Android.apk",
         headers={
-            "Content-Disposition": 'attachment; filename="PrepKampus-v2.2-Android.apk"',
+            "Content-Disposition": 'attachment; filename="PrepKampus-v2.3-Android.apk"',
             "Cache-Control": "public, max-age=3600"
         }
     )
@@ -2293,6 +2353,19 @@ class AdminStudentAccessRequest(BaseModel):
 
 class AdminPasswordResetRequest(BaseModel):
     new_password: str = Field(..., min_length=6, max_length=128)
+
+
+def _admin_log(request: Request, action: str, target: Any = "", detail: str = "") -> None:
+    """Yönetici işlemlerini kaydeder (kim, ne, kime, hangi IP'den). Kayıt hatası işlemi durdurmaz."""
+    try:
+        payload = verify_session_token(request.headers.get("Authorization", "").split(" ", 1)[-1].strip())
+        admin = payload.get("username") or "admin"
+    except Exception:
+        admin = "admin"
+    try:
+        log_admin_action(action, str(target), detail, admin=admin, ip=get_client_ip(request))
+    except Exception:
+        pass
 
 
 def _require_admin(request: Request) -> Dict[str, Any]:
@@ -2381,6 +2454,8 @@ def admin_update_student_access_endpoint(
     )
     if not res.get("success"):
         raise HTTPException(status_code=404, detail=res.get("detail", "Öğrenci güncellenemedi."))
+    _admin_log(request, "student_access", target_user_id,
+               f"okullar={','.join(res.get('unlocked_universities', []))}; doğrulandı={'evet' if res.get('is_verified') else 'hayır'}")
     if email_configured() and res.get("is_verified"):
         prof = get_profile(target_user_id)
         if prof.get("email"):
@@ -2403,16 +2478,28 @@ def admin_reset_student_password_endpoint(
     res = admin_reset_student_password(user_id=target_user_id, new_password=req.new_password)
     if not res.get("success"):
         raise HTTPException(status_code=400, detail=res.get("detail", "Şifre güncellenemedi."))
+    _admin_log(request, "student_password_reset", target_user_id)
     return res
 
 
 @app.delete("/api/admin/students/{target_user_id}")
 def admin_delete_student_endpoint(target_user_id: int, request: Request):
     _require_admin(request)
-    res = admin_delete_student(user_id=target_user_id)
+    # Hesap + tüm kişisel ilerleme tabloları silinir (KVKK silme talebi); ödeme ve onay kayıtları saklanır.
+    res = admin_delete_user_everywhere(user_id=target_user_id)
     if not res.get("success"):
         raise HTTPException(status_code=400, detail=res.get("detail", "Öğrenci silinemedi."))
+    _admin_log(request, "student_delete", target_user_id)
     return res
+
+
+@app.get("/api/admin/students/{target_user_id}")
+def admin_student_detail_endpoint(target_user_id: int, request: Request):
+    _require_admin(request)
+    detail = admin_student_detail(target_user_id)
+    if not detail:
+        raise HTTPException(status_code=404, detail="Öğrenci bulunamadı.")
+    return detail
 
 
 @app.get("/admin")
@@ -2552,6 +2639,7 @@ def admin_backup_download_endpoint(request: Request, background_tasks: Backgroun
     stamp = datetime.utcnow().strftime("%Y%m%d-%H%M")
     out = create_backup(target_dir=tmp_dir, name=f"prepmaster-yedek-{stamp}.db")
     background_tasks.add_task(lambda: __import__("shutil").rmtree(tmp_dir, ignore_errors=True))
+    _admin_log(request, "backup_download", out.name)
     return FileResponse(out, media_type="application/gzip", filename=out.name)
 
 
@@ -2592,6 +2680,266 @@ def admin_test_email_endpoint(req: AdminTestEmailRequest, request: Request):
 def admin_get_support_tickets_endpoint(request: Request):
     _require_admin(request)
     return {"tickets": list_support_tickets(limit=100)}
+
+
+# ---------------- Yönetici paneli: genel bakış, siparişler, destek, izinler, içerik, duyuru, kayıtlar ----------------
+
+class AdminTicketUpdateRequest(BaseModel):
+    status: Optional[str] = Field(None, max_length=20)
+    admin_note: Optional[str] = Field(None, max_length=2000)
+
+
+class AdminAnnouncementRequest(BaseModel):
+    enabled: bool = False
+    text: str = Field("", max_length=300)
+    tone: str = Field("info", max_length=10)
+    link_url: str = Field("", max_length=300)
+    link_text: str = Field("", max_length=60)
+
+    @field_validator("tone")
+    @classmethod
+    def _tone(cls, v):
+        if v not in ("info", "success", "warning"):
+            raise ValueError("Geçersiz duyuru tipi.")
+        return v
+
+    @field_validator("link_url")
+    @classmethod
+    def _link(cls, v):
+        v = (v or "").strip()
+        if v and not (v.startswith("https://") or (v.startswith("/") and not v.startswith("//"))):
+            raise ValueError("Bağlantı https:// veya / ile başlamalı.")
+        return v
+
+
+class AdminQuestionOption(BaseModel):
+    key: str = Field(..., min_length=1, max_length=2)
+    text: str = Field(..., min_length=1, max_length=1000)
+
+
+class AdminQuestionUpdateRequest(BaseModel):
+    hidden: bool = False
+    question: Optional[str] = Field(None, min_length=5, max_length=6000)
+    options: Optional[List[AdminQuestionOption]] = Field(None, min_length=2, max_length=6)
+    correct_answer: Optional[str] = Field(None, max_length=2)
+    explanation_tr: Optional[str] = Field(None, max_length=3000)
+    explanation_en: Optional[str] = Field(None, max_length=3000)
+    note: str = Field("", max_length=300)
+
+
+ANNOUNCEMENT_KEY = "site_announcement"
+
+
+def _csv_response(rows: List[Dict[str, Any]], columns: List[str], filename: str) -> Response:
+    import csv
+    buf = io.StringIO()
+    writer = csv.writer(buf)
+    writer.writerow(columns)
+    for r in rows:
+        cells = []
+        for c in columns:
+            v = r.get(c)
+            v = "" if v is None else str(v)
+            # CSV formül enjeksiyonuna karşı (Excel'de =, +, -, @ ile başlayan hücre çalıştırılmasın)
+            if v[:1] in ("=", "+", "-", "@"):
+                v = "'" + v
+            cells.append(v)
+        writer.writerow(cells)
+    return Response(
+        content="﻿" + buf.getvalue(),
+        media_type="text/csv; charset=utf-8",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
+
+
+@app.get("/api/admin/overview")
+def admin_overview_endpoint(request: Request):
+    _require_admin(request)
+    data = admin_overview()
+    data["content"] = {
+        "questions": len(questions_raw),
+        "questions_live": len(questions_data),
+        "lessons": sum(len(v) for v in lesson_path.topic_order.values()),
+        "vocabulary": len(vocabulary_data),
+        "listening": len(listening_data),
+        "speaking": len(speaking_data),
+        "writing_guides": len(writing_guides_data),
+        "universities": len(universities_data),
+    }
+    data["system"] = {
+        "paytr_configured": is_paytr_live_configured(),
+        "email_configured": email_configured(),
+        "demo_mode": DEMO_MODE,
+        "production": IS_PRODUCTION,
+    }
+    return data
+
+
+@app.get("/api/admin/orders")
+def admin_orders_endpoint(request: Request, status: str = Query("", max_length=20), search: str = Query("", max_length=120)):
+    _require_admin(request)
+    return admin_list_orders(status=status, search=search)
+
+
+@app.get("/api/admin/tickets")
+def admin_tickets_endpoint(request: Request, status: str = Query("", max_length=20)):
+    _require_admin(request)
+    return {"tickets": admin_list_tickets(status=status), "statuses": list(TICKET_STATUSES)}
+
+
+@app.patch("/api/admin/tickets/{ticket_id}")
+def admin_ticket_update_endpoint(ticket_id: int, req: AdminTicketUpdateRequest, request: Request):
+    _require_admin(request)
+    res = admin_update_ticket(ticket_id, req.status, req.admin_note)
+    if not res.get("success"):
+        raise HTTPException(status_code=400 if res.get("detail") == "Geçersiz durum." else 404, detail=res.get("detail"))
+    _admin_log(request, "ticket_update", ticket_id, f"durum={req.status or '-'}")
+    return res
+
+
+@app.get("/api/admin/consents")
+def admin_consents_endpoint(request: Request):
+    _require_admin(request)
+    marketing = admin_marketing_consents()
+    return {**admin_consent_summary(), "marketing_count": len(marketing), "marketing": marketing[:200]}
+
+
+@app.get("/api/admin/export/students.csv")
+def admin_export_students_endpoint(request: Request):
+    _require_admin(request)
+    rows = admin_students_export_rows()
+    _admin_log(request, "export_students", "", f"{len(rows)} satır")
+    cols = list(rows[0].keys()) if rows else ["id", "email", "full_name"]
+    return _csv_response(rows, cols, f"prepkampus-ogrenciler-{datetime.now(timezone.utc):%Y%m%d}.csv")
+
+
+@app.get("/api/admin/export/marketing-consents.csv")
+def admin_export_marketing_endpoint(request: Request):
+    _require_admin(request)
+    rows = admin_marketing_consents()
+    _admin_log(request, "export_marketing_consents", "", f"{len(rows)} satır")
+    return _csv_response(rows, ["id", "full_name", "email", "marketing_consent_at"],
+                         f"prepkampus-ticari-ileti-onaylari-{datetime.now(timezone.utc):%Y%m%d}.csv")
+
+
+@app.get("/api/admin/export/orders.csv")
+def admin_export_orders_endpoint(request: Request):
+    _require_admin(request)
+    rows = admin_list_orders(limit=100000)["orders"]
+    _admin_log(request, "export_orders", "", f"{len(rows)} satır")
+    return _csv_response(rows, ["merchant_oid", "created_at", "status", "amount_try", "university_id", "user_id",
+                                "full_name", "email", "failed_reason"],
+                         f"prepkampus-siparisler-{datetime.now(timezone.utc):%Y%m%d}.csv")
+
+
+@app.get("/api/site/announcement")
+def public_announcement_endpoint():
+    """Sitenin üstünde gösterilen duyuru (yönetici panelinden yönetilir)."""
+    a = get_setting(ANNOUNCEMENT_KEY, {}) or {}
+    if not a.get("enabled") or not (a.get("text") or "").strip():
+        return {"enabled": False}
+    return {k: a.get(k, "") for k in ("enabled", "text", "tone", "link_url", "link_text")}
+
+
+@app.get("/api/admin/announcement")
+def admin_get_announcement_endpoint(request: Request):
+    _require_admin(request)
+    return get_setting(ANNOUNCEMENT_KEY, {}) or {"enabled": False, "text": "", "tone": "info", "link_url": "", "link_text": ""}
+
+
+@app.put("/api/admin/announcement")
+def admin_set_announcement_endpoint(req: AdminAnnouncementRequest, request: Request):
+    _require_admin(request)
+    value = {**req.model_dump(), "text": req.text.strip()}
+    set_setting(ANNOUNCEMENT_KEY, value)
+    _admin_log(request, "announcement_update", "", f"açık={'evet' if req.enabled else 'hayır'}; {req.text[:80]}")
+    return value
+
+
+@app.get("/api/admin/questions")
+def admin_questions_endpoint(
+    request: Request,
+    search: str = Query("", max_length=200),
+    category: str = Query("", max_length=60),
+    level: str = Query("", max_length=4),
+    university_id: str = Query("", max_length=50),
+    state: str = Query("", max_length=10),
+    limit: int = Query(50, ge=1, le=200),
+):
+    _require_admin(request)
+    overrides = list_question_overrides()
+    q = search.strip().lower()
+    items = []
+    total = 0
+    for item in questions_raw:
+        ov = overrides.get(item.get("id"))
+        if category and item.get("category") != category:
+            continue
+        if level and item.get("level") != level.upper():
+            continue
+        if university_id and item.get("university_id") != university_id:
+            continue
+        if state == "hidden" and not (ov and ov.get("hidden")):
+            continue
+        if state == "edited" and not (ov and ov.get("patch")):
+            continue
+        if q and q not in (item.get("id", "") + " " + item.get("question", "")).lower():
+            continue
+        total += 1
+        if len(items) < limit:
+            items.append({**item, **(ov or {}).get("patch", {}), "_override": ov, "_original": item if ov else None})
+    from collections import Counter
+    by_cat = Counter(x.get("category") for x in questions_raw)
+    return {
+        "questions": items,
+        "total": total,
+        "hidden_count": sum(1 for o in overrides.values() if o.get("hidden")),
+        "edited_count": sum(1 for o in overrides.values() if o.get("patch")),
+        "categories": sorted(by_cat.items(), key=lambda kv: -kv[1]),
+        "matrix": _question_matrix(),
+    }
+
+
+def _question_matrix() -> Dict[str, Dict[str, int]]:
+    m: Dict[str, Dict[str, int]] = {}
+    for x in questions_raw:
+        m.setdefault(x.get("category") or "?", {}).setdefault(x.get("level") or "?", 0)
+        m[x.get("category") or "?"][x.get("level") or "?"] += 1
+    return m
+
+
+@app.put("/api/admin/questions/{question_id}")
+def admin_update_question_endpoint(question_id: str, req: AdminQuestionUpdateRequest, request: Request):
+    _require_admin(request)
+    original = next((x for x in questions_raw if x.get("id") == question_id), None)
+    if not original:
+        raise HTTPException(status_code=404, detail="Soru bulunamadı.")
+    patch: Dict[str, Any] = {}
+    for field in ("question", "correct_answer", "explanation_tr", "explanation_en"):
+        val = getattr(req, field)
+        if val is not None and val != original.get(field):
+            patch[field] = val
+    if req.options is not None:
+        opts = [o.model_dump() for o in req.options]
+        if len({o["key"] for o in opts}) != len(opts):
+            raise HTTPException(status_code=422, detail="Şık harfleri tekrar edemez.")
+        if opts != original.get("options"):
+            patch["options"] = opts
+    keys = {o["key"] for o in (patch.get("options") or original.get("options") or [])}
+    answer = patch.get("correct_answer", original.get("correct_answer"))
+    if answer not in keys:
+        raise HTTPException(status_code=422, detail="Doğru cevap şıklardan biri olmalı.")
+    save_question_override(question_id, req.hidden, patch, req.note)
+    rebuild_questions_data()
+    _admin_log(request, "question_update", question_id,
+               f"gizli={'evet' if req.hidden else 'hayır'}; alanlar={','.join(patch) or '-'}; {req.note[:80]}")
+    return {"success": True, "hidden": req.hidden, "patched_fields": sorted(patch)}
+
+
+@app.get("/api/admin/audit-log")
+def admin_audit_log_endpoint(request: Request, limit: int = Query(200, ge=1, le=1000)):
+    _require_admin(request)
+    return {"entries": list_audit_log(limit)}
 
 
 @app.get("/kvkk")

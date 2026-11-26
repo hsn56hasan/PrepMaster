@@ -200,7 +200,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Expanded(
               child: Text(
                 mastered == null || mastered == 'none'
-                    ? 'Seviye tespiti: önerilen kur $_placementLevel'
+                    ? 'Seviye tespiti: Önerilen kur $_placementLevel'
                     : 'Seviye tespiti: $mastered geçildi • önerilen $_placementLevel',
                 style: const TextStyle(
                   fontSize: 12,
@@ -1349,7 +1349,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               contentPadding: EdgeInsets.zero,
                               dense: true,
                               title: const Text(
-                                "Kampanya ve duyuru e-postalarına onay veriyorum; Ticari İleti Onay Metni (isteğe bağlı). Metinler: sitede /kvkk",
+                                "Kampanya ve duyuru e-postalarına onay veriyorum; Ticari İleti Onay Metni (isteğe bağlı). Metinler: Sitede /kvkk",
                                 style: TextStyle(fontSize: 12),
                               ),
                             ),

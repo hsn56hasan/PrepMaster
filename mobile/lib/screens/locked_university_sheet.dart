@@ -352,7 +352,7 @@ class _LockedUniversitySheetState extends State<LockedUniversitySheet> {
                 onPressed: _busy ? null : _openStudentScan,
                 icon: const Icon(Icons.badge_outlined),
                 label: const Text(
-                  'Bu okulun öğrencisiyim: belgemi doğrula (ücretsiz)',
+                  'Bu okulun öğrencisiyim: Belgemi doğrula (ücretsiz)',
                 ),
               ),
               const SizedBox(height: 8),

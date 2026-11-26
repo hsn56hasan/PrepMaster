@@ -34,8 +34,19 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+}
+
+// Yazı tanıma: APK'ya ~30 MB gömülen ML Kit modeli yerine Google Play Hizmetleri'nin OCR'ı kullanılır
+// (aynı API; model telefona bir kez indirilir). Böylece APK boyutu küçük kalır.
+configurations.all {
+    exclude(group = "com.google.mlkit", module = "text-recognition")
+}
+
+dependencies {
+    implementation("com.google.android.gms:play-services-mlkit-text-recognition:19.0.1")
 }
 
 kotlin {

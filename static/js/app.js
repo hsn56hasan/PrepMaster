@@ -127,15 +127,11 @@ async function initApp() {
           }
         }
       } catch (_) {}
-    } else if (!isUserVerifiedOrUnlocked(window.appState.currentUser)) {
-      setAppShellVisible(false);
-      document.getElementById("auth-modal")?.classList.add("hidden");
-      openDocScanModal(true);
+    } else if (shouldOpenPanelDirectly()) {
+      enterStudentPanel();
     } else {
-      document.getElementById("auth-modal")?.classList.add("hidden");
-      setAppShellVisible(true);
-      switchTab('dashboard');
-      loadStudentStatus();
+      // Siteye yeni gelen (giriş yapmış) öğrenci önce tanıtım sayfasını görür; "Panelime git" ile panele geçer.
+      showLandingForMember();
     }
 
     initDocDropZone();
@@ -329,6 +325,12 @@ const CATEGORY_COLORS = {
   "Sentence Completion": "#475569",
   "Paragraph Completion": "#0F6E56",
   "Dialogue": "#993556",
+  "Use of English": "#2563EB",
+  "Irrelevant Sentence": "#7C3AED",
+  "Sentence Insertion": "#0891B2",
+  "Error Identification": "#DC2626",
+  "Word Formation": "#CA8A04",
+  "Translation": "#4D7C0F",
 };
 const LEVEL_COLOR = "#059669";
 const dashboardState = { tab: "sections", data: null };
@@ -868,7 +870,13 @@ async function loadPracticeQuestions() {
       { key: "Cloze Test", label: "Cloze Test" },
       { key: "Sentence Completion", label: "Sentence Comp." },
       { key: "Paragraph Completion", label: "Paragraph Comp." },
-      { key: "Dialogue", label: "Dialogue" }
+      { key: "Dialogue", label: "Dialogue" },
+      { key: "Use of English", label: "Use of English" },
+      { key: "Irrelevant Sentence", label: "Irrelevant Sentence" },
+      { key: "Sentence Insertion", label: "Sentence Insertion" },
+      { key: "Error Identification", label: "Error Identification" },
+      { key: "Word Formation", label: "Word Formation" },
+      { key: "Translation", label: "Translation" }
     ];
 
     const catBar = document.getElementById("practice-category-bar");
@@ -1882,6 +1890,64 @@ async function setMarketingConsent(granted) {
 }
 window.setMarketingConsent = setMarketingConsent;
 
+// --- Giriş yapmış öğrenci: önce tanıtım, sonra panel ---
+// Panele bu sekmede bir kez girildiyse (sayfa yenileme, ödeme dönüşü) doğrudan panel açılır.
+const PANEL_SESSION_KEY = "pk_panel_session";
+
+function markPanelSession(on) {
+  try {
+    if (on) sessionStorage.setItem(PANEL_SESSION_KEY, "1");
+    else sessionStorage.removeItem(PANEL_SESSION_KEY);
+  } catch (_) {}
+}
+
+function shouldOpenPanelDirectly() {
+  try {
+    const qs = new URLSearchParams(window.location.search);
+    if (qs.has("panel") || qs.has("tab")) return true;
+    return sessionStorage.getItem(PANEL_SESSION_KEY) === "1";
+  } catch (_) {
+    return false;
+  }
+}
+
+function setLandingAudience(isMember) {
+  const user = window.appState.currentUser;
+  document.querySelectorAll("#pk-landing [data-guest-only]").forEach((el) => { el.hidden = isMember; });
+  document.querySelectorAll("#pk-landing [data-member-only]").forEach((el) => { el.hidden = !isMember; });
+  const nameEl = document.getElementById("pk-member-name");
+  if (nameEl && user) nameEl.textContent = ((user.full_name || user.username || "").split(" ")[0]) || "Öğrenci";
+}
+
+function showLandingForMember() {
+  openAuthModal(true);
+  setLandingAudience(true);
+}
+
+function enterStudentPanel() {
+  const user = window.appState.currentUser;
+  if (!user) {
+    landingGo("login");
+    return;
+  }
+  markPanelSession(true);
+  const modal = document.getElementById("auth-modal");
+  if (modal) {
+    modal.removeAttribute("data-mandatory");
+    modal.classList.add("hidden");
+  }
+  if (!isUserVerifiedOrUnlocked(user)) {
+    setAppShellVisible(false);
+    openDocScanModal(true);
+  } else {
+    setAppShellVisible(true);
+    switchTab("dashboard");
+    loadStudentStatus();
+  }
+  window.scrollTo(0, 0);
+}
+window.enterStudentPanel = enterStudentPanel;
+
 function setLandingMode(on) {
   // Tanıtım (girişsiz ziyaretçi) ↔ yalnız panel (giriş yapmış "Hesabım")
   const landing = document.getElementById("pk-landing");
@@ -1921,6 +1987,11 @@ document.addEventListener("keydown", (e) => {
 
 // Tanıtımdaki düğmeler: giriş panelini ilgili sekmeyle açar ve ilk alana odaklanır
 function landingGo(tab) {
+  // Giriş yapmış öğrenci tanıtımdaki "başla / giriş yap" düğmelerinden doğrudan paneline geçer.
+  if (window.appState.currentUser) {
+    enterStudentPanel();
+    return;
+  }
   switchAuthTab(tab);
   const modal = document.getElementById("auth-modal");
   if (modal && modal.classList.contains("landing-shell")) {
@@ -2032,6 +2103,7 @@ async function submitLogin() {
     const modal = document.getElementById("auth-modal");
     if (modal) modal.removeAttribute("data-mandatory");
     closeAuthModal();
+    markPanelSession(true);
 
     const isVerified = isUserVerifiedOrUnlocked(window.appState.currentUser);
     if (!isVerified) {
@@ -2117,6 +2189,7 @@ async function submitRegister() {
     const modal = document.getElementById("auth-modal");
     if (modal) modal.removeAttribute("data-mandatory");
     closeAuthModal();
+    markPanelSession(true);
 
     // Kayıt sonrası doğrudan tam ekran Belge Doğrulama Merkezine geç (arkada sistem gözükmez)
     setAppShellVisible(false);
@@ -2134,6 +2207,7 @@ function logoutUser() {
   window.appState.currentUser = null;
   localStorage.removeItem("auth_user");
   localStorage.removeItem("prepmaster_token");
+  markPanelSession(false);
   setAppShellVisible(false);
   window.location.reload();
 }
