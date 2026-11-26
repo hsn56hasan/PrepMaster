@@ -44,3 +44,6 @@ backups/
 
 # Günlük üretilen yerel Reels videoları (siteye eklenene kadar git'e girmez)
 static/videos/
+
+# Yerel pazarlama ve strateji notları (git'e ve canlı sunucuya girmez)
+docs/pazarlama/
