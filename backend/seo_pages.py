@@ -75,7 +75,9 @@ def build_robots_txt(site_url: str) -> str:
         "Allow: /kvkk\n"
         "Disallow: /admin\n"
         "Disallow: /api/\n"
-        "Disallow: /odeme-sonuc\n\n"
+        "Disallow: /odeme-sonuc\n"
+        "Disallow: /*?uni=\n"
+        "Disallow: /*&tab=register\n\n"
         f"Sitemap: {base}/sitemap.xml\n"
     )
 
@@ -225,7 +227,7 @@ def render_exams_hub_html(
             f'</div>'
             f'<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">'
             f'<a class="btn" href="/universite/{uid}">Sınav Rehberi</a>'
-            f'<a class="btn-outline" href="/?uni={uid}&tab=register">Ücretsiz Başla</a>'
+            f'<a class="btn-outline" href="/?uni={uid}&tab=register" rel="nofollow">Ücretsiz Başla</a>'
             f'</div>'
             f'</article>'
         )
@@ -454,7 +456,7 @@ def render_university_seo_html(
       <p style="color:#475569;max-width:820px;font-size:15px">{_html.escape(desc)}</p>
 
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin:16px 0">
-        <a class="btn" href="/?uni={_html.escape(uid)}&tab=register">{_html.escape(short)} İçin Ücretsiz Kayıt Ol</a>
+        <a class="btn" href="/?uni={_html.escape(uid)}&tab=register" rel="nofollow">{_html.escape(short)} İçin Ücretsiz Kayıt Ol</a>
         <a class="btn-outline" href="/sinavlar">Diğer Üniversiteleri Gör</a>
       </div>
 
