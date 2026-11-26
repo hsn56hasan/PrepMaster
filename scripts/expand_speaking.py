@@ -602,7 +602,7 @@ NEW_SPEAKING_TASKS = [
     {
         "id": "spk_b2_06",
         "university_id": "bilkent",
-        "target_university": "Bilkent Üniversitesi COPE",
+        "target_university": "Bilkent Üniversitesi (Bilkent PAE / COPE)",
         "level": "B2",
         "title": "The Commercialization of Higher Education",
         "topic": "Academic Capitalism & University Philosophy",
@@ -737,7 +737,7 @@ NEW_SPEAKING_TASKS = [
     {
         "id": "spk_c1_07",
         "university_id": "bilkent",
-        "target_university": "Bilkent Üniversitesi COPE",
+        "target_university": "Bilkent Üniversitesi (Bilkent PAE / COPE)",
         "level": "C1",
         "title": "Degrowth Economics vs. Green Growth Paradigms",
         "topic": "Ecological Economics & Planetary Boundaries",
@@ -853,7 +853,7 @@ NEW_SPEAKING_TASKS = [
     {
         "id": "spk_c2_05",
         "university_id": "bilkent",
-        "target_university": "Bilkent Üniversitesi COPE",
+        "target_university": "Bilkent Üniversitesi (Bilkent PAE / COPE)",
         "level": "C2",
         "title": "Aesthetic Autonomy and the Critique of Instrumental Reason",
         "topic": "Frankfurt School Critical Theory & Aesthetics",

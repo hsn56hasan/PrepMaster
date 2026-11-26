@@ -1,0 +1,11 @@
+# Yalnızca ses dosyalarını kovaya yüklemek için (scripts/upload_audio.py).
+# ANA requirements.txt'e EKLENMEZ: yükleme yerel makinede bir kez çalışır,
+# Railway imajına boto3 koymanın anlamı yok.
+#
+# Kurulum:  python -m pip install -r scripts/requirements-upload.txt
+#
+# Not: Projenin geri kalanında sürümler tam sabitlenmiştir. Burada alt sınır
+# kullanıldı çünkü bu dosya canlıya gitmiyor ve yanlış bir sürüm numarası
+# kurulumu kırar. Kurduktan sonra `python -m pip show boto3` ile çıkan sürümü
+# buraya tam yazıp sabitleyebilirsin.
+boto3>=1.35,<2

@@ -274,7 +274,7 @@ function renderCurrentQuestion() {
 
     <!-- Seçenekler -->
     <div class="space-y-3">
-      ${q.options.map(opt => {
+      ${(!Array.isArray(q.options) || !q.options.length) ? '<div class="p-4 text-sm rounded-xl border border-amber-200 bg-amber-50 text-amber-800 font-medium">Bu soru tipi bu ekranda henüz desteklenmiyor. Sınavı etkilememesi için bu soruyu boş bırakabilirsiniz.</div>' : q.options.map(opt => {
         const isSelected = currentAns === opt.key;
         return `
           <div onclick="selectExamOption('${q.id}', '${opt.key}')" class="p-4 rounded-xl border-2 cursor-pointer transition flex items-start gap-4 ${isSelected ? 'border-blue-600 bg-blue-50/50 shadow-sm' : 'border-slate-200 hover:border-slate-300 bg-white'}">

@@ -71,7 +71,8 @@ class TestRegistrationConsents(unittest.TestCase):
         self.assertIn(("kullanici_sozlesmesi", "accepted", "web"), keys)
         self.assertIn(("aydinlatma_metni", "acknowledged", "web"), keys)
         self.assertNotIn("ticari_ileti", {x["doc_key"] for x in c["history"]})
-        self.assertEqual({x["doc_version"] for x in c["history"]}, {app_module.LEGAL_VERSIONS["kullanici_sozlesmesi"]})
+        for x in c["history"]:
+            self.assertEqual(x["doc_version"], app_module.LEGAL_VERSIONS[x["doc_key"]], x["doc_key"])
 
     def test_marketing_is_optional_and_can_be_withdrawn(self):
         r = self.client.post("/api/auth/register", json=self._payload(

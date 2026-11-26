@@ -1,4 +1,4 @@
-# Bilkent COPE/PAE: Reading & Text Analysis %35, Listening %25, Academic Writing %40 (Part A: dil bilgisi + kelime)
+# Bilkent PAE (eski adi COPE): Stage II Part A = Reading %25, Listening %15, Grammar & Vocabulary %20; Part B = Academic Writing %25, Speaking %15
 UNI = "bilkent"
 ITEMS = [
     ("A1", "Grammar", "Bilkent ____ two campuses in Ankara.", "has", ["have", "having", "is have"],

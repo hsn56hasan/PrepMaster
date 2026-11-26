@@ -269,7 +269,7 @@ NEW_GUIDES = [
     {
         "id": "c1-discursive-analysis",
         "title": "Academic Discursive & Nuanced Synthesis",
-        "description": "C1 seviyesinde Boğaziçi BUEPT ve Bilkent COPE sınavlarına yönelik, karşıt argümanları çürütüp dengeli senteze ulaştıran 400 kelimelik üst düzey tartışma kompozisyonu.",
+        "description": "C1 seviyesinde Boğaziçi BUEPT ve Bilkent PAE sınavlarına yönelik, karşıt argümanları çürütüp dengeli senteze ulaştıran 400 kelimelik üst düzey tartışma kompozisyonu.",
         "level": "C1",
         "structure": [
             {

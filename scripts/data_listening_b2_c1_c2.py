@@ -57,7 +57,7 @@ B2_TRACKS = [
         "level": "B2",
         "type": "note_taking",
         "title": "Behavioral Economics and Choice Architecture",
-        "subtitle": "Bilkent COPE Tarzı Note-Taking Sınavı",
+        "subtitle": "Bilkent PAE / COPE Tarzı Note-Taking Sınavı",
         "target_university": "Bilkent Üniversitesi",
         "duration_minutes": 12,
         "lecture_duration_seconds": 95,

@@ -117,6 +117,46 @@ def _hide_codes(res: Dict[str, Any]) -> Dict[str, Any]:
     return {k: v for k, v in res.items() if k not in _SECRET_CODE_FIELDS}
 
 
+# --- Cevap anahtarı sızıntısına karşı ---
+# Kural: soruyu DAĞITAN uçlar cevap anahtarını göndermez; cevabı DEĞERLENDİREN uçlar
+# (/api/exam/submit, /api/practice/answer, /api/listening/answer) öğrenci cevabını
+# verdikten SONRA döndürmeye devam eder. Meşru açıklama ihtiyacı böyle karşılanır.
+# Ayıklama HER ZAMAN kopya üzerinde yapılır: _all_question_map ile questions_data aynı
+# sözlük nesnelerini paylaşır, yerinde silme sunucunun kendi puanlamasını bozar.
+_ANSWER_FIELDS = ("correct_answer", "explanation_tr", "explanation_en")
+_MODEL_ANSWER_FIELDS = ("model_essay", "annotated_strengths", "model_band_score", "model_answer_transcript")
+
+
+def _public_question(q: Dict[str, Any]) -> Dict[str, Any]:
+    """Soruyu cevap anahtarı ve çözümü olmadan kopyalar."""
+    if not isinstance(q, dict):
+        return q
+    return {k: v for k, v in q.items() if k not in _ANSWER_FIELDS}
+
+
+def _public_listening_track(track: Any, keep_audio_script: bool = True) -> Any:
+    """Dinleme parçasını, sorularının anahtarı olmadan kopyalar.
+
+    audio_script bir cevap anahtarı DEĞİL, sesin kendisidir: parçaların yalnızca
+    birkaçının mp3'ü var, gerisi tarayıcıda bu metinden seslendiriliyor. Bu yüzden
+    yalnızca hiçbir istemcinin okumadığı yerlerde (deneme paketi) düşürülür.
+    """
+    if not isinstance(track, dict):
+        return track
+    out = {k: v for k, v in track.items() if k != "questions"}
+    if not keep_audio_script:
+        out.pop("audio_script", None)
+    out["questions"] = [_public_question(q) for q in track.get("questions", [])]
+    return out
+
+
+def _public_prompt(item: Any) -> Any:
+    """Yazma/konuşma görevini model cevabı olmadan kopyalar."""
+    if not isinstance(item, dict):
+        return item
+    return {k: v for k, v in item.items() if k not in _MODEL_ANSWER_FIELDS}
+
+
 def _require_demo(feature: str):
     if not DEMO_MODE:
         raise HTTPException(
@@ -153,6 +193,21 @@ def _all_question_map() -> Dict[str, Dict[str, Any]]:
     q_map = {q["id"]: q for q in questions_data}
     q_map.update(_listening_question_map())
     return q_map
+
+
+def check_answer(question: Dict[str, Any], chosen: Optional[str]) -> bool:
+    """Verilen cevabın doğru olup olmadığını söyleyen TEK yer.
+
+    Dinleme, sınav ve alıştırma uçları bu fonksiyonu kullanır; böylece üç uçta
+    farklı davranan üç ayrı karşılaştırma kalmaz. Kurallar: boş cevap yanlıştır,
+    büyük/küçük harf farkı ve baştaki/sondaki boşluk önemsizdir.
+    """
+    if chosen is None:
+        return False
+    correct = question.get("correct_answer")
+    if correct is None:
+        return False
+    return str(chosen).strip().upper() == str(correct).strip().upper()
 
 
 def _current_user_id(request: Request) -> int:
@@ -521,7 +576,7 @@ def public_config():
 # --- Hukuki metin sürümleri (metin değişince tarihi güncelleyin; eski onaylar geçmişte kalır) ---
 LEGAL_VERSIONS = {
     "kullanici_sozlesmesi": "2026-11-25",
-    "aydinlatma_metni": "2026-11-25",
+    "aydinlatma_metni": "2026-11-26",
     "ticari_ileti": "2026-11-25",
     "acik_riza": "2025-legacy",
 }
@@ -1206,7 +1261,8 @@ def get_listening_detail(item_id: str, request: Request):
     for item in listening_data:
         if item["id"] == item_id:
             _require_item_access(request, item)
-            return item
+            # audio_script burada kalır (sesin kaynağı), yalnızca soruların anahtarı düşer.
+            return _public_listening_track(item)
     raise HTTPException(status_code=404, detail="Listening item not found")
 
 class ListeningAnswerRequest(BaseModel):
@@ -1227,7 +1283,7 @@ def listening_answer_endpoint(req: ListeningAnswerRequest, request: Request):
         raise HTTPException(status_code=404, detail="Dinleme sorusu bulunamadı.")
     _record_study(request)
     chosen = req.chosen_answer.upper()
-    is_correct = chosen == q["correct_answer"]
+    is_correct = check_answer(q, chosen)
     if is_correct:
         resolve_mistake(uid, q["id"])
     else:
@@ -1470,7 +1526,7 @@ def submit_exam(req: ExamSubmitRequest, request: Request):
         q = q_map[q_id]
         chosen_key = answers.get(q_id)
 
-        is_correct = (chosen_key == q["correct_answer"])
+        is_correct = check_answer(q, chosen_key)
         if chosen_key:
             progress_rows.append({"question_id": q_id, "university_id": q.get("university_id"), "level": q.get("level"),
                                   "category": q.get("category"), "is_correct": is_correct})
@@ -1595,8 +1651,8 @@ def practice_answer_endpoint(req: PracticeAnswerRequest, request: Request):
         raise HTTPException(status_code=404, detail="Alıştırma sorusu bulunamadı.")
     _record_study(request)
     chosen = req.chosen_answer.upper()
-    is_correct = chosen == q["correct_answer"]
-    record_question_answers(uid, [{"question_id": q["id"], "university_id": q.get("university_id"), "level": q.get("level"),
+    is_correct = check_answer(q, chosen)
+    record_question_answers(uid,[{"question_id": q["id"], "university_id": q.get("university_id"), "level": q.get("level"),
                                    "category": q.get("category"), "is_correct": is_correct}])
     if is_correct:
         resolve_mistake(uid, q["id"])
@@ -1959,7 +2015,9 @@ def get_speaking_tasks(
             a2_matches = [t for t in results if t.get("level", "").upper() == "A2"]
             if a2_matches:
                 results = a2_matches
-    return _filter_accessible(get_current_user_from_request(request), results)
+    # Model cevap metni görev listesinde gönderilmez; öğrenci onu konuşmasını
+    # gönderdikten sonra /api/speaking/evaluate yanıtında görür.
+    return [_public_prompt(t) for t in _filter_accessible(get_current_user_from_request(request), results)]
 
 @app.get("/api/speaking/{task_id}")
 def get_speaking_task(task_id: str, request: Request):
@@ -1967,7 +2025,7 @@ def get_speaking_task(task_id: str, request: Request):
     if not task:
         raise HTTPException(status_code=404, detail="Speaking task not found")
     _require_item_access(request, task)
-    return task
+    return _public_prompt(task)
 
 @app.post("/api/speaking/evaluate")
 def evaluate_speaking(req: SpeakingEvaluateRequest, request: Request, _=Depends(rate_limit_ai_speaking)):
@@ -2216,11 +2274,13 @@ def generate_mock_exam(university_id: str, request: Request, level: Optional[str
         "exam_title": f"{uni.get('name')} ({uni.get('exam_name')}) • {target_level} Deneme Sınavı",
         "duration_minutes": uni.get("duration_minutes", 120),
         "passing_score": uni.get("passing_score", 60),
+        # Deneme paketi yalnızca soruyu taşır; puanlama /api/exam/submit'te sunucuda yapılır
+        # ve doğru cevaplar sınav bitince o yanıtta döner.
         "sections": {
-            "multiple_choice": final_questions,
-            "listening": lis_track,
-            "writing_prompt": essay_guide,
-            "speaking_prompt": spk_task
+            "multiple_choice": [_public_question(q) for q in final_questions],
+            "listening": _public_listening_track(lis_track, keep_audio_script=False),
+            "writing_prompt": _public_prompt(essay_guide),
+            "speaking_prompt": _public_prompt(spk_task)
         }
     }
 

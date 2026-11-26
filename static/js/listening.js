@@ -303,7 +303,7 @@ function renderListeningRunner() {
               </div>
 
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
-                ${q.options.map(opt => `
+                ${(!Array.isArray(q.options) || !q.options.length) ? '<div class="p-3 text-xs rounded-xl border border-amber-200 bg-amber-50 text-amber-800 font-medium">Bu soru tipi bu ekranda henüz desteklenmiyor.</div>' : q.options.map(opt => `
                   <button onclick="selectListeningAnswer('${q.id}', '${opt.key}')" id="opt-btn-${q.id}-${opt.key}" class="p-3 text-left text-xs bg-white hover:bg-blue-50 border border-slate-200 rounded-xl transition flex items-center gap-2.5 opt-choice-${q.id}">
                     <span class="w-5 h-5 rounded-full border border-slate-300 font-bold flex items-center justify-center text-[10px] text-slate-500">${opt.key}</span>
                     <span class="text-slate-700 font-medium">${opt.text}</span>
@@ -311,11 +311,10 @@ function renderListeningRunner() {
                 `).join('')}
               </div>
 
-              <!-- Çözüm & Açıklama (Sınav bitince görünür) -->
-              <div id="explanation-${q.id}" class="hidden p-3 bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs rounded-xl mt-2 leading-relaxed">
-                <strong class="block mb-1 text-emerald-700">✓ Doğru Cevap: ${q.correct_answer}</strong>
-                ${q.explanation_tr}
-              </div>
+              <!-- Çözüm & Açıklama: BOŞ render edilir, içeriği sınav bitince doldurulur.
+                   Eskiden doğru cevap burada DOM'a yazılıp yalnızca "hidden" sınıfıyla gizleniyordu;
+                   öğrenci eleman denetleyicisinden okuyabiliyordu. -->
+              <div id="explanation-${q.id}" class="hidden p-3 bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs rounded-xl mt-2 leading-relaxed"></div>
             </div>
           `).join('')}
         </div>
@@ -398,12 +397,23 @@ function syncAudioProgressUI() {
   if (slider) slider.value = Math.min(100, Math.max(0, (cur / dur) * 100));
 }
 
-const AVAILABLE_MP3_TRACKS = new Set([
-  'lis_bilkent_01', 'lis_bilkent_02',
-  'lis_buept_01', 'lis_buept_02',
-  'lis_itu_01', 'lis_itu_02',
-  'lis_odtu_01', 'lis_odtu_02'
-]);
+// Bir parçanın gerçek MP3'ü varsa backend onu `audio_url` alanıyla bildirir
+// (backend/generate_audio.py üretirken data/listening.json'a yazar).
+// Alan yoksa tarayıcının kendi seslendirmesi devreye girer.
+// Eskiden burada elle yazılmış bir kimlik listesi vardı; veri kimlikleri
+// değişince liste bayatlamış ve 656 parçanın TAMAMI sentezlenen sese düşmüştü.
+// Yalnızca iki kaynağa izin verilir: kendi /static/audio/ yolumuz (yerel geliştirme ve
+// yedek) ve ses kovasının TEK alan adı. Kalıp bilerek dar: yalnızca https, tek alan adı,
+// /listening/ önü, .mp3 sonu, sorgu dizesi yok. listening.json ya da API yanıtı bir
+// şekilde kirlenirse üçüncü bir alan adından ses yüklenmesi böyle engellenir.
+const AUDIO_IZINLI_URL = /^https:\/\/ses\.prepkampus\.com\/listening\/[A-Za-z0-9._-]+\.mp3$/;
+
+function trackAudioUrl(track) {
+  const url = track && typeof track.audio_url === 'string' ? track.audio_url.trim() : '';
+  if (!url || url.includes('..')) return '';
+  if (url.startsWith('/static/audio/')) return url;
+  return AUDIO_IZINLI_URL.test(url) ? url : '';
+}
 
 function startPlaybackTicker() {
   stopPlaybackTicker();
@@ -460,15 +470,15 @@ function initTrackAudio(track) {
     window.listeningState.audio = null;
   }
 
-  // If this track does not have a pre-rendered MP3 file, use Web Speech Synthesis directly without 404
-  if (!track || !AVAILABLE_MP3_TRACKS.has(track.id)) {
+  // Gerçek MP3'ü olmayan parçada doğrudan tarayıcı seslendirmesine geç (404 üretmeden)
+  const audioUrl = trackAudioUrl(track);
+  if (!audioUrl) {
     window.listeningState.usingSpeechFallback = true;
     syncAudioProgressUI();
     return;
   }
 
-  // Primary: MP3 file from static audio directory
-  const audioUrl = `/static/audio/${track.id}.mp3`;
+  window.listeningState.usingSpeechFallback = false;
   const audio = new Audio(audioUrl);
   audio.preload = 'metadata';
   audio.playbackRate = window.listeningState.playbackRate;
@@ -737,9 +747,12 @@ async function submitListeningExam() {
     const isCorrect = chosen === q.correct_answer;
     if (isCorrect) correctCount++;
 
-    // Reveal explanation
+    // Çözümü şimdi yaz: sınav bitmeden doğru cevap DOM'a hiç girmez.
     const expEl = document.getElementById(`explanation-${q.id}`);
-    if (expEl) expEl.classList.remove("hidden");
+    if (expEl) {
+      expEl.innerHTML = `<strong class="block mb-1 text-emerald-700">✓ Doğru Cevap: ${q.correct_answer}</strong>${q.explanation_tr || ""}`;
+      expEl.classList.remove("hidden");
+    }
 
     // Highlight choices
     q.options.forEach(opt => {

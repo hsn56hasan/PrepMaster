@@ -47,3 +47,7 @@ static/videos/
 
 # Yerel pazarlama ve strateji notları (git'e ve canlı sunucuya girmez)
 docs/pazarlama/
+.audio-build/
+
+# Uretilen ses dosyalari kovaya (R2) yuklenir, depoya girmez
+static/audio/*.*.mp3

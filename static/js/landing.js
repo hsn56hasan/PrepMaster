@@ -6,7 +6,7 @@
 
   const FALLBACK = [
     ["itu", "İTÜ", "İTÜ Proficiency Sınavı", 60, 150, 60], ["metu", "ODTÜ", "METU EPE (English Proficiency Exam)", 60, 180, 65],
-    ["boun", "Boğaziçi", "BUEPT", 60, 210, 50], ["bilkent", "Bilkent", "COPE (Certificate of Proficiency in English)", 60, 180, 55],
+    ["boun", "Boğaziçi", "BUEPT", 60, 210, 50], ["bilkent", "Bilkent", "PAE (Proficiency in Academic English)", 60, 180, 55],
     ["ytu", "YTÜ", "YTÜ İYS (İngilizce Yeterlik Sınavı)", 60, 150, 60], ["hacettepe", "Hacettepe", "YDYO Muafiyet ve Düzey Belirleme Sınavı", 65, 160, 70],
     ["koc", "Koç Üni", "KUEPE (Koç University English Proficiency Exam)", 65, 180, 55], ["sabanci", "Sabancı", "ELAE (English Language Assessment Exam)", 65, 190, 50],
   ];

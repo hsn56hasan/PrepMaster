@@ -208,7 +208,7 @@
       </div>
       <p id="placement-question" class="text-[15px] leading-relaxed font-semibold text-slate-800 dark:text-slate-100 whitespace-pre-line mb-5">${esc(q.question)}</p>
       <div class="space-y-2.5">
-        ${q.options.map((o) => `
+        ${(!Array.isArray(q.options) || !q.options.length) ? '<div class="p-3 text-sm rounded-2xl border border-amber-200 bg-amber-50 text-amber-800 font-medium">Bu soru tipi bu ekranda henüz desteklenmiyor.</div>' : q.options.map((o) => `
           <button type="button" data-placement-opt="${esc(o.key)}" onclick="answerPlacementQuestion('${esc(o.key)}')"
             class="w-full text-left flex gap-3 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-slate-800 transition text-sm text-slate-700 dark:text-slate-200">
             <span class="font-black text-blue-600 shrink-0">${esc(o.key)})</span><span>${esc(o.text)}</span>

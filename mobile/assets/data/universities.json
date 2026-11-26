@@ -123,33 +123,47 @@
     "id": "bilkent",
     "name": "Bilkent Üniversitesi",
     "short_name": "Bilkent",
-    "exam_name": "COPE (Certificate of Proficiency in English)",
+    "exam_name": "PAE (Proficiency in Academic English)",
     "passing_score": 60,
     "duration_minutes": 180,
     "total_questions": 55,
     "badge_color": "amber",
-    "description": "Bilkent İngilizce Hazırlık Okulu tarafından uygulanan; Reading, Listening, Writing ve Use of English bölümlerinden oluşan iki aşamalı sınav.",
+    "description": "Bilkent İngilizce Hazırlık Okulu'nun iki aşamalı yeterlik sınavı; eski adı COPE'tur. Stage II iki bölümden oluşur: Part A (Reading, Listening, Grammar ve Vocabulary) ve Part B (Writing ve Speaking). Part B'ye girebilmek için Part A'yı geçmek gerekir.",
     "sections": [
       {
-        "name": "Reading & Text Analysis",
+        "name": "Reading (Part A)",
         "questions_count": 25,
-        "weight_percent": 35,
+        "weight_percent": 25,
         "description": "Akademik metinlerden soru yanıtlama, kelime anlamı çıkarma ve özetleme."
       },
       {
-        "name": "Listening",
+        "name": "Listening (Part A)",
         "questions_count": 15,
-        "weight_percent": 25,
+        "weight_percent": 15,
         "description": "Konuşmacının tutumunu (attitude) ve ana argümanlarını analiz etme."
       },
       {
-        "name": "Academic Writing",
+        "name": "Grammar & Vocabulary (Part A)",
+        "questions_count": 15,
+        "weight_percent": 20,
+        "description": "Akademik bağlamda dilbilgisi yapıları ve akademik kelime bilgisi."
+      },
+      {
+        "name": "Academic Writing (Part B)",
         "questions_count": 1,
-        "weight_percent": 40,
+        "weight_percent": 25,
         "description": "Okuma metinlerine atıfta bulunarak sentez (Synthesis/Argument) essay yazımı."
+      },
+      {
+        "name": "Speaking (Part B)",
+        "questions_count": 1,
+        "weight_percent": 15,
+        "description": "Akademik bir konuda hazırlıklı sunum ve soru-cevap."
       }
     ],
     "tips": [
+      "Sınavın adı COPE değil artık PAE; Bilkent'in kendi sayfalarında Stage II, Part A ve Part B olarak geçer.",
+      "Part B'ye (Writing ve Speaking) girebilmek için önce Part A'yı geçmeniz gerekir; Part A'ya çalışmayı erteleme.",
       "Sadece fikir beyan etmek yetmez; tezlerinizi örneklerle destekleme yeteneğiniz ölçülür.",
       "Kelime dağarcığınızda academic word list (AWL) gruplarını mutlaka tamamlayın."
     ]

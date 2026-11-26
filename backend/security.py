@@ -338,6 +338,12 @@ rate_limit_ai_speaking = make_rate_limiter_dependency("ai_speaking", max_request
 rate_limit_general = make_rate_limiter_dependency("general", max_requests=120, window_seconds=60)
 
 
+# Dinleme MP3'lerinin servis edildiği alan adı (Cloudflare R2 özel alan adı).
+# CSP'nin media-src direktifine eklenir. AUDIO_HOST ortam değişkeniyle değiştirilebilir;
+# değiştirilirse static/js/listening.js içindeki AUDIO_IZINLI_URL kalıbı da güncellenmeli.
+AUDIO_HOST = os.getenv("AUDIO_HOST", "https://ses.prepkampus.com").strip().rstrip("/")
+
+
 # -----------------------------------------------------------------------------
 # 3. Security Headers Middleware
 # -----------------------------------------------------------------------------
@@ -367,7 +373,10 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net",
             "font-src 'self' https://fonts.gstatic.com data:",
             "img-src 'self' data: https: https://cdn-icons-png.flaticon.com",
-            "media-src 'self' blob: data:",
+            # ses.prepkampus.com: dinleme MP3'leri Cloudflare R2 kovasından servis ediliyor.
+            # Bu alan adı static/js/listening.js içindeki AUDIO_IZINLI_URL kalıbıyla AYNI
+            # olmalı; biri değişirse diğeri de değişmeli, yoksa ses sessizce engellenir.
+            f"media-src 'self' blob: data: {AUDIO_HOST}",
             "connect-src 'self' https://cdn.jsdelivr.net",
             # PayTR ödeme penceresi (kart bilgisi yalnızca orada girilir)
             "frame-src https://www.paytr.com",

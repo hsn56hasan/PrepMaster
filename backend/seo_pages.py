@@ -232,7 +232,7 @@ def render_exams_hub_html(
 
     title = "26 Üniversite İngilizce Hazırlık & Muafiyet (Proficiency) Sınav Rehberi | PrepKampüs"
     description = (
-        f"İTÜ Proficiency, Boğaziçi BUEPT, ODTÜ EPE, Bilkent PAE/COPE, YTÜ İYS, Koç KUEPE, Sabancı ELAE ve "
+        f"İTÜ Proficiency, Boğaziçi BUEPT, ODTÜ EPE, Bilkent PAE, YTÜ İYS, Koç KUEPE, Sabancı ELAE ve "
         f"26 üniversite hazırlık muafiyet sınavları için {total_q} soru, {total_l} listening ve {total_s} speaking denemesi."
     )
     verif = get_google_verification_meta()

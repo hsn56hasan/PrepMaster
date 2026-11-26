@@ -118,7 +118,7 @@ class _SpeakingScreenState extends State<SpeakingScreen> {
                         ),
                         const SizedBox(height: 6),
                         Text(
-                          'Boğaziçi BUEPT, ODTÜ EPE, Bilkent COPE ve İTÜ mülakatlarına uygun konuşma görevleri. Hazırlanın, konuşun ve anlık yapay zeka geri bildirimi alın.',
+                          'Boğaziçi BUEPT, ODTÜ EPE, Bilkent PAE ve İTÜ mülakatlarına uygun konuşma görevleri. Hazırlanın, konuşun ve anlık yapay zeka geri bildirimi alın.',
                           style: TextStyle(
                             color: Colors.white.withValues(alpha: 0.85),
                             fontSize: 12,

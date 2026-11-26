@@ -769,7 +769,7 @@ function renderPracticeQuestionList(filteredQuestions) {
         <p class="text-sm font-semibold text-slate-800 mb-4 whitespace-pre-line">${q.question}</p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-4">
-          ${q.options.map(opt => {
+          ${(!Array.isArray(q.options) || !q.options.length) ? '<div class="p-3 text-xs rounded-xl border border-amber-200 bg-amber-50 text-amber-800 font-medium">Bu soru tipi bu ekranda henüz desteklenmiyor.</div>' : q.options.map(opt => {
             let btnClass = "bg-slate-50 hover:bg-blue-50/80 border-slate-200 hover:border-blue-300 text-slate-700";
             let badgeHtml = "";
             if (isAnswered) {
@@ -793,7 +793,8 @@ function renderPracticeQuestionList(filteredQuestions) {
           }).join('')}
         </div>
 
-        <details class="text-xs group" ${isAnswered ? 'open' : ''}>
+        ${isAnswered ? `
+        <details class="text-xs group" open>
           <summary class="cursor-pointer font-bold text-blue-600 hover:text-blue-700 list-none flex items-center gap-1">
             <i data-lucide="help-circle" class="w-3.5 h-3.5"></i> Doğru Cevap ve Çözümü Gör
           </summary>
@@ -802,6 +803,11 @@ function renderPracticeQuestionList(filteredQuestions) {
             ${q.explanation_tr}
           </div>
         </details>
+        ` : `
+        <p class="text-xs font-semibold text-slate-400 flex items-center gap-1">
+          <i data-lucide="lock" class="w-3.5 h-3.5"></i> Çözüm, bir şık seçtikten sonra açılır.
+        </p>
+        `}
       </div>
     `;
   }).join('') + (filteredQuestions.length > shown.length ? `
@@ -1402,7 +1408,7 @@ async function loadMistakeVault() {
           <p class="text-sm font-semibold text-slate-800 mb-4 whitespace-pre-line">${q.question}</p>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
-            ${q.options.map(opt => {
+            ${(!Array.isArray(q.options) || !q.options.length) ? '<div class="p-3 text-xs rounded-xl border border-amber-200 bg-amber-50 text-amber-800 font-medium">Bu soru tipi bu ekranda henüz desteklenmiyor.</div>' : q.options.map(opt => {
               const isYourWrong = opt.key === m.last_wrong_answer;
               const isCorrect = opt.key === q.correct_answer;
               let borderClass = "border-slate-200 bg-slate-50";
