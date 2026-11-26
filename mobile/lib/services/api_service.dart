@@ -33,11 +33,11 @@ class ApiService {
     if (kIsWeb) return 'http://127.0.0.1:8050';
     try {
       if (Platform.isAndroid) {
-        // Canlı Railway sunucusu (HTTPS)
-        return 'https://prepmaster-web-production.up.railway.app';
+        // Canlı site (Cloudflare korumasının arkasından geçsin diye Railway adresi yerine alan adı)
+        return 'https://prepkampus.com';
       }
     } catch (_) {}
-    return 'https://prepmaster-web-production.up.railway.app';
+    return 'https://prepkampus.com';
   }
 
   void setBaseUrl(String url) {

@@ -259,7 +259,7 @@ class TestAuthExpansionSuite(unittest.TestCase):
         cursor.execute("SELECT password_hash FROM users WHERE email = ?", (email,))
         pw_hash = cursor.fetchone()["password_hash"]
         conn.close()
-        self.assertTrue(pw_hash.startswith("pbkdf2:sha256:100000$"), f"Expected PBKDF2 hash format, got: {pw_hash}")
+        self.assertTrue(pw_hash.startswith("pbkdf2:sha256:600000$"), f"Expected PBKDF2 hash format, got: {pw_hash}")
 
     def test_reset_password_rejects_invalid_code(self):
         """Verify submitting an incorrect reset code returns HTTP 400 and does not change password."""

@@ -241,7 +241,7 @@ class TestSecuritySuite(unittest.TestCase):
         hash2 = sec.hash_password(raw_pw)
 
         # Verify PBKDF2 format
-        self.assertTrue(hash1.startswith("pbkdf2:sha256:100000$"))
+        self.assertTrue(hash1.startswith("pbkdf2:sha256:600000$"))
         # Verify dynamic salt ensures different hashes for the same password
         self.assertNotEqual(hash1, hash2)
 
@@ -278,7 +278,7 @@ class TestSecuritySuite(unittest.TestCase):
         new_hash = cursor.fetchone()["password_hash"]
         conn.close()
 
-        self.assertTrue(new_hash.startswith("pbkdf2:sha256:100000$"))
+        self.assertTrue(new_hash.startswith("pbkdf2:sha256:600000$"))
         # Verify user can still authenticate with the upgraded PBKDF2 hash
         user_again = authenticate_user("legacyuser", legacy_pw)
         self.assertIsNotNone(user_again)

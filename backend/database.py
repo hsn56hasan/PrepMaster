@@ -15,9 +15,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 try:
-    from security import hash_password, verify_password
+    from security import hash_password, verify_password, password_needs_rehash
 except ImportError:
-    from backend.security import hash_password, verify_password
+    from backend.security import hash_password, verify_password, password_needs_rehash
 
 _DEFAULT_DB_PATH = (
     Path("/data/prepmaster.db")
@@ -643,9 +643,9 @@ def authenticate_user(identifier: str, password: str) -> Optional[Dict[str, Any]
         conn.close()
         return None
 
-    # Transparently upgrade legacy SHA-256 hash to PBKDF2 and update last_active
+    # Eski SHA-256 ya da düşük turlu PBKDF2 özetini güncel ayara sessizce yükselt; last_active'i güncelle
     with conn:
-        if not stored_hash.startswith("pbkdf2:"):
+        if password_needs_rehash(stored_hash):
             upgraded_hash = hash_password(password)
             conn.execute(
                 "UPDATE users SET password_hash = ?, last_active = CURRENT_TIMESTAMP WHERE id = ?",

@@ -211,6 +211,41 @@ def _is_trusted_proxy(host: str) -> bool:
 _ON_RAILWAY = bool(os.getenv("RAILWAY_ENVIRONMENT_ID") or os.getenv("RAILWAY_ENVIRONMENT"))
 CLIENT_IP_HEADER = os.getenv("CLIENT_IP_HEADER", "X-Real-IP" if _ON_RAILWAY else "").strip()
 
+# Cloudflare'in yayımladığı vekil adresleri (https://www.cloudflare.com/ips-v4 ve /ips-v6, 26.11.2026).
+# Cloudflare koruması (turuncu bulut) açıkken isteği Railway'e bu adresler getirir ve gerçek ziyaretçi
+# CF-Connecting-IP başlığındadır. Bu başlığa YALNIZCA istek gerçekten bu aralıklardan geldiyse güvenilir;
+# Railway adresine doğrudan gelip başlığı uyduran saldırgan hız sınırını atlatamaz.
+# Liste değişirse CLOUDFLARE_IP_RANGES ortam değişkeniyle (virgülle ayrılmış) güncellenebilir.
+_CLOUDFLARE_DEFAULT_RANGES = (
+    "173.245.48.0/20,103.21.244.0/22,103.22.200.0/22,103.31.4.0/22,141.101.64.0/18,108.162.192.0/18,"
+    "190.93.240.0/20,188.114.96.0/20,197.234.240.0/22,198.41.128.0/17,162.158.0.0/15,104.16.0.0/13,"
+    "104.24.0.0/14,172.64.0.0/13,131.0.72.0/22,"
+    "2400:cb00::/32,2606:4700::/32,2803:f800::/32,2405:b500::/32,2405:8100::/32,2a06:98c0::/29,2c0f:f248::/32"
+)
+CLOUDFLARE_NETWORKS = tuple(
+    _ipaddress.ip_network(p.strip(), strict=False)
+    for p in os.getenv("CLOUDFLARE_IP_RANGES", _CLOUDFLARE_DEFAULT_RANGES).split(",")
+    if p.strip()
+)
+
+
+def _is_cloudflare(ip: str) -> bool:
+    try:
+        addr = _ipaddress.ip_address(ip)
+    except ValueError:
+        return False
+    return any(addr in net for net in CLOUDFLARE_NETWORKS)
+
+
+def _header_ip(request: Request, name: str) -> Optional[str]:
+    value = (request.headers.get(name) or "").split(",")[0].strip()
+    if not value:
+        return None
+    try:
+        return str(_ipaddress.ip_address(value))
+    except ValueError:
+        return None
+
 
 def get_client_ip(request: Request) -> str:
     """
@@ -225,13 +260,16 @@ def get_client_ip(request: Request) -> str:
     """
     peer = request.client.host if request.client and request.client.host else "127.0.0.1"
     if CLIENT_IP_HEADER:
-        value = (request.headers.get(CLIENT_IP_HEADER) or "").split(",")[0].strip()
-        if value:
-            try:
-                return str(_ipaddress.ip_address(value))
-            except ValueError:
-                pass
-        return peer
+        upstream = _header_ip(request, CLIENT_IP_HEADER)
+        if not upstream:
+            return peer
+        # Railway'e bağlanan adres Cloudflare ise gerçek ziyaretçi CF-Connecting-IP'dedir.
+        if _is_cloudflare(upstream):
+            return _header_ip(request, "CF-Connecting-IP") or upstream
+        return upstream
+    if _is_cloudflare(peer):
+        # Aracı olmadan doğrudan Cloudflare arkasında çalışma
+        return _header_ip(request, "CF-Connecting-IP") or peer
     if not _is_trusted_proxy(peer):
         return peer
     for header in ("CF-Connecting-IP", "X-Real-IP"):
@@ -571,21 +609,45 @@ def sanitize_text(value: Optional[str], strip_tags: bool = False, max_length: Op
 # -----------------------------------------------------------------------------
 # 5. Password Hashing & Salt Security (PBKDF2-HMAC-SHA256 + Legacy Fallback)
 # -----------------------------------------------------------------------------
-def hash_password(password: str, salt: Optional[str] = None) -> str:
+# OWASP Password Storage Cheat Sheet: PBKDF2-HMAC-SHA256 için en az 600.000 tur.
+# Eski (100.000 turluk) özetler geçerli kalır ve öğrenci bir sonraki girişinde otomatik yükseltilir.
+PBKDF2_ITERATIONS = 600_000
+_PBKDF2_MIN_ITERATIONS = 10_000
+_PBKDF2_MAX_ITERATIONS = 5_000_000
+
+
+def hash_password(password: str, salt: Optional[str] = None, iterations: Optional[int] = None) -> str:
     """
-    Hashes password using PBKDF2-HMAC-SHA256 with 100,000 iterations and
-    a cryptographically secure per-user salt.
-    Format: pbkdf2:sha256:100000$<salt>$<hash>
+    Hashes password using PBKDF2-HMAC-SHA256 and a cryptographically secure per-user salt.
+    Format: pbkdf2:sha256:<iterations>$<salt>$<hash>
     """
     if not salt:
         salt = secrets.token_hex(16)
+    rounds = iterations or PBKDF2_ITERATIONS
     key = hashlib.pbkdf2_hmac(
         "sha256",
         password.encode("utf-8"),
         salt.encode("utf-8"),
-        100000
+        rounds
     )
-    return f"pbkdf2:sha256:100000${salt}${key.hex()}"
+    return f"pbkdf2:sha256:{rounds}${salt}${key.hex()}"
+
+
+def _pbkdf2_iterations(stored_hash: str) -> Optional[int]:
+    """Kayıtlı özetteki tur sayısı; biçim bozuksa veya makul aralık dışındaysa None."""
+    try:
+        rounds = int(stored_hash.split("$", 1)[0].split(":")[2])
+    except (IndexError, ValueError):
+        return None
+    return rounds if _PBKDF2_MIN_ITERATIONS <= rounds <= _PBKDF2_MAX_ITERATIONS else None
+
+
+def password_needs_rehash(stored_hash: str) -> bool:
+    """Özet eski biçimdeyse ya da güncel tur sayısının altındaysa True (girişte yükseltilir)."""
+    if not stored_hash or not stored_hash.startswith("pbkdf2:sha256:"):
+        return True
+    rounds = _pbkdf2_iterations(stored_hash)
+    return rounds is None or rounds < PBKDF2_ITERATIONS
 
 
 def verify_password(password: str, stored_hash: str) -> bool:
@@ -601,16 +663,18 @@ def verify_password(password: str, stored_hash: str) -> bool:
     # Check for PBKDF2 format
     if stored_hash.startswith("pbkdf2:sha256:"):
         parts = stored_hash.split("$")
-        if len(parts) == 3:
+        rounds = _pbkdf2_iterations(stored_hash)
+        if len(parts) == 3 and rounds:
             salt = parts[1]
             expected_hex = parts[2]
             computed_hex = hashlib.pbkdf2_hmac(
                 "sha256",
                 password.encode("utf-8"),
                 salt.encode("utf-8"),
-                100000
+                rounds
             ).hex()
             return hmac.compare_digest(computed_hex, expected_hex)
+        return False
 
     # Legacy SHA-256 salted fallback
     legacy_hash = hashlib.sha256((password + LEGACY_SALT).encode("utf-8")).hexdigest()

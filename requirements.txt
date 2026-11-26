@@ -1,6 +1,8 @@
-fastapi>=0.110.0
-uvicorn>=0.28.0
-pydantic>=2.6.0
-httpx>=0.27.0
-pypdf>=5.0.0
-python-multipart>=0.0.9
+# Sürümler sabittir: sunucuya her derlemede aynı, test edilmiş paketler kurulur
+# (ele geçirilmiş ya da uyumsuz yeni bir sürüm kendiliğinden gelmesin). Güncellerken testleri çalıştırın.
+fastapi==0.143.0
+uvicorn==0.54.0
+pydantic==2.14.1
+httpx==0.28.1
+pypdf==6.21.1
+python-multipart==0.0.32

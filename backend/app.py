@@ -2292,7 +2292,7 @@ def get_mobile_app_info():
     return {
         "available": apk_path is not None,
         "app_name": "PrepKampüs Mobil (Android)",
-        "version": "2.3.0",
+        "version": "2.3.1",
         "build_type": "Release (ARM64)",
         "filename": "PrepKampus-v2.3-Android.apk",
         "size_mb": size_mb,
