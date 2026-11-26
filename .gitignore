@@ -48,6 +48,12 @@ static/videos/
 # Yerel pazarlama ve strateji notları (git'e ve canlı sunucuya girmez)
 docs/pazarlama/
 .audio-build/
+.audio-*.txt
+.audio-build/
 
 # Uretilen ses dosyalari kovaya (R2) yuklenir, depoya girmez
 static/audio/*.*.mp3
+
+# Ses uretim/yukleme calisma kayitlari (gecici)
+.audio-build-log.txt
+.audio-upload-log.txt
